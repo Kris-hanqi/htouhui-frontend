@@ -14,7 +14,7 @@ build_job:
   stage: build
   script:
     - rm -rf dist docker/dist
-    - PHANTOMJS_CDNURL=https://bitbucket.org/ariya/phantomjs/downloads npm install phantomjs
+    - npm install phantomjs-prebuilt@2.1.14 --ignore-scripts
     - yarn
     - yarn run build
     - mv dist docker
