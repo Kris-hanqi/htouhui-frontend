@@ -20,7 +20,7 @@ build_job:
     - mv dist docker
     - cd docker
     - PUBLISH_VERSION=$(echo $CI_COMMIT_REF_NAME | cut -d'/' -f 2)
-    - docker build --build-arg PUBLISH_VERSION=$PUBLISH_VERSION -t registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-payday-loan-admin:$DOCKER_IMAGE_VERSION .
+    - docker build --build-arg PUBLISH_VERSION=$PUBLISH_VERSION -t registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-hth-frontend:$DOCKER_IMAGE_VERSION .
 
 deploy_job:
   stage: deploy
@@ -30,9 +30,9 @@ deploy_job:
     - master
   script:
     - PUBLISH_VERSION=$(echo $CI_COMMIT_REF_NAME | cut -d'/' -f 2)
-    - docker stop nginx-payday-loan-admin-$CI_BUILD_REF_SLUG || true
-    - docker rm -f nginx-payday-loan-admin-$CI_BUILD_REF_SLUG || true
-    - docker run -d -p $SERVICE_PORT:80 --name nginx-payday-loan-admin-$CI_BUILD_REF_SLUG -t registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-payday-loan-admin:$DOCKER_IMAGE_VERSION
+    - docker stop nginx-hth-frontend-$CI_BUILD_REF_SLUG || true
+    - docker rm -f nginx-hth-frontend-$CI_BUILD_REF_SLUG || true
+    - docker run -d -p $SERVICE_PORT:80 --name nginx-hth-frontend-$CI_BUILD_REF_SLUG -t registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-hth-frontend:$DOCKER_IMAGE_VERSION
 
 deploy_docker_image:
   stage: deploy
@@ -44,6 +44,6 @@ deploy_docker_image:
   when: manual
   script:
     - docker login --username=228044108@qq.com --password=cnFbU8VKtvn3daF registry-internal.cn-beijing.aliyuncs.com
-    - docker tag registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-payday-loan-admin:$DOCKER_IMAGE_VERSION registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-payday-loan-admin:latest
-    - docker push registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-payday-loan-admin:$DOCKER_IMAGE_VERSION
-    - docker push registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-payday-loan-admin:latest
+    - docker tag registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-hth-frontend:$DOCKER_IMAGE_VERSION registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-hth-frontend:latest
+    - docker push registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-hth-frontend:$DOCKER_IMAGE_VERSION
+    - docker push registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-hth-frontend:latest
