@@ -7,7 +7,7 @@ RUN yum install -y epel-release && \
     yum install -y nginx
 
 ADD nginx.conf /etc/nginx/nginx.conf
-ADD release payday-loan-admin-frontend/
+ADD dist hth-frontend/
 
 EXPOSE 80 443
 
