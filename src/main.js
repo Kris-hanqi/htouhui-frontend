@@ -11,6 +11,7 @@ import './styles/index.scss';
 
 promise.polyfill();
 
+
 Vue.use(ElementUI);
 Vue.use(VueI18n);
 
