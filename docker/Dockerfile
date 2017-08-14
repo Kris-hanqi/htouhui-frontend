@@ -7,7 +7,7 @@ RUN yum install -y epel-release && \
     yum install -y nginx
 
 ADD nginx.conf /etc/nginx/nginx.conf
-ADD dist hth-frontend/
+ADD release hth-frontend/
 
 EXPOSE 80 443
 
