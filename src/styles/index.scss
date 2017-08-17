@@ -1,4 +1,12 @@
 @import "./variables";
+@font-face{
+  font-family: SourceHanSansCN-normal;
+  src: url('../../static/fonts/SourceHanSansCN-normal.otf');
+}
+@font-face{
+  font-family: Roboto-Regular;
+  src: url('../../static/fonts/Roboto-Regular.ttf');
+}
 
 body {
   -moz-osx-font-smoothing: grayscale;
@@ -7,25 +15,42 @@ body {
   font-family: $font-family;
 }
 
-a:focus,
-a:active {
-  outline: none;
+body, div, ul, li, ol, dl, dt, p, dd, img, a, span, h1, h2, h3, h4 {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  list-style: none;
+}
+
+button, input, select, textarea {
+  font-size: 100%;
+  vertical-align: middle;
+  outline: none
+}
+
+header, footer, article, section, nav, menu {
+  display: block;
+  clear: both
+}
+
+.clear{
+  clear: both;
 }
 
 a,
 a:focus,
-a:hover {
+a:hover,
+a:active{
   cursor: pointer;
   color: inherit;
   text-decoration: none;
+  outline: none;
 }
 
-ol, ul {
-  list-style: none;
+i {
+  text-decoration: none;
 }
 
-ul {
-  margin: 0;
-  padding: 0;
+.roboto-regular{
+  font-family: 'Roboto-Regular' !important;
 }
-
