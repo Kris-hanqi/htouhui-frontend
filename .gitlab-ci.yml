@@ -14,6 +14,7 @@ build_job:
   stage: build
   script:
     - rm -rf dist docker/dist
+    - npm install phantomjs-prebuilt@2.1.14 --ignore-scripts
     - yarn
     - yarn run build
     - mv dist docker
