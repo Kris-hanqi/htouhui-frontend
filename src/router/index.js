@@ -7,7 +7,7 @@ import Login from 'views/login';
 /** 首页 */
 import Index from 'views/index/index.vue';
 
-/**  */
+/** 首页公共区域 */
 import Home from 'views/home/index.vue';
 
 export const constantRouterMap = [

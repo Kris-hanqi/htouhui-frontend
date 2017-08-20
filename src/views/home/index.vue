@@ -2,6 +2,8 @@
   <div>
     <hth-header></hth-header>
     <router-view></router-view>
+    <!-- 回到顶部 -->
+    <hth-back-top :right="0"></hth-back-top>
     <hth-footer></hth-footer>
   </div>
 </template>
@@ -9,11 +11,13 @@
 <script>
   import HthHeader from 'components/header';
   import HthFooter from 'components/footer';
+  import HthBackTop from 'common/back-top';
 
   export default {
     components: {
       HthHeader,
-      HthFooter
+      HthFooter,
+      HthBackTop
     }
   };
 </script>

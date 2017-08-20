@@ -2,7 +2,9 @@
   <div class="footer-wrapper">
     <div class="footer-top">
       <div class="logo">
-        <a href=""><img src="../../../static/images/logo02.png" alt=""/></a>
+        <a href="">
+          <img src="../../../static/images/logo02.png" alt=""/>
+        </a>
         <p class="txt1">客服热线(工作时间<span class="roboto-regular">09:00-18:00</span>)</p>
         <p class="txt2 roboto-regular">400-698-8810</p>
       </div>
@@ -29,7 +31,7 @@
         </ul>
         <ul>
           <li>扫二维码下载<span class="roboto-regular">APP</span></li>
-          <li><img src="../../../static/images/code-phone-download.jpg" alt=""/></li>
+          <li><img src="../../../static/images/code-phone-download.jpg"/></li>
         </ul>
       </div>
     </div>
@@ -46,11 +48,11 @@
 </script>
 
 <style lang="scss" scoped>
-  .footer-wrapper{
+  .footer-wrapper {
     width: 100%;
     background-color: #3b3b3b;
 
-    .footer-top{
+    .footer-top {
       width: 1000px;
       min-height: 170px;
       margin: 0 auto;
@@ -59,64 +61,64 @@
       font-size: 16px;
       color: #707070;
 
-      .logo{
+      .logo {
         display: inline-block;
         margin-top: 25px;
         margin-left: 25px;
 
-        a{
+        a {
           width: 168px;
           height: 59px;
           display: inline-block;
 
-          img{
+          img {
             width: 100%;
           }
         }
 
-        .txt1{
+        .txt1 {
           font-size: 12px;
           line-height: 25px;
         }
 
-        .txt2{
+        .txt2 {
           font-size: 22px;
           line-height: 30px;
         }
       }
 
-      .footer-nav-box{
+      .footer-nav-box {
         font-size: 16px;
         color: #707070;
         font-weight: bold;
         float: right;
 
-        ul{
+        ul {
           float: left;
           margin-left: 65px;
 
-          li{
+          li {
             height: 30px;
           }
 
-          &:last-child img{
+          &:last-child img {
             width: 125px;
             height: 125px;
           }
         }
 
-        .nav-a{
+        .nav-a {
           font-size: 14px;
           font-weight: normal;
 
-          &:hover{
+          &:hover {
             color: #9ec8ff;;
           }
         }
       }
     }
 
-    .footer-bottom{
+    .footer-bottom {
       width: 1000px;
       margin: 0 auto;
       padding: 20px 0;
