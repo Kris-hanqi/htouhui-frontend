@@ -35,6 +35,12 @@
     </div>
     <div class="footer-bottom clear">
       <p>©版权所有 北京冠城瑞富信息技术有限公司 Copyright Reserved　|　京ICP备15020986</p>
+      <div class="icon-box">
+        <div class="xin"><img src="../../../static/images/icons_itrust.png" alt=""/></div>
+        <div class="norton"><img src="../../../static/images/icons_norton.png" alt=""/></div>
+        <div class="cheng"><img src="../../../static/images/icons_chengxin.png" alt=""/></div>
+      </div>
+      <p>版本切换： <a href="">电脑版</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="">手机版</a></p>
     </div>
   </div>
 </template>
@@ -62,7 +68,6 @@
       .logo{
         display: inline-block;
         margin-top: 25px;
-        margin-left: 25px;
 
         a{
           width: 168px;
@@ -122,6 +127,51 @@
       padding: 20px 0;
       font-size: 12px;
       color: #818181;
+
+      p{
+        display: inline-block;
+      }
+
+      .icon-box{
+        display: inline-block;
+        width: 535px;
+        text-align: right;
+        vertical-align: middle;
+
+        .xin{
+          display: inline-block;
+          width: 42px;
+          height: 42px;
+          margin-left: 90px;
+
+          img{
+            width: 100%;
+          }
+        }
+
+        .norton{
+          display: inline-block;
+          width: 96px;
+          height:53px;
+          margin-left: 90px;
+
+          img{
+            width: 100%;
+          }
+        }
+
+        .cheng{
+          display: inline-block;
+          width: 105px;
+          height: 38px;
+          margin-left: 90px;
+
+          img{
+            width: 100%;
+          }
+        }
+      }
+
     }
   }
 </style>
