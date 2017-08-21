@@ -38,51 +38,51 @@
 </script>
 
 <style lang="scss" scoped>
-  .header-down{
+  .header-down {
     height: 74px;
     background-color: #fff;
     line-height: 74px;
     font-size: 16px;
 
-    .main-section{
+    .main-section {
       width: 1000px;
       margin: 0 auto;
       color: #000;
 
-      .logo{
+      .logo {
         display: inline-block;
         width: 148px;
         height: 74px;
 
-        img{
+        img {
           width: 100%;
         }
       }
 
-      .logo-other{
+      .logo-other {
         display: inline-block;
         width: 307px;
         height: 74px;
 
-        img{
+        img {
           width: 100%;
         }
       }
 
-      .index-nav{
+      .index-nav {
         float: right;
         height: 74px;
 
-        .nav-item{
+        .nav-item {
           float: left;
           text-align: center;
 
-          a{
+          a {
             padding: 29px 15px;
             box-sizing: border-box;
 
             &:hover,
-            &.active{
+            &.active {
               color: #2875d9;
               border-bottom: 4px solid #2875d9;
             }
