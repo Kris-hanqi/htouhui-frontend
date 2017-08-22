@@ -8,30 +8,30 @@
 </template>
 
 <script>
-  import axios from 'axios';
-  import Swiper from 'swiper';
-  import 'swiper/dist/css/swiper.min.css';
+//  import Swiper from 'swiper';
+//  import 'swiper/dist/css/swiper.min.css';
   export default {
     name: 'HthBanner',
-    data: listImg,
+    data: {
+      listImg: []
+    },
     mounted() {
-      this.$nextTick(() => {
-        axios.get('192.168.1.196:21000/web-api/bannerList/index')
-          .then(response => {
-            console.log(response);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      });
+      this.$ajax({
+        url: 'http://192.168.1.196:21000/web-api/bannerList/index',
+        method: 'get'
+      })
+      .then(data => {
+        console.log(data);
+        this.listImg = data.bannerList.imgUrl
+      })
 
-      new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        paginationClickable: true,
-        loop: true,
-        speed: 600,
-        autoplay: 4000
-      });
+//      new Swiper('.swiper-container', {
+//        pagination: '.swiper-pagination',
+//        paginationClickable: true,
+//        loop: true,
+//        speed: 600,
+//        autoplay: 4000
+//      });
     }
   }
 </script>
@@ -39,7 +39,7 @@
 <style lang="scss" scoped>
   .swiper-container {
     width: 100%;
-    height: 10rem;
+    height: 362px;
     .swiper-wrapper {
       width: 100%;
       height: 100%;

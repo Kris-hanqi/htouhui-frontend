@@ -8,6 +8,8 @@ import VueI18n from 'vue-i18n'; // 多语言库
 import 'element-ui/lib/theme-default/index.css';
 import 'normalize.css';
 import './styles/index.scss';
+import axios from 'axios';
+Vue.prototype.$ajax = axios;
 
 promise.polyfill();
 
