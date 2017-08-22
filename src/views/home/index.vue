@@ -3,7 +3,7 @@
     <hth-header></hth-header>
     <router-view></router-view>
     <!-- 回到顶部 -->
-    <hth-back-top :right="0"></hth-back-top>
+    <hth-back-top :right="0" :height="100"></hth-back-top>
     <hth-footer></hth-footer>
   </div>
 </template>

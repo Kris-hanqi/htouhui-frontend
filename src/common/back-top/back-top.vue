@@ -1,5 +1,5 @@
 <template>
-  <div :class="classes" :style="styles">
+  <div :class="classes" :style="styles" @click="back">
     <slot>
       <div :class="innerClasses">
         <i :class="icon"></i>
@@ -9,6 +9,7 @@
 </template>
 
 <script>
+  import { scrollTop } from '@/utils/assist';
   const prefixCls = 'back-top';
 
   export default {
@@ -60,11 +61,23 @@
     },
     // el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子
     mounted() {
-      console.log('你好');
+      window.addEventListener('scroll', this.handleScroll, false);
+      window.addEventListener('resize', this.handleScroll, false);
     },
     // 销毁时调用该钩子
     beforeDestroy() {
-      console.log('你好');
+      window.removeEventListener('scroll', this.handleScroll, false);
+      window.removeEventListener('resize', this.handleScroll, false);
+    },
+    methods: {
+      handleScroll() {
+        this.backTop = window.pageYOffset >= this.height;
+      },
+      back() {
+        const sTop = document.documentElement.scrollTop || document.body.scrollTop;
+        scrollTop(window, sTop, 0, this.duration);
+        this.$emit('on-click');
+      }
     }
   }
 </script>
