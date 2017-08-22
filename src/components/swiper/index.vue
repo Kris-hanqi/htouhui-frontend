@@ -1,40 +1,40 @@
-<template>
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="str in listImg" :style="{ backgroundImage: 'url(' + str.url + ')' }"></div>
-    </div>
-    <div class="swiper-pagination swiper-pagination-white"></div>
-  </div>
-</template>
+<!--<template>-->
+  <!--<div class="swiper-container">-->
+    <!--<div class="swiper-wrapper">-->
+      <!--<div class="swiper-slide" v-for="str in listImg" :style="{ backgroundImage: 'url(' + str.url + ')' }"></div>-->
+    <!--</div>-->
+    <!--<div class="swiper-pagination swiper-pagination-white"></div>-->
+  <!--</div>-->
+<!--</template>-->
 
-<script>
-//  import Swiper from 'swiper';
-//  import 'swiper/dist/css/swiper.min.css';
-  export default {
-    name: 'HthBanner',
-    data: {
-      listImg: []
-    },
-    mounted() {
-      this.$ajax({
-        url: 'http://192.168.1.196:21000/web-api/bannerList/index',
-        method: 'get'
-      })
-      .then(data => {
-        console.log(data);
-        this.listImg = data.bannerList.imgUrl
-      })
+<!--<script>-->
+<!--//  import Swiper from 'swiper';-->
+<!--//  import 'swiper/dist/css/swiper.min.css';-->
+  <!--export default {-->
+    <!--name: 'HthBanner',-->
+    <!--data: {-->
+      <!--listImg: []-->
+    <!--},-->
+    <!--mounted() {-->
+      <!--this.$ajax({-->
+        <!--url: 'http://192.168.1.196:21000/web-api/bannerList/index',-->
+        <!--method: 'get'-->
+      <!--})-->
+      <!--.then(data => {-->
+        <!--console.log(data);-->
+        <!--this.listImg = data.bannerList.imgUrl-->
+      <!--})-->
 
-//      new Swiper('.swiper-container', {
-//        pagination: '.swiper-pagination',
-//        paginationClickable: true,
-//        loop: true,
-//        speed: 600,
-//        autoplay: 4000
-//      });
-    }
-  }
-</script>
+<!--//      new Swiper('.swiper-container', {-->
+<!--//        pagination: '.swiper-pagination',-->
+<!--//        paginationClickable: true,-->
+<!--//        loop: true,-->
+<!--//        speed: 600,-->
+<!--//        autoplay: 4000-->
+<!--//      });-->
+    <!--}-->
+  <!--}-->
+<!--</script>-->
 
 <style lang="scss" scoped>
   .swiper-container {
