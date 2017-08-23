@@ -6,8 +6,8 @@
   </div>
 </template>
 
-<style lang="sacc" scoped>
-  .silderBar{
+<style lang="scss" scoped>
+  .silderBar {
     position: fixed;
     right: 0;
     bottom: 140px;
