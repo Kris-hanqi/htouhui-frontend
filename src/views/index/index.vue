@@ -1,19 +1,19 @@
 <template>
   <div class="main">
-    <!--<hth-banner></hth-banner>-->
+    <hth-banner></hth-banner>
     <div>我是首页</div>
   </div>
 
 </template>
 
-<!--<script>-->
-  <!--import HthBanner from 'components/swiper';-->
-  <!--export default {-->
-    <!--components: {-->
-      <!--HthBanner-->
-    <!--}-->
-  <!--};-->
-<!--</script>-->
+<script>
+  import HthBanner from 'components/swiper';
+  export default {
+    components: {
+      HthBanner
+    }
+  };
+</script>
 
 <style type="scss" scoped>
   .main{

@@ -1,9 +1,7 @@
 <template>
   <div :class="classes" :style="styles" @click="back">
     <slot>
-      <div :class="innerClasses">
-        <i :class="icon"></i>
-      </div>
+      <div :class="innerClasses"></div>
     </slot>
   </div>
 </template>
@@ -29,10 +27,6 @@
       duration: {
         type: Number,
         default: 1000
-      },
-      icon: {
-        type: String,
-        default: 'fa fa-angle-up'
       }
     },
     data() {
@@ -93,18 +87,18 @@
     &.back-top-show {
       display: block;
     }
-
-    i {
-      color: #fff;
-      font-size: 24px;
-    }
   }
 
   .back-top-inner {
-    background-color: #7a6e6e;
     border-radius: 2px;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     transition: all .2s ease-in-out;
+    background: url(../../../static/images/icon_home.png) no-repeat;
+    background-position: -500px 0;
+
+    &:hover{
+      background-position: -500px -50px;
+    }
   }
 </style>

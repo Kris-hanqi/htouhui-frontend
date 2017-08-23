@@ -78,8 +78,8 @@
           text-align: center;
 
           a {
-            padding: 29px 15px;
             box-sizing: border-box;
+            padding: 25px 15px;
 
             &:hover,
             &.active {
