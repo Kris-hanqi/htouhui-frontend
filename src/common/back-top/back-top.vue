@@ -18,7 +18,7 @@
       },
       bottom: {
         type: Number,
-        default: 30
+        default: 90
       },
       right: {
         type: Number,

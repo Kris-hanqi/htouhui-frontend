@@ -14,7 +14,7 @@
   import HthHeader from 'components/header';
   import HthFooter from 'components/footer';
   import HthBackTop from 'common/back-top';
-  import HthSilderBar from 'common/silder-bar';
+  import HthSilderBar from 'common/silderbar';
 
   export default {
     components: {
