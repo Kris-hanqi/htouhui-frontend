@@ -15,7 +15,7 @@
   };
 </script>
 
-<style type="scss" scoped>
+<style lang="scss" scoped>
   .main{
     height: 800px;
   }

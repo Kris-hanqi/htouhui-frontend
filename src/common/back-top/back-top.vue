@@ -77,7 +77,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "src/styles/variables.scss";
+  @import "../../../src/styles/variables.scss";
   .back-top {
     position: fixed;
     cursor: pointer;
