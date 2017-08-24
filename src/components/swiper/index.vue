@@ -3,16 +3,16 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide" v-for="str in bannerList" :style="{ backgroundImage: 'url(' + str.imgUrl + ')' }"></div>
     </div>
-    <div class="swiper-pagination swiper-pagination-white"></div>
+    <div class="swiper-pagination"></div>
     <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
   </div>
 </template>
 
 <script>
-  import { banners } from '@/api';
   import Swiper from 'swiper';
   import 'swiper/dist/css/swiper.min.css';
+  import { banners } from '@/api';
 
   export default {
     name: 'HthBanner',
@@ -23,7 +23,7 @@
       }
     },
     methods: {
-      gstBannerList() {
+      getBannerList() {
         banners().then(data => {
           for (let i = 0; i < data.data.data.bannerList.length; i++) {
             this.bannerList.push(data.data.data.bannerList[i]);
@@ -32,17 +32,23 @@
       }
     },
     created() {
-      this.gstBannerList();
+      this.getBannerList();
     },
     mounted() {
       new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         paginationClickable: true,
+        autoplayDisableOnInteraction: false,
         prevButton: '.swiper-button-prev',
         nextButton: '.swiper-button-next',
         loop: true,
         speed: 600,
-        autoplay: 4000
+        autoplay: 5000,
+        observer: true,
+        observeParents: true,
+        onSlideChangeStart: swiper => {
+          console.log(swiper.activeIndex);
+        }
       });
     }
   }
@@ -70,7 +76,7 @@
       }
     }
 
-    .swiper-button-prev{
+    .swiper-button-prev {
       background-image: url(../../../static/images/button-prev.png);
       background-size: 100% 100%;
       width: 45px;
@@ -78,7 +84,7 @@
       margin-top: -45px;
     }
 
-    .swiper-button-next{
+    .swiper-button-next {
       background-image: url(../../../static/images/button-next.png);
       background-size: 100% 100%;
       width: 45px;
@@ -87,14 +93,10 @@
     }
 
     .swiper-pagination-bullet {
-      width: 12px;
-      height: 5px;
-      border-radius: 0;
-      display: inline-block;
       background: #7c5e53;
     }
 
-    .swiper-pagination-white .swiper-pagination-bullet-active {
+    .swiper-pagination-bullet-active {
       background: #2875d9;
     }
   }
