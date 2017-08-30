@@ -10,6 +10,9 @@ import Index from 'views/index/index.vue';
 /** 首页公共区域 */
 import Home from 'views/home/index.vue';
 
+/** 信息披露 **/
+import InformationDisclosure from 'views/information-disclosure/index.vue';
+
 export const constantRouterMap = [
   {
     path: '/login',
@@ -28,6 +31,10 @@ export const constantRouterMap = [
         component: Index
       }
     ]
+  },
+  {
+    path: '/information-disclosure',
+    component: InformationDisclosure
   }
 ];
 

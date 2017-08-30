@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@tweenjs/tween.js@^17.1.0":
+  version "17.1.0"
+  resolved "https://registry.yarnpkg.com/@tweenjs/tween.js/-/tween.js-17.1.0.tgz#87e889dfd57a6ecbcf54401938c0422e80b87306"
+
 "@types/node@^7.0.18":
   version "7.0.28"
   resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-7.0.28.tgz#3a8c62b718a73bbb89ede4aba5ab12c8f822c36e"
@@ -317,9 +321,9 @@ babel-core@^6.22.1, babel-core@^6.24.1, babel-core@~6:
     slash "^1.0.0"
     source-map "^0.5.0"
 
-babel-eslint@^7.1.1:
+babel-eslint@^7.2.3:
   version "7.2.3"
-  resolved "http://registry.npm.taobao.org/babel-eslint/download/babel-eslint-7.2.3.tgz#b2fe2d80126470f5c19442dc757253a897710827"
+  resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-7.2.3.tgz#b2fe2d80126470f5c19442dc757253a897710827"
   dependencies:
     babel-code-frame "^6.22.0"
     babel-traverse "^6.23.1"
@@ -930,6 +934,10 @@ base64id@1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/base64id/download/base64id-1.0.0.tgz#47688cb99bb6804f0e06d3e763b1c32e57d8e6b6"
 
+batch-processor@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/batch-processor/-/batch-processor-1.0.0.tgz#75c95c32b748e0850d10c2b168f6bdbe9891ace8"
+
 bcrypt-pbkdf@^1.0.0:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/bcrypt-pbkdf/download/bcrypt-pbkdf-1.0.1.tgz#63bc5dcb61331b92bc05fd528953c33462a06f8d"
@@ -1448,7 +1456,7 @@ concat-stream@1.5.0:
     readable-stream "~2.0.0"
     typedarray "~0.0.5"
 
-concat-stream@^1.5.2:
+concat-stream@1.6.0, concat-stream@^1.5.2:
   version "1.6.0"
   resolved "http://registry.npm.taobao.org/concat-stream/download/concat-stream-1.6.0.tgz#0aac662fd52be78964d5532f694784e70110acf7"
   dependencies:
@@ -1993,6 +2001,12 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
+echarts@^3.7.0, echarts@latest:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/echarts/-/echarts-3.7.0.tgz#79d21b2a7be18a43f6a3f19f8c0ec07c2cf4a3dc"
+  dependencies:
+    zrender "^3.6.0"
+
 editorconfig@^0.13.2:
   version "0.13.2"
   resolved "http://registry.npm.taobao.org/editorconfig/download/editorconfig-0.13.2.tgz#8e57926d9ee69ab6cb999f027c2171467acceb35"
@@ -2039,6 +2053,16 @@ electron@^1.6.10:
     "@types/node" "^7.0.18"
     electron-download "^3.0.1"
     extract-zip "^1.0.3"
+
+element-resize-detector@latest:
+  version "1.1.12"
+  resolved "https://registry.yarnpkg.com/element-resize-detector/-/element-resize-detector-1.1.12.tgz#8b3fd6eedda17f9c00b360a0ea2df9927ae80ba2"
+  dependencies:
+    batch-processor "^1.0.0"
+
+element-resize-event@latest:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/element-resize-event/-/element-resize-event-2.0.9.tgz#2f5e1581a296eb5275210c141bc56342e218f876"
 
 element-ui@^1.4.1:
   version "1.4.1"
@@ -2475,6 +2499,15 @@ extract-zip@^1.0.3, extract-zip@~1.5.0:
   dependencies:
     concat-stream "1.5.0"
     debug "0.7.4"
+    mkdirp "0.5.0"
+    yauzl "2.4.1"
+
+extract-zip@~1.6.5:
+  version "1.6.5"
+  resolved "https://registry.yarnpkg.com/extract-zip/-/extract-zip-1.6.5.tgz#99a06735b6ea20ea9b705d779acffcc87cff0440"
+  dependencies:
+    concat-stream "1.6.0"
+    debug "2.2.0"
     mkdirp "0.5.0"
     yauzl "2.4.1"
 
@@ -3559,9 +3592,9 @@ karma-mocha@^1.3.0:
   dependencies:
     minimist "1.2.0"
 
-karma-phantomjs-launcher@^1.0.2:
+karma-phantomjs-launcher@^1.0.4:
   version "1.0.4"
-  resolved "http://registry.npm.taobao.org/karma-phantomjs-launcher/download/karma-phantomjs-launcher-1.0.4.tgz#d23ca34801bda9863ad318e3bb4bd4062b13acd2"
+  resolved "https://registry.yarnpkg.com/karma-phantomjs-launcher/-/karma-phantomjs-launcher-1.0.4.tgz#d23ca34801bda9863ad318e3bb4bd4062b13acd2"
   dependencies:
     lodash "^4.0.1"
     phantomjs-prebuilt "^2.1.7"
@@ -3803,6 +3836,10 @@ lodash.create@3.1.1:
     lodash._baseassign "^3.0.0"
     lodash._basecreate "^3.0.0"
     lodash._isiterateecall "^3.0.0"
+
+lodash.debounce@latest:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
 
 lodash.defaultsdeep@4.3.2:
   version "4.3.2"
@@ -4626,7 +4663,21 @@ performance-now@^0.2.0:
   version "0.2.0"
   resolved "http://registry.npm.taobao.org/performance-now/download/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
 
-phantomjs-prebuilt@^2.1.14, phantomjs-prebuilt@^2.1.7:
+phantomjs-prebuilt@^2.1.15:
+  version "2.1.15"
+  resolved "https://registry.yarnpkg.com/phantomjs-prebuilt/-/phantomjs-prebuilt-2.1.15.tgz#20f86e82d3349c505917527745b7a411e08b3903"
+  dependencies:
+    es6-promise "~4.0.3"
+    extract-zip "~1.6.5"
+    fs-extra "~1.0.0"
+    hasha "~2.2.0"
+    kew "~0.7.0"
+    progress "~1.1.8"
+    request "~2.81.0"
+    request-progress "~2.0.1"
+    which "~1.2.10"
+
+phantomjs-prebuilt@^2.1.7:
   version "2.1.14"
   resolved "http://registry.npm.taobao.org/phantomjs-prebuilt/download/phantomjs-prebuilt-2.1.14.tgz#d53d311fcfb7d1d08ddb24014558f1188c516da0"
   dependencies:
@@ -5359,7 +5410,7 @@ request@2, request@^2.45.0, request@^2.79.0, request@~2.79.0:
     tunnel-agent "~0.4.1"
     uuid "^3.0.0"
 
-request@^2.81.0:
+request@^2.81.0, request@~2.81.0:
   version "2.81.0"
   resolved "http://registry.npm.taobao.org/request/download/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
   dependencies:
@@ -6286,11 +6337,27 @@ void-elements@^2.0.0:
   version "2.0.1"
   resolved "http://registry.npm.taobao.org/void-elements/download/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
+vue-awesome-swiper@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/vue-awesome-swiper/-/vue-awesome-swiper-2.6.2.tgz#e268882b2be1cef738226270b820d8e63277b689"
+  dependencies:
+    swiper "^3.4.2"
+
 vue-cookie@^1.1.4:
   version "1.1.4"
   resolved "http://registry.npm.taobao.org/vue-cookie/download/vue-cookie-1.1.4.tgz#b8b46d112bda9f93a2f47017c2ed5282d2064fda"
   dependencies:
     tiny-cookie "^1.0"
+
+vue-echarts-v3@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/vue-echarts-v3/-/vue-echarts-v3-1.0.5.tgz#e3a1cac057f126b15e0e6ae12be7c30f57008a26"
+  dependencies:
+    echarts latest
+    element-resize-detector latest
+    element-resize-event latest
+    lodash.debounce latest
+    vue "^2.3.2"
 
 vue-hot-reload-api@^2.1.0:
   version "2.1.0"
@@ -6344,7 +6411,7 @@ vue-template-es2015-compiler@^1.5.3:
   version "1.5.3"
   resolved "http://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.5.3.tgz#22787de4e37ebd9339b74223bc467d1adee30545"
 
-vue@^2.4.2:
+vue@^2.3.2, vue@^2.4.2:
   version "2.4.2"
   resolved "http://registry.npm.taobao.org/vue/download/vue-2.4.2.tgz#a9855261f191c978cc0dc1150531b8d08149b58c"
 
@@ -6644,3 +6711,7 @@ yauzl@2.4.1:
 yeast@0.1.2:
   version "0.1.2"
   resolved "http://registry.npm.taobao.org/yeast/download/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
+
+zrender@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/zrender/-/zrender-3.6.0.tgz#b8f4de98200c2c90785b90695680a1f12b4c71ba"

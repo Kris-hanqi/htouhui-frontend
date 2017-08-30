@@ -104,6 +104,7 @@
             position: absolute;
             top: 36px;
             left: -5px;
+            z-index: 3;
 
             i{
               display: inline-block;

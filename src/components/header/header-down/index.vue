@@ -21,7 +21,7 @@
           <a href="">风控措施</a>
         </li>
         <li class="nav-item">
-          <a href="">信息披露</a>
+          <a href="" class="information-disclosure" @click="clickFn()">信息披露</a>
         </li>
         <li class="nav-item">
           <a href="">关于我们</a>
@@ -33,7 +33,12 @@
 
 <script>
   export default {
-    name: 'HthHeaderDown'
+    name: 'HthHeaderDown',
+    computed: {
+      clickFn() {
+        this.$router.go('/information-disclosure');
+      }
+    }
   }
 </script>
 
