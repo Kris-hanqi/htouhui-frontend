@@ -21,7 +21,7 @@
           <a href="">风控措施</a>
         </li>
         <li class="nav-item">
-          <a href="" class="information-disclosure" @click="clickFn">信息披露</a>
+          <router-link :to="'/information-disclosure'">信息披露</router-link>
         </li>
         <li class="nav-item">
           <a href="">关于我们</a>
