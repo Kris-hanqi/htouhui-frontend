@@ -80,10 +80,10 @@
         float: right;
       }
 
-      .code-nav{
+      .code-nav {
         float: right;
 
-        .nav-item{
+        .nav-item {
           background-color: #80cc60;
           position: relative;
 
@@ -91,22 +91,23 @@
             padding: 0 10px;
             cursor: pointer;
           }
-          &:hover > .code-nav-arrow{
+
+          &:hover > .code-nav-arrow {
             display: block;
           }
 
-          &:hover{
+          &:hover {
             background-color: #92df72;
           }
 
-          .code-nav-arrow{
+          .code-nav-arrow {
             display: none;
             position: absolute;
             top: 36px;
             left: -5px;
             z-index: 3;
 
-            i{
+            i {
               display: inline-block;
               width: 13px;
               height: 8px;
@@ -114,13 +115,13 @@
               margin-bottom: 15px;
             }
 
-            .code-img{
+            .code-img {
               width: 125px;
-              border:1px #E8E8E8 solid;
+              border: 1px #e8e8e8 solid;
               background-color: #fff;
               margin-top: -30px;
 
-              span{
+              span {
                 color: #7b7b7b;
                 font-size: 14px;
                 position: absolute;
@@ -131,7 +132,7 @@
                 left: 15px;
               }
 
-              img{
+              img {
                 width: 100%;
               }
             }

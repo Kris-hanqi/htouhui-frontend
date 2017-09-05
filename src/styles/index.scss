@@ -1,8 +1,10 @@
 @import "./variables";
+
 @font-face{
   font-family: SourceHanSansCN-normal;
   src: url('../../static/fonts/SourceHanSansCN-normal.otf');
 }
+
 @font-face{
   font-family: Roboto-Regular;
   src: url('../../static/fonts/Roboto-Regular.ttf');
@@ -53,4 +55,8 @@ i {
 
 .roboto-regular{
   font-family: 'Roboto-Regular' !important;
+}
+
+#test {
+  background-color: red;
 }

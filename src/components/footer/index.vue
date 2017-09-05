@@ -117,7 +117,7 @@
           font-weight: normal;
 
           &:hover {
-            color: #9ec8ff;;
+            color: #9ec8ff;
           }
         }
       }
@@ -130,50 +130,49 @@
       font-size: 12px;
       color: #818181;
 
-      p{
+      p {
         display: inline-block;
       }
 
-      .icon-box{
+      .icon-box {
         display: inline-block;
         width: 535px;
         text-align: right;
         vertical-align: middle;
 
-        .xin{
+        .xin {
           display: inline-block;
           width: 42px;
           height: 42px;
           margin-left: 90px;
 
-          img{
+          img {
             width: 100%;
           }
         }
 
-        .norton{
+        .norton {
           display: inline-block;
           width: 96px;
-          height:53px;
+          height: 53px;
           margin-left: 90px;
 
-          img{
+          img {
             width: 100%;
           }
         }
 
-        .cheng{
+        .cheng {
           display: inline-block;
           width: 105px;
           height: 38px;
           margin-left: 90px;
 
-          img{
+          img {
             width: 100%;
           }
         }
       }
-
     }
   }
 </style>

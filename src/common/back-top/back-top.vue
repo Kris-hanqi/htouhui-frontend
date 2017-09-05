@@ -78,6 +78,7 @@
 
 <style lang="scss" scoped>
   @import "../../../src/styles/variables.scss";
+
   .back-top {
     position: fixed;
     cursor: pointer;
@@ -93,11 +94,11 @@
     border-radius: 2px;
     width: 50px;
     height: 50px;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     background: url(../../../static/images/icon_home.png) no-repeat;
     background-position: -500px 0;
 
-    &:hover{
+    &:hover {
       background-position: -500px -50px;
     }
   }

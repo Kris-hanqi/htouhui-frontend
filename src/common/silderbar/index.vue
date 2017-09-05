@@ -31,25 +31,25 @@
 </script>
 
 <style lang="scss" scoped>
-  .silderbar{
+  .silderbar {
     position: fixed;
     right: 0;
-    bottom:140px;
+    bottom: 140px;
     width: 50px;
     height: auto;
     z-index: 1000;
 
-    > div{
+    > div {
       position: relative;
       width: 100%;
       height: 50px;
       margin-bottom: 5px;
       border-radius: 2px;
-      transition: all .2s ease-in-out;
+      transition: all 0.2s ease-in-out;
       background: url(../../../static/images/icon_home.png) no-repeat;
       cursor: pointer;
 
-      .silderbar-box{
+      .silderbar-box {
         position: absolute;
         top: 0;
         right: 55px;
@@ -59,7 +59,7 @@
         text-align: center;
         display: none;
 
-        > p{
+        > p {
           width: 100px;
           font-size: 14px;
           line-height: 20px;
@@ -69,18 +69,18 @@
           display: inline-block;
           text-align: center;
 
-          img{
+          img {
             width: 125px;
             height: 125px;
           }
 
-          p{
+          p {
             font-size: 14px;
           }
         }
       }
 
-      i{
+      i {
         position: absolute;
         right: 50px;
         top: 15px;
@@ -89,48 +89,50 @@
       }
     }
 
-    .count{
+    .count {
       background-position: -550px 0;
 
-      &:hover{
+      &:hover {
         background-position: -550px -50px;
       }
     }
 
-    .online-service{
+    .online-service {
       background-position: -350px 0;
 
-      &:hover{
+      &:hover {
         background-position: -350px -50px;
 
-        .silderbar-box{
+        .silderbar-box {
           display: block;
         }
-        i{
+
+        i {
           display: block;
         }
       }
 
-      .silderbar-box{
+      .silderbar-box {
         top: -5px;
       }
     }
 
-    .code{
+    .code {
       background-position: -400px 0;
 
-      .silderbar-box{
+      .silderbar-box {
         width: 255px;
         top: -50px;
       }
 
-      &:hover{
+      &:hover {
         background-position: -400px -51px;
 
-        .silderbar-box{
+        .silderbar-box {
           display: block;
         }
-        i{
+
+        i {
           display: block;
         }
       }

@@ -60,7 +60,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .banner{
+  .banner {
     position: relative;
 
     .swiper-container {
@@ -129,7 +129,7 @@
         top: 45px;
         right: 0;
         font-size: 14px;
-        background-color: rgba(0,0,0,0.4);
+        background-color: rgba(0, 0, 0, 0.4);
         text-align: center;
         color: #fff;
 
@@ -159,13 +159,13 @@
           margin: 0 auto;
           line-height: 40px;
           font-size: 20px;
-          background: #ee5544;
+          background: #e54;
           border-radius: 5px;
           font-weight: bold;
           cursor: pointer;
 
           &:hover {
-            background: #ff5544;
+            background: #f54;
           }
         }
 
@@ -180,7 +180,7 @@
 
           &:hover {
             text-decoration: none;
-            color: #ee5544;
+            color: #e54;
           }
         }
       }

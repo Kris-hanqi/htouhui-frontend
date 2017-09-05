@@ -15,8 +15,6 @@
       HthHeaderDown
     }
   }
-
-
 </script>
 
 <style lang="scss">
@@ -26,6 +24,5 @@
     .header-top-container {
       margin: 0 auto;
     }
-
   }
 </style>

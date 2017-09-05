@@ -5,6 +5,8 @@ const config = require('../config');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+const StylelLintFormatter = require('stylelint-formatter-pretty');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -27,6 +29,10 @@ module.exports = merge(baseWebpackConfig, {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new StyleLintPlugin({
+      files: ['src/**/*.vue'],
+      syntax: 'scss'
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.ejs',
