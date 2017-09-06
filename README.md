@@ -1,5 +1,6 @@
 # payday-loan-app
 
+> 海投汇官网项目（PC）
 
 ## 开发环境搭建
 
@@ -16,7 +17,7 @@
 * `yarn run test` 执行单元测试以及端对端测试
 * `yarn run lint` 代码审查
 
-## 开发组件介绍
+## 开发依赖介绍
 
 **vue 全家桶**
 
@@ -38,8 +39,14 @@
 * [axios](https://github.com/mzabriskie/axios) // 基于 promise 的 HTTP 库
 * [lodash](https://github.com/lodash/lodash) // js库(提供对常见数据类型的处理)
 
+## 开发规范
 
-## 组件API中文文档集锦
+* js采用eslint进行代码审查
+* css采用stylelint进行代码审查
+
+详细请移步[开发规范](./code-guide.md)
+
+## API中文文档集锦
 
 * [vue中文官网](https://cn.vuejs.org/)
 * [vuex中文文档](https://vuex.vuejs.org/zh-cn/)
