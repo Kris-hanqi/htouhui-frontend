@@ -41,8 +41,8 @@
 
 ## 开发规范
 
-* js采用eslint进行代码审查
-* css采用stylelint进行代码审查
+* js采用eslint进行代码审查 - 具体规则请查看[.eslintrc.js](./.eslintrc.js)
+* css采用stylelint进行代码审查 - 具体规则请查看[.stylelintrc](./.stylelintrc)
 
 详细请移步[开发规范](./code-guide.md)
 
