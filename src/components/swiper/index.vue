@@ -86,7 +86,7 @@
       }
 
       .swiper-button-prev {
-        background-image: url(../../../static/images/button-prev.png);
+        //background-image: url(../../../static/images/button-prev.png);
         background-size: 100% 100%;
         left: 50%;
         width: 45px;
@@ -96,7 +96,7 @@
       }
 
       .swiper-button-next {
-        background-image: url(../../../static/images/button-next.png);
+        //background-image: url(../../../static/images/button-next.png);
         background-size: 100% 100%;
         right: 50%;
         width: 45px;

@@ -1,185 +1,127 @@
 <template>
   <!-- 页面底部组件 -->
-  <div class="hth-footer wrap">
-    <div class="footer-top">
-      <div class="logo">
-        <p class="txt1">客服热线(工作时间<span class="roboto-regular">09:00-18:00</span>)</p>
-        <p class="txt2 roboto-regular">400-698-8810</p>
+  <div class="hth-footer">
+    <div class="wrap">
+      <div class="hth-footer__box clearfix">
+        <div class="hth-footer__box-nav">
+          <h3><a href="">关于我们</a></h3>
+          <ul>
+            <li><a href="" class="nav-a">公司介绍</a></li>
+            <li><a href="" class="nav-a">团队介绍</a></li>
+            <li><a href="" class="nav-a">联系我们</a></li>
+            <li><a href="" class="nav-a">加入我们</a></li>
+          </ul>
+        </div>
+        <div class="hth-footer__box-nav">
+          <h3><a href="">法律法规</a></h3>
+          <ul>
+            <li><a href="" class="nav-a">法律顾问</a></li>
+            <li><a href="" class="nav-a">法律协议</a></li>
+            <li><a href="" class="nav-a">法律声明</a></li>
+          </ul>
+        </div>
+        <div class="hth-footer__box-nav">
+          <h3><a href="">帮助中心</a></h3>
+          <ul>
+            <li><a href="" class="nav-a">投资人必读</a></li>
+            <li><a href="" class="nav-a">新手指引</a></li>
+            <li><a href="" class="nav-a">充值提现指导</a></li>
+          </ul>
+        </div>
+        <div class="hth-footer__box-nav hth-footer__box-contact">
+          <h3><a href="">联系我们</a></h3>
+          <ul>
+            <li>客服电话：400-698-8810（工作日 9:00-18:00）</li>
+            <li>客服邮箱：callcenter@htouhui.com</li>
+            <li>公司地址：北京市朝阳区东三环北路19号中青大厦18层</li>
+            <li>我要合作：bd@htouhui.com</li>
+          </ul>
+        </div>
+        <ul class="hth-footer__qr_code">
+          <li><img :src="img_app_download"/></li>
+          <li class="text">市场有风险，投资需谨慎！</li>
+        </ul>
       </div>
-      <div class="footer-nav-box">
-        <ul>
-          <li><a href="">关于我们</a></li>
-          <li><a href="" class="nav-a">企业介绍</a></li>
-          <li><a href="" class="nav-a">管理团队</a></li>
-          <li><a href="" class="nav-a">合作伙伴</a></li>
-          <li><a href="" class="nav-a">联系我们</a></li>
-          <li><a href="" class="nav-a">加入我们</a></li>
-        </ul>
-        <ul>
-          <li><a href="">法律法规</a></li>
-          <li><a href="" class="nav-a">法律顾问</a></li>
-          <li><a href="" class="nav-a">法律协议</a></li>
-          <li><a href="" class="nav-a">法律声明</a></li>
-        </ul>
-        <ul>
-          <li><a href="">帮助中心</a></li>
-          <li><a href="" class="nav-a">投资人必读</a></li>
-          <li><a href="" class="nav-a">充值提现必读</a></li>
-          <li><a href="" class="nav-a">怎样债权转让</a></li>
-        </ul>
-        <ul>
-          <li>扫二维码下载<span class="roboto-regular">APP</span></li>
-          <li><img src="../../../static/images/code-phone-download.jpg"/></li>
-        </ul>
+      <div class="hth-info-container">
+        <hth-info></hth-info>
       </div>
-    </div>
-    <div class="footer-bottom clear">
-      <p>©版权所有 北京冠城瑞富信息技术有限公司 Copyright Reserved　|　京ICP备15020986</p>
-      <div class="icon-box">
-        <div class="xin"><img src="../../../static/images/icons_itrust.png" alt=""/></div>
-        <div class="norton"><img src="../../../static/images/icons_norton.png" alt=""/></div>
-        <div class="cheng"><img src="../../../static/images/icons_chengxin.png" alt=""/></div>
-      </div>
-      <p>版本切换： <a href="">电脑版</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="">手机版</a></p>
     </div>
   </div>
 </template>
 
 <script>
+  import img_app_download from '@/assets/images/components/app-download.jpg';
+  import HthInfo from '../hth-info/index.vue';
+
   export default {
-    name: 'HthFooter'
+    name: 'HthFooter',
+    data() {
+      return {
+        img_app_download
+      }
+    },
+    components: {
+      HthInfo
+    }
   }
 </script>
 
 <style lang="scss" scoped>
   $hth-footer-bg: #3b495b;
 
+  .clearfix:after {
+    content: ".";
+    clear: both;
+    display: block;
+    overflow: hidden;
+    font-size: 0;
+    height: 0;
+  }
+
   .hth-footer {
     width: 100%;
+    height: auto;
+    font-size: 14px;
     background-color: $hth-footer-bg;
+    color: #7d94b8;
+    text-align: left;
   }
 
   .hth-footer__box {
-    width: 1000px;
-    margin: 0 auto;
-    padding: 20px 0;
-    border-bottom: 1px solid #707070;
+    height: auto;
+    padding: 38px 0;
+    border-bottom: 1px solid #7d94b8;
+    font-weight: bold;
   }
 
-  .footer-top {
-    width: 1000px;
-    min-height: 170px;
-    margin: 0 auto;
-    padding: 20px 0;
-    border-bottom: 1px solid #707070;
-    font-size: 16px;
-    color: #707070;
+  .hth-footer__box-nav {
+    float: left;
+    width: 150px;
 
-    .logo {
-      display: inline-block;
-      margin-top: 25px;
-
-      a {
-        display: inline-block;
-        width: 168px;
-        height: 59px;
-
-        img {
-          width: 100%;
-        }
-      }
-
-      .txt1 {
-        font-size: 12px;
-        line-height: 25px;
-      }
-
-      .txt2 {
-        font-size: 22px;
-        line-height: 30px;
-      }
+    &.hth-footer__box-contact {
+      width: auto;
     }
 
-    .footer-nav-box {
-      float: right;
-      font-size: 16px;
-      color: #707070;
-      font-weight: bold;
+    ul {
+      padding: 20px 0 0;
+    }
 
-      ul {
-        float: left;
-        margin-left: 65px;
+    li {
+      height: 30px;
+    }
 
-        li {
-          height: 30px;
-        }
-
-        &:last-child img {
-          width: 125px;
-          height: 125px;
-        }
-      }
-
-      .nav-a {
-        font-size: 14px;
-        font-weight: normal;
-
-        &:hover {
-          color: #9ec8ff;
-        }
-      }
+    h3 {
+      color: #fff;
     }
   }
 
-  .footer-bottom {
-    width: 1000px;
-    margin: 0 auto;
-    padding: 20px 0;
-    font-size: 12px;
-    color: #818181;
+  .hth-footer__qr_code {
+    float: right;
+    text-align: center;
 
-    p {
-      display: inline-block;
-    }
-
-    .icon-box {
-      display: inline-block;
-      vertical-align: middle;
-      width: 535px;
-      text-align: right;
-
-      .xin {
-        display: inline-block;
-        width: 42px;
-        height: 42px;
-        margin-left: 90px;
-
-        img {
-          width: 100%;
-        }
-      }
-
-      .norton {
-        display: inline-block;
-        width: 96px;
-        height: 53px;
-        margin-left: 90px;
-
-        img {
-          width: 100%;
-        }
-      }
-
-      .cheng {
-        display: inline-block;
-        width: 105px;
-        height: 38px;
-        margin-left: 90px;
-
-        img {
-          width: 100%;
-        }
-      }
+    .text {
+      padding-top: 20px;
+      color: #fff;
     }
   }
 </style>

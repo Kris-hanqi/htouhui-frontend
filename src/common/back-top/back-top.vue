@@ -94,7 +94,7 @@
     border-radius: 2px;
     width: 50px;
     height: 50px;
-    background: url(../../../static/images/icon_home.png) no-repeat;
+    //background: url(../../../static/images/icon_home.png) no-repeat;
     background-position: -500px 0;
     transition: all 0.2s ease-in-out;
 
