@@ -1,36 +1,28 @@
 <template>
   <div class="header-down">
-    <div class="main-section">
-      <div class="logo">
-        <img src="../../../../static/images/logo.png" alt=""/>
-      </div>
-      <ul class="index-nav">
-        <li class="nav-item">
-          <a class="active" href="">首页</a>
-        </li>
-        <li class="nav-item">
-          <a href="">我要投资</a>
-        </li>
-        <li class="nav-item">
-          <a href="">债权转让</a>
-        </li>
-        <li class="nav-item">
-          <a href="">风控措施</a>
-        </li>
-        <li class="nav-item">
-          <router-link :to="'/information-disclosure'">信息披露</router-link>
-        </li>
-        <li class="nav-item">
-          <a href="">关于我们</a>
-        </li>
-      </ul>
+    <div class="header-down__logo">
+      <img :src="img_logo" alt="海投汇"/>
     </div>
+    <ul class="header-down__bar">
+      <li><a class="active" href="">首页</a></li>
+      <li><a href="">升薪宝量化</a></li>
+      <li><a href="">升薪宝定期</a></li>
+      <li><a href="">定期抵押</a></li>
+      <li><router-link to="'/information-disclosure'">风控措施</router-link></li>
+      <li><a href="">关于我们</a></li>
+    </ul>
   </div>
 </template>
 
 <script>
+  import img_logo from '@/assets/images/logo.png';
   export default {
     name: 'HthHeaderDown',
+    data() {
+      return {
+        img_logo
+      }
+    },
     methods: {
       clickFn() {
         this.$router.push({ path: '/information-disclosure' });
@@ -40,46 +32,45 @@
 </script>
 
 <style lang="scss" scoped>
+  $hth-header-down-height: 70px;
+
   .header-down {
-    height: 74px;
-    line-height: 74px;
+    height: $hth-header-down-height;
+    line-height: $hth-header-down-height;
     background-color: #fff;
     font-size: 16px;
+  }
 
-    .main-section {
-      width: 1000px;
-      margin: 0 auto;
-      color: #000;
+  .header-down__logo {
+    display: inline-block;
+    width: 148px;
+    height: $hth-header-down-height;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .header-down__bar {
+    float: right;
+    height: $hth-header-down-height;
+
+    li {
+      float: left;
+      text-align: center;
     }
 
-    .logo {
-      display: inline-block;
-      width: 148px;
-      height: 74px;
+    a {
+      box-sizing: border-box;
+      padding: 25px 15px;
 
-      img {
-        width: 100%;
-      }
-    }
-
-    .index-nav {
-      float: right;
-      height: 74px;
-
-      .nav-item {
-        float: left;
-        text-align: center;
+      &.active {
+        border-top: 2px solid #2875d9;
       }
 
-      a {
-        box-sizing: border-box;
-        padding: 25px 15px;
-
-        &:hover,
-        &.active {
-          color: #2875d9;
-          border-bottom: 4px solid #2875d9;
-        }
+      &:hover,
+      &.active {
+        color: #2875d9;
       }
     }
   }

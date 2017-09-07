@@ -4,7 +4,7 @@
       <hth-header-top class="wrap"></hth-header-top>
     </div>
 
-    <hth-header-down class="header-down-container"></hth-header-down>
+    <hth-header-down class="wrap"></hth-header-down>
   </div>
 </template>
 

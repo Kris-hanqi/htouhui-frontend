@@ -4,30 +4,14 @@
       客服电话: <span>400-698-8810</span>（工作日 <span>09:00 - 18:00</span>）
     </span>
     <ul class="header-top__bar">
-      <li class="header-top__bar-item">
-        <a class="active" href="">登录</a>
-      </li>
-      <li class="header-top__bar-item">
-        <a href="">注册</a>
-      </li>
-      <li class="header-top__bar-item">
-        <a href="">信息披露</a>
-      </li>
-      <li class="header-top__bar-item">
-        <a href="">网贷课堂</a>
-      </li>
-      <li class="header-top__bar-item">
-        <a href="">网贷课堂</a>
-      </li>
-      <li class="header-top__bar-item">
-        <a href="">最新活动</a>
-      </li>
-      <li class="header-top__bar-item">
-        <a href="">帮助中心</a>
-      </li>
-      <li class="header-top__bar-item">
-        <i class="fa fa-mobile" aria-hidden="true"></i>手机APP
-      </li>
+      <li><a class="active" href="">登录</a></li>
+      <li><a href="">注册</a></li>
+      <li><a href="">信息披露</a></li>
+      <li><a href="">网贷课堂</a></li>
+      <li><a href="">网贷课堂</a></li>
+      <li><a href="">最新活动</a></li>
+      <li><a href="">帮助中心</a></li>
+      <li><i class="fa fa-mobile" aria-hidden="true"></i>手机APP</li>
     </ul>
   </div>
 </template>
@@ -40,11 +24,11 @@
 
 <style lang="scss" scoped>
   $hth-header-top-text-color: #929ba9;
-  $hth-header-height: 34px;
+  $hth-header-top-height: 34px;
 
   .header-top {
-    height: $hth-header-height;
-    line-height: $hth-header-height;
+    height: $hth-header-top-height;
+    line-height: $hth-header-top-height;
     color: $hth-header-top-text-color;
     font-size: 12px;
     font-weight: bold;
@@ -54,7 +38,7 @@
     float: right;
   }
 
-  .header-top__bar-item {
+  .header-top__bar li {
     float: left;
     margin-left: 20px;
 
