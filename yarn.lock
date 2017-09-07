@@ -5154,7 +5154,7 @@ postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0
     source-map "^0.5.6"
     supports-color "^3.2.3"
 
-postcss@^6.0.0, postcss@^6.0.10, postcss@^6.0.3, postcss@^6.0.8:
+postcss@^6.0.0, postcss@^6.0.10, postcss@^6.0.3, postcss@^6.0.7, postcss@^6.0.8:
   version "6.0.10"
   resolved "http://registry.npm.taobao.org/postcss/download/postcss-6.0.10.tgz#c311b89734483d87a91a56dc9e53f15f4e6e84e4"
   dependencies:
@@ -6206,6 +6206,15 @@ stylelint-formatter-pretty@^1.0.3:
     log-symbols "^1.0.2"
     plur "^2.1.2"
     string-width "^2.0.0"
+
+stylelint-order@^0.6.0:
+  version "0.6.0"
+  resolved "http://registry.npm.taobao.org/stylelint-order/download/stylelint-order-0.6.0.tgz#72222be0c64d8782b2fc237d0d9ac974039f968b"
+  dependencies:
+    lodash "^4.17.4"
+    postcss "^6.0.7"
+    postcss-sorting "^3.0.1"
+    stylelint "^8.0.0"
 
 stylelint-processor-html@^1.0.0:
   version "1.0.0"

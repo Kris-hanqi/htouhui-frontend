@@ -88,9 +88,9 @@
       .swiper-button-prev {
         background-image: url(../../../static/images/button-prev.png);
         background-size: 100% 100%;
+        left: 50%;
         width: 45px;
         height: 95px;
-        left: 50%;
         margin-left: -555px;
         margin-top: -45px;
       }
@@ -98,9 +98,9 @@
       .swiper-button-next {
         background-image: url(../../../static/images/button-next.png);
         background-size: 100% 100%;
+        right: 50%;
         width: 45px;
         height: 95px;
-        right: 50%;
         margin-right: -555px;
         margin-top: -45px;
       }
@@ -115,19 +115,19 @@
     }
 
     .land-box {
+      position: relative;
+      top: -360px;
       width: 1000px;
       height: auto;
       margin: 0 auto;
-      position: relative;
-      top: -360px;
 
       .land {
-        width: 270px;
-        height: 270px;
         position: absolute;
         z-index: 2;
         top: 45px;
         right: 0;
+        width: 270px;
+        height: 270px;
         font-size: 14px;
         background-color: rgba(0, 0, 0, 0.4);
         text-align: center;
@@ -146,10 +146,10 @@
           font-size: 50px;
           color: #ffda1a;
           margin-bottom: 15px;
+        }
 
-          span {
-            font-size: 23px;
-          }
+        span {
+          font-size: 23px;
         }
 
         .land-button {
@@ -164,9 +164,9 @@
           font-weight: bold;
           cursor: pointer;
 
-          &:hover {
-            background: #f54;
-          }
+          //&:hover {
+          //  background: #f54;
+          //}
         }
 
         .land-has-account {
@@ -178,10 +178,10 @@
           text-decoration: underline;
           font-weight: bold;
 
-          &:hover {
-            text-decoration: none;
-            color: #e54;
-          }
+          //&:hover {
+          //  text-decoration: none;
+          //  color: #e54;
+          //}
         }
       }
     }

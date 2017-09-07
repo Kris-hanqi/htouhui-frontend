@@ -4,9 +4,6 @@
       <div class="logo">
         <img src="../../../../static/images/logo.png" alt=""/>
       </div>
-      <div class="logo-other">
-        <img src="../../../../static/images/logo_kongzhong_jxbank.png" alt=""/>
-      </div>
       <ul class="index-nav">
         <li class="nav-item">
           <a class="active" href="">首页</a>
@@ -45,53 +42,43 @@
 <style lang="scss" scoped>
   .header-down {
     height: 74px;
-    background-color: #fff;
     line-height: 74px;
+    background-color: #fff;
     font-size: 16px;
 
     .main-section {
       width: 1000px;
       margin: 0 auto;
       color: #000;
+    }
 
-      .logo {
-        display: inline-block;
-        width: 148px;
-        height: 74px;
+    .logo {
+      display: inline-block;
+      width: 148px;
+      height: 74px;
 
-        img {
-          width: 100%;
-        }
+      img {
+        width: 100%;
+      }
+    }
+
+    .index-nav {
+      float: right;
+      height: 74px;
+
+      .nav-item {
+        float: left;
+        text-align: center;
       }
 
-      .logo-other {
-        display: inline-block;
-        width: 307px;
-        height: 74px;
+      a {
+        box-sizing: border-box;
+        padding: 25px 15px;
 
-        img {
-          width: 100%;
-        }
-      }
-
-      .index-nav {
-        float: right;
-        height: 74px;
-
-        .nav-item {
-          float: left;
-          text-align: center;
-
-          a {
-            box-sizing: border-box;
-            padding: 25px 15px;
-
-            &:hover,
-            &.active {
-              color: #2875d9;
-              border-bottom: 4px solid #2875d9;
-            }
-          }
+        &:hover,
+        &.active {
+          color: #2875d9;
+          border-bottom: 4px solid #2875d9;
         }
       }
     }

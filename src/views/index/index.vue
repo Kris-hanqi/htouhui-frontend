@@ -1,4 +1,5 @@
 <template>
+  <!-- 网站首页 -->
   <div class="main">
     <hth-banner></hth-banner>
     <div>我是首页</div>

@@ -1,10 +1,8 @@
 <template>
-  <div class="footer-wrapper">
+  <!-- 页面底部组件 -->
+  <div class="hth-footer wrap">
     <div class="footer-top">
       <div class="logo">
-        <a href="">
-          <img src="../../../static/images/logo02.png" alt=""/>
-        </a>
         <p class="txt1">客服热线(工作时间<span class="roboto-regular">09:00-18:00</span>)</p>
         <p class="txt2 roboto-regular">400-698-8810</p>
       </div>
@@ -54,123 +52,132 @@
 </script>
 
 <style lang="scss" scoped>
-  .footer-wrapper {
+  $hth-footer-bg: #3b495b;
+
+  .hth-footer {
     width: 100%;
-    background-color: #3b3b3b;
+    background-color: $hth-footer-bg;
+  }
 
-    .footer-top {
-      width: 1000px;
-      min-height: 170px;
-      margin: 0 auto;
-      padding: 20px 0;
-      border-bottom: 1px solid #707070;
-      font-size: 16px;
-      color: #707070;
+  .hth-footer__box {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0;
+    border-bottom: 1px solid #707070;
+  }
 
-      .logo {
+  .footer-top {
+    width: 1000px;
+    min-height: 170px;
+    margin: 0 auto;
+    padding: 20px 0;
+    border-bottom: 1px solid #707070;
+    font-size: 16px;
+    color: #707070;
+
+    .logo {
+      display: inline-block;
+      margin-top: 25px;
+
+      a {
         display: inline-block;
-        margin-top: 25px;
+        width: 168px;
+        height: 59px;
 
-        a {
-          width: 168px;
-          height: 59px;
-          display: inline-block;
-
-          img {
-            width: 100%;
-          }
-        }
-
-        .txt1 {
-          font-size: 12px;
-          line-height: 25px;
-        }
-
-        .txt2 {
-          font-size: 22px;
-          line-height: 30px;
+        img {
+          width: 100%;
         }
       }
 
-      .footer-nav-box {
-        font-size: 16px;
-        color: #707070;
-        font-weight: bold;
-        float: right;
+      .txt1 {
+        font-size: 12px;
+        line-height: 25px;
+      }
 
-        ul {
-          float: left;
-          margin-left: 65px;
-
-          li {
-            height: 30px;
-          }
-
-          &:last-child img {
-            width: 125px;
-            height: 125px;
-          }
-        }
-
-        .nav-a {
-          font-size: 14px;
-          font-weight: normal;
-
-          &:hover {
-            color: #9ec8ff;
-          }
-        }
+      .txt2 {
+        font-size: 22px;
+        line-height: 30px;
       }
     }
 
-    .footer-bottom {
-      width: 1000px;
-      margin: 0 auto;
-      padding: 20px 0;
-      font-size: 12px;
-      color: #818181;
+    .footer-nav-box {
+      float: right;
+      font-size: 16px;
+      color: #707070;
+      font-weight: bold;
 
-      p {
-        display: inline-block;
+      ul {
+        float: left;
+        margin-left: 65px;
+
+        li {
+          height: 30px;
+        }
+
+        &:last-child img {
+          width: 125px;
+          height: 125px;
+        }
       }
 
-      .icon-box {
+      .nav-a {
+        font-size: 14px;
+        font-weight: normal;
+
+        &:hover {
+          color: #9ec8ff;
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0;
+    font-size: 12px;
+    color: #818181;
+
+    p {
+      display: inline-block;
+    }
+
+    .icon-box {
+      display: inline-block;
+      vertical-align: middle;
+      width: 535px;
+      text-align: right;
+
+      .xin {
         display: inline-block;
-        width: 535px;
-        text-align: right;
-        vertical-align: middle;
+        width: 42px;
+        height: 42px;
+        margin-left: 90px;
 
-        .xin {
-          display: inline-block;
-          width: 42px;
-          height: 42px;
-          margin-left: 90px;
-
-          img {
-            width: 100%;
-          }
+        img {
+          width: 100%;
         }
+      }
 
-        .norton {
-          display: inline-block;
-          width: 96px;
-          height: 53px;
-          margin-left: 90px;
+      .norton {
+        display: inline-block;
+        width: 96px;
+        height: 53px;
+        margin-left: 90px;
 
-          img {
-            width: 100%;
-          }
+        img {
+          width: 100%;
         }
+      }
 
-        .cheng {
-          display: inline-block;
-          width: 105px;
-          height: 38px;
-          margin-left: 90px;
+      .cheng {
+        display: inline-block;
+        width: 105px;
+        height: 38px;
+        margin-left: 90px;
 
-          img {
-            width: 100%;
-          }
+        img {
+          width: 100%;
         }
       }
     }

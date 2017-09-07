@@ -35,8 +35,13 @@ header, footer, article, section, nav, menu {
   clear: both
 }
 
-.clear{
+.clear {
   clear: both;
+}
+
+.wrap {
+  width: 1000px;
+  margin: 0 auto;
 }
 
 a,
