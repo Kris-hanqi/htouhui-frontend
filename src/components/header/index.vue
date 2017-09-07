@@ -1,5 +1,5 @@
 <template>
-  <div class="header-wrapper wrap">
+  <div class="header-wrapper">
     <div class="header-top-container">
       <hth-header-top class="wrap"></hth-header-top>
     </div>
