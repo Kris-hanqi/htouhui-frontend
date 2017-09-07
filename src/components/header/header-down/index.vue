@@ -4,12 +4,20 @@
       <img :src="img_logo" alt="海投汇"/>
     </div>
     <ul class="header-down__bar">
-      <li><a class="active" href="">首页</a></li>
+      <li class="active"><a href="">首页</a></li>
       <li><a href="">升薪宝量化</a></li>
       <li><a href="">升薪宝定期</a></li>
       <li><a href="">定期抵押</a></li>
       <li><router-link to="'/information-disclosure'">风控措施</router-link></li>
       <li><a href="">关于我们</a></li>
+      <li class="header-down__account">
+        <router-link to="'/information-disclosure'">
+          <div class="portrait">
+            <i class="fa fa-user-o" aria-hidden="true"></i>
+          </div>
+          <span>我的账户</span>
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -58,19 +66,40 @@
     li {
       float: left;
       text-align: center;
-    }
-
-    a {
-      box-sizing: border-box;
-      padding: 25px 15px;
 
       &.active {
         border-top: 2px solid #2875d9;
+
+        a {
+          color: #2875d9;
+          margin-top: -3px;
+        }
       }
+    }
+
+    a {
+      display: block;
+      padding: 0 15px;
 
       &:hover,
       &.active {
         color: #2875d9;
+      }
+    }
+  }
+
+  .header-down__account {
+    .portrait {
+      display: inline-block;
+      position: relative;
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      line-height: 30px;
+      background: #eef2fe;
+
+      i {
+        color: #8b93ad;
       }
     }
   }
