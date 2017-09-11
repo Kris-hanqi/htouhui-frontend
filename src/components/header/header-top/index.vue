@@ -1,17 +1,17 @@
 <template>
   <div class="header-top">
     <span>
-      客服电话: <span>400-698-8810</span>（工作日 <span>09:00 - 18:00</span>）
+      客服电话: <span class="roboto-regular">400-698-8810</span>（工作日 <span class="roboto-regular">09:00 - 18:00</span>）
     </span>
     <ul class="header-top__bar">
-      <li><a class="active" href="">登录</a></li>
+      <li><a href="">登录</a></li>
       <li><a href="">注册</a></li>
       <li><a href="">信息披露</a></li>
       <li><a href="">网贷课堂</a></li>
       <li><a href="">网贷课堂</a></li>
       <li><a href="">最新活动</a></li>
       <li><a href="">帮助中心</a></li>
-      <li><i class="fa fa-mobile" aria-hidden="true"></i>手机APP</li>
+      <li><i class="icon-mobile"></i>手机APP</li>
     </ul>
   </div>
 </template>
@@ -24,7 +24,7 @@
 
 <style lang="scss" scoped>
   $hth-header-top-text-color: #929ba9;
-  $hth-header-top-height: 34px;
+  $hth-header-top-height: 30px;
 
   .header-top {
     height: $hth-header-top-height;
@@ -43,20 +43,22 @@
     margin-left: 20px;
 
     i {
-      float: left;
-      margin-top: 9px;
-      font-size: 18px;
-      padding-right: 5px;
+      display: inline-block;
+      vertical-align: middle;
+      width: 13px;
+      height: 19px;
+      background: url(../../../assets/images/index-ico-phone.png) no-repeat center;
+      margin-right: 5px;
     }
 
     a {
       &.active {
-        color: #7594fa;
+        color: #507dfb;
       }
 
       &:hover,
       &:before {
-        color: #7594fa;
+        color: #507dfb;
       }
     }
   }

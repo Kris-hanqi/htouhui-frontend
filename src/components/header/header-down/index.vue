@@ -51,8 +51,9 @@
 
   .header-down__logo {
     display: inline-block;
-    width: 148px;
-    height: $hth-header-down-height;
+    width: 149px;
+    height: 41px;
+    margin-top: 15px;
 
     img {
       width: 100%;
@@ -68,11 +69,11 @@
       text-align: center;
 
       &.active {
-        border-top: 2px solid #2875d9;
+        border-top: 5px solid #2875d9;
 
         a {
           color: #2875d9;
-          margin-top: -3px;
+          margin-top: -5px;
         }
       }
     }
