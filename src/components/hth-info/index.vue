@@ -11,31 +11,31 @@
       <a href="javascript:void(0)" class="hth-info_type_h5">移动版</a>
     </div>
     <div class="hth-info__security">
-      <a href="http://www.itrust.org.cn/yz/pjwx.asp?wm=1335541052" target="_blank">
-        <img :src="img_info_trust" alt="">
+      <a class="info_trust" href="http://www.itrust.org.cn/yz/pjwx.asp?wm=1335541052" target="_blank">
+        <img :src="img_info_trust_1" alt="">
       </a>
-      <a href="https://trustsealinfo.verisign.com/splash?form_file=fdf/splash.fdf&dn=www.htouhui.com&lang=zh_cn" target="_blank">
-        <img :src="img_info_cx" alt="">
+      <a class="info_norton" href="" target="_blank">
+        <img :src="img_info_norton_1" alt="">
       </a>
-      <a href="" target="_blank">
-        <img :src="img_info_norton" alt="">
+      <a class="info_cx" href="https://trustsealinfo.verisign.com/splash?form_file=fdf/splash.fdf&dn=www.htouhui.com&lang=zh_cn" target="_blank">
+        <img :src="img_info_cx_1" alt="">
       </a>
     </div>
   </div>
 </template>
 
 <script>
-  import img_info_cx from '@/assets/images/components/info_cx.png';
-  import img_info_trust from '@/assets/images/components/info_trust.png';
-  import img_info_norton from '@/assets/images/components/info_norton.png';
+  import img_info_cx_1 from '@/assets/images/components/info_cx-1.png';
+  import img_info_trust_1 from '@/assets/images/components/info_trust-1.png';
+  import img_info_norton_1 from '@/assets/images/components/info_norton-1.png';
 
   export default {
     name: 'HthInfo',
     data() {
       return {
-        img_info_cx,
-        img_info_trust,
-        img_info_norton
+        img_info_cx_1,
+        img_info_trust_1,
+        img_info_norton_1
       }
     }
   }
@@ -63,6 +63,7 @@
 
     img {
       margin-right: 30px;
+      vertical-align: middle;
     }
   }
 </style>

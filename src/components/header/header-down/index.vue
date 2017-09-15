@@ -30,11 +30,6 @@
       return {
         img_logo
       }
-    },
-    methods: {
-      clickFn() {
-        this.$router.push({ path: '/information-disclosure' });
-      }
     }
   }
 </script>
