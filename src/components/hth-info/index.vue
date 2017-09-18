@@ -7,7 +7,7 @@
 
     <div class="hth-info__security">
       <a class="info_trust" href="http://www.itrust.org.cn/yz/pjwx.asp?wm=1335541052" target="_blank">
-        <info-img-src></info-img-src>
+        <img-toggle :img-info="info_trust"></img-toggle>
       </a>
     </div>
 
@@ -22,20 +22,24 @@
 
 <script>
   import img_info_cx_1 from '@/assets/images/components/info_cx-1.png';
-  import img_info_trust_1 from '@/assets/images/components/info_trust-1.png';
+  
   import img_info_norton_1 from '@/assets/images/components/info_norton-1.png';
   import img_info_cx from '@/assets/images/components/info_cx.png';
-  import img_info_trust from '@/assets/images/components/info_trust.png';
+  import img_info_trust_hover from '@/assets/images/components/info_trust.png';
+  import img_info_trust from '@/assets/images/components/info_trust-1.png';
   import img_info_norton from '@/assets/images/components/info_norton.png';
-  import infoImgSrc from './info-imgSrc.vue';
+  import ImgToggle from './img-toggle.vue';
 
   export default {
     name: 'HthInfo',
+    components: {
+      ImgToggle
+    },
     data() {
       return {
         info_trust: {
-          notHover: img_info_trust_1,
-          hover: img_info_trust,
+          notHover: img_info_trust,
+          hover: img_info_trust_hover,
           status: false
         },
         info_norton: {
@@ -48,9 +52,6 @@
         },
         status: true
       }
-    },
-    components: {
-      infoImgSrc
     }
   }
 </script>
