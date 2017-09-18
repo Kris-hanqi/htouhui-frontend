@@ -5,22 +5,18 @@
       <span>信息安全等级保护三级：11010517098-00001</span>
     </div>
 
+    <div class="hth-info__security">
+      <a class="info_trust" href="http://www.itrust.org.cn/yz/pjwx.asp?wm=1335541052" target="_blank">
+        <info-img-src></info-img-src>
+      </a>
+    </div>
+
     <div class="hth-info__toggle">
       <span>版本切换：</span>
       <a href="javascript:void(0)" class="hth-info_type_pc">电脑版</a>
       <a href="javascript:void(0)" class="hth-info_type_h5">移动版</a>
     </div>
-    <div class="hth-info__security">
-      <a class="info_trust" href="http://www.itrust.org.cn/yz/pjwx.asp?wm=1335541052" target="_blank">
-        <img :src="img_info_trust_1" alt="">
-      </a>
-      <a class="info_norton" href="" target="_blank">
-        <img :src="img_info_norton_1" alt="">
-      </a>
-      <a class="info_cx" href="https://trustsealinfo.verisign.com/splash?form_file=fdf/splash.fdf&dn=www.htouhui.com&lang=zh_cn" target="_blank">
-        <img :src="img_info_cx_1" alt="">
-      </a>
-    </div>
+    <div class="clear"></div>
   </div>
 </template>
 
@@ -28,15 +24,33 @@
   import img_info_cx_1 from '@/assets/images/components/info_cx-1.png';
   import img_info_trust_1 from '@/assets/images/components/info_trust-1.png';
   import img_info_norton_1 from '@/assets/images/components/info_norton-1.png';
+  import img_info_cx from '@/assets/images/components/info_cx.png';
+  import img_info_trust from '@/assets/images/components/info_trust.png';
+  import img_info_norton from '@/assets/images/components/info_norton.png';
+  import infoImgSrc from './info-imgSrc.vue';
 
   export default {
     name: 'HthInfo',
     data() {
       return {
-        img_info_cx_1,
-        img_info_trust_1,
-        img_info_norton_1
+        info_trust: {
+          notHover: img_info_trust_1,
+          hover: img_info_trust,
+          status: false
+        },
+        info_norton: {
+          notHover: img_info_norton_1,
+          hover: img_info_norton
+        },
+        info_cx: {
+          notHover: img_info_cx_1,
+          hover: img_info_cx
+        },
+        status: true
       }
+    },
+    components: {
+      infoImgSrc
     }
   }
 </script>
@@ -48,21 +62,28 @@
   }
 
   .hth-info__text {
+    float: left;
+    font-size: 12px;
+    line-height: 0.75;
+    margin-bottom: 15px;
+
     span {
       padding-left: 30px;
     }
   }
 
   .hth-info__toggle {
-    margin-top: 15px;
+    font-size: 12px;
+    line-height: 0.75;
   }
 
   .hth-info__security {
+    float: right;
     text-align: right;
     padding-bottom: 20px;
 
     img {
-      margin-right: 30px;
+      margin-left: 10px;
       vertical-align: middle;
     }
   }

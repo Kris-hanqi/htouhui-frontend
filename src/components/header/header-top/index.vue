@@ -52,6 +52,7 @@
 
     &:last-child {
       position: relative;
+      cursor: default;
 
       .icon-mobile {
         display: inline-block;

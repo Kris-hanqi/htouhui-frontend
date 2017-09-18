@@ -98,6 +98,16 @@
     float: left;
     width: 150px;
 
+    ul {
+      a {
+        font-size: 12px;
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+
     &.hth-footer__box-contact {
       width: auto;
     }
@@ -121,7 +131,8 @@
 
     .text {
       padding-top: 20px;
-      color: #fff;
+      font-size: 10px;
+      color: #dfe8f0;
     }
   }
 </style>
