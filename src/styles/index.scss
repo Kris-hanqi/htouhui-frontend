@@ -15,6 +15,7 @@ body {
   -webkit-font-smoothing: antialiased; // css3 设置字体抗锯齿属性
   text-rendering: optimizeLegibility;
   font-family: $font-family;
+  background-color: $index-background;
 }
 
 body, div, ul, li, ol, dl, dt, p, dd, img, a, span, h1, h2, h3, h4 {

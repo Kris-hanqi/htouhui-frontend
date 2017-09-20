@@ -1,9 +1,9 @@
 <template>
-  <img :src="test" v-on:mouseenter="hover" alt="">
+  <img :src="test" v-on:mouseenter="hover" v-on:mouseout="unHover" alt="">
 </template>
 
 <script>
-  
+
   export default {
     name: 'ImgToggle',
     props: {
@@ -19,6 +19,9 @@
     methods: {
       hover() {
         this.imgInfo.status = true;
+      },
+      unHover() {
+        this.imgInfo.status = false;
       }
     },
     computed: {

@@ -25,6 +25,7 @@
 
   .header-wrapper {
     width: 100%;
+    background-color: #fff;
   }
 
   .header-top-container {

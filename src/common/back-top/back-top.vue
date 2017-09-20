@@ -16,10 +16,6 @@
         type: Number,
         default: 400
       },
-      bottom: {
-        type: Number,
-        default: 90
-      },
       right: {
         type: Number,
         default: 30
@@ -87,19 +83,6 @@
 
     &.back-top-show {
       display: block;
-    }
-  }
-
-  .back-top-inner {
-    border-radius: 2px;
-    width: 50px;
-    height: 50px;
-    //background: url(../../../static/images/icon_home.png) no-repeat;
-    background-position: -500px 0;
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-      background-position: -500px -50px;
     }
   }
 </style>

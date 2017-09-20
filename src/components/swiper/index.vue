@@ -45,6 +45,7 @@
       getBannerList() {
         banners().then(data => {
           for (let i = 0; i < data.data.data.bannerList.length; i++) {
+            console.log(data.data.data.bannerList);
             this.bannerList.push(data.data.data.bannerList[i]);
           }
         })
@@ -86,7 +87,7 @@
       }
 
       .swiper-button-prev {
-        //background-image: url(../../../static/images/button-prev.png);
+        background-image: url(../../assets/images/button-prev.png);
         background-size: 100% 100%;
         left: 50%;
         width: 45px;
@@ -96,7 +97,7 @@
       }
 
       .swiper-button-next {
-        //background-image: url(../../../static/images/button-next.png);
+        background-image: url(../../assets/images/button-next.png);
         background-size: 100% 100%;
         right: 50%;
         width: 45px;
@@ -129,9 +130,9 @@
         width: 270px;
         height: 270px;
         font-size: 14px;
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(255, 255, 255, 0.4);
         text-align: center;
-        color: #fff;
+        color: #394b67;
 
         .land-title {
           padding-top: 23px;
@@ -162,11 +163,12 @@
           background: #e54;
           border-radius: 5px;
           font-weight: bold;
+          color: #fff;
           cursor: pointer;
+        }
 
-          //&:hover {
-          //  background: #f54;
-          //}
+        .land-button:hover {
+          background: #f54;
         }
 
         .land-has-account {
@@ -177,11 +179,12 @@
           padding-right: 40px;
           text-decoration: underline;
           font-weight: bold;
+          color: #727e90;
+        }
 
-          //&:hover {
-          //  text-decoration: none;
-          //  color: #e54;
-          //}
+        .land-has-account:hover {
+          text-decoration: none;
+          color: #e54;
         }
       }
     }

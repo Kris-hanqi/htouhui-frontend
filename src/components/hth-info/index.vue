@@ -9,6 +9,12 @@
       <a class="info_trust" href="http://www.itrust.org.cn/yz/pjwx.asp?wm=1335541052" target="_blank">
         <img-toggle :img-info="info_trust"></img-toggle>
       </a>
+      <a class="info_norton" href="https://trustsealinfo.verisign.com/splash?form_file=fdf/splash.fdf&dn=www.htouhui.com&lang=zh_cn" target="_blank">
+        <img-toggle :img-info="info_norton"></img-toggle>
+      </a>
+      <a class="info_cx" href="https://credit.cecdc.com/CX20150617010820010588.html" target="_blank">
+        <img-toggle :img-info="info_cx"></img-toggle>
+      </a>
     </div>
 
     <div class="hth-info__toggle">
@@ -22,10 +28,10 @@
 
 <script>
   import img_info_cx_1 from '@/assets/images/components/info_cx-1.png';
-  
+  import img_info_trust_1 from '@/assets/images/components/info_trust.png';
   import img_info_norton_1 from '@/assets/images/components/info_norton-1.png';
+
   import img_info_cx from '@/assets/images/components/info_cx.png';
-  import img_info_trust_hover from '@/assets/images/components/info_trust.png';
   import img_info_trust from '@/assets/images/components/info_trust-1.png';
   import img_info_norton from '@/assets/images/components/info_norton.png';
   import ImgToggle from './img-toggle.vue';
@@ -39,18 +45,19 @@
       return {
         info_trust: {
           notHover: img_info_trust,
-          hover: img_info_trust_hover,
+          hover: img_info_trust_1,
           status: false
         },
         info_norton: {
           notHover: img_info_norton_1,
-          hover: img_info_norton
+          hover: img_info_norton,
+          status: false
         },
         info_cx: {
           notHover: img_info_cx_1,
-          hover: img_info_cx
-        },
-        status: true
+          hover: img_info_cx,
+          status: false
+        }
       }
     }
   }
