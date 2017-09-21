@@ -50,7 +50,7 @@
 </template>
 
 <script>
-  import img_app_download from '@/assets/images/components/app-download.jpg';
+  import img_app_download from '@/assets/images/components/smart_download02.jpg';
   import HthInfo from '../hth-info/index.vue';
 
   export default {

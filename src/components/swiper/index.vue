@@ -45,7 +45,6 @@
       getBannerList() {
         banners().then(data => {
           for (let i = 0; i < data.data.data.bannerList.length; i++) {
-            console.log(data.data.data.bannerList);
             this.bannerList.push(data.data.data.bannerList[i]);
           }
         })
@@ -130,7 +129,7 @@
         width: 270px;
         height: 270px;
         font-size: 14px;
-        background-color: rgba(255, 255, 255, 0.4);
+        background-color: rgba(255, 255, 255, 0.88);
         text-align: center;
         color: #394b67;
 

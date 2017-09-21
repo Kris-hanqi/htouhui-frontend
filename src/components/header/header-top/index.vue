@@ -16,7 +16,7 @@
         手机APP
         <div class="app-download">
           <i></i>
-          <img src="../../../assets/images/components/app-download.jpg" alt=""/>
+          <img src="../../../assets/images/components/smart_download02.jpg" alt=""/>
           <p>手机客户端下载</p>
         </div>
       </li>
