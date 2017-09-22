@@ -24,3 +24,11 @@ export function media_report() {
     method: 'get'
   });
 }
+
+/** 首页投资人风采 */
+export function investors() {
+  return fetch()({
+    url: 'investorSaid',
+    method: 'get'
+  })
+}

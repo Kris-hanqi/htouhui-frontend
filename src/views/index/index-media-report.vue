@@ -5,13 +5,17 @@
       <a href="#" class="seaMoreMedia">查看更多 <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i></a>
     </div>
     <div class="media-box">
-      <div class="media-headNews">
-        <img class="headNews-img" src="" alt=""/>
+      <a class="media-headNews" :href="mediaHeadNews.targetUrl">
+        <img class="headNews-img" :src="mediaHeadNews.picUrl" alt=""/>
         <div class="headNews-txt">
-          <p class="headNews-title"></p>
-          <p class="headNews-message"></p>
+          <p class="headNews-title">{{ mediaHeadNews.title }}</p>
+          <p class="headNews-message">{{ mediaHeadNews.content }}</p>
         </div>
-      </div>
+      </a>
+      <a v-for="str in mediaList" :href="str.targetUrl" class="media-indexNews">
+        <p class="indexNews-title">{{ str.title }}</p>
+        <span class="indexNews-time roboto-regular">{{ str.createTime }}</span>
+      </a>
     </div>
   </div>
 </template>
@@ -30,7 +34,6 @@
     methods: {
       getMediaList() {
         media_report().then(data => {
-          console.log(data);
           for (let i = 0; i < data.data.data.indexNews.length; i++) {
             this.mediaList.push(data.data.data.indexNews[i]);
           }
@@ -47,10 +50,10 @@
 <style lang="scss" scoped>
   .media-report {
     display: inline-block;
-    width: 510px;
-    height: 315px;
+    width: 505px;
+    height: 325px;
+    box-sizing: border-box;
     padding: 15px;
-    margin-right: 14px;
     background-color: #fff;
 
     .title {
@@ -82,20 +85,30 @@
     width: 100%;
 
     .media-headNews {
+      display: block;
       height: 128px;
+      margin-bottom: 20px;
+
+      &:hover .headNews-txt .headNews-title {
+        color: #0573f4;
+      }
 
       .headNews-img {
         display: inline-block;
         width: 205px;
         height: 128px;
-        margin-right: 10px;
+        margin-right: 5px;
         object-fit: contain;
       }
 
       .headNews-txt {
         display: inline-block;
+        vertical-align: bottom;
+        width: 260px;
+        height: 128px;
 
         .headNews-title {
+          margin-bottom: 15px;
           font-size: 16px;
           font-weight: 300;
           line-height: 1.31;
@@ -103,11 +116,40 @@
         }
 
         .headNews-message {
+          text-align: justify;
           height: 60px;
           font-size: 12px;
           line-height: 1.67;
           color: #727e90;
         }
+      }
+    }
+
+    .media-indexNews {
+      display: block;
+      width: 100%;
+      margin-bottom: 8px;
+      color: #798596;
+
+      &:hover .indexNews-title {
+        color: #0573f4;
+      }
+
+      .indexNews-title {
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 290px;
+        white-space: nowrap;
+        font-size: 14px;
+        font-weight: 300;
+      }
+
+      .indexNews-time {
+        float: right;
+        font-size: 14px;
+        font-weight: 300;
+        color: #798596;
       }
     }
   }

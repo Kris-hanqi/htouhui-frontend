@@ -46,6 +46,8 @@
     <div class="main-main">
       <!--媒体报道-->
       <media-report></media-report>
+      <!--投资人风采-->
+      <investors></investors>
     </div>
   </div>
 
@@ -55,13 +57,15 @@
   import HthBanner from 'components/swiper';
   import NoticeTopBox from './index-notice-top.vue';
   import MediaReport from './index-media-report.vue';
+  import Investors from './index-investors.vue';
 
 
   export default {
     components: {
       HthBanner,
       NoticeTopBox,
-      MediaReport
+      MediaReport,
+      Investors
     }
   };
 </script>
@@ -97,6 +101,7 @@
     box-sizing: border-box;
     margin: 0 auto;
     border-top: 1px solid #efefef;
+    text-align: center;
   }
 
   .notice-box {
