@@ -5,8 +5,8 @@
       <a href="#" class="seaMoreMedia">查看更多 <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i></a>
     </div>
     <div class="investors-message">
-      <swiper :options="swiperOption">
-        <swiper-slide class="investors-box" v-for="str in investorSaid" :key="str.index">
+      <swiper :options="swiperOption" ref="mySwiper" v-on:mouseout="startAuto">
+        <swiper-slide v-for="str in investorSaid" :key="str.index">
           <div class="investors-img">
             <img :src="str.headPicUrl" alt=""/>
             <p class="investors-name">{{ str.nickName }}</p>
@@ -46,14 +46,24 @@
         }
       }
     },
+    computed: {
+      swiper() {
+        return this.$refs.mySwiper.swiper
+      }
+    },
+    mounted() {
+      this.swiper.stopAutoplay();
+    },
     methods: {
       getInvestorsList() {
         investors().then(data => {
-          console.log(data);
           for (let i = 0; i < data.data.data.investorSaid.length; i++) {
             this.investorSaid.push(data.data.data.investorSaid[i]);
           }
         })
+      },
+      startAuto() {
+        this.swiper.startAutoplay();
       }
     },
     created() {
@@ -100,6 +110,7 @@
       position: relative;
       width: 100%;
       min-height: 220px;
+      margin: 0 auto;
 
       .swiper-wrapper {
         width: 100%;
@@ -112,20 +123,55 @@
         width: 100%;
         height: 100%;
       }
-    }
-  }
 
-  .investors-box {
-    width: 90%;
-    margin: 0 auto;
+      .swiper-button-prev {
+        width: 12px;
+        height: 26px;
+        background-image: url(../../assets/images/index/icon-prev.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+      }
 
-    .investors-img {
-      display: inline-block;
-      width: 95px;
+      .swiper-button-next {
+        width: 12px;
+        height: 26px;
+        background-image: url(../../assets/images/index/icon-next.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+      }
 
-      img {
+      .investors-img {
+        display: inline-block;
         width: 95px;
-        height: 95px;
+        margin-left: 35px;
+        margin-right: 15px;
+        text-align: center;
+
+        img {
+          width: 95px;
+          height: 95px;
+        }
+
+        p {
+          font-size: 14px;
+          line-height: 1.29;
+          text-align: center;
+          color: #7c86a2;
+        }
+      }
+
+      .investors-txt {
+        display: inline-block;
+        vertical-align: middle;
+        width: 262px;
+        height: 220px;
+        padding-right: 15px;
+        text-align: justify;
+        font-size: 12px;
+        line-height: 1.83;
+        color: #7c86a2;
       }
     }
   }
