@@ -2,10 +2,9 @@
   <div class="investors">
     <div class="title">
       <span>投资人风采</span>
-      <a href="#" class="seaMoreMedia">查看更多 <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i></a>
     </div>
     <div class="investors-message">
-      <swiper :options="swiperOption" ref="mySwiper" v-on:mouseout="startAuto">
+      <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide v-for="str in investorSaid" :key="str.index">
           <div class="investors-img">
             <img :src="str.headPicUrl" alt=""/>
@@ -51,9 +50,6 @@
         return this.$refs.mySwiper.swiper
       }
     },
-    mounted() {
-      this.swiper.stopAutoplay();
-    },
     methods: {
       getInvestorsList() {
         investors().then(data => {
@@ -61,9 +57,6 @@
             this.investorSaid.push(data.data.data.investorSaid[i]);
           }
         })
-      },
-      startAuto() {
-        this.swiper.startAutoplay();
       }
     },
     created() {

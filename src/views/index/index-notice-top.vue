@@ -90,6 +90,10 @@
         i {
           vertical-align: 0;
         }
+
+        &:hover {
+          color: #0671f0;
+        }
       }
     }
   }

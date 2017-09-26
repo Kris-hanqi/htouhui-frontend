@@ -9,12 +9,32 @@ export function banners() {
   });
 }
 
+/** 首页精选定期 */
+export function regularIntervals() {
+  return fetch()({
+    url: 'iloans',
+    method: 'post',
+    data: {
+      size: '4',
+      userId: 'h1217350723'
+    }
+  })
+}
+
 /** 首页公告 */
 export function notice() {
   return fetch()({
     url: 'notice/1/1',
     method: 'get'
   });
+}
+
+/** 首页平台数据播报 */
+export function platform() {
+  return fetch()({
+    url: 'platformData',
+    method: 'get'
+  })
 }
 
 /** 首页媒体报道 */

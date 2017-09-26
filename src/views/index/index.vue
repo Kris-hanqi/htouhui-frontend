@@ -44,6 +44,10 @@
       </div>
     </div>
     <div class="main-main">
+      <!--精选定期-->
+      <regular-intervals></regular-intervals>
+      <!--平台数据播报-->
+      <platform-data></platform-data>
       <!--媒体报道-->
       <media-report></media-report>
       <!--投资人风采-->
@@ -58,14 +62,17 @@
   import NoticeTopBox from './index-notice-top.vue';
   import MediaReport from './index-media-report.vue';
   import Investors from './index-investors.vue';
-
+  import PlatformData from './index-platformData.vue';
+  import RegularIntervals from './index-regular-intervals.vue';
 
   export default {
     components: {
       HthBanner,
       NoticeTopBox,
       MediaReport,
-      Investors
+      Investors,
+      PlatformData,
+      RegularIntervals
     }
   };
 </script>
