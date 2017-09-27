@@ -44,6 +44,12 @@
       </div>
     </div>
     <div class="main-main">
+      <!--新手计划-->
+      <new-user-plan></new-user-plan>
+      <!--广告位-->
+      <advertising-board></advertising-board>
+      <!--21天计划-->
+      <plan21-day></plan21-day>
       <!--精选定期-->
       <regular-intervals></regular-intervals>
       <!--平台数据播报-->
@@ -58,21 +64,27 @@
 </template>
 
 <script>
-  import HthBanner from 'components/swiper';
-  import NoticeTopBox from './index-notice-top.vue';
-  import MediaReport from './index-media-report.vue';
-  import Investors from './index-investors.vue';
-  import PlatformData from './index-platformData.vue';
-  import RegularIntervals from './index-regular-intervals.vue';
+  import HthBanner from 'components/swiper'; // 轮播
+  import NoticeTopBox from './index-notice-top.vue'; // 最新公告
+  import NewUserPlan from './index-newUser-plan.vue'; // 新手计划
+  import AdvertisingBoard from './index-advertising-borad.vue'; //  广告位
+  import Plan21Day from './index-plan21day.vue';
+  import RegularIntervals from './index-regular-intervals.vue'; // 精选定期
+  import PlatformData from './index-platformData.vue'; // 安心投资
+  import MediaReport from './index-media-report.vue'; // 媒体报道
+  import Investors from './index-investors.vue'; // 投资人风采
 
   export default {
     components: {
       HthBanner,
       NoticeTopBox,
-      MediaReport,
-      Investors,
+      NewUserPlan,
+      AdvertisingBoard,
+      Plan21Day,
+      RegularIntervals,
       PlatformData,
-      RegularIntervals
+      MediaReport,
+      Investors
     }
   };
 </script>

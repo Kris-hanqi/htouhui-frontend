@@ -5,7 +5,7 @@
       <span class="title2">定期投资  严格风控</span>
       <a href="#" class="seaMoreLoans">查看更多 <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i></a>
     </div>
-    <div class="loans-box" v-for="str in loansList" :key="str.index">
+    <a v-for="str in loansList" :href="str.targetUrl" v-bind:class="{ loansBoxRepaying: str.status != 'raising'}" class="loans-box" :key="str.index">
       <div class="loans-title">
         <div class="loans-name roboto-regular">{{ str.name }}</div>
         <div class="loans-id roboto-regular">{{ str.id }}</div>
@@ -27,7 +27,17 @@
         <div>T+1生息</div>
         <div>{{ str.type }}</div>
       </div>
-    </div>
+      <div class="loans-process">
+        <span class="loans-process-state">投资进度</span>
+        <el-progress :percentage="str.process"></el-progress>
+        <div class="loans-process-message">
+          <span class="state" v-if="str.status == 'raising'">剩余金额</span>
+          <span class="state" v-else>融资完成</span>
+          <span class="money" v-if="str.status == 'raising'">{{ str.moneyNeedRaised }}元</span>
+          <span class="money" v-else>{{ str.money }}万</span>
+        </div>
+      </div>
+    </a>
   </div>
 </template>
 
@@ -38,16 +48,12 @@
     name: 'regularIntervals',
     data() {
       return {
-        loansList: [],
-        tiexiMessage: {
-          block: false
-        }
+        loansList: []
       }
     },
     methods: {
       regularIntervalsList() {
         regularIntervals().then(data => {
-          console.log(data);
           for (let i = 0; i < data.data.data.loans.length; i++) {
             this.loansList.push(data.data.data.loans[i]);
           }
@@ -64,6 +70,15 @@
   .el-tooltip__popper.is-dark {
     background: #fde993;
     color: #64420a;
+  }
+
+  .el-progress-bar__inner {
+    background-color: #0573f4;
+  }
+
+  .el-progress__text {
+    margin-left: 15px;
+    margin-bottom: 25px;
   }
 
   .regular-intervals {
@@ -124,6 +139,7 @@
     background-color: #fff;
     border-top: 3px solid #0671f0;
     transition: 0.3s;
+    cursor: pointer;
 
     &:hover {
       bottom: 4px;
@@ -200,6 +216,7 @@
 
     .loans-introduce {
       width: 100%;
+      margin-bottom: 25px;
       text-align: center;
 
       > div {
@@ -208,7 +225,7 @@
         border-radius: 41px;
         background-color: #fff;
         border: solid 1px #d0dae5;
-        padding: 2px 5px;
+        padding: 3px 5px;
         margin-right: 5px;
         font-size: 12px;
         font-weight: 300;
@@ -222,7 +239,7 @@
         border-radius: 41px;
         background-color: #fff;
         border: solid 1px #3d92f7;
-        padding: 2px 5px;
+        padding: 3px 5px;
         margin-right: 5px;
         font-family: "SourceHanSansCN-normal";
         font-size: 12px;
@@ -230,5 +247,27 @@
         color: #4296f7;
       }
     }
+
+    .loans-process {
+      width: 100%;
+
+      .loans-process-state {
+        font-size: 12px;
+        color: #7c86a2;
+      }
+
+      .loans-process-message {
+        font-size: 12px;
+        color: #7c86a2;
+
+        .money {
+          float: right;
+        }
+      }
+    }
+  }
+
+  .loansBoxRepaying {
+    border-top: 3px solid #727e90;
   }
 </style>

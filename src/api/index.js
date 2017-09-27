@@ -9,6 +9,8 @@ export function banners() {
   });
 }
 
+/** 首页新手计划 */
+
 /** 首页精选定期 */
 export function regularIntervals() {
   return fetch()({
