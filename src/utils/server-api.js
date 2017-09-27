@@ -5,7 +5,8 @@ const ApiAddress = {
   pretest: '47.93.119.31:16666',  // 预发环境
   production: '47.93.77.75:16666', // 正式环境
   tieLocalAddress: '192.168.0.15:21000', // 铁托本地环境
-  zeLocalAddress: '192.168.0.127:21000' // 润泽本地环境
+  zeLocalAddress: '192.168.0.127:21000', // 润泽本地环境
+  hongLocalAddress: '192.168.0.10:21000' // 小宏本地环境
 };
 
 // 获取后端地址
@@ -14,7 +15,7 @@ export default function() {
   let serverAddress;
   // 获取地址栏IP
   if (ip === 'localhost' || ip === '127.0.0.1') {
-    serverAddress = ApiAddress.zeLocalAddress;
+    serverAddress = ApiAddress.hongLocalAddress;
   }
 
   return 'http://' + serverAddress + '/web-api/';

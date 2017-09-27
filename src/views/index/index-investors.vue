@@ -159,7 +159,7 @@
         display: inline-block;
         vertical-align: middle;
         width: 262px;
-        height: 220px;
+        height: 215px;
         padding-right: 15px;
         text-align: justify;
         font-size: 12px;

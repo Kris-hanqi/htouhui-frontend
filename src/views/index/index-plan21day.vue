@@ -1,27 +1,29 @@
 <template>
-  <div class="plan-21day">
-    <i class="icon-zhiNeng"></i>
-    <div class="plan-21day-title">
-      <p>21天计划<span>到期后自动返还本息</span></p>
-    </div>
-    <div class="plan-21day-main">
-      <div class="plan-21day-rate">
-        <p class="rate"><span class="roboto-regular">7</span><span class="small-plan-21day-rate roboto-regular">.0</span>%</p>
-        <p>往期年化利率</p>
+  <div class="plan-21day-box">
+    <div class="plan-21day">
+      <i class="icon-zhiNeng"></i>
+      <div class="plan-21day-title">
+        <p>21天计划<span>到期后自动返还本息</span></p>
       </div>
-      <div class="plan-21day-day">
-        <p class="day"><span class="roboto-regular">21</span>天</p>
-        <p>周期 </p>
+      <div class="plan-21day-main">
+        <div class="plan-21day-rate">
+          <p class="rate"><span class="roboto-regular">7</span><span class="small-plan-21day-rate roboto-regular">.0</span>%</p>
+          <p>往期年化利率</p>
+        </div>
+        <div class="plan-21day-day">
+          <p class="day"><span class="roboto-regular">21</span>天</p>
+          <p>周期 </p>
+        </div>
+        <div class="plan-21day-way">
+          <p class="way">即投即生息</p>
+          <p>计息方式</p>
+        </div>
       </div>
-      <div class="plan-21day-way">
-        <p class="way">即投即生息</p>
-        <p>计息方式</p>
+      <div class="plan-21day-btn">
+        <span>1000元起投</span>
+        <span>无手续费</span>
+        <a class="plan-21day-join" href="">立即加入</a>
       </div>
-    </div>
-    <div class="plan-21day-btn">
-      <span>1000元起投</span>
-      <span>无手续费</span>
-      <a class="plan-21day-join" href="">立即加入</a>
     </div>
   </div>
 </template>
@@ -33,16 +35,31 @@
 </script>
 
 <style lang="scss" scoped>
-  .plan-21day {
+  .plan-21day-box {
     display: inline-block;
     position: relative;
     width: 635px;
+    height: 245px;
+    margin-top: 30px;
+  }
+
+  .plan-21day {
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     height: 245px;
     margin-bottom: 30px;
     box-sizing: border-box;
     border-top: 3px solid #0671f0;
     padding: 20px 15px;
     background-color: #fff;
+    transition: 0.3s;
+
+    &:hover {
+      bottom: 4px;
+      box-shadow: 0 2px 10px 0 #bfc1c4;
+    }
 
     .icon-zhiNeng {
       display: block;

@@ -1,27 +1,29 @@
 <template>
-  <div class="newUser-plan">
-    <i class="icon-zhiNeng"></i>
-    <div class="newUser-plan-title">
-      <p>新手计划<span>1元起投，最高可投1万元 ，每人仅限1次 </span></p>
-    </div>
-    <div class="newUser-plan-main">
-      <div class="newUser-plan-rate">
-        <p class="rate"><span class="roboto-regular">12</span><span class="small-newUser-plan-rate roboto-regular">.0</span>%</p>
-        <p>往期年化利率</p>
+  <div class="newUser-plan-box">
+    <div class="newUser-plan">
+      <i class="icon-zhiNeng"></i>
+      <div class="newUser-plan-title">
+        <p>新手计划<span>1元起投，最高可投1万元 ，每人仅限1次 </span></p>
       </div>
-      <div class="newUser-plan-day">
-        <p class="day"><span class="roboto-regular">14</span>天</p>
-        <p>到期自动退出</p>
+      <div class="newUser-plan-main">
+        <div class="newUser-plan-rate">
+          <p class="rate"><span class="roboto-regular">12</span><span class="small-newUser-plan-rate roboto-regular">.0</span>%</p>
+          <p>往期年化利率</p>
+        </div>
+        <div class="newUser-plan-day">
+          <p class="day"><span class="roboto-regular">14</span>天</p>
+          <p>到期自动退出</p>
+        </div>
+        <div class="newUser-plan-way">
+          <p class="way">即投即生息</p>
+          <p>计息方式</p>
+        </div>
       </div>
-      <div class="newUser-plan-way">
-        <p class="way">即投即生息</p>
-        <p>计息方式</p>
+      <div class="newUser-plan-btn">
+        <span>新手专享</span>
+        <span>限量发售</span>
+        <a class="newUser-plan-join" href="">立即加入</a>
       </div>
-    </div>
-    <div class="newUser-plan-btn">
-      <span>新手专享</span>
-      <span>限量发售</span>
-      <a class="newUser-plan-join" href="">立即加入</a>
     </div>
   </div>
 </template>
@@ -39,16 +41,30 @@
 </script>
 
 <style lang="scss" scoped>
-  .newUser-plan {
+  .newUser-plan-box {
     display: inline-block;
     position: relative;
     width: 635px;
     height: 245px;
     margin-bottom: 30px;
+  }
+
+  .newUser-plan {
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 245px;
     box-sizing: border-box;
     border-top: 3px solid #0671f0;
     padding: 20px 15px;
     background-color: #fff;
+    transition: 0.3s;
+
+    &:hover {
+      bottom: 4px;
+      box-shadow: 0 2px 10px 0 #bfc1c4;
+    }
 
     .icon-zhiNeng {
       display: block;

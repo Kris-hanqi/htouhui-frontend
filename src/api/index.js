@@ -11,6 +11,16 @@ export function banners() {
 
 /** 首页新手计划 */
 
+/** 首页21天计划 */
+
+/** 首页升薪宝量化 */
+export function shengxinbao_lianghua() {
+  return fetch()({
+    url: 'quantizations/4',
+    method: 'get'
+  })
+}
+
 /** 首页精选定期 */
 export function regularIntervals() {
   return fetch()({

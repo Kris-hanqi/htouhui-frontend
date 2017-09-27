@@ -121,6 +121,10 @@
         font-size: 14px;
         color: #727e90;
 
+        i {
+          vertical-align: -4%;
+        }
+
         &:hover {
           color: #0671f0;
         }

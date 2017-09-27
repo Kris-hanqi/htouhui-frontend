@@ -50,6 +50,10 @@
       <advertising-board></advertising-board>
       <!--21天计划-->
       <plan21-day></plan21-day>
+      <!--APP下载-->
+      <app-download></app-download>
+      <!--升薪宝量化-->
+      <shengxinbao-lianghua></shengxinbao-lianghua>
       <!--精选定期-->
       <regular-intervals></regular-intervals>
       <!--平台数据播报-->
@@ -68,7 +72,9 @@
   import NoticeTopBox from './index-notice-top.vue'; // 最新公告
   import NewUserPlan from './index-newUser-plan.vue'; // 新手计划
   import AdvertisingBoard from './index-advertising-borad.vue'; //  广告位
-  import Plan21Day from './index-plan21day.vue';
+  import Plan21Day from './index-plan21day.vue'; // 21天计划
+  import AppDownload from './index-appDownload.vue'; // APP下载
+  import ShengxinbaoLianghua from './index-shengxinbao-lianghua.vue'; // 升薪宝量化
   import RegularIntervals from './index-regular-intervals.vue'; // 精选定期
   import PlatformData from './index-platformData.vue'; // 安心投资
   import MediaReport from './index-media-report.vue'; // 媒体报道
@@ -81,6 +87,8 @@
       NewUserPlan,
       AdvertisingBoard,
       Plan21Day,
+      AppDownload,
+      ShengxinbaoLianghua,
       RegularIntervals,
       PlatformData,
       MediaReport,
