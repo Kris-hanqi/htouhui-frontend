@@ -16,7 +16,8 @@
         <p>往期年化利率</p>
       </div>
       <div class="shengxinbao-liangehua-message">
-        <el-tooltip class="tiexi-message item" v-if="str.lockPeriod != 0" effect="dark" :content="啊啊啊啊啊" placement="bottom">
+        <el-tooltip class="tiexi-message item" v-if="str.lockPeriod != 0" effect="dark" placement="bottom">
+          <span slot="content">基准利率{{ str.baseMinRate }}%～{{ str.baseMaxRate }}%，首{{ str.lockPeriod }}天平台贴息{{ str.tiexiRate }}%</span>
           <el-button>首<span class="roboto-regular">{{ str.lockPeriod }}</span>天贴息</el-button>
         </el-tooltip>
         <div><span class="roboto-regular">1000</span>元起投</div>
@@ -234,5 +235,9 @@
     .icon-img {
       background: url(../../assets/images/index/icon-active.png) no-repeat center;
     }
+  }
+
+  .shengxinbaoLianghuaRating {
+    border-top: 3px solid #727e90;
   }
 </style>

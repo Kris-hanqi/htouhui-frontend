@@ -21,7 +21,8 @@
         </div>
       </div>
       <div class="loans-introduce">
-        <el-tooltip class="tiexi-message item" v-if="str.tiexiInfo.totalTiexiRate != 0" effect="dark" :content="str.tiexiInfo.description" placement="bottom">
+        <el-tooltip class="tiexi-message item" v-if="str.tiexiInfo.totalTiexiRate != 0" effect="dark" placement="bottom">
+          <span slot="content">基准利率{{ str.rate }}%，平台贴息{{ str.tiexiInfo.totalTiexiRatePercent }}%</span>
           <el-button>贴息{{ str.tiexiInfo.totalTiexiRatePercent }}%</el-button>
         </el-tooltip>
         <div>T+1生息</div>
