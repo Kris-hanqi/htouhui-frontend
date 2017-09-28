@@ -16,7 +16,7 @@ export function banners() {
 /** 首页升薪宝量化 */
 export function shengxinbao_lianghua() {
   return fetch()({
-    url: 'quantizations/4',
+    url: 'quantizations/3',
     method: 'get'
   })
 }

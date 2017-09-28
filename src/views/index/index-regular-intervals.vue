@@ -5,7 +5,7 @@
       <span class="title2">定期投资  严格风控</span>
       <a href="#" class="seaMoreLoans">查看更多 <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i></a>
     </div>
-    <a v-for="str in loansList" :href="str.targetUrl" v-bind:class="{ loansBoxRepaying: str.status != 'raising'}" class="loans-box" :key="str.index">
+    <a class="loans-box"  v-for="str in loansList" :href="str.targetUrl" v-bind:class="{ loansBoxRepaying: str.status != 'raising'}" :key="str.index">
       <div class="loans-title">
         <div class="loans-name roboto-regular">{{ str.name }}</div>
         <div class="loans-id roboto-regular">{{ str.id }}</div>
@@ -21,8 +21,8 @@
         </div>
       </div>
       <div class="loans-introduce">
-        <el-tooltip v-if="str.tiexiInfo.totalTiexiRate != 0" class="tiexi-message item" effect="dark" :content="str.tiexiInfo.description" placement="bottom">
-          <el-button  class="tiexi">贴息{{ str.tiexiInfo.totalTiexiRatePercent }}%</el-button>
+        <el-tooltip class="tiexi-message item" v-if="str.tiexiInfo.totalTiexiRate != 0" effect="dark" :content="str.tiexiInfo.description" placement="bottom">
+          <el-button>贴息{{ str.tiexiInfo.totalTiexiRatePercent }}%</el-button>
         </el-tooltip>
         <div>T+1生息</div>
         <div>{{ str.type }}</div>
@@ -237,7 +237,7 @@
         cursor: default;
       }
 
-      .tiexi {
+      .tiexi-message {
         display: inline-block;
         box-sizing: border-box;
         border-radius: 41px;
@@ -249,6 +249,13 @@
         font-size: 12px;
         font-weight: 300;
         color: #4296f7;
+
+        &:hover {
+          border: none;
+          background-color: rgba(5, 114, 244, 0.75);
+          box-shadow: 0 5px 7px 0 #d5e7fe;
+          color: #fff;
+        }
       }
     }
 
