@@ -53,6 +53,3 @@
 * [vue-router中文文档](http://router.vuejs.org/zh-cn/)
 * [lodash中文文档](http://www.css88.com/doc/lodash/)
 * [axios中文文档](https://segmentfault.com/a/1190000008470355?utm_source=tuicool&utm_medium=referral)
-
-
-
