@@ -10,6 +10,9 @@ import Index from 'views/index/index.vue';
 /** 首页公共区域 */
 import Home from 'views/home/index.vue';
 
+/** 定期抵押 */
+import RegularMortgage from 'views/regular-mortgage/index.vue';
+
 /** 信息披露 **/
 import InformationDisclosure from 'views/information-disclosure/index.vue';
 
@@ -31,6 +34,10 @@ export const constantRouterMap = [
         component: Index
       }
     ]
+  },
+  {
+    path: '/regular-mortgage',
+    component: RegularMortgage
   },
   {
     path: '/information-disclosure',

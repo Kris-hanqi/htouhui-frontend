@@ -5,19 +5,19 @@
         <img :src="img_logo" alt="海投汇"/>
       </div>
       <ul class="header-down__bar">
-        <li class="active"><a href="">首页</a></li>
+        <li><router-link to="index" active-class="active">首页</router-link></li>
         <li><a href="">升薪宝量化</a></li>
         <li><a href="">升薪宝定期</a></li>
-        <li><a href="">定期抵押</a></li>
-        <li><router-link to="'/information-disclosure'">风控措施</router-link></li>
+        <li><router-link to="regular-mortgage" active-class="active">定期抵押</router-link></li>
+        <li><router-link to="information-disclosure" active-class="active">风控措施</router-link></li>
         <li><a href="">关于我们</a></li>
         <li class="header-down__account">
-          <router-link to="'/information-disclosure'">
+          <a href="">
             <div class="portrait">
               <i class="fa fa-user-o" aria-hidden="true"></i>
             </div>
             <span>我的账户</span>
-          </router-link>
+          </a>
         </li>
       </ul>
     </div>
@@ -71,23 +71,21 @@
     li {
       float: left;
       text-align: center;
+      height: $hth-header-down-height;
 
-      &.active {
+      a.active {
         border-top: 5px solid #2875d9;
-
-        a {
-          color: #2875d9;
-          margin-top: -5px;
-        }
+        color: #2875d9;
       }
     }
 
     a {
       display: block;
       padding: 0 15px;
+      line-height: $hth-header-down-height - 10;
+      border-top: 5px solid transparent;
 
-      &:hover,
-      &.active {
+      &:hover {
         color: #2875d9;
       }
     }
