@@ -39,6 +39,13 @@
 * [axios](https://github.com/mzabriskie/axios) // 基于 promise 的 HTTP 库
 * [lodash](https://github.com/lodash/lodash) // js库(提供对常见数据类型的处理)
 
+## 各个环境说明
+
+* 测试环境 -- http://47.93.122.236:9600 端口: 9600-9699 
+* 常驻测试环境 -- http://47.93.122.236:9666
+* 预发环境 -- 待定
+* 正式环境 -- 待定
+
 ## 开发规范
 
 * js采用eslint进行代码审查 - 具体规则请查看[.eslintrc.js](./.eslintrc.js)
