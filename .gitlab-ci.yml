@@ -3,8 +3,8 @@ stages:
   - deploy
 
 variables:
-  SERVICE_PORT: "9600"
-  DOCKER_IMAGE_VERSION: "0.0.1"
+  SERVICE_PORT: "9666"
+  DOCKER_IMAGE_VERSION: "0.0.1-release"
 
 cache:
   paths:
