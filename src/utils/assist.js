@@ -1,4 +1,3 @@
-
 // 回到顶部动画
 export function scrollTop(el, from = 0, to, duration = 500) {
   if (!window.requestAnimationFrame) {

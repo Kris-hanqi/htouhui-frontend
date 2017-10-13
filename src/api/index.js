@@ -1,21 +1,16 @@
 import fetch from '../utils/fetch';
 
-
-/** 首页广告轮播 */
+/** Banner广告轮播 */
 export function banners() {
-  return fetch()({
+  return fetch({
     url: 'bannerList/index',
     method: 'get'
   });
 }
 
-/** 首页新手计划 */
-
-/** 首页21天计划 */
-
 /** 首页升薪宝量化 */
 export function shengxinbao_lianghua() {
-  return fetch()({
+  return fetch({
     url: 'quantizations/3',
     method: 'get'
   })
@@ -23,7 +18,7 @@ export function shengxinbao_lianghua() {
 
 /** 首页精选定期 */
 export function regularIntervals() {
-  return fetch()({
+  return fetch({
     url: 'iloans',
     method: 'post',
     data: {
@@ -35,7 +30,7 @@ export function regularIntervals() {
 
 /** 首页公告 */
 export function notice() {
-  return fetch()({
+  return fetch({
     url: 'notice/1/1',
     method: 'get'
   });
@@ -43,7 +38,7 @@ export function notice() {
 
 /** 首页平台数据播报 */
 export function platform() {
-  return fetch()({
+  return fetch({
     url: 'platformData',
     method: 'get'
   })
@@ -51,7 +46,7 @@ export function platform() {
 
 /** 首页媒体报道 */
 export function media_report() {
-  return fetch()({
+  return fetch({
     url: 'indexNews/5',
     method: 'get'
   });
@@ -59,7 +54,7 @@ export function media_report() {
 
 /** 首页投资人风采 */
 export function investors() {
-  return fetch()({
+  return fetch({
     url: 'investorSaid',
     method: 'get'
   })

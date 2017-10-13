@@ -1,19 +1,33 @@
-import ServiceApi from './server-api';
+import axios from 'axios';
+import BaseApi from './server-api';
 
-let Vue = null;
-let service = null;
+// 获取后端API地址
+const BaseUrl = BaseApi();
 
-export function setVue(VueObj) {
-  Vue = VueObj
-}
+const service = axios.create({
+  baseURL: BaseUrl,     // api的base_url
+  timeout: 5000         // 请求超时时间
+});
 
-export function getService() {
-  service = Vue.axios.create({
-    baseURL: ServiceApi()
-  });
+// 请求拦截器
+service.interceptors.request.use(config => config, error => {
+  console.log(error);
+  return Promise.reject(error)
+});
 
-  return service;
-}
+// 响应拦截器
+service.interceptors.response.use(
+  response => {
+    const res = response.data;
 
-export default getService;
+    console.log(res);
 
+    return response;
+  },
+  error => {
+    console.log('api error');
+    return Promise.reject(error)
+  }
+);
+
+export default service;
