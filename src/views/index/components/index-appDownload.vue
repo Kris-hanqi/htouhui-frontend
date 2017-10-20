@@ -3,7 +3,7 @@
     <div class="appDownload-title">手机APP更精彩</div>
     <div class="appDownload-icon"></div>
     <div class="appDownload-main">
-      <img class="appDownload-code" src="../../assets/images/components/smart_download01.jpg" alt=""/>
+      <img class="appDownload-code" src="../../../assets/images/components/smart_download01.jpg" alt=""/>
       <a class="appDownload-android" href="https://www.htouhui.com/resources/app/2.3.0/htouhui-android-2.3.0_htouhui.apk"><i></i><span class="roboto-regular">Android</span>下载</a>
       <a class="appDownload-iphone" href="https://itunes.apple.com/us/app/hai-tou-hui-shang-shi-gong/id1017642310?l=zh&amp;ls=1&amp;mt=8" target="_blank"><i></i><span class="roboto-regular">iOS</span>下载</a>
     </div>
@@ -36,7 +36,7 @@
       width: 160px;
       height: 149px;
       margin-top: 30px;
-      background: url(../../assets/images/index/home-pic.png) no-repeat center;
+      background: url(../../../assets/images/index/home-pic.png) no-repeat center;
     }
   }
 
@@ -72,7 +72,7 @@
         height: 14px;
         margin-right: 5px;
         margin-left: 20px;
-        background: url(../../assets/images/index/icon-android.png) no-repeat center;
+        background: url(../../../assets/images/index/icon-android.png) no-repeat center;
       }
 
       &:hover {
@@ -81,7 +81,7 @@
         color: #fff;
 
         i {
-          background: url(../../assets/images/index/icon-androiad-hover.png) no-repeat center;
+          background: url(../../../assets/images/index/icon-androiad-hover.png) no-repeat center;
         }
       }
     }
@@ -108,7 +108,7 @@
         margin-top: 3px;
         margin-right: 17px;
         margin-left: 25px;
-        background: url(../../assets/images/index/icon-iphone-hover.png) no-repeat center;
+        background: url(../../../assets/images/index/icon-iphone-hover.png) no-repeat center;
       }
 
       &:hover {
@@ -117,7 +117,7 @@
         color: #0573f4;
 
         i {
-          background: url(../../assets/images/index/icon-iphone.png) no-repeat center;
+          background: url(../../../assets/images/index/icon-iphone.png) no-repeat center;
         }
       }
     }

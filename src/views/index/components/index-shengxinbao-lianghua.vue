@@ -130,7 +130,7 @@
       right: 10px;
       width: 42px;
       height: 54px;
-      background: url(../../assets/images/index/icon-zhiNeng.png) no-repeat center;
+      background: url(../../../assets/images/index/icon-zhiNeng.png) no-repeat center;
     }
 
     .shengxinbao-lianghua-title {
@@ -230,10 +230,10 @@
   }
 
   .shengxinbaoLianghuaKongzhong {
-    background: url(../../assets/images/index/tank-bg.png) no-repeat center;
+    background: url(../../../assets/images/index/tank-bg.png) no-repeat center;
 
     .icon-img {
-      background: url(../../assets/images/index/icon-active.png) no-repeat center;
+      background: url(../../../assets/images/index/icon-active.png) no-repeat center;
     }
   }
 

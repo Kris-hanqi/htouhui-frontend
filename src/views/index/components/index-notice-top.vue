@@ -61,7 +61,7 @@
         width: 23px;
         height: 23px;
         margin-right: 5px;
-        background: url(../../assets/images/index/icon-sound.png) no-repeat center;
+        background: url(../../../assets/images/index/icon-sound.png) no-repeat center;
       }
 
       > span {

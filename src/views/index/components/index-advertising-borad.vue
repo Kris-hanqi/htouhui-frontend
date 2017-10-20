@@ -1,6 +1,6 @@
 <template>
   <div class="advertising-board">
-    <img src="../../assets/images/index/red-bag.png" alt="">
+    <img src="../../../assets/images/index/red-bag.png" alt="">
   </div>
 </template>
 

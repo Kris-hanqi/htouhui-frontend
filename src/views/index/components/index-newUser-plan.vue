@@ -73,7 +73,7 @@
       top: -3px;
       width: 42px;
       height: 54px;
-      background: url(../../assets/images/index/icon-zhiNeng.png) no-repeat center;
+      background: url(../../../assets/images/index/icon-zhiNeng.png) no-repeat center;
     }
 
     .newUser-plan-title {

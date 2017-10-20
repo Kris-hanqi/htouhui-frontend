@@ -6,9 +6,9 @@ const merge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const StylelLintFormatter = require('stylelint-formatter-pretty');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
+// add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
 });
@@ -17,29 +17,36 @@ module.exports = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
   },
-  devtool: '#cheap-module-source-map',
-  cache: true, // 开启缓存
+  // cheap-module-eval-source-map is faster for development
+  devtool: '#cheap-module-eval-source-map',
   plugins: [
     new webpack.DefinePlugin({
       'process.env': config.dev.env
     }),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      'jQuery': 'jquery'
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
     new StyleLintPlugin({
       files: ['src/**/*.vue'],
       syntax: 'scss'
     }),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.ejs',
-      favicon: utils.root('favicon.ico'),
-      inject: true,
-      path: config.dev.staticPath
-    }),
+    // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new FriendlyErrorsPlugin()
   ]
 });
+
+const pages = utils.getMultiEntry('./src/' + config.moduleName + '/**/*.html');
+
+for (let pathname in pages) {
+  const pathName = pathname.replace('views/', '');
+
+  // 配置生成的html文件，定义路径等
+  const conf = {
+    favicon: path.resolve(__dirname, '../favicon.ico'),
+    filename: pathName + '.html',
+    template: pages[pathname], // 模板路径
+    chunks: [pathname, 'vendors', 'manifest'], // 每个html引用的js模块
+    inject: true              // js插入位置
+  };
+  // 需要生成几个html文件，就配置几个HtmlWebpackPlugin对象
+  module.exports.plugins.push(new HtmlWebpackPlugin(conf));
+}

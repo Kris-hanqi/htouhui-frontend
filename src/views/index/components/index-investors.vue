@@ -120,7 +120,7 @@
       .swiper-button-prev {
         width: 12px;
         height: 26px;
-        background-image: url(../../assets/images/index/icon-prev.png);
+        background-image: url(../../../assets/images/index/icon-prev.png);
         background-repeat: no-repeat;
         background-position: center;
         background-size: 100% 100%;
@@ -129,7 +129,7 @@
       .swiper-button-next {
         width: 12px;
         height: 26px;
-        background-image: url(../../assets/images/index/icon-next.png);
+        background-image: url(../../../assets/images/index/icon-next.png);
         background-repeat: no-repeat;
         background-position: center;
         background-size: 100% 100%;

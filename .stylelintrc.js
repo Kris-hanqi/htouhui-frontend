@@ -10,6 +10,7 @@ module.exports = {
   rules: {
     // 最大嵌套深度
     'max-nesting-depth': 3,
+    'no-eol-whitespace': null,
     'no-empty-source': null,
     'selector-pseudo-element-colon-notation': 'single',
     'order/order': [

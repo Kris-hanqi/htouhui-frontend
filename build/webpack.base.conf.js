@@ -1,29 +1,41 @@
 const path = require('path');
 const utils = require('./utils');
+const webpack = require('webpack');
 const config = require('../config');
+
+const glob = require('glob');
+const entries =  utils.getMultiEntry('./src/' + config.moduleName + '/**/*.js'); // 获得入口js文件
+const chunks = Object.keys(entries);
+
+console.log(chunks);
+
+const projectRoot = path.resolve(__dirname, '../');
+const vuxLoader = require('vux-loader');
+
 const vueLoaderConfig = require('./vue-loader.conf');
 
-module.exports = {
-  entry: {
-    app: ['babel-polyfill', './src/main.js']
-  },
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
+const webpackConfig = {
+  entry:entries,
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath
+    publicPath: process.env.NODE_ENV === 'production'
+      ? config.build.assetsPublicPath
+      : config.dev.assetsPublicPath
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': utils.root('src'),
-      'components': path.resolve(__dirname, '../src/components'),
-      'common': path.resolve(__dirname, '../src/common'),
-      'views': path.resolve(__dirname, '../src/views'),
+      '@': resolve('src'),
+      'src': path.resolve(__dirname, '../src'),
+      'assets': path.resolve(__dirname, '../src/assets'),
+      'components': path.resolve(__dirname, '../src/components')
     }
-  },
-  externals: {
-    jquery: 'jQuery'
   },
   module: {
     rules: [
@@ -47,27 +59,30 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [
-          utils.root('src'),
-          utils.root('test')
-        ]
+        include: [resolve('src'), resolve('test')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
-        options: {
+        query: {
           limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+          name: 'img/[name].[ext]'
         }
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
-        options: {
+        query: {
           limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+          name: utils.assetsPath('fonts/[name].[ext]')
         }
       }
     ]
-  }
+  },
+  plugins: []
 };
+
+module.exports = vuxLoader.merge(webpackConfig, {
+  options: {},
+  plugins: ['progress-bar', 'duplicate-style']
+});

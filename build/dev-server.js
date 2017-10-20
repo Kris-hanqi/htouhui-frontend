@@ -1,6 +1,6 @@
 require('./check-versions')(); // 检查 Node 和 npm 版本
-
 const config = require('../config');
+
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 }
@@ -14,7 +14,7 @@ const webpackConfig = process.env.NODE_ENV === 'testing'
   ? require('./webpack.prod.conf')
   : require('./webpack.dev.conf');
 
-// 开发端口
+// default port where dev server listens for incoming traffic
 const port = process.env.PORT || config.dev.port;
 // automatically open browser, if not set will be false
 const autoOpenBrowser = !!config.dev.autoOpenBrowser;
@@ -61,31 +61,25 @@ app.use(devMiddleware);
 app.use(hotMiddleware);
 
 // serve pure static assets
-let staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
+const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory);
 app.use(staticPath, express.static('./static'));
 
-let uri = 'http://localhost:' + port;
 
-let _resolve;
-let readyPromise = new Promise(resolve => {
-  _resolve = resolve
-});
+const uri = 'http://localhost:' + port;
 
-console.log('> Starting dev server...');
-devMiddleware.waitUntilValid(() => {
+devMiddleware.waitUntilValid(function () {
+  console.log('> 构建完成，已自动在浏览器打开页面，如未自动打开，请手工复制下面的链接，复制到浏览器里打开。');
   console.log('> Listening at ' + uri + '\n');
-  // when env is testing, don't need open it
   if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
     opn(uri)
   }
-  _resolve()
 });
 
-let server = app.listen(port);
-
-module.exports = {
-  ready: readyPromise,
-  close: () => {
-    server.close()
+module.exports = app.listen(port, function (err) {
+  if (err) {
+    console.log(err);
+    return
   }
-};
+  console.log("\n正在构建初始化中，构建完成后，将自动在浏览器打开页面。");
+  // when env is testing, don't need open it
+});

@@ -1,7 +1,7 @@
 <template>
   <div class="platformData">
     <div class="platformData-img">
-      <img src="../../assets/images/index/icon-platform.png" alt=""/>
+      <img src="../../../assets/images/index/icon-platform.png" alt=""/>
     </div>
     <div class="platformData-title">
       <p>安心投资</p>
