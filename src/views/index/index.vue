@@ -1,74 +1,81 @@
 <template>
-  <!-- 网站首页 -->
-  <div class="main">
-    <!--广告轮播-->
-    <hth-banner></hth-banner>
-    <!--平台公告-->
-    <div class="notice">
-      <div class="notice-top">
-        <notice-top-box></notice-top-box>
+  <div class="index-page">
+    <hth-header></hth-header>
+    <!-- 网站首页 -->
+    <div class="main">
+      <!--广告轮播-->
+      <hth-banner></hth-banner>
+      <!--平台公告-->
+      <div class="notice">
+        <div class="notice-top">
+          <notice-top-box></notice-top-box>
+        </div>
+        <div class="notice-down">
+          <a class="notice-box notice-box1" href="#">
+            <div class="notice-icon"></div>
+            <div class="txt-box">
+              <p class="txt">稳健运营</p>
+              <p>完善的业务闭环，</p>
+              <p>历史100%兑付</p>
+            </div>
+          </a>
+          <a class="notice-box notice-box2" href="#">
+            <div class="notice-icon"></div>
+            <div class="txt-box">
+              <p class="txt">江西银行资金存管</p>
+              <p>平台与用户资金分离，</p>
+              <p>借贷双方交易信息安全</p>
+            </div>
+          </a>
+          <a class="notice-box notice-box3" href="#">
+            <div class="notice-icon"></div>
+            <div class="txt-box">
+              <p class="txt">Pre-A轮融资</p>
+              <p>获战略投资方，</p>
+              <p>五星资本Pre-A轮融资</p>
+            </div>
+          </a>
+          <a class="notice-box notice-box4" href="#">
+            <div class="notice-icon"></div>
+            <div class="txt-box">
+              <p class="txt">多重风控保障</p>
+              <p>多级风控审核，</p>
+              <p>抵押信息真实透明</p>
+            </div>
+          </a>
+        </div>
       </div>
-      <div class="notice-down">
-        <a class="notice-box notice-box1" href="#">
-          <div class="notice-icon"></div>
-          <div class="txt-box">
-            <p class="txt">稳健运营</p>
-            <p>完善的业务闭环，</p>
-            <p>历史100%兑付</p>
-          </div>
-        </a>
-        <a class="notice-box notice-box2" href="#">
-          <div class="notice-icon"></div>
-          <div class="txt-box">
-            <p class="txt">江西银行资金存管</p>
-            <p>平台与用户资金分离，</p>
-            <p>借贷双方交易信息安全</p>
-          </div>
-        </a>
-        <a class="notice-box notice-box3" href="#">
-          <div class="notice-icon"></div>
-          <div class="txt-box">
-            <p class="txt">Pre-A轮融资</p>
-            <p>获战略投资方，</p>
-            <p>五星资本Pre-A轮融资</p>
-          </div>
-        </a>
-        <a class="notice-box notice-box4" href="#">
-          <div class="notice-icon"></div>
-          <div class="txt-box">
-            <p class="txt">多重风控保障</p>
-            <p>多级风控审核，</p>
-            <p>抵押信息真实透明</p>
-          </div>
-        </a>
+      <div class="main-main">
+        <!--新手计划-->
+        <new-user-plan></new-user-plan>
+        <!--广告位-->
+        <advertising-board></advertising-board>
+        <!--21天计划-->
+        <plan21-day></plan21-day>
+        <!--APP下载-->
+        <app-download></app-download>
+        <!--升薪宝量化-->
+        <shengxinbao-lianghua></shengxinbao-lianghua>
+        <!--精选定期-->
+        <regular-intervals></regular-intervals>
+        <!--平台数据播报-->
+        <platform-data></platform-data>
+        <!--媒体报道-->
+        <media-report></media-report>
+        <!--投资人风采-->
+        <investors></investors>
       </div>
     </div>
-    <div class="main-main">
-      <!--新手计划-->
-      <new-user-plan></new-user-plan>
-      <!--广告位-->
-      <advertising-board></advertising-board>
-      <!--21天计划-->
-      <plan21-day></plan21-day>
-      <!--APP下载-->
-      <app-download></app-download>
-      <!--升薪宝量化-->
-      <shengxinbao-lianghua></shengxinbao-lianghua>
-      <!--精选定期-->
-      <regular-intervals></regular-intervals>
-      <!--平台数据播报-->
-      <platform-data></platform-data>
-      <!--媒体报道-->
-      <media-report></media-report>
-      <!--投资人风采-->
-      <investors></investors>
-    </div>
+    <hth-slider-bar></hth-slider-bar>
+    <hth-footer></hth-footer>
   </div>
-
 </template>
 
 <script>
   import HthBanner from 'components/swiper'; // 轮播
+  import HthHeader from 'components/header';
+  import HthFooter from 'components/footer';
+  import HthSliderBar from 'common/slider-bar';
   import NoticeTopBox from './components/index-notice-top.vue'; // 最新公告
   import NewUserPlan from './components/index-newUser-plan.vue'; // 新手计划
   import AdvertisingBoard from './components/index-advertising-borad.vue'; //  广告位
@@ -82,6 +89,9 @@
   
   export default {
     components: {
+      HthHeader,
+      HthFooter,
+      HthSliderBar,
       HthBanner,
       NoticeTopBox,
       NewUserPlan,
