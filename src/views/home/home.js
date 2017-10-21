@@ -4,6 +4,7 @@ import 'element-ui/lib/theme-default/index.css';
 import { Button, Select, Table, TableColumn, Pagination, Breadcrumb, BreadcrumbItem } from 'element-ui'
 import '@/styles/base.scss';
 import router from '../../router/home';
+import store from '../../store';
 import App from './App';
 
 Vue.use(Button);
@@ -17,6 +18,7 @@ Vue.use(BreadcrumbItem);
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 });
