@@ -35,7 +35,8 @@ body, div, ul, li, ol, dl, dt, p, dd, img, a, span, h1, h2, h3, h4 {
 button, input, select, textarea {
   font-size: 100%;
   vertical-align: middle;
-  outline: none
+  outline: none;
+  border: none;
 }
 
 header, footer, article, section, nav, menu {
@@ -64,6 +65,7 @@ a:active{
 
 i {
   text-decoration: none;
+  font-style: normal;
 }
 
 .roboto-regular{
@@ -72,4 +74,22 @@ i {
 
 #test {
   background-color: red;
+}
+
+.clearFix::before,
+.clearFix::after {
+  content: "";
+  display: block;
+  visibility: hidden;
+  height: 0;
+  line-height: 0;
+  clear: both;
+}
+
+.fl {
+  float: left !important;
+}
+
+.fr {
+  float: right !important;
 }

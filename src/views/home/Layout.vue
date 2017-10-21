@@ -15,7 +15,7 @@
           <p class="myInvestment">我的投资</p>
           <ul>
             <li><a href="#">新手计划</a></li>
-            <li class="currentLi"><a href="#">21天计划</a></li>
+            <li><a href="#">21天计划</a></li>
             <li><a href="#">升薪宝量化</a></li>
             <li><a href="#">定期项目</a></li>
             <li><a href="#">债权转让</a></li>
@@ -140,20 +140,12 @@
       background: url("../../assets/images/home/center-ico-05.png") no-repeat;
     }
 
-    ul li {
+    ul li a {
+      display: block;
+      height: 41px;
+      line-height: 38px;
+      color: #7c86a2;
       margin-left: 45px;
-    }
-
-    ul li a {
-      font-size: 14px;
-      line-height: 2.57;
-      color: #7c86a2;
-    }
-
-    ul li a {
-      font-size: 14px;
-      line-height: 2.57;
-      color: #7c86a2;
     }
 
     ul li:first-child {
@@ -171,10 +163,8 @@
     ul li a.active {
       display: inline-block;
       width: 153px;
-      height: 41px;
-      line-height: 38px;
       background: url("../../assets/images/home/button.png") no-repeat;
-      margin-left: -30px;
+      margin-left: 15px;
       padding-left: 30px;
       margin-top: 0;
       color: #fff !important;
