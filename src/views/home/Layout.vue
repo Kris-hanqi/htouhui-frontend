@@ -69,7 +69,6 @@
   .home-wrapper__account-container-menu {
     float: left;
     width: 152px;
-    height: 846px;
     background-color: #fff;
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
 
@@ -151,11 +150,7 @@
     }
 
     ul li:last-child {
-      margin-bottom: 12px;
-    }
-
-    ul li.currentLi:first-child {
-      margin-top: 5px;
+      margin-bottom: 5px;
     }
 
     ul li a.active {
