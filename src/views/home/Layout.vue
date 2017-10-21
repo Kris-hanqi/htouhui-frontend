@@ -164,7 +164,7 @@
     }
   }
 
-  .home-wrapper__account-container-main {
+  .main-container {
     float: right;
     width: 832px;
   }
