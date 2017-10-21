@@ -49,7 +49,7 @@
 <script>
   import HthHeader from 'components/header';
   import HthSliderBar from 'common/slider-bar';
-  
+
   export default {
     components: {
       HthHeader,
@@ -74,7 +74,7 @@
     height: 846px;
     background-color: #fff;
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-  
+
     p {
       position: relative;
       height: 43px;
@@ -84,7 +84,7 @@
       padding-left: 42px;
       background-color: #f6f9ff;
     }
-  
+
     p.myAccount:after {
       display: block;
       content: '';
@@ -95,7 +95,7 @@
       height: 18px;
       background: url("../../assets/images/home/center-ico-01.png") no-repeat;
     }
-  
+
     p.myInvestment:after {
       content: '';
       display: block;
@@ -106,7 +106,7 @@
       height: 24px;
       background: url("../../assets/images/home/center-ico-02.png") no-repeat;
     }
-  
+
     p.myBorrowMoney:after {
       content: '';
       display: block;
@@ -117,7 +117,7 @@
       height: 24px;
       background: url("../../assets/images/home/center-ico-03.png") no-repeat;
     }
-  
+
     p.newPlatformRewards:after {
       content: '';
       display: block;
@@ -128,7 +128,7 @@
       height: 24px;
       background: url("../../assets/images/home/center-ico-04.png") no-repeat;
     }
-  
+
     p.accountManagement:after {
       content: '';
       display: block;
@@ -139,57 +139,51 @@
       height: 22px;
       background: url("../../assets/images/home/center-ico-05.png") no-repeat;
     }
-    
+
     ul li {
       margin-left: 45px;
     }
-  
+
     ul li a {
       font-size: 14px;
       line-height: 2.57;
       color: #7c86a2;
     }
-  
+
     ul li a {
       font-size: 14px;
       line-height: 2.57;
       color: #7c86a2;
     }
-  
+
     ul li:first-child {
       margin-top: 10px;
     }
-  
+
     ul li:last-child {
       margin-bottom: 12px;
     }
-  
+
     ul li.currentLi:first-child {
       margin-top: 5px;
     }
-  
-    ul li.currentLi {
+
+    ul li a.active {
+      display: inline-block;
       width: 153px;
       height: 41px;
       line-height: 38px;
       background: url("../../assets/images/home/button.png") no-repeat;
-      margin-left: 15px;
+      margin-left: -30px;
       padding-left: 30px;
       margin-top: 0;
-    }
-  
-    ul li.currentLi a {
-      color: #fff !important;
-    }
-  
-    ul li.currentLi a {
       color: #fff !important;
     }
   }
-  
+
   .home-wrapper__account-container-main {
     float: right;
     width: 832px;
   }
-  
+
 </style>
