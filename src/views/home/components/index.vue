@@ -3,10 +3,10 @@
     <div class="account-wrapper__top">
       <i class="iconMy"></i>
       <span>你好，<i class="num-font">某某某</i></span>
-      <a href="#" class="iconSmall01"></a>
-      <a href="#" class="iconSmall02"></a>
-      <button class="withdrawBtn fr">提现</button>
-      <button class="rechargeBtn fr">充值</button>
+      <a href="#" class="icon-user"></a>
+      <a href="#" class="icon-bank-card"></a>
+      <el-button :plain="true" type="primary" class="recharge-btn">充值</el-button>
+      <el-button type="primary" class="withdraw-btn">提现</el-button>
     </div>
   
     <div class="account-wrapper__asset">
@@ -32,7 +32,7 @@
     </div>
     
     <div>
-      
+    
     </div>
    
   </div>
@@ -57,67 +57,67 @@
     background-color: #fff;
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
     
+    .recharge-btn {
+      float: right;
+      margin-top: 19px;
+      margin-right: 16px;
+    }
+    
     .iconMy {
       display: inline-block;
       vertical-align: middle;
       width: 42px;
       height: 42px;
       margin: 0 14px 0 27px;
-      background: url(../../../assets/images/home/center-ico-06.png) no-repeat;
+      background: url(../../../assets/images/icon-avatar.png) no-repeat;
     }
   
     span {
       font-size: 16px;
       vertical-align: middle;
-      color: #394b67;
     }
   
-    a.iconSmall01 {
-      display: inline-block;
-      vertical-align: middle;
-      width: 23px;
-      height: 21px;
-      background: url(../../../assets/images/home/center-ico-07.png) no-repeat;
-      margin-left: 40px;
-    }
-  
-    a.iconSmall01:hover {
-      background: url(../../../assets/images/home/center-ico-07-hover.png) no-repeat;
-    }
-  
-    a.iconSmall02 {
-      display: inline-block;
-      vertical-align: middle;
-      width: 23px;
-      height: 18px;
-      background: url(../../../assets/images/home/center-ico-08.png) no-repeat;
-      margin-left: 7px;
-    }
-  
-    a.iconSmall02:hover {
-      background: url(../../../assets/images/home/center-ico-08-hover.png) no-repeat;
-    }
-    
     button {
       width: 101px;
-      height: 36px;
       border-radius: 100px;
-      font-size: 16px;
-      box-sizing: border-box;
+    }
+  
+    .withdraw-btn {
+      float: right;
       margin-top: 19px;
-    }
-  
-    .withdrawBtn {
-      background-color: #fff;
-      border: solid 1px #378ff6;
-      color: #0671f0;
-      margin-right: 19px;
-    }
-  
-    .rechargeBtn {
       background-color: #378ff6;
       color: #fff;
       margin-right: 16px;
+    
+      &:hover {
+        background-color: #186dd1;
+      }
+    }
+    
+    a {
+      display: inline-block;
+      vertical-align: middle;
+      width: 23px;
+    }
+  
+    a.icon-user {
+      height: 21px;
+      background: url(../../../assets/images/home/index/icon-user.png) no-repeat;
+      margin-left: 40px;
+      
+      &:hover {
+        background: url(../../../assets/images/home/index/icon-user-hover.png) no-repeat;
+      }
+    }
+  
+    a.icon-bank-card {
+      height: 18px;
+      background: url(../../../assets/images/home/index/icon-bank-card.png) no-repeat;
+      margin-left: 7px;
+  
+      &:hover {
+        background: url(../../../assets/images/home/index/icon-bank-card-hover.png) no-repeat;
+      }
     }
   }
   
