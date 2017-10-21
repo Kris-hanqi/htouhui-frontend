@@ -7,10 +7,10 @@
         <div class="home-wrapper__account-container-menu">
           <p class="myAccount">我的账户</p>
           <ul>
-            <li><a href="#">账户概览</a></li>
+            <li><router-link to="index" active-class="active">账户概览</router-link></li>
             <li><a href="#">资金流水</a></li>
-            <li><a href="#">我要充值</a></li>
-            <li><a href="#">我要提现</a></li>
+            <li><router-link to="recharge" active-class="active">我要充值</router-link></li>
+            <li><router-link to="withdraw" active-class="active">我要提现</router-link></li>
           </ul>
           <p class="myInvestment">我的投资</p>
           <ul>
