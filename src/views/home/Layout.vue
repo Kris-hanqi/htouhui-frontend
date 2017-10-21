@@ -8,7 +8,7 @@
           <p class="myAccount">我的账户</p>
           <ul>
             <li><router-link to="index" active-class="active">账户概览</router-link></li>
-            <li><a href="#">资金流水</a></li>
+            <li><router-link to="funds" active-class="active">资金流水</router-link></li>
             <li><router-link to="recharge" active-class="active">我要充值</router-link></li>
             <li><router-link to="withdraw" active-class="active">我要提现</router-link></li>
           </ul>
