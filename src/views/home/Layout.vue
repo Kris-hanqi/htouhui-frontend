@@ -60,7 +60,7 @@
 
 <style lang="scss" scoped>
   .home-wrapper {
-    width: 1200px;
+    width: 1000px;
     margin: 0 auto;
   }
 

@@ -4,9 +4,13 @@ const _import = require('./_import_' + process.env.NODE_ENV);
 
 Vue.use(Router);
 
+/** layout */
+import Layout from 'views/home/Layout';
+
 export const constantRouterMap = [
   {
     path: '/',
+    component: Layout,
     redirect: '/index',
     children: [
       {

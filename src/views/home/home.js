@@ -2,9 +2,11 @@ import Vue from 'vue';
 import 'normalize.css/normalize.css';
 import '@/styles/base.scss';
 import router from '../../router/home';
-import App from './index.vue';
+import App from './App';
 
 new Vue({
+  el: '#app',
   router,
-  render: h => h(App)
-}).$mount('#app');
+  template: '<App/>',
+  components: { App }
+});
