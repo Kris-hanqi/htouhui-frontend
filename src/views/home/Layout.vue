@@ -14,30 +14,28 @@
           </ul>
           <p class="myInvestment">我的投资</p>
           <ul>
-            <li><a href="#">新手计划</a></li>
-            <li><a href="#">21天计划</a></li>
-            <li><a href="#">升薪宝量化</a></li>
-            <li><a href="#">定期项目</a></li>
-            <li><a href="#">债权转让</a></li>
+            <li><router-link to="planNovice" active-class="active">新手计划</router-link></li>
+            <li><router-link to="plan21Day" active-class="active">21天计划</router-link></li>
+            <li><router-link to="quantify" active-class="active">升薪宝量化</router-link></li>
+            <li><router-link to="regular" active-class="active">定期项目</router-link></li>
+            <li><router-link to="claims" active-class="active">债权转让</router-link></li>
           </ul>
           <p class="myBorrowMoney">我的借款</p>
           <ul>
-            <li><a href="#">借款纪录</a></li>
-            <li><a href="#">近期借款</a></li>
+            <li><router-link to="loanRecording" active-class="active">借款纪录</router-link></li>
+            <li><router-link to="recentlyLoan" active-class="active">近期借款</router-link></li>
           </ul>
           <p class="newPlatformRewards">平台奖励</p>
           <ul>
-            <li><a href="#">优惠券</a></li>
-            <li><a href="#">邀请好友</a></li>
+            <li><router-link to="coupon" active-class="active">优惠券</router-link></li>
           </ul>
           <p class="accountManagement">账户管理</p>
           <ul>
-            <li><a href="#">账户设置</a></li>
-            <li><a href="#">站内通知</a></li>
+            <li><router-link to="accountSet" active-class="active">账户设置</router-link></li>
+            <li><router-link to="stationNotification" active-class="active">站内通知</router-link></li>
           </ul>
         </div>
         <div class="main-container">
-          我是主区域
           <router-view></router-view>
         </div>
       </div>

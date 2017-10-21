@@ -59,12 +59,12 @@ export const constantRouterMap = [
         component: _import('home/components/claims')
       },
       {
-        path: 'LoanRecording',
+        path: 'loanRecording',
         name: '借款记录',
         component: _import('home/components/LoanRecording')
       },
       {
-        path: 'RecentlyLoan',
+        path: 'recentlyLoan',
         name: '最近借款',
         component: _import('home/components/RecentlyLoan')
       },
@@ -74,12 +74,12 @@ export const constantRouterMap = [
         component: _import('home/components/coupon')
       },
       {
-        path: 'AccountSet',
+        path: 'accountSet',
         name: '账户设置',
         component: _import('home/components/AccountSet')
       },
       {
-        path: 'StationNotification',
+        path: 'stationNotification',
         name: '站内通知',
         component: _import('home/components/StationNotification')
       }

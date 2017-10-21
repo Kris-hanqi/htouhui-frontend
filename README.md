@@ -1,4 +1,4 @@
-# payday-loan-app
+# hth-frontend
 
 > 海投汇官网项目（PC）
 
