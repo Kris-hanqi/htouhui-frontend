@@ -5,11 +5,11 @@
         <img :src="img_logo" alt="海投汇"/>
       </div>
       <ul class="header-down__bar">
-        <li><router-link to="index" active-class="active">首页</router-link></li>
+        <li><a href="./index.html" active-class="active">首页</a></li>
         <li><a href="">升薪宝量化</a></li>
         <li><a href="">升薪宝定期</a></li>
-        <li><router-link to="regular-mortgage" active-class="active">定期抵押</router-link></li>
-        <li><router-link to="information-disclosure" active-class="active">风控措施</router-link></li>
+        <li><a href="">定期抵押</a></li>
+        <li><a href="">风控措施</a></li>
         <li><a href="">关于我们</a></li>
         <li class="header-down__account">
           <a href="">
