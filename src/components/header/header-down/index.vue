@@ -12,7 +12,7 @@
         <li><a href="">风控措施</a></li>
         <li><a href="">关于我们</a></li>
         <li class="header-down__account">
-          <a href="">
+          <a href="./home.html">
             <div class="portrait">
               <i class="fa fa-user-o" aria-hidden="true"></i>
             </div>
