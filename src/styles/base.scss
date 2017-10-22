@@ -72,8 +72,9 @@ i {
   font-family: 'Roboto-Regular' !important;
 }
 
-#test {
-  background-color: red;
+.main-section {
+  width: 1080px;
+  margin: 0 auto;
 }
 
 .clearFix::before,
