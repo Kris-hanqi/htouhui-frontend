@@ -4,5 +4,7 @@ import '@/styles/base.scss';
 import App from './index.vue';
 
 new Vue({
-  render: h => h(App)
-}).$mount('#app');
+  el: '#app',
+  template: '<App/>',
+  components: { App }
+});
