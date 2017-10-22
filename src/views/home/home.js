@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import 'normalize.css/normalize.css';
 import 'element-ui/lib/theme-default/index.css';
-import { Button, Select, Table, TableColumn, Pagination, Breadcrumb, BreadcrumbItem } from 'element-ui'
+import { Button, Select, Table, TableColumn, Pagination, Breadcrumb, BreadcrumbItem, DatePicker } from 'element-ui'
 import '@/styles/base.scss';
 import router from '../../router/home';
 import store from '../../store';
@@ -14,6 +14,7 @@ Vue.use(TableColumn);
 Vue.use(Pagination);
 Vue.use(Breadcrumb);
 Vue.use(BreadcrumbItem);
+Vue.use(DatePicker);
 
 new Vue({
   el: '#app',
@@ -21,4 +22,4 @@ new Vue({
   store,
   template: '<App/>',
   components: { App }
-});
+})
