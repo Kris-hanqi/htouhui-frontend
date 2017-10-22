@@ -83,10 +83,6 @@
         }
       }
 
-      .newUser-plan-day {
-        margin: 0 50px;
-      }
-
       .day {
         font-size: 20px;
         color: #394b67;
@@ -101,6 +97,10 @@
         font-size: 24px;
         color: #394b67;
       }
+    }
+
+    .newUser-plan-day {
+      margin: 0 50px;
     }
   }
 

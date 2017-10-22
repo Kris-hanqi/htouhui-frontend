@@ -39,7 +39,7 @@
   .shengxinbaolianghua {
     width: 100%;
     height: auto;
-    padding: 20px 50px 45px 25px;
+    padding: 20px 50px 25px 25px;
     background-color: #fff;
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
   }
