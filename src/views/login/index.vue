@@ -27,18 +27,30 @@
               <form ref="form">
                 <div class="from-item">
                   <div class="item-box" v-show="loginType === 0">
-                    <input type="text" placeholder="请输入用户名/用户名">
+                    <i class="icon icon-phone"></i>
+                    <input type="text" placeholder="请输入手机号/用户名">
                   </div>
                 </div>
-                <div class="item-box" v-show="loginType === 0">
-                  <input type="password" placeholder="请输入密码">
+                <div class="from-item">
+                  <div class="item-box" v-show="loginType === 0">
+                    <i class="icon icon-pwd"></i>
+                    <input type="password" placeholder="请输入密码">
+                  </div>
                 </div>
-                <div class="item-box" v-show="loginType === 1">
-                  <input type="text" placeholder="请输入用户名/用户名">
+                <div class="from-item">
+                  <div class="item-box" v-show="loginType === 1">
+                    <i class="icon icon-phone"></i>
+                    <input type="text" placeholder="请输入手机号">
+                  </div>
                 </div>
-                <div class="item-box" v-show="loginType === 1">
-                  <input type="text" placeholder="请输入验证码">
+                <div class="from-item">
+                  <div class="item-box" v-show="loginType === 1">
+                    <i class="icon icon-captcha"></i>
+                    <input type="text" class="captcha_input" placeholder="请输入验证码">
+                    <button type="button" class="get-captcha-btn">获取验证码</button>
+                  </div>
                 </div>
+                <input type="submit" value="立即登录" id="butt" class="login-btn">
               </form>
             </div>
           </div>
@@ -134,11 +146,15 @@
         padding-top: 2px;
         font-size: 15px;
         color: #5a5454;
+        
+        &:hover {
+          color: #2577e3;
+        }
       }
     }
     
     .login-from__content {
-      padding-top: 30px;
+      padding: 30px 0;
       
       .form-item {
         position: relative;
@@ -146,16 +162,70 @@
       }
   
       .item-box {
-        padding-top: 10px;
+        padding-top: 25px;
         border-bottom: 1px solid rgb(184, 184, 184);
+      }
+      
+      .icon {
+        display: inline-block;
+        vertical-align: middle;
+        width: 30px;
+        height: 40px;
+      }
+  
+      .icon-phone {
+        background: url(../../assets/images/login/icon-phone.png) no-repeat center;
+      }
+  
+      .icon-pwd {
+        background: url(../../assets/images/login/icon-pwd.png) no-repeat center;
+      }
+      
+      .icon-captcha {
+        background: url(../../assets/images/login/icon-captcha.png) no-repeat center;
+      }
+  
+      .captcha_input {
+        width: 250px;
+      }
+      
+      .get-captcha-btn {
+        display: inline-block;
+        vertical-align: middle;
+        width: 112px;
+        height: 40px;
+        border: none;
+        padding: 0;
+        background-color: #f0f0f0;
+        font-size: 14px;
+        color: #606060;
+        cursor: pointer;
       }
   
       input {
-        width: 340px;
+        width: 365px;
         height: 40px;
         font-size: 14px;
         box-sizing: border-box;
         border: none;
+      }
+  
+      .login-btn {
+        display: block;
+        width: 100%;
+        height: 45px;
+        margin-top: 30px;
+        background-color: #2875d9;
+        border: none;
+        line-height: 45px;
+        text-align: center;
+        color: #fff;
+        font-size: 18px;
+        cursor: default;
+        
+        &:hover {
+          background-color: #1c64d9;
+        }
       }
     }
   }
