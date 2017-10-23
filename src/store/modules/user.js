@@ -4,13 +4,19 @@ import { getToken } from '@/utils/auth';
 const user = {
   state: {
     token: getToken(),
-    name: '', // 用户名
-    avatar: ''
+    name: '', // 用户姓名
+    avatar: '',
+    status: 0, // 用户状态
+    bankCard: '', // 银行卡号
+    bankName: '' // 银行名称
   },
 
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token;
+    },
+    SET_STATUS: (state, status) => {
+      state.status = status
     }
   },
 

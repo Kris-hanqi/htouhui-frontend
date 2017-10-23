@@ -67,7 +67,7 @@
               <router-link to="accountSet" active-class="active">账户设置</router-link>
             </li>
             <li class="nav">
-              <router-link to="stationNotification" active-class="active">站内通知</router-link>
+              <router-link to="notification" active-class="active">站内通知</router-link>
             </li>
           </ul>
         </div>
@@ -99,7 +99,23 @@
     },
     data() {
       return {
-        data: ''
+        operationTipsArray: [
+          {
+            status: 0,
+            title: '您还未开通江西银行存管账户，即刻开通确保您的正常使用和资金安全。',
+            url: ''
+          },
+          {
+            status: 1,
+            title: '设置交易密码可提高账号安全。',
+            url: ''
+          },
+          {
+            status: 2,
+            title: '您可以去充值投资啦，请在提现前绑定银行卡。',
+            url: ''
+          }
+        ]
       }
     },
     created() {
