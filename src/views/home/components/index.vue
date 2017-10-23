@@ -34,16 +34,20 @@
     <div>
     
     </div>
-   
   </div>
 </template>
 
 <script>
+  import { getToken } from '@/utils/auth';
+  
   export default {
     data() {
       return {
         options: {}
       }
+    },
+    created() {
+      console.log(getToken());
     }
   }
 </script>

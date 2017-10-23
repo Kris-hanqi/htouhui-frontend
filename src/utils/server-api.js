@@ -1,6 +1,6 @@
 // 后端地址配置数据
 const ApiAddress = {
-  mock: 'https://easy-mock.com/mock/59e0324afadf2a214faa253d/hth/web-api',
+  mock: 'https://api-dev',
   development: '47.93.122.236:40551', // 开发环境
   test: '120.27.165.213:5001', // 测试环境
   pretest: '47.93.119.31:16666',  // 预发环境
@@ -24,5 +24,5 @@ export default function() {
     serverAddress = ApiAddress.development;
   }
 
-  return 'http://' + serverAddress + '/payday-loan-flow/admin';
+  return 'https://' + serverAddress + '/web-api';
 }

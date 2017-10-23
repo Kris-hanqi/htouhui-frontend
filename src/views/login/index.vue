@@ -19,7 +19,7 @@
           <div class="login-from fr">
             <div class="login-from__header">
               <span class="title fl">欢迎登录</span>
-              <a class="fr" v-on:click="switchLoginType">
+              <a class="fr" @click="switchLoginType">
                 {{loginType === 0 ? '手机动态密码登录' : '普通登录'}}
             </a>
             </div>
@@ -28,13 +28,13 @@
                 <div class="from-item">
                   <div class="item-box" v-show="loginType === 0">
                     <i class="icon icon-phone"></i>
-                    <input type="text" placeholder="请输入手机号/用户名">
+                    <input type="text" v-model="loginData.username" placeholder="请输入手机号/用户名">
                   </div>
                 </div>
                 <div class="from-item">
                   <div class="item-box" v-show="loginType === 0">
                     <i class="icon icon-pwd"></i>
-                    <input type="password" placeholder="请输入密码">
+                    <input type="password" v-model="loginData.password" placeholder="请输入密码">
                   </div>
                 </div>
                 <div class="from-item">
@@ -50,7 +50,7 @@
                     <button type="button" class="get-captcha-btn">获取验证码</button>
                   </div>
                 </div>
-                <input type="submit" value="立即登录" id="butt" class="login-btn">
+                <button type="button" @click="login" class="login-btn">立即登录</button>
               </form>
             </div>
           </div>
@@ -64,6 +64,8 @@
 </template>
 
 <script>
+  import { fetchLogin } from '@/api/login';
+  import { setToken } from '@/utils/auth';
   import img_logo from '@/assets/images/logo.png';
   export default {
     data() {
@@ -72,17 +74,28 @@
         loginType: 0,
         loginData: {
           username: '',
-          password: ''
+          password: '',
+          channel: ''
         }
       }
     },
     methods: {
+      // 切换登录方式
       switchLoginType() {
         if (this.loginType) {
           this.loginType = 0;
         } else {
           this.loginType = 1;
         }
+      },
+      // 切换登录方式
+      login() {
+        fetchLogin(this.loginData).then(response => {
+          if (response.data.meta.code === 200) {
+            setToken(response.data.data.token);
+            window.location.href = 'home.html';
+          }
+        });
       }
     }
   }
