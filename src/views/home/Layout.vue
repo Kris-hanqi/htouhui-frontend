@@ -90,11 +90,22 @@
 <script>
   import HthHeader from 'components/header';
   import HthSliderBar from 'common/slider-bar';
+  import { getUserInfo } from '@/api/login';
 
   export default {
     components: {
       HthHeader,
       HthSliderBar
+    },
+    data() {
+      return {
+        data: ''
+      }
+    },
+    created() {
+      getUserInfo().then(response => {
+        console.log(response);
+      })
     }
   };
 </script>

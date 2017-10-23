@@ -1,10 +1,20 @@
 import fetch from '@/utils/fetch'
 
-export function getUserInfo(token) {
+/** 用户登录 */
+export function fetchLogin(data) {
   return fetch({
-    url: '/user/info',
+    url: 'web-api/loginByPassword',
+    method: 'post',
+    data
+  })
+}
+
+/** 获取用户信息 */
+export function getUserInfo() {
+  return fetch({
+    url: 'user/userInfo',
     method: 'get',
-    params: { token }
+    params: { }
   })
 }
 
