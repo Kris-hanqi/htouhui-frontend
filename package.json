@@ -21,6 +21,7 @@
     "element-ui": "^1.4.7",
     "es6-promise": "^4.1.1",
     "jquery": "^3.2.1",
+    "js-base64": "^2.3.2",
     "js-cookie": "^2.1.4",
     "lodash": "^4.17.4",
     "mockjs": "^1.0.1-beta3",

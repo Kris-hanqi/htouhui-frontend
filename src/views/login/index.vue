@@ -65,6 +65,7 @@
 
 <script>
   import { fetchLogin } from '@/api/login';
+  import { Base64 } from 'js-base64';
   import { setToken } from '@/utils/auth';
   import img_logo from '@/assets/images/logo.png';
   export default {
@@ -88,9 +89,12 @@
           this.loginType = 1;
         }
       },
-      // 切换登录方式
+      // 用户登录
       login() {
-        fetchLogin(this.loginData).then(response => {
+        const data = {};
+        data.userPhone = Base64.encode(this.loginData.username);
+        data.userPassword = Base64.encode(this.loginData.password);
+        fetchLogin(data).then(response => {
           if (response.data.meta.code === 200) {
             setToken(response.data.data.token);
             window.location.href = 'home.html';

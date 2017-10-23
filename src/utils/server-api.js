@@ -1,7 +1,7 @@
 // 后端地址配置数据
 const ApiAddress = {
   mock: 'https://api-dev',
-  development: '47.93.122.236:40551', // 开发环境
+  development: '192.168.0.84:21000', // 开发环境
   test: '120.27.165.213:5001', // 测试环境
   pretest: '47.93.119.31:16666',  // 预发环境
   production: '47.93.77.75:16666' // 正式环境
@@ -24,5 +24,5 @@ export default function() {
     serverAddress = ApiAddress.development;
   }
 
-  return 'https://' + serverAddress + '/web-api';
+  return 'http://' + serverAddress + '/';
 }
