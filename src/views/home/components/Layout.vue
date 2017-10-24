@@ -5,11 +5,7 @@
     <div class="home-wrapper">
       <!-- 面包屑导航 -->
       <div class="home-wrapper__breadcrumb">
-        <el-breadcrumb separator=">">
-          <el-breadcrumb-item>首页</el-breadcrumb-item>
-          <el-breadcrumb-item>个人中心</el-breadcrumb-item>
-          <el-breadcrumb-item>账户概览</el-breadcrumb-item>
-        </el-breadcrumb>
+        <hth-breadcrumb></hth-breadcrumb>
       </div>
       <div class="home-wrapper__account">
         <div class="home-wrapper__account-menu">
@@ -90,11 +86,13 @@
 <script>
   import HthHeader from 'components/header';
   import HthSliderBar from 'common/slider-bar';
+  import HthBreadcrumb from './breadcrumb';
 
   export default {
     components: {
       HthHeader,
-      HthSliderBar
+      HthSliderBar,
+      HthBreadcrumb
     },
     data() {
       return {
