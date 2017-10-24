@@ -18,3 +18,46 @@
   color: #394b67;
   cursor: default;
 }
+
+/*table*/
+th {
+  font-weight: normal;
+}
+
+.el-table {
+  border: none;
+}
+
+.el-table td {
+  height: 55px;
+  border-bottom: solid 1px #dee8f2;
+}
+
+.el-table th.is-leaf {
+  border-bottom: none;
+}
+
+.el-table::after, .el-table::before {
+  background-color: transparent;
+}
+
+.el-table th {
+  background-color: #f6f9fe;
+  text-align: center;
+}
+
+.el-table td {
+  text-align: center;
+  font-size: 14px;
+  color: #727e90;
+}
+
+.el-table__footer-wrapper thead div, .el-table__header-wrapper thead div {
+  background-color: #f6f9fe;
+  font-size: 14px;
+  color: #394b67;
+}
+
+.el-table .cell, .el-table th>div {
+  padding: 0;
+}
