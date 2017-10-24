@@ -72,9 +72,9 @@
           </ul>
         </div>
         <div class="main-container">
-          <div class="prompt-message">
-            <span>您可以去充值投资啦，请在提现前绑定银行卡。</span>
-            <el-button>去绑卡</el-button>
+          <div class="prompt-message" v-if="operationTips">
+            <span>{{ operationTips.title }}</span>
+            <el-button>{{ operationTips.btnText }}</el-button>
           </div>
           <div class="main-container__router">
           
@@ -102,24 +102,27 @@
           {
             status: 0,
             title: '您还未开通江西银行存管账户，即刻开通确保您的正常使用和资金安全。',
+            btnText: '开通江西银行存管账户',
             url: ''
           },
           {
             status: 1,
             title: '设置交易密码可提高账号安全。',
+            btnText: '立即设置',
             url: ''
           },
           {
             status: 2,
             title: '您可以去充值投资啦，请在提现前绑定银行卡。',
+            btnText: '去绑卡',
             url: ''
           }
         ]
       }
     },
     computed: {
-      sidebar() {
-        return this.$store.state.app.sidebar
+      operationTips() {
+        return this.operationTipsArray[this.$store.state.user.status]
       }
     },
     created() {
