@@ -2,31 +2,40 @@
   <div class="account-wrapper">
     <div class="account-wrapper__top">
       <i class="iconMy"></i>
-      <span>你好，<i class="num-font">某某某</i></span>
-      <a href="#" class="icon-user"></a>
-      <a href="#" class="icon-bank-card"></a>
-      <el-button :plain="true" type="primary" class="recharge-btn">充值</el-button>
-      <el-button type="primary" class="withdraw-btn">提现</el-button>
+      <span>你好，<i class="num-font">{{ name }}</i></span>
+      <a href="javascript:void(0)" class="icon-user" @click="operationAccount" :class="{ 'icon-user-active': status }"></a>
+      <a href="javascript:void(0)" class="icon-bank-card" @click="operationBankCard" :class="{ 'icon-bank-card-active': bankCard }"></a>
+      <el-button :plain="true" @click="toRouter('recharge')" type="primary" class="recharge-btn">充值</el-button>
+      <el-button type="primary" @click="toRouter('withdraw')" class="withdraw-btn">提现</el-button>
     </div>
+    
+    <!-- 银行卡解绑提示 -->
+    <el-dialog title="提示" :visible.sync="dialogVisible" size="tiny">
+      <span style="font-size: 20px; color: #ee5544">确认解绑银行卡？</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   
     <div class="account-wrapper__asset">
       <h1>我的资产</h1>
       <ul class="allAsset">
         <li>
           <p class="txt01">总资产</p>
-          <p class="txt02"><i class="num-font">122,390,00</i>元</p>
+          <p class="txt02"><i class="num-font">{{ assetData.sumCapital }}</i>元</p>
         </li>
         <li>
           <p class="txt01">累计收益</p>
-          <p class="txt02"><i class="num-font">5,390,00</i>元</p>
+          <p class="txt02"><i class="num-font">{{ assetData.accumulatedIncome }}</i>元</p>
         </li>
         <li>
           <p class="txt01">冻结金额</p>
-          <p class="txt02"><i class="num-font">3,390,00</i>元</p>
+          <p class="txt02"><i class="num-font">{{ assetData.balance }}</i>元</p>
         </li>
         <li>
           <p class="txt01">可用余额</p>
-          <p class="txt02"><i class="num-font">1,390,00</i>元</p>
+          <p class="txt02"><i class="num-font">{{ assetData.frozenMoney }}</i>元</p>
         </li>
       </ul>
     </div>
@@ -38,16 +47,50 @@
 </template>
 
 <script>
-  import { getToken } from '@/utils/auth';
+  import { mapGetters } from 'vuex';
+  import { fetchAsset } from '@/api/account';
   
   export default {
     data() {
       return {
-        options: {}
+        dialogVisible: false,
+        assetData: { }
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'name',
+        'status',
+        'bankCard'
+      ])
+    },
+    methods: {
+      getAsset() {
+        fetchAsset().then(response => {
+          console.log(response);
+          if (response.data.meta.code === 200) {
+            this.assetData = response.data.data;
+          }
+        })
+      },
+      operationBankCard() {
+        if (!this.bankCard) {
+          cosole.log('跳转绑卡页面');
+        } else {
+          this.dialogVisible = true;
+        }
+      },
+      operationAccount() {
+        if (this.status === 0) {
+          console.log('跳转开户页面');
+        }
+      },
+      toRouter(path) {
+        this.$router.push('/' + path);
       }
     },
     created() {
-      console.log(getToken());
+      this.getAsset();
     }
   }
 </script>
@@ -108,20 +151,20 @@
       height: 21px;
       background: url(../../../assets/images/home/index/icon-user.png) no-repeat;
       margin-left: 40px;
-      
-      &:hover {
-        background: url(../../../assets/images/home/index/icon-user-hover.png) no-repeat;
-      }
+    }
+  
+    a.icon-user-active {
+      background: url(../../../assets/images/home/index/icon-user-hover.png) no-repeat !important;
     }
   
     a.icon-bank-card {
       height: 18px;
       background: url(../../../assets/images/home/index/icon-bank-card.png) no-repeat;
       margin-left: 7px;
+    }
   
-      &:hover {
-        background: url(../../../assets/images/home/index/icon-bank-card-hover.png) no-repeat;
-      }
+    a.icon-bank-card-active {
+      background: url(../../../assets/images/home/index/icon-bank-card-hover.png) no-repeat;
     }
   }
   
