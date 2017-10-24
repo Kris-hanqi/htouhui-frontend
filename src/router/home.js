@@ -7,6 +7,8 @@ Vue.use(Router);
 /** layout */
 import Layout from 'views/home/components/Layout';
 
+import Account from 'views/home/account-set/accountSet';
+
 export const constantRouterMap = [
   {
     path: '/',
@@ -75,8 +77,20 @@ export const constantRouterMap = [
       },
       {
         path: 'accountSet',
-        name: '账户设置',
-        component: _import('home/account-set/index')
+        component: Account,
+        redirect: '/accountSet/index',
+        children: [
+          {
+            path: 'index',
+            name: '账户设置',
+            component: _import('home/account-set/accountSet')
+          },
+          {
+            path: 'account-set',
+            name: '修改密码',
+            component: _import('home/account-set/amendLoginPassword')
+          }
+        ]
       },
       {
         path: 'notification',
