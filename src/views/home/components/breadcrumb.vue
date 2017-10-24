@@ -2,7 +2,7 @@
   <div class="breadcrumb-wrapper">
     <el-breadcrumb separator=">">
       <el-breadcrumb-item @click.native="goToIndex">首页</el-breadcrumb-item>
-      <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.path" :to="item.path">
+      <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path" :to="item.path">
        {{item.name}}
       </el-breadcrumb-item>
     </el-breadcrumb>
