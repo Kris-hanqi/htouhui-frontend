@@ -16,7 +16,7 @@
           <p class="account">我的账户</p>
           <ul>
             <li class="nav">
-              <router-link to="index" active-class="active">账户概览</router-link>
+              <router-link to="account" active-class="active">账户概览</router-link>
             </li>
             <li class="nav">
               <router-link to="funds" active-class="active">资金流水</router-link>
@@ -90,7 +90,6 @@
 <script>
   import HthHeader from 'components/header';
   import HthSliderBar from 'common/slider-bar';
-  import { getUserInfo } from '@/api/login';
 
   export default {
     components: {
@@ -118,10 +117,18 @@
         ]
       }
     },
+    computed: {
+      sidebar() {
+        return this.$store.state.app.sidebar
+      }
+    },
     created() {
-      getUserInfo().then(response => {
-        console.log(response);
-      })
+      this.$store.dispatch('GetUserInfo')
+        .then(() => {
+          console.log(this.$store);
+        }).catch(() => {
+          this.loading = false
+        })
     }
   };
 </script>
