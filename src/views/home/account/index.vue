@@ -23,19 +23,19 @@
       <ul class="allAsset">
         <li>
           <p class="txt01">总资产</p>
-          <p class="txt02"><i class="num-font">122,390,00</i>元</p>
+          <p class="txt02"><i class="num-font">{{ assetData.sumCapital }}</i>元</p>
         </li>
         <li>
           <p class="txt01">累计收益</p>
-          <p class="txt02"><i class="num-font">5,390,00</i>元</p>
+          <p class="txt02"><i class="num-font">{{ assetData.accumulatedIncome }}</i>元</p>
         </li>
         <li>
           <p class="txt01">冻结金额</p>
-          <p class="txt02"><i class="num-font">3,390,00</i>元</p>
+          <p class="txt02"><i class="num-font">{{ assetData.balance }}</i>元</p>
         </li>
         <li>
           <p class="txt01">可用余额</p>
-          <p class="txt02"><i class="num-font">1,390,00</i>元</p>
+          <p class="txt02"><i class="num-font">{{ assetData.frozenMoney }}</i>元</p>
         </li>
       </ul>
     </div>
@@ -48,11 +48,13 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import { fetchAsset } from '@/api/account';
   
   export default {
     data() {
       return {
-        dialogVisible: false
+        dialogVisible: false,
+        assetData: { }
       }
     },
     computed: {
@@ -63,6 +65,14 @@
       ])
     },
     methods: {
+      getAsset() {
+        fetchAsset().then(response => {
+          console.log(response);
+          if (response.data.meta.code === 200) {
+            this.assetData = response.data.data;
+          }
+        })
+      },
       operationBankCard() {
         if (!this.bankCard) {
           cosole.log('跳转绑卡页面');
@@ -78,6 +88,9 @@
       toRouter(path) {
         this.$router.push('/' + path);
       }
+    },
+    created() {
+      this.getAsset();
     }
   }
 </script>
