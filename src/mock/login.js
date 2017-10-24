@@ -7,7 +7,7 @@ const user = {
   bankCard: '66666666666666666666',
   bankName: '中国工商银行',
   accountId: '454545342323',
-  isOpenAccount: true,
+  isOpenAccount: false,
   isSetPassWord: true,
   isAutoBidAuth: true,
   isAutoInvestAuth: true,

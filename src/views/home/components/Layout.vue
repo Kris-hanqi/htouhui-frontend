@@ -16,7 +16,7 @@
           <p class="account">我的账户</p>
           <ul>
             <li class="nav">
-              <router-link to="index" active-class="active">账户概览</router-link>
+              <router-link to="account" active-class="active">账户概览</router-link>
             </li>
             <li class="nav">
               <router-link to="funds" active-class="active">资金流水</router-link>
@@ -72,9 +72,9 @@
           </ul>
         </div>
         <div class="main-container">
-          <div class="prompt-message">
-            <span>您可以去充值投资啦，请在提现前绑定银行卡。</span>
-            <el-button>去绑卡</el-button>
+          <div class="prompt-message" v-if="operationTips">
+            <span>{{ operationTips.title }}</span>
+            <el-button>{{ operationTips.btnText }}</el-button>
           </div>
           <div class="main-container__router">
           
@@ -90,7 +90,6 @@
 <script>
   import HthHeader from 'components/header';
   import HthSliderBar from 'common/slider-bar';
-  import { getUserInfo } from '@/api/login';
 
   export default {
     components: {
@@ -103,25 +102,36 @@
           {
             status: 0,
             title: '您还未开通江西银行存管账户，即刻开通确保您的正常使用和资金安全。',
+            btnText: '开通江西银行存管账户',
             url: ''
           },
           {
             status: 1,
             title: '设置交易密码可提高账号安全。',
+            btnText: '立即设置',
             url: ''
           },
           {
             status: 2,
             title: '您可以去充值投资啦，请在提现前绑定银行卡。',
+            btnText: '去绑卡',
             url: ''
           }
         ]
       }
     },
+    computed: {
+      operationTips() {
+        return this.operationTipsArray[this.$store.state.user.status]
+      }
+    },
     created() {
-      getUserInfo().then(response => {
-        console.log(response);
-      })
+      this.$store.dispatch('GetUserInfo')
+        .then(() => {
+          console.log(this.$store);
+        }).catch(() => {
+          this.loading = false
+        })
     }
   };
 </script>

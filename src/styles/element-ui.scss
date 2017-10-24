@@ -1,0 +1,20 @@
+.el-pagination .btn-prev,
+.el-pager li {
+  margin-right: 10px;
+  border: 1px solid #d1dbe5;
+}
+
+.el-pager li.active+li {
+  border: 1px solid #d1dbe5;
+}
+
+.el-pagination .btn-next {
+  border: 1px solid #d1dbe5;
+}
+
+.el-pager li.active {
+  border-color: #dfe8f0;
+  background-color: #dfe8f0;
+  color: #394b67;
+  cursor: default;
+}
