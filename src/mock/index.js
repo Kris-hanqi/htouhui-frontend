@@ -7,5 +7,6 @@ Mock.setup({
 
 // 登录相关
 Mock.mock(/\/loginByPassword/, 'post', loginAPI.login);
+Mock.mock(/\/user\/userInfo/, 'get', loginAPI.userInfo);
 
 export default Mock;

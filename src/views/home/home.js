@@ -6,6 +6,7 @@ import '@/styles/base.scss';
 import router from '@/router/home';
 import store from '@/store';
 import App from './App';
+// import '@/mock';
 
 Vue.use(Button);
 Vue.use(Select);
@@ -15,22 +16,6 @@ Vue.use(Pagination);
 Vue.use(Breadcrumb);
 Vue.use(BreadcrumbItem);
 Vue.use(DatePicker);
-
-router.beforeEach((to, from, next) => {
-  if (store.getters.token) { // 判断是否有token
-    if (to.path === '/login') {
-      next({ path: '/app' });
-    } else {
-      next();
-    }
-  } else {
-    if (whiteList.indexOf(to.path) !== -1) {
-      next()
-    } else {
-      next('/login');
-    }
-  }
-});
 
 new Vue({
   el: '#app',
