@@ -7,8 +7,6 @@ Vue.use(Router);
 /** layout */
 import Layout from 'views/home/components/Layout';
 
-import Account from 'views/home/account-set/accountSet';
-
 export const constantRouterMap = [
   {
     path: '/',
@@ -16,68 +14,68 @@ export const constantRouterMap = [
     redirect: '/account',
     children: [
       {
-        path: 'account',
+        path: '/account',
         name: '账户概览',
         component: _import('home/account/index')
       },
       {
-        path: 'funds',
+        path: '/funds',
         name: '资金流水',
         component: _import('home/funds/index')
       },
       {
-        path: 'recharge',
+        path: '/recharge',
         name: '我要充值',
         component: _import('home/recharge/index')
       },
       {
-        path: 'withdraw',
+        path: '/withdraw',
         name: '我要提现',
         component: _import('home/withdraw/index')
       },
       {
-        path: 'planNovice',
+        path: '/planNovice',
         name: '新手计划',
         component: _import('home/plan-novice/index')
       },
       {
-        path: 'plan21Day',
+        path: '/plan21Day',
         name: '21天计划',
         component: _import('home/plan21-day/index')
       },
       {
-        path: 'quantify',
+        path: '/quantify',
         name: '升薪宝量化',
         component: _import('home/quantify/index')
       },
       {
-        path: 'regular',
+        path: '/regular',
         name: '定期项目',
         component: _import('home/regular/index')
       },
       {
-        path: 'claims',
+        path: '/claims',
         name: '债券转让',
         component: _import('home/claims/index')
       },
       {
-        path: 'loanRecording',
+        path: '/loanRecording',
         name: '借款记录',
         component: _import('home/loan-recording/index')
       },
       {
-        path: 'recentlyLoan',
+        path: '/recentlyLoan',
         name: '最近借款',
         component: _import('home/recently-loan/index')
       },
       {
-        path: 'coupon',
+        path: '/coupon',
         name: '优惠券',
         component: _import('home/coupon/index')
       },
       {
-        path: 'accountSet',
-        component: Account,
+        path: '/accountSet',
+        component: _import('home/account-set/index'),
         redirect: '/accountSet/index',
         children: [
           {
@@ -93,7 +91,7 @@ export const constantRouterMap = [
         ]
       },
       {
-        path: 'notification',
+        path: '/notification',
         name: '站内通知',
         component: _import('home/notification/index')
       }
