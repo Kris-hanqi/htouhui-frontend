@@ -61,7 +61,7 @@
       <tr class="borderNone">
         <td>登录密码</td>
         <td>已设置</td>
-        <td rowspan="2" class="borderLine"><button>修改</button></td>
+        <td rowspan="2" class="borderLine"><router-link to="amendLoginPassword"><button>修改</button></router-link></td>
       </tr>
       <tr>
         <td colspan="2" class="tableSmallFont textAlignLeft">登录密码已设置 上次登录时间： 2017-08-29 14:27:24</td>
