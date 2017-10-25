@@ -1,3 +1,8 @@
+/*pages*/
+.el-pagination {
+  text-align: right;
+}
+
 .el-pagination .btn-prev,
 .el-pager li {
   margin-right: 10px;
@@ -10,6 +15,14 @@
 
 .el-pagination .btn-next {
   border: 1px solid #d1dbe5;
+}
+
+.el-pagination .btn-prev, .el-pagination .btn-next, .el-pager li {
+  width: 33px;
+  height: 33px;
+  font-family: 'Roboto-Regular';
+  line-height: 33px;
+  font-size: 16px;
 }
 
 .el-pager li.active {
