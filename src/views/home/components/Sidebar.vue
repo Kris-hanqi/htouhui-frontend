@@ -3,58 +3,58 @@
     <p class="account">我的账户</p>
     <ul>
       <li class="nav">
-        <router-link to="account" active-class="active">账户概览</router-link>
+        <router-link to="/account" active-class="active">账户概览</router-link>
       </li>
       <li class="nav">
-        <router-link to="funds" active-class="active">资金流水</router-link>
+        <router-link to="/funds" active-class="active">资金流水</router-link>
       </li>
       <li class="nav">
-        <router-link to="recharge" active-class="active">我要充值</router-link>
+        <router-link to="/recharge" active-class="active">我要充值</router-link>
       </li>
       <li class="nav">
-        <router-link to="withdraw" active-class="active">我要提现</router-link>
+        <router-link to="/withdraw" active-class="active">我要提现</router-link>
       </li>
     </ul>
     <p class="investment">我的投资</p>
     <ul>
       <li class="nav">
-        <router-link to="planNovice" active-class="active">新手计划</router-link>
+        <router-link to="/planNovice" active-class="active">新手计划</router-link>
       </li>
       <li class="nav">
-        <router-link to="plan21Day" active-class="active">21天计划</router-link>
+        <router-link to="/plan21Day" active-class="active">21天计划</router-link>
       </li>
       <li class="nav">
-        <router-link to="quantify" active-class="active">升薪宝量化</router-link>
+        <router-link to="/quantify" active-class="active">升薪宝量化</router-link>
       </li>
       <li class="nav">
-        <router-link to="regular" active-class="active">定期项目</router-link>
+        <router-link to="/regular" active-class="active">定期项目</router-link>
       </li>
       <li class="nav">
-        <router-link to="claims" active-class="active">债权转让</router-link>
+        <router-link to="/claims" active-class="active">债权转让</router-link>
       </li>
     </ul>
     <p class="borrow-money">我的借款</p>
     <ul>
       <li class="nav">
-        <router-link to="loanRecording" active-class="active">借款纪录</router-link>
+        <router-link to="/loanRecording" active-class="active">借款纪录</router-link>
       </li>
       <li class="nav">
-        <router-link to="recentlyLoan" active-class="active">近期借款</router-link>
+        <router-link to="/recentlyLoan" active-class="active">近期借款</router-link>
       </li>
     </ul>
     <p class="new-platform-rewards">平台奖励</p>
     <ul>
       <li class="nav">
-        <router-link to="coupon" active-class="active">优惠券</router-link>
+        <router-link to="/coupon" active-class="active">优惠券</router-link>
       </li>
     </ul>
     <p class="account-management">账户管理</p>
     <ul>
       <li class="nav">
-        <router-link to="accountSet" active-class="active">账户设置</router-link>
+        <router-link to="/accountSet/index" active-class="active">账户设置</router-link>
       </li>
       <li class="nav">
-        <router-link to="notification" active-class="active">站内通知</router-link>
+        <router-link to="/notification" active-class="active">站内通知</router-link>
       </li>
     </ul>
   </div>
