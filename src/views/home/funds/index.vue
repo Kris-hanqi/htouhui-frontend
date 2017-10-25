@@ -34,40 +34,19 @@
       </div>
     </div>
     <div class="assetRunWaterTable personalCenterBoxShadow">
-      <table border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <th>交易时间</th>
-          <th>项目名称</th>
-          <th>类型</th>
-          <th>变动金额</th>
-          <th>管理平台</th>
-          <th>备注</th>
-        </tr>
-        <tr>
-          <td class="num-font">2017-08-22 13:58:05</td>
-          <td>升薪宝滚动</td>
-          <td>投资成功</td>
-          <td><span class="num-font"><i class="minus">-</i> 800.00</span>元</td>
-          <td>江西存管银行</td>
-          <td>提现申请通过，取出提现</td>
-        </tr>
-        <tr>
-          <td class="num-font">2017-08-22 13:58:05</td>
-          <td>升薪宝滚动</td>
-          <td>投资成功</td>
-          <td class="minus"><span class="num-font"><i>+</i> 33</span>元</td>
-          <td>江西存管银行</td>
-          <td>提现申请通过，取出提现</td>
-        </tr>
-      </table>
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page.sync="currentPage1"
-        :page-size="100"
-        layout="total, prev, pager, next"
-        :total="1000">
-      </el-pagination>
+      <el-table :data="runWaterTableData" style="width: 100%">
+        <el-table-column prop="time" label="交易时间" width="150"></el-table-column>
+        <el-table-column prop="name" label="项目名称" width="110"></el-table-column>
+        <el-table-column prop="type" label="类型" width="110"></el-table-column>
+        <el-table-column prop="variationMoney" label="变动金额" width="100"></el-table-column>
+        <el-table-column prop="managementPlatform" label="管理平台" width="140"></el-table-column>
+        <el-table-column prop="canUseMoney" label="可用余额" width="100"></el-table-column>
+        <el-table-column prop="remark" label="备注" width="100"></el-table-column>
+      </el-table>
+      <div class="pages">
+        <p class="total-pages">共计<span class="roboto-regular">25</span>条记录（共<span class="roboto-regular">3</span>页）</p>
+        <el-pagination layout="prev, pager, next" :total="30"></el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -103,21 +82,16 @@
             }
           }]
         },
-        value6: '',
-        value7: '',
-        currentPage1: 5,
-        currentPage2: 5,
-        currentPage3: 5,
-        currentPage4: 4
+        runWaterTableData: [{
+          time: '2017-08-22 13:58:05',
+          name: '升薪宝滚动',
+          type: '投资成功',
+          variationMoney: '-800.00元',
+          managementPlatform: '江西存管银行',
+          canUseMoney: '2900.00元',
+          remark: '提现申请通过，取出提现'
+        }]
       };
-    },
-    methods: {
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
-      },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      }
     }
   }
 </script>
@@ -226,35 +200,35 @@
     margin-top: 17px;
     background-color: #fff;
 
-    table {
-      width: 100%;
-
-      th {
-        background-color: #f6f9fe;
-        padding-top: 15px;
-        padding-bottom: 14px;
-        font-size: 14px;
-        line-height: 1;
-        color: #394b67;
-      }
-
-      td {
-        line-height: 1;
-        font-size: 14px;
-        color: #727e90;
-        border-bottom: solid 1px #dee8f2;
-        padding-top: 25px;
-        padding-bottom: 15px;
-        text-align: center;
-      }
-
-      td.minus {
-        color: #ff4a33;
-      }
-    }
-
     .pagesTotal {
       font-size: 14px;
+    }
+
+    .el-table .cell,
+    .el-table th > div {
+      padding: 0 5px;
+    }
+
+    .el-table .cell {
+      white-space: nowrap;
+    }
+  }
+
+  .pages {
+    width: 100%;
+    margin-top: 20px;
+    text-align: right;
+
+    .total-pages {
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 14px;
+      color: #394b67;
+    }
+
+    .el-pagination {
+      display: inline-block;
+      vertical-align: middle;
     }
   }
 </style>

@@ -36,7 +36,7 @@
     <p class="borrow-money">我的借款</p>
     <ul>
       <li class="nav">
-        <router-link to="/loanRecording" active-class="active">借款纪录</router-link>
+        <router-link to="/loanRecording" active-class="active">借款记录</router-link>
       </li>
       <li class="nav">
         <router-link to="/recentlyLoan" active-class="active">近期借款</router-link>
@@ -51,7 +51,7 @@
     <p class="account-management">账户管理</p>
     <ul>
       <li class="nav">
-        <router-link to="/accountSet/index" active-class="active">账户设置</router-link>
+        <router-link to="/accountSet" active-class="active">账户设置</router-link>
       </li>
       <li class="nav">
         <router-link to="/notification" active-class="active">站内通知</router-link>
@@ -65,7 +65,7 @@
     width: 152px;
     background-color: #fff;
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-  
+
     p {
       position: relative;
       height: 43px;
@@ -74,13 +74,13 @@
       color: #274161;
       padding-left: 42px;
       background-color: #f6f9ff;
-      
+
       &:after {
         content: '';
         display: block;
         position: absolute;
       }
-    
+
       &.account:after {
         left: 16px;
         top: 13px;
@@ -88,7 +88,7 @@
         height: 18px;
         background: url(../../../assets/images/home/icon-account.png) no-repeat;
       }
-    
+
       &.investment:after {
         left: 13px;
         top: 11px;
@@ -96,7 +96,7 @@
         height: 24px;
         background: url(../../../assets/images/home/icon-money.png) no-repeat;
       }
-    
+
       &.borrow-money:after {
         left: 15px;
         top: 9px;
@@ -104,7 +104,7 @@
         height: 24px;
         background: url(../../../assets/images/home/icon-loan.png) no-repeat;
       }
-    
+
       &.new-platform-rewards:after {
         left: 17px;
         top: 10px;
@@ -112,7 +112,7 @@
         height: 24px;
         background: url(../../../assets/images/home/icon-reward.png) no-repeat;
       }
-    
+
       &.account-management:after {
         left: 15px;
         top: 12px;
@@ -121,12 +121,12 @@
         background: url(../../../assets/images/home/icon-set.png) no-repeat;
       }
     }
-  
+
     ul {
       margin-top: 10px;
       margin-bottom: 5px;
     }
-  
+
     .nav {
       a {
         display: block;
@@ -135,7 +135,7 @@
         color: #7c86a2;
         margin-left: 45px;
       }
-    
+
       a.active {
         display: inline-block;
         width: 153px;

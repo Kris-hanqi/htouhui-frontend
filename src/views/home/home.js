@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import 'normalize.css/normalize.css';
 import 'element-ui/lib/theme-default/index.css';
-import { Button, Select, Table, TableColumn, Pagination, Breadcrumb, BreadcrumbItem, DatePicker, Dialog, MessageBox, Tabs } from 'element-ui'
+import { Button, Select, Table, TableColumn, Pagination, Breadcrumb, BreadcrumbItem, DatePicker, Dialog, MessageBox, Tabs, TabPane } from 'element-ui'
 import '@/styles/base.scss';
 import '@/styles/element-ui.scss';
 import router from '@/router/home';
@@ -13,6 +13,7 @@ Vue.use(Button);
 Vue.use(Dialog);
 Vue.use(Select);
 Vue.use(Tabs);
+Vue.use(TabPane);
 Vue.use(Table);
 Vue.use(TableColumn);
 Vue.use(Pagination);

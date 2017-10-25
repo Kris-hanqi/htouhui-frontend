@@ -87,6 +87,26 @@ export const constantRouterMap = [
             path: 'amendLoginPassword',
             name: '修改密码',
             component: _import('home/account-set/amendLoginPassword')
+          },
+          {
+            path: 'amendLoginEmail01',
+            name: '修改邮箱',
+            component: _import('home/account-set/amendLoginEmail01')
+          },
+          {
+            path: 'amendLoginEmailBind',
+            name: '绑定邮箱',
+            component: _import('home/account-set/amendLoginEmailBind')
+          },
+          {
+            path: 'amendLoginSetJyPwd',
+            name: '设置交易密码',
+            component: _import('home/account-set/amendLoginSetJyPwd')
+          },
+          {
+            path: 'amendLoginPhoneNum',
+            name: '修改绑定手机号',
+            component: _import('home/account-set/amendLoginPhoneNum')
           }
         ]
       },

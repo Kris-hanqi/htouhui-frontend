@@ -40,8 +40,12 @@
       </ul>
     </div>
     
-    <div>
-      <invest-chart></invest-chart>
+    <div class="account-wrapper__invest receptacle-view">
+      <h1>我的投资</h1>
+      <invest-chart :data="chartData"
+                    class="chart"
+                    :options="chartOptions"
+                    :width="200" :height="200"></invest-chart>
     </div>
   </div>
 </template>
@@ -58,7 +62,20 @@
     data() {
       return {
         dialogVisible: false,
-        assetData: { }
+        assetData: { },
+        chartData: {
+          // labels: ['新手计划', '21天计划', '升薪宝量化', '升薪宝定期', '定期抵押'],
+          datasets: [
+            {
+              backgroundColor: ['#f8e71c', '#ffa837', '#b8e986', '#50e3c2', '#06b7f0'],
+              data: [40, 20, 80, 10, 50]
+            }
+          ]
+        },
+        chartOptions: {
+          responsive: false,
+          segmentShowStroke: false
+        }
       }
     },
     computed: {
@@ -99,6 +116,12 @@
 </script>
 
 <style lang="scss">
+  
+  .receptacle-view {
+    background-color: #fff;
+    box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
+  }
+  
   .account-wrapper__top {
     width: 100%;
     height: 73px;
@@ -212,6 +235,27 @@
     ul.allAsset li p.txt02 i {
       font-size: 26px;
       color: #ff4c35;
+    }
+  }
+
+  .account-wrapper__invest {
+    width: 100%;
+    height: 384px;
+    margin-top: 16px;
+    
+    h1 {
+      font-size: 20px;
+      line-height: 1;
+      color: rgb(39, 65, 97);
+      padding-top: 20px;
+      margin-left: 27px;
+    }
+    
+    .chart {
+      margin-left: 20px;
+      margin-top: 60px;
+      height: 200px;
+      width: 200px;
     }
   }
 </style>
