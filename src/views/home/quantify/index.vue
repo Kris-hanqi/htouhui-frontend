@@ -44,34 +44,17 @@
       open4() {
         const h = this.$createElement;
         this.$msgbox({
-          title: '消息',
-          message: h('p', null, [
-            h('span', null, '内容可以是 '),
-            h('i', { style: 'color: teal' }, 'VNode')
+          title: '退出金额中',
+          message: h('div', { style: 'text-align: center' }, [
+            h('p', { style: 'display: inline-block' }, [
+              h('span', { style: 'color: #394b67;font-size: 18px' }, '元')
+            ]),
+            h('p', { style: 'display: inline-block' }, 'VNode')
           ]),
           showCancelButton: true,
           confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          beforeClose: (action, instance, done) => {
-            if (action === 'confirm') {
-              instance.confirmButtonLoading = true;
-              instance.confirmButtonText = '执行中...';
-              setTimeout(() => {
-                done();
-                setTimeout(() => {
-                  instance.confirmButtonLoading = false;
-                }, 300);
-              }, 3000);
-            } else {
-              done();
-            }
-          }
-        }).then(action => {
-          this.$message({
-            type: 'info',
-            message: 'action: ' + action
-          });
-        });
+          cancelButtonText: '取消'
+        })
       }
     }
   }
@@ -81,6 +64,7 @@
   .shengxinbaolianghua {
     width: 100%;
     height: auto;
+    box-sizing: border-box;
     padding: 20px 50px 25px 25px;
     background-color: #fff;
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
