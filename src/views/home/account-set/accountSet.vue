@@ -45,18 +45,18 @@
       <tr class="borderNone">
         <td>交易密码</td>
         <td>已设置</td>
-        <td rowspan="2" class="borderLine"><button>修改</button></td>
+        <td rowspan="2" class="borderLine"><router-link to="amendLoginSetJyPwd"><button>修改</button></router-link></td>
       </tr>
       <tr>
-        <td colspan="2" class="tableSmallFontColor textAlignLeft">保障资金安全，转入、转出、投资等资金相关操作时使用</td>
+        <td colspan="2" class="tableSmallFontColor textAlignLeft tablePadding">保障资金安全，转入、转出、投资等资金相关操作时使用</td>
       </tr>
       <tr class="borderNone">
         <td>手机认证</td>
         <td>哈哈哈</td>
-        <td rowspan="2" class="borderLine"><button>修改</button></td>
+        <td rowspan="2" class="borderLine"><router-link to="amendLoginPhoneNum"><button>修改</button></router-link></td>
       </tr>
       <tr>
-        <td colspan="2" class="tableSmallFontColor textAlignLeft">保障资金安全，转入、转出、投资等资金相关操作时使用</td>
+        <td colspan="2" class="tableSmallFontColor textAlignLeft tablePadding">保障资金安全，转入、转出、投资等资金相关操作时使用</td>
       </tr>
       <tr class="borderNone">
         <td>登录密码</td>
@@ -64,15 +64,15 @@
         <td rowspan="2" class="borderLine"><router-link to="amendLoginPassword"><button>修改</button></router-link></td>
       </tr>
       <tr>
-        <td colspan="2" class="tableSmallFont textAlignLeft">登录密码已设置 上次登录时间： 2017-08-29 14:27:24</td>
+        <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">登录密码已设置 上次登录时间： 2017-08-29 14:27:24</td>
       </tr>
       <tr class="borderNone">
         <td>邮箱认证<i class="iconDangerous"></i></td>
         <td class="tableSmallFontColor01">未绑定</td>
-        <td rowspan="2"><button class="btnBlue">绑定</button></td>
+        <td rowspan="2"><router-link to="amendLoginEmailBind"><button class="btnBlue">绑定</button></router-link></td>
       </tr>
       <tr class="borderNone">
-        <td colspan="2" class="tableSmallFont textAlignLeft">登录密码已设置 上次登录时间： 2017-08-29 14:27:24</td>
+        <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">登录密码已设置 上次登录时间： 2017-08-29 14:27:24</td>
       </tr>
     </table>
   </div>
@@ -103,8 +103,8 @@
         font-size: 14px;
         color: #35385a;
         border-bottom: solid 2px #dfe8f0;
-        padding-top: 15px;
-        padding-bottom: 15px;
+        padding-top: 18px;
+        padding-bottom: 18px;
 
         button {
           width: 91px;
@@ -156,8 +156,13 @@
         border-bottom: solid 2px #dfe8f0 !important;
       }
 
+      td.tablePadding {
+        padding-top: 3px;
+      }
+
       .iconDangerous {
         display: inline-block;
+        vertical-align: bottom;
         width: 20px;
         height: 18px;
         background: url("../../../assets/images/home/center-ico-dangerous.png") no-repeat;
