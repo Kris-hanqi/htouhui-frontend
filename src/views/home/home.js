@@ -12,7 +12,7 @@ import '@/mock';
 Vue.use(Button);
 Vue.use(Dialog);
 Vue.use(Select);
-Vue.use(Tabs)
+Vue.use(Tabs);
 Vue.use(Table);
 Vue.use(TableColumn);
 Vue.use(Pagination);
