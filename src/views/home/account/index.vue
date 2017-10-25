@@ -41,7 +41,7 @@
     </div>
     
     <div>
-    
+      <invest-chart></invest-chart>
     </div>
   </div>
 </template>
@@ -49,8 +49,12 @@
 <script>
   import { mapGetters } from 'vuex';
   import { fetchAsset } from '@/api/account';
+  import InvestChart from './InvestChart.vue';
   
   export default {
+    components: {
+      InvestChart
+    },
     data() {
       return {
         dialogVisible: false,
@@ -67,7 +71,6 @@
     methods: {
       getAsset() {
         fetchAsset().then(response => {
-          console.log(response);
           if (response.data.meta.code === 200) {
             this.assetData = response.data.data;
           }
