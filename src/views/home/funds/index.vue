@@ -1,73 +1,55 @@
 <template>
-  <div class="hom-right">
-    <div class="assetRunWaterSee personalCenterBoxShadow clearFix">
-      <h1 class="personalCenterRightTitle">资金流水</h1>
+  <div class="funds-wrapper">
+    <div class="funds-wrapper__menus clearFix">
+      <h1>资金流水</h1>
       <div class="fl">
-        <ul class="allChoose">
+        <ul class="nav">
           <li>选择时间：</li>
-          <li><a href="">近三天</a></li>
-          <li><a href="">近一个月</a></li>
-          <li><a href="">近三个月</a></li>
-          <li><a href="" class="selectA">自定义时间</a></li>
+          <li><a href="javascript:void(0)" @click="switchDateType('3day')" :class="{ active: dateType === '3day'}">近三天</a></li>
+          <li><a href="javascript:void(0)" @click="switchDateType('1months')" :class="{ active: dateType === '1months'}">近一个月</a></li>
+          <li><a href="javascript:void(0)" @click="switchDateType('3months')" :class="{ active: dateType === '3months'}">近三个月</a></li>
+          <li><a href="javascript:void(0)" @click="switchDateType('other')" :class="{ active: dateType === 'other'}">自定义时间</a></li>
         </ul>
-        <ul class="allChoose allChooseCalendar">
-          <el-date-picker
-            v-model="value7"
-            type="daterange"
-            align="right"
-            placeholder="选择日期范围"
-            :picker-options="pickerOptions2">
-          </el-date-picker>
+        <ul class="nav allChooseCalendar">
+        
         </ul>
-        <ul class="allChoose">
+        <ul class="nav">
           <li>项目类型：</li>
-          <li><a href="">全部</a></li>
-          <li><a href="">投资</a></li>
-          <li><a href="">充值</a></li>
-          <li><a href="">提现</a></li>
-          <li><a href="">还款</a></li>
-          <li>其他</li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('all')" :class="{ active: projectType === 'all'}">全部</a></li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('plan')" :class="{ active: projectType === 'plan'}">投资</a></li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('recharge')" :class="{ active: projectType === 'recharge'}">充值</a></li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('withdraw')" :class="{ active: projectType === 'withdraw'}">提现</a></li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('repayment')" :class="{ active: projectType === 'repayment'}">还款</a></li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('other')" :class="{ active: projectType === 'other'}">其他</a></li>
         </ul>
       </div>
       <div class="fr">
-        <button class="inquireBtn">查询</button>
+        <button class="query-btn">查询</button>
       </div>
     </div>
-    <div class="assetRunWaterTable personalCenterBoxShadow">
-      <table border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <th>交易时间</th>
-          <th>项目名称</th>
-          <th>类型</th>
-          <th>变动金额</th>
-          <th>管理平台</th>
-          <th>备注</th>
-        </tr>
-        <tr>
-          <td class="num-font">2017-08-22 13:58:05</td>
-          <td>升薪宝滚动</td>
-          <td>投资成功</td>
-          <td><span class="num-font"><i class="minus">-</i> 800.00</span>元</td>
-          <td>江西存管银行</td>
-          <td>提现申请通过，取出提现</td>
-        </tr>
-        <tr>
-          <td class="num-font">2017-08-22 13:58:05</td>
-          <td>升薪宝滚动</td>
-          <td>投资成功</td>
-          <td class="minus"><span class="num-font"><i>+</i> 33</span>元</td>
-          <td>江西存管银行</td>
-          <td>提现申请通过，取出提现</td>
-        </tr>
-      </table>
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page.sync="currentPage1"
-        :page-size="100"
-        layout="total, prev, pager, next"
-        :total="1000">
-      </el-pagination>
+  
+    <!-- table区域 -->
+    <div class="table-container">
+      <div class="funds-wrapper__menus assetRunWaterTable personalCenterBoxShadow">
+        <el-table :data="list" style="width: 100%">
+          <el-table-column prop="date" label="交易时间" width="180"></el-table-column>
+          <el-table-column prop="name" label="项目名称" width="180"></el-table-column>
+          <el-table-column prop="address" label="类型"></el-table-column>
+          <el-table-column prop="address" label="变动金额"></el-table-column>
+          <el-table-column prop="address" label="管理平台"></el-table-column>
+          <el-table-column prop="address" label="备注"></el-table-column>
+        </el-table>
+        
+        <!-- 分页 -->
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page.sync="currentPage1"
+          :page-size="10"
+          layout="total, prev, pager, next"
+          :total="40">
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -76,33 +58,9 @@
   export default {
     data() {
       return {
-        pickerOptions2: {
-          shortcuts: [{
-            text: '最近一周',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: '最近一个月',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: '最近三个月',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
-            }
-          }]
-        },
+        list: null,
+        dateType: '3day',
+        projectType: 'all',
         value6: '',
         value7: '',
         currentPage1: 5,
@@ -112,6 +70,12 @@
       };
     },
     methods: {
+      switchDateType(type) {
+        this.dateType = type;
+      },
+      switchProjectType(type) {
+        this.projectType = type;
+      },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
       },
@@ -123,28 +87,29 @@
 </script>
 
 <style lang="scss">
-  .hom-right {
-    float: right;
-    width: 832px;
-
+  .funds-wrapper {
     .personalCenterBoxShadow {
-      -webkit-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
       box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
     }
 
-    .personalCenterRightTitle {
+    h1 {
       font-size: 20px;
       color: #274161;
       margin-left: 27px;
       padding-top: 20px;
     }
+    
+    .table-container {
+      margin-top: 20px;
+    }
   }
-
-  .assetRunWaterSee {
+  
+  .funds-wrapper__menus {
     padding-bottom: 10px;
     background-color: #fff;
+    box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
 
-    .allChoose {
+    ul.nav {
       margin: 15px 0 15px 57px;
 
       li {
@@ -161,7 +126,7 @@
           color: #394b67;
         }
 
-        a.selectA {
+        a.active {
           border-radius: 100px;
           background-color: #0573f4;
           color: #fff;
@@ -174,39 +139,7 @@
       }
     }
 
-    .allChooseCalendar {
-      width: 100%;
-
-      li {
-        position: relative;
-
-        input.calendar {
-          width: 194.8px;
-          height: 35px;
-          background-color: #fff;
-          border: solid 1px #ced9e4;
-          font-size: 16px;
-          color: #7c86a2;
-          padding-left: 5px;
-        }
-
-        i.calendarIcon {
-          display: block;
-          position: absolute;
-          right: 10px;
-          top: 7px;
-          width: 25px;
-          height: 23px;
-          background: url("../../../assets/images/home/center_ico16.png") no-repeat;
-        }
-      }
-
-      li:nth-child(3) {
-        margin-left: 0;
-      }
-    }
-
-    .inquireBtn {
+    .query-btn {
       width: 157px;
       height: 46px;
       border-radius: 100px;
@@ -215,46 +148,8 @@
       text-align: center;
       color: #fff;
       margin-right: 64px;
-      margin-top: 50px;
+      margin-top: 25px;
       cursor: pointer;
-    }
-  }
-
-  .assetRunWaterTable {
-    height: 561px;
-    padding: 12px 8px 0 10px;
-    margin-top: 17px;
-    background-color: #fff;
-
-    table {
-      width: 100%;
-
-      th {
-        background-color: #f6f9fe;
-        padding-top: 15px;
-        padding-bottom: 14px;
-        font-size: 14px;
-        line-height: 1;
-        color: #394b67;
-      }
-
-      td {
-        line-height: 1;
-        font-size: 14px;
-        color: #727e90;
-        border-bottom: solid 1px #dee8f2;
-        padding-top: 25px;
-        padding-bottom: 15px;
-        text-align: center;
-      }
-
-      td.minus {
-        color: #ff4a33;
-      }
-    }
-
-    .pagesTotal {
-      font-size: 14px;
     }
   }
 </style>

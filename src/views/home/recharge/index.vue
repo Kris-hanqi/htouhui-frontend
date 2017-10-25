@@ -257,7 +257,7 @@
         right: 22px;
         width: 40px;
         height: 40px;
-        background: url("../../../assets/images/home/shortcut-recharge-closeIcon.png") no-repeat;
+        background: url(../../../assets/images/home/shortcut-recharge-closeIcon.png) no-repeat;
       }
     }
 
