@@ -74,3 +74,50 @@ th {
 .el-table .cell, .el-table th>div {
   padding: 0;
 }
+
+/*弹窗*/
+.el-message-box__header {
+  padding: 0;
+}
+
+.el-message-box__title {
+  display: inline-block;
+  height: 45px;
+  padding-left: 27px;
+  padding-right: 27px;
+  border-bottom-right-radius: 100px;
+  background-color: #0671f0;
+  box-shadow: 0 4px 14px 0 rgba(97, 104, 123, 0.5);
+  text-align: center;
+  line-height: 45px;
+  font-size: 22px;
+  color: #fff;
+}
+
+.el-message-box__btns {
+  text-align: center;
+}
+
+button, html [type="button"], [type="reset"], [type="submit"] {
+
+}
+
+.el-message-box__wrapper .el-button {
+  height: 45px;
+  padding: 0 42px;
+  border-radius: 100px;
+  line-height: 45px;
+  font-size: 18px;
+  border: solid 1px #979797;
+  color: #9b9b9b;
+}
+
+.el-message-box__wrapper .el-button--primary {
+  background-color: #378ff6;
+  border-color: #378ff6;
+  color: #fff;
+}
+
+.el-message-box__wrapper .el-message-box__headerbtn {
+  display: none;
+}
