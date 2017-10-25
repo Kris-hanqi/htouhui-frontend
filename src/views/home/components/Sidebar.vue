@@ -51,7 +51,7 @@
     <p class="account-management">账户管理</p>
     <ul>
       <li class="nav">
-        <router-link to="/accountSet/index" active-class="active">账户设置</router-link>
+        <router-link to="/accountSet" active-class="active">账户设置</router-link>
       </li>
       <li class="nav">
         <router-link to="/notification" active-class="active">站内通知</router-link>
