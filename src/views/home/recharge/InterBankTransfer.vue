@@ -2,7 +2,7 @@
   <div class="interBankTransfer">
     <div class="alipayStep">
       <p class="step01-txt">操作流程（以招商银行为例）</p>
-      <img class="step01-img" src="../../../assets/images/home/center-interBank-step.png" alt="">
+      <img class="step01-img" :src="img_inter_bank_step" alt="">
       <p class="step03-txt">您可以使用您的银行卡，通过支付宝转账的方式将资金充值到您的江西银行存管帐户（支付宝APP更方便）</p>
     </div>
     <div class="splitLine"></div>
@@ -62,3 +62,14 @@
     </div>
   </div>
 </template>
+
+<script>
+  import img_inter_bank_step from '@/assets/images/home/recharge/inter-bank-step.png';
+  export default {
+    data() {
+      return {
+        img_inter_bank_step
+      }
+    }
+  }
+</script>
