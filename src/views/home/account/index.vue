@@ -8,53 +8,38 @@
     <!-- 我的资产 -->
     <div class="account-wrapper__asset">
       <account-asset :data="assetData"></account-asset>
-     </div>
+    </div>
     
-    <div class="account-wrapper__invest receptacle-view">
-      <h1>我的投资</h1>
-      <invest-chart :data="chartData"
-                    class="chart"
-                    :options="chartOptions"
-                    :width="200" :height="200"></invest-chart>
+    <!-- 我的投资 -->
+    <div class="account-wrapper__invest">
+      <account-invest></account-invest>
+    </div>
+    
+    <!-- 还款日历 -->
+    <div class="account-wrapper__repayment-calendar">
+      <repayment-calendar></repayment-calendar>
     </div>
   </div>
 </template>
 
 <script>
   import { fetchAsset } from '@/api/account';
-  import InvestChart from './InvestChart.vue';
-  import AccountTop from './account-top.vue';
-  import AccountAsset from './account-asset.vue';
+  import AccountTop from './AccountTop.vue';
+  import AccountAsset from './AccountAsset.vue';
+  import AccountInvest from './AccountInvest.vue';
+  import RepaymentCalendar from './RepaymentCalendar.vue';
   
   export default {
     components: {
-      InvestChart,
       AccountTop,
-      AccountAsset
+      AccountAsset,
+      AccountInvest,
+      RepaymentCalendar
     },
     data() {
       return {
         dialogVisible: false,
-        assetData: { },
-        chartData: {
-          labels: ['新手计划', '21天计划', '升薪宝量化', '升薪宝定期', '定期抵押'],
-          datasets: [
-            {
-              backgroundColor: ['#f8e71c', '#ffa837', '#b8e986', '#50e3c2', '#06b7f0'],
-              data: [40, 20, 80, 10, 50]
-            }
-          ]
-        },
-        chartOptions: {
-          responsive: false,
-          segmentShowStroke: false,
-          legend: {
-            display: false
-          },
-          tooltips: {
-            enabled: true
-          }
-        }
+        assetData: { }
       }
     },
     methods: {
@@ -74,11 +59,6 @@
 </script>
 
 <style lang="scss">
-  .receptacle-view {
-    background-color: #fff;
-    box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-  }
-  
   .account-wrapper__top {
     margin-top: 8px;
   }
@@ -88,23 +68,11 @@
   }
 
   .account-wrapper__invest {
-    width: 100%;
-    height: 384px;
     margin-top: 16px;
-    
-    h1 {
-      font-size: 20px;
-      line-height: 1;
-      color: rgb(39, 65, 97);
-      padding-top: 20px;
-      margin-left: 27px;
-    }
-    
-    .chart {
-      margin-left: 20px;
-      margin-top: 60px;
-      height: 200px;
-      width: 200px;
-    }
+  }
+  
+  .account-wrapper__repayment-calendar {
+    margin-top: 19px;
+    margin-bottom: 32px;
   }
 </style>
