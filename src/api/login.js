@@ -3,7 +3,7 @@ import fetch from '@/utils/fetch'
 /** 用户登录 */
 export function fetchLogin(data) {
   return fetch({
-    url: 'web-api/loginByPassword',
+    url: 'loginByPassword',
     method: 'post',
     data
   })
