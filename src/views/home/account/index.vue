@@ -17,7 +17,7 @@
     
     <!-- 还款日历 -->
     <div class="account-wrapper__repayment-calendar">
-      <repayment-calendar></repayment-calendar>
+      <repay-calendar></repay-calendar>
     </div>
   </div>
 </template>
@@ -27,14 +27,14 @@
   import AccountTop from './AccountTop.vue';
   import AccountAsset from './AccountAsset.vue';
   import AccountInvest from './AccountInvest.vue';
-  import RepaymentCalendar from './RepaymentCalendar.vue';
+  import RepayCalendar from './RepayCalendar.vue';
   
   export default {
     components: {
       AccountTop,
       AccountAsset,
       AccountInvest,
-      RepaymentCalendar
+      RepayCalendar
     },
     data() {
       return {

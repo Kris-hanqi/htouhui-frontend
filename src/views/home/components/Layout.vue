@@ -17,8 +17,8 @@
             <el-button>{{ operationTips.btnText }}</el-button>
           </div>
           <div class="prompt-message" v-else>
-            <span>{{ operationTips.title }}</span>
-            <el-button>{{ operationTips.btnText }}</el-button>
+            <!--<span>{{ operationTips.title }}</span>-->
+            <!--<el-button>{{ operationTips.btnText }}</el-button>-->
           </div>
           <div class="main-container__router">
           
@@ -47,6 +47,7 @@
     },
     data() {
       return {
+        status: this.$store.state.user.status,
         operationTipsArray: [
           {
             status: 0,
@@ -84,13 +85,17 @@
         return this.operationTipsArray[this.$store.state.user.status]
       }
     },
+    watch: {
+      status(val, oldVal) {
+        console.log(val);
+        console.log(oldVal);
+      }
+    },
     created() {
-      this.$store.dispatch('GetUserInfo')
-        .then(() => {
-          console.log(this.$store);
-        }).catch(() => {
-          this.loading = false
-        })
+      if (this.status === 3) {
+        this.getARecommend();
+      }
+      this.$store.dispatch('GetUserInfo');
     }
   };
 </script>
