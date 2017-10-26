@@ -1,7 +1,7 @@
 <template>
   <div class="account-wrapper">
     <div class="account-wrapper__top">
-      <i class="iconMy"></i>
+      <i class="icon-avatar"></i>
       <span>你好，<i class="num-font">{{ name }}</i></span>
       <a href="javascript:void(0)" class="icon-user" @click="operationAccount" :class="{ 'icon-user-active': status }"></a>
       <a href="javascript:void(0)" class="icon-bank-card" @click="operationBankCard" :class="{ 'icon-bank-card-active': bankCard }"></a>
@@ -136,7 +136,7 @@
       margin-right: 16px;
     }
     
-    .iconMy {
+    .icon-avatar {
       display: inline-block;
       vertical-align: middle;
       width: 42px;
@@ -175,22 +175,22 @@
   
     a.icon-user {
       height: 21px;
-      background: url(../../../assets/images/home/index/icon-user.png) no-repeat;
+      background: url(../../../assets/images/home/account/icon-user.png) no-repeat;
       margin-left: 40px;
     }
   
     a.icon-user-active {
-      background: url(../../../assets/images/home/index/icon-user-hover.png) no-repeat !important;
+      background: url(../../../assets/images/home/account/icon-user-hover.png) no-repeat !important;
     }
   
     a.icon-bank-card {
       height: 18px;
-      background: url(../../../assets/images/home/index/icon-bank-card.png) no-repeat;
+      background: url(../../../assets/images/home/account/icon-bank-card.png) no-repeat;
       margin-left: 7px;
     }
   
     a.icon-bank-card-active {
-      background: url(../../../assets/images/home/index/icon-bank-card-hover.png) no-repeat;
+      background: url(../../../assets/images/home/account/icon-bank-card-hover.png) no-repeat;
     }
   }
   

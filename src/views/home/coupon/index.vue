@@ -229,7 +229,7 @@
         left: 12px;
         width: 19px;
         height: 39px;
-        background: url(../../../assets/images/home/icon-new.png) no-repeat center;
+        background: url(../../../assets/images/home/icons/icon-new.png) no-repeat center;
       }
 
       .title {

@@ -86,7 +86,7 @@
         top: 13px;
         width: 18px;
         height: 18px;
-        background: url(../../../assets/images/home/icon-account.png) no-repeat;
+        background: url(../../../assets/images/home/icons/icon-account.png) no-repeat;
       }
 
       &.investment:after {
@@ -94,7 +94,7 @@
         top: 11px;
         width: 24px;
         height: 24px;
-        background: url(../../../assets/images/home/icon-money.png) no-repeat;
+        background: url(../../../assets/images/home/icons/icon-money.png) no-repeat;
       }
 
       &.borrow-money:after {
@@ -102,7 +102,7 @@
         top: 9px;
         width: 25px;
         height: 24px;
-        background: url(../../../assets/images/home/icon-loan.png) no-repeat;
+        background: url(../../../assets/images/home/icons/icon-loan.png) no-repeat;
       }
 
       &.new-platform-rewards:after {
@@ -110,7 +110,7 @@
         top: 10px;
         width: 16px;
         height: 24px;
-        background: url(../../../assets/images/home/icon-reward.png) no-repeat;
+        background: url(../../../assets/images/home/icons/icon-reward.png) no-repeat;
       }
 
       &.account-management:after {
@@ -118,7 +118,7 @@
         top: 12px;
         width: 22px;
         height: 22px;
-        background: url(../../../assets/images/home/icon-set.png) no-repeat;
+        background: url(../../../assets/images/home/icons/icon-set.png) no-repeat;
       }
     }
 

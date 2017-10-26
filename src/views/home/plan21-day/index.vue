@@ -63,7 +63,7 @@
   .icon-interests {
     width: 17px;
     height: 23px;
-    background: url(../../../assets/images/home/icon-interest.png) no-repeat center;
+    background: url(../../../assets/images/home/icons/icon-interest.png) no-repeat center;
   }
 
   .pages {

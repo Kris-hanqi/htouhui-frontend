@@ -16,6 +16,10 @@
             <span>{{ operationTips.title }}</span>
             <el-button>{{ operationTips.btnText }}</el-button>
           </div>
+          <div class="prompt-message" v-else>
+            <span>{{ operationTips.title }}</span>
+            <el-button>{{ operationTips.btnText }}</el-button>
+          </div>
           <div class="main-container__router">
           
           </div>
@@ -32,6 +36,7 @@
   import HthSliderBar from 'common/slider-bar';
   import HthBreadcrumb from './breadcrumb';
   import HthSidebar from './Sidebar';
+  import { fetchARecommend } from '@/api/home';
 
   export default {
     components: {
@@ -61,7 +66,17 @@
             btnText: '去绑卡',
             url: ''
           }
-        ]
+        ],
+        ARecommend: {}
+      }
+    },
+    methods: {
+      getARecommend() {
+        fetchARecommend().then(response => {
+          if (response.data.meta.code === 200) {
+            this.ARecommend = response.data.data;
+          }
+        })
       }
     },
     computed: {

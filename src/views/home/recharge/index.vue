@@ -6,10 +6,10 @@
         <fast-recharge></fast-recharge>
       </el-tab-pane>
       <el-tab-pane label="跨行转账" name="two">
-        <alipay-transfer></alipay-transfer>
+        <inter-bank-transfer></inter-bank-transfer>
       </el-tab-pane>
       <el-tab-pane label="支付宝转账" name="there">
-        <inter-bank-transfer></inter-bank-transfer>
+        <alipay-transfer></alipay-transfer>
       </el-tab-pane>
     </el-tabs>
   </div>

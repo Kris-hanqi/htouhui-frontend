@@ -1,10 +1,10 @@
 <template>
   <div class="alipayTransfer">
     <div class="alipayStep">
-      <p class="step01-txt">步骤一： 点击转账</p>
-      <img class="step01-img" src="../../../assets/images/home/center-alipay-step1.png" alt="">
+      <p class="step01-txt">步骤一：点击转账</p>
+      <img class="step01-img" :src="img_alipay_step1" alt="">
       <p class="step02-txt">步骤二：完成转账</p>
-      <img class="step02-img" src="../../../assets/images/home/center-alipay-step1.png" alt="">
+      <img class="step02-img" :src="img_alipay_step2" alt="">
       <p class="step03-txt">您可以使用您的银行卡，通过支付宝转账的方式将资金充值到您的江西银行存管帐户（支付宝APP更方便）</p>
     </div>
     <div class="splitLine"></div>
@@ -52,3 +52,17 @@
     </div>
   </div>
 </template>
+
+<script>
+  import img_alipay_step1 from '@/assets/images/home/recharge/alipay-step1.png';
+  import img_alipay_step2 from '@/assets/images/home/recharge/alipay-step2.png';
+  export default {
+    data() {
+      return {
+        img_alipay_step1,
+        img_alipay_step2
+      }
+    }
+  }
+  
+</script>
