@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-  import InvestChart from './InvestChart.vue';
+  import InvestChart from './components/InvestChart.vue';
   
   export default {
     components: {

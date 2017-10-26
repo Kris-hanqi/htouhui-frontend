@@ -1,8 +1,30 @@
 <template>
   <div class="repayment-calendar-wrapper">
     <h1>定期还款日历</h1>
+    <flat-pickr v-model="date"
+                :config="config"></flat-pickr>
   </div>
 </template>
+
+<script>
+  import FlatPickr from 'vue-flatpickr-component';
+  import 'flatpickr/dist/flatpickr.css';
+  
+  export default {
+    components: {
+      FlatPickr
+    },
+    data() {
+      return {
+        date: null,
+        config: {
+          inline: true
+        }
+      }
+    },
+    methods: {}
+  }
+</script>
 
 <style lang="scss">
   .repayment-calendar-wrapper {
@@ -19,6 +41,15 @@
       padding-top: 20px;
       margin-left: 27px;
     }
-  }
+    
+    .flatpickr-input {
+      display: none;
+    }
   
+    .flatpickr-calendar {
+      margin-top: 30px;
+      margin-left: 40px;
+    }
+  }
 </style>
+
