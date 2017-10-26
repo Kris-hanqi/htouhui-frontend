@@ -242,6 +242,6 @@
   .icon-download {
     width: 20px;
     height: 21px;
-    background: url(../../../assets/images/home/icon-download.png) no-repeat center;
+    background: url(../../../assets/images/home/icons/icon-download.png) no-repeat center;
   }
 </style>

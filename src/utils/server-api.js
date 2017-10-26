@@ -19,5 +19,9 @@ export default function() {
     serverAddress = ApiAddress.development;
   }
 
-  return 'http://' + serverAddress + '/';
+  console.log(serverAddress);
+
+  return '/web-api/';
+
+  // return 'http://' + serverAddress + '/web-api/';
 }

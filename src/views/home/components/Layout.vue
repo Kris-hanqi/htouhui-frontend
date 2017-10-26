@@ -16,6 +16,10 @@
             <span>{{ operationTips.title }}</span>
             <el-button>{{ operationTips.btnText }}</el-button>
           </div>
+          <div class="prompt-message" v-else>
+            <!--<span>{{ operationTips.title }}</span>-->
+            <!--<el-button>{{ operationTips.btnText }}</el-button>-->
+          </div>
           <div class="main-container__router">
           
           </div>
@@ -32,6 +36,7 @@
   import HthSliderBar from 'common/slider-bar';
   import HthBreadcrumb from './breadcrumb';
   import HthSidebar from './Sidebar';
+  import { fetchARecommend } from '@/api/home';
 
   export default {
     components: {
@@ -42,6 +47,7 @@
     },
     data() {
       return {
+        status: this.$store.state.user.status,
         operationTipsArray: [
           {
             status: 0,
@@ -61,7 +67,17 @@
             btnText: '去绑卡',
             url: ''
           }
-        ]
+        ],
+        ARecommend: {}
+      }
+    },
+    methods: {
+      getARecommend() {
+        fetchARecommend().then(response => {
+          if (response.data.meta.code === 200) {
+            this.ARecommend = response.data.data;
+          }
+        })
       }
     },
     computed: {
@@ -69,13 +85,17 @@
         return this.operationTipsArray[this.$store.state.user.status]
       }
     },
+    watch: {
+      status(val, oldVal) {
+        console.log(val);
+        console.log(oldVal);
+      }
+    },
     created() {
-      this.$store.dispatch('GetUserInfo')
-        .then(() => {
-          console.log(this.$store);
-        }).catch(() => {
-          this.loading = false
-        })
+      if (this.status === 3) {
+        this.getARecommend();
+      }
+      this.$store.dispatch('GetUserInfo');
     }
   };
 </script>

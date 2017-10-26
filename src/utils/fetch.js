@@ -13,7 +13,6 @@ const service = axios.create({
 
 // 请求拦截器
 service.interceptors.request.use(config => {
-  console.log(store.getters.token);
   if (store.getters.token) {
     config.headers["token"] = getToken();  // eslint-disable-line
   }

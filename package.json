@@ -33,6 +33,7 @@
     "vue-chartjs": "^3.0.0",
     "vue-cookie": "^1.1.4",
     "vue-echarts-v3": "^1.0.5",
+    "vue-flatpickr-component": "^4.0.0",
     "vue-lazyload": "^1.0.6",
     "vue-router": "^2.7.0",
     "vuex": "^2.3.1",

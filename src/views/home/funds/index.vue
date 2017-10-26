@@ -12,7 +12,6 @@
         </ul>
         <ul class="allChoose allChooseCalendar">
           <el-date-picker
-            v-model="value7"
             type="daterange"
             align="right"
             placeholder="选择日期范围"

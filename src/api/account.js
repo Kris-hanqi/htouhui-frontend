@@ -7,3 +7,13 @@ export function fetchAsset() {
     method: 'get'
   })
 }
+
+/** 还款日历 */
+export function fetchRepayCalendar(data) {
+  return fetch({
+    url: 'user/repayCalendar',
+    method: 'get',
+    data
+  })
+}
+
