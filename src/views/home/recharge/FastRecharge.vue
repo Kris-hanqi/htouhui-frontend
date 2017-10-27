@@ -11,6 +11,8 @@
       <p class="bankName">兴业银行</p>
       <p class="roboto-regular bankNum">6229 **** **** 3126</p>
     </div>
+  
+    <bank-limit :visible="dialogBankLimitVisible"></bank-limit>
     
     <ul class="withdrawMsgBox">
       <li>
@@ -21,7 +23,7 @@
         <span>提现金额：</span>
         <input type="text">
         <span>元</span>
-        <a href="#">(查看银行限额)</a>
+        <a href="javascript:void(0)" @click="showBankLimit">(查看银行限额)</a>
       </li>
       <li>
         <p class="remainingSumColor">中信银行每笔限额单笔5万，单日5万<br />大额充值请选择跨行转账或支付宝转账</p>
@@ -48,17 +50,25 @@
       <p>5、禁止洗钱、信用卡套现、虚假交易等行为，一经发现并确认，将终止该账户的使用。</p>
       <p>6、如果充值金额没有及时到账，请联系客服，400-698-8810。</p>
     </div>
-    
-    <!--弹窗-->
-    <div class="shortcutRechargeMask" style="display: none;">
-      <div class="shortcutRechargeMoneyRule">
-        <h1>支持快捷支付的银行与限额参考表</h1>
-        <p>充值限额可参考上表，具体的额度以发卡银行为准。<br />如果您在发卡银行设置的支付额度低于此表额度，以您的设置为准。</p>
-      </div>
-    </div>
   </div>
 </template>
 
-<style>
-
-</style>
+<script>
+  import BankLimit from '../components/BankLimit.vue';
+  
+  export default {
+    components: {
+      BankLimit
+    },
+    data() {
+      return {
+        dialogBankLimitVisible: false
+      }
+    },
+    methods: {
+      showBankLimit() {
+        this.dialogBankLimitVisible = true;
+      }
+    }
+  }
+</script>

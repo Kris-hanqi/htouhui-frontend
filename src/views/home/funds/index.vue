@@ -5,35 +5,38 @@
       <div class="fl">
         <ul class="allChoose">
           <li>选择时间：</li>
-          <li><a href="">近三天</a></li>
-          <li><a href="">近一个月</a></li>
-          <li><a href="">近三个月</a></li>
-          <li><a href="" class="selectA">自定义时间</a></li>
+          <li><a href="javascript:void(0)" @click="switchDateType('3day')" :class="{ active: dateType === '3day'}">近三天</a></li>
+          <li><a href="javascript:void(0)" @click="switchDateType('1month')" :class="{ active: dateType === '1month'}">近一个月</a></li>
+          <li><a href="javascript:void(0)" @click="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a></li>
+          <li><a href="javascript:void(0)" @click="switchDateType('other')" :class="{ active: dateType === 'other'}">自定义时间</a></li>
         </ul>
-        <ul class="allChoose allChooseCalendar">
+        <ul class="allChoose allChooseCalendar" v-show="dateType === 'other'">
           <el-date-picker
             type="daterange"
             align="right"
-            placeholder="选择日期范围"
-            :picker-options="pickerOptions2">
+            placeholder="选择日期范围">
           </el-date-picker>
         </ul>
         <ul class="allChoose">
           <li>项目类型：</li>
-          <li><a href="">全部</a></li>
-          <li><a href="">投资</a></li>
-          <li><a href="">充值</a></li>
-          <li><a href="">提现</a></li>
-          <li><a href="">还款</a></li>
-          <li>其他</li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('all')" :class="{ active: projectType === 'all'}">全部</a></li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('investRecord')" :class="{ active: projectType === 'investRecord'}">投资</a></li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('payRecord')" :class="{ active: projectType === 'payRecord'}">充值</a></li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('tixianRecord')" :class="{ active: projectType === 'tixianRecord'}">提现</a></li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('refundRecord')" :class="{ active: projectType === 'refundRecord'}">还款</a></li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('other')" :class="{ active: projectType === 'other'}">其他</a></li>
         </ul>
       </div>
       <div class="fr">
-        <button class="inquireBtn">查询</button>
+        <button @click="query" class="inquireBtn">查询</button>
       </div>
     </div>
     <div class="assetRunWaterTable personalCenterBoxShadow">
-      <el-table :data="runWaterTableData" style="width: 100%">
+      <el-table :data="list"
+                v-loading="listLoading"
+                element-loading-text="拼命加载中..."
+                :border="false"
+                style="width: 100%">
         <el-table-column prop="time" label="交易时间" width="150"></el-table-column>
         <el-table-column prop="name" label="项目名称" width="110"></el-table-column>
         <el-table-column prop="type" label="类型" width="110"></el-table-column>
@@ -42,55 +45,78 @@
         <el-table-column prop="canUseMoney" label="可用余额" width="100"></el-table-column>
         <el-table-column prop="remark" label="备注" width="100"></el-table-column>
       </el-table>
-      <div class="pages">
+      <div class="pages" v-show="!listLoading">
         <p class="total-pages">共计<span class="roboto-regular">25</span>条记录（共<span class="roboto-regular">3</span>页）</p>
-        <el-pagination layout="prev, pager, next" :total="30"></el-pagination>
+        <el-pagination
+          @current-change="handleCurrentChange"
+          :current-page.sync="listQuery.pageNo"
+          :page-size="listQuery.size"
+          layout="prev, pager, next" :total="total"></el-pagination>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import { fetchPageList } from '@/api/funds';
+  import { getStartAndEndTime } from '@/utils';
+  
   export default {
     data() {
       return {
-        pickerOptions2: {
-          shortcuts: [{
-            text: '最近一周',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: '最近一个月',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: '最近三个月',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
-            }
-          }]
+        list: null,
+        total: null,
+        listLoading: true,
+        listQuery: {
+          pageNo: 1,
+          size: 10,
+          beginTime: '',
+          endTime: '',
+          type: ''
         },
-        runWaterTableData: [{
-          time: '2017-08-22 13:58:05',
-          name: '升薪宝滚动',
-          type: '投资成功',
-          variationMoney: '-800.00元',
-          managementPlatform: '江西存管银行',
-          canUseMoney: '2900.00元',
-          remark: '提现申请通过，取出提现'
-        }]
+        dateType: '3day',
+        projectType: 'all'
       };
+    },
+    methods: {
+      // 获取资金流水分页数据
+      getPageList() {
+        let dates = null;
+        this.listLoading = true;
+        this.listQuery.type = this.projectType;
+        if (this.dateType !== 'other') {
+          dates = getStartAndEndTime(this.dateType);
+          console.log(dates);
+        }
+        if (dates) {
+          this.listQuery.beginTime = dates.startTime;
+          this.listQuery.endTime = dates.endTime;
+        }
+        fetchPageList(this.listQuery).then(response => {
+          if (response.data.status === 200) {
+            const data = response.data.data;
+            this.list = data.list;
+            this.total = data.total;
+          }
+          this.listLoading = false
+        })
+      },
+      query() {
+        this.getPageList();
+      },
+      switchDateType(type) {
+        this.dateType = type;
+      },
+      switchProjectType(type) {
+        this.projectType = type;
+      },
+      handleCurrentChange(val) {
+        this.listQuery.pageNo = val;
+        this.getPageList();
+      }
+    },
+    created() {
+      this.getPageList();
     }
   }
 </script>
@@ -134,7 +160,7 @@
           color: #394b67;
         }
 
-        a.selectA {
+        a.active {
           border-radius: 100px;
           background-color: #0573f4;
           color: #fff;
@@ -170,7 +196,7 @@
           top: 7px;
           width: 25px;
           height: 23px;
-          background: url("../../../assets/images/home/center_ico16.png") no-repeat;
+          background: url(../../../assets/images/home/center_ico16.png) no-repeat;
         }
       }
 

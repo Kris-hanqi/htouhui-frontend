@@ -14,7 +14,7 @@
         <span>提现金额：</span>
         <input type="text">
         <span>元</span>
-        <a href="#">(查看银行限额)</a>
+        <a href="javascript:void(0)" @click="showBankLimit">(查看银行限额)</a>
       </li>
       <li>
         <span>充值费用：</span>
@@ -40,8 +40,30 @@
       <p>7、平台禁止洗钱、信用卡套现、虚假交易等行为，一经发现并确认，将终止该账户的使用。</p>
       <p>8、如果提现出现任何疑问，请联系客服，400-698-8810</p>
     </div>
+  
+    <bank-limit :visible="dialogBankLimitVisible"></bank-limit>
   </div>
 </template>
+
+<script>
+  import BankLimit from '../components/BankLimit.vue';
+  
+  export default {
+    components: {
+      BankLimit
+    },
+    data() {
+      return {
+        dialogBankLimitVisible: false
+      }
+    },
+    methods: {
+      showBankLimit() {
+        this.dialogBankLimitVisible = true;
+      }
+    }
+  }
+</script>
 
 <style lang="scss">
   .iNeedWithdrawBox {

@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import 'normalize.css/normalize.css';
 import 'element-ui/lib/theme-default/index.css';
-import { Button, Select, Table, TableColumn, Pagination, Breadcrumb, BreadcrumbItem, DatePicker, Dialog, MessageBox, Tabs, TabPane } from 'element-ui'
+import { Button, Select, Table, TableColumn, Pagination, Breadcrumb, BreadcrumbItem, DatePicker, Dialog, MessageBox, Tabs, Loading, TabPane } from 'element-ui'
 import '@/styles/base.scss';
 import '@/styles/element-ui.scss';
 import router from '@/router/home';
 import store from '@/store';
 import App from './App';
-import '@/mock';
+// import '@/mock';
 
 Vue.use(Button);
 Vue.use(Dialog);
@@ -21,6 +21,9 @@ Vue.use(Breadcrumb);
 Vue.use(BreadcrumbItem);
 Vue.use(DatePicker);
 
+Vue.use(Loading.directive);
+
+Vue.prototype.$loading = Loading.service;
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$confirm = MessageBox.confirm;
 

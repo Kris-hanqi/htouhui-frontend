@@ -10,6 +10,8 @@
   import FlatPickr from 'vue-flatpickr-component';
   import 'flatpickr/dist/flatpickr.css';
   import { fetchRepayCalendar } from '@/api/account';
+  import { dateStrFormat } from '@/utils';
+  const testDates = ['2017-10-20', '2017-10-04', '2017-12-04'];
   
   export default {
     components: {
@@ -18,8 +20,23 @@
     data() {
       return {
         date: null,
+        defaultDate: [],
         config: {
-          inline: true
+          inline: true,
+          locale: 'zh',
+          onChange(selectedDates, dateStr) {
+            const result = testDates.findIndex(value => value === dateStr);
+            if (result !== -1) {
+              console.log('显示该日数据');
+            }
+          },
+          onDayCreate(dObj, dStr, fp, dayElem) {
+            const date = dateStrFormat(dayElem.getAttribute('aria-label'));
+            const result = testDates.findIndex(value => value === date);
+            if (result !== -1) {
+              dayElem.innerHTML += '<span class="event"></span>';
+            }
+          }
         }
       }
     },
@@ -58,6 +75,18 @@
     .flatpickr-calendar {
       margin-top: 30px;
       margin-left: 40px;
+    }
+  
+    .event {
+      content: " ";
+      display: block;
+      position: absolute;
+      left: calc(50% - 1.5px);
+      bottom: 3px;
+      width: 3px;
+      height: 3px;
+      border-radius: 150px;
+      background: #3d8eb9;
     }
   }
 </style>
