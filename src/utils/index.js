@@ -1,3 +1,4 @@
+import moment from 'moment';
 const mArr = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
 
 export function getMonths(str) {
@@ -27,3 +28,31 @@ export function dateStrFormat(str) {
 
   return newArr.join('-');
 }
+
+/**
+ * 通过字符串获取开始/结束时间
+ * @param str 3day 1month 3month
+ */
+export function getStartAndEndTime(str) {
+  const dates = {
+    startTime: null,
+    endTime: null
+  };
+  const now = moment(new Date());
+  dates.endTime = now.format('YYYY-MM-DD HH:mm:ss');
+  // 三天
+  if (str === '3day') {
+    dates.startTime = now.subtract(3, 'days').format('YYYY-MM-DD HH:mm:ss');
+  }
+  // 一月
+  if (str === '1month') {
+    dates.startTime = now.subtract(1, 'month').format('YYYY-MM-DD HH:mm:ss');
+  }
+  // 三月
+  if (str === '3month') {
+    dates.startTime = now.subtract(3, 'month').format('YYYY-MM-DD HH:mm:ss');
+  }
+  return dates;
+}
+
+

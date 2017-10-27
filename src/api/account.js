@@ -13,7 +13,7 @@ export function fetchRepayCalendar(data) {
   return fetch({
     url: 'user/repayCalendar',
     method: 'get',
-    data
+    params: data
   })
 }
 
