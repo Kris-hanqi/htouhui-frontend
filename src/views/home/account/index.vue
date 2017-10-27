@@ -28,6 +28,7 @@
   import AccountAsset from './AccountAsset.vue';
   import AccountInvest from './AccountInvest.vue';
   import RepayCalendar from './RepayCalendar.vue';
+  import 'flatpickr/dist/l10n/zh.js';
   
   export default {
     components: {

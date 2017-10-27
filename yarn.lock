@@ -2766,7 +2766,7 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
-flatpickr@^4.0.3:
+flatpickr@^4.0.3, flatpickr@^4.0.6:
   version "4.0.6"
   resolved "http://registry.npm.taobao.org/flatpickr/download/flatpickr-4.0.6.tgz#d898778636984b9b46b590f3b60513fc260db709"
 
