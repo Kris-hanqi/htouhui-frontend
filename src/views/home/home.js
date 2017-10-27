@@ -7,7 +7,7 @@ import '@/styles/element-ui.scss';
 import router from '@/router/home';
 import store from '@/store';
 import App from './App';
-import '@/mock';
+// import '@/mock';
 
 Vue.use(Button);
 Vue.use(Dialog);

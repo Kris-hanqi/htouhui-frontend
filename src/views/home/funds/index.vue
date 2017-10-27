@@ -5,27 +5,26 @@
       <div class="fl">
         <ul class="allChoose">
           <li>选择时间：</li>
-          <li><a href="">近三天</a></li>
-          <li><a href="">近一个月</a></li>
-          <li><a href="">近三个月</a></li>
-          <li><a href="" class="selectA">自定义时间</a></li>
+          <li><a href="javascript:void(0)" @click="switchDateType('3day')" :class="{ active: dateType === '3day'}">近三天</a></li>
+          <li><a href="javascript:void(0)" @click="switchDateType('1months')" :class="{ active: dateType === '1months'}">近一个月</a></li>
+          <li><a href="javascript:void(0)" @click="switchDateType('3months')" :class="{ active: dateType === '3months'}">近三个月</a></li>
+          <li><a href="javascript:void(0)" @click="switchDateType('other')" :class="{ active: dateType === 'other'}">自定义时间</a></li>
         </ul>
         <ul class="allChoose allChooseCalendar">
           <el-date-picker
             type="daterange"
             align="right"
-            placeholder="选择日期范围"
-            :picker-options="pickerOptions2">
+            placeholder="选择日期范围">
           </el-date-picker>
         </ul>
         <ul class="allChoose">
           <li>项目类型：</li>
-          <li><a href="">全部</a></li>
-          <li><a href="">投资</a></li>
-          <li><a href="">充值</a></li>
-          <li><a href="">提现</a></li>
-          <li><a href="">还款</a></li>
-          <li>其他</li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('all')" :class="{ active: projectType === 'all'}">全部</a></li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('plan')" :class="{ active: projectType === 'plan'}">投资</a></li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('recharge')" :class="{ active: projectType === 'recharge'}">充值</a></li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('withdraw')" :class="{ active: projectType === 'withdraw'}">提现</a></li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('repayment')" :class="{ active: projectType === 'repayment'}">还款</a></li>
+          <li><a href="javascript:void(0)" @click="switchProjectType('other')" :class="{ active: projectType === 'other'}">其他</a></li>
         </ul>
       </div>
       <div class="fr">
@@ -54,33 +53,8 @@
   export default {
     data() {
       return {
-        pickerOptions2: {
-          shortcuts: [{
-            text: '最近一周',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: '最近一个月',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: '最近三个月',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
-            }
-          }]
-        },
+        dateType: '3day',
+        projectType: 'all',
         runWaterTableData: [{
           time: '2017-08-22 13:58:05',
           name: '升薪宝滚动',
@@ -91,6 +65,14 @@
           remark: '提现申请通过，取出提现'
         }]
       };
+    },
+    methods: {
+      switchDateType(type) {
+        this.dateType = type;
+      },
+      switchProjectType(type) {
+        this.projectType = type;
+      }
     }
   }
 </script>
@@ -134,7 +116,7 @@
           color: #394b67;
         }
 
-        a.selectA {
+        a.active {
           border-radius: 100px;
           background-color: #0573f4;
           color: #fff;
