@@ -192,7 +192,6 @@
       border: solid 1px #0573f4;
       padding: 13px 34px;
       font-size: 18px;
-      font-weight: 300;
       color: #0573f4;
 
       &:hover {
@@ -230,7 +229,6 @@
       display: inline-block;
       margin-right: 60px;
       font-size: 16px;
-      font-weight: 300;
       color: #394b67;
 
       span {

@@ -122,3 +122,32 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 .el-message-box__wrapper .el-message-box__headerbtn {
   display: none;
 }
+
+/*tabs*/
+.el-tabs__header {
+  border: none;
+  background-color: #f6f9fe;
+}
+
+.el-tabs__item {
+  width: 175px;
+  height: 50px;
+  padding: 0;
+  line-height: 50px;
+  text-align: center;
+  color: #394b67;
+  font-size: 18px;
+}
+
+.el-tabs__item.is-active {
+  color: #0671f0;
+}
+
+.el-tabs--card>.el-tabs__header .el-tabs__item.is-active {
+  box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.5), -5px 0 5px -5px rgba(0, 0, 0, 0.5);
+  border: 1px solid #fff;
+  border-top: 2px solid #0573f4;
+  background-color: #fff;
+  border-radius: 0;
+}
+

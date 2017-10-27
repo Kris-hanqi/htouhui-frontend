@@ -120,7 +120,6 @@
     p {
       display: inline-block;
       font-size: 14px;
-      font-weight: 300;
       color: #727e90;
       margin-right: 80px;
 

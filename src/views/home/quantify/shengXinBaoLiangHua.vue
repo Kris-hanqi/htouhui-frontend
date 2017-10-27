@@ -6,13 +6,13 @@
         <p class="firstDay">首30天贴息</p>
         <p>随时可退</p>
         <p>满某某天免手续费</p>
-        <a href="#" class="tradingParticulars"><i></i>交易详情</a>
+        <a href="#" class="tradingParticulars-1"><i></i>交易详情</a>
+        <!--<router-link to="transactionRecord"><a href="#" class="tradingParticulars-2"><i></i>交易详情</a></router-link>-->
       </div>
       <div class="shengxinbaolianghua-main">
         <div class="shengxinbaolianghua-rate">
           <p class="rate">
-            <span class="roboto-regular">12</span><span class="small-shengxinbaolianghua-rate roboto-regular">.0</span>% ~
-            <span class="roboto-regular">12</span><span class="small-shengxinbaolianghua-rate roboto-regular">.0</span>%
+            <span class="roboto-regular">12</span><span class="small-shengxinbaolianghua-rate roboto-regular">.0</span>%~<span class="roboto-regular">12</span><span class="small-shengxinbaolianghua-rate roboto-regular">.0</span>%
           </p>
           <p>往期年化利率</p>
         </div>
@@ -24,7 +24,36 @@
           <p class="money"><span class="roboto-regular">152.06</span>元</p>
           <p>当前剩余金额</p>
         </div>
-        <router-link to="oneKeyJoin"><a class="shengxinbaolianghua-btn" href="#">一键加入</a></router-link>
+        <router-link to="oneKeyJoin"><a class="btn-join" href="#">一键加入</a></router-link>
+        <!--<router-link to="oneKeyJoin"><a class="btn-out" href="#">申请退出</a></router-link>-->
+      </div>
+    </div>
+
+    <div class="shengxinbaolianghua">
+      <div class="title-box">
+        <span class="title">升薪宝量化xxx</span>
+        <p class="firstDay">首30天贴息</p>
+        <p>随时可退</p>
+        <p>满某某天免手续费</p>
+        <router-link to="transactionRecord"><a href="#" class="tradingParticulars-2"><i></i>交易详情</a></router-link>
+      </div>
+      <div class="shengxinbaolianghua-main">
+        <div class="shengxinbaolianghua-rate">
+          <p class="rate">
+            <span class="roboto-regular">12</span><span class="small-shengxinbaolianghua-rate roboto-regular">.0</span>%~<span class="roboto-regular">12</span><span class="small-shengxinbaolianghua-rate roboto-regular">.0</span>%
+          </p>
+          <p>往期年化利率</p>
+        </div>
+        <div class="shengxinbaolianghua-money">
+          <p class="money"><span class="roboto-regular">100</span>元</p>
+          <p>起投金额</p>
+        </div>
+        <div class="shengxinbaolianghua-money">
+          <p class="money"><span class="roboto-regular">152.06</span>元</p>
+          <p>当前剩余金额</p>
+        </div>
+        <!--<router-link to="oneKeyJoin"><a class="btn-join" href="#">一键加入</a></router-link>-->
+        <router-link to="pullOut"><a class="btn-out" href="#">申请退出</a></router-link>
       </div>
       <div class="shengxinbaolianghua-bottom">
         <p>在投金额（元）<span class="roboto-regular">209000</span></p>
@@ -32,56 +61,14 @@
         <a href="#" class="seeBiao">查看标的</a>
       </div>
     </div>
-
-    <!--退出金额-->
-    <el-button type="text" @click="open4">退出金额弹框</el-button>
   </div>
 </template>
-
-<script>
-  export default {
-    methods: {
-      open4() {
-        const h = this.$createElement;
-        this.$msgbox({
-          title: '退出金额中',
-          message: h('div', null, [
-            h('div', { style: 'display: inline-block;text-align: center;margin-left: 70px;' }, [
-              h('p', { style: 'color: #394b67;' }, [
-                h('span', { style: 'font-size: 30px;' }, '900'),
-                h('span', { style: 'font-size: 18px;' }, '元')
-              ]),
-              h('p', { style: 'color: #7c86a2;font-size: 16px;' }, '退出金额')
-            ]),
-            h('div', { style: 'display: inline-block;text-align: center;margin-left: 70px;' }, [
-              h('p', { style: 'color: #394b67;' }, [
-                h('span', { style: 'font-size: 30px;' }, '18.00'),
-                h('span', { style: 'font-size: 18px;' }, '元')
-              ]),
-              h('p', { style: 'color: #7c86a2;font-size: 16px;' }, '退出手续费')
-            ]),
-            h('div', { style: 'margin-top: 35px;color: #ff4a33;text-align: center;font-size: 18px;' }, [
-              h('p', null, '圣上！不要退出！'),
-              h('p', null, [
-                h('span', null, '放在里面可以继续'),
-                h('span', { style: 'font-size: 30px;' }, '钱滚钱'),
-                h('span', null, '啊！')
-              ])
-            ])
-          ]),
-          showCancelButton: true,
-          confirmButtonText: '确定',
-          cancelButtonText: '取消'
-        })
-      }
-    }
-  }
-</script>
 
 <style lang="scss" scoped>
   .shengxinbaolianghua {
     width: 100%;
     height: auto;
+    margin-bottom: 20px;
     box-sizing: border-box;
     padding: 20px 50px 25px 25px;
     background-color: #fff;
@@ -114,10 +101,26 @@
       color: #0e76f1;
     }
 
-    .tradingParticulars {
+    .tradingParticulars-1 {
       float: right;
       font-size: 14px;
       color: #727e90;
+      cursor: no-drop;
+
+      i {
+        display: inline-block;
+        vertical-align: middle;
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+        background: url(../../../assets/images/home/center-ico-019.png) no-repeat center;
+      }
+    }
+
+    .tradingParticulars-2 {
+      float: right;
+      font-size: 14px;
+      color: #0573f4;
 
       i {
         display: inline-block;
@@ -137,7 +140,7 @@
 
     > div {
       display: inline-block;
-      width: 23%;
+      width: 25%;
 
       p {
         font-size: 14px;
@@ -172,24 +175,39 @@
       }
     }
 
-    .shengxinbaolianghua-btn {
+    .btn-join {
       float: right;
       vertical-align: top;
       width: 122px;
       height: 34px;
+      box-sizing: border-box;
       margin-top: 15px;
       border-radius: 41px;
       border: solid 1px #0573f4;
       line-height: 34px;
       text-align: center;
       font-size: 18px;
-      font-weight: 300;
       color: #0573f4;
 
       &:hover {
         background-color: #378ff6;
         color: #fff;
       }
+    }
+
+    .btn-out {
+      float: right;
+      vertical-align: top;
+      width: 122px;
+      height: 34px;
+      box-sizing: border-box;
+      margin-top: 15px;
+      border-radius: 41px;
+      border: solid 1px #7c86a2;
+      line-height: 34px;
+      text-align: center;
+      font-size: 18px;
+      color: #7c86a2;
     }
   }
 
@@ -202,7 +220,6 @@
     p {
       display: inline-block;
       font-size: 14px;
-      font-weight: 300;
       color: #727e90;
       margin-right: 80px;
 
@@ -217,7 +234,6 @@
       width: 125px;
       font-size: 14px;
       text-align: center;
-      font-weight: 300;
       color: #0671f0;
     }
   }

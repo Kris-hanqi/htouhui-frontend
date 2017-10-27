@@ -14,22 +14,26 @@
         <p>可用余额<span class="roboto-regular">5,390,00</span>元<router-link to="/recharge"><span>充值</span></router-link></p>
       </div>
       <div class="coupons-box">
-        <div class="coupons-icon" v-on:mouseenter="isUp" v-on:mouseout="isDown">
+        <div class="coupons-icon" @click="isUp">
           优惠券
-          <i class="fa fa-lg" :class="iconFa ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
-          <div class="coupons-content">
+          <i class="fa fa-lg" :class="coupons ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
+          <div class="coupons-content" :style="{display: coupons ? 'none' : 'block'}">
             <i></i>
             <p class="title">可用券： 当前有<span class="roboto-regular">2</span>张可用的优惠券</p>
+            <div class="noUse"><input type="radio" name="coupons" checked>不使用优惠券</div>
             <div class="coupons-list">
-              <div class="noUse"><input type="radio" name="coupons">不使用优惠券</div>
               <div class="coupon">
                 <input type="radio" name="coupons">
                 <div class="coupon-img">1%加息</div>
                 <div class="coupon-message">
-                  <p>使用限制：100元-500000万</p>
-                  <p>最高计息金额：1,000元、最高计息天数：10天</p>
+                  <p>满100元可用</p>
+                  <p><span>最高计息金额：1,000元 </span><span> 最高计息天数：10天</span></p>
                 </div>
               </div>
+            </div>
+            <div class="coupons-btn">
+              <p class="sure">确定</p>
+              <p class="cancel" @click.stop="isDown">取消</p>
             </div>
           </div>
         </div>
@@ -53,7 +57,7 @@
           two: false
         },
         show: true,
-        iconFa: true
+        coupons: true
       }
     },
     methods: {
@@ -61,10 +65,10 @@
         this.show = false
       },
       isUp() {
-        this.iconFa = false
+        this.coupons = false
       },
       isDown() {
-        this.iconFa = true
+        this.coupons = true
       }
     }
   }
@@ -259,7 +263,6 @@
         margin-left: 10px;
         line-height: 25px;
         font-size: 14px;
-        font-weight: 300;
         text-align: center;
         color: #727e90;
       }
@@ -270,12 +273,13 @@
     position: absolute;
     top: 40px;
     width: 390px;
-    min-height: 250px;
+    max-height: 312px;
     box-sizing: border-box;
     background-color: #fff;
     border: solid 1px #ff4e37;
     padding: 15px;
     text-align: left;
+    cursor: default;
 
     i {
       display: block;
@@ -293,7 +297,6 @@
       border-bottom: solid 1px #ced9e4;
       padding-bottom: 5px;
       font-size: 14px;
-      font-weight: 300;
       color: #394b67;
 
       span {
@@ -301,45 +304,81 @@
       }
     }
 
+    .noUse {
+      margin-bottom: 10px;
+      padding-left: 1px;
+      font-size: 14px;
+      color: #394b67;
+
+      input {
+        margin-right: 8px;
+      }
+    }
+
     .coupons-list {
+      overflow: auto;
+      max-height: 155px;
+
       > div {
-        margin-bottom: 15px;
-
-        .coupon-img {
-          display: inline-block;
-          width: 80px;
-          height: 25px;
-          box-sizing: border-box;
-          border: 1px dotted #fff;
-          line-height: 25px;
-          background-color: #ff4e37;
-          text-align: center;
-          font-size: 14px;
-          font-weight: 300;
-          color: #fff;
-        }
-
-        .coupon-message {
-          display: inline-block;
-          font-size: 12px;
-          font-weight: 300;
-          color: #727e90;
-        }
+        margin-bottom: 10px;
+        padding-left: 1px;
       }
 
-      .noUse {
+      .coupon-img {
+        display: inline-block;
+        width: 80px;
+        height: 25px;
+        box-sizing: border-box;
+        border: 1px dotted #fff;
+        line-height: 25px;
+        background-color: #ff4e37;
+        text-align: center;
         font-size: 14px;
-        font-weight: 300;
-        color: #394b67;
+        color: #fff;
+      }
 
-        input {
-          margin-right: 8px;
+      .coupon-message {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 12px;
+        color: #727e90;
+
+        p {
+          line-height: 1.1;
         }
       }
 
       input {
-        margin-right: 5px;
         vertical-align: text-top;
+      }
+    }
+
+    .coupons-btn {
+      width: 100%;
+      text-align: center;
+      margin-top: 15px;
+
+      p {
+        display: inline-block;
+        width: 75px;
+        height: 30px;
+        box-sizing: border-box;
+        line-height: 30px;
+        border-radius: 40px;
+        font-size: 16px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .sure {
+        background-color: #ff4e37;
+        color: #fff;
+      }
+
+      .cancel {
+        border: solid 1px #c5c5c5;
+        background-color: #fff;
+        color: #727e90;
       }
     }
   }

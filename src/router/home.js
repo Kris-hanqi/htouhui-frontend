@@ -62,6 +62,11 @@ export const constantRouterMap = [
             path: 'pullOut',
             name: '申请退出',
             component: _import('home/quantify/pullOut')
+          },
+          {
+            path: 'transactionRecord',
+            name: '交易记录',
+            component: _import('home/quantify/transactionRecord')
           }
         ]
       },
