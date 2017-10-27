@@ -45,8 +45,25 @@ export const constantRouterMap = [
       },
       {
         path: '/quantify',
-        name: '升薪宝量化',
-        component: _import('home/quantify/index')
+        component: _import('home/quantify/index'),
+        redirect: '/quantify/index',
+        children: [
+          {
+            path: 'index',
+            name: '升薪宝量化',
+            component: _import('home/quantify/shengXinBaoLiangHua')
+          },
+          {
+            path: 'oneKeyJoin',
+            name: '一键加入',
+            component: _import('home/quantify/oneKeyJoin')
+          },
+          {
+            path: 'pullOut',
+            name: '申请退出',
+            component: _import('home/quantify/pullOut')
+          }
+        ]
       },
       {
         path: '/regular',
