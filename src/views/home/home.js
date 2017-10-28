@@ -1,7 +1,25 @@
 import Vue from 'vue';
 import 'normalize.css/normalize.css';
 import 'element-ui/lib/theme-default/index.css';
-import { Button, Select, Table, TableColumn, Pagination, Breadcrumb, BreadcrumbItem, DatePicker, Dialog, MessageBox, Tabs, Loading, TabPane, Message } from 'element-ui'
+import {
+  Button,
+  Select,
+  Table,
+  TableColumn,
+  Pagination,
+  Breadcrumb,
+  BreadcrumbItem,
+  DatePicker,
+  Dialog,
+  MessageBox,
+  Tabs,
+  Loading,
+  TabPane,
+  Message,
+  Form,
+  FormItem,
+  Input
+} from 'element-ui'
 import VueClipboards from 'vue-clipboards';
 import '@/styles/base.scss';
 import '@/styles/element-ui.scss';
@@ -21,6 +39,9 @@ Vue.use(Pagination);
 Vue.use(Breadcrumb);
 Vue.use(BreadcrumbItem);
 Vue.use(DatePicker);
+Vue.use(Form);
+Vue.use(FormItem);
+Vue.use(Input);
 
 Vue.use(Loading.directive);
 
