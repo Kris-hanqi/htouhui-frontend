@@ -12,7 +12,7 @@
       <p class="roboto-regular bankNum">6229 **** **** 3126</p>
     </div>
   
-    <bank-limit :visible="dialogBankLimitVisible"></bank-limit>
+    <bank-limit :visible="dialogBankLimitVisible" @close="closeBankLimit"></bank-limit>
     
     <ul class="withdrawMsgBox">
       <li>
@@ -68,6 +68,9 @@
     methods: {
       showBankLimit() {
         this.dialogBankLimitVisible = true;
+      },
+      closeBankLimit() {
+        this.dialogBankLimitVisible = false;
       }
     }
   }

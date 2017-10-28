@@ -42,6 +42,7 @@
     },
     methods: {
       handleClose() {
+        this.$emit('close');
         this.$parent.dialogBankLimitVisible = false;
       }
     }

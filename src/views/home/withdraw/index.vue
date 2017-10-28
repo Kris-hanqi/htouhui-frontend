@@ -41,7 +41,7 @@
       <p>8、如果提现出现任何疑问，请联系客服，400-698-8810</p>
     </div>
   
-    <bank-limit :visible="dialogBankLimitVisible"></bank-limit>
+    <bank-limit :visible="dialogBankLimitVisible" @close="closeBankLimit"></bank-limit>
   </div>
 </template>
 
@@ -60,6 +60,9 @@
     methods: {
       showBankLimit() {
         this.dialogBankLimitVisible = true;
+      },
+      closeBankLimit() {
+        this.dialogBankLimitVisible = false;
       }
     }
   }
