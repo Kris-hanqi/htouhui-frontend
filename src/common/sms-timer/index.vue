@@ -1,7 +1,5 @@
 <template>
-  <div class="sms-timer">
-    <button type="button" @click="run" :disabled="disabled || time > 0">{{ text }}</button>
-  </div>
+  <button class="sms-timer" type="button" @click="run" :disabled="disabled || time > 0">{{ text }}</button>
 </template>
 
 <script>
@@ -48,16 +46,14 @@
 
 <style lang="scss">
   .sms-timer {
-    button {
-      height: 46px;
-      border-radius: 100px;
-      background-color: #dfe8f0;
-      font-size: 16px;
-      text-align: center;
-      padding: 0 20px;
-      color: #7c86a2;
-      margin-left: 15px;
-      cursor: pointer;
-    }
+    height: 46px;
+    border-radius: 100px;
+    background-color: #dfe8f0;
+    font-size: 16px;
+    text-align: center;
+    padding: 0 20px;
+    color: #7c86a2;
+    margin-left: 15px;
+    cursor: pointer;
   }
 </style>

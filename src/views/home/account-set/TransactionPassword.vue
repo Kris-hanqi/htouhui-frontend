@@ -7,7 +7,7 @@
       </el-form-item>
       <el-form-item label="验证码">
         <el-input v-model="transactionPassword.code" placeholder="请输入验证码"></el-input>
-        <sms-timer style="float: right; margin-top: -50px;" @run="sendCode"></sms-timer>
+        <sms-timer @run.native="sendCode"></sms-timer>
       </el-form-item>
     </el-form>
     <p class="yzmCodeSent">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
@@ -30,7 +30,7 @@
     data() {
       return {
         transactionPassword: {
-          code: '1234'
+          code: ''
         }
       }
     },
@@ -65,7 +65,6 @@
     }
     
     .el-form {
-      width: 480px;
       padding-left: 40px;
       
       input {
@@ -90,6 +89,13 @@
       color: #838d9d;
       margin-left: 124px;
       margin-top: 14px;
+    }
+    
+    .sms-timer {
+      float: right;
+      position: absolute;
+      top: -1px;
+      left: 260px;
     }
   
     .submitBtn {
