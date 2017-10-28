@@ -1,10 +1,7 @@
 <template>
-  <div class="iNeedRechargeBox recharge-wrapper">
-    <h1>我要充值</h1>
-    <div>
-    
-    </div>
-    <el-tabs v-model="activeName">
+  <div class="iNeedRechargeBox fr">
+    <h1 class="personalCenterRightTitle">我要充值</h1>
+    <el-tabs v-model="activeName"  type="card">
       <el-tab-pane label="快捷充值" name="one">
         <fast-recharge></fast-recharge>
       </el-tab-pane>
@@ -22,7 +19,7 @@
   import FastRecharge from './FastRecharge.vue';
   import AlipayTransfer from './AlipayTransfer1.vue';
   import InterBankTransfer from './InterBankTransfer.vue';
-  
+
   export default {
     components: {
       FastRecharge,
@@ -38,18 +35,20 @@
 </script>
 
 <style lang="scss">
-  .recharge-wrapper {
-    width: 832px;
-    padding: 0 20px;
+  .iNeedRechargeBox {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 50px 25px 25px;
     background-color: #fff;
+    -webkit-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
+    -moz-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-  
-    h1 {
+
+    .personalCenterRightTitle {
       line-height: 1;
       font-size: 20px;
       color: #274161;
-      margin-bottom: 20px;
-      padding-top: 20px;
+      margin-bottom: 25px;
     }
 
     .tabChangeUl {
@@ -98,7 +97,7 @@
         width: 62px;
         height: 62px;
         margin: 0 auto;
-        background: url(../../../assets/images/home/center-recharge-addBankCard.png) no-repeat;
+        background: url("../../../assets/images/home/center-recharge-addBankCard.png") no-repeat;
       }
 
       p.noBankCardTxt {
@@ -112,7 +111,7 @@
     .bankCardMsg {
       width: 300px;
       height: 163px;
-      background: url(../../../assets/images/home/group-4.png) no-repeat;
+      background: url("../../../assets/images/home/group-4.png") no-repeat;
       margin-top: 45px;
       margin-left: 54px;
 

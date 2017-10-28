@@ -58,7 +58,7 @@
       <div class="shengxinbaolianghua-bottom">
         <p>在投金额（元）<span class="roboto-regular">209000</span></p>
         <p>累计收益（元）<span class="roboto-regular">307.51</span></p>
-        <a href="#" class="seeBiao">查看标的</a>
+        <router-link to="lookTarget"><a href="#" class="seeBiao">查看标的</a></router-link>
       </div>
     </div>
   </div>

@@ -9,13 +9,13 @@
       <el-table-column prop="free" label="即日起免手续费"></el-table-column>
       <el-table-column prop="award" label="平台奖励">
         <template scope="scope">
-          <el-button class="icon-award" type="text" size="small"></el-button>
+          <el-button class="icon-award" @click="dialogVisible = true" type="text" size="small"></el-button>
         </template>
       </el-table-column>
-      <el-table-column prop="state" label="状态" width="40"></el-table-column>
+      <el-table-column prop="state" label="状态" width="50"></el-table-column>
       <el-table-column prop="doing" label="操作">
         <template scope="scope">
-          <el-button class="icon-interests" type="text" size="small"></el-button>
+          <router-link to="lookRegular"><el-button class="icon-interests" type="text" size="small"></el-button></router-link>
         </template>
       </el-table-column>
     </el-table>
@@ -23,18 +23,37 @@
       <p class="total-pages">共计<span class="roboto-regular">25</span>条记录（共<span class="roboto-regular">3</span>页）</p>
       <el-pagination layout="prev, pager, next" :total="30"></el-pagination>
     </div>
+
+    <el-dialog title="平台奖励" :visible.sync="dialogVisible" width="30%">
+      <div class="dialog-main">
+        <el-tabs v-model="activeName" type="card">
+          <el-tab-pane label="贴息" name="first">
+            <tab-tie-xi></tab-tie-xi>
+          </el-tab-pane>
+          <el-tab-pane label="优惠券" name="second">
+            <tab-coupons></tab-coupons>
+          </el-tab-pane>
+        </el-tabs>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
   import tradingHour from '../homeComponent/tradingHour.vue';
+  import tabTieXi from './tab-TieXi.vue';
+  import tabCoupons from './tab-coupons.vue';
 
   export default {
     components: {
-      tradingHour
+      tradingHour,
+      tabTieXi,
+      tabCoupons
     },
     data() {
       return {
+        dialogVisible: false,
+        activeName: 'first',
         tableData: [{
           joinTime: '2017-08-17 14:52:17',
           joinMoney: '10,00000.00元',
@@ -62,24 +81,6 @@
       width: 17px;
       height: 23px;
       background: url(../../../assets/images/home/icons/icon-interest.png) no-repeat center;
-    }
-
-    .pages {
-      width: 100%;
-      margin-top: 20px;
-      text-align: right;
-
-      .total-pages {
-        display: inline-block;
-        margin-right: 10px;
-        font-size: 14px;
-        color: #394b67;
-      }
-
-      .el-pagination {
-        display: inline-block;
-        vertical-align: middle;
-      }
     }
   }
 </style>

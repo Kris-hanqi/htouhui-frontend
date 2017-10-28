@@ -9,7 +9,7 @@
         <el-table-column prop="limit" label="持有期限"></el-table-column>
         <el-table-column prop="rate" label="往期年化利率"></el-table-column>
         <el-table-column prop="limitStop" label="持有期限截至"></el-table-column>
-        <el-table-column prop="state" label="状态" width="40"></el-table-column>
+        <el-table-column prop="state" label="状态" width="50"></el-table-column>
         <el-table-column prop="seeInterests" label="查看债权">
           <template scope="scope">
             <el-button class="icon-interests" type="text" size="small"></el-button>
@@ -39,7 +39,7 @@
           limit: '21天',
           rate: '12.0%',
           limitStop: '2017-9-17',
-          state: '成功'
+          state: '还款中'
         }]
       }
     }

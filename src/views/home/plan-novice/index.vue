@@ -59,13 +59,13 @@
         <el-table-column prop="number" label="项目编号" width="120"></el-table-column>
         <el-table-column prop="borrowedMoney" label="借款金额" width="100"></el-table-column>
         <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
-        <el-table-column prop="timeLimit" label="借款期限" width="70"></el-table-column>
+        <el-table-column prop="timeLimit" label="借款期限" width="60"></el-table-column>
         <el-table-column prop="investMoney" label="投资金额" width="100"></el-table-column>
         <el-table-column prop="time" label="还款时间" width="80"></el-table-column>
-        <el-table-column prop="incomePrincipal" label="已收本息" width="100"></el-table-column>
-        <el-table-column prop="collectPrincipal" label="待收本息" width="100"></el-table-column>
-        <el-table-column prop="state" label="状态" width="30"></el-table-column>
-        <el-table-column prop="contract" label="合同" width="50">
+        <el-table-column prop="incomePrincipal" label="已收本息"></el-table-column>
+        <el-table-column prop="collectPrincipal" label="待收本息"></el-table-column>
+        <el-table-column prop="state" label="状态" width="50"></el-table-column>
+        <el-table-column prop="contract" label="合同" width="40">
           <template scope="scope">
             <el-button class="icon-download" type="text" size="small"></el-button>
           </template>
@@ -88,7 +88,7 @@
           time: '2017/10/24',
           incomePrincipal: '10,00000.00元',
           collectPrincipal: '0',
-          state: '完成'
+          state: '还款中'
         }]
       }
     }

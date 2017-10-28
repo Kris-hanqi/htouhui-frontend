@@ -94,3 +94,21 @@ i {
   background-color: $white;
   padding: 10px 10px 40px 10px;
 }
+
+.pages {
+  width: 100%;
+  margin-top: 20px;
+  text-align: right;
+
+  .total-pages {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+    color: #394b67;
+  }
+
+  .el-pagination {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
