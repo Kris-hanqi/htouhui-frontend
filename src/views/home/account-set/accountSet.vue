@@ -45,7 +45,7 @@
       <tr class="borderNone">
         <td>交易密码</td>
         <td>已设置</td>
-        <td rowspan="2" class="borderLine"><router-link to="amendLoginSetJyPwd"><button>修改</button></router-link></td>
+        <td rowspan="2" class="borderLine"><router-link to="transactionPassword"><button>修改</button></router-link></td>
       </tr>
       <tr>
         <td colspan="2" class="tableSmallFontColor textAlignLeft tablePadding">保障资金安全，转入、转出、投资等资金相关操作时使用</td>
@@ -81,7 +81,6 @@
 <style lang="scss">
   .accountSet {
     width: 832px;
-    -webkit-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
     background-color: #fff;
     padding-top: 21px;
@@ -165,7 +164,7 @@
         vertical-align: bottom;
         width: 20px;
         height: 18px;
-        background: url("../../../assets/images/home/center-ico-dangerous.png") no-repeat;
+        background: url(../../../assets/images/home/center-ico-dangerous.png) no-repeat;
         margin-left: 5px;
       }
 

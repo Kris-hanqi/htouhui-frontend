@@ -121,9 +121,9 @@ export const constantRouterMap = [
             component: _import('home/account-set/amendLoginEmailBind')
           },
           {
-            path: 'amendLoginSetJyPwd',
+            path: 'transactionPassword',
             name: '设置交易密码',
-            component: _import('home/account-set/amendLoginSetJyPwd')
+            component: _import('home/account-set/TransactionPassword')
           },
           {
             path: 'amendLoginPhoneNum',

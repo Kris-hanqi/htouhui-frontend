@@ -10,7 +10,7 @@
         <li class="marginTop">
           <label>验证码</label>
           <input type="text" placeholder="请输入验证码">
-          <button class="getYzmCode">获取验证码</button>
+          <sms-timer @run="sendCode"></sms-timer>
         </li>
       </ul>
       <p class="yzmCodeSent">校验码已发出，请注意查收短信，如果没有收到，你可以在111秒后要求系统重新发送</p>
@@ -24,6 +24,23 @@
     </div>
   </div>
 </template>
+
+<script>
+  import SmsTimer from '@/common/sms-timer';
+  export default {
+    components: {
+      SmsTimer
+    },
+    data() {
+      return {}
+    },
+    methods: {
+      sendCode() {
+        console.log('发送验证码');
+      }
+    }
+  }
+</script>
 
 <style lang="scss">
   .amendLoginPwd {
