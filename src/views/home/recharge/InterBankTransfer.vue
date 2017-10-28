@@ -32,7 +32,7 @@
           </li>
           <li>
             <span>6212461320000256288</span>
-            <button class="copyBtn">复制</button>
+            <button class="copyBtn" v-clipboard="bankCard" @success="handleSuccess">复制</button>
           </li>
           <li>
             <span>江西银行或城市商业银行</span>
@@ -68,7 +68,13 @@
   export default {
     data() {
       return {
-        img_inter_bank_step
+        img_inter_bank_step,
+        bankCard: '6212461320000256288'
+      }
+    },
+    methods: {
+      handleSuccess(e) {
+        alert('拷贝成功:' + e.text);
       }
     }
   }

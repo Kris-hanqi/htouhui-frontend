@@ -2,6 +2,7 @@ import Vue from 'vue';
 import 'normalize.css/normalize.css';
 import 'element-ui/lib/theme-default/index.css';
 import { Button, Select, Table, TableColumn, Pagination, Breadcrumb, BreadcrumbItem, DatePicker, Dialog, MessageBox, Tabs, Loading, TabPane, Message } from 'element-ui'
+import VueClipboards from 'vue-clipboards';
 import '@/styles/base.scss';
 import '@/styles/element-ui.scss';
 import router from '@/router/home';
@@ -27,6 +28,8 @@ Vue.prototype.$loading = Loading.service;
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$confirm = MessageBox.confirm;
 Vue.prototype.$message = Message;
+
+Vue.use(VueClipboards);
 
 new Vue({
   el: '#app',
