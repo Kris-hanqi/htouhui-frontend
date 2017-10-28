@@ -1,14 +1,11 @@
 <template>
-  <el-tabs v-model="activeName">
-    <el-tab-pane label="快捷充值" name="one">
-      121212
-    </el-tab-pane>
-    <el-tab-pane label="跨行转账" name="two">
-      12122
-    </el-tab-pane>
-    <el-tab-pane label="支付宝转账" name="there">
-      12333
-    </el-tab-pane>
+  <el-tabs v-model="activeName" @tab-click="toggleType">
+    <el-tab-pane label="还款中" name="one"></el-tab-pane>
+    <el-tab-pane label="待放款" name="two"></el-tab-pane>
+    <el-tab-pane label="待发布" name="there"></el-tab-pane>
+    <el-tab-pane label="筹集中" name="four"></el-tab-pane>
+    <el-tab-pane label="已结清" name="five"></el-tab-pane>
+    <el-tab-pane label="流标" name="six"></el-tab-pane>
   </el-tabs>
 </template>
 
@@ -16,7 +13,13 @@
   export default {
     data() {
       return {
-        activeName: 'one'
+        activeName: 'one',
+        type: ''
+      }
+    },
+    methods: {
+      toggleType(tab) {
+        console.log(tab);
       }
     }
   }

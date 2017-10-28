@@ -12,9 +12,14 @@
         </ul>
         <ul class="allChoose allChooseCalendar" v-show="dateType === 'other'">
           <el-date-picker
-            type="daterange"
-            align="right"
-            placeholder="选择日期范围">
+            v-model="selectDates.startTime"
+            type="date"
+            placeholder="选择开始日期">
+          </el-date-picker>
+          <el-date-picker
+            v-model="selectDates.endTime"
+            type="date"
+            placeholder="选择结束日期">
           </el-date-picker>
         </ul>
         <ul class="allChoose">
@@ -28,7 +33,7 @@
         </ul>
       </div>
       <div class="fr">
-        <button @click="query" class="inquireBtn">查询</button>
+        <button @click="query" class="query-btn">查询</button>
       </div>
     </div>
     <div class="assetRunWaterTable personalCenterBoxShadow">
@@ -38,15 +43,15 @@
                 :border="false"
                 style="width: 100%">
         <el-table-column prop="time" label="交易时间" width="150"></el-table-column>
-        <el-table-column prop="name" label="项目名称" width="110"></el-table-column>
-        <el-table-column prop="type" label="类型" width="110"></el-table-column>
-        <el-table-column prop="variationMoney" label="变动金额" width="100"></el-table-column>
-        <el-table-column prop="managementPlatform" label="管理平台" width="140"></el-table-column>
+        <el-table-column prop="projectName" label="项目名称" width="110"></el-table-column>
+        <el-table-column prop="typeinfo" label="类型" width="110"></el-table-column>
+        <el-table-column prop="money" label="变动金额" width="100"></el-table-column>
+        <el-table-column prop="trusteeship" label="管理平台" width="140"></el-table-column>
         <el-table-column prop="canUseMoney" label="可用余额" width="100"></el-table-column>
-        <el-table-column prop="remark" label="备注" width="100"></el-table-column>
+        <el-table-column prop="detail" :show-overflow-tooltip="true" label="备注" width="100"></el-table-column>
       </el-table>
       <div class="pages" v-show="!listLoading">
-        <p class="total-pages">共计<span class="roboto-regular">25</span>条记录（共<span class="roboto-regular">3</span>页）</p>
+        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ total }}</span>页）</p>
         <el-pagination
           @current-change="handleCurrentChange"
           :current-page.sync="listQuery.pageNo"
@@ -59,13 +64,13 @@
 
 <script>
   import { fetchPageList } from '@/api/funds';
-  import { getStartAndEndTime } from '@/utils';
+  import { getStartAndEndTime, getDateString } from '@/utils';
   
   export default {
     data() {
       return {
         list: null,
-        total: null,
+        total: 0,
         listLoading: true,
         listQuery: {
           pageNo: 1,
@@ -74,29 +79,54 @@
           endTime: '',
           type: ''
         },
+        selectDates: {
+          startTime: '',
+          endTime: ''
+        },
         dateType: '3day',
         projectType: 'all'
       };
+    },
+    computed: {
+      getPageSize() {
+        return Math.ceil(this.total / this.listQuery.size);
+      }
     },
     methods: {
       // 获取资金流水分页数据
       getPageList() {
         let dates = null;
-        this.listLoading = true;
         this.listQuery.type = this.projectType;
         if (this.dateType !== 'other') {
           dates = getStartAndEndTime(this.dateType);
-          console.log(dates);
-        }
-        if (dates) {
           this.listQuery.beginTime = dates.startTime;
           this.listQuery.endTime = dates.endTime;
+        } else {
+          if (this.selectDates.startTime && this.selectDates.endTime) {
+            if (this.selectDates.startTime > this.selectDates.endTime) {
+              this.$message({
+                message: '开始时间不能大于结束时间',
+                type: 'warning'
+              });
+              return;
+            }
+            this.listQuery.beginTime = getDateString(this.selectDates.startTime);
+            this.listQuery.endTime = getDateString(this.selectDates.endTime);
+          } else {
+            this.$message({
+              message: '请选择时间',
+              type: 'warning'
+            });
+            return;
+          }
         }
+        this.listLoading = true;
         fetchPageList(this.listQuery).then(response => {
-          if (response.data.status === 200) {
-            const data = response.data.data;
-            this.list = data.list;
-            this.total = data.total;
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.list = data.data.data;
+            this.total = data.data.totalPage;
+            console.log(this.list);
           }
           this.listLoading = false
         })
@@ -205,7 +235,7 @@
       }
     }
 
-    .inquireBtn {
+    .query-btn {
       width: 157px;
       height: 46px;
       border-radius: 100px;
@@ -214,7 +244,7 @@
       text-align: center;
       color: #fff;
       margin-right: 64px;
-      margin-top: 50px;
+      margin-top: 30px;
       cursor: pointer;
     }
   }

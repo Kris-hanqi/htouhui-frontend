@@ -55,4 +55,10 @@ export function getStartAndEndTime(str) {
   return dates;
 }
 
+export function getDateString(date) {
+  if (date) {
+    return moment(date).format('YYYY-MM-DD HH:mm:ss');
+  }
+}
+
 
