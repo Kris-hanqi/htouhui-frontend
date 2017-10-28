@@ -36,10 +36,10 @@
     <p class="borrow-money">我的借款</p>
     <ul>
       <li class="nav">
-        <router-link to="/loanRecording" active-class="active">借款记录</router-link>
+        <router-link to="/loanRecord" active-class="active">借款记录</router-link>
       </li>
       <li class="nav">
-        <router-link to="/recentlyLoan" active-class="active">近期借款</router-link>
+        <router-link to="/recentlyRepayment" active-class="active">近期还款</router-link>
       </li>
     </ul>
     <p class="new-platform-rewards">平台奖励</p>

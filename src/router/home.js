@@ -81,14 +81,14 @@ export const constantRouterMap = [
         component: _import('home/claims/index')
       },
       {
-        path: '/loanRecording',
+        path: '/loanRecord',
         name: '借款记录',
-        component: _import('home/loan-recording/index')
+        component: _import('home/loan-record/index')
       },
       {
-        path: '/recentlyLoan',
+        path: '/recentlyRepayment',
         name: '最近借款',
-        component: _import('home/recently-loan/index')
+        component: _import('home/recently-repayment/index')
       },
       {
         path: '/coupon',

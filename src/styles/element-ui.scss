@@ -75,6 +75,10 @@ th {
   padding: 0;
 }
 
+.el-table__empty-block {
+  border-bottom: solid 1px #dee8f2;
+}
+
 /*弹窗*/
 .el-message-box__header {
   padding: 0;

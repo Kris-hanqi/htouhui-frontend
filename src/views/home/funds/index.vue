@@ -51,7 +51,7 @@
         <el-table-column prop="detail" :show-overflow-tooltip="true" label="备注" width="100"></el-table-column>
       </el-table>
       <div class="pages" v-show="!listLoading">
-        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ total }}</span>页）</p>
+        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
         <el-pagination
           @current-change="handleCurrentChange"
           :current-page.sync="listQuery.pageNo"
