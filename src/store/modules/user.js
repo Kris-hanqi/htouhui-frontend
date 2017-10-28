@@ -31,6 +31,7 @@ const user = {
   state: {
     token: getToken(),
     name: '', // 用户姓名
+    mobile: '', // 手机号
     status: 0, // 用户状态
     bankCard: '', // 银行卡号
     bankName: '', // 银行名称
@@ -43,6 +44,9 @@ const user = {
     },
     SET_STATUS: (state, status) => {
       state.status = status;
+    },
+    SET_MOBILE: (state, mobile) => {
+      state.mobile = mobile;
     },
     SET_NAME: (state, name) => {
       state.name = name;
@@ -67,6 +71,7 @@ const user = {
           const status = getUserStatus(data);
           const showNovicePlan = isShowNovicePlan(data);
           commit('SET_NAME', data.realName);
+          commit('SET_MOBILE', data.mobileNumber);
           commit('SET_BANK_NAME', data.bankName);
           commit('SET_BANK_CARD', data.bankCard);
           commit('SET_STATUS', status);

@@ -3,11 +3,11 @@
     <h1>设置交易密码</h1>
     <el-form ref="transactionPassword" label-width="80px">
       <el-form-item label="手机号码">
-        <span class="phone">{{ '1777******' }}</span>
+        <span class="phone">{{ mobile }}</span>
       </el-form-item>
       <el-form-item label="验证码">
         <el-input v-model="transactionPassword.code" placeholder="请输入验证码"></el-input>
-        <sms-timer @run.native="sendCode"></sms-timer>
+        <sms-timer @run="sendCode"></sms-timer>
       </el-form-item>
     </el-form>
     <p class="yzmCodeSent">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
@@ -22,10 +22,18 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import SmsTimer from '@/common/sms-timer';
+  import { fetchSendCode } from '@/api/public';
+  
   export default {
     components: {
       SmsTimer
+    },
+    computed: {
+      ...mapGetters([
+        'mobile'
+      ])
     },
     data() {
       return {
@@ -36,7 +44,10 @@
     },
     methods: {
       sendCode() {
-        console.log('发送验证码');
+        console.log(123);
+        fetchSendCode({ authType: 'set' }).then(response => {
+          console.log(response);
+        })
       }
     }
   }

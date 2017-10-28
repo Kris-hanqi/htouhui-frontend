@@ -18,6 +18,7 @@
     },
     methods: {
       run() {
+        this.$emit('run');
         this.start();
       },
       start() {

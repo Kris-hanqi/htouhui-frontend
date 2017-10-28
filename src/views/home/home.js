@@ -18,7 +18,10 @@ import {
   Message,
   Form,
   FormItem,
-  Input
+  Input,
+  Steps,
+  Step,
+  Checkbox
 } from 'element-ui'
 import VueClipboards from 'vue-clipboards';
 import '@/styles/base.scss';
@@ -42,6 +45,9 @@ Vue.use(DatePicker);
 Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(Input);
+Vue.use(Steps);
+Vue.use(Step);
+Vue.use(Checkbox);
 
 Vue.use(Loading.directive);
 
