@@ -4,7 +4,8 @@ const getters = {
   mobile: state => state.user.mobile,
   status: state => state.user.status,
   bankCard: state => state.user.bankCard,
-  showNovicePlan: state => state.user.showNovicePlan
+  showNovicePlan: state => state.user.showNovicePlan,
+  isBorrower: state => state.user.isBorrower
 };
 
 export default getters;

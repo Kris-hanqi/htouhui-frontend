@@ -8,8 +8,9 @@
         <hth-breadcrumb></hth-breadcrumb>
       </div>
       <div class="home-wrapper__account">
+        <!-- 左侧菜单 -->
         <div class="home-wrapper__account-menu">
-          <hth-sidebar></hth-sidebar>
+          <hth-sidebar :show-novice-plan="showNovicePlan" :show-loan="isBorrower"></hth-sidebar>
         </div>
         <div class="main-container">
           <div class="prompt-message" v-if="operationTips">
@@ -33,6 +34,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import HthHeader from 'components/header';
   import HthSliderBar from 'common/slider-bar';
   import HthBreadcrumb from './breadcrumb';
@@ -47,6 +49,15 @@
       HthBreadcrumb,
       HthSidebar,
       OpenAccount
+    },
+    computed: {
+      ...mapGetters([
+        'showNovicePlan',
+        'isBorrower'
+      ]),
+      operationTips() {
+        return this.operationTipsArray[this.$store.state.user.status]
+      }
     },
     data() {
       return {
@@ -88,11 +99,6 @@
       },
       closeOpenAccount() {
         this.dialogOpenAccountVisible = false;
-      }
-    },
-    computed: {
-      operationTips() {
-        return this.operationTipsArray[this.$store.state.user.status]
       }
     },
     watch: {

@@ -17,7 +17,7 @@
     </ul>
     <p class="investment">我的投资</p>
     <ul>
-      <li class="nav">
+      <li class="nav" v-if="showNovicePlan">
         <router-link to="/planNovice" active-class="active">新手计划</router-link>
       </li>
       <li class="nav">
@@ -33,8 +33,8 @@
         <router-link to="/claims" active-class="active">债权转让</router-link>
       </li>
     </ul>
-    <p class="borrow-money">我的借款</p>
-    <ul>
+    <p class="borrow-money" v-if="showLoan">我的借款</p>
+    <ul v-if="showLoan">
       <li class="nav">
         <router-link to="/loanRecord" active-class="active">借款记录</router-link>
       </li>
@@ -59,6 +59,26 @@
     </ul>
   </div>
 </template>
+
+<script>
+  export default {
+    props: {
+      showNovicePlan: { // 是否显示新手计划
+        type: Boolean,
+        default: false,
+        required: true
+      },
+      showLoan: { // 是否显示我的借款
+        type: Boolean,
+        default: false,
+        required: true
+      }
+    },
+    data() {
+      return { }
+    }
+  }
+</script>
 
 <style lang="scss">
   .sidebar-wrapper {

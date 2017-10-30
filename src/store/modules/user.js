@@ -33,6 +33,17 @@ function isShowNovicePlanMessage(data) {
   }
 }
 
+function isBorrower() {
+  let returnData = false;
+  const result = data.roles.find(v => v === 'LOANER');
+
+  if (result) {
+    returnData = true;
+  }
+
+  return returnData;
+}
+
 const user = {
   state: {
     token: getToken(),
@@ -42,7 +53,8 @@ const user = {
     bankCard: '', // 银行卡号
     bankName: '', // 银行名称
     showNovicePlan: false,
-    showNovicePlanMessage: false
+    showNovicePlanMessage: false,
+    isBorrower: false // 是否是借款人
   },
 
   mutations: {
@@ -69,6 +81,9 @@ const user = {
     },
     SET_SHOW_NOVICE_PLAN_MESSAGE: (state, showNovicePlanMessage) => {
       state.showNovicePlanMessage = showNovicePlanMessage;
+    },
+    SET_IS_BORROWER: (state, showNovicePlan) => {
+      state.showNovicePlan = showNovicePlan;
     }
   },
 
@@ -77,17 +92,20 @@ const user = {
     GetUserInfo({ commit }) {
       return new Promise((resolve, reject) => {
         getUserInfo().then(response => {
-          const data = response.data.data;
-          const status = getUserStatus(data);
-          const showNovicePlan = isShowNovicePlan(data);
-          const showNovicePlanMessage = isShowNovicePlanMessage(data);
-          commit('SET_NAME', data.realName);
-          commit('SET_MOBILE', data.mobileNumber);
-          commit('SET_BANK_NAME', data.bankName);
-          commit('SET_BANK_CARD', data.bankCard);
-          commit('SET_STATUS', status);
-          commit('SET_SHOW_NOVICE_PLAN', showNovicePlan);
-          commit('SET_SHOW_NOVICE_PLAN_MESSAGE', showNovicePlanMessage);
+          if (response.data.meta.code === 200) {
+            const data = response.data.data;
+            const status = getUserStatus(data);
+            const showNovicePlan = isShowNovicePlan(data);
+            const showNovicePlanMessage = isShowNovicePlanMessage(data);
+            commit('SET_NAME', data.realName);
+            commit('SET_MOBILE', data.mobileNumber);
+            commit('SET_BANK_NAME', data.bankName);
+            commit('SET_BANK_CARD', data.bankCard);
+            commit('SET_STATUS', status);
+            commit('SET_SHOW_NOVICE_PLAN', showNovicePlan);
+            commit('SET_SHOW_NOVICE_PLAN_MESSAGE', showNovicePlanMessage);
+            commit('SET_IS_BORROWER', isBorrower());
+          }
           resolve(response)
         }).catch(error => {
           reject(error)
