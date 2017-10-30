@@ -15,7 +15,7 @@
           <td class="td1">
             <i></i>
           </td>
-          <td class="td2">&nbsp;本金</td>
+          <td class="td2">&nbsp本金</td>
           <td class="td3">收益</td>
           <td class="td4">
             <i></i>
@@ -74,11 +74,11 @@
           cutoutPercentage: 70
         },
         tableData: [
-          {label: '新手计划', signColor: '#f8e71c', capital: '1000.00', earnings: '20.00'},
-          {label: '21天计划', signColor: '#ffa837', capital: '20,000.00', earnings: '130.00'},
-          {label: '升薪宝量化', signColor: '#b8e986', capital: '30,000.00', earnings: '100.00'},
-          {label: '升薪宝定期', signColor: '#50e3c2', capital: '5,000.00', earnings: '300.00'},
-          {label: '定期抵押', signColor: '#06b7f0', capital: '11,390.00', earnings: '30.0'},
+          { label: '新手计划', signColor: '#f8e71c', capital: '1000.00', earnings: '20.00' },
+          { label: '21天计划', signColor: '#ffa837', capital: '20,000.00', earnings: '130.00' },
+          { label: '升薪宝量化', signColor: '#b8e986', capital: '30,000.00', earnings: '100.00' },
+          { label: '升薪宝定期', signColor: '#50e3c2', capital: '5,000.00', earnings: '300.00' },
+          { label: '定期抵押', signColor: '#06b7f0', capital: '11,390.00', earnings: '30.0' }
         ]
       }
     }
@@ -107,10 +107,6 @@
       margin-top: 60px;
       height: 200px;
       width: 200px;
-    }
-
-    .num {
-      font-family: Roboto;
     }
 
     .fl {
@@ -184,14 +180,13 @@
           border: solid 1px #378ff6;
           color: #0671f0;
           font-size: 14px;
-
-          &:hover {
-            background-color: #0671f0;
-            color: #fff;
-          }
+        }
+  
+        button:hover {
+          background-color: #0671f0;
+          color: #fff;
         }
       }
     }
-
   }
 </style>
