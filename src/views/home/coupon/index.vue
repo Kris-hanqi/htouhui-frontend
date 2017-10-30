@@ -6,7 +6,7 @@
       <el-button :plain="true" type="info">兑换优惠券</el-button>
     </div>
     <div class="coupon-wrapper__body">
-      <el-tabs v-model="activeName" @tab-click="handleTabClick" type="card">
+      <el-tabs v-model="listQuery.type" @tab-click="handleTabClick" type="card">
         <el-tab-pane label="全部" name="all"></el-tab-pane>
         <el-tab-pane label="现金券" name="cash"></el-tab-pane>
         <el-tab-pane label="加息券" name="plus_coupon"></el-tab-pane>
@@ -14,29 +14,41 @@
       </el-tabs>
       
       <div class="coupon-wrapper__menu">
-        <a href="javascript:void(0)" @click="switchStatus('unused')" :class="{ active: status === 'unused'}">未使用</a>
-        <a href="javascript:void(0)" @click="switchStatus('used')" :class="{ active: status === 'used'}">已使用</a>
-        <a href="javascript:void(0)" @click="switchStatus('expire')" :class="{ active: status === 'expire'}">已过期</a>
+        <a href="javascript:void(0)" @click="switchStatus('unused')" :class="{ active: listQuery.status === 'unused'}">未使用</a>
+        <a href="javascript:void(0)" @click="switchStatus('used')" :class="{ active: listQuery.status === 'used'}">已使用</a>
+        <a href="javascript:void(0)" @click="switchStatus('expire')" :class="{ active: listQuery.status === 'expire'}">已过期</a>
       </div>
   
-      <div class="coupon-wrapper__list">
-        <div class="quan-box">
-          <div class="nowOpen">
-            <a class="nowOpen-btn" href="#">立即开户激活</a>
-          </div>
-          <div class="box-top">
+      <div class="coupon-wrapper__list" v-loading="listLoading">
+        <div class="coupon-wrapper__box" v-for="coupon in list" :key="coupon.id">
+          <!--未开户-->
+          <!--<div class="coupon-wrapper__box-open-account">-->
+            <!--<a href="#">立即开户激活</a>-->
+          <!--</div>-->
+          <div class="coupon-wrapper__box-top">
             <i class="icon-new"></i>
-            <p class="title"><span class="roboto-regular">30</span>元</p>
-            <p class="detail">现金券<span>［满100可用］</span></p>
+            <p class="title">
+              <span v-if="coupon.type === 'plus_coupon'"><span class="roboto-regular">{{ coupon.rate }}</span>%</span>
+              <span v-else=""><span class="roboto-regular">{{ coupon.money }}</span>元</span>
+            </p>
+            <p class="detail">现金券<span>［满{{ coupon.lowerLimitMoney }}可用］</span></p>
             <p class="time">2017.07.01-2017.7.30</p>
           </div>
-          <div class="box-bottom">
-            <p class="money">计息金额：<span class="roboto-regular">1,000</span>元</p>
-            <p class="message">使用说明：投资1,000元可用</p>
+          <div class="coupon-wrapper__box-body">
+            <div class="content" v-if="coupon.type === 'plus_coupon'">
+              <p class="money">最高计息金额：<span class="roboto-regular">{{ coupon.maxInterestMoney }}</span>元</p>
+              <p class="money">最高计息天数：<span class="roboto-regular">{{ coupon.interestDeadline }}</span>天</p>
+              <p class="message">使用说明：投资1,000元可用</p>
+            </div>
+            <div class="content" v-else>
+              <p class="money">计息金额：<span class="roboto-regular">{{ coupon.maxInterestMoney }}</span>元</p>
+              <p class="message">使用说明：投资1,000元可用</p>
+            </div>
             <a class="newUse" href="#">立即使用</a>
           </div>
         </div>
-        <div class="quan-box">
+        
+        <div class="quan-box" v-show="false">
           <div class="nowOpen">
             <a class="nowOpen-btn" href="#">立即开户激活</a>
           </div>
@@ -54,25 +66,65 @@
         </div>
       </div>
     </div>
-   
+  
+    <div class="pages" v-show="!listLoading">
+      <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+      <el-pagination
+        @current-change="handleCurrentChange"
+        :current-page.sync="listQuery.pageNo"
+        :page-size="listQuery.pageSize"
+        layout="prev, pager, next" :total="total"></el-pagination>
+    </div>
   </div>
 </template>
 
 <script>
+  import { fetchPageList } from '@/api/home/coupon';
+  
   export default {
     data() {
       return {
-        activeName: 'all',
-        status: 'unused'
+        list: null,
+        total: 0,
+        listLoading: true,
+        listQuery: {
+          pageNo: 1,
+          pageSize: 6,
+          type: 'all',
+          status: 'unused'
+        }
+      }
+    },
+    computed: {
+      getPageSize() {
+        return Math.ceil(this.total / this.listQuery.pageSize);
       }
     },
     methods: {
+      getPageList() {
+        fetchPageList(this.listQuery).then(response => {
+          console.log(response);
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.list = data.data.data;
+            this.total = data.data.total;
+          }
+          this.listLoading = false
+        })
+      },
       handleTabClick(tab) {
-        console.log(tab);
+        this.listQuery.type = tab.name;
+      },
+      handleCurrentChange(val) {
+        this.listQuery.pageNo = val;
+        this.getPageList();
       },
       switchStatus(data) {
-        this.status = data;
+        this.listQuery.status = data;
       }
+    },
+    created() {
+      this.getPageList();
     }
   }
 </script>
@@ -80,7 +132,7 @@
 <style lang="scss">
   .coupon-wrapper {
     width: 100%;
-    height: 846px;
+    height: auto;
     box-sizing: border-box;
     padding: 20px 15px;
     background-color: #fff;
@@ -136,122 +188,127 @@
     padding-left: 30px;
   }
 
-  .quan-box {
+  .coupon-wrapper__box {
     display: inline-block;
     vertical-align: top;
     position: relative;
     width: 230px;
-    height: 272px;
+    height: 330px;
     margin-right: 20px;
+    margin-bottom: 10px;
+  }
 
-    .nowOpen {
+  .coupon-wrapper__box-top {
+    width: 230px;
+    height: 133px;
+    box-sizing: border-box;
+    padding-top: 20px;
+    background: url(../../../assets/images/home/quan-1.png) no-repeat center;
+  
+    .icon-new {
       display: block;
       position: absolute;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      background: url(../../../assets/images/home/quan-3.png) no-repeat center;
-
-      .nowOpen-btn {
-        display: block;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 185px;
-        height: 46px;
-        box-sizing: border-box;
-        margin: 0 auto;
-        margin-left: -92px;
-        margin-top: -23px;
-        border-radius: 100px;
-        border: solid 1px #fff;
-        line-height: 46px;
-        font-size: 18px;
-        text-align: center;
+      top: 0;
+      left: 12px;
+      width: 19px;
+      height: 39px;
+      background: url(../../../assets/images/home/icons/icon-new.png) no-repeat center;
+    }
+  
+    .title {
+      text-align: center;
+      font-size: 20px;
+      color: #fff;
+    
+      span {
+        font-size: 50px;
+      }
+    }
+  
+    .detail {
+      font-size: 12px;
+      text-align: center;
+      color: #7d1010;
+      margin-bottom: 20px;
+    
+      span {
         color: #fff;
       }
     }
-
-    .box-top {
-      width: 230px;
-      height: 133px;
-      box-sizing: border-box;
-      padding-top: 20px;
-      background: url(../../../assets/images/home/quan-1.png) no-repeat center;
-
-      .icon-new {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 12px;
-        width: 19px;
-        height: 39px;
-        background: url(../../../assets/images/home/icons/icon-new.png) no-repeat center;
-      }
-
-      .title {
-        text-align: center;
-        font-size: 20px;
-        color: #fff;
-
-        span {
-          font-size: 50px;
-        }
-      }
-
-      .detail {
-        font-size: 12px;
-        text-align: center;
-        color: #7d1010;
-        margin-bottom: 20px;
-
-        span {
-          color: #fff;
-        }
-      }
-
-      .time {
-        font-size: 12px;
-        text-align: center;
-        color: #7d1010;
-      }
+  
+    .time {
+      font-size: 12px;
+      text-align: center;
+      color: #7d1010;
     }
+  }
 
-    .box-bottom {
-      width: 100%;
-      height: auto;
+  .coupon-wrapper__box-body {
+    width: 100%;
+    height: 197px;
+    box-sizing: border-box;
+    padding: 20px 15px;
+    background-color: #f9f9f9;
+    
+    .content {
+      overflow: hidden;
+      height: 120px;
+    }
+  
+    p {
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: #727e90;
+    }
+  
+    .newUse {
+      display: block;
+      width: 111px;
+      height: 30px;
       box-sizing: border-box;
-      padding: 20px 15px;
-      background-color: #f9f9f9;
+      margin: 0 auto;
+      border-radius: 100px;
+      border: solid 1px #eb5145;
+      line-height: 30px;
+      font-size: 12px;
+      text-align: center;
+      color: #eb5145;
+    }
+  
+    .pass {
+      display: block;
+      position: absolute;
+      right: 20px;
+      width: 63px;
+      height: 64px;
+    }
+  }
 
-      p {
-        margin-bottom: 10px;
-        font-size: 12px;
-        color: #727e90;
-      }
-
-      .newUse {
-        display: block;
-        width: 111px;
-        height: 30px;
-        box-sizing: border-box;
-        margin: 0 auto;
-        margin-top: 30px;
-        border-radius: 100px;
-        border: solid 1px #eb5145;
-        line-height: 30px;
-        font-size: 12px;
-        text-align: center;
-        color: #eb5145;
-      }
-
-      .pass {
-        display: block;
-        position: absolute;
-        right: 20px;
-        width: 63px;
-        height: 64px;
-      }
+  .coupon-wrapper__box-open-account {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: url(../../../assets/images/home/quan-3.png) no-repeat center;
+  
+    a {
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 185px;
+      height: 46px;
+      box-sizing: border-box;
+      margin: 0 auto;
+      margin-left: -92px;
+      margin-top: -23px;
+      border-radius: 100px;
+      border: solid 1px #fff;
+      line-height: 46px;
+      font-size: 18px;
+      text-align: center;
+      color: #fff;
     }
   }
 </style>

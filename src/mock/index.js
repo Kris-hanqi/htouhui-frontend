@@ -1,6 +1,7 @@
 import Mock from 'mockjs';
 import loginAPI from './login';
-import accountAPI from './account';
+import accountAPI from './home/account';
+import couponAPI from './home/coupon';
 
 Mock.setup({
   timeout: '350-600'
@@ -12,5 +13,8 @@ Mock.mock(/\/user\/userInfo/, 'get', loginAPI.userInfo);
 
 // 账户概览
 Mock.mock(/\/user\/investStatistics/, 'get', accountAPI.investStatistics);
+
+// 优惠券
+Mock.mock(/\/user\/queryUserCouponRecord/, 'get', couponAPI.getPageList);
 
 export default Mock;
