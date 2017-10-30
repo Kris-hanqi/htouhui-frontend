@@ -1,11 +1,11 @@
 <template>
   <div class="interBankTransfer">
-    <div class="alipayStep">
-      <p class="step01-txt">操作流程（以招商银行为例）</p>
-      <img class="step01-img" :src="img_inter_bank_step" alt="">
-      <p class="step03-txt">您可以使用您的银行卡，通过支付宝转账的方式将资金充值到您的江西银行存管帐户（支付宝APP更方便）</p>
+    <div class="recharge-wrapper__steps">
+      <p>操作流程（以招商银行为例）</p>
+      <img :src="img_inter_bank_step" alt="">
+      <p>您可以使用您的银行卡，通过支付宝转账的方式将资金充值到您的江西银行存管帐户（支付宝APP更方便）</p>
     </div>
-    <div class="splitLine"></div>
+    <div class="split-line"></div>
     <div class="transferNeedMsg">
       <p>转账时所需信息如下</p>
       <div class="transferNeedUl clearFix">
@@ -41,8 +41,8 @@
             <span>江西省南昌市</span>
           </li>
           <li>
-            <span>江西银行股份有限公司总行营业部</span>
-            <button class="copyBtn">复制</button>
+            <span>{{ bankAddress }}</span>
+            <button class="copyBtn" v-clipboard="bankAddress" @success="handleSuccess">复制</button>
           </li>
         </ul>
       </div>
@@ -50,7 +50,7 @@
         我是一个table啊
       </table>
     </div>
-    <div class="splitLine"></div>
+    <div class="split-line"></div>
     <div class="warmPrompt">
       <h3>温馨提示</h3>
       <p>1、严禁信用卡充值、套现等行为；</p>
@@ -69,12 +69,13 @@
     data() {
       return {
         img_inter_bank_step,
-        bankCard: '6212461320000256288'
+        bankCard: '6212461320000256288',
+        bankAddress: '江西银行股份有限公司总行营业部'
       }
     },
     methods: {
-      handleSuccess(e) {
-        alert('拷贝成功:' + e.text);
+      handleSuccess() {
+        this.$message('拷贝成功');
       }
     }
   }

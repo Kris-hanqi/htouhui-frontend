@@ -1,6 +1,6 @@
 <template>
-  <div class="iNeedRechargeBox fr">
-    <h1 class="personalCenterRightTitle">我要充值</h1>
+  <div class="recharge-wrapper">
+    <h1>我要充值</h1>
     <el-tabs v-model="activeName"  type="card">
       <el-tab-pane label="快捷充值" name="one">
         <fast-recharge></fast-recharge>
@@ -35,20 +35,35 @@
 </script>
 
 <style lang="scss">
-  .iNeedRechargeBox {
+  .recharge-wrapper {
     width: 100%;
     box-sizing: border-box;
-    padding: 20px 50px 25px 25px;
+    padding: 0 20px;
     background-color: #fff;
-    -webkit-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-    -moz-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
 
-    .personalCenterRightTitle {
+    h1 {
+      padding-top: 30px;
       line-height: 1;
       font-size: 20px;
       color: #274161;
       margin-bottom: 25px;
+    }
+  
+    .recharge-wrapper__steps {
+      p {
+        margin-top: 24px;
+        color: #394b67;
+      }
+    
+      img {
+        margin-top: 15px;
+        margin-left: 34px;
+      }
+    }
+  
+    .split-line {
+      margin: 30px 0;
     }
 
     .tabChangeUl {
@@ -97,7 +112,7 @@
         width: 62px;
         height: 62px;
         margin: 0 auto;
-        background: url("../../../assets/images/home/center-recharge-addBankCard.png") no-repeat;
+        background: url(../../../assets/images/home/center-recharge-addBankCard.png) no-repeat;
       }
 
       p.noBankCardTxt {
@@ -111,7 +126,7 @@
     .bankCardMsg {
       width: 300px;
       height: 163px;
-      background: url("../../../assets/images/home/group-4.png") no-repeat;
+      background: url(../../../assets/images/home/group-4.png) no-repeat;
       margin-top: 45px;
       margin-left: 54px;
 
@@ -181,14 +196,6 @@
           color: #fff;
         }
       }
-    }
-
-    .splitLine {
-      width: 759px;
-      height: 3px;
-      border-top: dashed 1px #aab2c9;
-      border-bottom: dashed 1px #aab2c9;
-      margin-left: 39px;
     }
 
     .warmPrompt {
@@ -261,8 +268,7 @@
         background: url(../../../assets/images/home/shortcut-recharge-closeIcon.png) no-repeat;
       }
     }
-
-    .alipayStep,
+    
     .transferNeedMsg {
       margin-left: 47px;
 
@@ -303,33 +309,6 @@
         width: 145px;
         text-align: right;
         margin-right: 35px;
-      }
-    }
-
-    .alipayStep {
-      p.step01-txt {
-        margin-top: 28px;
-      }
-
-      img.step01-img {
-        margin-top: 17px;
-      }
-
-      p.step02-txt {
-        margin-top: 22px;
-      }
-
-      img.step02-img {
-        margin-top: 11px;
-      }
-
-      img {
-        margin-left: 34px;
-      }
-
-      p.step03-txt {
-        margin-top: 15px;
-        margin-bottom: 33px;
       }
     }
 
