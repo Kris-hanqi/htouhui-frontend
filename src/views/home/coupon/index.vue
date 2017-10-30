@@ -1,181 +1,138 @@
 <template>
-  <div class="you-hui-quan">
-    <div class="title-box">
+  <div class="coupon-wrapper">
+    <div class="coupon-wrapper__top">
       <p>优惠券</p>
-      <span>优惠券使用说明</span>
-      <a href="#">兑换优惠券</a>
+      <el-button type="text">优惠券使用说明</el-button>
+      <el-button :plain="true" type="info">兑换优惠券</el-button>
     </div>
-    <ul class="tab">
-      <li class="active">全部</li>
-      <li>现金券</li>
-      <li>加息券</li>
-      <li>礼金券</li>
-    </ul>
-    <ul class="type">
-      <li class="active">未使用</li>
-      <li>已使用</li>
-      <li>已过期</li>
-    </ul>
-    <div class="quan-list">
-      <div class="quan-box">
-        <div class="nowOpen">
-          <a class="nowOpen-btn" href="#">立即开户激活</a>
-        </div>
-        <div class="box-top">
-          <i class="icon-new"></i>
-          <p class="title"><span class="roboto-regular">30</span>元</p>
-          <p class="detail">现金券<span>［满100可用］</span></p>
-          <p class="time">2017.07.01-2017.7.30</p>
-        </div>
-        <div class="box-bottom">
-          <p class="money">计息金额：<span class="roboto-regular">1,000</span>元</p>
-          <p class="message">使用说明：投资1,000元可用</p>
-          <a class="newUse" href="#">立即使用</a>
-        </div>
+    <div class="coupon-wrapper__body">
+      <el-tabs v-model="activeName" @tab-click="handleTabClick" type="card">
+        <el-tab-pane label="全部" name="all"></el-tab-pane>
+        <el-tab-pane label="现金券" name="cash"></el-tab-pane>
+        <el-tab-pane label="加息券" name="plus_coupon"></el-tab-pane>
+        <el-tab-pane label="礼金券" name="lijin"></el-tab-pane>
+      </el-tabs>
+      
+      <div class="coupon-wrapper__menu">
+        <a href="javascript:void(0)" @click="switchStatus('unused')" :class="{ active: status === 'unused'}">未使用</a>
+        <a href="javascript:void(0)" @click="switchStatus('used')" :class="{ active: status === 'used'}">已使用</a>
+        <a href="javascript:void(0)" @click="switchStatus('expire')" :class="{ active: status === 'expire'}">已过期</a>
       </div>
-      <div class="quan-box">
-        <div class="nowOpen">
-          <a class="nowOpen-btn" href="#">立即开户激活</a>
+  
+      <div class="coupon-wrapper__list">
+        <div class="quan-box">
+          <div class="nowOpen">
+            <a class="nowOpen-btn" href="#">立即开户激活</a>
+          </div>
+          <div class="box-top">
+            <i class="icon-new"></i>
+            <p class="title"><span class="roboto-regular">30</span>元</p>
+            <p class="detail">现金券<span>［满100可用］</span></p>
+            <p class="time">2017.07.01-2017.7.30</p>
+          </div>
+          <div class="box-bottom">
+            <p class="money">计息金额：<span class="roboto-regular">1,000</span>元</p>
+            <p class="message">使用说明：投资1,000元可用</p>
+            <a class="newUse" href="#">立即使用</a>
+          </div>
         </div>
-        <div class="box-top">
-          <i class="icon-new"></i>
-          <p class="title"><span class="roboto-regular">30</span>元</p>
-          <p class="detail">现金券<span>［满100可用］</span></p>
-          <p class="time">2017.07.01-2017.7.30</p>
-        </div>
-        <div class="box-bottom">
-          <p class="money">计息金额：<span class="roboto-regular">1,000</span>元</p>
-          <p class="message">使用说明：投资1,000元可用</p>
-          <a class="newUse" href="#">立即使用</a>
-        </div>
-      </div>
-      <div class="quan-box">
-        <div class="nowOpen">
-          <a class="nowOpen-btn" href="#">立即开户激活</a>
-        </div>
-        <div class="box-top">
-          <i class="icon-new"></i>
-          <p class="title"><span class="roboto-regular">30</span>元</p>
-          <p class="detail">现金券<span>［满100可用］</span></p>
-          <p class="time">2017.07.01-2017.7.30</p>
-        </div>
-        <div class="box-bottom">
-          <p class="money">计息金额：<span class="roboto-regular">1,000</span>元</p>
-          <p class="message">使用说明：投资1,000元可用</p>
-          <img class="pass" src="../../../assets/images/home/ico-used.png" alt="">
+        <div class="quan-box">
+          <div class="nowOpen">
+            <a class="nowOpen-btn" href="#">立即开户激活</a>
+          </div>
+          <div class="box-top">
+            <i class="icon-new"></i>
+            <p class="title"><span class="roboto-regular">30</span>元</p>
+            <p class="detail">现金券<span>［满100可用］</span></p>
+            <p class="time">2017.07.01-2017.7.30</p>
+          </div>
+          <div class="box-bottom">
+            <p class="money">计息金额：<span class="roboto-regular">1,000</span>元</p>
+            <p class="message">使用说明：投资1,000元可用</p>
+            <img class="pass" src="../../../assets/images/home/ico-used.png" alt="">
+          </div>
         </div>
       </div>
     </div>
+   
   </div>
 </template>
 
-<style lang="scss" scoped>
-  .you-hui-quan {
+<script>
+  export default {
+    data() {
+      return {
+        activeName: 'all',
+        status: 'unused'
+      }
+    },
+    methods: {
+      handleTabClick(tab) {
+        console.log(tab);
+      },
+      switchStatus(data) {
+        this.status = data;
+      }
+    }
+  }
+</script>
+
+<style lang="scss">
+  .coupon-wrapper {
     width: 100%;
     height: 846px;
     box-sizing: border-box;
     padding: 20px 15px;
     background-color: #fff;
     margin-bottom: 20px;
-
-    .title-box {
-      width: 100%;
-      height: 30px;
-      margin-bottom: 15px;
-      line-height: 30px;
-      padding-left: 5px;
-
-      p {
-        display: inline-block;
-        font-size: 20px;
-        color: #274161;
-      }
-
-      a {
-        float: right;
-        display: inline-block;
-        width: 86px;
-        height: 30px;
-        margin-right: 15px;
-        box-sizing: border-box;
-        border-radius: 100px;
-        background-color: #fff;
-        border: solid 1px #0671f0;
-        line-height: 30px;
-        text-align: center;
-        color: #0671f0;
-        font-size: 14px;
-
-        &:hover {
-          color: #fff;
-          background-color: #0671f0;
-        }
-      }
-
-      span {
-        float: right;
-        font-size: 14px;
-        color: #0671f0;
-        cursor: pointer;
-      }
+  }
+  
+  .coupon-wrapper__top {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 15px;
+    line-height: 30px;
+    padding-left: 5px;
+  
+    p {
+      display: inline-block;
+      font-size: 20px;
+      color: #274161;
     }
-
-    .tab {
-      width: 100%;
-      height: 50px;
-      margin-bottom: 20px;
-      background-color: #f6f9fe;
-      line-height: 50px;
-
-      li {
-        float: left;
-        width: 170px;
-        box-sizing: border-box;
-        text-align: center;
-        font-size: 18px;
-        color: #394b67;
-        cursor: pointer;
-      }
-
-      li.active {
-        background-color: #fff;
-        color: #0573f4;
-        border-top: 2px solid #0573f4;
-        box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.5), -5px 0 5px -5px rgba(0, 0, 0, 0.5);
-      }
+  
+    .el-button--info {
+      float: right;
+      border-radius: 100px;
+      margin-right: 10px;
     }
-
-    .type {
-      width: 100%;
-      height: 25px;
-      box-sizing: border-box;
-      padding-left: 35px;
-      margin-bottom: 25px;
-
-      li {
-        float: left;
-        width: 73px;
-        height: 25px;
-        margin-right: 20px;
-        box-sizing: border-box;
-        line-height: 25px;
-        text-align: center;
-        font-size: 16px;
-        color: #394b67;
-        cursor: pointer;
-      }
-
-      li.active {
-        border-radius: 100px;
-        background-color: #0671f0;
-        color: #fff;
-      }
+  
+    .el-button--text {
+      float: right;
     }
   }
 
-  .quan-list {
+  .coupon-wrapper__menu {
+    padding-left: 30px;
+    
+    a {
+      margin-right: 20px;
+      color: #394b67;
+    }
+  
+    a.active {
+      height: 26px;
+      padding: 4px 15px;
+      line-height: 26px;
+      color: #fff;
+      border-radius: 100px;
+      background-color: #0671f0;
+    }
+  }
+  
+  .coupon-wrapper__list {
     width: 100%;
     box-sizing: border-box;
+    margin-top: 20px;
     padding-left: 30px;
   }
 
