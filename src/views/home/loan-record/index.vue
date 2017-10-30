@@ -2,6 +2,24 @@
   <div class="loan-record-wrapper">
     <div class="loan-record-wrapper__header">
       <h1>借款记录</h1>
+      <ul class="allAsset">
+        <li>
+          <p><span>123<i>元</i></span></p>
+          <p class="title">待还总额</p>
+        </li>
+        <li>
+          <p><span>123<i>元</i></span></p>
+          <p class="title">本月待还金额</p>
+        </li>
+        <li>
+          <p><span>1231<i>笔</i></span></p>
+          <p class="title">本月待还笔数</p>
+        </li>
+        <li>
+          <p><span>12121<i>元</i></span></p>
+          <p class="title">逾期金额</p>
+        </li>
+      </ul>
     </div>
     
     <div class="loan-record-wrapper__body">
@@ -64,6 +82,9 @@
     methods: {
       toggleType(tab) {
         console.log(tab);
+      },
+      handleCurrentChange(val) {
+        this.listQuery.pageNo = val;
       }
     }
   }
@@ -104,6 +125,33 @@
       margin-top: 13px;
       padding: 17px 20px;
       background-color: #fff;
+    }
+  
+    ul li {
+      float: left;
+      margin-top: 50px;
+      width: 25%;
+  
+      p {
+        line-height: 1;
+        font-size: 14px;
+        text-align: center;
+        color: #7c86a2;
+      }
+      
+      p.title {
+        padding-top: 10px;
+      }
+      
+      p span {
+        font-size: 26px;
+        color: #475872;
+        text-align: center;
+      }
+  
+      span i {
+        font-size: 14px;
+      }
     }
   }
 </style>

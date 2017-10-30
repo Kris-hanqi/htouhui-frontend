@@ -26,6 +26,7 @@
     "js-base64": "^2.3.2",
     "js-cookie": "^2.1.4",
     "lodash": "^4.17.4",
+    "mint-ui": "^2.2.9",
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.19.1",
     "normalize.css": "^7.0.0",

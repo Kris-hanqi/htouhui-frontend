@@ -55,6 +55,9 @@
     methods: {
       toggleType(tab) {
         console.log(tab);
+      },
+      handleCurrentChange(val) {
+        this.listQuery.pageNo = val;
       }
     }
   }
