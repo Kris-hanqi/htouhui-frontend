@@ -1,5 +1,5 @@
 <template>
-  <div class="interBankTransfer">
+  <div class="inter-bank-transfer-wrapper">
     <div class="recharge-wrapper__steps">
       <p>操作流程（以招商银行为例）</p>
       <img :src="img_inter_bank_step" alt="">
@@ -80,3 +80,9 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .inter-bank-transfer-wrapper {
+    padding: 0 20px;
+  }
+</style>
