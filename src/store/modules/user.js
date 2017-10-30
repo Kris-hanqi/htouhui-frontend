@@ -33,7 +33,7 @@ function isShowNovicePlanMessage(data) {
   }
 }
 
-function isBorrower() {
+function isBorrower(data) {
   let returnData = false;
   const result = data.roles.find(v => v === 'LOANER');
 
@@ -82,8 +82,8 @@ const user = {
     SET_SHOW_NOVICE_PLAN_MESSAGE: (state, showNovicePlanMessage) => {
       state.showNovicePlanMessage = showNovicePlanMessage;
     },
-    SET_IS_BORROWER: (state, showNovicePlan) => {
-      state.showNovicePlan = showNovicePlan;
+    SET_IS_BORROWER: (state, isBorrower) => {
+      state.isBorrower = isBorrower;
     }
   },
 
@@ -97,6 +97,7 @@ const user = {
             const status = getUserStatus(data);
             const showNovicePlan = isShowNovicePlan(data);
             const showNovicePlanMessage = isShowNovicePlanMessage(data);
+
             commit('SET_NAME', data.realName);
             commit('SET_MOBILE', data.mobileNumber);
             commit('SET_BANK_NAME', data.bankName);
@@ -104,7 +105,7 @@ const user = {
             commit('SET_STATUS', status);
             commit('SET_SHOW_NOVICE_PLAN', showNovicePlan);
             commit('SET_SHOW_NOVICE_PLAN_MESSAGE', showNovicePlanMessage);
-            commit('SET_IS_BORROWER', isBorrower());
+            commit('SET_IS_BORROWER', isBorrower(data));
           }
           resolve(response)
         }).catch(error => {

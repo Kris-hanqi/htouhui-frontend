@@ -25,9 +25,9 @@ service.interceptors.request.use(config => {
 // 响应拦截器
 service.interceptors.response.use(
   response => {
-    const res = response.data;
+    // const res = response.data;
 
-    console.log(res);
+    console.log('');
 
     return response;
   },

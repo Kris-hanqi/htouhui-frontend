@@ -17,7 +17,7 @@ const user = {
   isJoinNovicePlan: true,
   isHaveTransfer: true,
   status: 'without_account',
-  roles: []
+  roles: ['LOANER']
 };
 
 export default {
