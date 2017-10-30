@@ -47,7 +47,7 @@
         <el-table-column prop="typeinfo" label="类型" width="110"></el-table-column>
         <el-table-column prop="money" label="变动金额" width="100"></el-table-column>
         <el-table-column prop="trusteeship" label="管理平台" width="140"></el-table-column>
-        <el-table-column prop="canUseMoney" label="可用余额" width="100"></el-table-column>
+        <el-table-column prop="balance" label="可用余额" width="100"></el-table-column>
         <el-table-column prop="detail" :show-overflow-tooltip="true" label="备注" width="100"></el-table-column>
       </el-table>
       <div class="pages" v-show="!listLoading">
@@ -74,8 +74,8 @@
         listLoading: true,
         listQuery: {
           pageNo: 1,
-          size: 10,
-          beginTime: '',
+          size: 5,
+          startTime: '',
           endTime: '',
           type: ''
         },
@@ -99,7 +99,7 @@
         this.listQuery.type = this.projectType;
         if (this.dateType !== 'other') {
           dates = getStartAndEndTime(this.dateType);
-          this.listQuery.beginTime = dates.startTime;
+          this.listQuery.startTime = dates.startTime;
           this.listQuery.endTime = dates.endTime;
         } else {
           if (this.selectDates.startTime && this.selectDates.endTime) {
@@ -110,7 +110,7 @@
               });
               return;
             }
-            this.listQuery.beginTime = getDateString(this.selectDates.startTime);
+            this.listQuery.startTime = getDateString(this.selectDates.startTime);
             this.listQuery.endTime = getDateString(this.selectDates.endTime);
           } else {
             this.$message({

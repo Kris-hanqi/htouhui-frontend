@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch'
+import fetch from '@/utils/fetch';
 
 /** 获取我的资产 */
 export function fetchAsset() {
@@ -17,3 +17,11 @@ export function fetchRepayCalendar(data) {
   })
 }
 
+/** 获取设置交易密码请求数据 */
+export function fetchTransactionPassword(data) {
+  return fetch({
+    url: 'user/setPwd',
+    method: 'get',
+    params: data
+  })
+}

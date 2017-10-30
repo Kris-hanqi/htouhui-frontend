@@ -14,7 +14,10 @@ export function getUserInfo() {
   return fetch({
     url: 'user/userInfo',
     method: 'get',
-    params: { }
+    params: {
+      isGetRole: true,
+      isGetMenuAuth: true
+    }
   })
 }
 
