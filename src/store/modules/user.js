@@ -27,6 +27,12 @@ function isShowNovicePlan(data) {
   }
 }
 
+function isShowNovicePlanMessage(data) {
+  if (data.isJoinNovicePlan) {
+    return true;
+  }
+}
+
 const user = {
   state: {
     token: getToken(),
@@ -35,7 +41,8 @@ const user = {
     status: 0, // 用户状态
     bankCard: '', // 银行卡号
     bankName: '', // 银行名称
-    showNovicePlan: false
+    showNovicePlan: false,
+    showNovicePlanMessage: false
   },
 
   mutations: {
@@ -59,6 +66,9 @@ const user = {
     },
     SET_SHOW_NOVICE_PLAN: (state, showNovicePlan) => {
       state.showNovicePlan = showNovicePlan;
+    },
+    SET_SHOW_NOVICE_PLAN_MESSAGE: (state, showNovicePlanMessage) => {
+      state.showNovicePlanMessage = showNovicePlanMessage;
     }
   },
 
@@ -70,12 +80,14 @@ const user = {
           const data = response.data.data;
           const status = getUserStatus(data);
           const showNovicePlan = isShowNovicePlan(data);
+          const showNovicePlanMessage = isShowNovicePlanMessage(data);
           commit('SET_NAME', data.realName);
           commit('SET_MOBILE', data.mobileNumber);
           commit('SET_BANK_NAME', data.bankName);
           commit('SET_BANK_CARD', data.bankCard);
           commit('SET_STATUS', status);
           commit('SET_SHOW_NOVICE_PLAN', showNovicePlan);
+          commit('SET_SHOW_NOVICE_PLAN_MESSAGE', showNovicePlanMessage);
           resolve(response)
         }).catch(error => {
           reject(error)
