@@ -1,8 +1,7 @@
 <template>
   <div class="recently-repayment-wrapper">
-    <div class="recently-repayment__header">
-      <h1>近期还款</h1>
-    </div>
+    <!-- 统计信息 -->
+    <loan-repayment-statistics title="近期还款" :data="repaymentData"></loan-repayment-statistics>
     
     <div class="recently-repayment__body">
       <el-table :data="list"
@@ -34,7 +33,12 @@
 </template>
 
 <script>
+  import LoanRepaymentStatistics from '../components/LoanRepaymentStatistics.vue';
+  
   export default {
+    components: {
+      LoanRepaymentStatistics
+    },
     data() {
       return {
         list: null,
@@ -44,6 +48,12 @@
           pageNo: 1,
           size: 10,
           type: ''
+        },
+        repaymentData: {
+          totalUnRepayMoney: '10000.10',
+          curMonthUnRepayMoney: '1000.10',
+          curMonthUnRepayNum: '100',
+          rsCurMonthOverdueMoney: '1000000000'
         }
       }
     },

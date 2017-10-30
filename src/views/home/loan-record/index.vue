@@ -1,26 +1,7 @@
 <template>
   <div class="loan-record-wrapper">
-    <div class="loan-record-wrapper__header">
-      <h1>借款记录</h1>
-      <ul class="allAsset">
-        <li>
-          <p><span>123<i>元</i></span></p>
-          <p class="title">待还总额</p>
-        </li>
-        <li>
-          <p><span>123<i>元</i></span></p>
-          <p class="title">本月待还金额</p>
-        </li>
-        <li>
-          <p><span>1231<i>笔</i></span></p>
-          <p class="title">本月待还笔数</p>
-        </li>
-        <li>
-          <p><span>12121<i>元</i></span></p>
-          <p class="title">逾期金额</p>
-        </li>
-      </ul>
-    </div>
+    <!-- 统计信息 -->
+    <loan-repayment-statistics title="借款记录" :data="loanData"></loan-repayment-statistics>
     
     <div class="loan-record-wrapper__body">
       <el-tabs v-model="activeName" @tab-click="toggleType">
@@ -60,7 +41,12 @@
 </template>
 
 <script>
+  import LoanRepaymentStatistics from '../components/LoanRepaymentStatistics.vue';
+  
   export default {
+    components: {
+      LoanRepaymentStatistics
+    },
     data() {
       return {
         activeName: 'repaying',
@@ -71,6 +57,12 @@
           pageNo: 1,
           size: 10,
           type: ''
+        },
+        loanData: {
+          totalUnRepayMoney: '10000.10',
+          curMonthUnRepayMoney: '1000.10',
+          curMonthUnRepayNum: '100',
+          rsCurMonthOverdueMoney: '1000000000'
         }
       }
     },
@@ -125,33 +117,6 @@
       margin-top: 13px;
       padding: 17px 20px;
       background-color: #fff;
-    }
-  
-    ul li {
-      float: left;
-      margin-top: 50px;
-      width: 25%;
-  
-      p {
-        line-height: 1;
-        font-size: 14px;
-        text-align: center;
-        color: #7c86a2;
-      }
-      
-      p.title {
-        padding-top: 10px;
-      }
-      
-      p span {
-        font-size: 26px;
-        color: #475872;
-        text-align: center;
-      }
-  
-      span i {
-        font-size: 14px;
-      }
     }
   }
 </style>
