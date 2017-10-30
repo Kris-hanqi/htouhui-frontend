@@ -16,7 +16,9 @@ for (let i = 0; i < count; i++) {
     maxInterestMoney: '@natural(10, 100)',
     interestDeadline: '@natural(10, 30)',
     'rate|1': [1.2, 1.5, 2],
-    money: '@natural(1000, 3000)'
+    money: '@natural(1000, 3000)',
+    'isNew|1': [0, 1],
+    'description|1': ['投资0元可用,最高计息金额500元,最高计息30天']
   }));
 }
 

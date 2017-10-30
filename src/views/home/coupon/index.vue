@@ -26,7 +26,7 @@
             <!--<a href="#">立即开户激活</a>-->
           <!--</div>-->
           <div class="coupon-wrapper__box-top">
-            <i class="icon-new"></i>
+            <i class="icon-new" v-if="coupon.isNew === 1"></i>
             <p class="title">
               <span v-if="coupon.type === 'plus_coupon'"><span class="roboto-regular">{{ coupon.rate }}</span>%</span>
               <span v-else=""><span class="roboto-regular">{{ coupon.money }}</span>元</span>
@@ -38,11 +38,11 @@
             <div class="content" v-if="coupon.type === 'plus_coupon'">
               <p class="money">最高计息金额：<span class="roboto-regular">{{ coupon.maxInterestMoney }}</span>元</p>
               <p class="money">最高计息天数：<span class="roboto-regular">{{ coupon.interestDeadline }}</span>天</p>
-              <p class="message">使用说明：投资1,000元可用</p>
+              <p class="message" style="line-height: 1.67;">使用说明：{{ coupon.description }}</p>
             </div>
             <div class="content" v-else>
               <p class="money">计息金额：<span class="roboto-regular">{{ coupon.maxInterestMoney }}</span>元</p>
-              <p class="message">使用说明：投资1,000元可用</p>
+              <p class="message" style="line-height: 1.67;">使用说明：{{ coupon.description }}</p>
             </div>
             <a class="newUse" href="#">立即使用</a>
           </div>
@@ -60,7 +60,7 @@
           </div>
           <div class="box-bottom">
             <p class="money">计息金额：<span class="roboto-regular">1,000</span>元</p>
-            <p class="message">使用说明：投资1,000元可用</p>
+            <p class="message"></p>
             <img class="pass" src="../../../assets/images/home/ico-used.png" alt="">
           </div>
         </div>
