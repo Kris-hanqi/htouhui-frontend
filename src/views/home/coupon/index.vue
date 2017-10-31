@@ -103,11 +103,10 @@
     methods: {
       getPageList() {
         fetchPageList(this.listQuery).then(response => {
-          console.log(response);
           const data = response.data;
           if (data.meta.code === 200) {
-            this.list = data.data.data;
-            this.total = data.data.total;
+            this.list = data.data.data || null;
+            this.total = data.data.total || 0;
           }
           this.listLoading = false
         })

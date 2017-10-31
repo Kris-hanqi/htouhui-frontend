@@ -4,7 +4,7 @@
     <loan-repayment-statistics title="借款记录" :data="loanData"></loan-repayment-statistics>
     
     <div class="loan-record-wrapper__body">
-      <el-tabs v-model="activeName" @tab-click="toggleType">
+      <el-tabs v-model="listQuery.type" @tab-click="toggleType">
         <el-tab-pane label="还款中" name="repaying"></el-tab-pane>
         <el-tab-pane label="待放款" name="rechecking"></el-tab-pane>
         <el-tab-pane label="待发布" name="waiting"></el-tab-pane>
@@ -42,6 +42,7 @@
 
 <script>
   import LoanRepaymentStatistics from '../components/LoanRepaymentStatistics.vue';
+  import { fetchPageList } from '@/api/home/loan-record';
   
   export default {
     components: {
@@ -49,14 +50,13 @@
     },
     data() {
       return {
-        activeName: 'repaying',
         list: null,
         total: 0,
         listLoading: true,
         listQuery: {
           pageNo: 1,
           size: 10,
-          type: ''
+          type: 'repaying'
         },
         loanData: {
           totalUnRepayMoney: '10000.10',
@@ -72,12 +72,26 @@
       }
     },
     methods: {
+      getPageList() {
+        this.listLoading = true;
+        fetchPageList(this.listQuery).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.list = data.data.data;
+            this.total = data.data.totalPage;
+          }
+          this.listLoading = false
+        })
+      },
       toggleType(tab) {
         console.log(tab);
       },
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
       }
+    },
+    created() {
+      this.getPageList();
     }
   }
 </script>

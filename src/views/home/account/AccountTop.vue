@@ -21,6 +21,7 @@
 </template>
 <script>
   import { mapGetters } from 'vuex';
+  import { fetchUnlockBankCard } from '@/api/home/account-set';
   
   export default {
     data() {

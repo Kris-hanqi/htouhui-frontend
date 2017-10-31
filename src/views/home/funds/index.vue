@@ -63,7 +63,7 @@
 </template>
 
 <script>
-  import { fetchPageList } from '@/api/funds';
+  import { fetchPageList } from '@/api/home/funds';
   import { getStartAndEndTime, getDateString } from '@/utils';
   
   export default {

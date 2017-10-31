@@ -9,7 +9,7 @@
 <script>
   import FlatPickr from 'vue-flatpickr-component';
   import 'flatpickr/dist/flatpickr.css';
-  import { fetchRepayCalendar } from '@/api/account';
+  import { fetchRepayCalendar } from '@/api/home/account';
   import { dateStrFormat } from '@/utils';
   const testDates = ['2017-10-20', '2017-10-04', '2017-12-04'];
   

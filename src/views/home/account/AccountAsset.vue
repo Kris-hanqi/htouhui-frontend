@@ -4,19 +4,19 @@
     <ul class="allAsset">
       <li>
         <p class="txt01">总资产</p>
-        <p class="txt02"><i class="num-font">{{ data.sumCapital }}</i>元</p>
+        <p class="txt02"><i class="num-font">{{ data.sumCapital || 0 }}</i>元</p>
       </li>
       <li>
         <p class="txt01">累计收益</p>
-        <p class="txt02"><i class="num-font">{{ data.accumulatedIncome }}</i>元</p>
+        <p class="txt02"><i class="num-font">{{ data.accumulatedIncome || 0 }}</i>元</p>
       </li>
       <li>
         <p class="txt01">冻结金额</p>
-        <p class="txt02"><i class="num-font">{{ data.balance }}</i>元</p>
+        <p class="txt02"><i class="num-font">{{ data.balance || 0 }}</i>元</p>
       </li>
       <li>
         <p class="txt01">可用余额</p>
-        <p class="txt02"><i class="num-font">{{ data.frozenMoney }}</i>元</p>
+        <p class="txt02"><i class="num-font">{{ data.frozenMoney || 0 }}</i>元</p>
       </li>
     </ul>
   </div>

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import { fetchAsset } from '@/api/account';
+  import { fetchAsset } from '@/api/home/account';
   import AccountTop from './AccountTop.vue';
   import AccountAsset from './AccountAsset.vue';
   import AccountInvest from './AccountInvest.vue';
