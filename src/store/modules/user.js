@@ -52,6 +52,7 @@ const user = {
     status: 0, // 用户状态
     bankCard: '', // 银行卡号
     bankName: '', // 银行名称
+    accountId: '', // 电子账号
     showNovicePlan: false,
     showNovicePlanMessage: false,
     isBorrower: false // 是否是借款人
@@ -72,6 +73,9 @@ const user = {
     },
     SET_BANK_NAME: (state, bankName) => {
       state.bankName = bankName;
+    },
+    SET_ACCOUNT_ID: (state, accountId) => {
+      state.accountId = accountId;
     },
     SET_BANK_CARD: (state, bankCard) => {
       state.bankCard = bankCard;
@@ -94,6 +98,7 @@ const user = {
         getUserInfo().then(response => {
           if (response.data.meta.code === 200) {
             const data = response.data.data;
+            console.log(data);
             const status = getUserStatus(data);
             const showNovicePlan = isShowNovicePlan(data);
             const showNovicePlanMessage = isShowNovicePlanMessage(data);
@@ -102,6 +107,7 @@ const user = {
             commit('SET_MOBILE', data.mobileNumber);
             commit('SET_BANK_NAME', data.bankName);
             commit('SET_BANK_CARD', data.bankCard);
+            commit('SET_ACCOUNT_ID', data.accountId);
             commit('SET_STATUS', status);
             commit('SET_SHOW_NOVICE_PLAN', showNovicePlan);
             commit('SET_SHOW_NOVICE_PLAN_MESSAGE', showNovicePlanMessage);

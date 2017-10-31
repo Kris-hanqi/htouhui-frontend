@@ -4,7 +4,7 @@
     <table border="0" cellspacing="0" cellpadding="0" class="accountSetTable">
       <tr>
         <td>真实姓名</td>
-        <td>哈哈哈</td>
+        <td>{{ name }}</td>
         <td>已认证</td>
       </tr>
       <tr>
@@ -19,12 +19,12 @@
       </tr>
       <tr>
         <td>银行卡</td>
-        <td><i>**** **** **** 0974</i>（此卡是默认提现卡）</td>
+        <td><i>{{ bankCard }}</i>（此卡是默认提现卡）</td>
         <td><button>解绑</button></td>
       </tr>
       <tr>
         <td>电子账号</td>
-        <td>6212 4620 0000 0330 361 <button class="btnBlue">复制</button></td>
+        <td>{{ accountId }}<button class="btnBlue">复制</button></td>
         <td>已认证</td>
       </tr>
       <tr class="borderNone">
@@ -52,8 +52,8 @@
       </tr>
       <tr class="borderNone">
         <td>手机认证</td>
-        <td>哈哈哈</td>
-        <td rowspan="2" class="borderLine"><router-link to="amendLoginPhoneNum"><button>修改</button></router-link></td>
+        <td>{{ mobile }}</td>
+        <td rowspan="2" class="borderLine"><router-link to="updateMobile"><button>修改</button></router-link></td>
       </tr>
       <tr>
         <td colspan="2" class="tableSmallFontColor textAlignLeft tablePadding">保障资金安全，转入、转出、投资等资金相关操作时使用</td>
@@ -77,6 +77,24 @@
     </table>
   </div>
 </template>
+
+<script>
+  import { mapGetters } from 'vuex';
+  
+  export default {
+    computed: {
+      ...mapGetters([
+        'name',
+        'mobile',
+        'bankCard',
+        'accountId'
+      ])
+    },
+    data() {
+      return {}
+    }
+  }
+</script>
 
 <style lang="scss">
   .accountSet {

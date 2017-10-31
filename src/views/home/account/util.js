@@ -38,23 +38,23 @@ export function getInvestData(data) {
 
     const item = {};
 
-    if (key === 'xsMap') {
+    if (key === 'noviceMap') {
       Object.assign(item, mapData.planNovice, value);
     }
 
-    if (key === 'kzMap') {
+    if (key === 'skyMap') {
       Object.assign(item, mapData.plan21Day, value);
     }
 
-    if (key === 'lhMap') {
+    if (key === 'quantificationMap') {
       Object.assign(item, mapData.SxbQuantify, value);
     }
 
-    if (key === 'sxbMap') {
+    if (key === 'shengxinbaoMap') {
       Object.assign(item, mapData.SxbRegular, value);
     }
 
-    if (key === 'dqMap') {
+    if (key === 'regularMap') {
       Object.assign(item, mapData.regularMortgage, value);
     }
 

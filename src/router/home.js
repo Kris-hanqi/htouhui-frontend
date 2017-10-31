@@ -136,9 +136,9 @@ export const constantRouterMap = [
             component: _import('home/account-set/TransactionPassword')
           },
           {
-            path: 'amendLoginPhoneNum',
+            path: 'updateMobile',
             name: '修改绑定手机号',
-            component: _import('home/account-set/amendLoginPhoneNum')
+            component: _import('home/account-set/UpdateMobile')
           }
         ]
       },

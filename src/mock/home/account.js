@@ -6,23 +6,23 @@ const assetStatisticsData = {
 };
 
 const investStatisticsData = {
-  xsMap: { // 新手投资总额
+  noviceMap: { // 新手投资总额
     sum: 1000.0,
     interest: 4.2
   },
-  kzMap: { // 21天总投资额
+  skyMap: { // 21天总投资额
     sum: 2000,
     interest: 20
   },
-  lhMap: { // 量化
+  quantificationMap: { // 量化
     sum: 2000,
     interest: 10
   },
-  sxbMap: { // 升薪宝
+  shengxinbaoMap: { // 升薪宝
     sum: 2000,
     interest: 10
   },
-  dqMap: { // 定期
+  regularMap: { // 定期
     sum: 2000,
     interest: 10
   }

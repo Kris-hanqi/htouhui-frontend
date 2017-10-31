@@ -10,7 +10,7 @@
   import FlatPickr from 'vue-flatpickr-component';
   import 'flatpickr/dist/flatpickr.css';
   import { fetchRepayCalendar } from '@/api/home/account';
-  import { dateStrFormat } from '@/utils';
+  import { dateStrFormat, getDateString } from '@/utils';
   const testDates = ['2017-10-20', '2017-10-04', '2017-12-04'];
   
   export default {
@@ -36,18 +36,38 @@
             if (result !== -1) {
               dayElem.innerHTML += '<span class="event"></span>';
             }
-          }
+          },
+          onMonthChange: [
+            function(selectedDates, dateStr, instance) {
+              console.log(selectedDates);
+              console.log(dateStr);
+              console.log(instance);
+            }
+          ],
+          onYearChange: [
+            function(selectedDates, dateStr, instance) {
+              console.log(selectedDates);
+              console.log(dateStr);
+              console.log(instance);
+            }
+          ]
         }
       }
     },
     methods: {
-      getRepayCalendarData(data) {
-        fetchRepayCalendar(data).then(response => {
-          if (response.data.meta.code === 200) {
-            this.assetData = response.data.data;
-          }
+      getRepayCalendarData(date) {
+        date = date || new Date();
+        date = getDateString(date, 'YYYY-MM');
+        fetchRepayCalendar({ month: date }).then(response => {
+          console.log(response);
+//          if (response.data.meta.code === 200) {
+//            this.assetData = response.data.data;
+//          }
         })
       }
+    },
+    created() {
+      this.getRepayCalendarData();
     }
   }
 </script>
