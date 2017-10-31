@@ -13,18 +13,26 @@
           <hth-sidebar :show-novice-plan="showNovicePlan" :show-loan="isBorrower"></hth-sidebar>
         </div>
         <div class="main-container">
+          <!-- 步骤操作区域 -->
           <div class="prompt-message" v-if="operationTips">
             <span>{{ operationTips.title }}</span>
             <el-button @click="operationTips.fun">{{ operationTips.btnText }}</el-button>
           </div>
-          <div class="prompt-message" v-else>
-            <!--<span>{{ operationTips.title }}</span>-->
-            <!--<el-button>{{ operationTips.btnText }}</el-button>-->
+          <!-- 广告位 -->
+          <div v-else>
+            <div class="prompt-ad" v-show="ARecommend">
+              <!-- 标题 -->
+              <div>
+                <span class="title">{{ARecommend.title}}</span>
+                <span>{{ ARecommend.couponInfo }}</span>
+                <!-- 按钮 -->
+                <a class="fr" :href="ARecommend.address">立即加入</a>
+              </div>
+            </div>
           </div>
           <div class="main-container__router">
-          
+            <router-view></router-view>
           </div>
-          <router-view></router-view>
         </div>
       </div>
     </div>
@@ -40,7 +48,7 @@
   import HthBreadcrumb from './breadcrumb';
   import OpenAccount from './OpenAccount.vue';
   import HthSidebar from './Sidebar';
-  import { fetchARecommend } from '@/api/home/public';
+  import { fetchAdRecommend } from '@/api/home/public';
 
   export default {
     components: {
@@ -88,7 +96,7 @@
     },
     methods: {
       getARecommend() {
-        fetchARecommend().then(response => {
+        fetchAdRecommend().then(response => {
           if (response.data.meta.code === 200) {
             this.ARecommend = response.data.data;
           }
@@ -101,16 +109,8 @@
         this.dialogOpenAccountVisible = false;
       }
     },
-    watch: {
-      status(val, oldVal) {
-        console.log(val);
-        console.log(oldVal);
-      }
-    },
     created() {
-      if (this.status === 3) {
-        this.getARecommend();
-      }
+      this.getARecommend();
       this.$store.dispatch('GetUserInfo');
     }
   };
@@ -139,6 +139,7 @@
     .prompt-message {
       width: 100%;
       height: 54px;
+      margin-bottom: 15px;
       background-color: #fcf8e3;
       line-height: 54px;
   
@@ -162,9 +163,41 @@
         margin-top: 10px;
       }
     }
-  
-    .main-container__router {
-      margin-top: 8px;
+    
+    .prompt-ad {
+      overflow: hidden;
+      width: 832px;
+      height: 54px;
+      line-height: 54px;
+      margin-bottom: 15px;
+      background: url(../../../assets/images/home/ad-recommend.png) no-repeat #fff;
+      box-shadow: 0 2px 4px 0 rgba(67, 135, 186, 0.14);
+      
+      span.title {
+        padding-left: 35px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #fff;
+      }
+      
+      span {
+        padding-left: 60px;
+        font-size: 18px;
+        color: #4a4949;
+      }
+      
+      a {
+        width: 100px;
+        height: 36px;
+        margin-top: 10px;
+        margin-right: 30px;
+        line-height: 36px;
+        font-size: 16px;
+        text-align: center;
+        color: #fff;
+        border-radius: 100px;
+        background-color: #ff6a40;
+      }
     }
   }
 </style>

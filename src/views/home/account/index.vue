@@ -60,10 +60,6 @@
 </script>
 
 <style lang="scss">
-  .account-wrapper__top {
-    margin-top: 8px;
-  }
-  
   .account-wrapper__asset {
     margin-top: 16px;
   }
