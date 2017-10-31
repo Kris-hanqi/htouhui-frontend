@@ -14,14 +14,14 @@
       <span style="font-size: 20px; color: #ee5544">确认解绑银行卡？</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="unlockBankCard">确 定</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 <script>
   import { mapGetters } from 'vuex';
-  // import { fetchUnlockBankCard } from '@/api/home/account-set';
+  import { fetchUnlockBankCard } from '@/api/home/account-set';
   
   export default {
     data() {
@@ -48,6 +48,9 @@
         if (this.status === 0) {
           console.log('跳转开户页面');
         }
+      },
+      unlockBankCard() {
+        fetchUnlockBankCard().then()
       },
       toRouter(path) {
         this.$router.push('/' + path);

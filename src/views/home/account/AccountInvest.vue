@@ -11,27 +11,23 @@
     <div class="fr">
       <table>
         <thead>
-        <tr>
-          <td class="td1">
-            <i></i>
-          </td>
-          <td class="td2">&nbsp本金</td>
-          <td class="td3">收益</td>
-          <td class="td4">
-            <i></i>
-          </td>
-        </tr>
+          <tr>
+            <td class="td1"><i></i></td>
+            <td class="td2">&nbsp本金</td>
+            <td class="td3">收益</td>
+            <td class="td4"><i></i></td>
+          </tr>
         </thead>
         <tbody>
-        <tr v-for="obj in tableData">
+        <tr v-for="item in list" :key="item.order">
           <td class="td1">
-            <span v-bind:style="{ background: obj.signColor}"></span>{{obj.label}}
+            <span v-bind:style="{ background: item.color}"></span>{{item.label}}
           </td>
           <td class="td2">
-            <span class="num">{{obj.capital}}</span>元
+            <span class="num">{{item.sum}}</span>元
           </td>
           <td class="td3">
-            <span class="num">{{obj.earnings}}</span>元
+            <span class="num">{{item.interest}}</span>元
           </td>
           <td class="td4">
             <button>立即投资</button>
@@ -45,6 +41,8 @@
 </template>
 <script>
   import InvestChart from './components/InvestChart.vue';
+  import { fetchInvest } from '@/api/home/account';
+  import { getInvestData } from './util';
 
   export default {
     components: {
@@ -73,14 +71,21 @@
           },
           cutoutPercentage: 70
         },
-        tableData: [
-          { label: '新手计划', signColor: '#f8e71c', capital: '1000.00', earnings: '20.00' },
-          { label: '21天计划', signColor: '#ffa837', capital: '20,000.00', earnings: '130.00' },
-          { label: '升薪宝量化', signColor: '#b8e986', capital: '30,000.00', earnings: '100.00' },
-          { label: '升薪宝定期', signColor: '#50e3c2', capital: '5,000.00', earnings: '300.00' },
-          { label: '定期抵押', signColor: '#06b7f0', capital: '11,390.00', earnings: '30.0' }
-        ]
+        list: []
       }
+    },
+    methods: {
+      getData() {
+        fetchInvest().then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.list = getInvestData(data.data);
+          }
+        })
+      }
+    },
+    created() {
+      this.getData();
     }
   }
 </script>

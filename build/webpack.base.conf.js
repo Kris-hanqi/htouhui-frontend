@@ -3,13 +3,16 @@ const utils = require('./utils');
 const webpack = require('webpack');
 const config = require('../config');
 
-const glob = require('glob');
-const entries =  utils.getMultiEntry('./src/' + config.moduleName + '/**/*.js'); // 获得入口js文件
+const entries =  utils.getMultiEntry('./src/' + config.moduleName + '/**/*.html'); // 获得入口js文件
+
 const chunks = Object.keys(entries);
 
 console.log(chunks);
 
-const projectRoot = path.resolve(__dirname, '../');
+chunks.forEach(v => {
+  entries[v] = entries[v].replace('html', 'js');
+});
+
 const vuxLoader = require('vux-loader');
 
 const vueLoaderConfig = require('./vue-loader.conf');
@@ -19,7 +22,7 @@ function resolve (dir) {
 }
 
 const webpackConfig = {
-  entry:entries,
+  entry: entries,
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',

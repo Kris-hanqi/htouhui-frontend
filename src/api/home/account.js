@@ -8,6 +8,14 @@ export function fetchAsset() {
   })
 }
 
+/** 获取我的投资数据 */
+export function fetchInvest() {
+  return fetch({
+    url: 'user/investStatisticsChart',
+    method: 'get'
+  })
+}
+
 /**
  * 还款日历
  * @param data
