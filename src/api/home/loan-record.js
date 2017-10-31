@@ -1,9 +1,9 @@
 import fetch from '@/utils/fetch';
 
-/** 借款记录 */
+/** 获取借款记录 / 无参数返回总数 */
 export function fetchPageList(data) {
   return fetch({
-    url: 'lrstatistic',
+    url: 'user/lrstatistic',
     method: 'get',
     params: data
   })

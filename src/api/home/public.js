@@ -7,3 +7,11 @@ export function fetchBankLimit() {
     method: 'get'
   })
 }
+
+/** 获取广告推荐 */
+export function fetchAdRecommend() {
+  return fetch({
+    url: 'user/adRecommend',
+    method: 'get'
+  })
+}
