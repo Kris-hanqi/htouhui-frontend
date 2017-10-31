@@ -3,7 +3,7 @@
     <div class=""></div>
     <h1>我的投资</h1>
     <div class="fl">
-      <invest-chart :data="chartData"
+      <invest-chart :chart-data="chartData"
                     class="chart"
                     :options="chartOptions"
                     :width="200" :height="200"></invest-chart>
@@ -51,17 +51,9 @@
     data() {
       return {
         dialogVisible: false,
-        chartData: {
-          labels: ['新手计划', '21天计划', '升薪宝量化', '升薪宝定期', '定期抵押'],
-          datasets: [
-            {
-              backgroundColor: ['#f8e71c', '#ffa837', '#b8e986', '#50e3c2', '#06b7f0'],
-              data: [40, 20, 80, 10, 50]
-            }
-          ]
-        },
+        chartData: null,
         chartOptions: {
-          responsive: false,
+          responsive: true,
           segmentShowStroke: false,
           legend: {
             display: false
@@ -78,8 +70,25 @@
       getData() {
         fetchInvest().then(response => {
           const data = response.data;
-          if (data.meta.code === 200) {
+          if (data.meta.code === 200 && data.data) {
             this.list = getInvestData(data.data);
+            const chartData = {
+              labels: [],
+              datasets: [
+                {
+                  backgroundColor: [],
+                  data: []
+                }
+              ]
+            };
+            if (this.list.length) {
+              this.list.forEach(v => {
+                chartData.labels.push(v.label);
+                chartData.datasets[0].backgroundColor.push(v.color);
+                chartData.datasets[0].data.push(v.sum);
+              });
+            }
+            this.chartData = chartData;
           }
         })
       }
