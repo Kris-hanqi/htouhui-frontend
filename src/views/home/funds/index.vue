@@ -124,9 +124,8 @@
         fetchPageList(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            this.list = data.data.data;
-            this.total = data.data.totalPage;
-            console.log(this.list);
+            this.list = data.data.data || [];
+            this.total = data.data.count || 0;
           }
           this.listLoading = false
         })

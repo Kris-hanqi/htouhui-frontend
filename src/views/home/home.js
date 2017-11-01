@@ -23,7 +23,7 @@ import {
   Step,
   Checkbox
 } from 'element-ui'
-import VueClipboards from 'vue-clipboards';
+import VueClipboard from 'vue-clipboard2'
 import '@/styles/base.scss';
 import '@/styles/element-ui.scss';
 import router from '@/router/home';
@@ -56,7 +56,7 @@ Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$confirm = MessageBox.confirm;
 Vue.prototype.$message = Message;
 
-Vue.use(VueClipboards);
+Vue.use(VueClipboard);
 
 new Vue({
   el: '#app',

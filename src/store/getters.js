@@ -6,6 +6,7 @@ const getters = {
   bankCard: state => state.user.bankCard,
   accountId: state => state.user.accountId,
   showNovicePlan: state => state.user.showNovicePlan,
+  showNovicePlanMessage: state => state.user.showNovicePlan,
   isBorrower: state => state.user.isBorrower
 };
 

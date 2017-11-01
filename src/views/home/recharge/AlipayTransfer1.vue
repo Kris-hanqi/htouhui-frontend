@@ -24,15 +24,15 @@
         </ul>
         <ul class="transferNeedMsgRight fl">
           <li>
-            <span>小海</span>
+            <span>{{ accountData.name || '无' }}</span>
           </li>
           <li>
-            <span>{{ bankCard }}</span>
-            <button class="copyBtn" v-clipboard="bankCard" @success="handleSuccess">复制</button>
+            <span>{{ accountData.accountId }}</span>
+            <button class="copyBtn" v-clipboard:copy="accountData.accountId" v-clipboard:success="handleSuccess">复制</button>
           </li>
           <li>
             <span>{{ bankName }}</span>
-            <button class="copyBtn" v-clipboard="bankName" @success="handleSuccess">复制</button>
+            <button class="copyBtn" v-clipboard:copy="bankName" v-clipboard:success="handleSuccess">复制</button>
           </li>
         </ul>
       </div>
@@ -47,6 +47,12 @@
         </thead>
         <tbody>
           <tr>
+            <th>余额</th>
+            <th>单笔5万，单月20万，单日20万</th>
+            <th>单笔5万，单月20万，单日20万</th>
+            <th>共享</th>
+          </tr>
+          <tr>
             <th>余额宝</th>
             <th>暂不支持余额宝转账</th>
             <th>暂不支持余额宝转账</th>
@@ -54,18 +60,18 @@
           </tr>
           <tr>
             <th>储蓄卡快捷</th>
-            <th colspan="2">储蓄卡快捷支付限额表</th>
+            <th colspan="2" class="colspan-th">储蓄卡快捷支付限额表</th>
             <th>共享</th>
           </tr>
           <tr>
             <th>储蓄卡卡通</th>
-            <th>有证书：最大为每家银行卡通本身的支付额度<br> 无证书：不支持，收银台页面不显示账户中绑定的卡通<br> 具体以收银台显示额度为准</th>
+            <th class="long-th">有证书：最大为每家银行卡通本身的支付额度<br> 无证书：不支持，收银台页面不显示账户中绑定的卡通<br> 具体以收银台显示额度为准</th>
             <th>具体以收银台显示额度为准</th>
             <th>共享</th>
           </tr>
           <tr>
             <th>储蓄卡网银</th>
-            <th>单笔5万元、单日20万元、单月20万元（若银行端限额低于该限额，则以银行限额为准）</th>
+            <th class="long-th">单笔5万元、单日20万元、单月20万元（若银行端限额低于该限额，则以银行限额为准）</th>
             <th>不支持</th>
             <th>/</th>
           </tr>
@@ -89,11 +95,11 @@
   import img_alipay_step1 from '@/assets/images/home/recharge/alipay-step1.png';
   import img_alipay_step2 from '@/assets/images/home/recharge/alipay-step2.png';
   export default {
+    props: ['accountData'],
     data() {
       return {
         img_alipay_step1,
         img_alipay_step2,
-        bankCard: '6212461320000256288',
         bankName: '江西银行'
       }
     },
@@ -109,18 +115,18 @@
   .alipay-transfer-wrapper {
     padding: 0 20px;
   }
-  
+
   .alipay-transfer__main {
     .transferNeedUl {
       margin-top: 14px;
       margin-bottom: 55px;
-    
+
       span {
         font-size: 16px;
         line-height: 2.88;
         color: #7c86a2;
       }
-    
+
       .copyBtn {
         width: 80px;
         height: 32px;
@@ -132,23 +138,66 @@
         background-color: #fff;
         cursor: pointer;
       }
-    
+
       .copyBtn:hover {
         background-color: #0671f0;
         color: #fff;
       }
     }
-  
+
     ul.transferNeedMsgLeft {
       width: 145px;
       text-align: right;
       margin-right: 35px;
     }
+
+    table {
+      th {
+        border: solid 1px #ced9e4;
+        border-top: none;
+        border-right: none;
+        padding: 10px 0;
+        font-size: 14px;
+        color: #727e90;
+      }
+
+      th:last-child {
+        width: 110px;
+        border-right: solid 1px #ced9e4;
+      }
+
+      th:first-child {
+        width: 90px;
+      }
+
+      th.colspan-th {
+        text-align: left;
+        padding-left: 100px;
+      }
+
+      th.long-th {
+        text-align: left;
+        padding-left: 3px;
+      }
+    }
+
+    thead {
+      th {
+        height: 40px;
+        line-height: 40px;
+        border-top: solid 1px #ced9e4;
+        background-color: #f6f9fe;
+      }
+
+      th:nth-child(3) {
+        width: 206px;
+      }
+    }
   }
-  
+
   .prompt {
     padding-bottom: 40px;
-  
+
     h3 {
       font-size: 16px;
       line-height: 1;
@@ -156,7 +205,7 @@
       margin-left: 20px;
       margin-bottom: 15px;
     }
-  
+
     p {
       font-size: 14px;
       line-height: 1.79;

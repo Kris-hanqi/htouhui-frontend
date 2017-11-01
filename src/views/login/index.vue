@@ -34,7 +34,7 @@
                 <div class="from-item">
                   <div class="item-box" v-show="loginType === 0">
                     <i class="icon icon-pwd"></i>
-                    <input type="password" v-model="loginData.password" placeholder="请输入密码">
+                    <input type="text" v-model="loginData.password" placeholder="请输入密码">
                   </div>
                 </div>
                 <div class="from-item">
@@ -74,9 +74,8 @@
         img_logo,
         loginType: 0,
         loginData: {
-          username: '',
-          password: '',
-          channel: ''
+          username: 'h8982670515',
+          password: '123abc'
         }
       }
     },

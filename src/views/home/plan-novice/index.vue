@@ -1,7 +1,7 @@
 <template>
   <div class="plan-novice">
     <!--未投资-->
-    <div class="newUser-plan">
+    <div class="newUser-plan" v-if="showNovicePlanMessage">
       <div class="newUser-plan-title">
         <p>新手计划<span>1元起投，最高可投1万元 ，每人仅限1次 </span></p>
       </div>
@@ -25,9 +25,8 @@
         <a class="newUser-plan-join" href="">立即加入</a>
       </div>
     </div>
-
     <!--已投资-->
-    <div class="newUser-plan">
+    <div class="newUser-plan" v-else>
       <div class="newUser-plan-title">
         <p>加入记录</p>
       </div>
@@ -55,7 +54,7 @@
     <!--table-->
     <div class="message">
       <p class="title">您购买的债权信息</p>
-      <el-table :data="tableData" style="width: 100%">
+      <el-table :data="list" style="width: 100%">
         <el-table-column prop="number" label="项目编号" width="120"></el-table-column>
         <el-table-column prop="borrowedMoney" label="借款金额" width="100"></el-table-column>
         <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
@@ -76,21 +75,42 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+  import { planNovice } from '@/api/home/plan-novice';
+
   export default {
     data() {
       return {
-        tableData: [{
-          number: '20170817004576',
-          borrowedMoney: '10,00000.00元',
-          rate: '12.0%',
-          timeLimit: '14天',
-          investMoney: '10,00000.00元',
-          time: '2017/10/24',
-          incomePrincipal: '10,00000.00元',
-          collectPrincipal: '0',
-          state: '还款中'
-        }]
+        list: null,
+        listQuery: {
+          planId: '',
+          type: 'novice_plan',
+          purpose: '',
+          startTime: '',
+          endTime: '',
+          pageNo: 1,
+          pageSize: 1
+        }
       }
+    },
+    computed: {
+      ...mapGetters([
+        'showNovicePlanMessage'
+      ])
+    },
+    methods: {
+      planNoviceList() {
+        planNovice(this.listQuery).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.list = data.data.data;
+            console.log(this.list);
+          }
+        })
+      }
+    },
+    created() {
+      this.planNoviceList();
     }
   }
 </script>

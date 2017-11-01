@@ -17,7 +17,7 @@
           <sms-timer @run="sendCode"></sms-timer>
         </li>
       </ul>
-      <p class="yzmCodeSent">校验码已发出，请注意查收短信，如果没有收到，你可以在111秒后要求系统重新发送</p>
+      <p class="yzmCodeSent">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
       <button class="submitBtn">提交</button>
     </div>
     <div class="splitLine"></div>
@@ -30,6 +30,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import { fetchSendCode } from '@/api/public';
   import SmsTimer from '@/common/sms-timer';
   
   export default {
@@ -47,7 +48,9 @@
     },
     methods: {
       sendCode() {
-        console.log(123);
+        fetchSendCode({ authType: 'change_binding_mobile_number' }).then(response => {
+          console.log(response);
+        })
       }
     }
   }

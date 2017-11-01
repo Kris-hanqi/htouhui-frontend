@@ -6,16 +6,17 @@
         <fast-recharge></fast-recharge>
       </el-tab-pane>
       <el-tab-pane label="跨行转账" name="two">
-        <inter-bank-transfer></inter-bank-transfer>
+        <inter-bank-transfer :account-data="{ name: name, accountId: accountId }"></inter-bank-transfer>
       </el-tab-pane>
       <el-tab-pane label="支付宝转账" name="there">
-        <alipay-transfer></alipay-transfer>
+        <alipay-transfer :account-data="{ name: name, accountId: accountId }"></alipay-transfer>
       </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import FastRecharge from './FastRecharge.vue';
   import AlipayTransfer from './AlipayTransfer1.vue';
   import InterBankTransfer from './InterBankTransfer.vue';
@@ -26,8 +27,18 @@
       AlipayTransfer,
       InterBankTransfer
     },
+    computed: {
+      ...mapGetters([
+        'name',
+        'accountId'
+      ])
+    },
     data() {
       return {
+        accountData: {
+          name: this.name,
+          accountId: this.accountId
+        },
         activeName: 'one'
       };
     }
