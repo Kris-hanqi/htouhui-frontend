@@ -56,7 +56,8 @@
         listQuery: {
           pageNo: 1,
           size: 10,
-          type: 'repaying'
+          type: 'repaying',
+          name: ''
         },
         loanData: {
           totalUnRepayMoney: '10000.10',

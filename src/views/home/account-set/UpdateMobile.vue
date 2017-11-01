@@ -5,11 +5,11 @@
       <ul>
         <li>
           <label>用户名</label>
-          <span class="amendLoginName">xiaohai</span>
+          <span class="amendLoginName">{{ name }}</span>
         </li>
         <li>
           <label>手机号</label>
-          <span class="amendLoginName">137****3132</span>
+          <span class="amendLoginName">{{ mobile }}</span>
         </li>
         <li class="marginTop">
           <label>验证码</label>
@@ -17,7 +17,7 @@
           <sms-timer @run="sendCode"></sms-timer>
         </li>
       </ul>
-      <p class="yzmCodeSent">校验码已发出，请注意查收短信，如果没有收到，你可以在111秒后要求系统重新发送</p>
+      <p class="yzmCodeSent">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
       <button class="submitBtn">提交</button>
     </div>
     <div class="splitLine"></div>
@@ -29,18 +29,28 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+  import { fetchSendCode } from '@/api/public';
   import SmsTimer from '@/common/sms-timer';
   
   export default {
     components: {
       SmsTimer
     },
+    computed: {
+      ...mapGetters([
+        'name',
+        'mobile'
+      ])
+    },
     data() {
       return {}
     },
     methods: {
       sendCode() {
-        console.log(123);
+        fetchSendCode({ authType: 'change_binding_mobile_number' }).then(response => {
+          console.log(response);
+        })
       }
     }
   }

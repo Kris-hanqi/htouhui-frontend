@@ -42,7 +42,7 @@
 <script>
   import InvestChart from './components/InvestChart.vue';
   import { fetchInvest } from '@/api/home/account';
-  import { getInvestData } from './util';
+  import { getInvestData } from '@/utils/home/index';
 
   export default {
     components: {

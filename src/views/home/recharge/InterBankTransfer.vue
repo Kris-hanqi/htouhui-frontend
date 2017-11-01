@@ -46,9 +46,6 @@
           </li>
         </ul>
       </div>
-      <table class="transferNeedMsgTable" border="0" cellpadding="0" cellspacing="0">
-        我是一个table啊
-      </table>
     </div>
     <div class="split-line"></div>
     <div class="warmPrompt">
@@ -64,7 +61,7 @@
 </template>
 
 <script>
-  import img_inter_bank_step from '@/assets/images/home/recharge/inter-bank-step.png';
+  import img_inter_bank_step from '@/assets/images/home/recharge/inter-bank-step.jpg';
   export default {
     data() {
       return {
@@ -84,5 +81,12 @@
 <style lang="scss">
   .inter-bank-transfer-wrapper {
     padding: 0 20px;
+  }
+
+  .split-line {
+    height: 3px;
+    margin: 30px 0;
+    border-top: dashed 1px #aab2c9;
+    border-bottom: dashed 1px #aab2c9;
   }
 </style>

@@ -45,7 +45,7 @@ compiler.plugin('compilation', function (compilation) {
 Object.keys(proxyTable).forEach(function (context) {
   let options = proxyTable[context];
   if (typeof options === 'string') {
-    options = { target: options }
+    options = { target: options };
   }
   app.use(proxyMiddleware(options.filter || context, options))
 });
