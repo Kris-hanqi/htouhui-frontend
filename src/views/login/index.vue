@@ -74,9 +74,8 @@
         img_logo,
         loginType: 0,
         loginData: {
-          username: '',
-          password: '',
-          channel: ''
+          username: 'h8982670515',
+          password: '123abc'
         }
       }
     },

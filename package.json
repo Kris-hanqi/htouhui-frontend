@@ -34,7 +34,7 @@
     "vue": "^2.4.2",
     "vue-awesome-swiper": "^2.6.2",
     "vue-chartjs": "^3.0.0",
-    "vue-clipboards": "^1.1.0",
+    "vue-clipboard2": "^0.0.6",
     "vue-cookie": "^1.1.4",
     "vue-echarts-v3": "^1.0.5",
     "vue-flatpickr-component": "^4.0.0",

@@ -28,11 +28,11 @@
         </ul>
         <ul class="transferNeedMsgRight fl">
           <li>
-            <span>用户姓名</span>
+            <span>{{ accountData.name || '无' }}</span>
           </li>
           <li>
-            <span>6212461320000256288</span>
-            <button class="copyBtn" v-clipboard="bankCard" @success="handleSuccess">复制</button>
+            <span>{{ accountData.accountId || '无' }}</span>
+            <button class="copyBtn" v-clipboard:copy="accountData.accountId" v-clipboard:success="handleSuccess">复制</button>
           </li>
           <li>
             <span>江西银行或城市商业银行</span>
@@ -42,7 +42,7 @@
           </li>
           <li>
             <span>{{ bankAddress }}</span>
-            <button class="copyBtn" v-clipboard="bankAddress" @success="handleSuccess">复制</button>
+            <button class="copyBtn" v-clipboard:copy="bankAddress" v-clipboard:success="handleSuccess">复制</button>
           </li>
         </ul>
       </div>
@@ -61,12 +61,13 @@
 </template>
 
 <script>
-  import img_inter_bank_step from '@/assets/images/home/recharge/inter-bank-step.jpg';
+  import img_inter_bank_step from '@/assets/images/home/recharge/inter-bank-step.png';
+  
   export default {
+    props: ['accountData'],
     data() {
       return {
         img_inter_bank_step,
-        bankCard: '6212461320000256288',
         bankAddress: '江西银行股份有限公司总行营业部'
       }
     },

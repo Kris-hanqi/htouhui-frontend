@@ -24,15 +24,15 @@
         </ul>
         <ul class="transferNeedMsgRight fl">
           <li>
-            <span>小海</span>
+            <span>{{ accountData.name || '无' }}</span>
           </li>
           <li>
-            <span>{{ bankCard }}</span>
-            <button class="copyBtn" v-clipboard="bankCard" @success="handleSuccess">复制</button>
+            <span>{{ accountData.accountId }}</span>
+            <button class="copyBtn" v-clipboard:copy="accountData.accountId" v-clipboard:success="handleSuccess">复制</button>
           </li>
           <li>
             <span>{{ bankName }}</span>
-            <button class="copyBtn" v-clipboard="bankName" @success="handleSuccess">复制</button>
+            <button class="copyBtn" v-clipboard:copy="bankName" v-clipboard:success="handleSuccess">复制</button>
           </li>
         </ul>
       </div>
@@ -95,11 +95,11 @@
   import img_alipay_step1 from '@/assets/images/home/recharge/alipay-step1.png';
   import img_alipay_step2 from '@/assets/images/home/recharge/alipay-step2.png';
   export default {
+    props: ['accountData'],
     data() {
       return {
         img_alipay_step1,
         img_alipay_step2,
-        bankCard: '6212461320000256288',
         bankName: '江西银行'
       }
     },
