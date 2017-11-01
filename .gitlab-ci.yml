@@ -4,7 +4,7 @@ stages:
 
 variables:
   SERVICE_PORT: "9666"
-  DOCKER_IMAGE_VERSION: "0.0.1-release"
+  DOCKER_IMAGE_VERSION: "0.1.0-release"
 
 cache:
   paths:

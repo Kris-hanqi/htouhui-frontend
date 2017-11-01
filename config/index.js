@@ -1,6 +1,8 @@
 const path = require('path');
 
 module.exports = {
+  moduleName:'views',
+
   build: {
     env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
@@ -22,12 +24,23 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 8080,
+    port: 9600,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    staticPath:'/static/',
-    proxyTable: {},
+    proxyTable: {
+      '/web-api': {
+        target: 'http://120.27.165.213:5001',
+        pathRewrite: {
+          '^/web-api': '/web-api'
+        }
+      }
+    },
+    // CSS Sourcemaps off by default because relative paths are "buggy"
+    // with this option, according to the CSS-Loader README
+    // (https://github.com/webpack/css-loader#sourcemaps)
+    // In our experience, they generally work as expected,
+    // just be aware of this issue when enabling this option.
     cssSourceMap: false
   }
 };
