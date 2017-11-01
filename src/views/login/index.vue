@@ -34,7 +34,7 @@
                 <div class="from-item">
                   <div class="item-box" v-show="loginType === 0">
                     <i class="icon icon-pwd"></i>
-                    <input type="password" v-model="loginData.password" placeholder="请输入密码">
+                    <input type="text" v-model="loginData.password" placeholder="请输入密码">
                   </div>
                 </div>
                 <div class="from-item">
