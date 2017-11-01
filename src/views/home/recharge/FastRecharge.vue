@@ -5,15 +5,15 @@
       <span class="addBankCard"></span>
       <p class="noBankCardTxt">您暂未绑定银行卡</p>
     </div>
-    
+
     <!--已绑卡-->
     <div class="bankCardMsg" style="display: none;">
       <p class="bankName">兴业银行</p>
       <p class="roboto-regular bankNum">6229 **** **** 3126</p>
     </div>
-  
+
     <bank-limit :visible="dialogBankLimitVisible" @close="closeBankLimit"></bank-limit>
-    
+
     <ul class="withdrawMsgBox">
       <li>
         <span>账户余额：</span>
@@ -40,7 +40,7 @@
         <button>查询</button>  <!--未绑卡为充值-->
       </li>
     </ul>
-    <div class="splitLine"></div>
+    <div class="split-line"></div>
     <div class="warmPrompt">
       <h3>温馨提示</h3>
       <p>1、请在充值前完成江西银行开户及交易密码设置。</p>
@@ -55,7 +55,7 @@
 
 <script>
   import BankLimit from '../components/BankLimit.vue';
-  
+
   export default {
     components: {
       BankLimit
