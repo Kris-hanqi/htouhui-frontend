@@ -20,7 +20,7 @@
         <span><i class="remainingSumColor">5,390,00</i>元</span>
       </li>
       <li>
-        <span>提现金额：</span>
+        <span>转入金额：</span>
         <input type="text">
         <span>元</span>
         <a href="javascript:void(0)" @click="showBankLimit">(查看银行限额)</a>
@@ -37,7 +37,7 @@
         <span>0.00元</span>
       </li>
       <li class="withdrawBtn">
-        <button>查询</button>  <!--未绑卡为充值-->
+        <button>充值</button>
       </li>
     </ul>
     <div class="split-line"></div>

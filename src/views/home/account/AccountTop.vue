@@ -37,6 +37,7 @@
       ])
     },
     methods: {
+      // 操作银行卡
       operationBankCard() {
         if (!this.bankCard) {
           cosole.log('跳转绑卡页面');
@@ -50,7 +51,9 @@
         }
       },
       unlockBankCard() {
-        fetchUnlockBankCard().then()
+        fetchUnlockBankCard().then(response => {
+          console.log(response);
+        })
       },
       toRouter(path) {
         this.$router.push('/' + path);
