@@ -6,12 +6,12 @@
         首页
       </mt-tab-item>
       <mt-tab-item>
-        <icon slot="icon" name="order"></icon>
-        订单
+        <icon slot="icon" name="money"></icon>
+        投资
       </mt-tab-item>
       <mt-tab-item>
-        <icon slot="icon" name="home"></icon>
-        发现
+        <icon slot="icon" name="information"></icon>
+        资讯
       </mt-tab-item>
       <mt-tab-item>
         <icon slot="icon" name="user"></icon>
