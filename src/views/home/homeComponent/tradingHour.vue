@@ -6,19 +6,31 @@
         <a class="active" href="#">全部</a>
       </li>
       <li>
-        <a href="#">近三天</a>
+        <a href="#" @click="switchDateType('3day')" :class="{ active: dateType === '3day'}">近三天</a>
       </li>
       <li>
-        <a href="#">近一个月</a>
+        <a href="#" @click="switchDateType('1month')" :class="{ active: dateType === '1month'}">近一个月</a>
       </li>
       <li>
-        <a href="#">近三个月</a>
+        <a href="#"@click="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a>
       </li>
       <li>
-        <a href="#" class="diy-time">自定义时间</a>
+        <a href="#" class="diy-time" @click="switchDateType('other')" :class="{ active: dateType === 'other'}">自定义时间</a>
       </li>
     </ul>
-    <button class="find-btn">查询</button>
+    <ul class="allChoose allChooseCalendar" v-show="dateType === 'other'">
+      <el-date-picker
+        v-model="selectDates.startTime"
+        type="date"
+        placeholder="选择开始日期">
+      </el-date-picker>
+      <el-date-picker
+        v-model="selectDates.endTime"
+        type="date"
+        placeholder="选择结束日期">
+      </el-date-picker>
+    </ul>
+    <button class="find-btn" @click="query">查询</button>
   </div>
 </template>
 

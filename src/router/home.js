@@ -40,8 +40,20 @@ export const constantRouterMap = [
       },
       {
         path: '/plan21Day',
-        name: '21天计划',
-        component: _import('home/plan21-day/index')
+        component: _import('home/plan21-day/index'),
+        redirect: '/plan21-day/index',
+        children: [
+          {
+            path: 'index',
+            name: '21天计划',
+            component: _import('home/plan21-day/plan21day')
+          },
+          {
+            path: 'lookRegular',
+            name: '查看债权',
+            component: _import('home/plan21-day/lookRegular')
+          }
+        ]
       },
       {
         path: '/quantify',
