@@ -41,7 +41,7 @@ export const constantRouterMap = [
       {
         path: '/plan21Day',
         component: _import('home/plan21-day/index'),
-        redirect: '/plan21-day/index',
+        redirect: '/plan21Day/index',
         children: [
           {
             path: 'index',
