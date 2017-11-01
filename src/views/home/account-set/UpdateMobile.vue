@@ -5,11 +5,11 @@
       <ul>
         <li>
           <label>用户名</label>
-          <span class="amendLoginName">xiaohai</span>
+          <span class="amendLoginName">{{ name }}</span>
         </li>
         <li>
           <label>手机号</label>
-          <span class="amendLoginName">137****3132</span>
+          <span class="amendLoginName">{{ mobile }}</span>
         </li>
         <li class="marginTop">
           <label>验证码</label>
@@ -29,11 +29,18 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import SmsTimer from '@/common/sms-timer';
   
   export default {
     components: {
       SmsTimer
+    },
+    computed: {
+      ...mapGetters([
+        'name',
+        'mobile'
+      ])
     },
     data() {
       return {}
