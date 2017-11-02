@@ -81,16 +81,7 @@
   export default {
     data() {
       return {
-        list: null,
-        listQuery: {
-          planId: '',
-          type: 'novice_plan',
-          purpose: '',
-          startTime: '',
-          endTime: '',
-          pageNo: 1,
-          pageSize: 1
-        }
+        list: null
       }
     },
     computed: {
@@ -100,7 +91,7 @@
     },
     methods: {
       planNoviceList() {
-        planNovice(this.listQuery).then(response => {
+        planNovice().then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
