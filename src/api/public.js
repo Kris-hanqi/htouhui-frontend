@@ -8,3 +8,13 @@ export function fetchSendCode(data) {
     params: data
   })
 }
+
+/** 发送邮箱验证码 */
+export function fetchSendEmailCode(data) {
+  return fetch({
+    url: 'user/sendEmailCode',
+    method: 'post',
+    data
+  })
+}
+

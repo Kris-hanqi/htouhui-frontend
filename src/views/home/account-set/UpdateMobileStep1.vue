@@ -5,23 +5,19 @@
       <ul>
         <li>
           <label>用户名</label>
-          <span class="amendLoginName">xiaohai</span>
+          <span class="amendLoginName">{{ name }}</span>
         </li>
         <li>
           <label>原邮箱</label>
-          <span class="amendLoginName">xiaohai@163.com</span>
+          <span class="amendLoginName">{{ email }}</span>
         </li>
-        <li class="marginTop">
-          <i class="dangerousIcon"></i>
-          <span class="dangerousTxt">新邮箱不可与原邮箱相同！</span>
-        </li>
-        <li>
+        <li style="margin-top: 20px;">
           <label>验证码</label>
           <input type="text" placeholder="请输入验证码">
-          <button class="getYzmCode">获取验证码</button>
+          <sms-timer @run="sendCode"></sms-timer>
         </li>
       </ul>
-      <p class="yzmCodeSent">校验码已发出，请注意查收短信，如果没有收到，你可以在111秒后要求系统重新发送</p>
+      <p class="yzmCodeSent" v-if="showPrompt">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
       <button class="submitBtn">提交</button>
     </div>
     <div class="splitLine"></div>
@@ -32,13 +28,49 @@
   </div>
 </template>
 
+<script>
+  import { mapGetters } from 'vuex';
+  import { fetchSendEmailCode } from '@/api/public';
+  import SmsTimer from '@/common/sms-timer';
+  
+  export default {
+    components: {
+      SmsTimer
+    },
+    computed: {
+      ...mapGetters([
+        'name',
+        'email'
+      ])
+    },
+    data() {
+      return {
+        showPrompt: false
+      }
+    },
+    methods: {
+      sendCode() {
+        if (!this.email) return;
+        fetchSendEmailCode({ email: this.email })
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.showPrompt = true;
+              this.$message({
+                message: '邮箱验证码已发送',
+                type: 'success'
+              });
+            }
+          });
+      }
+    }
+  }
+</script>
+
 <style lang="scss">
   .amendLoginPwd {
     width: 832px;
     height: 797px;
     background-color: #fff;
-    -webkit-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-    -moz-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
 
     .personalCenterRightTitle {

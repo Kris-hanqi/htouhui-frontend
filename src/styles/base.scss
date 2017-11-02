@@ -1,6 +1,5 @@
 @import "./variables";
 
-// Roboto字体
 @font-face {
   font-family: 'Roboto-Regular';
   src: url('../assets/fonts/roboto/Roboto-Regular.eot');
@@ -112,3 +111,9 @@ i {
     vertical-align: middle;
   }
 }
+
+.text-warning {
+  color: $warning;
+}
+
+
