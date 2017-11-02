@@ -52,7 +52,21 @@
       },
       unlockBankCard() {
         fetchUnlockBankCard().then(response => {
-          console.log(response);
+          if (response.data.meta.code === 200) {
+            this.$store.commit('SET_BANK_NAME', null);
+            this.$store.commit('SET_BANK_CARD', null);
+            this.$store.commit('SET_BANK_CARD', 2);
+            this.dialogVisible = false;
+            this.$message({
+              message: '银行卡解绑成功',
+              type: 'success'
+            });
+          } else {
+            this.$message({
+              message: '银行卡解绑失败: ' + response.data.meta.message,
+              type: 'error'
+            });
+          }
         })
       },
       toRouter(path) {

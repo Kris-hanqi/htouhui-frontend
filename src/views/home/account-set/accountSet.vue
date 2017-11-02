@@ -52,7 +52,7 @@
       </tr>
       <tr class="borderNone">
         <td>手机认证</td>
-        <td>{{ mobile }}</td>
+        <td>{{ mobile || '无' }}</td>
         <td rowspan="2" class="borderLine"><router-link to="updateMobile"><button>修改</button></router-link></td>
       </tr>
       <tr>
@@ -62,14 +62,20 @@
         <td>登录密码</td>
         <td>已设置</td>
         <td rowspan="2" class="borderLine"><router-link to="amendLoginPassword"><button>修改</button></router-link></td>
-      </tr>
       <tr>
         <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">登录密码已设置 上次登录时间： 2017-08-29 14:27:24</td>
       </tr>
       <tr class="borderNone">
-        <td>邮箱认证<i class="iconDangerous"></i></td>
-        <td class="tableSmallFontColor01">未绑定</td>
-        <td rowspan="2"><router-link to="amendLoginEmailBind"><button class="btnBlue">绑定</button></router-link></td>
+        <td>邮箱认证<i class="iconDangerous" v-if="!email"></i></td>
+        <td :class="{ 'text-warning': email }">{{ email ? email : '未绑定' }}</td>
+        <td rowspan="2">
+          <router-link to="updateMobileStep1" v-if="email">
+            <button :class="{ 'btn-blue': !email }">{{ email ? '修改' : '绑定'  }}</button>
+          </router-link>
+          <router-link to="bindEmail" v-else>
+            <button :class="{ 'btn-blue': !email }">{{ email ? '修改' : '绑定'  }}</button>
+          </router-link>
+        </td>
       </tr>
       <tr class="borderNone">
         <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">登录密码已设置 上次登录时间： 2017-08-29 14:27:24</td>
@@ -86,6 +92,7 @@
       ...mapGetters([
         'name',
         'mobile',
+        'email',
         'bankCard',
         'accountId'
       ])
@@ -103,7 +110,34 @@
     background-color: #fff;
     padding-top: 21px;
     padding-bottom: 75px;
-
+  
+    button {
+      width: 91px;
+      height: 28px;
+      border-radius: 100px;
+      background-color: #fff;
+      border: solid 1px #727e90;
+      color: #727e90;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #7c86a2;
+        border: solid 1px #727e90;
+        color: #fff;
+      }
+  
+      &.btn-blue {
+        background-color: #fff;
+        border: solid 1px #0671f0;
+        color: #0671f0;
+    
+        &:hover {
+          background-color: #0671f0;
+          color: #fff;
+        }
+      }
+    }
+    
     h1 {
       line-height: 1;
       font-size: 20px;
@@ -122,33 +156,6 @@
         border-bottom: solid 2px #dfe8f0;
         padding-top: 18px;
         padding-bottom: 18px;
-
-        button {
-          width: 91px;
-          height: 28px;
-          border-radius: 100px;
-          background-color: #fff;
-          border: solid 1px #727e90;
-          color: #727e90;
-          cursor: pointer;
-        }
-
-        button:hover {
-          background-color: #7c86a2;
-          border: solid 1px #727e90;
-          color: #fff;
-        }
-
-        button.btnBlue {
-          background-color: #fff;
-          border: solid 1px #0671f0;
-          color: #0671f0;
-        }
-
-        button.btnBlue:hover {
-          background-color: #0671f0;
-          color: #fff;
-        }
       }
 
       td:first-child {

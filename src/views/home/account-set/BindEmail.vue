@@ -1,6 +1,6 @@
 <template>
   <div class="amendLoginPwd">
-    <h1 class="personalCenterRightTitle">修改邮箱</h1>
+    <h1 class="personalCenterRightTitle">绑定邮箱</h1>
     <div class="amendLoginPwdMsg">
       <ul>
         <li>
@@ -9,13 +9,9 @@
         </li>
         <li class="marginTop">
           <label>邮箱</label>
-          <input type="text" placeholder="请输新邮箱">
+          <input type="text" placeholder="请输入邮箱">
         </li>
-        <li>
-          <i class="dangerousIcon"></i>
-          <span class="dangerousTxt">新邮箱不可与原邮箱相同！</span>
-        </li>
-        <li>
+        <li class="marginTop">
           <label>验证码</label>
           <input type="text" placeholder="请输入验证码">
           <button class="getYzmCode">获取验证码</button>
@@ -37,8 +33,6 @@
     width: 832px;
     height: 797px;
     background-color: #fff;
-    -webkit-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-    -moz-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
 
     .personalCenterRightTitle {
