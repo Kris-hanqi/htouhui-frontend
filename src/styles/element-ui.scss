@@ -91,6 +91,10 @@ th {
   margin-left: 0;
 }
 
+.el-table__fixed-header-wrapper thead div {
+  background-color: #f6f9fe;
+}
+
 /*弹窗*/
 .el-dialog__header {
   padding: 0;

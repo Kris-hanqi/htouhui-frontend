@@ -20,7 +20,7 @@
     </div>
 
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="name" label="项目名称"></el-table-column>
+      <el-table-column prop="name" label="项目名称" fixed width="170"></el-table-column>
       <el-table-column prop="time" label="投资时间" width="80"></el-table-column>
       <el-table-column prop="money" label="投资金额" width="100"></el-table-column>
       <el-table-column prop="rate" label="年利率" width="60"></el-table-column>
@@ -32,13 +32,14 @@
         </template>
       </el-table-column>
       <el-table-column prop="state" label="投资状态" width="70"></el-table-column>
-      <el-table-column prop="look" label="查看" width="40">
+      <el-table-column prop="look" label="查看" fixed="right" width="100">
         <template scope="scope">
-          <el-button class="icon-plan" type="text" size="small"></el-button>
-          <el-button class="icon-interests" type="text" size="small"></el-button>
+          <el-button class="icon-plan" type="text" size="small">还款计划</el-button>
+          <el-button class="icon-interests" type="text" size="small">合同</el-button>
         </template>
       </el-table-column>
     </el-table>
+
     <div class="pages">
       <p class="total-pages">共计<span class="roboto-regular">25</span>条记录（共<span class="roboto-regular">3</span>页）</p>
       <el-pagination layout="prev, pager, next" :total="30"></el-pagination>
@@ -100,7 +101,7 @@
       box-sizing: border-box;
       padding-left: 30px;
       padding-right: 30px;
-      margin-bottom: 25px;
+      margin-bottom: 15px;
 
       ul {
         float: left;
@@ -149,15 +150,11 @@
     }
 
     .icon-plan {
-      width: 20px;
-      height: 20px;
-      background: url(../../../assets/images/home/icon-plan.png) no-repeat center;
+      color: #0573f4;
     }
 
     .icon-interests {
-      width: 17px;
-      height: 23px;
-      background: url(../../../assets/images/home/icons/icon-interest.png) no-repeat center;
+      color: #0573f4;
     }
   }
 </style>

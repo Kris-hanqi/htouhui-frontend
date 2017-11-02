@@ -51,9 +51,9 @@
         </el-table-column>
         <el-table-column prop="lockEndTime" label="持有期限截至" width="135"></el-table-column>
         <el-table-column prop="status" label="状态" width="80"></el-table-column>
-        <el-table-column prop="seeInterests" label="查看债权">
+        <el-table-column prop="seeInterests" label="债权">
           <template scope="scope">
-            <router-link to="lookRegular"><el-button class="icon-interests" type="text" size="small"></el-button></router-link>
+            <router-link to="lookRegular"><el-button class="icon-interests" type="text" size="small">查看债权</el-button></router-link>
           </template>
         </el-table-column>
       </el-table>
@@ -207,9 +207,7 @@
   }
 
   .icon-interests {
-    width: 17px;
-    height: 23px;
-    background: url(../../../assets/images/home/icons/icon-interest.png) no-repeat center;
+    color: #0573f4;
   }
 
   .plan21day {
