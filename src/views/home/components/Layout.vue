@@ -48,7 +48,7 @@
   import HthBreadcrumb from './breadcrumb';
   import OpenAccount from './OpenAccount.vue';
   import HthSidebar from './Sidebar';
-  import { fetchAdRecommend } from '@/api/home/public';
+  import { fetchAdRecommend } from 'api/home/public';
 
   export default {
     components: {
