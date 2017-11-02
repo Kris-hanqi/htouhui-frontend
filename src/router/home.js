@@ -128,9 +128,9 @@ export const constantRouterMap = [
             component: _import('home/account-set/accountSet')
           },
           {
-            path: 'amendLoginPassword',
+            path: 'updateLoginPassword',
             name: '修改密码',
-            component: _import('home/account-set/amendLoginPassword')
+            component: _import('home/account-set/UpdateLoginPassword')
           },
           {
             path: 'updateMobileStep1',
