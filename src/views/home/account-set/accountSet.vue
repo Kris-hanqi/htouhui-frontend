@@ -78,7 +78,7 @@
         </td>
       </tr>
       <tr class="borderNone">
-        <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">登录密码已设置 上次登录时间： 2017-08-29 14:27:24</td>
+        <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">可用于获取账户资金变动通知和投资讯息</td>
       </tr>
     </table>
   </div>
@@ -86,7 +86,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  
+
   export default {
     computed: {
       ...mapGetters([
@@ -110,7 +110,7 @@
     background-color: #fff;
     padding-top: 21px;
     padding-bottom: 75px;
-  
+
     button {
       width: 91px;
       height: 28px;
@@ -119,25 +119,25 @@
       border: solid 1px #727e90;
       color: #727e90;
       cursor: pointer;
-  
+
       &:hover {
         background-color: #7c86a2;
         border: solid 1px #727e90;
         color: #fff;
       }
-  
+
       &.btn-blue {
         background-color: #fff;
         border: solid 1px #0671f0;
         color: #0671f0;
-    
+
         &:hover {
           background-color: #0671f0;
           color: #fff;
         }
       }
     }
-    
+
     h1 {
       line-height: 1;
       font-size: 20px;
