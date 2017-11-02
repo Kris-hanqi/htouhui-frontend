@@ -1,14 +1,15 @@
 <template>
+  <!-- 开户组件 -->
   <div class="open-account-wrapper">
     <el-dialog title="平台开户"
                :before-close="handleClose"
                :visible.sync="visible">
-      <el-steps :space="200" :active="2">
+      <el-steps :space="200" :active="stepActive">
         <el-step title="注册"></el-step>
         <el-step title="开户"></el-step>
         <el-step title="交易密码"></el-step>
       </el-steps>
-      <el-form label-position="right" label-width="90px">
+      <el-form label-position="right" label-width="90px" v-if="stepActive === 2">
         <el-form-item label="姓名">
           <el-input></el-input>
         </el-form-item>
@@ -22,7 +23,18 @@
           <el-checkbox>江西银行存管协议</el-checkbox>
         </el-form-item>
         <el-form-item label="">
-          <el-button type="primary">下一步</el-button>
+          <el-button type="primary" @click="openAccount">下一步</el-button>
+        </el-form-item>
+      </el-form>
+      <el-form label-position="right" label-width="90px" v-if="stepActive === 3">
+        <el-form-item label="手机号码">
+          <el-input></el-input>
+        </el-form-item>
+        <el-form-item label="身份证号">
+          <el-input></el-input>
+        </el-form-item>
+        <el-form-item label="">
+          <el-button type="primary" @click="openAccount">下一步</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -30,7 +42,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { fetchOpenAccount } from 'api/home/account-set'
   
   export default {
     props: {
@@ -40,17 +52,26 @@
         required: true
       }
     },
-    computed: {
-      ...mapGetters([
-        'mobile'
-      ])
-    },
     data() {
-      return {}
+      return {
+        dialogOpenAccountVisible: false,
+        stepActive: 2,
+        openAccountData: {
+          cardNo: '',
+          realName: '',
+          idCard: ''
+        }
+      }
     },
     methods: {
       handleClose() {
         this.$parent.dialogBankLimitVisible = false;
+      },
+      openAccount() {
+        console.log(this.openAccountData);
+        fetchOpenAccount().then(response => {
+          console.log(response);
+        })
       }
     }
   }

@@ -9,6 +9,9 @@
       <el-button type="primary" @click="toRouter('withdraw')" class="withdraw-btn">提现</el-button>
     </div>
     
+    <!-- 开户组件 -->
+    <open-account :visible="dialogOpenAccountVisible" @close="closeOpenAccount"></open-account>
+    
     <!-- 银行卡解绑提示 -->
     <el-dialog title="提示" :visible.sync="dialogVisible" size="tiny">
       <span style="font-size: 20px; color: #ee5544">确认解绑银行卡？</span>
@@ -21,13 +24,12 @@
 </template>
 <script>
   import { mapGetters } from 'vuex';
-  import { fetchUnlockBankCard } from '@/api/home/account-set';
+  import OpenAccount from '../components/OpenAccount.vue';
+  import { fetchUnlockBankCard } from 'api/home/account-set';
   
   export default {
-    data() {
-      return {
-        dialogVisible: false
-      }
+    components: {
+      OpenAccount
     },
     computed: {
       ...mapGetters([
@@ -35,6 +37,12 @@
         'status',
         'bankCard'
       ])
+    },
+    data() {
+      return {
+        dialogOpenAccountVisible: false,
+        dialogVisible: false
+      }
     },
     methods: {
       // 操作银行卡
@@ -47,7 +55,7 @@
       },
       operationAccount() {
         if (this.status === 0) {
-          console.log('跳转开户页面');
+          this.dialogOpenAccountVisible = true
         }
       },
       unlockBankCard() {
@@ -71,6 +79,9 @@
       },
       toRouter(path) {
         this.$router.push('/' + path);
+      },
+      closeOpenAccount() {
+        this.dialogOpenAccountVisible = false;
       }
     }
   }
