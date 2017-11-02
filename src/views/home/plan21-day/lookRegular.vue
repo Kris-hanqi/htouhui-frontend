@@ -33,9 +33,39 @@
         <span>您购买的债权信息</span>
         <p class="title-message">目前已为您自动投标成功   <span>100元</span></p>
       </div>
+      <el-table :data="list" style="width: 100%">
+        <el-table-column prop="investId" label="项目编号" width="120"></el-table-column>
+        <el-table-column prop="loanMoney" label="借款金额" width="100"></el-table-column>
+        <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
+        <el-table-column prop="perid" label="借款期限" width="60"></el-table-column>
+        <el-table-column prop="investMoney" label="投资金额" width="100"></el-table-column>
+        <el-table-column prop="repayTimeFormat" label="还款时间" width="80"></el-table-column>
+        <el-table-column prop="earnings" label="已收本息"></el-table-column>
+        <el-table-column prop="uncollectedRepayMoney" label="待收本息"></el-table-column>
+        <el-table-column prop="status" label="状态" width="50"></el-table-column>
+        <el-table-column prop="contract" label="合同" width="40">
+          <template scope="scope">
+            <el-button class="icon-download" type="text" size="small"></el-button>
+          </template>
+        </el-table-column>
+      </el-table>
     </div>
   </div>
 </template>
+
+<script>
+  import { getJoinInfo } from '@/api/home/getJoinInfo';
+
+  export default {
+    data() {
+      return {
+        listQuery: {
+          joinPlanId: ''
+        }
+      }
+    }
+  }
+</script>
 
 <style lang="scss" scoped>
   .details {

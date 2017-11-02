@@ -34,11 +34,23 @@
     <div class="message">
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="joinTime" label="加入时间" width="135"></el-table-column>
-        <el-table-column prop="joinMoney" label="加入金额"></el-table-column>
-        <el-table-column prop="lockPeriod" label="持有期限"></el-table-column>
-        <el-table-column prop="rate" label="往期年化利率"></el-table-column>
-        <el-table-column prop="lockEndTime" label="持有期限截至"></el-table-column>
-        <el-table-column prop="status" label="状态" width="50"></el-table-column>
+        <el-table-column prop="joinMoney" label="加入金额">
+          <template scope="scope">
+            {{ scope.row.joinMoney + '元' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="lockPeriod" label="持有期限">
+          <template scope="scope">
+            {{ scope.row.lockPeriod + '天' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="rate" label="往期年化利率">
+          <template scope="scope">
+            {{ scope.row.rate + '%' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="lockEndTime" label="持有期限截至" width="135"></el-table-column>
+        <el-table-column prop="status" label="状态" width="80"></el-table-column>
         <el-table-column prop="seeInterests" label="查看债权">
           <template scope="scope">
             <router-link to="lookRegular"><el-button class="icon-interests" type="text" size="small"></el-button></router-link>
@@ -80,15 +92,15 @@
     },
     computed: {
       getPageSize() {
-        return Math.ceil(this.total / this.listQuery.size);
+        return Math.ceil(this.total / this.listQuery.pageSize);
       }
     },
     methods: {
-      // 获取我的资产数据
       getPageList() {
         let dates = null;
         if (this.dateType !== 'other') {
           dates = getStartAndEndTime(this.dateType);
+          console.log(dates);
           this.listQuery.startTime = dates.startTime;
           this.listQuery.endTime = dates.endTime;
         } else {
@@ -115,7 +127,8 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            this.total = data.data.totalPage;
+            this.total = data.data.totalPage || 0;
+            console.log('21天计划' + this.list);
             console.log(this.list);
           }
         })
@@ -197,24 +210,6 @@
     width: 17px;
     height: 23px;
     background: url(../../../assets/images/home/icons/icon-interest.png) no-repeat center;
-  }
-
-  .pages {
-    width: 100%;
-    margin-top: 20px;
-    text-align: right;
-
-    .total-pages {
-      display: inline-block;
-      margin-right: 10px;
-      font-size: 14px;
-      color: #394b67;
-    }
-
-    .el-pagination {
-      display: inline-block;
-      vertical-align: middle;
-    }
   }
 
   .plan21day {
