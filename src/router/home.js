@@ -49,8 +49,9 @@ export const constantRouterMap = [
             component: _import('home/plan21-day/plan21day')
           },
           {
-            path: 'lookRegular',
+            path: 'lookRegular/:id',
             name: '查看债权',
+            props: true,
             component: _import('home/plan21-day/lookRegular')
           }
         ]

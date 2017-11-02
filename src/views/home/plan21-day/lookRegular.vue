@@ -54,15 +54,19 @@
 </template>
 
 <script>
-  import { getJoinInfo } from '@/api/home/getJoinInfo';
+  // import { getJoinInfo } from '@/api/home/getJoinInfo';
 
   export default {
     data() {
       return {
+        list: null,
         listQuery: {
           joinPlanId: ''
         }
       }
+    },
+    created() {
+      console.log(this.$route.params);
     }
   }
 </script>
