@@ -22,4 +22,13 @@ export function fetchUpdatePassword(data) {
   })
 }
 
+export function fetchBindEmail(data) {
+  return fetch({
+    url: 'user/bindEmail',
+    method: 'post',
+    data
+  })
+}
+
+
 

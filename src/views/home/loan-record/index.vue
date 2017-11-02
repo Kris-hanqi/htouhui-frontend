@@ -18,7 +18,11 @@
                 :border="false"
                 style="width: 100%">
         <el-table-column prop="name" label="项目名称" width="150"></el-table-column>
-        <el-table-column prop="projectName" label="放款时间" width="110"></el-table-column>
+        <el-table-column label="放款时间" width="140">
+          <template scope="scope">
+            {{ scope.row.giveDate + ' ' + scope.row.giveTime }}
+          </template>
+        </el-table-column>
         <el-table-column prop="loanMoney" label="借款金额" width="110"></el-table-column>
         <el-table-column prop="realLoanMoney" label="实际借款金额" width="110"></el-table-column>
         <el-table-column prop="rateCount" label="年利率" width="110"></el-table-column>
