@@ -54,26 +54,24 @@
 </template>
 
 <script>
-//  import { getJoinInfo } from '@/api/home/getJoinInfo';
+  // import { getJoinInfo } from '@/api/home/getJoinInfo';
 
   export default {
     data() {
       return {
+        list: null,
         listQuery: {
           joinPlanId: ''
         }
       }
+    },
+    created() {
+      console.log(this.$route.params);
     }
   }
 </script>
 
 <style lang="scss" scoped>
-  .icon-download {
-    width: 20px;
-    height: 21px;
-    background: url(../../../assets/images/home/icons/icon-download.png) no-repeat center;
-  }
-
   .details {
     width: 100%;
     height: auto;

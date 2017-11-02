@@ -9,7 +9,7 @@
         </li>
         <li>
           <label>原密码</label>
-          <input type="text" placeholder="请输入原登录密码">
+          <input type="text" v-model="passwordData.oldPassword" placeholder="请输入原登录密码">
         </li>
         <li>
           <i class="dangerousIcon"></i>
@@ -17,7 +17,7 @@
         </li>
         <li>
           <label>新密码</label>
-          <input type="text" placeholder="6-16位字母与数字组合">
+          <input type="text" v-model="passwordData.newPassword" placeholder="6-16位字母与数字组合">
         </li>
         <li>
           <i class="dangerousIcon"></i>
@@ -25,10 +25,10 @@
         </li>
         <li>
           <label>确认密码</label>
-          <input type="text" placeholder="再次输入您的新密码">
+          <input type="text" v-model="passwordData.confirmPassword" placeholder="再次输入您的新密码">
         </li>
       </ul>
-      <button class="submitBtn">提交</button>
+      <button class="submitBtn" @click="UpdatePassword">提交</button>
     </div>
     <div class="splitLine"></div>
     <div class="warmPrompt">
@@ -38,13 +38,40 @@
   </div>
 </template>
 
+<script>
+  import { fetchUpdatePassword } from 'api/public';
+  
+  export default {
+    data() {
+      return {
+        passwordData: {
+          oldPassword: '',
+          newPassword: '',
+          confirmPassword: ''
+        }
+      }
+    },
+    methods: {
+      UpdatePassword() {
+        fetchUpdatePassword(this.passwordData)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.$message({
+                message: '登录密码修改成功,请牢记你的登录密码!',
+                type: 'success'
+              });
+            }
+          })
+      }
+    }
+  }
+</script>
+
 <style lang="scss">
   .amendLoginPwd {
     width: 832px;
     height: 797px;
     background-color: #fff;
-    -webkit-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-    -moz-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
 
     .personalCenterRightTitle {
