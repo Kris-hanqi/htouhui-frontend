@@ -1,9 +1,7 @@
 <template>
   <div class="account-wrapper">
     <!-- 用户快捷操作工具栏 -->
-    <div class="account-wrapper__top">
-      <account-top></account-top>
-    </div>
+    <account-top></account-top>
   
     <!-- 我的资产 -->
     <div class="account-wrapper__asset">

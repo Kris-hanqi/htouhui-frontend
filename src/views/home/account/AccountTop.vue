@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="account-top__wrapper">
+  <div class="account-top__wrapper">
+    <div class="hth-panel">
       <i class="icon-avatar"></i>
       <span>你好，<i class="num-font">{{ name }}</i></span>
       <a href="javascript:void(0)" class="icon-user" @click="operationAccount" :class="{ 'icon-user-active': status }"></a>
@@ -89,11 +89,12 @@
 
 <style lang="scss">
   .account-top__wrapper {
-    width: 100%;
-    height: 73px;
-    line-height: 73px;
-    background-color: #fff;
-    box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
+    .hth-panel {
+      width: 100%;
+      height: 73px;
+      padding: 0;
+      line-height: 73px;
+    }
     
     .recharge-btn {
       float: right;
