@@ -3,38 +3,38 @@
     <div class="details">
       <div class="title-box">
         <span class="title">资产详情-债权信息</span>
-        <router-link to="index"><a href="#" class="return-prev-pages">返回上一页 ></a></router-link>
+        <router-link to="/plan21Day/index"><a href="#" class="return-prev-pages">返回上一页 ></a></router-link>
       </div>
       <div class="look-regular-main">
         <div class="look-regular-rate">
           <p class="rate">
-            <span class="roboto-regular">12</span><span class="small-look-regular-rate roboto-regular">.0</span>% ~
-            <span class="roboto-regular">12</span><span class="small-look-regular-rate roboto-regular">.0</span>%
+            <span class="roboto-regular">{{ detailList.rate.substring(0, detailList.rate.indexOf('.')) }}</span><span class="small-look-regular-rate roboto-regular">{{ detailList.rate.substring(detailList.rate.indexOf('.')) }}</span>%
           </p>
           <p>往期年化利率</p>
         </div>
         <div class="look-regular-day">
-          <p class="day"><span class="roboto-regular">15</span>天</p>
+          <p class="day"><span class="roboto-regular">{{ detailList.lockPeriod }}</span>天</p>
           <p>持有期限</p>
         </div>
         <div class="look-regular-money">
-          <p class="money"><span class="roboto-regular">152.06</span>元</p>
+          <p class="money"><span class="roboto-regular">{{ detailList.joinMoney }}</span>元</p>
           <p>加入金额</p>
         </div>
       </div>
       <div class="look-regular-bottom">
-        <p>加入时间 <span class="roboto-regular">2017/10/11 17:30:26</span></p>
-        <p>即日起免手续费 <span class="roboto-regular">2017/10/11 </span></p>
+        <p>加入时间 <span class="roboto-regular">{{ detailList.joinTime }}</span></p>
+        <p>即日起免手续费 <span class="roboto-regular">{{ detailList.lockEndTime }}</span></p>
         <img class="type-message" src="../../../assets/images/home/ico.png" alt=""/>
       </div>
     </div>
+
     <div class="message">
       <div class="title">
         <span>您购买的债权信息</span>
-        <p class="title-message">目前已为您自动投标成功   <span>100元</span></p>
+        <p class="title-message">目前已为您自动投标成功   <span>{{ detailList.totalInvestMoney }}元</span></p>
       </div>
       <el-table :data="list" style="width: 100%">
-        <el-table-column prop="investId" label="项目编号" width="120"></el-table-column>
+        <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
         <el-table-column prop="loanMoney" label="借款金额" width="100"></el-table-column>
         <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
         <el-table-column prop="perid" label="借款期限" width="60"></el-table-column>
@@ -43,35 +43,114 @@
         <el-table-column prop="earnings" label="已收本息"></el-table-column>
         <el-table-column prop="uncollectedRepayMoney" label="待收本息"></el-table-column>
         <el-table-column prop="status" label="状态" width="50"></el-table-column>
-        <el-table-column prop="contract" label="合同" width="40">
+        <el-table-column prop="contract" label="查看" width="40">
           <template scope="scope">
-            <el-button class="icon-download" type="text" size="small"></el-button>
+            <el-button class="icon-download" type="text" size="small">合同</el-button>
           </template>
         </el-table-column>
       </el-table>
+    </div>
+    <div class="pages">
+      <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+      <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
     </div>
   </div>
 </template>
 
 <script>
-  // import { getJoinInfo } from '@/api/home/getJoinInfo';
+  import { joinPlan } from '@/api/home/getJoinInfo';
+  import { queryUserInvestList } from '@/api/home/queryUserJoinInvestList';
+  import { getStartAndEndTime, getDateString } from '@/utils';
 
   export default {
     data() {
       return {
         list: null,
+        detailList: {},
+        detailQuery: {
+          joinPlanId: this.$route.params.id
+        },
         listQuery: {
-          joinPlanId: ''
+          joinPlanId: this.$route.params.id,
+          pageNo: 1,
+          pageSize: 10
+        },
+        total: 0
+      }
+    },
+    methods: {
+      getList() {
+        joinPlan(this.detailQuery).then(response => {
+          if (response.data.meta.code === 200) {
+            this.detailList = response.data.data;
+            console.log('21天计划债权' + this.detailList);
+            console.log(this.detailList);
+          }
+        })
+      },
+      getPageList() {
+        let dates = null;
+        if (this.dateType !== 'other') {
+          dates = getStartAndEndTime(this.dateType);
+          console.log(dates);
+          this.listQuery.startTime = dates.startTime;
+          this.listQuery.endTime = dates.endTime;
+        } else {
+          if (this.selectDates.startTime && this.selectDates.endTime) {
+            if (this.selectDates.startTime > this.selectDates.endTime) {
+              this.$message({
+                message: '开始时间不能大于结束时间',
+                type: 'warning'
+              });
+              return;
+            }
+            this.listQuery.startTime = getDateString(this.selectDates.startTime);
+            this.listQuery.endTime = getDateString(this.selectDates.endTime);
+          } else {
+            this.$message({
+              message: '请选择时间',
+              type: 'warning'
+            });
+            return;
+          }
         }
+        this.listLoading = true;
+        queryUserInvestList(this.listQuery).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.list = data.data.data;
+            this.total = data.data.totalPage || 0;
+            console.log('21天计划债权列表' + this.list);
+            console.log(this.list);
+          }
+        })
+      },
+      query() {
+        this.getPageList();
+      },
+      switchDateType(type) {
+        this.dateType = type;
+      },
+      switchProjectType(type) {
+        this.projectType = type;
+      },
+      handleCurrentChange(val) {
+        this.listQuery.pageNo = val;
+        this.getPageList();
       }
     },
     created() {
-      console.log(this.$route.params);
+      this.getList()
+      this.getPageList()
     }
   }
 </script>
 
 <style lang="scss" scoped>
+  .icon-download {
+    color: #0573f4;
+  }
+
   .details {
     width: 100%;
     height: auto;

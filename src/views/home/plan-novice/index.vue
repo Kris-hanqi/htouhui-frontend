@@ -55,7 +55,7 @@
     <div class="message">
       <p class="title">您购买的债权信息</p>
       <el-table :data="list" style="width: 100%">
-        <el-table-column prop="investId" label="项目编号" width="120"></el-table-column>
+        <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
         <el-table-column prop="loanMoney" label="借款金额" width="100"></el-table-column>
         <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
         <el-table-column prop="perid" label="借款期限" width="60"></el-table-column>
@@ -138,9 +138,7 @@
       creditList() {
         queryUserInvestList(this.investQuery).then(data => {
           if (data.data.meta.code === 200) {
-            for (let i = 0; i < data.data.data.data.length; i++) {
-              this.list.push(data.data.data.data[i]);
-            }
+            this.list = data.data.data.data;
             console.log('新手计划债权信息：' + this.list);
           }
         })

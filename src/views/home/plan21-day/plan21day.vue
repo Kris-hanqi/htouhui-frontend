@@ -51,20 +51,16 @@
         </el-table-column>
         <el-table-column prop="lockEndTime" label="持有期限截至" width="135"></el-table-column>
         <el-table-column prop="status" label="状态" width="80"></el-table-column>
-        <el-table-column prop="seeInterests" label="查看债权">
+        <el-table-column prop="seeInterests" label="查看">
           <template scope="scope">
-            <el-button class="icon-interests" @click="goClaimsView(scope.row.joinPlanId)" type="text" size="small"></el-button>
+            <el-button class="icon-interests" @click="goClaimsView(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
     <div class="pages">
       <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-      <el-pagination @current-change="handleCurrentChange"
-                     :current-page.sync="listQuery.pageNo"
-                     :page-size="listQuery.size"
-                     layout="prev, pager, next"
-                     :total="total"></el-pagination>
+      <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
     </div>
   </div>
 </template>
@@ -152,7 +148,6 @@
       },
       goClaimsView(id) {
         this.$router.push('/plan21Day/lookRegular/' + id);
-        console.log(id);
       }
     },
     created() {
@@ -215,9 +210,7 @@
   }
 
   .icon-interests {
-    width: 17px;
-    height: 23px;
-    background: url(../../../assets/images/home/icons/icon-interest.png) no-repeat center;
+    color: #0573f4;
   }
 
   .plan21day {
