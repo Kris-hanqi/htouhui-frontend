@@ -25,7 +25,7 @@
       <div class="look-regular-bottom">
         <p>加入时间 <span class="roboto-regular">2017/10/11 17:30:26</span></p>
         <p>即日起免手续费 <span class="roboto-regular">2017/10/11 </span></p>
-        <img class="type-message" src="../../../assets/images/home/ico.png" alt=""/>
+        <img class="type-message" src="../../../assets/images/home/icon-success.png" alt=""/>
       </div>
     </div>
     <div class="message">

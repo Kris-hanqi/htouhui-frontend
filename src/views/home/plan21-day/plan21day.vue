@@ -50,7 +50,11 @@
           </template>
         </el-table-column>
         <el-table-column prop="lockEndTime" label="持有期限截至" width="135"></el-table-column>
-        <el-table-column prop="status" label="状态" width="80"></el-table-column>
+        <el-table-column prop="status" label="状态" width="80">
+          <template scope="scope">
+            {{ scope.row.status | keyToValue(typeList) }}
+          </template>
+        </el-table-column>
         <el-table-column prop="seeInterests" label="查看">
           <template scope="scope">
             <el-button class="icon-interests" @click="goClaimsView(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
@@ -87,7 +91,11 @@
           startTime: '',
           endTime: ''
         },
-        dateType: '3day'
+        dateType: '3day',
+        typeList: [
+          { key: 'matched', value: '全部匹配' },
+          { key: 'matching', value: '匹配中' }
+        ]
       }
     },
     computed: {
@@ -100,7 +108,6 @@
         let dates = null;
         if (this.dateType !== 'other') {
           dates = getStartAndEndTime(this.dateType);
-          console.log(dates);
           this.listQuery.startTime = dates.startTime;
           this.listQuery.endTime = dates.endTime;
         } else {
@@ -127,9 +134,7 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            this.total = data.data.totalPage || 0;
-            console.log('21天计划' + this.list);
-            console.log(this.list);
+            this.total = data.data.count || 0;
           }
         })
       },

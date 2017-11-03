@@ -8,7 +8,7 @@
       <div class="look-regular-main">
         <div class="look-regular-rate">
           <p class="rate">
-            <span class="roboto-regular">{{ detailList.rate.substring(0, detailList.rate.indexOf('.')) }}</span><span class="small-look-regular-rate roboto-regular">{{ detailList.rate.substring(detailList.rate.indexOf('.')) }}</span>%
+            <span class="roboto-regular">12</span><span class="small-look-regular-rate roboto-regular">.9</span>%
           </p>
           <p>往期年化利率</p>
         </div>
@@ -24,7 +24,8 @@
       <div class="look-regular-bottom">
         <p>加入时间 <span class="roboto-regular">{{ detailList.joinTime }}</span></p>
         <p>即日起免手续费 <span class="roboto-regular">{{ detailList.lockEndTime }}</span></p>
-        <img class="type-message" src="../../../assets/images/home/ico.png" alt=""/>
+        <img v-if="detailList.status == 'matched'" class="type-message" src="../../../assets/images/home/icon-success.png" alt=""/>
+        <img v-else class="type-message" src="../../../assets/images/home/icon-auto.png" alt=""/>
       </div>
     </div>
 
@@ -60,7 +61,7 @@
 <script>
   import { joinPlan } from '@/api/home/getJoinInfo';
   import { queryUserInvestList } from '@/api/home/queryUserJoinInvestList';
-  import { getStartAndEndTime, getDateString } from '@/utils';
+  import
 
   export default {
     data() {
@@ -78,6 +79,11 @@
         total: 0
       }
     },
+    computed: {
+      getPageSize() {
+        return Math.ceil(this.total / this.listQuery.pageSize);
+      }
+    },
     methods: {
       getList() {
         joinPlan(this.detailQuery).then(response => {
@@ -89,37 +95,11 @@
         })
       },
       getPageList() {
-        let dates = null;
-        if (this.dateType !== 'other') {
-          dates = getStartAndEndTime(this.dateType);
-          console.log(dates);
-          this.listQuery.startTime = dates.startTime;
-          this.listQuery.endTime = dates.endTime;
-        } else {
-          if (this.selectDates.startTime && this.selectDates.endTime) {
-            if (this.selectDates.startTime > this.selectDates.endTime) {
-              this.$message({
-                message: '开始时间不能大于结束时间',
-                type: 'warning'
-              });
-              return;
-            }
-            this.listQuery.startTime = getDateString(this.selectDates.startTime);
-            this.listQuery.endTime = getDateString(this.selectDates.endTime);
-          } else {
-            this.$message({
-              message: '请选择时间',
-              type: 'warning'
-            });
-            return;
-          }
-        }
-        this.listLoading = true;
         queryUserInvestList(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            this.total = data.data.totalPage || 0;
+            this.total = data.data.count || 0;
             console.log('21天计划债权列表' + this.list);
             console.log(this.list);
           }
@@ -128,19 +108,13 @@
       query() {
         this.getPageList();
       },
-      switchDateType(type) {
-        this.dateType = type;
-      },
-      switchProjectType(type) {
-        this.projectType = type;
-      },
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
         this.getPageList();
       }
     },
     created() {
-      this.getList()
+      this.getList();
       this.getPageList()
     }
   }

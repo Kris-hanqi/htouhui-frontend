@@ -7,7 +7,7 @@
       </div>
       <div class="newUser-plan-main">
         <div class="newUser-plan-rate">
-          <p class="rate"><span class="roboto-regular">{{ planListData.rate.substring(0, planListData.rate.indexOf('.')) }}</span><span class="small-newUser-plan-rate roboto-regular">{{ planListData.rate.substring(planListData.rate.indexOf('.')) }}</span>%</p>
+          <p class="rate"><span class="roboto-regular">12</span><span class="small-newUser-plan-rate roboto-regular">.0</span>%</p>
           <p>往期年化利率</p>
         </div>
         <div class="newUser-plan-day">

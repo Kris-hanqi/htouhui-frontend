@@ -67,12 +67,12 @@ export const constantRouterMap = [
             component: _import('home/quantify/shengXinBaoLiangHua')
           },
           {
-            path: 'oneKeyJoin',
+            path: 'oneKeyJoin/:id',
             name: '一键加入',
             component: _import('home/quantify/oneKeyJoin')
           },
           {
-            path: 'pullOut',
+            path: 'pullOut/:id',
             name: '申请退出',
             component: _import('home/quantify/pullOut')
           },

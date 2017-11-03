@@ -2,16 +2,16 @@
   <div class="oneKeyJoin">
     <p class="title">一键加入</p>
     <div class="main-1" v-if="show">
-        <p>可加入额<span class="roboto-regular">1000</span><span>元</span><i @click="isShow"></i></p>
+        <p>可加入额<span class="roboto-regular">{{ messageList.canJoinMoney }}</span><span>元</span><i @click="isShow"></i></p>
     </div>
     <div class="main-2" v-else>
       <div class="use-money">
-        <p class="main-2-p-1">起投金额：<span class="roboto-regular">1000</span><span class="small-font">元</span></p>
-        <p>您目前还可加入<span class="roboto-regular">263,500</span>元</p>
+        <p class="main-2-p-1">起投金额：<span class="roboto-regular">{{ messageList.startInvestMoney }}</span><span class="small-font">元</span></p>
+        <p>您目前还可加入<span class="roboto-regular">{{ messageList.canJoinMoney }}</span>元</p>
       </div>
       <input type="number" class="inputMoney" placeholder="加入金额须为1000.00的整数倍">
       <div class="canUseMoney">
-        <p>可用余额<span class="roboto-regular">5,390,00</span>元<router-link to="/recharge"><span>充值</span></router-link></p>
+        <p>可用余额<span class="roboto-regular">{{ messageList.balance }}</span>元<router-link to="/recharge"><span>充值</span></router-link></p>
       </div>
       <div class="coupons-box">
         <div class="coupons-icon" @click="isUp">
@@ -22,7 +22,7 @@
             <p class="title">可用券： 当前有<span class="roboto-regular">2</span>张可用的优惠券</p>
             <div class="noUse"><input type="radio" name="coupons" checked>不使用优惠券</div>
             <div class="coupons-list">
-              <div class="coupon">
+              <div class="coupon" v-for="str in couponsList">
                 <input type="radio" name="coupons">
                 <div class="coupon-img">1%加息</div>
                 <div class="coupon-message">
@@ -49,6 +49,8 @@
 </template>
 
 <script>
+  import { getUserQuantizationInfo, userCouponList } from '@/api/home/quantify';
+
   export default {
     data() {
       return {
@@ -57,7 +59,12 @@
           two: false
         },
         show: true,
-        coupons: true
+        coupons: true,
+        listQuery: {
+          planId: this.$route.params.id
+        },
+        messageList: {},
+        couponsList: []
       }
     },
     methods: {
@@ -69,7 +76,31 @@
       },
       isDown() {
         this.coupons = true
+      },
+      getMessageList() {
+        getUserQuantizationInfo(this.listQuery).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.messageList = data.data.data;
+            console.log('一键加入页面' + this.messageList);
+            console.log(this.messageList);
+          }
+        })
+      },
+      getCouponsList() {
+        userCouponList(this.listQuery).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.couponsList = data.data.data;
+            console.log('优惠券列表' + this.couponsList);
+            console.log(this.couponsList);
+          }
+        })
       }
+    },
+    created() {
+      this.getMessageList();
+      this.getCouponsList()
     }
   }
 </script>
