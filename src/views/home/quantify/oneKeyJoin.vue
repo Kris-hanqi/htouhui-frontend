@@ -87,8 +87,8 @@
           }
         })
       },
-      getCouponsList() {
-        userCouponList(this.listQuery).then(response => {
+      getCouponsList(id) {
+        userCouponList(id).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.couponsList = data.data;
@@ -100,7 +100,7 @@
     },
     created() {
       this.getMessageList();
-      this.getCouponsList()
+      this.getCouponsList(this.$route.params.id)
     }
   }
 </script>
