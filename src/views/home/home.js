@@ -21,6 +21,7 @@ import {
   Input,
   Steps,
   Step,
+  Radio,
   Checkbox
 } from 'element-ui'
 import VueClipboard from 'vue-clipboard2'
@@ -48,6 +49,7 @@ Vue.use(FormItem);
 Vue.use(Input);
 Vue.use(Steps);
 Vue.use(Step);
+Vue.use(Radio);
 Vue.use(Checkbox);
 
 Vue.use(Loading.directive);
