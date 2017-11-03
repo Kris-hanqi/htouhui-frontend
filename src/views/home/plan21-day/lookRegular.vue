@@ -8,7 +8,7 @@
       <div class="look-regular-main">
         <div class="look-regular-rate">
           <p class="rate">
-            <span class="roboto-regular">12</span><span class="small-look-regular-rate roboto-regular">.9</span>%
+            <span class="roboto-regular"><interest-rate :value="detailList.rate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%
           </p>
           <p>往期年化利率</p>
         </div>
@@ -46,7 +46,7 @@
         <el-table-column prop="status" label="状态" width="50"></el-table-column>
         <el-table-column prop="contract" label="查看" width="40">
           <template scope="scope">
-            <el-button class="icon-download" type="text" size="small">合同</el-button>
+            <a class="icon-download" type="text" @click="downloadContractList()" :src="downloadContract">合同</a>
           </template>
         </el-table-column>
       </el-table>
@@ -59,15 +59,21 @@
 </template>
 
 <script>
-  import { joinPlan } from '@/api/home/getJoinInfo';
-  import { queryUserInvestList } from '@/api/home/queryUserJoinInvestList';
-  import
+  import { joinPlan } from 'api/home/getJoinInfo';
+  import { queryUserInvestList } from 'api/home/queryUserJoinInvestList';
+  import interestRate from 'components/interest-rate';
+  import { attornSignedFileUrl } from 'api/home/attornSignedFileUrl';
 
   export default {
+    components: {
+      interestRate
+    },
     data() {
       return {
         list: null,
-        detailList: {},
+        detailList: {
+          rate: ''
+        },
         detailQuery: {
           joinPlanId: this.$route.params.id
         },
@@ -76,7 +82,11 @@
           pageNo: 1,
           pageSize: 10
         },
-        total: 0
+        total: 0,
+        contractQuery: {
+          investId: ''
+        },
+        downloadContract: ''
       }
     },
     computed: {
@@ -111,6 +121,12 @@
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
         this.getPageList();
+      },
+      downloadContractList() {
+        this.contractQuery.investId = '88bb09df791442298c8e08d500534655';
+        attornSignedFileUrl(this.contractQuery).then(data => {
+          this.downloadContract = data.data.data;
+        })
       }
     },
     created() {

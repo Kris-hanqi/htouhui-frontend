@@ -23,8 +23,8 @@
           <p class="money"><span class="roboto-regular">{{ str.raisingMoney }}</span>元</p>
           <p>当前剩余金额</p>
         </div>
-        <router-link to="oneKeyJoin" @click="goClaimsView(str.planId)" v-if="!str.joinPlan"><a class="btn-join" href="#">一键加入</a></router-link>
-        <router-link to="pullOut" @click="goClaimsView(str.planId)" v-else><a class="btn-out" href="#">申请退出</a></router-link>
+        <router-link to="oneKeyJoin" v-if="!str.joinPlan"><a class="btn-join" href="#">一键加入</a></router-link>
+        <router-link to="pullOut" v-else><a class="btn-out" href="#">申请退出</a></router-link>
       </div>
       <div class="shengxinbaolianghua-bottom" v-if="str.joinPlan">
         <p>在投金额（元）<span class="roboto-regular">{{ str.investMoney }}</span></p>
@@ -53,7 +53,7 @@
         })
       },
       goClaimsView(id) {
-        this.$router.push('/quantify/lookRegular/' + id);
+        this.$router.push('/plan21Day/lookRegular/' + id);
       }
     },
     created() {
