@@ -29,7 +29,7 @@
       <div class="shengxinbaolianghua-bottom" v-if="str.joinPlan">
         <p>在投金额（元）<span class="roboto-regular">{{ str.investMoney }}</span></p>
         <p>累计收益（元）<span class="roboto-regular">{{ str.accumulatedEarnings }}</span></p>
-        <router-link to="lookTarget"><a href="#" class="seeBiao">查看标的</a></router-link>
+        <router-link to="lookTarget" @click="goClaimsView(str.planId)"><a href="#" class="seeBiao">查看标的</a></router-link>
       </div>
     </div>
   </div>
@@ -51,6 +51,9 @@
           console.log('升薪宝量化' + this.quantifyData);
           console.log(this.quantifyData);
         })
+      },
+      goClaimsView(id) {
+        this.$router.push('/quantify/lookRegular/' + id);
       }
     },
     created() {

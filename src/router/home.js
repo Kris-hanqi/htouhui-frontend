@@ -82,7 +82,7 @@ export const constantRouterMap = [
             component: _import('home/quantify/transactionRecord')
           },
           {
-            path: 'lookTarget',
+            path: 'lookTarget/:id',
             name: '查看标的',
             component: _import('home/quantify/lookTarget')
           },

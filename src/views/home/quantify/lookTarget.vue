@@ -3,7 +3,7 @@
     <div class="detail">
       <div class="title-box">
         <p class="title">资产详情-债权信息</p>
-        <router-link to="index"><p class="return">返回上一页 <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i></p></router-link>
+        <router-link to="/quantify/index"><p class="return">返回上一页 <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i></p></router-link>
       </div>
       <div class="main">
         <div class="name">
@@ -33,9 +33,9 @@
         <el-table-column prop="incomePrincipal" label="已收本息"></el-table-column>
         <el-table-column prop="collectPrincipal" label="待收本息"></el-table-column>
         <el-table-column prop="state" label="状态" width="50"></el-table-column>
-        <el-table-column prop="contract" label="合同" width="40">
+        <el-table-column prop="contract" label="查看" width="40">
           <template scope="scope">
-            <el-button class="icon-download" type="text" size="small"></el-button>
+            <el-button class="icon-download" type="text" size="small">合同</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -48,6 +48,8 @@
 </template>
 
 <script>
+  import { queryUserAssetInfoList } from '@/api/home/queryUserAssetInfoList';
+
   export default {
     data() {
       return {
@@ -69,9 +71,7 @@
 
 <style lang="scss" scoped>
   .icon-download {
-    width: 20px;
-    height: 21px;
-    background: url(../../../assets/images/home/icons/icon-download.png) no-repeat center;
+    color: #0573f4;
   }
 
   .lookTarget {
