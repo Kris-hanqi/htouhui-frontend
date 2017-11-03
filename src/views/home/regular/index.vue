@@ -4,34 +4,46 @@
       <ul>
         <li>状态：</li>
         <li>
-          <a class="active" href="#">还款中</a>
+          <a href="javascript:void(0)" @click="switchDateType('repaying')" :class="{ active: dateType === 'repaying'}">还款中</a>
         </li>
         <li>
-          <a href="#">投标中</a>
+          <a href="javascript:void(0)" @click="switchDateType('bidSuccess')" :class="{ active: dateType === 'bidSuccess'}">投标中</a>
         </li>
         <li>
-          <a href="#">已结清</a>
+          <a href="javascript:void(0)" @click="switchDateType('complete')" :class="{ active: dateType === 'complete'}">已结清</a>
         </li>
         <li>
-          <a href="#">未成功</a>
+          <a href="javascript:void(0)" @click="switchDateType('cancel')" :class="{ active: dateType === 'cancel'}">未成功</a>
         </li>
       </ul>
-      <button class="find-btn">查询</button>
+      <button class="find-btn" @click="query">查询</button>
     </div>
 
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="name" label="项目名称" fixed width="170"></el-table-column>
-      <el-table-column prop="time" label="投资时间" width="80"></el-table-column>
-      <el-table-column prop="money" label="投资金额" width="100"></el-table-column>
-      <el-table-column prop="rate" label="年利率" width="60"></el-table-column>
-      <el-table-column prop="period" label="已还期数/总期数" width="110"></el-table-column>
-      <el-table-column prop="nextDay" label="下次还款日" width="90"></el-table-column>
+    <el-table :data="list" style="width: 100%">
+      <el-table-column prop="projectName" label="项目名称" fixed width="170"></el-table-column>
+      <el-table-column prop="investTime" label="投资时间" width="80"></el-table-column>
+      <el-table-column prop="investCash" label="投资金额" width="100">
+        <template scope="scope">
+          {{ scope.row.investCash + '元' }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="investRate" label="年利率" width="60"></el-table-column>
+      <el-table-column prop="paidPeriod" label="已还期数/总期数" width="110">
+        <template scope="scope">
+          {{ scope.row.paidPeriod + '/' + scope.row.repayPeriod }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="nextRepayDate" label="下次还款日" width="90"></el-table-column>
       <el-table-column prop="award" label="额外奖励" width="60">
         <template scope="scope">
           <el-button class="icon-award" @click="dialogVisible = true" type="text" size="small"></el-button>
         </template>
       </el-table-column>
-      <el-table-column prop="state" label="投资状态" width="70"></el-table-column>
+      <el-table-column prop="status" label="投资状态" width="70">
+        <template scope="scope">
+          {{ scope.row.status | keyToValue(typeList) }}
+        </template>
+      </el-table-column>
       <el-table-column prop="look" label="查看" fixed="right" width="100">
         <template scope="scope">
           <el-button class="icon-plan" type="text" size="small">还款计划</el-button>
@@ -41,8 +53,8 @@
     </el-table>
 
     <div class="pages">
-      <p class="total-pages">共计<span class="roboto-regular">25</span>条记录（共<span class="roboto-regular">3</span>页）</p>
-      <el-pagination layout="prev, pager, next" :total="30"></el-pagination>
+      <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+      <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
     </div>
 
 
@@ -61,19 +73,28 @@
 </template>
 
 <script>
+  import { getUserQuantizationInfo } from 'api/home/regularInvest';
+
   export default {
     data() {
       return {
         dialogVisible: false,
-        tableData: [{
-          name: '企业借款--01 2017071405',
-          time: '2017-08-17 14:52:17',
-          money: '1,000000.00元',
-          rate: '12.0%',
-          period: '3个月',
-          nextDay: '2017-9-17',
-          state: '成功'
-        }],
+        listQuery: {
+          status: '',
+          startTime: '',
+          endTime: '',
+          pageNo: 1,
+          pageSize: 10
+        },
+        list: null,
+        total: 0,
+        dateType: 'repaying',
+        typeList: [
+          { key: 'repaying', value: '还款中' },
+          { key: 'bid_success', value: '投标中' },
+          { key: 'complete', value: '已结清' },
+          { key: 'cancel', value: '未成功' }
+        ],
         etherRewards: [{
           coupon: '加息券无最高计息金额',
           point: '3.0%',
@@ -82,6 +103,39 @@
           state: '未发放'
         }]
       }
+    },
+    computed: {
+      getPageSize() {
+        return Math.ceil(this.total / this.listQuery.pageSize);
+      }
+    },
+    methods: {
+      getPageList() {
+        this.listLoading = true;
+        this.listQuery.status = this.dateType;
+        getUserQuantizationInfo(this.listQuery).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.list = data.data.data;
+            console.log('定期项目' + this.list);
+            console.log(this.list);
+            this.total = data.data.count || 0;
+          }
+        })
+      },
+      query() {
+        this.getPageList();
+      },
+      switchDateType(type) {
+        this.dateType = type;
+      },
+      handleCurrentChange(val) {
+        this.listQuery.pageNo = val;
+        this.getPageList();
+      }
+    },
+    created() {
+      this.getPageList();
     }
   }
 </script>

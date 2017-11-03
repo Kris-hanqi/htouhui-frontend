@@ -106,8 +106,6 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.messageList = data.data;
-            console.log('一键加入页面' + this.messageList);
-            console.log(this.messageList);
           }
         })
       },
@@ -116,8 +114,6 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.couponsList = data.data;
-            console.log('优惠券列表' + this.couponsList);
-            console.log(this.couponsList);
           }
         })
       },

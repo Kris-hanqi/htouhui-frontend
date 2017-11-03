@@ -48,7 +48,7 @@
 </template>
 
 <script>
-  import { queryUserAssetInfoList } from '@/api/home/queryUserAssetInfoList';
+  import { queryUserAssetInfoList } from 'api/home/queryUserAssetInfoList';
 
   export default {
     data() {
@@ -60,6 +60,11 @@
           pageSize: 10
         },
         total: 0
+      }
+    },
+    computed: {
+      getPageSize() {
+        return Math.ceil(this.total / this.listQuery.pageSize);
       }
     },
     methods: {

@@ -42,7 +42,7 @@
 </template>
 
 <script>
-  import { applyExitInfo } from '@/api/home/quantify';
+  import { applyExitInfo } from 'api/home/quantify';
 
   export default {
     data() {
@@ -59,7 +59,7 @@
         applyExitInfo(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            this.messageList = data.data.data;
+            this.messageList = data.data;
             console.log('申请退出页面' + this.messageList);
             console.log(this.messageList);
           }

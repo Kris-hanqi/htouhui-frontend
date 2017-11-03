@@ -6,7 +6,7 @@
         <p class="firstDay" v-show="str.isTiexi">首{{ str.tiexiPeriod }}天贴息</p>
         <p>随时可退</p>
         <p>满{{ str.lockPeriod }}天免手续费</p>
-        <router-link to="transactionRecord" v-if="str.joinPlan"><a href="javascript:void(0)" class="tradingParticulars-2"><i></i>交易详情</a></router-link>
+        <a href="javascript:void(0)" class="tradingParticulars-2" v-if="str.joinPlan" @click="transactionRecord(str.planId)"><i></i>交易详情</a>
         <a href="javascript:void(0)" class="tradingParticulars-1" v-else><i></i>交易详情</a>
       </div>
       <div class="shengxinbaolianghua-main">
@@ -24,13 +24,13 @@
           <p class="money"><span class="roboto-regular">{{ str.raisingMoney }}</span>元</p>
           <p>当前剩余金额</p>
         </div>
-        <a class="btn-join" href="javascript:void(0)" @click="goClaimsView(str.planId)" v-if="!str.joinPlan">一键加入</a>
-        <router-link to="pullOut" v-else><a class="btn-out" href="#">申请退出</a></router-link>
+        <a class="btn-join" href="javascript:void(0)" @click="oneKeyJoin(str.planId)" v-if="!str.joinPlan">一键加入</a>
+        <a class="btn-out" href="javascript:void(0)" @click="pullOut(str.planId)" v-else>申请退出</a>
       </div>
       <div class="shengxinbaolianghua-bottom" v-if="str.joinPlan">
         <p>在投金额（元）<span class="roboto-regular">{{ str.investMoney }}</span></p>
         <p>累计收益（元）<span class="roboto-regular">{{ str.accumulatedEarnings }}</span></p>
-        <a href="javascript:void(0)" @click="goClaimsView(str.planId)" class="seeBiao">查看标的</a>
+        <a href="javascript:void(0)" @click="lookTarget(str.planId)" class="seeBiao">查看标的</a>
       </div>
     </div>
   </div>
@@ -51,8 +51,17 @@
           this.quantifyData = data.data.data;
         })
       },
-      goClaimsView(id) {
+      oneKeyJoin(id) {
         this.$router.push('/quantify/oneKeyJoin/' + id);
+      },
+      pullOut(id) {
+        this.$router.push('/quantify/pullOut/' + id);
+      },
+      lookTarget(id) {
+        this.$router.push('/quantify/lookTarget/' + id);
+      },
+      transactionRecord(id) {
+        this.$router.push('/quantify/transactionRecord/' + id);
       }
     },
     created() {

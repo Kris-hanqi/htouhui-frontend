@@ -70,7 +70,7 @@
 </template>
 
 <script>
-  import { plan21dayJoin } from '@/api/home/plan-21day';
+  import { plan21dayJoin } from 'api/home/plan-21day';
   import { getStartAndEndTime, getDateString } from '@/utils';
 
   export default {
@@ -143,9 +143,6 @@
       },
       switchDateType(type) {
         this.dateType = type;
-      },
-      switchProjectType(type) {
-        this.projectType = type;
       },
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;

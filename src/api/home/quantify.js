@@ -33,3 +33,21 @@ export function userCouponList(id) {
     method: 'get'
   })
 }
+
+/** 加入记录 */
+export function joinRecord(data) {
+  return fetch({
+    url: 'user/findJoinPlanBill',
+    method: 'get',
+    params: data
+  })
+}
+
+/** 退出记录 */
+export function outRecord(data) {
+  return fetch({
+    url: 'user/findExitPlanBill',
+    method: 'get',
+    params: data
+  })
+}

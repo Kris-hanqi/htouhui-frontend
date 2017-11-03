@@ -79,8 +79,9 @@ export const constantRouterMap = [
             component: _import('home/quantify/pullOut')
           },
           {
-            path: 'transactionRecord',
+            path: 'transactionRecord/:id',
             name: '交易记录',
+            props: true,
             component: _import('home/quantify/transactionRecord')
           },
           {
@@ -90,8 +91,9 @@ export const constantRouterMap = [
             component: _import('home/quantify/lookTarget')
           },
           {
-            path: 'lookRegular',
+            path: 'lookRegular/:id',
             name: '查看债权',
+            props: true,
             component: _import('home/quantify/lookRegular')
           }
         ]
