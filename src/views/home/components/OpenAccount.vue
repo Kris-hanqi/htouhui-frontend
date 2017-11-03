@@ -11,13 +11,13 @@
       </el-steps>
       <el-form label-position="right" label-width="90px" v-if="stepActive === 2">
         <el-form-item label="姓名">
-          <el-input></el-input>
+          <el-input v-model="openAccountData.realName"></el-input>
         </el-form-item>
         <el-form-item label="身份证号">
-          <el-input></el-input>
+          <el-input v-model="openAccountData.idCard"></el-input>
         </el-form-item>
         <el-form-item label="绑定银行卡">
-          <el-input></el-input>
+          <el-input v-model="openAccountData.cardNo"></el-input>
         </el-form-item>
         <el-form-item label="">
           <el-checkbox>江西银行存管协议</el-checkbox>
@@ -57,9 +57,9 @@
         dialogOpenAccountVisible: false,
         stepActive: 2,
         openAccountData: {
-          cardNo: '',
           realName: '',
-          idCard: ''
+          idCard: '',
+          cardNo: ''
         }
       }
     },
@@ -67,11 +67,14 @@
       handleClose() {
         this.$parent.dialogBankLimitVisible = false;
       },
-      openAccount() {
-        console.log(this.openAccountData);
-        fetchOpenAccount().then(response => {
-          console.log(response);
-        })
+      openAccount() { // 开户操作
+        fetchOpenAccount(this.openAccountData)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.stepActive = 3;
+            }
+            console.log(response);
+          })
       }
     }
   }
