@@ -69,11 +69,13 @@ export const constantRouterMap = [
           {
             path: 'oneKeyJoin/:id',
             name: '一键加入',
+            props: true,
             component: _import('home/quantify/oneKeyJoin')
           },
           {
             path: 'pullOut/:id',
             name: '申请退出',
+            props: true,
             component: _import('home/quantify/pullOut')
           },
           {
@@ -84,6 +86,7 @@ export const constantRouterMap = [
           {
             path: 'lookTarget/:id',
             name: '查看标的',
+            props: true,
             component: _import('home/quantify/lookTarget')
           },
           {

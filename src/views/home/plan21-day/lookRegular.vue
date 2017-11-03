@@ -46,7 +46,7 @@
         <el-table-column prop="status" label="状态" width="50"></el-table-column>
         <el-table-column prop="contract" label="查看" width="40">
           <template scope="scope">
-            <a class="icon-download" type="text" @click="downloadContractList()" :src="downloadContract">合同</a>
+            <a class="icon-download" type="text" @click="downloadContractList()" :src="downloadContract(scope.row.investId)">合同</a>
           </template>
         </el-table-column>
       </el-table>
@@ -122,8 +122,8 @@
         this.listQuery.pageNo = val;
         this.getPageList();
       },
-      downloadContractList() {
-        this.contractQuery.investId = '88bb09df791442298c8e08d500534655';
+      downloadContractList(val) {
+        this.contractQuery.investId = val;
         attornSignedFileUrl(this.contractQuery).then(data => {
           this.downloadContract = data.data.data;
         })

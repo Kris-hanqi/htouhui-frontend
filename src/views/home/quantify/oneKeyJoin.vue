@@ -9,7 +9,7 @@
         <p class="main-2-p-1">起投金额：<span class="roboto-regular">{{ messageList.startInvestMoney }}</span><span class="small-font">元</span></p>
         <p>您目前还可加入<span class="roboto-regular">{{ messageList.canJoinMoney }}</span>元</p>
       </div>
-      <input type="number" class="inputMoney" placeholder="加入金额须为1000.00的整数倍">
+      <input type="number" class="inputMoney" :placeholder="'加入金额须为'+ messageList.incrMoney +'的整数倍'">
       <div class="canUseMoney">
         <p>可用余额<span class="roboto-regular">{{ messageList.balance }}</span>元<router-link to="/recharge"><span>充值</span></router-link></p>
       </div>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-  import { getUserQuantizationInfo, userCouponList } from '@/api/home/quantify';
+  import { getUserQuantizationInfo, userCouponList } from 'api/home/quantify';
 
   export default {
     data() {
@@ -81,7 +81,7 @@
         getUserQuantizationInfo(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            this.messageList = data.data.data;
+            this.messageList = data.data;
             console.log('一键加入页面' + this.messageList);
             console.log(this.messageList);
           }
@@ -91,7 +91,7 @@
         userCouponList(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            this.couponsList = data.data.data;
+            this.couponsList = data.data;
             console.log('优惠券列表' + this.couponsList);
             console.log(this.couponsList);
           }

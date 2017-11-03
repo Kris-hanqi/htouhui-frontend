@@ -6,7 +6,8 @@
         <p class="firstDay" v-show="str.isTiexi">首{{ str.tiexiPeriod }}天贴息</p>
         <p>随时可退</p>
         <p>满{{ str.lockPeriod }}天免手续费</p>
-        <router-link to="transactionRecord"><a href="#" class="tradingParticulars-2"><i></i>交易详情</a></router-link>
+        <router-link to="transactionRecord" v-if="str.joinPlan"><a href="javascript:void(0)" class="tradingParticulars-2"><i></i>交易详情</a></router-link>
+        <a href="javascript:void(0)" class="tradingParticulars-1" v-else><i></i>交易详情</a>
       </div>
       <div class="shengxinbaolianghua-main">
         <div class="shengxinbaolianghua-rate">
@@ -23,13 +24,13 @@
           <p class="money"><span class="roboto-regular">{{ str.raisingMoney }}</span>元</p>
           <p>当前剩余金额</p>
         </div>
-        <router-link to="oneKeyJoin" v-if="!str.joinPlan"><a class="btn-join" href="#">一键加入</a></router-link>
+        <a class="btn-join" href="javascript:void(0)" @click="goClaimsView(str.planId)" v-if="!str.joinPlan">一键加入</a>
         <router-link to="pullOut" v-else><a class="btn-out" href="#">申请退出</a></router-link>
       </div>
       <div class="shengxinbaolianghua-bottom" v-if="str.joinPlan">
         <p>在投金额（元）<span class="roboto-regular">{{ str.investMoney }}</span></p>
         <p>累计收益（元）<span class="roboto-regular">{{ str.accumulatedEarnings }}</span></p>
-        <router-link to="lookTarget" @click="goClaimsView(str.planId)"><a href="#" class="seeBiao">查看标的</a></router-link>
+        <router-link to="lookTarget" @click="goClaimsView(str.planId)"><a href="javascript:void(0)" class="seeBiao">查看标的</a></router-link>
       </div>
     </div>
   </div>
@@ -48,12 +49,10 @@
       getQuantifyList() {
         quantifyList().then(data => {
           this.quantifyData = data.data.data;
-          console.log('升薪宝量化' + this.quantifyData);
-          console.log(this.quantifyData);
         })
       },
       goClaimsView(id) {
-        this.$router.push('/plan21Day/lookRegular/' + id);
+        this.$router.push('/quantify/oneKeyJoin/' + id);
       }
     },
     created() {
