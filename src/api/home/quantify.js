@@ -30,7 +30,6 @@ export function applyExitInfo(data) {
 export function userCouponList(id) {
   return fetch({
     url: 'findUserCouponList/' + id,
-    method: 'get',
-    params: data
+    method: 'get'
   })
 }

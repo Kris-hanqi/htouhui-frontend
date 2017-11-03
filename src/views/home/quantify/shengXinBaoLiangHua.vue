@@ -30,7 +30,7 @@
       <div class="shengxinbaolianghua-bottom" v-if="str.joinPlan">
         <p>在投金额（元）<span class="roboto-regular">{{ str.investMoney }}</span></p>
         <p>累计收益（元）<span class="roboto-regular">{{ str.accumulatedEarnings }}</span></p>
-        <router-link to="lookTarget" @click="goClaimsView(str.planId)"><a href="javascript:void(0)" class="seeBiao">查看标的</a></router-link>
+        <a href="javascript:void(0)" @click="goClaimsView(str.planId)" class="seeBiao">查看标的</a>
       </div>
     </div>
   </div>
