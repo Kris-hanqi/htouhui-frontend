@@ -1,23 +1,29 @@
 <template>
   <div class="right-notification">
     <h1 class="notification-title">站内通知</h1>
-    <el-tabs @tab-click="handleTabClick" type="card">
+    <el-tabs v-model="type" @tab-click="handleTabClick" type="card">
       <el-tab-pane label="全部" name="all"></el-tab-pane>
       <el-tab-pane label="未读" name="unread"></el-tab-pane>
       <el-tab-pane label="已读" name="read"></el-tab-pane>
     </el-tabs>
     <div class="notification-data">
-      <img :src="nothing_data" alt="" />
+      <img :src="nothing_data" />
     </div>
   </div>
 </template>
 
 <script>
-  import nothing_data from '@/assets/images/home/icon-nothing.jpg';
+  import nothing_data from 'assets/images/home/icon-nothing.jpg';
   export default {
     data() {
       return {
-        nothing_data
+        nothing_data,
+        type: 'all'
+      }
+    },
+    methods: {
+      handleTabClick(tab) {
+        this.type = tab.name;
       }
     }
   }
