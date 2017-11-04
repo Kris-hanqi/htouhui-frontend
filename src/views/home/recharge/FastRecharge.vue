@@ -1,17 +1,18 @@
 <template>
   <div class="shortcutRecharge">
     <!--未绑卡-->
-    <div class="noBankCardMsg">
+    <div class="noBankCardMsg" v-if="!bankCard">
       <span class="addBankCard"></span>
       <p class="noBankCardTxt">您暂未绑定银行卡</p>
     </div>
 
     <!--已绑卡-->
-    <div class="bankCardMsg" style="display: none;">
+    <div class="bankCardMsg" v-else>
       <p class="bankName">兴业银行</p>
-      <p class="roboto-regular bankNum">6229 **** **** 3126</p>
+      <p class="roboto-regular bankNum">{{ bankCard }}</p>
     </div>
 
+    <!-- 银行限额组件 -->
     <bank-limit :visible="dialogBankLimitVisible" @close="closeBankLimit"></bank-limit>
 
     <ul class="withdrawMsgBox">
@@ -54,9 +55,15 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import BankLimit from '../components/BankLimit.vue';
 
   export default {
+    computed: {
+      ...mapGetters([
+        'bankCard'
+      ])
+    },
     components: {
       BankLimit
     },

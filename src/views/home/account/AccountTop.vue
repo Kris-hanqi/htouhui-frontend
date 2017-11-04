@@ -61,9 +61,9 @@
       unlockBankCard() {
         fetchUnlockBankCard().then(response => {
           if (response.data.meta.code === 200) {
-            this.$store.commit('SET_BANK_NAME', null);
-            this.$store.commit('SET_BANK_CARD', null);
-            this.$store.commit('SET_BANK_CARD', 2);
+            this.$store.commit('SET_BANK_NAME', '');
+            this.$store.commit('SET_BANK_CARD', '');
+            this.$store.commit('SET_STATUS', 2);
             this.dialogVisible = false;
             this.$message({
               message: '银行卡解绑成功',
