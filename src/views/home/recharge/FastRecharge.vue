@@ -22,7 +22,7 @@
       </li>
       <li>
         <span>转入金额：</span>
-        <input type="text">
+        <input v-model="rechargeData.money" type="text">
         <span>元</span>
         <a href="javascript:void(0)" @click="showBankLimit">(查看银行限额)</a>
       </li>
@@ -38,7 +38,7 @@
         <span>0.00元</span>
       </li>
       <li class="withdrawBtn">
-        <button>充值</button>
+        <button @click="getRequestBankData">充值</button>
       </li>
     </ul>
     <div class="split-line"></div>
@@ -51,12 +51,16 @@
       <p>5、禁止洗钱、信用卡套现、虚假交易等行为，一经发现并确认，将终止该账户的使用。</p>
       <p>6、如果充值金额没有及时到账，请联系客服，400-698-8810。</p>
     </div>
+  
+    <request-bank-from :request-data="requestData"></request-bank-from>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
+  import { fetchRecharge } from 'api/home/account';
   import BankLimit from '../components/BankLimit.vue';
+  import RequestBankFrom from '../components/RequestBankFrom.vue';
 
   export default {
     computed: {
@@ -65,11 +69,19 @@
       ])
     },
     components: {
+      RequestBankFrom,
       BankLimit
     },
     data() {
       return {
-        dialogBankLimitVisible: false
+        dialogBankLimitVisible: false,
+        requestData: {},
+        rechargeData: {
+          money: '',
+          source: 'pc',
+          sessionId: '4561321465451346',
+          callbackUrl: 'http://www.baidu.com'
+        }
       }
     },
     methods: {
@@ -78,6 +90,14 @@
       },
       closeBankLimit() {
         this.dialogBankLimitVisible = false;
+      },
+      getRequestBankData() {
+        fetchRecharge(this.rechargeData)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.requestData = response.data.data;
+            }
+          })
       }
     }
   }
