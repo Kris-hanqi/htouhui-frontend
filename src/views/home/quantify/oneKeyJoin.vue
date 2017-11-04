@@ -2,42 +2,45 @@
   <div class="oneKeyJoin">
     <p class="title">一键加入</p>
     <div class="main-1" v-if="show">
-        <p>可加入额<span class="roboto-regular">1000</span><span>元</span><i @click="isShow"></i></p>
+        <p>可加入额<span class="roboto-regular">{{ messageList.canJoinMoney }}</span><span>元</span><i @click="isShow"></i></p>
     </div>
     <div class="main-2" v-else>
       <div class="use-money">
-        <p class="main-2-p-1">起投金额：<span class="roboto-regular">1000</span><span class="small-font">元</span></p>
-        <p>您目前还可加入<span class="roboto-regular">263,500</span>元</p>
+        <p class="main-2-p-1">起投金额：<span class="roboto-regular">{{ messageList.startInvestMoney }}</span><span class="small-font">元</span></p>
+        <p>您目前还可加入<span class="roboto-regular">{{ messageList.canJoinMoney }}</span>元</p>
       </div>
-      <input type="number" class="inputMoney" placeholder="加入金额须为1000.00的整数倍">
+      <input type="number" class="inputMoney" v-model="userMoney" :placeholder="'加入金额须为'+ messageList.incrMoney +'的整数倍'">
       <div class="canUseMoney">
-        <p>可用余额<span class="roboto-regular">5,390,00</span>元<router-link to="/recharge"><span>充值</span></router-link></p>
+        <p>可用余额<span class="roboto-regular">{{ messageList.balance }}</span>元<router-link to="/recharge"><span>充值</span></router-link></p>
       </div>
       <div class="coupons-box">
         <div class="coupons-icon" @click="isUp">
           优惠券
           <i class="fa fa-lg" :class="coupons ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
-          <div class="coupons-content" :style="{display: coupons ? 'none' : 'block'}">
+          <div class="coupons-content" v-if="coupons">
             <i></i>
-            <p class="title">可用券： 当前有<span class="roboto-regular">2</span>张可用的优惠券</p>
-            <div class="noUse"><input type="radio" name="coupons" checked>不使用优惠券</div>
+            <p class="title">可用券： 当前有<span class="roboto-regular">{{ couponsList.count }}</span>张可用的优惠券</p>
+            <div class="noUse">
+              <el-radio v-model="radio" :label="0" name="coupons">不使用优惠券</el-radio>
+            </div>
             <div class="coupons-list">
-              <div class="coupon">
-                <input type="radio" name="coupons">
-                <div class="coupon-img">1%加息</div>
-                <div class="coupon-message">
-                  <p>满100元可用</p>
-                  <p><span>最高计息金额：1,000元 </span><span> 最高计息天数：10天</span></p>
-                </div>
+              <div class="coupon" v-for="str in couponsList.userCouponInfos">
+                <el-radio :disabled="!chooseCoupons(str.lowerLimitMoney)" v-model="radio" :label="str.userCouponId" name="coupons">
+                  <div class="coupon-img" :id="str.userCouponId">{{ str.type == 'plus_coupon' ? str.rate : str.money }}{{ str.type | keyToValue(typeList) }}</div>
+                  <div class="coupon-message">
+                    <p>满{{ str.lowerLimitMoney }}元可用</p>
+                    <p><span v-if="str.maxInterestMoney != null">最高计息金额：{{ str.maxInterestMoney }}元 </span><span v-if="str.interestDeadline != null"> 最高计息天数：{{ str.interestDeadline }}天</span></p>
+                  </div>
+                </el-radio>
               </div>
             </div>
             <div class="coupons-btn">
-              <p class="sure">确定</p>
+              <p class="sure" @click="sureCoupon">确定</p>
               <p class="cancel" @click.stop="isDown">取消</p>
             </div>
           </div>
         </div>
-        <p class="usedCoupon">已使用1%加息券</p>
+        <p class="usedCoupon" v-show="showUsedCoupon">已使用{{ usedCouponText }}券</p>
       </div>
     </div>
     <div class="checkboxes">
@@ -49,6 +52,8 @@
 </template>
 
 <script>
+  import { getUserQuantizationInfo, userCouponList } from 'api/home/quantify';
+
   export default {
     data() {
       return {
@@ -56,20 +61,81 @@
           one: false,
           two: false
         },
+        radio: 0,
         show: true,
-        coupons: true
+        coupons: false,
+        userMoney: '',
+        listQuery: {
+          planId: this.$route.params.id
+        },
+        test1234: '',
+        messageList: {},
+        couponsList: [],
+        typeList: [
+          { key: 'cash', value: '元现金' },
+          { key: 'lijin', value: '元礼金' },
+          { key: 'plus_coupon', value: '%加息' }
+        ],
+        showUsedCoupon: false,
+        usedCouponText: ''
       }
     },
     methods: {
       isShow() {
-        this.show = false
+        this.show = false;
       },
       isUp() {
-        this.coupons = false
+        this.coupons = true;
+      },
+      chooseCoupons(value) {
+        if (!this.userMoney) {
+          return false;
+        } else {
+          if (this.userMoney > value) {
+            return true;
+          } else {
+            return false;
+          }
+        }
       },
       isDown() {
-        this.coupons = true
+        this.coupons = false;
+      },
+      getMessageList() {
+        getUserQuantizationInfo(this.listQuery).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.messageList = data.data;
+          }
+        })
+      },
+      getCouponsList(id) {
+        userCouponList(id).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.couponsList = data.data;
+          }
+        })
+      },
+      sureCoupon() {
+        if (this.radio !== 0) {
+          let obj = '';
+          this.couponsList.userCouponInfos.forEach(v => {
+            if (v.userCouponId === this.radio) {
+              obj = v;
+            }
+          });
+          if (obj) {
+            this.usedCouponText = document.getElementById(this.radio).innerHTML;
+            this.showUsedCoupon = true;
+            this.coupons = false;
+          }
+        }
       }
+    },
+    created() {
+      this.getMessageList();
+      this.getCouponsList(this.$route.params.id)
     }
   }
 </script>
@@ -97,16 +163,6 @@
         margin-bottom: 15px;
         font-size: 14px;
         color: #727e90;
-      }
-
-      input {
-        width: 17px;
-        height: 17px;
-        margin-right: 12px;
-        background-color: #fff;
-        border: solid 1px #aab2c9;
-        border-radius: 0;
-        padding: 0;
       }
     }
 

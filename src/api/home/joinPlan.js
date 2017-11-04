@@ -1,9 +1,9 @@
 import fetch from '@/utils/fetch';
 
-/** 获取资金流水 */
-export function fetchPageList(data) {
+/** 加入记录 */
+export function joinPlan(data) {
   return fetch({
-    url: 'user/newUserBill',
+    url: 'user/findJoinPlanBill',
     method: 'get',
     params: data
   })

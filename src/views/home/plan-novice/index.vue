@@ -1,9 +1,9 @@
 <template>
   <div class="plan-novice">
     <!--未投资-->
-    <div class="newUser-plan" v-if="showNovicePlanMessage">
+    <div class="newUser-plan" v-if="showPlanNovice">
       <div class="newUser-plan-title">
-        <p>新手计划<span>1元起投，最高可投1万元 ，每人仅限1次 </span></p>
+        <p>新手计划<span>{{ planListData.startInvestMoeny }}元起投，最高可投1万元 ，每人仅限1次 </span></p>
       </div>
       <div class="newUser-plan-main">
         <div class="newUser-plan-rate">
@@ -11,7 +11,7 @@
           <p>往期年化利率</p>
         </div>
         <div class="newUser-plan-day">
-          <p class="day"><span class="roboto-regular">14</span>天</p>
+          <p class="day"><span class="roboto-regular">{{ planListData.lockPeriod }}</span>天</p>
           <p>持有期限</p>
         </div>
         <div class="newUser-plan-way">
@@ -32,22 +32,22 @@
       </div>
       <div class="newUser-plan-main">
         <div class="newUser-plan-rate">
-          <p class="rate"><span class="roboto-regular">12</span><span class="small-newUser-plan-rate roboto-regular">.0</span>%</p>
+          <p class="rate"><span class="roboto-regular">{{ joinPlanList.rate.substring(0, joinPlanList.rate.indexOf('.')) }}</span><span class="small-newUser-plan-rate roboto-regular">{{ joinPlanList.rate.substring(joinPlanList.rate.indexOf('.')) }}</span>%</p>
           <p>往期年化利率</p>
         </div>
         <div class="newUser-plan-day">
-          <p class="day"><span class="roboto-regular">14</span>天</p>
+          <p class="day"><span class="roboto-regular">{{ joinPlanList.lockPeriod }}</span>天</p>
           <p>持有期限</p>
         </div>
         <div class="newUser-plan-money">
-          <p class="money"><span>100</span>元</p>
+          <p class="money"><span>{{ joinPlanList.joinMoney }}</span>元</p>
           <p>加入金额</p>
         </div>
       </div>
       <div class="newUser-plan-bottom">
-        <p class="join-time">加入时间<span class="roboto-regular">2017/09/17 14:52:17</span></p>
-        <p class="day-stop">持有期限截至<span class="roboto-regular">2017/10/114:52:17</span></p>
-        <p class="status">状态<span>成功</span></p>
+        <p class="join-time">加入时间<span class="roboto-regular">{{ joinPlanList.joinTime }}</span></p>
+        <p class="day-stop">持有期限截至<span class="roboto-regular">{{ joinPlanList.lockEndTime }}</span></p>
+        <p class="status">状态<span>{{ joinPlanList.status == matched ? '全部匹配' : '匹配中' }}</span></p>
       </div>
     </div>
 
@@ -55,33 +55,42 @@
     <div class="message">
       <p class="title">您购买的债权信息</p>
       <el-table :data="list" style="width: 100%">
-        <el-table-column prop="number" label="项目编号" width="120"></el-table-column>
-        <el-table-column prop="borrowedMoney" label="借款金额" width="100"></el-table-column>
+        <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
+        <el-table-column prop="loanMoney" label="借款金额" width="100"></el-table-column>
         <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
-        <el-table-column prop="timeLimit" label="借款期限" width="60"></el-table-column>
+        <el-table-column prop="perid" label="借款期限" width="60"></el-table-column>
         <el-table-column prop="investMoney" label="投资金额" width="100"></el-table-column>
-        <el-table-column prop="time" label="还款时间" width="80"></el-table-column>
-        <el-table-column prop="incomePrincipal" label="已收本息"></el-table-column>
-        <el-table-column prop="collectPrincipal" label="待收本息"></el-table-column>
-        <el-table-column prop="state" label="状态" width="50"></el-table-column>
+        <el-table-column prop="repayTimeFormat" label="还款时间" width="80"></el-table-column>
+        <el-table-column prop="earnings" label="已收本息"></el-table-column>
+        <el-table-column prop="uncollectedRepayMoney" label="待收本息"></el-table-column>
+        <el-table-column prop="status" label="状态" width="50"></el-table-column>
         <el-table-column prop="contract" label="合同" width="40">
           <template scope="scope">
             <el-button class="icon-download" type="text" size="small"></el-button>
           </template>
         </el-table-column>
       </el-table>
+
+      <div class="pages">
+        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+        <el-pagination @current-change="handleCurrentChange" :current-page.sync="investQuery.pageNo" :page-size="investQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
   import { planNovice } from '@/api/home/plan-novice';
+  import { joinPlan } from '@/api/home/joinPlan';
+  import { queryUserInvestList } from '@/api/home/queryUserJoinInvestList';
 
   export default {
     data() {
       return {
-        list: null,
+        showPlanNovice: false,
+        planListData: {},
+        joinPlanList: [],
+        list: [],
         listQuery: {
           planId: '',
           type: 'novice_plan',
@@ -90,27 +99,55 @@
           endTime: '',
           pageNo: 1,
           pageSize: 1
-        }
+        },
+        investQuery: {
+          joinPlanId: '',
+          pageNo: 1,
+          pageSize: 10
+        },
+        total: 0
       }
     },
     computed: {
-      ...mapGetters([
-        'showNovicePlanMessage'
-      ])
+      getPageSize() {
+        return Math.ceil(this.total / this.listQuery.size);
+      }
     },
     methods: {
-      planNoviceList() {
-        planNovice(this.listQuery).then(response => {
-          const data = response.data;
-          if (data.meta.code === 200) {
-            this.list = data.data.data;
-            console.log(this.list);
+      planList() {
+        planNovice().then(data => {
+          console.log(data);
+          if (data.data.meta.code === 200) {
+            this.planListData = data.data.data.data;
+            console.log('新手计划标的：' + this.planListData);
+          }
+        })
+      },
+      joinPlanNoviceList() {
+        joinPlan(this.listQuery).then(response => {
+          if (response.data.meta.code === 200) {
+            this.joinPlanList = response.data.data.data;
+            this.investQuery.joinPlanId = response.data.data.data.joinPlanId;
+            if (this.joinPlanList == '' || this.joinPlanList == null) { // eslint-disable-line
+              this.showPlanNovice = true;
+            }
+            console.log('新手计划加入记录：' + this.joinPlanList);
+          }
+        })
+      },
+      creditList() {
+        queryUserInvestList(this.investQuery).then(data => {
+          if (data.data.meta.code === 200) {
+            this.list = data.data.data.data;
+            console.log('新手计划债权信息：' + this.list);
           }
         })
       }
     },
     created() {
-      this.planNoviceList();
+      this.joinPlanNoviceList();
+      this.planList();
+      this.creditList();
     }
   }
 </script>

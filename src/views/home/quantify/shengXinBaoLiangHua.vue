@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="shengxinbaolianghua">
+    <div class="shengxinbaolianghua" v-for="str in quantifyData">
       <div class="title-box">
-        <span class="title">升薪宝量化某某</span>
-        <p class="firstDay">首30天贴息</p>
+        <span class="title">{{ str.planName }}</span>
+        <p class="firstDay" v-show="str.isTiexi">首{{ str.tiexiPeriod }}天贴息</p>
         <p>随时可退</p>
-        <p>满某某天免手续费</p>
-        <a href="#" class="tradingParticulars-1"><i></i>交易详情</a>
-        <!--<router-link to="transactionRecord"><a href="#" class="tradingParticulars-2"><i></i>交易详情</a></router-link>-->
+        <p>满{{ str.lockPeriod }}天免手续费</p>
+        <a href="javascript:void(0)" class="tradingParticulars-2" v-if="str.joinPlan" @click="transactionRecord(str.planId)"><i></i>交易详情</a>
+        <a href="javascript:void(0)" class="tradingParticulars-1" v-else><i></i>交易详情</a>
       </div>
       <div class="shengxinbaolianghua-main">
         <div class="shengxinbaolianghua-rate">
@@ -17,52 +17,58 @@
           <p>往期年化利率</p>
         </div>
         <div class="shengxinbaolianghua-money">
-          <p class="money"><span class="roboto-regular">100</span>元</p>
+          <p class="money"><span class="roboto-regular">{{ str.startInvestMoeny }}</span>元</p>
           <p>起投金额</p>
         </div>
         <div class="shengxinbaolianghua-money">
-          <p class="money"><span class="roboto-regular">152.06</span>元</p>
+          <p class="money"><span class="roboto-regular">{{ str.raisingMoney }}</span>元</p>
           <p>当前剩余金额</p>
         </div>
-        <router-link to="oneKeyJoin"><a class="btn-join" href="#">一键加入</a></router-link>
-        <!--<router-link to="oneKeyJoin"><a class="btn-out" href="#">申请退出</a></router-link>-->
+        <a class="btn-join" href="javascript:void(0)" @click="oneKeyJoin(str.planId)" v-if="!str.joinPlan">一键加入</a>
+        <a class="btn-out" href="javascript:void(0)" @click="pullOut(str.planId)" v-else>申请退出</a>
       </div>
-    </div>
-
-    <div class="shengxinbaolianghua">
-      <div class="title-box">
-        <span class="title">升薪宝量化xxx</span>
-        <p class="firstDay">首30天贴息</p>
-        <p>随时可退</p>
-        <p>满某某天免手续费</p>
-        <router-link to="transactionRecord"><a href="#" class="tradingParticulars-2"><i></i>交易详情</a></router-link>
-      </div>
-      <div class="shengxinbaolianghua-main">
-        <div class="shengxinbaolianghua-rate">
-          <p class="rate">
-            <span class="roboto-regular">12</span><span class="small-shengxinbaolianghua-rate roboto-regular">.0</span>%~<span class="roboto-regular">12</span><span class="small-shengxinbaolianghua-rate roboto-regular">.0</span>%
-          </p>
-          <p>往期年化利率</p>
-        </div>
-        <div class="shengxinbaolianghua-money">
-          <p class="money"><span class="roboto-regular">100</span>元</p>
-          <p>起投金额</p>
-        </div>
-        <div class="shengxinbaolianghua-money">
-          <p class="money"><span class="roboto-regular">152.06</span>元</p>
-          <p>当前剩余金额</p>
-        </div>
-        <!--<router-link to="oneKeyJoin"><a class="btn-join" href="#">一键加入</a></router-link>-->
-        <router-link to="pullOut"><a class="btn-out" href="#">申请退出</a></router-link>
-      </div>
-      <div class="shengxinbaolianghua-bottom">
-        <p>在投金额（元）<span class="roboto-regular">209000</span></p>
-        <p>累计收益（元）<span class="roboto-regular">307.51</span></p>
-        <router-link to="lookTarget"><a href="#" class="seeBiao">查看标的</a></router-link>
+      <div class="shengxinbaolianghua-bottom" v-if="str.joinPlan">
+        <p>在投金额（元）<span class="roboto-regular">{{ str.investMoney }}</span></p>
+        <p>累计收益（元）<span class="roboto-regular">{{ str.accumulatedEarnings }}</span></p>
+        <a href="javascript:void(0)" @click="lookTarget(str.planId)" class="seeBiao">查看标的</a>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+  import { quantifyList } from '@/api/home/quantify';
+
+  export default {
+    data() {
+      return {
+        quantifyData: []
+      }
+    },
+    methods: {
+      getQuantifyList() {
+        quantifyList().then(data => {
+          this.quantifyData = data.data.data;
+        })
+      },
+      oneKeyJoin(id) {
+        this.$router.push('/quantify/oneKeyJoin/' + id);
+      },
+      pullOut(id) {
+        this.$router.push('/quantify/pullOut/' + id);
+      },
+      lookTarget(id) {
+        this.$router.push('/quantify/lookTarget/' + id);
+      },
+      transactionRecord(id) {
+        this.$router.push('/quantify/transactionRecord/' + id);
+      }
+    },
+    created() {
+      this.getQuantifyList();
+    }
+  }
+</script>
 
 <style lang="scss" scoped>
   .shengxinbaolianghua {

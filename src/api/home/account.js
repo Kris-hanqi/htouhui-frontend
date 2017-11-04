@@ -30,6 +30,24 @@ export function fetchRepayCalendar(data) {
   })
 }
 
+/** 获取资金流水 */
+export function fetchFundsPageList(data) {
+  return fetch({
+    url: 'user/newUserBill',
+    method: 'get',
+    params: data
+  })
+}
+
+/** 充值接口 - 获取请求银行数据 */
+export function fetchRecharge(data) {
+  return fetch({
+    url: 'user/recharge',
+    method: 'post',
+    data
+  })
+}
+
 /** 获取设置交易密码请求数据 */
 export function fetchTransactionPassword(data) {
   return fetch({

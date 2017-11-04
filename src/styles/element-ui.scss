@@ -91,6 +91,10 @@ th {
   margin-left: 0;
 }
 
+.el-table__fixed-header-wrapper thead div {
+  background-color: #f6f9fe;
+}
+
 /*弹窗*/
 .el-dialog__header {
   padding: 0;
@@ -175,3 +179,12 @@ th {
   border-radius: 0;
 }
 
+/*单选框*/
+.oneKeyJoin .el-radio__inner {
+  width: 15px;
+  height: 15px;
+}
+.oneKeyJoin .el-radio__inner::after {
+  width: 4px;
+  height: 4px;
+}

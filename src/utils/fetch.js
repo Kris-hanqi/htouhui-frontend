@@ -8,7 +8,7 @@ const BaseUrl = BaseApi();
 
 const service = axios.create({
   baseURL: BaseUrl,     // api的base_url
-  timeout: 5000         // 请求超时时间
+  timeout: 10000         // 请求超时时间
 });
 
 // 请求拦截器

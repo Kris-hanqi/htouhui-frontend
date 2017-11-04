@@ -63,7 +63,7 @@
 </template>
 
 <script>
-  import { fetchPageList } from '@/api/home/funds';
+  import { fetchFundsPageList } from 'api/home/account';
   import { getStartAndEndTime, getDateString } from '@/utils';
   
   export default {
@@ -121,7 +121,7 @@
           }
         }
         this.listLoading = true;
-        fetchPageList(this.listQuery).then(response => {
+        fetchFundsPageList(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data || [];

@@ -1,50 +1,76 @@
 <template>
   <div class="amendLoginPwd">
-    <h1 class="personalCenterRightTitle">修改登录密码</h1>
+    <h1 class="personalCenterRightTitle">修改邮箱</h1>
     <div class="amendLoginPwdMsg">
       <ul>
         <li>
           <label>用户名</label>
-          <span class="amendLoginName">xiaohai</span>
+          <span class="amendLoginName">{{ name }}</span>
         </li>
         <li>
-          <label>原密码</label>
-          <input type="text" placeholder="请输入原登录密码">
+          <label>原邮箱</label>
+          <span class="amendLoginName">{{ email }}</span>
         </li>
-        <li>
-          <i class="dangerousIcon"></i>
-          <span class="dangerousTxt">密码不可以为空</span>
-        </li>
-        <li>
-          <label>新密码</label>
-          <input type="text" placeholder="6-16位字母与数字组合">
-        </li>
-        <li>
-          <i class="dangerousIcon"></i>
-          <span class="dangerousTxt">新密码不可以为空</span>
-        </li>
-        <li>
-          <label>确认密码</label>
-          <input type="text" placeholder="再次输入您的新密码">
+        <li style="margin-top: 20px;">
+          <label>验证码</label>
+          <input type="text" placeholder="请输入验证码">
+          <sms-timer @run="sendCode"></sms-timer>
         </li>
       </ul>
+      <p class="yzmCodeSent" v-if="showPrompt">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
       <button class="submitBtn">提交</button>
     </div>
     <div class="splitLine"></div>
     <div class="warmPrompt">
       <h3>温馨提示</h3>
-      <p>请定期更换密码，并确保登录密码的设置与交易密码不同。</p>
+      <p>请填写真实有效的邮箱地址，以保证及时收到邮件信息。</p>
     </div>
   </div>
 </template>
+
+<script>
+  import { mapGetters } from 'vuex';
+  import { fetchSendEmailCode } from '@/api/public';
+  import SmsTimer from '@/common/sms-timer';
+  
+  export default {
+    components: {
+      SmsTimer
+    },
+    computed: {
+      ...mapGetters([
+        'name',
+        'email'
+      ])
+    },
+    data() {
+      return {
+        showPrompt: false
+      }
+    },
+    methods: {
+      sendCode() {
+        if (!this.email) return;
+        fetchSendEmailCode({ email: this.email })
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.showPrompt = true;
+              this.$message({
+                message: '邮箱验证码已发送',
+                type: 'success'
+              });
+            }
+          });
+      }
+    }
+  }
+</script>
 
 <style lang="scss">
   .amendLoginPwd {
     width: 832px;
     height: 797px;
     background-color: #fff;
-    -webkit-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-    -moz-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
 
     .personalCenterRightTitle {
@@ -59,6 +85,10 @@
     .amendLoginPwdMsg {
       li:first-child {
         margin-bottom: 20px;
+      }
+
+      li.marginTop {
+        margin-top: 18px;
       }
 
       label {
@@ -110,6 +140,13 @@
         color: #ff7900;
       }
 
+      p.yzmCodeSent {
+        font-size: 14px;
+        color: #838d9d;
+        margin-left: 124px;
+        margin-top: 14px;
+      }
+
       .submitBtn {
         width: 203px;
         height: 46px;
@@ -120,6 +157,18 @@
         margin-top: 33px;
         margin-bottom: 39px;
         font-size: 18px;
+        cursor: pointer;
+      }
+
+      .getYzmCode {
+        height: 46px;
+        border-radius: 100px;
+        background-color: #dfe8f0;
+        font-size: 16px;
+        text-align: center;
+        padding: 0 20px;
+        color: #7c86a2;
+        margin-left: 15px;
         cursor: pointer;
       }
     }

@@ -34,14 +34,30 @@
     <div class="message">
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="joinTime" label="加入时间" width="135"></el-table-column>
-        <el-table-column prop="joinMoney" label="加入金额"></el-table-column>
-        <el-table-column prop="lockPeriod" label="持有期限"></el-table-column>
-        <el-table-column prop="rate" label="往期年化利率"></el-table-column>
-        <el-table-column prop="lockEndTime" label="持有期限截至"></el-table-column>
-        <el-table-column prop="status" label="状态" width="50"></el-table-column>
-        <el-table-column prop="seeInterests" label="查看债权">
+        <el-table-column prop="joinMoney" label="加入金额">
           <template scope="scope">
-            <router-link to="lookRegular"><el-button class="icon-interests" type="text" size="small"></el-button></router-link>
+            {{ scope.row.joinMoney + '元' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="lockPeriod" label="持有期限">
+          <template scope="scope">
+            {{ scope.row.lockPeriod + '天' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="rate" label="往期年化利率">
+          <template scope="scope">
+            {{ scope.row.rate + '%' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="lockEndTime" label="持有期限截至" width="135"></el-table-column>
+        <el-table-column prop="status" label="状态" width="80">
+          <template scope="scope">
+            {{ scope.row.status | keyToValue(typeList) }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="seeInterests" label="查看">
+          <template scope="scope">
+            <el-button class="icon-interests" @click="goClaimsView(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -54,7 +70,7 @@
 </template>
 
 <script>
-  import { plan21dayJoin } from '@/api/home/plan-21day';
+  import { plan21dayJoin } from 'api/home/plan-21day';
   import { getStartAndEndTime, getDateString } from '@/utils';
 
   export default {
@@ -75,16 +91,19 @@
           startTime: '',
           endTime: ''
         },
-        dateType: '3day'
+        dateType: '3day',
+        typeList: [
+          { key: 'matched', value: '全部匹配' },
+          { key: 'matching', value: '匹配中' }
+        ]
       }
     },
     computed: {
       getPageSize() {
-        return Math.ceil(this.total / this.listQuery.size);
+        return Math.ceil(this.total / this.listQuery.pageSize);
       }
     },
     methods: {
-      // 获取我的资产数据
       getPageList() {
         let dates = null;
         if (this.dateType !== 'other') {
@@ -115,8 +134,7 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            this.total = data.data.totalPage;
-            console.log(this.list);
+            this.total = data.data.count || 0;
           }
         })
       },
@@ -126,12 +144,12 @@
       switchDateType(type) {
         this.dateType = type;
       },
-      switchProjectType(type) {
-        this.projectType = type;
-      },
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
         this.getPageList();
+      },
+      goClaimsView(id) {
+        this.$router.push('/plan21Day/lookRegular/' + id);
       }
     },
     created() {
@@ -194,27 +212,7 @@
   }
 
   .icon-interests {
-    width: 17px;
-    height: 23px;
-    background: url(../../../assets/images/home/icons/icon-interest.png) no-repeat center;
-  }
-
-  .pages {
-    width: 100%;
-    margin-top: 20px;
-    text-align: right;
-
-    .total-pages {
-      display: inline-block;
-      margin-right: 10px;
-      font-size: 14px;
-      color: #394b67;
-    }
-
-    .el-pagination {
-      display: inline-block;
-      vertical-align: middle;
-    }
+    color: #0573f4;
   }
 
   .plan21day {

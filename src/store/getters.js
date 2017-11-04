@@ -1,7 +1,9 @@
 const getters = {
   token: state => state.user.token,
-  name: state => state.user.name,
   mobile: state => state.user.mobile,
+  email: state => state.user.email,
+  username: state => state.user.username,
+  realName: state => state.user.realName,
   status: state => state.user.status,
   bankCard: state => state.user.bankCard,
   accountId: state => state.user.accountId,

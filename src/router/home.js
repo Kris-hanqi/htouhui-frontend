@@ -49,8 +49,9 @@ export const constantRouterMap = [
             component: _import('home/plan21-day/plan21day')
           },
           {
-            path: 'lookRegular',
+            path: 'lookRegular/:id',
             name: '查看债权',
+            props: true,
             component: _import('home/plan21-day/lookRegular')
           }
         ]
@@ -66,28 +67,33 @@ export const constantRouterMap = [
             component: _import('home/quantify/shengXinBaoLiangHua')
           },
           {
-            path: 'oneKeyJoin',
+            path: 'oneKeyJoin/:id',
             name: '一键加入',
+            props: true,
             component: _import('home/quantify/oneKeyJoin')
           },
           {
-            path: 'pullOut',
+            path: 'pullOut/:id',
             name: '申请退出',
+            props: true,
             component: _import('home/quantify/pullOut')
           },
           {
-            path: 'transactionRecord',
+            path: 'transactionRecord/:id',
             name: '交易记录',
+            props: true,
             component: _import('home/quantify/transactionRecord')
           },
           {
-            path: 'lookTarget',
+            path: 'lookTarget/:id',
             name: '查看标的',
+            props: true,
             component: _import('home/quantify/lookTarget')
           },
           {
-            path: 'lookRegular',
+            path: 'lookRegular/:id',
             name: '查看债权',
+            props: true,
             component: _import('home/quantify/lookRegular')
           }
         ]
@@ -128,19 +134,24 @@ export const constantRouterMap = [
             component: _import('home/account-set/accountSet')
           },
           {
-            path: 'amendLoginPassword',
+            path: 'updateLoginPassword',
             name: '修改密码',
-            component: _import('home/account-set/amendLoginPassword')
+            component: _import('home/account-set/UpdateLoginPassword')
           },
           {
-            path: 'amendLoginEmail01',
+            path: 'updateMobileStep1',
+            name: '验证邮箱',
+            component: _import('home/account-set/UpdateMobileStep1')
+          },
+          {
+            path: 'updateMobileStep2',
             name: '修改邮箱',
-            component: _import('home/account-set/amendLoginEmail01')
+            component: _import('home/account-set/UpdateMobileStep2')
           },
           {
-            path: 'amendLoginEmailBind',
+            path: 'bindEmail',
             name: '绑定邮箱',
-            component: _import('home/account-set/amendLoginEmailBind')
+            component: _import('home/account-set/BindEmail')
           },
           {
             path: 'transactionPassword',

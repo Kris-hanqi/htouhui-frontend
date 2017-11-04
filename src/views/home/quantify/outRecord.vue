@@ -1,58 +1,221 @@
 <template>
   <div class="out-record">
-    <trading-hour></trading-hour>
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="time" label="申请时间" width="135"></el-table-column>
-      <el-table-column prop="outMoney" label="退出金额"></el-table-column>
-      <el-table-column prop="tipMoney" label="退出手续费"></el-table-column>
-      <el-table-column prop="limit" label="持有期限"  width="60"></el-table-column>
-      <el-table-column prop="successOutTime" label="成功退出时间" width="135"></el-table-column>
-      <el-table-column prop="actualMoney" label="实际到账金额"></el-table-column>
-      <el-table-column prop="state" label="状态" width="80"></el-table-column>
-      <el-table-column prop="lookEquity" label="查看债权"  width="70">
+    <div class="times-box">
+      <ul class="times">
+        <li>交易时间：</li>
+        <li>
+          <a href="javascript:void(0)" @click="switchDateType('3day')" :class="{ active: dateType === '3day'}">近三天</a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" @click="switchDateType('1month')" :class="{ active: dateType === '1month'}">近一个月</a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" @click="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" class="diy-time" @click="switchDateType('other')" :class="{ active: dateType === 'other'}">自定义时间</a>
+        </li>
+      </ul>
+      <ul class="allChooseCalendar" v-show="dateType === 'other'">
+        <el-date-picker
+          v-model="selectDates.startTime"
+          type="date"
+          placeholder="选择开始日期">
+        </el-date-picker>
+        <el-date-picker
+          v-model="selectDates.endTime"
+          type="date"
+          placeholder="选择结束日期">
+        </el-date-picker>
+      </ul>
+      <button class="find-btn" @click="query">查询</button>
+    </div>
+
+    <el-table :data="list" style="width: 100%">
+      <el-table-column prop="applyTime" label="申请时间" width="135"></el-table-column>
+      <el-table-column prop="exitMoney" label="退出金额">
         <template scope="scope">
-          <el-button class="icon-interests" type="text" size="small"></el-button>
+          {{ scope.row.exitMoney + '元' }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="exitFee" label="退出手续费">
+        <template scope="scope">
+          {{ scope.row.exitFee + '元' }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="lockPeriod" label="持有期限"  width="60"></el-table-column>
+      <el-table-column prop="actualExitTime" label="成功退出时间" width="135"></el-table-column>
+      <el-table-column prop="actualMoney" label="实际到账金额">
+        <template scope="scope">
+          {{ scope.row.actualMoney + '元' }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="status" label="状态" width="80">
+        <template scope="scope">
+          {{ scope.row.status | keyToValue(typeList) }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="lookEquity" label="查看"  width="70">
+        <template scope="scope">
+          <el-button class="icon-interests" type="text" @click="lookOutRegular(scope.row.joinPlanId)" size="small">查看债权</el-button>
         </template>
       </el-table-column>
     </el-table>
     <div class="pages">
-      <p class="total-pages">共计<span class="roboto-regular">25</span>条记录（共<span class="roboto-regular">3</span>页）</p>
-      <el-pagination layout="prev, pager, next" :total="30"></el-pagination>
+      <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+      <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
     </div>
   </div>
 </template>
 
 <script>
-  import tradingHour from '../homeComponent/tradingHour.vue';
+  import { outRecord } from 'api/home/quantify';
+  import { getStartAndEndTime, getDateString } from '@/utils';
 
   export default {
-    components: {
-      tradingHour
-    },
     data() {
       return {
-        tableData: [{
-          time: '2017-08-17 14:52:17',
-          outMoney: '10,00000.00元',
-          tipMoney: '10,00000.00元',
-          limit: '90天',
-          successOutTime: '2017-08-17 14:52:17',
-          actualMoney: '10,00000.00元',
-          state: '退出处理中'
-        }]
+        selectDates: {
+          startTime: '',
+          endTime: ''
+        },
+        list: null,
+        listQuery: {
+          planId: this.$route.params.id,
+          startTime: '',
+          endTime: '',
+          pageNo: 1,
+          pageSize: 10
+        },
+        total: 0,
+        dateType: '3day',
+        typeList: [
+          { key: 'apply_exit', value: '申请退出' },
+          { key: 'exiting', value: '退出处理中' },
+          { key: 'exited', value: '已退出' }
+        ]
       }
+    },
+    computed: {
+      getPageSize() {
+        return Math.ceil(this.total / this.listQuery.pageSize);
+      }
+    },
+    methods: {
+      getPageList() {
+        let dates = null;
+        if (this.dateType !== 'other') {
+          dates = getStartAndEndTime(this.dateType);
+          this.listQuery.startTime = dates.startTime;
+          this.listQuery.endTime = dates.endTime;
+        } else {
+          if (this.selectDates.startTime && this.selectDates.endTime) {
+            if (this.selectDates.startTime > this.selectDates.endTime) {
+              this.$message({
+                message: '开始时间不能大于结束时间',
+                type: 'warning'
+              });
+              return;
+            }
+            this.listQuery.startTime = getDateString(this.selectDates.startTime);
+            this.listQuery.endTime = getDateString(this.selectDates.endTime);
+          } else {
+            this.$message({
+              message: '请选择时间',
+              type: 'warning'
+            });
+            return;
+          }
+        }
+        this.listLoading = true;
+        outRecord(this.listQuery).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.list = data.data.data;
+            console.log('升薪宝量化退出记录' + this.list);
+            console.log(this.list);
+            this.total = data.data.count || 0;
+          }
+        })
+      },
+      query() {
+        this.getPageList();
+      },
+      switchDateType(type) {
+        this.dateType = type;
+      },
+      handleCurrentChange(val) {
+        this.listQuery.pageNo = val;
+        this.getPageList();
+      },
+      lookOutRegular(id) {
+        this.$router.push('/quantify/lookRegular/' + id);
+      }
+    },
+    created() {
+      this.getPageList();
     }
   }
 </script>
 
 <style lang="scss" scoped>
+  .times-box {
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 25px;
+
+    ul {
+      float: left;
+    }
+
+    li {
+      float: left;
+      margin-right: 10px;
+      font-size: 16px;
+      color: #274161;
+
+      a {
+        display: inline-block;
+        padding: 4px 10px;
+        text-align: center;
+        margin-top: -5px;
+      }
+
+      a.active {
+        border-radius: 100px;
+        background-color: #0671f0;
+        color: #fff;
+      }
+    }
+
+    .allChooseCalendar {
+      margin: 15px 0 15px 57px;
+    }
+
+    .find-btn {
+      float: right;
+      width: 135px;
+      height: 40px;
+      box-sizing: border-box;
+      margin-top: -10px;
+      border-radius: 100px;
+      background-color: #378ff6;
+      line-height: 40px;
+      text-align: center;
+      font-size: 18px;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+
   .out-record {
     margin-top: 20px;
 
     .icon-interests {
-      width: 17px;
-      height: 23px;
-      background: url(../../../assets/images/home/icons/icon-interest.png) no-repeat center;
+      color: #0573f4;
     }
   }
 </style>

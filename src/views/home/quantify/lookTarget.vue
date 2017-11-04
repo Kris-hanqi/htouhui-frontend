@@ -3,7 +3,7 @@
     <div class="detail">
       <div class="title-box">
         <p class="title">资产详情-债权信息</p>
-        <router-link to="index"><p class="return">返回上一页 <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i></p></router-link>
+        <router-link to="/quantify/index"><p class="return">返回上一页 <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i></p></router-link>
       </div>
       <div class="main">
         <div class="name">
@@ -23,55 +23,79 @@
 
     <div class="message-list">
       <p class="title">您在升薪宝量化90的在投标的</p>
-      <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="number" label="项目编号" width="120"></el-table-column>
-        <el-table-column prop="borrowedMoney" label="借款金额" width="100"></el-table-column>
+      <el-table :data="list" style="width: 100%">
+        <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
+        <el-table-column prop="loanMoney" label="借款金额" width="100"></el-table-column>
         <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
-        <el-table-column prop="timeLimit" label="借款期限" width="70"></el-table-column>
+        <el-table-column prop="perid" label="借款期限" width="70"></el-table-column>
         <el-table-column prop="investMoney" label="投资金额" width="100"></el-table-column>
-        <el-table-column prop="time" label="还款时间" width="80"></el-table-column>
-        <el-table-column prop="incomePrincipal" label="已收本息"></el-table-column>
-        <el-table-column prop="collectPrincipal" label="待收本息"></el-table-column>
-        <el-table-column prop="state" label="状态" width="50"></el-table-column>
-        <el-table-column prop="contract" label="合同" width="40">
+        <el-table-column prop="repayTimeFormat" label="还款时间" width="80"></el-table-column>
+        <el-table-column prop="earnings" label="已收本息"></el-table-column>
+        <el-table-column prop="uncollectedRepayMoney" label="待收本息"></el-table-column>
+        <el-table-column prop="status" label="状态" width="50"></el-table-column>
+        <el-table-column prop="contract" label="查看" width="40">
           <template scope="scope">
-            <el-button class="icon-download" type="text" size="small"></el-button>
+            <el-button class="icon-download" type="text" size="small">合同</el-button>
           </template>
         </el-table-column>
       </el-table>
       <div class="pages">
-        <p class="total-pages">共计<span class="roboto-regular">25</span>条记录（共<span class="roboto-regular">3</span>页）</p>
-        <el-pagination layout="prev, pager, next" :total="30"></el-pagination>
+        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+        <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import { queryUserAssetInfoList } from 'api/home/queryUserAssetInfoList';
+
   export default {
     data() {
       return {
-        tableData: [{
-          number: '20170817004576',
-          borrowedMoney: '10,00000.00元',
-          rate: '12.0%',
-          timeLimit: '14天',
-          investMoney: '10,00000.00元',
-          time: '2017/10/24',
-          incomePrincipal: '10,00000.00元',
-          collectPrincipal: '0',
-          state: '还款中'
-        }]
+        list: null,
+        listQuery: {
+          planId: this.$route.params.id,
+          pageNo: 1,
+          pageSize: 10
+        },
+        total: 0
       }
+    },
+    computed: {
+      getPageSize() {
+        return Math.ceil(this.total / this.listQuery.pageSize);
+      }
+    },
+    methods: {
+      getPageList() {
+        queryUserAssetInfoList(this.listQuery).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.list = data.data.data;
+            this.total = data.data.totalPage || 0;
+            console.log('升薪宝量化查看标的下边列表' + this.list);
+            console.log(this.list);
+          }
+        })
+      },
+      query() {
+        this.getPageList();
+      },
+      handleCurrentChange(val) {
+        this.listQuery.pageNo = val;
+        this.getPageList();
+      }
+    },
+    created() {
+      this.getPageList()
     }
   }
 </script>
 
 <style lang="scss" scoped>
   .icon-download {
-    width: 20px;
-    height: 21px;
-    background: url(../../../assets/images/home/icons/icon-download.png) no-repeat center;
+    color: #0573f4;
   }
 
   .lookTarget {

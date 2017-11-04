@@ -10,7 +10,7 @@ function getUserStatus(data) {
     return 1;
   }
 
-  if (!data.bankCard) { // 用户未设置交易密码
+  if (!data.bankCard) { // 用户未绑卡
     return 2;
   }
 
@@ -47,12 +47,14 @@ function isBorrower(data) {
 const user = {
   state: {
     token: getToken(),
-    name: '', // 用户姓名
-    mobile: '', // 手机号
+    username: '',
+    realName: '',
+    mobile: '',
     status: 0, // 用户状态
     bankCard: '', // 银行卡号
     bankName: '', // 银行名称
     accountId: '', // 电子账号
+    email: '', // 电子邮箱
     showNovicePlan: false,
     showNovicePlanMessage: false,
     isBorrower: false // 是否是借款人
@@ -61,6 +63,12 @@ const user = {
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token;
+    },
+    SET_USERNAME: (state, username) => {
+      state.username = username;
+    },
+    SET_REAL_NAME: (state, realName) => {
+      state.realName = realName;
     },
     SET_STATUS: (state, status) => {
       state.status = status;
@@ -80,6 +88,9 @@ const user = {
     SET_BANK_CARD: (state, bankCard) => {
       state.bankCard = bankCard;
     },
+    SET_EMAIL: (state, email) => {
+      state.email = email;
+    },
     SET_SHOW_NOVICE_PLAN: (state, showNovicePlan) => {
       state.showNovicePlan = showNovicePlan;
     },
@@ -98,17 +109,17 @@ const user = {
         getUserInfo().then(response => {
           if (response.data.meta.code === 200) {
             const data = response.data.data;
-            console.log(data);
             const status = getUserStatus(data);
             const showNovicePlan = isShowNovicePlan(data);
             const showNovicePlanMessage = isShowNovicePlanMessage(data);
-
-            commit('SET_NAME', data.realName);
+            commit('SET_USERNAME', data.userId);
+            commit('SET_REAL_NAME', data.realName);
             commit('SET_MOBILE', data.mobileNumber);
             commit('SET_BANK_NAME', data.bankName);
             commit('SET_BANK_CARD', data.bankCard);
             commit('SET_ACCOUNT_ID', data.accountId);
             commit('SET_STATUS', status);
+            commit('SET_EMAIL', data.email);
             commit('SET_SHOW_NOVICE_PLAN', showNovicePlan);
             commit('SET_SHOW_NOVICE_PLAN_MESSAGE', showNovicePlanMessage);
             commit('SET_IS_BORROWER', isBorrower(data));

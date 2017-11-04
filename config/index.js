@@ -6,7 +6,7 @@ module.exports = {
   build: {
     env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: path.resolve(__dirname, '../dist/user'),
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
     productionSourceMap: true,
@@ -30,7 +30,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/web-api': {
-        target: 'http://192.168.1.15:21000',
+        target: 'http://121.43.72.36',
         pathRewrite: {
           '^/web-api': '/web-api'
         }

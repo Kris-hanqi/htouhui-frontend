@@ -1,9 +1,9 @@
 <template>
   <div class="pullOut">
-    <p class="title">升薪宝量化xxx申请退出</p>
+    <p class="title">{{ messageList.planName }}申请退出</p>
     <div class="canPullMoney">
-      <p class="inTimeLimitMoney">锁定期内可退金额<span class="roboto-regular">1000,00</span><span>元</span></p>
-      <p class="outTimeLimitMoney">锁定期外可退出金额<span class="roboto-regular">1000,00</span><span>元</span></p>
+      <p class="inTimeLimitMoney">锁定期内可退金额<span class="roboto-regular">{{ messageList.lockExitMoney }}</span><span>元</span></p>
+      <p class="outTimeLimitMoney">锁定期外可退出金额<span class="roboto-regular">{{ messageList.unlockExitMoney }}</span><span>元</span></p>
     </div>
     <div class="main">
       <span>申请退出</span>
@@ -42,11 +42,32 @@
 </template>
 
 <script>
+  import { applyExitInfo } from 'api/home/quantify';
+
   export default {
     data() {
       return {
-        dialogVisible: false
+        dialogVisible: false,
+        listQuery: {
+          planId: this.$route.params.id
+        },
+        messageList: {}
       }
+    },
+    methods: {
+      getMessageList() {
+        applyExitInfo(this.listQuery).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.messageList = data.data;
+            console.log('申请退出页面' + this.messageList);
+            console.log(this.messageList);
+          }
+        })
+      }
+    },
+    created() {
+      this.getMessageList();
     }
   };
 </script>

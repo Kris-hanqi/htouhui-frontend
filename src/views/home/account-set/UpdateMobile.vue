@@ -30,8 +30,9 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import { fetchSendCode } from '@/api/public';
-  import SmsTimer from '@/common/sms-timer';
+  import { fetchSendCode } from 'api/public';
+  import { fetchCheckCurrentMobile } from 'api/home/account-set';
+  import SmsTimer from 'common/sms-timer';
   
   export default {
     components: {
@@ -48,9 +49,16 @@
     },
     methods: {
       sendCode() {
-        fetchSendCode({ authType: 'change_binding_mobile_number' }).then(response => {
-          console.log(response);
-        })
+        fetchSendCode({ authType: 'change_binding_mobile_number' })
+          .then(response => {
+            console.log(response);
+          })
+      },
+      checkCurrentMobile() {
+        fetchCheckCurrentMobile()
+          .then(response => {
+            console.log(response);
+          })
       }
     }
   }

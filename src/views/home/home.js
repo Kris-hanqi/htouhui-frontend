@@ -21,15 +21,17 @@ import {
   Input,
   Steps,
   Step,
+  Radio,
   Checkbox
 } from 'element-ui'
 import VueClipboard from 'vue-clipboard2'
 import '@/styles/base.scss';
 import '@/styles/element-ui.scss';
+import * as filters from '@/filters' // 全局filter
 import router from '@/router/home';
 import store from '@/store';
 import App from './App';
-import '@/mock';
+// import '@/mock';
 
 Vue.use(Button);
 Vue.use(Dialog);
@@ -47,6 +49,7 @@ Vue.use(FormItem);
 Vue.use(Input);
 Vue.use(Steps);
 Vue.use(Step);
+Vue.use(Radio);
 Vue.use(Checkbox);
 
 Vue.use(Loading.directive);
@@ -57,6 +60,10 @@ Vue.prototype.$confirm = MessageBox.confirm;
 Vue.prototype.$message = Message;
 
 Vue.use(VueClipboard);
+
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+});
 
 new Vue({
   el: '#app',

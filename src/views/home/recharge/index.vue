@@ -6,10 +6,10 @@
         <fast-recharge></fast-recharge>
       </el-tab-pane>
       <el-tab-pane label="跨行转账" name="two">
-        <inter-bank-transfer :account-data="{ name: name, accountId: accountId }"></inter-bank-transfer>
+        <inter-bank-transfer :account-data="{ realName: realName, accountId: accountId }"></inter-bank-transfer>
       </el-tab-pane>
       <el-tab-pane label="支付宝转账" name="there">
-        <alipay-transfer :account-data="{ name: name, accountId: accountId }"></alipay-transfer>
+        <alipay-transfer :account-data="{ realName: realName, accountId: accountId }"></alipay-transfer>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -29,7 +29,7 @@
     },
     computed: {
       ...mapGetters([
-        'name',
+        'realName',
         'accountId'
       ])
     },

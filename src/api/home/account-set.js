@@ -8,17 +8,30 @@ export function fetchUnlockBankCard() {
   })
 }
 
-/**
- * 修改登录密码
- * @param data
- *   type: Object
- *   examples: { oldPassword: '123456', newPassword: '123abc'}
- */
-export function fetchUpdatePassword(data) {
+/** 绑定邮箱 */
+export function fetchBindEmail(data) {
   return fetch({
-    url: 'user/modifyPassword',
+    url: 'user/bindEmail',
+    method: 'post',
+    data
+  })
+}
+
+/** 检验验证码(修改手机号) */
+export function fetchCheckCurrentMobile(code) {
+  return fetch({
+    url: 'user/checkCurrentMobile',
     method: 'get',
-    params: data
+    params: { authCode: code }
+  })
+}
+
+/** 检验验证码(修改手机号) */
+export function fetchOpenAccount(data) {
+  return fetch({
+    url: 'user/openAccount',
+    method: 'post',
+    data
   })
 }
 
