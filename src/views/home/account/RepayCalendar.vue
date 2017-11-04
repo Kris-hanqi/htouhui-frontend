@@ -6,9 +6,9 @@
 </template>
 
 <script>
-  import { fetchRepayCalendar } from 'api/home/account';
+  // import { fetchRepayCalendar } from 'api/home/account';
   import EventCalendar from 'common/event-calendar/index.vue';
-  import { dateStrFormat, getDateString } from 'utils/index';
+  // import { dateStrFormat, getDateString } from 'utils/index';
   
   export default {
     components: {
