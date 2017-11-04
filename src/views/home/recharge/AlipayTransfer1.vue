@@ -24,7 +24,7 @@
         </ul>
         <ul class="transferNeedMsgRight fl">
           <li>
-            <span>{{ accountData.name || '无' }}</span>
+            <span>{{ accountData.realName || '无' }}</span>
           </li>
           <li>
             <span>{{ accountData.accountId }}</span>
