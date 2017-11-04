@@ -47,8 +47,9 @@ function isBorrower(data) {
 const user = {
   state: {
     token: getToken(),
-    name: '', // 用户姓名
-    mobile: '', // 手机号
+    username: '',
+    realName: '',
+    mobile: '',
     status: 0, // 用户状态
     bankCard: '', // 银行卡号
     bankName: '', // 银行名称
@@ -62,6 +63,12 @@ const user = {
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token;
+    },
+    SET_USERNAME: (state, username) => {
+      state.username = username;
+    },
+    SET_REAL_NAME: (state, realName) => {
+      state.realName = realName;
     },
     SET_STATUS: (state, status) => {
       state.status = status;
@@ -105,7 +112,8 @@ const user = {
             const status = getUserStatus(data);
             const showNovicePlan = isShowNovicePlan(data);
             const showNovicePlanMessage = isShowNovicePlanMessage(data);
-            commit('SET_NAME', data.realName);
+            commit('SET_USERNAME', data.userId);
+            commit('SET_REAL_NAME', data.realName);
             commit('SET_MOBILE', data.mobileNumber);
             commit('SET_BANK_NAME', data.bankName);
             commit('SET_BANK_CARD', data.bankCard);

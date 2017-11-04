@@ -2,7 +2,8 @@
   <div class="account-top__wrapper">
     <div class="hth-panel">
       <i class="icon-avatar"></i>
-      <span>你好，<i class="num-font">{{ name }}</i></span>
+      <!-- 优先显示用户真实姓名 -->
+      <span>你好，<i class="num-font">{{ realName || username }}</i></span>
       <a href="javascript:void(0)" class="icon-user" @click="operationAccount" :class="{ 'icon-user-active': status }"></a>
       <a href="javascript:void(0)" class="icon-bank-card" @click="operationBankCard" :class="{ 'icon-bank-card-active': bankCard }"></a>
       <el-button :plain="true" @click="toRouter('recharge')" type="primary" class="recharge-btn">充值</el-button>
@@ -33,7 +34,8 @@
     },
     computed: {
       ...mapGetters([
-        'name',
+        'realName',
+        'username',
         'status',
         'bankCard'
       ])
