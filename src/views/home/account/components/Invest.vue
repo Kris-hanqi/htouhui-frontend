@@ -1,6 +1,5 @@
 <template>
   <div class="account-invest__wrapper">
-    <div class=""></div>
     <h1>我的投资</h1>
     <div class="fl">
       <invest-chart :chart-data="chartData"

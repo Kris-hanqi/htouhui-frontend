@@ -3,9 +3,13 @@
     <div class="cal-panel__header">
       <span class="title">{{ yearMonthStr }}</span>
       <div class="menus">
-        <span @click="preMonth" class="pre"></span>
-        <button>今天</button>
-        <span @click="nextMonth" class="next"></span>
+        <button @click="preMonth" class="pre">
+          <img :src="img_icon_left">
+        </button>
+        <button class="today">今天</button>
+        <button :disabled="nextSelect" @click="nextMonth" class="next">
+          <img :src="img_icon_right">
+        </button>
       </div>
     </div>
     <div class="cal-panel__body">
@@ -58,6 +62,11 @@
       today() {
         const date = new Date();
         return date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate();
+      },
+      nextSelect() {
+        const list = this.yearMonthStr.split('-');
+        const date = new Date(list[0], list[1]);
+        return date > new Date();
       }
     },
     methods: {
@@ -155,7 +164,7 @@
       
       .menus {
         position: absolute;
-        top: 0;
+        top: -2px;
         right: 25px;
       }
   
@@ -170,19 +179,14 @@
         cursor: pointer;
       }
   
-      span.pre {
-        float: left;
-        margin-right: 6px;
-        background: url(../img/icon-left.png) no-repeat;
-      }
-  
-      span.next {
-        float: right;
-        margin-left: 6px;
-        background: url(../img/icon-right.png) no-repeat;
+      .pre,
+      .next {
+        margin-top: 2px;
+        padding: 0;
+        background-color: transparent;
       }
       
-      button {
+      button.today {
         width: 51px;
         height: 22px;
         border-radius: 100px;

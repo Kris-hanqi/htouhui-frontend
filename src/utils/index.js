@@ -62,6 +62,14 @@ export function getDateString(date, format) {
   }
 }
 
+export function formatDate(date, format) {
+  date = date || new Date();
+  format = format || 'YYYY-MM-DD HH:mm:ss';
+  if (date) {
+    return moment(date).format(format);
+  }
+}
+
 /**
  * 获取请求参数
  * @param url
