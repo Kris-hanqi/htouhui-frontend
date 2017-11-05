@@ -25,7 +25,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import SmsTimer from 'common/sms-timer';
-  import RequestBankFrom from '../components/RequestBankFrom.vue';
+  import RequestBankFrom from '../../components/RequestBankFrom.vue';
   import { fetchSendCode } from 'api/public';
   import { fetchSetTransactionPassword, fetchResetTransactionPassword } from 'api/home/account-set';
   

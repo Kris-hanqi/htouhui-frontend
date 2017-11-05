@@ -1,17 +1,21 @@
 <template>
   <div class="amendLoginPwd">
-    <h1 class="personalCenterRightTitle">修改绑定手机号</h1>
+    <h1 class="personalCenterRightTitle">修改邮箱</h1>
     <div class="amendLoginPwdMsg">
       <ul>
         <li>
           <label>用户名</label>
           <span class="amendLoginName">{{ realName }}</span>
         </li>
-        <li>
-          <label>手机号</label>
-          <span class="amendLoginName">{{ mobile }}</span>
-        </li>
         <li class="marginTop">
+          <label>邮箱</label>
+          <input type="text" placeholder="请输新邮箱">
+        </li>
+        <li>
+          <i class="dangerousIcon"></i>
+          <span class="dangerousTxt">新邮箱不可与原邮箱相同！</span>
+        </li>
+        <li>
           <label>验证码</label>
           <input type="text" placeholder="请输入验证码">
           <sms-timer @run="sendCode"></sms-timer>
@@ -23,16 +27,15 @@
     <div class="splitLine"></div>
     <div class="warmPrompt">
       <h3>温馨提示</h3>
-      <p>为了您的账户安全，更换手机号码需填写原来绑定的手机号验证码。</p>
+      <p>请填写真实有效的邮箱地址，以保证及时收到邮件信息。</p>
     </div>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
-  import { fetchSendCode } from 'api/public';
-  import { fetchCheckCurrentMobile } from 'api/home/account-set';
-  import SmsTimer from 'common/sms-timer';
+  import { fetchSendEmailCode } from '@/api/public';
+  import SmsTimer from '@/common/sms-timer';
   
   export default {
     components: {
@@ -40,25 +43,27 @@
     },
     computed: {
       ...mapGetters([
-        'realName',
-        'mobile'
+        'realName'
       ])
     },
     data() {
-      return {}
+      return {
+        showPrompt: false
+      }
     },
     methods: {
       sendCode() {
-        fetchSendCode({ authType: 'change_binding_mobile_number' })
+        if (!this.email) return;
+        fetchSendEmailCode({ email: this.email })
           .then(response => {
-            console.log(response);
-          })
-      },
-      checkCurrentMobile() {
-        fetchCheckCurrentMobile()
-          .then(response => {
-            console.log(response);
-          })
+            if (response.data.meta.code === 200) {
+              this.showPrompt = true;
+              this.$message({
+                message: '邮箱验证码已发送',
+                type: 'success'
+              });
+            }
+          });
       }
     }
   }
@@ -126,7 +131,7 @@
         width: 20px;
         height: 18px;
         margin: 10px 5px 10px 132px;
-        background: url("../../../assets/images/home/center-ico-dangerous.png") no-repeat;
+        background: url(../../../../assets/images/home/center-ico-dangerous.png) no-repeat;
       }
 
       span.amendLoginName {

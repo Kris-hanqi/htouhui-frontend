@@ -126,7 +126,7 @@
         width: 20px;
         height: 18px;
         margin: 10px 5px 10px 132px;
-        background: url("../../../assets/images/home/center-ico-dangerous.png") no-repeat;
+        background: url(../../../../assets/images/home/center-ico-dangerous.png) no-repeat;
       }
 
       span.amendLoginName {

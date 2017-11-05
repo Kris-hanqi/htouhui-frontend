@@ -1,37 +1,37 @@
 <template>
   <div class="amendLoginPwd">
-    <h1 class="personalCenterRightTitle">绑定邮箱</h1>
+    <h1 class="personalCenterRightTitle">修改绑定手机号</h1>
     <div class="amendLoginPwdMsg">
       <ul>
         <li>
-          <label>{{ realName || '无' }}</label>
-          <span class="amendLoginName">xiaohai</span>
+          <label>用户名</label>
+          <span class="amendLoginName">{{ realName }}</span>
         </li>
-        <li class="marginTop">
-          <label>邮箱</label>
-          <input type="text" v-model="bindEmailData.email" placeholder="请输入邮箱">
+        <li>
+          <label>手机号</label>
+          <span class="amendLoginName">{{ mobile }}</span>
         </li>
         <li class="marginTop">
           <label>验证码</label>
-          <input type="text" v-model="bindEmailData.authCode" placeholder="请输入验证码">
+          <input type="text" placeholder="请输入验证码">
           <sms-timer @run="sendCode"></sms-timer>
         </li>
       </ul>
-      <p class="yzmCodeSent" v-if="showPrompt">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
-      <button class="submitBtn" @click="bindEmail">提交</button>
+      <p class="yzmCodeSent">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
+      <button class="submitBtn">提交</button>
     </div>
     <div class="splitLine"></div>
     <div class="warmPrompt">
       <h3>温馨提示</h3>
-      <p>请填写真实有效的邮箱地址，以保证及时收到邮件信息。</p>
+      <p>为了您的账户安全，更换手机号码需填写原来绑定的手机号验证码。</p>
     </div>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
-  import { fetchSendEmailCode } from 'api/public';
-  import { fetchBindEmail } from 'api/home/account-set';
+  import { fetchSendCode } from 'api/public';
+  import { fetchCheckCurrentMobile } from 'api/home/account-set';
   import SmsTimer from 'common/sms-timer';
   
   export default {
@@ -40,44 +40,25 @@
     },
     computed: {
       ...mapGetters([
-        'realName'
+        'realName',
+        'mobile'
       ])
     },
     data() {
-      return {
-        bindEmailData: {
-          email: '',
-          authCode: ''
-        },
-        showPrompt: false
-      }
+      return {}
     },
     methods: {
       sendCode() {
-        fetchSendEmailCode({ email: this.bindEmailData.email })
+        fetchSendCode({ authType: 'change_binding_mobile_number' })
           .then(response => {
-            if (response.data.meta.code === 200) {
-              this.showPrompt = true;
-              this.$message({
-                message: '邮箱验证码已发送',
-                type: 'success'
-              });
-            }
-          });
+            console.log(response);
+          })
       },
-      bindEmail() {
-        fetchBindEmail(this.bindEmailData)
+      checkCurrentMobile() {
+        fetchCheckCurrentMobile()
           .then(response => {
-            if (response.data.meta.code === 200) {
-              this.showPrompt = false;
-              this.$store.commit('SET_EMAIL', this.bindEmailData.email);
-              this.$message({
-                message: '邮箱绑定成功！',
-                type: 'success'
-              });
-              this.$router.push('/accountSet/index')
-            }
-          });
+            console.log(response);
+          })
       }
     }
   }
@@ -88,6 +69,8 @@
     width: 832px;
     height: 797px;
     background-color: #fff;
+    -webkit-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
+    -moz-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
 
     .personalCenterRightTitle {
@@ -143,7 +126,7 @@
         width: 20px;
         height: 18px;
         margin: 10px 5px 10px 132px;
-        background: url("../../../assets/images/home/center-ico-dangerous.png") no-repeat;
+        background: url(../../../../assets/images/home/center-ico-dangerous.png) no-repeat;
       }
 
       span.amendLoginName {

@@ -1,68 +1,83 @@
 <template>
   <div class="amendLoginPwd">
-    <h1 class="personalCenterRightTitle">修改登录密码</h1>
+    <h1 class="personalCenterRightTitle">绑定邮箱</h1>
     <div class="amendLoginPwdMsg">
       <ul>
         <li>
-          <label>用户名</label>
+          <label>{{ realName || '无' }}</label>
           <span class="amendLoginName">xiaohai</span>
         </li>
-        <li>
-          <label>原密码</label>
-          <input type="text" v-model="passwordData.oldPassword" placeholder="请输入原登录密码">
+        <li class="marginTop">
+          <label>邮箱</label>
+          <input type="text" v-model="bindEmailData.email" placeholder="请输入邮箱">
         </li>
-        <li>
-          <i class="dangerousIcon"></i>
-          <span class="dangerousTxt">密码不可以为空</span>
-        </li>
-        <li>
-          <label>新密码</label>
-          <input type="text" v-model="passwordData.newPassword" placeholder="6-16位字母与数字组合">
-        </li>
-        <li>
-          <i class="dangerousIcon"></i>
-          <span class="dangerousTxt">新密码不可以为空</span>
-        </li>
-        <li>
-          <label>确认密码</label>
-          <input type="text" v-model="passwordData.confirmPassword" placeholder="再次输入您的新密码">
+        <li class="marginTop">
+          <label>验证码</label>
+          <input type="text" v-model="bindEmailData.authCode" placeholder="请输入验证码">
+          <sms-timer @run="sendCode"></sms-timer>
         </li>
       </ul>
-      <button class="submitBtn" @click="UpdatePassword">提交</button>
+      <p class="yzmCodeSent" v-if="showPrompt">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
+      <button class="submitBtn" @click="bindEmail">提交</button>
     </div>
     <div class="splitLine"></div>
     <div class="warmPrompt">
       <h3>温馨提示</h3>
-      <p>请定期更换密码，并确保登录密码的设置与交易密码不同。</p>
+      <p>请填写真实有效的邮箱地址，以保证及时收到邮件信息。</p>
     </div>
   </div>
 </template>
 
 <script>
-  import { fetchUpdatePassword } from 'api/public';
+  import { mapGetters } from 'vuex';
+  import { fetchSendEmailCode } from 'api/public';
+  import { fetchBindEmail } from 'api/home/account-set';
+  import SmsTimer from 'common/sms-timer';
   
   export default {
+    components: {
+      SmsTimer
+    },
+    computed: {
+      ...mapGetters([
+        'realName'
+      ])
+    },
     data() {
       return {
-        passwordData: {
-          oldPassword: '',
-          newPassword: '',
-          confirmPassword: ''
-        }
+        bindEmailData: {
+          email: '',
+          authCode: ''
+        },
+        showPrompt: false
       }
     },
     methods: {
-      UpdatePassword() {
-        fetchUpdatePassword(this.passwordData)
+      sendCode() {
+        fetchSendEmailCode({ email: this.bindEmailData.email })
           .then(response => {
             if (response.data.meta.code === 200) {
-              this.$router.push('/accountSet/index');
+              this.showPrompt = true;
               this.$message({
-                message: '登录密码修改成功,请牢记你的登录密码!',
+                message: '邮箱验证码已发送',
                 type: 'success'
               });
             }
-          })
+          });
+      },
+      bindEmail() {
+        fetchBindEmail(this.bindEmailData)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.showPrompt = false;
+              this.$store.commit('SET_EMAIL', this.bindEmailData.email);
+              this.$message({
+                message: '邮箱绑定成功！',
+                type: 'success'
+              });
+              this.$router.push('/accountSet/index')
+            }
+          });
       }
     }
   }
@@ -87,6 +102,10 @@
     .amendLoginPwdMsg {
       li:first-child {
         margin-bottom: 20px;
+      }
+
+      li.marginTop {
+        margin-top: 18px;
       }
 
       label {
@@ -124,7 +143,7 @@
         width: 20px;
         height: 18px;
         margin: 10px 5px 10px 132px;
-        background: url("../../../assets/images/home/center-ico-dangerous.png") no-repeat;
+        background: url(../../../../assets/images/home/center-ico-dangerous.png) no-repeat;
       }
 
       span.amendLoginName {
@@ -138,6 +157,13 @@
         color: #ff7900;
       }
 
+      p.yzmCodeSent {
+        font-size: 14px;
+        color: #838d9d;
+        margin-left: 124px;
+        margin-top: 14px;
+      }
+
       .submitBtn {
         width: 203px;
         height: 46px;
@@ -148,6 +174,18 @@
         margin-top: 33px;
         margin-bottom: 39px;
         font-size: 18px;
+        cursor: pointer;
+      }
+
+      .getYzmCode {
+        height: 46px;
+        border-radius: 100px;
+        background-color: #dfe8f0;
+        font-size: 16px;
+        text-align: center;
+        padding: 0 20px;
+        color: #7c86a2;
+        margin-left: 15px;
         cursor: pointer;
       }
     }
