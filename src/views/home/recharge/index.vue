@@ -1,7 +1,7 @@
 <template>
   <div class="recharge-wrapper">
     <h1>我要充值</h1>
-    <el-tabs v-model="activeName"  type="card">
+    <el-tabs v-model="activeName" type="card">
       <el-tab-pane label="快捷充值" name="one">
         <fast-recharge></fast-recharge>
       </el-tab-pane>
