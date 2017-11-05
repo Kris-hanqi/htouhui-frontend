@@ -35,4 +35,22 @@ export function fetchOpenAccount(data) {
   })
 }
 
+/** 获取设置交易密码请求数据 */
+export function fetchSetTransactionPassword(data) {
+  return fetch({
+    url: 'user/setPwd',
+    method: 'get',
+    params: data
+  })
+}
+
+/** 获取重置交易密码请求数据 */
+export function fetchResetTransactionPassword(data) {
+  return fetch({
+    url: 'user/passwordReset',
+    method: 'get',
+    params: data
+  })
+}
+
 

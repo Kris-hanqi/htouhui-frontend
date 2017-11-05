@@ -5,7 +5,7 @@
       <ul>
         <li>
           <label>用户名</label>
-          <span class="amendLoginName">{{ name }}</span>
+          <span class="amendLoginName">{{ realName }}</span>
         </li>
         <li>
           <label>手机号</label>
@@ -40,7 +40,7 @@
     },
     computed: {
       ...mapGetters([
-        'name',
+        'realName',
         'mobile'
       ])
     },
@@ -126,7 +126,7 @@
         width: 20px;
         height: 18px;
         margin: 10px 5px 10px 132px;
-        background: url("../../../assets/images/home/center-ico-dangerous.png") no-repeat;
+        background: url(../../../../assets/images/home/center-ico-dangerous.png) no-repeat;
       }
 
       span.amendLoginName {

@@ -2,8 +2,8 @@
   <div class="iNeedWithdrawBox fr">
     <h1 class="personalCenterRightTitle">我要提现</h1>
     <div class="bankCardMsg">
-      <p class="bankName">兴业银行</p>
-      <p class="roboto-regular bankNum">6229 **** **** 3126</p>
+      <p class="bankName">{{ bankName || '无' }}</p>
+      <p class="roboto-regular bankNum">{{ bankCard || '无' }}</p>
     </div>
     <ul class="withdrawMsgBox">
       <li>
@@ -12,7 +12,7 @@
       </li>
       <li>
         <span>提现金额：</span>
-        <input type="text">
+        <input v-model="withdrawData.inputMoney" type="text">
         <span>元</span>
         <a href="javascript:void(0)" @click="showBankLimit">(查看银行限额)</a>
       </li>
@@ -25,7 +25,7 @@
         <span>0.00元</span>
       </li>
       <li class="withdrawBtn">
-        <button>提现</button>
+        <button @click="withdraw">提现</button>
       </li>
     </ul>
     <div class="splitLine"></div>
@@ -42,22 +42,50 @@
     </div>
   
     <bank-limit :visible="dialogBankLimitVisible" @close="closeBankLimit"></bank-limit>
+  
+    <request-bank-from :request-data="requestData"></request-bank-from>
   </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import BankLimit from '../components/BankLimit.vue';
+  import RequestBankFrom from '../components/RequestBankFrom.vue';
+  import { fetchWithdraw } from 'api/home/account';
   
   export default {
     components: {
-      BankLimit
+      BankLimit,
+      RequestBankFrom
+    },
+    computed: {
+      ...mapGetters([
+        'bankCard',
+        'bankName'
+      ])
     },
     data() {
       return {
-        dialogBankLimitVisible: false
+        dialogBankLimitVisible: false,
+        requestData: {},
+        withdrawData: {
+          inputMoney: '',
+          source: 'pc',
+          cnapNumber: '',
+          cardNo: '',
+          sessionId: 'YDADAVDAVDJAVDJAVJ001212'
+        }
       }
     },
     methods: {
+      withdraw() {
+        this.withdrawData.cardNo = this.bankCard;
+        fetchWithdraw(this.withdrawData).then(response => {
+          if (response.data.meta.code === 200) {
+            this.requestData = response.data.data;
+          }
+        })
+      },
       showBankLimit() {
         this.dialogBankLimitVisible = true;
       },
@@ -72,8 +100,6 @@
   .iNeedWithdrawBox {
     width: 832px;
     background-color: #fff;
-    -webkit-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-    -moz-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
 
     .personalCenterRightTitle {
@@ -87,7 +113,7 @@
     .bankCardMsg {
       width: 300px;
       height: 163px;
-      background: url("../../../assets/images/home/group-4.png") no-repeat;
+      background: url(../../../assets/images/home/group-4.png) no-repeat;
       margin-top: 45px;
       margin-left: 54px;
 

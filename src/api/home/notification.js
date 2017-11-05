@@ -1,18 +1,18 @@
 import fetch from '@/utils/fetch';
 
-/** 获取借款记录 */
+/** 获取站内消息列表 */
 export function fetchPageList(data) {
   return fetch({
-    url: 'user/loanrepayment',
+    url: 'user/queryInboxs',
     method: 'get',
     params: data
   })
 }
 
-/** 获取借款记录统计结果 */
-export function fetchStatistic(data) {
+/** 获取站内消息详情 */
+export function fetchDetail(data) {
   return fetch({
-    url: 'user/lrstatistic',
+    url: 'user/queryInboxDetail',
     method: 'get',
     params: data
   })

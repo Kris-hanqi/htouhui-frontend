@@ -4,7 +4,7 @@
     <loan-repayment-statistics title="借款记录" :data="loanData"></loan-repayment-statistics>
     
     <div class="loan-record-wrapper__body">
-      <el-tabs v-model="listQuery.type" @tab-click="toggleType">
+      <el-tabs v-model="listQuery.type" @tab-click="toggleType" type="card">
         <el-tab-pane label="还款中" name="repaying"></el-tab-pane>
         <el-tab-pane label="待放款" name="rechecking"></el-tab-pane>
         <el-tab-pane label="待发布" name="waiting"></el-tab-pane>
@@ -12,33 +12,14 @@
         <el-tab-pane label="已结清" name="finished"></el-tab-pane>
         <el-tab-pane label="流标" name="fail"></el-tab-pane>
       </el-tabs>
-      <el-table :data="list"
-                v-loading="listLoading"
-                element-loading-text="拼命加载中..."
-                :border="false"
-                style="width: 100%">
-        <el-table-column prop="name" label="项目名称" width="150"></el-table-column>
-        <el-table-column prop="giveTime" label="放款时间" width="140"></el-table-column>
-        <el-table-column prop="loanMoney" label="借款金额" width="110"></el-table-column>
-        <el-table-column prop="realLoanMoney" label="实际借款金额" width="110"></el-table-column>
-        <el-table-column prop="rateCount" label="年利率" width="110"></el-table-column>
-        <el-table-column prop="unPaidMoney" label="待还总额" width="110"></el-table-column>
-        <el-table-column label="已还期数/总期数" width="110">
-          <template scope="scope">
-            {{ scope.row.repayedTerm }}/{{ scope.row.repayedTerm + scope.row.unRepayTerm }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="payDay" label="下次还款日" width="140"></el-table-column>
-        <el-table-column prop="nextRepayMoney" label="下次还款数" width="100"></el-table-column>
-        <el-table-column prop="status" label="状态" width="100"></el-table-column>
-        <el-table-column prop="trusteeship" label="管理平台" width="100"></el-table-column>
-        <el-table-column fixed="right" label="操作" width="120">
-          <template scope="scope">
-            <el-button type="text">还款计划</el-button>
-            <el-button type="text">合同</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+  
+      <repaying :load="listLoading" :list="list" v-if="listQuery.type === 'repaying'"></repaying>
+      <rechecking :load="listLoading" :list="list" v-if="listQuery.type === 'rechecking'"></rechecking>
+      <waiting :load="listLoading" :list="list" v-if="listQuery.type === 'waiting'"></waiting>
+      <raising :load="listLoading" :list="list" v-if="listQuery.type === 'raising'"></raising>
+      <finished :load="listLoading" :list="list" v-if="listQuery.type === 'finished'"></finished>
+      <fail :load="listLoading" :list="list" v-if="listQuery.type === 'fail'"></fail>
+      
       <div class="pages" v-show="!listLoading">
         <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
         <el-pagination
@@ -53,11 +34,23 @@
 
 <script>
   import LoanRepaymentStatistics from '../components/LoanRepaymentStatistics.vue';
-  import { fetchPageList } from 'api/home/loan-record';
+  import Repaying from './components/repaying.vue';
+  import Rechecking from './components/rechecking.vue';
+  import Waiting from './components/waiting.vue';
+  import Raising from './components/raising.vue';
+  import Finished from './components/finished.vue';
+  import Fail from './components/fail.vue';
+  import { fetchLoanRecordPageList, fetchLoanRecordStatistic } from 'api/home/loan';
   
   export default {
     components: {
-      LoanRepaymentStatistics
+      LoanRepaymentStatistics,
+      Repaying,
+      Rechecking,
+      Waiting,
+      Raising,
+      Finished,
+      Fail
     },
     data() {
       return {
@@ -70,12 +63,7 @@
           type: 'repaying',
           name: ''
         },
-        loanData: {
-          totalUnRepayMoney: '10000.10',
-          curMonthUnRepayMoney: '1000.10',
-          curMonthUnRepayNum: '100',
-          rsCurMonthOverdueMoney: '1000000000'
-        }
+        loanData: {}
       }
     },
     computed: {
@@ -86,17 +74,28 @@
     methods: {
       getPageList() {
         this.listLoading = true;
-        fetchPageList(this.listQuery).then(response => {
+        fetchLoanRecordPageList(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            this.total = data.data.totalPage;
+            this.total = data.data.total;
           }
           this.listLoading = false
         })
       },
+      getStatistic() {
+        fetchLoanRecordStatistic().then(response => {
+          if (response.data.meta.code === 200) {
+            this.loanData = response.data.data;
+          }
+        })
+      },
       toggleType(tab) {
-        console.log(tab);
+        if (tab && tab.name) {
+          this.list = null;
+          this.listQuery.type = tab.name;
+          this.getPageList();
+        }
       },
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
@@ -104,6 +103,7 @@
     },
     created() {
       this.getPageList();
+      this.getStatistic();
     }
   }
 </script>

@@ -8,3 +8,12 @@ export function fetchPageList(data) {
     params: data
   })
 }
+
+/** 兑换优惠券 */
+export function fetchExchangeCoupon(data) {
+  return fetch({
+    url: 'user/activeCoupon',
+    method: 'get',
+    params: data
+  })
+}

@@ -37,10 +37,11 @@ const webpackConfig = {
       '@': resolve('src'),
       'src': path.resolve(__dirname, '../src'),
       'api': path.resolve(__dirname, '../src/api'),
+      'utils': path.resolve(__dirname, '../src/utils'),
       'assets': path.resolve(__dirname, '../src/assets'),
       'common': path.resolve(__dirname, '../src/common'),
-      'views': path.resolve(__dirname, '../src/views'),
-      'components': path.resolve(__dirname, '../src/components')
+      'components': path.resolve(__dirname, '../src/components'),
+      'views': path.resolve(__dirname, '../src/views')
     }
   },
   module: {

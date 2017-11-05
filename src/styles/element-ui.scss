@@ -188,3 +188,17 @@ th {
   width: 4px;
   height: 4px;
 }
+
+.hth-from {
+  .el-form-item__label {
+    line-height: 2.5;
+  }
+
+  .el-input__inner {
+    height: 56px;
+    background-color: #ffffff;
+    border: solid 1px #bfc1c4;
+  }
+}
+
+
