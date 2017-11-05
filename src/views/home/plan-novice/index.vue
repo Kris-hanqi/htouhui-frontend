@@ -1,13 +1,13 @@
 <template>
   <div class="plan-novice">
     <!--未投资-->
-    <div class="newUser-plan" v-if="showPlanNovice">
+    <div class="newUser-plan" v-if="showNovicePlanMessage">
       <div class="newUser-plan-title">
         <p>新手计划<span>{{ planListData.startInvestMoeny }}元起投，最高可投1万元 ，每人仅限1次 </span></p>
       </div>
       <div class="newUser-plan-main">
         <div class="newUser-plan-rate">
-          <p class="rate"><span class="roboto-regular">12</span><span class="small-newUser-plan-rate roboto-regular">.0</span>%</p>
+          <p class="rate"><span class="roboto-regular"><interest-rate :value="planListData.rate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%</p>
           <p>往期年化利率</p>
         </div>
         <div class="newUser-plan-day">
@@ -32,7 +32,7 @@
       </div>
       <div class="newUser-plan-main">
         <div class="newUser-plan-rate">
-          <p class="rate"><span class="roboto-regular">{{ joinPlanList.rate.substring(0, joinPlanList.rate.indexOf('.')) }}</span><span class="small-newUser-plan-rate roboto-regular">{{ joinPlanList.rate.substring(joinPlanList.rate.indexOf('.')) }}</span>%</p>
+          <p class="rate"><span class="roboto-regular"><interest-rate :value="joinPlanList.rate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%</p>
           <p>往期年化利率</p>
         </div>
         <div class="newUser-plan-day">
@@ -80,17 +80,23 @@
 </template>
 
 <script>
-  import { planNovice } from '@/api/home/plan-novice';
-  import { joinPlan } from '@/api/home/joinPlan';
-  import { queryUserInvestList } from '@/api/home/queryUserJoinInvestList';
+  import { mapGetters } from 'vuex';
+  import { planNovice } from 'api/home/plan-novice';
+  import { joinPlan } from 'api/home/joinPlan';
+  import { queryUserInvestList } from 'api/home/queryUserJoinInvestList';
+  import interestRate from 'components/interest-rate';
 
   export default {
+    components: {
+      interestRate
+    },
     data() {
       return {
-        showPlanNovice: false,
-        planListData: {},
-        joinPlanList: [],
-        list: [],
+        planListData: {
+          rate: ''
+        },
+        joinPlanList: null,
+        list: null,
         listQuery: {
           planId: '',
           type: 'novice_plan',
@@ -109,8 +115,11 @@
       }
     },
     computed: {
+      ...mapGetters([
+        'showNovicePlanMessage'
+      ]),
       getPageSize() {
-        return Math.ceil(this.total / this.listQuery.size);
+        return Math.ceil(this.total / this.listQuery.pageSize);
       }
     },
     methods: {
@@ -118,8 +127,9 @@
         planNovice().then(data => {
           console.log(data);
           if (data.data.meta.code === 200) {
-            this.planListData = data.data.data.data;
+            this.planListData = data.data.data;
             console.log('新手计划标的：' + this.planListData);
+            console.log(this.planListData);
           }
         })
       },
@@ -127,11 +137,8 @@
         joinPlan(this.listQuery).then(response => {
           if (response.data.meta.code === 200) {
             this.joinPlanList = response.data.data.data;
-            this.investQuery.joinPlanId = response.data.data.data.joinPlanId;
-            if (this.joinPlanList == '' || this.joinPlanList == null) { // eslint-disable-line
-              this.showPlanNovice = true;
-            }
             console.log('新手计划加入记录：' + this.joinPlanList);
+            console.log(this.joinPlanList);
           }
         })
       },
@@ -140,8 +147,12 @@
           if (data.data.meta.code === 200) {
             this.list = data.data.data.data;
             console.log('新手计划债权信息：' + this.list);
+            console.log(this.list);
           }
         })
+      },
+      handleCurrentChange() {
+        this.getPageList();
       }
     },
     created() {

@@ -91,10 +91,16 @@ export const constantRouterMap = [
             component: _import('home/quantify/lookTarget')
           },
           {
-            path: 'lookRegular/:id',
-            name: '查看债权',
+            path: 'lookRegular-joinRecord/:id',
+            name: '加入记录查看债权',
             props: true,
-            component: _import('home/quantify/lookRegular')
+            component: _import('home/quantify/lookRegular-joinRecord')
+          },
+          {
+            path: 'lookRegular-outRecord/:id',
+            name: '退出记录查看债权',
+            props: true,
+            component: _import('home/quantify/lookRegular-outRecord')
           }
         ]
       },

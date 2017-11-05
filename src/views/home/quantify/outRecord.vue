@@ -13,7 +13,7 @@
           <a href="javascript:void(0)" @click="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a>
         </li>
         <li>
-          <a href="javascript:void(0)" class="diy-time" @click="switchDateType('other')" :class="{ active: dateType === 'other'}">自定义时间</a>
+          <a href="javascript:void(0)" class="diy-time" @click="dateType = 'other'" :class="{ active: dateType === 'other'}">自定义时间</a>
         </li>
       </ul>
       <ul class="allChooseCalendar" v-show="dateType === 'other'">
@@ -27,8 +27,8 @@
           type="date"
           placeholder="选择结束日期">
         </el-date-picker>
+        <button class="find-btn" @click="query">查询</button>
       </ul>
-      <button class="find-btn" @click="query">查询</button>
     </div>
 
     <el-table :data="list" style="width: 100%">
@@ -57,7 +57,7 @@
       </el-table-column>
       <el-table-column prop="lookEquity" label="查看"  width="70">
         <template scope="scope">
-          <el-button class="icon-interests" type="text" @click="lookOutRegular(scope.row.joinPlanId)" size="small">查看债权</el-button>
+          <el-button class="icon-interests" type="text" @click="lookOutRegular(scope.row.userExitId)" size="small">查看债权</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -132,8 +132,6 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            console.log('升薪宝量化退出记录' + this.list);
-            console.log(this.list);
             this.total = data.data.count || 0;
           }
         })
@@ -143,13 +141,14 @@
       },
       switchDateType(type) {
         this.dateType = type;
+        this.getPageList();
       },
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
         this.getPageList();
       },
       lookOutRegular(id) {
-        this.$router.push('/quantify/lookRegular/' + id);
+        this.$router.push('/quantify/lookRegular-outRecord/' + id);
       }
     },
     created() {
@@ -196,11 +195,9 @@
     }
 
     .find-btn {
-      float: right;
       width: 135px;
       height: 40px;
       box-sizing: border-box;
-      margin-top: -10px;
       border-radius: 100px;
       background-color: #378ff6;
       line-height: 40px;

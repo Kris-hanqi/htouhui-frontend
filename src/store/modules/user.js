@@ -56,7 +56,7 @@ const user = {
     accountId: '', // 电子账号
     email: '', // 电子邮箱
     showNovicePlan: false,
-    showNovicePlanMessage: false,
+    showNovicePlanMessage: true,
     isBorrower: false // 是否是借款人
   },
 

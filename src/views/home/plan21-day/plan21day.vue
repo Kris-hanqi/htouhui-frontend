@@ -14,7 +14,7 @@
           <a href="javascript:void(0)" @click="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a>
         </li>
         <li>
-          <a href="javascript:void(0)" class="diy-time" @click="switchDateType('other')" :class="{ active: dateType === 'other'}">自定义时间</a>
+          <a href="javascript:void(0)" class="diy-time" @click="dateType = 'other'" :class="{ active: dateType === 'other'}">自定义时间</a>
         </li>
       </ul>
       <ul class="allChooseCalendar" v-show="dateType === 'other'">
@@ -28,8 +28,8 @@
           type="date"
           placeholder="选择结束日期">
         </el-date-picker>
+        <button class="find-btn" @click="query">查询</button>
       </ul>
-      <button class="find-btn" @click="query">查询</button>
     </div>
     <div class="message">
       <el-table :data="list" style="width: 100%">
@@ -143,6 +143,7 @@
       },
       switchDateType(type) {
         this.dateType = type;
+        this.getPageList();
       },
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
@@ -196,11 +197,9 @@
     }
 
     .find-btn {
-      float: right;
       width: 135px;
       height: 40px;
       box-sizing: border-box;
-      margin-top: -10px;
       border-radius: 100px;
       background-color: #378ff6;
       line-height: 40px;
