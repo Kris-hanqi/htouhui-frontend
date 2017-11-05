@@ -3,7 +3,7 @@
     <div class="coupon-wrapper__top">
       <p>优惠券</p>
       <el-button type="text">优惠券使用说明</el-button>
-      <el-button :plain="true" type="info">兑换优惠券</el-button>
+      <el-button :plain="true" @click="showExchangeCoupon" type="info">兑换优惠券</el-button>
     </div>
     <div class="coupon-wrapper__body">
       <el-tabs v-model="listQuery.type" @tab-click="handleTabClick" type="card">
@@ -75,11 +75,26 @@
         :page-size="listQuery.pageSize"
         layout="prev, pager, next" :total="total"></el-pagination>
     </div>
+  
+    <el-dialog title="兑换优惠券"
+               size="tiny"
+               :before-close="handleClose"
+               :visible.sync="visible">
+      <el-form class="exchange-coupon hth-from" label-position="right" label-width="60px">
+        <el-form-item label="兑换码">
+          <el-input v-model="exchangeCode"></el-input>
+        </el-form-item>
+        <el-form-item label="">
+          <el-button :plain="true" type="info">取消</el-button>
+          <el-button @click="exchangeCoupon" type="primary">确认</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-  import { fetchPageList } from '@/api/home/coupon';
+  import { fetchPageList, fetchExchangeCoupon } from 'api/home/coupon';
   
   export default {
     data() {
@@ -92,7 +107,9 @@
           pageSize: 6,
           type: 'all',
           status: 'unused'
-        }
+        },
+        visible: false,
+        exchangeCode: ''
       }
     },
     computed: {
@@ -120,6 +137,21 @@
       },
       switchStatus(data) {
         this.listQuery.status = data;
+      },
+      showExchangeCoupon() {
+        this.visible = true;
+      },
+      exchangeCoupon() {
+        fetchExchangeCoupon({ cdkey: this.exchangeCode })
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.visible = false;
+              this.getPageList();
+            }
+          })
+      },
+      handleClose() {
+        this.visible = false;
       }
     },
     created() {
@@ -136,6 +168,13 @@
     padding: 20px 15px;
     background-color: #fff;
     margin-bottom: 20px;
+    
+    .exchange-coupon {
+      button {
+        width: 125px;
+        height: 46px;
+      }
+    }
   }
   
   .coupon-wrapper__top {

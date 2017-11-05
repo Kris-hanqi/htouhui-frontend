@@ -12,7 +12,7 @@
       <div class="shengxinbaolianghua-main">
         <div class="shengxinbaolianghua-rate">
           <p class="rate">
-            <span class="roboto-regular">12</span><span class="small-shengxinbaolianghua-rate roboto-regular">.0</span>%~<span class="roboto-regular">12</span><span class="small-shengxinbaolianghua-rate roboto-regular">.0</span>%
+            <span class="roboto-regular"><interest-rate :value="str.minRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%~<span class="roboto-regular"><interest-rate :value="str.maxRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%
           </p>
           <p>往期年化利率</p>
         </div>
@@ -38,8 +38,12 @@
 
 <script>
   import { quantifyList } from '@/api/home/quantify';
+  import interestRate from 'components/interest-rate';
 
   export default {
+    components: {
+      interestRate
+    },
     data() {
       return {
         quantifyData: []

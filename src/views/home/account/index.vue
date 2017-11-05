@@ -1,43 +1,36 @@
 <template>
   <div class="account-wrapper">
     <!-- 用户快捷操作工具栏 -->
-    <account-top></account-top>
+    <top></top>
   
     <!-- 我的资产 -->
-    <div class="account-wrapper__asset">
-      <account-asset :data="assetData"></account-asset>
-    </div>
+    <asset :data="assetData"></asset>
     
     <!-- 我的投资 -->
-    <div class="account-wrapper__invest">
-      <account-invest></account-invest>
-    </div>
+    <invest></invest>
     
     <!-- 还款日历 -->
-    <div class="account-wrapper__repayment-calendar">
-      <repay-calendar></repay-calendar>
-    </div>
+    <repay-calendar></repay-calendar>
   </div>
 </template>
 
 <script>
-  import { fetchAsset } from '@/api/home/account';
-  import AccountTop from './AccountTop.vue';
-  import AccountAsset from './AccountAsset.vue';
-  import AccountInvest from './AccountInvest.vue';
-  import RepayCalendar from './RepayCalendar.vue';
+  import { fetchAsset } from 'api/home/account';
+  import Top from './components/Top.vue';
+  import Asset from './components/Asset.vue';
+  import Invest from './components/Invest.vue';
+  import RepayCalendar from './components/RepayCalendar.vue';
   
   export default {
     components: {
-      AccountTop,
-      AccountAsset,
-      AccountInvest,
+      Top,
+      Asset,
+      Invest,
       RepayCalendar
     },
     data() {
       return {
-        dialogVisible: false,
-        assetData: { }
+        assetData: {}
       }
     },
     methods: {
@@ -55,18 +48,3 @@
     }
   }
 </script>
-
-<style lang="scss">
-  .account-wrapper__asset {
-    margin-top: 16px;
-  }
-
-  .account-wrapper__invest {
-    margin-top: 16px;
-  }
-  
-  .account-wrapper__repayment-calendar {
-    margin-top: 19px;
-    margin-bottom: 32px;
-  }
-</style>

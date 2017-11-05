@@ -4,6 +4,10 @@ const _import = require('./_import_' + process.env.NODE_ENV);
 
 Vue.use(Router);
 
+const Public = {
+  template: '<router-view></router-view>'
+};
+
 /** layout */
 import Layout from 'views/home/components/Layout';
 
@@ -91,10 +95,16 @@ export const constantRouterMap = [
             component: _import('home/quantify/lookTarget')
           },
           {
-            path: 'lookRegular/:id',
-            name: '查看债权',
+            path: 'lookRegular-joinRecord/:id',
+            name: '加入记录查看债权',
             props: true,
-            component: _import('home/quantify/lookRegular')
+            component: _import('home/quantify/lookRegular-joinRecord')
+          },
+          {
+            path: 'lookRegular-outRecord/:id',
+            name: '退出记录查看债权',
+            props: true,
+            component: _import('home/quantify/lookRegular-outRecord')
           }
         ]
       },
@@ -125,43 +135,43 @@ export const constantRouterMap = [
       },
       {
         path: '/accountSet',
-        component: _import('home/account-set/index'),
+        component: Public,
         redirect: '/accountSet/index',
         children: [
           {
             path: 'index',
             name: '账户设置',
-            component: _import('home/account-set/accountSet')
+            component: _import('home/account-set/index')
           },
           {
             path: 'updateLoginPassword',
             name: '修改密码',
-            component: _import('home/account-set/UpdateLoginPassword')
+            component: _import('home/account-set/components/UpdateLoginPassword')
           },
           {
             path: 'updateMobileStep1',
             name: '验证邮箱',
-            component: _import('home/account-set/UpdateMobileStep1')
+            component: _import('home/account-set/components/UpdateMobileStep1')
           },
           {
             path: 'updateMobileStep2',
             name: '修改邮箱',
-            component: _import('home/account-set/UpdateMobileStep2')
+            component: _import('home/account-set/components/UpdateMobileStep2')
           },
           {
             path: 'bindEmail',
             name: '绑定邮箱',
-            component: _import('home/account-set/BindEmail')
+            component: _import('home/account-set/components/BindEmail')
           },
           {
             path: 'transactionPassword',
             name: '设置交易密码',
-            component: _import('home/account-set/TransactionPassword')
+            component: _import('home/account-set/components/TransactionPassword')
           },
           {
             path: 'updateMobile',
             name: '修改绑定手机号',
-            component: _import('home/account-set/UpdateMobile')
+            component: _import('home/account-set/components/UpdateMobile')
           }
         ]
       },

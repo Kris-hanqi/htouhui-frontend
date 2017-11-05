@@ -1,6 +1,5 @@
 <template>
   <div class="account-invest__wrapper">
-    <div class=""></div>
     <h1>我的投资</h1>
     <div class="fl">
       <invest-chart :chart-data="chartData"
@@ -40,9 +39,9 @@
   </div>
 </template>
 <script>
-  import InvestChart from './components/InvestChart.vue';
-  import { fetchInvest } from '@/api/home/account';
-  import { getInvestData } from '@/utils/home/index';
+  import InvestChart from './InvestChart.vue';
+  import { fetchInvest } from 'api/home/account';
+  import { getInvestData } from 'utils/home/index';
 
   export default {
     components: {

@@ -2,37 +2,37 @@
   <div class="look-regular">
     <div class="details">
       <div class="title-box">
-        <span class="title">资产详情-债权信息</span>
-        <router-link to="/plan21Day/index"><a href="#" class="return-prev-pages">返回上一页 ></a></router-link>
+        <span class="title">加入记录-债权信息</span>
+        <a href="javascript:void(0)" class="return-prev-pages" @click="returnPrevPages(joinPlanList.planId)">返回上一页 ></a>
       </div>
       <div class="look-regular-main">
         <div class="look-regular-rate">
           <p class="rate">
-            <span class="roboto-regular"><interest-rate :value="detailList.rate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%
+            <span class="roboto-regular"><interest-rate :value="joinPlanList.minRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>% ~
+            <span class="roboto-regular"><interest-rate :value="joinPlanList.maxRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%
           </p>
           <p>往期年化利率</p>
         </div>
         <div class="look-regular-day">
-          <p class="day"><span class="roboto-regular">{{ detailList.lockPeriod }}</span>天</p>
+          <p class="day"><span class="roboto-regular">{{ joinPlanList.lockPeriod }}</span>天</p>
           <p>持有期限</p>
         </div>
         <div class="look-regular-money">
-          <p class="money"><span class="roboto-regular">{{ detailList.joinMoney }}</span>元</p>
+          <p class="money"><span class="roboto-regular">{{ joinPlanList.joinMoney }}</span>元</p>
           <p>加入金额</p>
         </div>
       </div>
       <div class="look-regular-bottom">
-        <p>加入时间 <span class="roboto-regular">{{ detailList.joinTime }}</span></p>
-        <p>即日起免手续费 <span class="roboto-regular">{{ detailList.lockEndTime }}</span></p>
-        <img v-if="detailList.status == 'matched'" class="type-message" src="../../../assets/images/home/icon-success.png" alt=""/>
-        <img v-else class="type-message" src="../../../assets/images/home/icon-auto.png" alt=""/>
+        <p>加入时间 <span class="roboto-regular">{{ joinPlanList.joinTime }}</span></p>
+        <p>即日起免手续费 <span class="roboto-regular">{{ joinPlanList.lockEndTime }}</span></p>
+        <img class="type-message" src="../../../assets/images/home/icon-success.png" alt=""/>
       </div>
     </div>
 
     <div class="message">
       <div class="title">
         <span>您购买的债权信息</span>
-        <p class="title-message">目前已为您自动投标成功   <span>{{ detailList.totalInvestMoney }}元</span></p>
+        <p class="title-message">目前已为您自动投标成功   <span>{{ joinPlanList.totalInvestMoney }}</span></p>
       </div>
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
@@ -50,7 +50,6 @@
           </template>
         </el-table-column>
       </el-table>
-
       <div class="pages">
         <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
         <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
@@ -70,23 +69,24 @@
     },
     data() {
       return {
-        list: null,
-        detailList: {
-          rate: ''
-        },
-        detailQuery: {
+        joinPlanQuery: {
           joinPlanId: this.$route.params.id
         },
         listQuery: {
-          joinPlanId: this.$route.params.id,
+          planId: this.$route.params.id,
+          type: '',
+          purpose: '',
+          startTime: '',
+          endTime: '',
           pageNo: 1,
           pageSize: 10
         },
-        total: 0,
-        contractQuery: {
-          investId: ''
+        joinPlanList: {
+          minRate: '',
+          maxRate: ''
         },
-        downloadContract: ''
+        list: null,
+        total: 0
       }
     },
     computed: {
@@ -95,23 +95,25 @@
       }
     },
     methods: {
-      getList() {
-        joinPlan(this.detailQuery).then(response => {
-          if (response.data.meta.code === 200) {
-            this.detailList = response.data.data;
-            console.log('21天计划债权' + this.detailList);
-            console.log(this.detailList);
+      getJoinPlanList() {
+        joinPlan(this.joinPlanQuery).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.joinPlanList = data.data;
+            console.log('升薪宝量化加入记录债券信息' + this.joinPlanList);
+            console.log(this.joinPlanList);
           }
         })
       },
       getPageList() {
+        this.listLoading = true;
         queryUserInvestList(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            this.total = data.data.count || 0;
-            console.log('21天计划债权列表' + this.list);
+            console.log('升薪宝量化您购买的债券信息' + this.list);
             console.log(this.list);
+            this.total = data.data.count || 0;
           }
         })
       },
@@ -121,11 +123,14 @@
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
         this.getPageList();
+      },
+      returnPrevPages(id) {
+        this.$router.push('/quantify/transactionRecord/' + id);
       }
     },
     created() {
-      this.getList();
-      this.getPageList()
+      this.getPageList();
+      this.getJoinPlanList();
     }
   }
 </script>

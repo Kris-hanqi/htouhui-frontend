@@ -55,8 +55,9 @@ const user = {
     bankName: '', // 银行名称
     accountId: '', // 电子账号
     email: '', // 电子邮箱
+    transactionPasswordStatus: false, // 是否设置交易密码
     showNovicePlan: false,
-    showNovicePlanMessage: false,
+    showNovicePlanMessage: true,
     isBorrower: false // 是否是借款人
   },
 
@@ -76,9 +77,6 @@ const user = {
     SET_MOBILE: (state, mobile) => {
       state.mobile = mobile;
     },
-    SET_NAME: (state, name) => {
-      state.name = name;
-    },
     SET_BANK_NAME: (state, bankName) => {
       state.bankName = bankName;
     },
@@ -90,6 +88,9 @@ const user = {
     },
     SET_EMAIL: (state, email) => {
       state.email = email;
+    },
+    SET_TRANSACTION_PASSWORD_STATUS: (state, status) => {
+      state.transactionPasswordStatus = status;
     },
     SET_SHOW_NOVICE_PLAN: (state, showNovicePlan) => {
       state.showNovicePlan = showNovicePlan;
@@ -119,6 +120,7 @@ const user = {
             commit('SET_BANK_CARD', data.bankCard);
             commit('SET_ACCOUNT_ID', data.accountId);
             commit('SET_STATUS', status);
+            commit('SET_TRANSACTION_PASSWORD_STATUS', data.isSetPassWord);
             commit('SET_EMAIL', data.email);
             commit('SET_SHOW_NOVICE_PLAN', showNovicePlan);
             commit('SET_SHOW_NOVICE_PLAN_MESSAGE', showNovicePlanMessage);
