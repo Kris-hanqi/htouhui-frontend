@@ -3,10 +3,10 @@
     <h1>设置交易密码</h1>
     <el-form ref="transactionPassword" label-width="80px">
       <el-form-item label="手机号码">
-        <span class="phone">{{ mobile }}</span>
+        <span class="phone">{{ mobile || '无' }}</span>
       </el-form-item>
       <el-form-item label="验证码">
-        <el-input v-model="transactionPassword.code" placeholder="请输入验证码"></el-input>
+        <el-input v-model="transactionPassword.authCode" placeholder="请输入验证码"></el-input>
         <sms-timer @run="sendCode"></sms-timer>
       </el-form-item>
     </el-form>
@@ -18,7 +18,7 @@
       <p>1、设置交易密码需获取手机验证码。</p>
       <p>2、提交手机验证码后会跳转至江西银行存管页面，为了保障你的资金安全，请定期更换你的密码，并确保登录设置与交易密码不同。</p>
     </div>
-    <request-bank-from ref="htest" :request-data="requestData"></request-bank-from>
+    <request-bank-from :request-data="requestBankData"></request-bank-from>
   </div>
 </template>
 
@@ -27,32 +27,7 @@
   import SmsTimer from 'common/sms-timer';
   import RequestBankFrom from '../components/RequestBankFrom.vue';
   import { fetchSendCode } from 'api/public';
-  // import { fetchSetTransactionPassword } from 'api/home/account';
-
-  const testData = {
-    formContent: {
-      NOTIFY_URL: 'notifyUrl',
-      RET_URL: 'retUrl',
-      accountId: '6212461430000704425',
-      acqRes: 'htouhui',
-      bankCode: '30050000',
-      channel: '000002',
-      idNo: '130127196406223311',
-      idType: '01',
-      instCode: '00300001',
-      mobile: '12345678910',
-      name: '测试用户灵灵狗',
-      notifyUrl: 'http://127.0.0.1:8080/htouhui/jixin_return_s2s/passwordSet',
-      retUrl: 'http://127.0.0.1:8080/htouhui/jixin_return_web/passwordSet',
-      seqNo: '100001',
-      sign: 'ZoXZ+koGvzV2LSnE4k4drLq6zf2BNx56jPYhZWBuapZz33C4nM0fdklzjHwvJQCDOwa0+w8obiJw7sX3KJlKgFRELB2pkaL0q7t0f1tSZtQTuB1GdLGRoXK1Dw7XcNlmrvtAVxZjp1ndK/9pdb7nS69cOmg8VhfTx5GdgEgCB1yTCBZJQwKA6ybWYiRfK5Qs2HH7EQ+mqbhOlX0pM7WDCGg/RSKD2mQBhgZF5ph48OCFc4tTvNgizNsJ23qRVZDbScv3pKBeRY0vHEKlPQpOH9vgxd3QzpoDymuOBoIg0YhujpUnjIVskEajxz8RRyFSMPXVDkP9LFic6fNCGoN7jA==',
-      txCode: 'passwordSet',
-      txDate: '20171028',
-      txTime: '184135',
-      version: '10'
-    },
-    formPostUrl: 'https://test.credit2go.cn/escrow/p2p/page/passwordset'
-  };
+  import { fetchSetTransactionPassword, fetchResetTransactionPassword } from 'api/home/account-set';
   
   export default {
     components: {
@@ -61,15 +36,20 @@
     },
     computed: {
       ...mapGetters([
-        'mobile'
+        'mobile',
+        'transactionPasswordStatus'
       ])
     },
     data() {
       return {
         htmlStr: '',
-        requestData: testData,
+        authType: 'set',
+        requestBankData: {},
         transactionPassword: {
-          code: ''
+          source: 'pc',
+          authCode: '',
+          sessionId: 'trhashvasjavsjajdasj123',
+          callbackUrl: 'www.baidu.com'
         }
       }
     },
@@ -80,39 +60,30 @@
         })
       },
       setPwd() {
-        this.$refs.htest.requestBank();
-//        const requestData = {
-//          authCode: this.transactionPassword.code,
-//          source: 'pc'
-//        };
-//        fetchTransactionPassword(requestData).then(response => {
-//          const data = response.data;
-//          if (data.meta.code === 200) {
-//            const fromData = data.data.formContent;
-//
-//            if (fromData) {
-//              for (let item of fromData) {
-//                console.log(item);
-//              }
-//            }
-//
-//            console.log(fromData);
-//          }
-//        })
-//        const fromData = new FormData();
-//        for (const item in testData.formContent) {
-//          fromData.append(item + '', testData.formContent[item + '']);
-//        }
-//        fetchSetTransactionPassword(fromData, testData.formPostUrl).then(response => {
-//          console.log(response);
-//        });
-
-//        const oReq = new XMLHttpRequest();
-//        oReq.open('POST', testData.formPostUrl, true);
-//        oReq.send(fromData);
-//        oReq.onload = function(oEvent) {
-//          console.log(oEvent);
-//        };
+        const requestData = {
+          authCode: this.transactionPassword.code,
+          source: 'pc'
+        };
+        if (!this.transactionPasswordStatus) {
+          fetchSetTransactionPassword(requestData).then(response => {
+            const data = response.data;
+            if (data.meta.code === 200) {
+              this.requestBankData = data.data;
+            }
+          });
+        } else {
+          fetchResetTransactionPassword(requestData).then(response => {
+            const data = response.data;
+            if (data.meta.code === 200) {
+              this.requestBankData = data.data;
+            }
+          });
+        }
+      }
+    },
+    created() {
+      if (this.transactionPasswordStatus) {
+        this.authType = 'reset';
       }
     }
   }

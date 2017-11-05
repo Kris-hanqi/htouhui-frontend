@@ -47,12 +47,3 @@ export function fetchRecharge(data) {
     data
   })
 }
-
-/** 获取设置交易密码请求数据 */
-export function fetchTransactionPassword(data) {
-  return fetch({
-    url: 'user/setPwd',
-    method: 'get',
-    params: data
-  })
-}

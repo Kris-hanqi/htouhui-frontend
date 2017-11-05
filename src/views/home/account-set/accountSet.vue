@@ -44,8 +44,8 @@
       </tr>
       <tr class="borderNone">
         <td>交易密码</td>
-        <td>已设置</td>
-        <td rowspan="2" class="borderLine"><router-link to="transactionPassword"><button>修改</button></router-link></td>
+        <td>{{ transactionPasswordStatus ? '已设置' : '未设置'}}</td>
+        <td rowspan="2" class="borderLine"><router-link to="transactionPassword"><button>{{ transactionPasswordStatus ? '修改' : '设置' }}</button></router-link></td>
       </tr>
       <tr>
         <td colspan="2" class="tableSmallFontColor textAlignLeft tablePadding">保障资金安全，转入、转出、投资等资金相关操作时使用</td>
@@ -94,7 +94,8 @@
         'mobile',
         'email',
         'bankCard',
-        'accountId'
+        'accountId',
+        'transactionPasswordStatus'
       ])
     },
     data() {
