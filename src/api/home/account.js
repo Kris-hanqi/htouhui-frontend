@@ -39,10 +39,19 @@ export function fetchFundsPageList(data) {
   })
 }
 
-/** 充值接口 - 获取请求银行数据 */
+/** 充值 - 获取请求银行数据 */
 export function fetchRecharge(data) {
   return fetch({
     url: 'user/recharge',
+    method: 'post',
+    data
+  })
+}
+
+/** 提现 */
+export function fetchWithdraw(data) {
+  return fetch({
+    url: 'user/withdraw',
     method: 'post',
     data
   })

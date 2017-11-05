@@ -7,6 +7,7 @@ const getters = {
   status: state => state.user.status,
   transactionPasswordStatus: state => state.user.transactionPasswordStatus,
   bankCard: state => state.user.bankCard,
+  bankName: state => state.user.bankName,
   accountId: state => state.user.accountId,
   showNovicePlan: state => state.user.showNovicePlan,
   showNovicePlanMessage: state => state.user.showNovicePlan,
