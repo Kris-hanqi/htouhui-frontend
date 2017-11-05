@@ -5,7 +5,7 @@
       <ul>
         <li>
           <label>用户名</label>
-          <span class="amendLoginName">{{ name }}</span>
+          <span class="amendLoginName">{{ realName }}</span>
         </li>
         <li class="marginTop">
           <label>邮箱</label>
@@ -43,7 +43,7 @@
     },
     computed: {
       ...mapGetters([
-        'name'
+        'realName'
       ])
     },
     data() {

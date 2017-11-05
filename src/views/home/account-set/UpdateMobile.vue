@@ -5,7 +5,7 @@
       <ul>
         <li>
           <label>用户名</label>
-          <span class="amendLoginName">{{ name }}</span>
+          <span class="amendLoginName">{{ realName }}</span>
         </li>
         <li>
           <label>手机号</label>
@@ -40,7 +40,7 @@
     },
     computed: {
       ...mapGetters([
-        'name',
+        'realName',
         'mobile'
       ])
     },

@@ -4,7 +4,7 @@
     <div class="amendLoginPwdMsg">
       <ul>
         <li>
-          <label>{{ name || '无' }}</label>
+          <label>{{ realName || '无' }}</label>
           <span class="amendLoginName">xiaohai</span>
         </li>
         <li class="marginTop">
@@ -40,7 +40,7 @@
     },
     computed: {
       ...mapGetters([
-        'name'
+        'realName'
       ])
     },
     data() {

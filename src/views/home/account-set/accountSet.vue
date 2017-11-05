@@ -4,7 +4,7 @@
     <table border="0" cellspacing="0" cellpadding="0" class="accountSetTable">
       <tr>
         <td>真实姓名</td>
-        <td>{{ name }}</td>
+        <td>{{ realName }}</td>
         <td>已认证</td>
       </tr>
       <tr>
@@ -60,7 +60,7 @@
       </tr>
       <tr class="borderNone">
         <td>登录密码</td>
-        <td>已设置</td>link
+        <td>已设置</td>
         <td rowspan="2" class="borderLine"><router-link to="updateLoginPassword"><button>修改</button></router-link></td>
       <tr>
         <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">登录密码已设置 上次登录时间： 2017-08-29 14:27:24</td>
@@ -90,7 +90,7 @@
   export default {
     computed: {
       ...mapGetters([
-        'name',
+        'realName',
         'mobile',
         'email',
         'bankCard',
