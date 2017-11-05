@@ -1,13 +1,13 @@
 <template>
   <div class="account-wrapper">
     <!-- 用户快捷操作工具栏 -->
-    <account-top></account-top>
+    <top></top>
   
     <!-- 我的资产 -->
-    <account-asset :data="assetData"></account-asset>
+    <asset :data="assetData"></asset>
     
     <!-- 我的投资 -->
-    <account-invest></account-invest>
+    <invest></invest>
     
     <!-- 还款日历 -->
     <repay-calendar></repay-calendar>
@@ -16,22 +16,21 @@
 
 <script>
   import { fetchAsset } from 'api/home/account';
-  import AccountTop from './components/AccountTop.vue';
-  import AccountAsset from './components/AccountAsset.vue';
-  import AccountInvest from './components/AccountInvest.vue';
+  import Top from './components/Top.vue';
+  import Asset from './components/Asset.vue';
+  import Invest from './components/Invest.vue';
   import RepayCalendar from './components/RepayCalendar.vue';
   
   export default {
     components: {
-      AccountTop,
-      AccountAsset,
-      AccountInvest,
+      Top,
+      Asset,
+      Invest,
       RepayCalendar
     },
     data() {
       return {
-        dialogVisible: false,
-        assetData: { }
+        assetData: {}
       }
     },
     methods: {
