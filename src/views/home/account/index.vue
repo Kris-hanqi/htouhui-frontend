@@ -4,28 +4,22 @@
     <account-top></account-top>
   
     <!-- 我的资产 -->
-    <div class="account-wrapper__asset">
-      <account-asset :data="assetData"></account-asset>
-    </div>
+    <account-asset :data="assetData"></account-asset>
     
     <!-- 我的投资 -->
-    <div class="account-wrapper__invest">
-      <account-invest></account-invest>
-    </div>
+    <account-invest></account-invest>
     
     <!-- 还款日历 -->
-    <div class="account-wrapper__repayment-calendar">
-      <repay-calendar></repay-calendar>
-    </div>
+    <repay-calendar></repay-calendar>
   </div>
 </template>
 
 <script>
-  import { fetchAsset } from '@/api/home/account';
-  import AccountTop from './AccountTop.vue';
-  import AccountAsset from './AccountAsset.vue';
-  import AccountInvest from './AccountInvest.vue';
-  import RepayCalendar from './RepayCalendar.vue';
+  import { fetchAsset } from 'api/home/account';
+  import AccountTop from './components/AccountTop.vue';
+  import AccountAsset from './components/AccountAsset.vue';
+  import AccountInvest from './components/AccountInvest.vue';
+  import RepayCalendar from './components/RepayCalendar.vue';
   
   export default {
     components: {
@@ -55,18 +49,3 @@
     }
   }
 </script>
-
-<style lang="scss">
-  .account-wrapper__asset {
-    margin-top: 16px;
-  }
-
-  .account-wrapper__invest {
-    margin-top: 16px;
-  }
-  
-  .account-wrapper__repayment-calendar {
-    margin-top: 19px;
-    margin-bottom: 32px;
-  }
-</style>

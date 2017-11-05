@@ -80,7 +80,7 @@
                size="tiny"
                :before-close="handleClose"
                :visible.sync="visible">
-      <el-form class="exchange-coupon" label-position="right" label-width="60px">
+      <el-form class="exchange-coupon hth-from" label-position="right" label-width="60px">
         <el-form-item label="兑换码">
           <el-input v-model="exchangeCode"></el-input>
         </el-form-item>

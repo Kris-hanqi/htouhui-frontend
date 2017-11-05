@@ -25,7 +25,7 @@
 </template>
 <script>
   import { mapGetters } from 'vuex';
-  import OpenAccount from '../components/OpenAccount.vue';
+  import OpenAccount from '../../components/OpenAccount.vue';
   import { fetchUnlockBankCard } from 'api/home/account-set';
   
   export default {
@@ -110,7 +110,7 @@
       width: 42px;
       height: 42px;
       margin: 0 14px 0 27px;
-      background: url(../../../assets/images/icon-avatar.png) no-repeat;
+      background: url(../../../../assets/images/icon-avatar.png) no-repeat;
     }
     
     span {
@@ -143,22 +143,22 @@
     
     a.icon-user {
       height: 21px;
-      background: url(../../../assets/images/home/account/icon-user.png) no-repeat;
+      background: url(../../../../assets/images/home/account/icon-user.png) no-repeat;
       margin-left: 40px;
     }
     
     a.icon-user-active {
-      background: url(../../../assets/images/home/account/icon-user-hover.png) no-repeat !important;
+      background: url(../../../../assets/images/home/account/icon-user-hover.png) no-repeat !important;
     }
     
     a.icon-bank-card {
       height: 18px;
-      background: url(../../../assets/images/home/account/icon-bank-card.png) no-repeat;
+      background: url(../../../../assets/images/home/account/icon-bank-card.png) no-repeat;
       margin-left: 7px;
     }
     
     a.icon-bank-card-active {
-      background: url(../../../assets/images/home/account/icon-bank-card-hover.png) no-repeat;
+      background: url(../../../../assets/images/home/account/icon-bank-card-hover.png) no-repeat;
     }
   }
 </style>
