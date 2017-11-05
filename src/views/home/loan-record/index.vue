@@ -53,7 +53,7 @@
 
 <script>
   import LoanRepaymentStatistics from '../components/LoanRepaymentStatistics.vue';
-  import { fetchPageList } from 'api/home/loan-record';
+  import { fetchLoanRecordPageList, fetchLoanRecordStatistic } from 'api/home/loan';
   
   export default {
     components: {
@@ -70,12 +70,7 @@
           type: 'repaying',
           name: ''
         },
-        loanData: {
-          totalUnRepayMoney: '10000.10',
-          curMonthUnRepayMoney: '1000.10',
-          curMonthUnRepayNum: '100',
-          rsCurMonthOverdueMoney: '1000000000'
-        }
+        loanData: {}
       }
     },
     computed: {
@@ -86,13 +81,20 @@
     methods: {
       getPageList() {
         this.listLoading = true;
-        fetchPageList(this.listQuery).then(response => {
+        fetchLoanRecordPageList(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
             this.total = data.data.totalPage;
           }
           this.listLoading = false
+        })
+      },
+      getStatistic() {
+        fetchLoanRecordStatistic().then(response => {
+          if (response.data.meta.code === 200) {
+            this.loanData = response.data.data;
+          }
         })
       },
       toggleType(tab) {
@@ -104,6 +106,7 @@
     },
     created() {
       this.getPageList();
+      this.getStatistic();
     }
   }
 </script>
