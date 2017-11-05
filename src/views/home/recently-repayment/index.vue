@@ -1,7 +1,7 @@
 <template>
   <div class="recently-repayment-wrapper">
     <!-- 统计信息 -->
-    <loan-repayment-statistics title="近期还款" :data="repaymentData"></loan-repayment-statistics>
+    <loan-repayment-statistics title="近期还款" :data="loanData"></loan-repayment-statistics>
     
     <div class="recently-repayment__body">
       <el-table :data="list"
@@ -18,7 +18,7 @@
         <el-table-column prop="trusteeship" label="还款日" width="140"></el-table-column>
         <el-table-column prop="canUseMoney" label="状态" width="100"></el-table-column>
         <el-table-column prop="canUseMoney" label="管理平台" width="100"></el-table-column>
-        <el-table-column prop="detail" label="操作" width="100"></el-table-column>
+        <el-table-column label="操作" width="100"></el-table-column>
       </el-table>
       <div class="pages" v-show="!listLoading">
         <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
@@ -34,6 +34,7 @@
 
 <script>
   import LoanRepaymentStatistics from '../components/LoanRepaymentStatistics.vue';
+  import { fetchRecentlyRepaymentPageList, fetchRecentlyRepaymentStatistic } from 'api/home/loan';
   
   export default {
     components: {
@@ -49,12 +50,7 @@
           size: 10,
           type: ''
         },
-        repaymentData: {
-          totalUnRepayMoney: '10000.10',
-          curMonthUnRepayMoney: '1000.10',
-          curMonthUnRepayNum: '100',
-          rsCurMonthOverdueMoney: '1000000000'
-        }
+        loanData: {}
       }
     },
     computed: {
@@ -63,12 +59,31 @@
       }
     },
     methods: {
-      toggleType(tab) {
-        console.log(tab);
+      getPageList() {
+        this.listLoading = true;
+        fetchRecentlyRepaymentPageList(this.listQuery).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.list = data.data.data;
+            this.total = data.data.total || 0;
+          }
+          this.listLoading = false
+        })
+      },
+      getStatistic() {
+        fetchRecentlyRepaymentStatistic().then(response => {
+          if (response.data.meta.code === 200) {
+            this.loanData = response.data.data;
+          }
+        })
       },
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
       }
+    },
+    created() {
+      this.getPageList();
+      this.getStatistic();
     }
   }
 </script>

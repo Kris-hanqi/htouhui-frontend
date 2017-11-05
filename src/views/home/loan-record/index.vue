@@ -78,7 +78,7 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            this.total = data.data.totalPage;
+            this.total = data.data.total;
           }
           this.listLoading = false
         })

@@ -17,3 +17,21 @@ export function fetchLoanRecordStatistic(data) {
     params: data
   })
 }
+
+/** 获取近期还款记录 */
+export function fetchRecentlyRepaymentPageList(data) {
+  return fetch({
+    url: 'user/curMonthRepayments',
+    method: 'get',
+    params: data
+  })
+}
+
+/** 获取近期还款统计结果 */
+export function fetchRecentlyRepaymentStatistic(data) {
+  return fetch({
+    url: 'user/currentmonthstatistic',
+    method: 'get',
+    params: data
+  })
+}
