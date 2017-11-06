@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import uuid from 'utils/uuid';
 
 const TokenKey = 'token';
 
@@ -20,6 +21,6 @@ export function getUuid() {
   return Cookies.get(uuidKey);
 }
 
-export function setUuid(token) {
-  return Cookies.set(uuidKey, token, { expires: 2 });
+export function setUuid() {
+  return Cookies.set(uuidKey, uuid(), { expires: 2 });
 }

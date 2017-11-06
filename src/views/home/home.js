@@ -30,7 +30,6 @@ import '@/styles/element-ui.scss';
 import * as filters from '@/filters' // 全局filter
 import router from '@/router/home';
 import store from '@/store';
-import uuid from '@/utils/uuid';
 import { setUuid, getUuid } from '@/utils/auth';
 import App from './App';
 // import '@/mock';
@@ -39,7 +38,7 @@ const uuidCode = getUuid();
 
 // 设置uuid
 if (!uuidCode) {
-  setUuid(uuid());
+  setUuid();
 }
 
 

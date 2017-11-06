@@ -2,7 +2,7 @@
   <div class="repayment-calendar-wrapper">
     <panel :title="'定期还款日历'">
       <div>
-        <event-calendar :dates="['2017-11-01', '2017-11-25']"
+        <event-calendar :dates="dates"
                         @day-changed="handleDayChange"
                         @month-changed="handleMonthChanged"></event-calendar>
         <div class="event-detail">
@@ -32,26 +32,46 @@
     },
     data() {
       return {
-        date: null,
-        defaultDate: []
+        dates: [],
+        events: null,
+        month: null,
+        monthData: {
+          collectMoney: '', // 待收
+          receiptMoney: ''  // 已收
+        }
       }
     },
     methods: {
-      repayCalendar(date) {
-        fetchRepayCalendar({ month: date }).then(response => {
-          console.log(response);
-        })
+      repayCalendar() {
+        this.dates = [];
+        fetchRepayCalendar({ month: this.month })
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              const data = response.data.data;
+              this.events = data.dayRepayInfo || [];
+              this.monthData.collectMoney = data.totalColletedMoney || 0;
+              this.monthData.receiptMoney = data.totalUncolletedMoney || 0;
+  
+              this.events.forEach(v => {
+                this.dates.push(v.date);
+              })
+            }
+            console.log(this.events);
+            console.log(this.monthData);
+            console.log(this.dates);
+          })
       },
       handleDayChange(date) {
         console.log(date);
       },
       handleMonthChanged(date) {
-        console.log(date);
+        this.month = date;
+        this.repayCalendar();
       }
     },
     created() {
-      const date = formatDate(null, 'YYYY-MM');
-      this.repayCalendar(date);
+      this.month = formatDate(null, 'YYYY-MM');
+      this.repayCalendar();
     }
   }
 </script>

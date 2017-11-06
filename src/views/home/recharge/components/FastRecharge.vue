@@ -59,8 +59,8 @@
 <script>
   import { mapGetters } from 'vuex';
   import { fetchRecharge } from 'api/home/account';
-  import BankLimit from '../components/BankLimit.vue';
-  import RequestBankFrom from '../components/RequestBankFrom.vue';
+  import BankLimit from '../../components/BankLimit.vue';
+  import RequestBankFrom from '../../components/RequestBankFrom.vue';
 
   export default {
     computed: {

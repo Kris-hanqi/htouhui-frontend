@@ -73,6 +73,11 @@
         return date > new Date();
       }
     },
+    watch: {
+      events: function() { // eslint-disable-line
+        this.dayList();
+      }
+    },
     methods: {
       curYearMonth() {
         this.yearMonthStr = this.calendar.params.curYear + '-' + (this.calendar.params.curMonth + 1);

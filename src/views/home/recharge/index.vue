@@ -17,9 +17,9 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import FastRecharge from './FastRecharge.vue';
-  import AlipayTransfer from './AlipayTransfer1.vue';
-  import InterBankTransfer from './InterBankTransfer.vue';
+  import FastRecharge from './components/FastRecharge.vue';
+  import AlipayTransfer from './components/AlipayTransfer.vue';
+  import InterBankTransfer from './components/InterBankTransfer.vue';
 
   export default {
     components: {
