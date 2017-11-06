@@ -9,7 +9,11 @@
           {{ scope.row.investCash + '元' }}
         </template>
       </el-table-column>
-      <el-table-column prop="investRate" label="年利率" width="60"></el-table-column>
+      <el-table-column prop="investRate" label="年利率" width="60">
+        <template scope="scope">
+          {{ scope.row.investRate + '%' }}
+        </template>
+      </el-table-column>
       <el-table-column prop="paidPeriod" label="已还期数/总期数" width="110">
         <template scope="scope">
           {{ scope.row.paidPeriod + '/' + scope.row.repayPeriod }}
@@ -18,7 +22,7 @@
       <el-table-column prop="nextRepayDate" label="下次还款日" width="90"></el-table-column>
       <el-table-column prop="award" label="额外奖励" width="60">
         <template scope="scope">
-          <el-button class="icon-award" @click="dialogVisible = true" type="text" size="small"></el-button>
+          <el-button class="icon-award" @click="getExtendEarn(scope.row.investId)" type="text" size="small"></el-button>
         </template>
       </el-table-column>
       <el-table-column prop="status" label="投资状态" width="70">
@@ -36,18 +40,30 @@
 
     <div class="pages">
       <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-      <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
+      <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.pageSize" layout="prev, pager, next" :total="total"></el-pagination>
     </div>
 
 
     <el-dialog title="额外奖励" :visible.sync="dialogVisible" width="30%">
       <div class="dialog-main">
-        <el-table :data="etherRewards" style="width: 100%">
-          <el-table-column prop="coupon" label="优惠券" width="140"></el-table-column>
-          <el-table-column prop="point" label="额外加息点数"></el-table-column>
-          <el-table-column prop="ether" label="额外利息"></el-table-column>
-          <el-table-column prop="time" label="还款时间"></el-table-column>
-          <el-table-column prop="state" label="状态"></el-table-column>
+        <el-table :data="extendEarnList" style="width: 100%">
+          <el-table-column prop="name" label="优惠券" width="140"></el-table-column>
+          <el-table-column prop="rate" label="额外加息点数">
+            <template scope="scope">
+              {{ scope.row.rate + '%' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="money" label="额外利息">
+            <template scope="scope">
+              {{ scope.row.money + '元' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="repayTime" label="还款时间"></el-table-column>
+          <el-table-column prop="status" label="状态">
+            <template scope="scope">
+             {{ scope.row.status | keyToValue(extendEarnListStatus) }}
+            </template>
+          </el-table-column>
         </el-table>
       </div>
     </el-dialog>
@@ -55,10 +71,10 @@
     <el-dialog title="还款计划" :visible.sync="investRepays" width="30%">
       <div class="dialog-main">
         <el-table :data="investRepaysList" style="width: 100%">
-          <el-table-column prop="period" label="期数"></el-table-column>
+          <el-table-column prop="period" label="期数" fixed width="30"></el-table-column>
           <el-table-column prop="corpus" label="本金">
-            <template scope="corpus">
-              {{ scope.row.investCash + '元' }}
+            <template scope="scope">
+              {{ scope.row.corpus + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="interest" label="利息">
@@ -88,7 +104,7 @@
           </el-table-column>
           <el-table-column prop="repayDay" label="还款日"></el-table-column>
           <el-table-column prop="time" label="还款时间"></el-table-column>
-          <el-table-column prop="status" label="状态">
+          <el-table-column prop="status" label="状态" fixed="right">
             <template scope="scope">
               {{ scope.row.status | keyToValue(statusList) }}
             </template>
@@ -100,7 +116,7 @@
 </template>
 
 <script>
-  import { regularInvest, investRepays } from 'api/home/regularInvest';
+  import { regularInvest, investRepays, extendEarn } from 'api/home/regularInvest';
 
   export default {
     data() {
@@ -108,7 +124,7 @@
         dialogVisible: false,
         investRepays: false,
         listQuery: {
-          status: '',
+          status: 'repaying',
           startTime: '',
           endTime: '',
           pageNo: 1,
@@ -119,24 +135,27 @@
         },
         list: null,
         total: 0,
-        dateType: 'repaying',
         typeList: [
           { key: 'repaying', value: '还款中' },
           { key: 'bid_success', value: '投标中' },
           { key: 'complete', value: '已结清' },
           { key: 'cancel', value: '未成功' }
         ],
-        statusList: [
-          { key: 'complete', value: '' }
+        extendEarnListStatus: [
+          { key: 'not_opened', value: '未开户' },
+          { key: 'wait_repay', value: '等待代偿' },
+          { key: 'success', value: '成功' },
+          { key: 'fail', value: '失败' }
         ],
-        etherRewards: [{
-          coupon: '加息券无最高计息金额',
-          point: '3.0%',
-          ether: '0.2466',
-          time: '2018-1-18',
-          state: '未发放'
-        }],
-        investRepaysList: null
+        statusList: [
+          { key: 'complete', value: '完成' },
+          { key: 'overdue', value: '逾期的' },
+          { key: 'repaying', value: '还款中' },
+          { key: 'waiting_transfer', value: '-' },
+          { key: 'wait_transfer_confirm', value: '-' }
+        ],
+        investRepaysList: null,
+        extendEarnList: null
       }
     },
     computed: {
@@ -146,13 +165,10 @@
     },
     methods: {
       getPageList() {
-        this.listQuery.status = this.dateType;
         regularInvest(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            console.log('定期项目' + this.list);
-            console.log(this.list);
             this.total = data.data.count || 0;
           }
         })
@@ -163,17 +179,23 @@
         investRepays(this.investRepaysQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            this.investRepaysList = data.data.data;
+            this.investRepaysList = data.data;
             console.log('还款计划' + this.investRepaysList);
             console.log(this.investRepaysList);
           }
         })
       },
-      query() {
-        this.getPageList();
-      },
-      switchDateType(type) {
-        this.dateType = type;
+      getExtendEarn(id) {
+        this.dialogVisible = true;
+        this.investRepaysQuery.investId = id;
+        extendEarn(this.investRepaysQuery).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.extendEarnList = data.data;
+            console.log('额外奖励' + this.extendEarnList);
+            console.log(this.extendEarnList);
+          }
+        })
       },
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
@@ -185,3 +207,21 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+
+  .icon-award {
+    width: 24px;
+    height: 24px;
+    background: url(../../../assets/images/home/icon-award.png) no-repeat center;
+  }
+
+  .icon-plan {
+    color: #0573f4;
+  }
+
+  .icon-interests {
+    color: #0573f4;
+  }
+
+</style>
