@@ -6910,6 +6910,10 @@ uid-number@^0.0.6:
   version "0.0.6"
   resolved "http://registry.npm.taobao.org/uid-number/download/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
 
+ulid@^2.2.1:
+  version "2.2.1"
+  resolved "http://registry.npm.taobao.org/ulid/download/ulid-2.2.1.tgz#fcd7eda844e8d336d6aa67d9dfdd6ea644ee3b18"
+
 ultron@1.0.x:
   version "1.0.2"
   resolved "http://registry.npm.taobao.org/ultron/download/ultron-1.0.2.tgz#ace116ab557cd197386a4e88f4685378c8b2e4fa"

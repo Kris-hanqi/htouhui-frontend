@@ -1,4 +1,4 @@
-import uniqueString from '../utils/uniqueString';
+import uuid from '../utils/uuid';
 
 const user = {
   realName: '张三',
@@ -26,7 +26,7 @@ export default {
     console.log(data);
     return {
       data: {
-        token: uniqueString()
+        token: uuid()
       },
       meta: {
         code: 200,
