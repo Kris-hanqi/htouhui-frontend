@@ -32,6 +32,13 @@
         exchangeCode: ''
       }
     },
+    watch: {
+      visible(val) {
+        if (val) {
+          this.exchangeCode = '';
+        }
+      }
+    },
     methods: {
       exchangeCoupon() { // 兑换优惠券
         this.loading = true;
