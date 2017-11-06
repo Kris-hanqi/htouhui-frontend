@@ -2,7 +2,9 @@
   <div class="repayment-calendar-wrapper">
     <panel :title="'定期还款日历'">
       <div>
-        <event-calendar></event-calendar>
+        <event-calendar :dates="['2017-11-01', '2017-11-25']"
+                        @day-changed="handleDayChange"
+                        @month-changed="handleMonthChanged"></event-calendar>
         <div class="event-detail">
           <div class="event-detail__top">
             <h3 class="title">2017年11月收益账单</h3>
@@ -39,11 +41,16 @@
         fetchRepayCalendar({ month: date }).then(response => {
           console.log(response);
         })
+      },
+      handleDayChange(date) {
+        console.log(date);
+      },
+      handleMonthChanged(date) {
+        console.log(date);
       }
     },
     created() {
       const date = formatDate(null, 'YYYY-MM');
-      console.log(date);
       this.repayCalendar(date);
     }
   }
