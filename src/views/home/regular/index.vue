@@ -47,23 +47,5 @@
     padding-top: 30px;
     background-color: #fff;
     margin-bottom: 20px;
-
-    .icon-award {
-      width: 24px;
-      height: 24px;
-      background: url(../../../assets/images/home/icon-award.png) no-repeat center;
-    }
-
-    .icon-plan {
-      color: #0573f4;
-    }
-
-    .icon-interests {
-      color: #0573f4;
-    }
-
-    .payment-details {
-      color: #0573f4;
-    }
   }
 </style>

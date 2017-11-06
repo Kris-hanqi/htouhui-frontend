@@ -95,13 +95,14 @@ th {
   background-color: #f6f9fe;
 }
 
-/*弹窗*/
+/** 弹窗 */
 .el-dialog__header {
   padding: 0;
 }
 
 .el-dialog__headerbtn {
-  display: none;
+  padding-top: 10px;
+  padding-right: 10px;
 }
 
 .el-dialog__title {
@@ -124,7 +125,6 @@ th {
 }
 
 .el-dialog .el-button {
-  height: 45px;
   padding: 0 42px;
   border-radius: 100px;
   line-height: 45px;

@@ -1,24 +1,30 @@
 <template>
-  <div class="account-top__wrapper">
+  <div class="account-top-wrapper">
     <div class="hth-panel">
+      <!-- 用户头像 -->
       <i class="icon-avatar"></i>
       <!-- 优先显示用户真实姓名 -->
       <span>你好，<i class="num-font">{{ realName || username }}</i></span>
-      <a href="javascript:void(0)" class="icon-user" @click="operationAccount" :class="{ 'icon-user-active': status }"></a>
-      <a href="javascript:void(0)" class="icon-bank-card" @click="operationBankCard" :class="{ 'icon-bank-card-active': bankCard }"></a>
+      <a class="icon-user" @click.stop="operationAccount" :class="{ 'icon-user-active': status }"></a>
+      <a class="icon-bank-card" @click.stop="operationBankCard" :class="{ 'icon-bank-card-active': bankCard }"></a>
       <el-button :plain="true" @click="toRouter('recharge')" type="primary" class="recharge-btn">充值</el-button>
       <el-button type="primary" @click="toRouter('withdraw')" class="withdraw-btn">提现</el-button>
     </div>
     
     <!-- 开户组件 -->
-    <open-account :visible="dialogOpenAccountVisible" @close="closeOpenAccount"></open-account>
+    <open-account :visible="dialogOpenAccountVisible"
+                  @close="closeOpenAccount"></open-account>
     
     <!-- 银行卡解绑提示 -->
-    <el-dialog title="提示" :visible.sync="dialogVisible" size="tiny">
+    <el-dialog title="提示"
+               size="tiny"
+               :visible.sync="dialogUnlockBankCardVisible">
       <span style="font-size: 20px; color: #ee5544">确认解绑银行卡？</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="unlockBankCard">确 定</el-button>
+      <span slot="footer">
+        <el-button @click="dialogUnlockBankCardVisible = false">取 消</el-button>
+        <el-button type="primary"
+                   :loading="unlockBankCardLoading"
+                   @click="unlockBankCard">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -43,7 +49,8 @@
     data() {
       return {
         dialogOpenAccountVisible: false,
-        dialogVisible: false
+        unlockBankCardLoading: false,
+        dialogUnlockBankCardVisible: false
       }
     },
     methods: {
@@ -52,7 +59,7 @@
         if (!this.bankCard) {
           cosole.log('跳转绑卡页面');
         } else {
-          this.dialogVisible = true;
+          this.dialogUnlockBankCardVisible = true;
         }
       },
       operationAccount() {
@@ -61,12 +68,12 @@
         }
       },
       unlockBankCard() {
+        this.unlockBankCardLoading = true;
         fetchUnlockBankCard().then(response => {
           if (response.data.meta.code === 200) {
             this.$store.commit('SET_BANK_NAME', '');
             this.$store.commit('SET_BANK_CARD', '');
             this.$store.commit('SET_STATUS', 2);
-            this.dialogVisible = false;
             this.$message({
               message: '银行卡解绑成功',
               type: 'success'
@@ -77,6 +84,8 @@
               type: 'error'
             });
           }
+          this.unlockBankCardLoading = false;
+          this.dialogUnlockBankCardVisible = false;
         })
       },
       toRouter(path) {
@@ -90,7 +99,7 @@
 </script>
 
 <style lang="scss">
-  .account-top__wrapper {
+  .account-top-wrapper {
     .hth-panel {
       width: 100%;
       height: 73px;
@@ -116,11 +125,6 @@
     span {
       font-size: 16px;
       vertical-align: middle;
-    }
-    
-    button {
-      width: 101px;
-      border-radius: 100px;
     }
     
     .withdraw-btn {

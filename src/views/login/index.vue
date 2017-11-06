@@ -64,10 +64,10 @@
 </template>
 
 <script>
-  import { fetchLogin } from '@/api/login';
+  import { fetchLogin } from 'api/login';
   import { Base64 } from 'js-base64';
-  import { setToken } from '@/utils/auth';
-  import img_logo from '@/assets/images/logo.png';
+  import { setToken } from 'utils/auth';
+  import img_logo from 'assets/images/logo.png';
   export default {
     data() {
       return {

@@ -24,8 +24,12 @@
       <ul class="dates">
         <li class="item" :class="{
                 'item-selected': date.status,
+                 'item-event': date.event && date.status,
                  today: date.status ? (today == date.date) : false
-              }" v-for="date in list" :key="date.date">
+              }"
+            @click="handleChangeCurDay(date)"
+            v-for="date in list"
+            :key="date.date">
           {{ date.status ? date.date.split('-')[2] : '&nbsp'}}
         </li>
       </ul>
@@ -61,7 +65,7 @@
     computed: {
       today() {
         const date = new Date();
-        return date.getFullYear() + '-' + date.getMonth() + 1 + '-' + date.getDate();
+        return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
       },
       nextSelect() {
         const list = this.yearMonthStr.split('-');
@@ -98,16 +102,14 @@
             status = 0
           }
           tempItem = {
-            date: item.getFullYear() + '-' + item.getMonth() + 1 + '-' + item.getDate(),
+            date: item.getFullYear() + '-' + (item.getMonth() + 1) + '-' + item.getDate(),
             status: status, // eslint-disable-line
             customClass: []
           };
-          //
+          // 设置事件
           this.events.forEach(event => {
-            if (isEqualDateStr(event.date, tempItem.date)) {
-              tempItem.title = event.title;
-              tempItem.desc = event.desc || '';
-              if (event.customClass) tempItem.customClass.push(event.customClass)
+            if (isEqualDateStr(event, tempItem.date)) {
+              tempItem.event = true;
             }
           });
           tempArr.push(tempItem)
@@ -121,8 +123,9 @@
           this.$parent.calendarOptions.params.curYear++;
           this.$parent.calendarOptions.params.curMonth = 0;
         }
-        this.dayList();
         this.curYearMonth();
+        this.$emit('month-changed', this.yearMonthStr);
+        this.dayList();
       },
       preMonth() {
         if (this.$parent.calendarOptions.params.curMonth > 0) {
@@ -131,8 +134,14 @@
           this.$parent.calendarOptions.params.curYear--;
           this.$parent.calendarOptions.params.curMonth = 11;
         }
-        this.dayList();
         this.curYearMonth();
+        this.$emit('month-changed', this.yearMonthStr);
+        this.dayList();
+      },
+      handleChangeCurDay(date) {
+        if (date.status) {
+          this.$emit('cur-day-changed', date.date)
+        }
       }
     },
     created() {
@@ -184,6 +193,14 @@
         margin-top: 2px;
         padding: 0;
         background-color: transparent;
+      }
+      
+      button {
+        cursor: pointer;
+      }
+  
+      [disabled='disabled'] {
+        cursor: not-allowed;
       }
       
       button.today {

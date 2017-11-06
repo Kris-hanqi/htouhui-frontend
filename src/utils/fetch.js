@@ -1,7 +1,7 @@
 import axios from 'axios';
 import store from '@/store'
 import BaseApi from './server-api';
-import { getToken } from '@/utils/auth';
+import { getToken } from 'utils/auth';
 
 // 获取后端API地址
 const BaseUrl = BaseApi();

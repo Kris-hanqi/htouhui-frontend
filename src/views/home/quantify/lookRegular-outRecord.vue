@@ -3,7 +3,7 @@
     <div class="details">
       <div class="title-box">
         <span class="title">退出记录-债权信息</span>
-        <a href="javascript:void(0)" class="return-prev-pages" @click="returnPrevPages(outPlanQuery.userExitId)">返回上一页 ></a>
+        <a href="javascript:void(0)" class="return-prev-pages" @click="returnPrevPages(outPlanQuery.planId)">返回上一页 ></a>
       </div>
       <div class="look-regular-main">
         <div class="look-regular-money">

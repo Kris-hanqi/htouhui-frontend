@@ -13,3 +13,13 @@ export function setToken(token) {
 export function removeToken() {
   return Cookies.remove(TokenKey);
 }
+
+const uuidKey = 'hth-uuid';
+
+export function getUuid() {
+  return Cookies.get(uuidKey);
+}
+
+export function setUuid(token) {
+  return Cookies.set(uuidKey, token, { expires: 2 });
+}

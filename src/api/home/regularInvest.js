@@ -17,3 +17,12 @@ export function investRepays(data) {
     params: data
   })
 }
+
+/** 定期项目额外收益 */
+export function extendEarn(data) {
+  return fetch({
+    url: 'user/extendEarn',
+    method: 'get',
+    params: data
+  })
+}

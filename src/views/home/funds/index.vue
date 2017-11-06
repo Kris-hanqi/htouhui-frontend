@@ -35,7 +35,7 @@
         </ul>
       </div>
       <div class="fr">
-        <button @click="query" class="query-btn">查询</button>
+        <button @click="query" class="query-btn" v-show="dateType === 'other'">查询</button>
       </div>
     </div>
     <div class="assetRunWaterTable personalCenterBoxShadow">
@@ -76,7 +76,7 @@
         listLoading: true,
         listQuery: {
           pageNo: 1,
-          size: 5,
+          size: 10,
           startTime: '',
           endTime: '',
           type: ''
@@ -142,9 +142,13 @@
       },
       switchDateType(type) {
         this.dateType = type;
+        if (this.dateType !== 'other') {
+          this.getPageList();
+        }
       },
       switchProjectType(type) {
         this.projectType = type;
+        this.getPageList();
       },
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
@@ -256,8 +260,8 @@
   }
 
   .assetRunWaterTable {
-    height: 561px;
-    padding: 12px 8px 0 10px;
+    height: auto;
+    padding: 12px 8px 30px 10px;
     margin-top: 17px;
     background-color: #fff;
 
