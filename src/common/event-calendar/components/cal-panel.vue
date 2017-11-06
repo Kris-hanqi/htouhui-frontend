@@ -24,8 +24,8 @@
       <ul class="dates">
         <li class="item" :class="{
                 'item-selected': date.status,
-                 'item-event': date.event && date.status,
-                 today: date.status ? (today == date.date) : false
+                'item-event-selected': date.date == selectedDate,
+                'item-event': date.event && date.status
               }"
             @click="handleChangeCurDay(date)"
             v-for="date in list"
@@ -47,6 +47,7 @@
       return {
         img_icon_left,
         img_icon_right,
+        selectedDate: '',
         weekNames: configData.weekNames,
         yearMonthStr: '',
         list: []
@@ -143,9 +144,10 @@
         this.$emit('month-changed', this.yearMonthStr);
         this.dayList();
       },
-      handleChangeCurDay(date) {
-        if (date.status) {
-          this.$emit('cur-day-changed', date.date)
+      handleChangeCurDay(data) {
+        if (data.status) {
+          this.selectedDate = data.date;
+          this.$emit('cur-day-changed', data.date)
         }
       }
     },
@@ -260,12 +262,6 @@
           border: solid 1px #50e3c2;
           text-align: center;
           color: #50e3c2;
-        }
-        
-        .today {
-          background-color: #0671f0;
-          border: none;
-          color: white;
         }
   
         .item-event-selected,

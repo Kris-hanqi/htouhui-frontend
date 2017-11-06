@@ -27,6 +27,7 @@ import {
 import VueClipboard from 'vue-clipboard2'
 import '@/styles/base.scss';
 import '@/styles/element-ui.scss';
+import Vue2Filters from 'vue2-filters';
 import * as filters from '@/filters' // 全局filter
 import router from '@/router/home';
 import store from '@/store';
@@ -40,7 +41,6 @@ const uuidCode = getUuid();
 if (!uuidCode) {
   setUuid();
 }
-
 
 Vue.use(Button);
 Vue.use(Dialog);
@@ -69,6 +69,7 @@ Vue.prototype.$confirm = MessageBox.confirm;
 Vue.prototype.$message = Message;
 
 Vue.use(VueClipboard);
+Vue.use(Vue2Filters);
 
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
