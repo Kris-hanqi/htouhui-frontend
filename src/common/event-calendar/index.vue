@@ -2,7 +2,9 @@
   <div class="event-calendar-wrapper">
     <cal-panel
       :calendar="calendarOptions"
-      :events="[]"></cal-panel>
+      @cur-day-changed="handleChangeCurDay"
+      @month-changed="handleMonthChanged"
+      :events="dates"></cal-panel>
   </div>
 </template>
 
@@ -12,8 +14,11 @@
     components: {
       CalPanel
     },
-    data() {
-      return {};
+    props: {
+      dates: {
+        type: Array,
+        required: true
+      }
     },
     computed: {
       calendarOptions() {
@@ -28,6 +33,14 @@
             curDate: dateObj.getDate()
           }
         };
+      }
+    },
+    methods: {
+      handleChangeCurDay(date) {
+        this.$emit('day-changed', date)
+      },
+      handleMonthChanged(yearMonth) {
+        this.$emit('month-changed', yearMonth)
       }
     }
   }
