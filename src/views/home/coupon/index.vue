@@ -5,6 +5,12 @@
       <el-button type="text">优惠券使用说明</el-button>
       <el-button :plain="true" @click="showExchangeCoupon" type="info">兑换优惠券</el-button>
     </div>
+    
+    <!-- 兑换优惠券组件 -->
+    <exchange-coupon :visible="exchangeCouponVisible"
+                     @add-success="successExchangeCoupon"
+                     @close="closeExchangeCoupon"></exchange-coupon>
+    
     <div class="coupon-wrapper__body">
       <el-tabs v-model="listQuery.type" @tab-click="handleTabClick" type="card">
         <el-tab-pane label="全部" name="all"></el-tab-pane>
@@ -65,10 +71,6 @@
           layout="prev, pager, next" :total="total"></el-pagination>
       </div>
     </div>
-  
-    <exchange-coupon :visible="exchangeCouponVisible"
-                     @add-success=""
-                     @close="closeExchangeCoupon"></exchange-coupon>
   </div>
 </template>
 
@@ -103,35 +105,44 @@
       }
     },
     methods: {
+      // 切换优惠券列表
       getPageList() {
         this.listLoading = true;
         fetchPageList(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data || null;
-            this.total = data.data.total || 0;
+            this.total = data.data.count || 0;
           }
           this.listLoading = false
         })
       },
-      handleTabClick(tab) { // 切换优惠券类型
+      // 切换优惠券类型
+      handleTabClick(tab) {
         this.listQuery.type = tab.name;
+        this.listQuery.status = 'unused';
         this.getPageList();
       },
+      // 优惠券分页
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
         this.getPageList();
       },
+      // 切换优惠券状态
       switchStatus(data) {
         this.listQuery.status = data;
+        this.getPageList();
       },
+      // 打开兑换优惠券modal
       showExchangeCoupon() {
         this.exchangeCouponVisible = true;
       },
+      // 兑换成功事件
       successExchangeCoupon() {
         this.exchangeCouponVisible = false;
         this.getPageList();
       },
+      // 关闭兑换优惠券modal
       closeExchangeCoupon() {
         this.exchangeCouponVisible = false;
       }

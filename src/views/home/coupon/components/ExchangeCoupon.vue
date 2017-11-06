@@ -1,4 +1,5 @@
 <template>
+  <!-- 兑换优惠券组件 -->
   <el-dialog title="兑换优惠券"
              size="tiny"
              :before-close="handleClose"
