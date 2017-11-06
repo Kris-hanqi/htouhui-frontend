@@ -13,90 +13,75 @@
         <el-tab-pane label="礼金券" name="lijin"></el-tab-pane>
       </el-tabs>
       
-      <div class="coupon-wrapper__menu">
-        <a href="javascript:void(0)" @click="switchStatus('unused')" :class="{ active: listQuery.status === 'unused'}">未使用</a>
-        <a href="javascript:void(0)" @click="switchStatus('used')" :class="{ active: listQuery.status === 'used'}">已使用</a>
-        <a href="javascript:void(0)" @click="switchStatus('expire')" :class="{ active: listQuery.status === 'expire'}">已过期</a>
-      </div>
+      <div v-loading="listLoading" element-loading-text="拼命加载中">
+        <div class="coupon-wrapper__menu">
+          <a href="javascript:void(0)" @click="switchStatus('unused')" :class="{ active: listQuery.status === 'unused'}">未使用</a>
+          <a href="javascript:void(0)" @click="switchStatus('used')" :class="{ active: listQuery.status === 'used'}">已使用</a>
+          <a href="javascript:void(0)" @click="switchStatus('expire')" :class="{ active: listQuery.status === 'expire'}">已过期</a>
+        </div>
   
-      <div class="coupon-wrapper__list" v-loading="listLoading">
-        <div class="coupon-wrapper__box" v-for="coupon in list" :key="coupon.id">
-          <!--未开户-->
-          <!--<div class="coupon-wrapper__box-open-account">-->
+        <!-- 无数据显示 -->
+        <no-data v-if="!list"></no-data>
+  
+        <!-- 优惠券 -->
+        <div class="coupon-wrapper__list">
+          <div class="coupon-wrapper__box" v-for="coupon in list" :key="coupon.id">
+            <!--未开户-->
+            <!--<div class="coupon-wrapper__box-open-account">-->
             <!--<a href="#">立即开户激活</a>-->
-          <!--</div>-->
-          <div class="coupon-wrapper__box-top">
-            <i class="icon-new" v-if="coupon.isNew === 1"></i>
-            <p class="title">
-              <span v-if="coupon.type === 'plus_coupon'"><span class="roboto-regular">{{ coupon.rate }}</span>%</span>
-              <span v-else=""><span class="roboto-regular">{{ coupon.money }}</span>元</span>
-            </p>
-            <p class="detail">现金券<span>［满{{ coupon.lowerLimitMoney }}可用］</span></p>
-            <p class="time">2017.07.01-2017.7.30</p>
-          </div>
-          <div class="coupon-wrapper__box-body">
-            <div class="content" v-if="coupon.type === 'plus_coupon'">
-              <p class="money">最高计息金额：<span class="roboto-regular">{{ coupon.maxInterestMoney }}</span>元</p>
-              <p class="money">最高计息天数：<span class="roboto-regular">{{ coupon.interestDeadline }}</span>天</p>
-              <p class="message" style="line-height: 1.67;">使用说明：{{ coupon.description }}</p>
+            <!--</div>-->
+            <div class="coupon-wrapper__box-top">
+              <i class="icon-new" v-if="coupon.isNew === 1"></i>
+              <p class="title">
+                <span v-if="coupon.type === 'plus_coupon'"><span class="roboto-regular">{{ coupon.rate }}</span>%</span>
+                <span v-else=""><span class="roboto-regular">{{ coupon.money }}</span>元</span>
+              </p>
+              <p class="detail">现金券<span>［满{{ coupon.lowerLimitMoney }}可用］</span></p>
+              <p class="time">2017.07.01-2017.7.30</p>
             </div>
-            <div class="content" v-else>
-              <p class="money">计息金额：<span class="roboto-regular">{{ coupon.maxInterestMoney }}</span>元</p>
-              <p class="message" style="line-height: 1.67;">使用说明：{{ coupon.description }}</p>
+            <div class="coupon-wrapper__box-body">
+              <div class="content" v-if="coupon.type === 'plus_coupon'">
+                <p class="money">最高计息金额：<span class="roboto-regular">{{ coupon.maxInterestMoney }}</span>元</p>
+                <p class="money">最高计息天数：<span class="roboto-regular">{{ coupon.interestDeadline }}</span>天</p>
+                <p class="message" style="line-height: 1.67;">使用说明：{{ coupon.description }}</p>
+              </div>
+              <div class="content" v-else>
+                <p class="money">计息金额：<span class="roboto-regular">{{ coupon.maxInterestMoney }}</span>元</p>
+                <p class="message" style="line-height: 1.67;">使用说明：{{ coupon.description }}</p>
+              </div>
+              <a class="newUse" href="#">立即使用</a>
             </div>
-            <a class="newUse" href="#">立即使用</a>
-          </div>
-        </div>
-        
-        <div class="quan-box" v-show="false">
-          <div class="nowOpen">
-            <a class="nowOpen-btn" href="#">立即开户激活</a>
-          </div>
-          <div class="box-top">
-            <i class="icon-new"></i>
-            <p class="title"><span class="roboto-regular">30</span>元</p>
-            <p class="detail">现金券<span>［满100可用］</span></p>
-            <p class="time">2017.07.01-2017.7.30</p>
-          </div>
-          <div class="box-bottom">
-            <p class="money">计息金额：<span class="roboto-regular">1,000</span>元</p>
-            <p class="message"></p>
-            <img class="pass" src="../../../assets/images/home/ico-used.png" alt="">
           </div>
         </div>
       </div>
+  
+      <!-- 分页 -->
+      <div class="pages" v-show="!listLoading">
+        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+        <el-pagination
+          @current-change="handleCurrentChange"
+          :current-page.sync="listQuery.pageNo"
+          :page-size="listQuery.pageSize"
+          layout="prev, pager, next" :total="total"></el-pagination>
+      </div>
     </div>
   
-    <div class="pages" v-show="!listLoading">
-      <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-      <el-pagination
-        @current-change="handleCurrentChange"
-        :current-page.sync="listQuery.pageNo"
-        :page-size="listQuery.pageSize"
-        layout="prev, pager, next" :total="total"></el-pagination>
-    </div>
-  
-    <el-dialog title="兑换优惠券"
-               size="tiny"
-               :before-close="handleClose"
-               :visible.sync="visible">
-      <el-form class="exchange-coupon hth-from" label-position="right" label-width="60px">
-        <el-form-item label="兑换码">
-          <el-input v-model="exchangeCode"></el-input>
-        </el-form-item>
-        <el-form-item label="">
-          <el-button :plain="true" type="info">取消</el-button>
-          <el-button @click="exchangeCoupon" type="primary">确认</el-button>
-        </el-form-item>
-      </el-form>
-    </el-dialog>
+    <exchange-coupon :visible="exchangeCouponVisible"
+                     @add-success=""
+                     @close="closeExchangeCoupon"></exchange-coupon>
   </div>
 </template>
 
 <script>
-  import { fetchPageList, fetchExchangeCoupon } from 'api/home/coupon';
+  import NoData from '../components/NoData.vue';
+  import ExchangeCoupon from './components/ExchangeCoupon.vue';
+  import { fetchPageList } from 'api/home/coupon';
   
   export default {
+    components: {
+      ExchangeCoupon,
+      NoData
+    },
     data() {
       return {
         list: null,
@@ -108,7 +93,7 @@
           type: 'all',
           status: 'unused'
         },
-        visible: false,
+        exchangeCouponVisible: false,
         exchangeCode: ''
       }
     },
@@ -119,6 +104,7 @@
     },
     methods: {
       getPageList() {
+        this.listLoading = true;
         fetchPageList(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
@@ -128,8 +114,9 @@
           this.listLoading = false
         })
       },
-      handleTabClick(tab) {
+      handleTabClick(tab) { // 切换优惠券类型
         this.listQuery.type = tab.name;
+        this.getPageList();
       },
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
@@ -139,19 +126,14 @@
         this.listQuery.status = data;
       },
       showExchangeCoupon() {
-        this.visible = true;
+        this.exchangeCouponVisible = true;
       },
-      exchangeCoupon() {
-        fetchExchangeCoupon({ cdkey: this.exchangeCode })
-          .then(response => {
-            if (response.data.meta.code === 200) {
-              this.visible = false;
-              this.getPageList();
-            }
-          })
+      successExchangeCoupon() {
+        this.exchangeCouponVisible = false;
+        this.getPageList();
       },
-      handleClose() {
-        this.visible = false;
+      closeExchangeCoupon() {
+        this.exchangeCouponVisible = false;
       }
     },
     created() {
@@ -168,13 +150,6 @@
     padding: 20px 15px;
     background-color: #fff;
     margin-bottom: 20px;
-    
-    .exchange-coupon {
-      button {
-        width: 125px;
-        height: 46px;
-      }
-    }
   }
   
   .coupon-wrapper__top {
