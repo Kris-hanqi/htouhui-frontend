@@ -13,10 +13,10 @@
         <td>已认证</td>
       </tr>
       <tr>
-      </tr>
         <td>存管手机</td>
         <td>137*****330</td>
         <td>已认证</td>
+      </tr>
       <tr>
         <td>银行卡</td>
         <td><i>{{ email ? email : '未绑定' }}</i><span v-if="email">（此卡是默认提现卡）</span></td>
