@@ -30,7 +30,7 @@ export const constantRouterMap = [
       {
         path: '/recharge',
         name: '我要充值',
-        component: _import('home/recharge/index')
+        component: _import('home/account/recharge')
       },
       {
         path: '/withdraw',
