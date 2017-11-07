@@ -38,7 +38,7 @@
         </el-form-item>
         <el-form-item class="sms-code" label="验证码">
           <el-col :span="11">
-            <el-input></el-input>
+            <el-input v-model="transactionPasswordData.authCode"></el-input>
           </el-col>
           <el-col :span="11">
             <sms-timer style="margin-top: 5px;" @run="sendCode"></sms-timer>
@@ -47,22 +47,26 @@
         <el-form-item label="">
           <el-button type="primary next"
                      :loading="openAccountButLoading"
-                     @click="openAccount">下一步</el-button>
+                     @click="setTransactionPassword">下一步</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
+  
+    <request-bank-from :request-data="requestData"></request-bank-from>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
   import SmsTimer from 'common/sms-timer/index.vue';
-  import { fetchOpenAccount } from 'api/home/account-set';
+  import RequestBankFrom from './RequestBankFrom.vue';
+  import { fetchOpenAccount, fetchSetTransactionPassword } from 'api/home/account-set';
   import { fetchSendCode } from 'api/public';
   
   export default {
     components: {
-      SmsTimer
+      SmsTimer,
+      RequestBankFrom
     },
     props: {
       visible: {
@@ -73,7 +77,8 @@
     },
     computed: {
       ...mapGetters([
-        'mobile'
+        'mobile',
+        'uuid'
       ])
     },
     data() {
@@ -86,6 +91,13 @@
           realName: '',
           idCard: '',
           cardNo: ''
+        },
+        requestData: {},
+        transactionPasswordData: {
+          authCode: '',
+          source: 'pc',
+          sessionId: '',
+          callbackUrl: ''
         }
       }
     },
@@ -103,6 +115,15 @@
       },
       handleClose() {
         this.$emit('close');
+      },
+      setTransactionPassword() {
+        this.transactionPasswordData.sessionId = this.uuid;
+        fetchSetTransactionPassword(this.transactionPasswordData)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.requestData = response.data.data;
+            }
+          })
       },
       openAccount() { // 开户操作
         this.openAccountButLoading = true;
