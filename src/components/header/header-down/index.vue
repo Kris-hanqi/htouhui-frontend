@@ -5,7 +5,7 @@
         <img :src="img_logo" alt="海投汇"/>
       </div>
       <ul class="header-down__bar">
-        <li><a href="./index.html" active-class="active">首页</a></li>
+        <li><a @click.stop="testHref(location + '/')" active-class="active">首页</a></li>
         <li><a href="">升薪宝量化</a></li>
         <li><a href="">升薪宝定期</a></li>
         <li><a href="">定期抵押</a></li>
@@ -25,13 +25,24 @@
 </template>
 
 <script>
+  import location from 'utils/server-src';
   import img_logo from '@/assets/images/logo.png';
   export default {
     name: 'HthHeaderDown',
     data() {
       return {
+        location: '',
         img_logo
       }
+    },
+    methods: {
+      testHref(herf) {
+        window.location.href = herf;
+      }
+    },
+    created() {
+      this.location = location();
+      console.log(this.location);
     }
   }
 </script>
