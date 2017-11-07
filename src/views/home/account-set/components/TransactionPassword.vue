@@ -41,6 +41,7 @@
     computed: {
       ...mapGetters([
         'mobile',
+        'uuid',
         'transactionPasswordStatus'
       ])
     },
@@ -52,7 +53,7 @@
         transactionPassword: {
           source: 'pc',
           authCode: '',
-          sessionId: 'trhashvasjavsjajdasj123',
+          sessionId: '',
           callbackUrl: 'www.baidu.com'
         }
       }
@@ -61,23 +62,25 @@
       sendCode() {
         fetchSendCode({ authType: 'set' })
           .then(response => {
-            window.open(response)
+            if (response.data.meta.code === 200) {
+              this.$message({
+                message: '验证码发送成功!',
+                type: 'success'
+              });
+            }
           })
       },
       setPwd() {
-        const requestData = {
-          authCode: this.transactionPassword.code,
-          source: 'pc'
-        };
+        this.transactionPassword.sessionId = this.uuid;
         if (!this.transactionPasswordStatus) {
-          fetchSetTransactionPassword(requestData).then(response => {
+          fetchSetTransactionPassword(this.transactionPassword).then(response => {
             const data = response.data;
             if (data.meta.code === 200) {
               this.requestBankData = data.data;
             }
           });
         } else {
-          fetchResetTransactionPassword(requestData).then(response => {
+          fetchResetTransactionPassword(this.transactionPassword).then(response => {
             const data = response.data;
             if (data.meta.code === 200) {
               this.requestBankData = data.data;
