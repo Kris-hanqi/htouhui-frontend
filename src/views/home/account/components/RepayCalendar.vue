@@ -2,16 +2,17 @@
   <div class="repayment-calendar-wrapper">
     <panel :title="'定期还款日历'">
       <div>
-        <event-calendar :dates="dates"
+        <event-calendar :dates="dates" class="calendar"
                         @day-changed="handleDayChange"
                         @month-changed="handleMonthChanged"></event-calendar>
         <div class="event-detail">
           <div class="event-detail__top">
-            <h3 class="title">2017年11月收益账单</h3>
+            <p class="title"><span></span>2017年11月收益账单<span></span></p>
           </div>
           <div class="event-detail__body">
-            <p>本月待收 3000元</p>
-            <p>本月已收 6000元</p>
+            <p><i></i>本月待收 <span class="roboto-regular">3000</span><span>元</span></p>
+            <p class="hasDone"><i></i>本月已收 <span class="roboto-regular">6000</span><span>元</span></p>
+            <img src="../../../../assets/images/home/icon-calendar.png" alt=""/>
           </div>
         </div>
       </div>
@@ -24,7 +25,7 @@
   import Panel from '../../components/panel.vue';
   import { fetchRepayCalendar } from 'api/home/account';
   import { formatDate } from 'utils/index'
-  
+
   export default {
     components: {
       EventCalendar,
@@ -51,7 +52,7 @@
               this.events = data.dayRepayInfo || [];
               this.monthData.collectMoney = data.totalColletedMoney || 0;
               this.monthData.receiptMoney = data.totalUncolletedMoney || 0;
-  
+
               this.events.forEach(v => {
                 this.dates.push(v.date);
               })
@@ -79,9 +80,80 @@
 <style lang="scss">
   .repayment-calendar-wrapper {
     height: 418px;
-    
+
+    .calendar {
+      display: inline-block;
+    }
+
+    .event-detail__top {
+      margin-bottom: 45px;
+    }
+
     .event-detail {
       float: right;
+      width: 360px;
+      padding-top: 55px;
+      text-align: center;
+
+      .title {
+        font-size: 18px;
+        letter-spacing: 0.7px;
+        text-align: center;
+        color: #35385a;
+
+        span {
+          display: inline-block;
+          vertical-align: middle;
+          width: 40px;
+          margin: 0 15px;
+          border: solid 1px #ced9e4;
+        }
+      }
+    }
+
+    .event-detail__body {
+      img {
+        display: inline-block;
+        width: 207px;
+        height: 64px;
+      }
+
+      p {
+        margin-bottom: 35px;
+        font-size: 16px;
+        color: #727e90;
+
+        i {
+          display: inline-block;
+          vertical-align: text-bottom;
+          width: 26px;
+          height: 21px;
+          margin-right: 5px;
+          background: url(../../../../assets/images/home/icon-calendar-01.png) no-repeat center;
+        }
+
+        span {
+          font-size: 14px;
+        }
+
+        span.roboto-regular {
+          font-size: 26px;
+          color: #ff4a33;
+        }
+      }
+
+      p.hasDone {
+        i {
+          width: 22px;
+          height: 22px;
+          background: url(../../../../assets/images/home/icon-calendar-02.png) no-repeat center;
+        }
+
+        span.roboto-regular {
+          font-size: 26px;
+          color: #727e90;
+        }
+      }
     }
   }
 </style>
