@@ -25,13 +25,11 @@
 </template>
 
 <script>
-  import location from 'utils/server-src';
-  import img_logo from '@/assets/images/logo.png';
+  import img_logo from 'assets/images/logo.png';
   export default {
     name: 'HthHeaderDown',
     data() {
       return {
-        location: '',
         img_logo
       }
     }
