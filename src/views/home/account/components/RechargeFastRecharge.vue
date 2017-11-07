@@ -15,7 +15,7 @@
     <!-- 银行限额组件 -->
     <bank-limit :visible="dialogBankLimitVisible" @close="closeBankLimit"></bank-limit>
 
-    <ul class="withdrawMsgBox">
+    <ul class="withdrawMsgBox" v-loading="loading" :element-loading-text="loadText">
       <li>
         <span>账户余额：</span>
         <span><i class="remainingSumColor">{{ balance | currency('') }}</i>元</span>
@@ -31,11 +31,11 @@
       </li>
       <li>
         <span>充值费用：</span>
-        <span>0.00元</span>
+        <span>{{ commissionCharge | currency('')}}元</span>
       </li>
       <li>
         <span>支付金额：</span>
-        <span>0.00元</span>
+        <span>{{ (Number(rechargeData.money) + commissionCharge) | currency('') }}元</span>
       </li>
       <li class="withdrawBtn">
         <button @click="getRequestBankData">充值</button>
@@ -75,8 +75,11 @@
     },
     data() {
       return {
+        loading: false,
+        loadText: '加载数据中...',
         dialogBankLimitVisible: false,
         balance: '',
+        commissionCharge: 0,
         requestData: {},
         rechargeData: {
           money: '',
@@ -103,15 +106,19 @@
       },
       getBalanceCost() {
         if (!this.rechargeData.money) return;
+        this.loading = true;
         fetchBalanceCost({ rechargeMoney: this.rechargeData.money })
           .then(response => {
             if (response.data.meta.code === 200) {
-              this.balance = response.data.data;
+              this.commissionCharge = response.data.data || 0;
             }
+            this.loading = false;
           })
       },
       getRequestBankData() {
         if (!this.rechargeData.money) return;
+        this.loading = true;
+        this.loadText = '充值中...';
         this.rechargeData.sessionId = this.uuid;
         fetchRecharge(this.rechargeData)
           .then(response => {
