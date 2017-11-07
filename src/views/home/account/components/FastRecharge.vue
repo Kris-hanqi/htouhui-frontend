@@ -58,7 +58,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import { fetchRecharge, fetchBalance, fetchBalanceCost } from 'api/home/account';
+  import { fetchRecharge, fetchAccountMoney, fetchBalanceCost } from 'api/home/account';
   import BankLimit from '../../components/BankLimit.vue';
   import RequestBankFrom from '../../components/RequestBankFrom.vue';
 
@@ -94,7 +94,7 @@
         this.dialogBankLimitVisible = false;
       },
       getBalance() {
-        fetchBalance()
+        fetchAccountMoney()
           .then(response => {
             if (response.data.meta.code === 200) {
               this.balance = response.data.data;

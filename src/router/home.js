@@ -35,7 +35,7 @@ export const constantRouterMap = [
       {
         path: '/withdraw',
         name: '我要提现',
-        component: _import('home/withdraw/index')
+        component: _import('home/account/withdraw')
       },
       {
         path: '/planNovice',

@@ -7,12 +7,12 @@
                         @month-changed="handleMonthChanged"></event-calendar>
         <div class="event-detail">
           <div class="event-detail__top">
-            <p class="title"><span></span>2017年11月收益账单<span></span></p>
+            <p class="title"><span></span>{{ month }}收益账单<span></span></p>
           </div>
           <div class="event-detail__body">
-            <p><i></i>本月待收 <span class="roboto-regular">3000</span><span>元</span></p>
-            <p class="hasDone"><i></i>本月已收 <span class="roboto-regular">6000</span><span>元</span></p>
-            <img src="../../../../assets/images/home/icon-calendar.png" alt=""/>
+            <p><i></i>本月待收 <span class="roboto-regular">{{ monthData.collectMoney | currency('') }}</span><span>元</span></p>
+            <p class="hasDone"><i></i>本月已收 <span class="roboto-regular">{{ monthData.receiptMoney | currency('')}}</span><span>元</span></p>
+            <img :src="img_icon_calendar"/>
           </div>
         </div>
       </div>
@@ -23,6 +23,7 @@
 <script>
   import EventCalendar from 'common/event-calendar/index.vue';
   import Panel from '../../components/panel.vue';
+  import img_icon_calendar from 'assets/images/home/icon-calendar.png';
   import { fetchRepayCalendar } from 'api/home/account';
   import { formatDate } from 'utils/index'
 
@@ -33,6 +34,7 @@
     },
     data() {
       return {
+        img_icon_calendar,
         dates: [],
         events: null,
         month: null,

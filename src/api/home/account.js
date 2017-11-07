@@ -48,8 +48,8 @@ export function fetchRecharge(data) {
   })
 }
 
-/** 获取账户可用余额 */
-export function fetchBalance() {
+/** 获取账户可用余额 -- 充值/提现 */
+export function fetchAccountMoney() {
   return fetch({
     url: 'user/banlance',
     method: 'get'
