@@ -5,7 +5,7 @@
         <event-calendar :dates="dates" class="calendar"
                         @day-changed="handleDayChange"
                         @month-changed="handleMonthChanged"></event-calendar>
-        <div class="event-detail">
+        <div class="event-detail" v-if="showViewType === 'month'">
           <div class="event-detail__top">
             <p class="title"><span></span>{{ month }}收益账单<span></span></p>
           </div>
@@ -16,40 +16,24 @@
           </div>
         </div>
 
-        <div class="event-detail2 active">
+        <div class="event-detail2" v-else>
           <div class="event-detail__top">
-            <p class="title"><span></span>2017年8月9日账单</p>
+            <p class="title"><span @click="switchViewType"></span>{{ dayData.date }}账单</p>
           </div>
           <div class="event-detail__body">
-            <div class="box">
-              <div class="title">升薪宝17090602</div>
+            <div v-for="info in dayData.investRepayInfo" :key="info.loanNumber" class="box">
+              <div class="title">{{ info.loanName }}</div>
               <div class="box-main">
                 <div class="left-part">
-                  <p>投资金额<span class="roboto-regular">3,000</span>元</p>
-                  <p>本&nbsp;&nbsp;&nbsp;&nbsp;金<span class="roboto-regular">3,000</span>元</p>
+                  <p>投资金额<span class="roboto-regular">{{ info.investMoeny | currency('') }}</span>元</p>
+                  <p>本&nbsp;&nbsp;&nbsp;&nbsp;金<span class="roboto-regular">{{ info.corpus | currency('') }}</span>元</p>
                 </div>
                 <div class="right-part">
-                  <p>利&nbsp;&nbsp;&nbsp;&nbsp;息<span class="roboto-regular">0.81</span>元</p>
-                  <p>平台奖励<span class="roboto-regular">50</span>元</p>
+                  <p>利&nbsp;&nbsp;&nbsp;&nbsp;息<span class="roboto-regular">{{ info.interest | currency('') }}</span>元</p>
+                  <p>平台奖励<span class="roboto-regular">{{ info.extraEarning | currency('')}}</span>元</p>
                 </div>
               </div>
             </div>
-
-            <div class="box">
-              <div class="title">升薪宝17090602</div>
-              <div class="box-main">
-                <div class="left-part">
-                  <p>投资金额<span class="roboto-regular">3,000</span>元</p>
-                  <p>本&nbsp;&nbsp;&nbsp;&nbsp;金<span class="roboto-regular">3,000</span>元</p>
-                </div>
-                <div class="right-part">
-                  <p>利&nbsp;&nbsp;&nbsp;&nbsp;息<span class="roboto-regular">0.81</span>元</p>
-                  <p>平台奖励<span class="roboto-regular">50</span>元</p>
-                </div>
-              </div>
-            </div>
-
-            <img src="../../../../assets/images/home/icon-bottom.png" alt=""/>
           </div>
         </div>
       </div>
@@ -74,11 +58,13 @@
         img_icon_calendar,
         dates: [],
         events: null,
+        showViewType: 'month',
         month: null,
         monthData: {
           collectMoney: '', // 待收
           receiptMoney: ''  // 已收
-        }
+        },
+        dayData: null
       }
     },
     methods: {
@@ -96,13 +82,24 @@
                 this.dates.push(v.date);
               })
             }
-            console.log(this.events);
-            console.log(this.monthData);
-            console.log(this.dates);
           })
       },
+      switchViewType() {
+        if (this.showViewType === 'month') {
+          this.showViewType = 'day';
+        } else {
+          this.showViewType = 'month';
+        }
+      },
       handleDayChange(date) {
-        console.log(date);
+        if (this.dates.indexOf(date) !== -1) {
+          this.events.forEach(v => {
+            if (v.date === date) {
+              this.dayData = v;
+            }
+          });
+          this.showViewType = 'day';
+        }
       },
       handleMonthChanged(date) {
         this.month = date;
@@ -131,7 +128,6 @@
     .event-detail,
     .event-detail2 {
       float: right;
-      display: none;
       width: 360px;
       box-sizing: border-box;
       padding-top: 55px;
@@ -222,10 +218,6 @@
           color: #ff4f38;
         }
       }
-    }
-
-    .active {
-      display: inline-block;
     }
 
     .event-detail__body {

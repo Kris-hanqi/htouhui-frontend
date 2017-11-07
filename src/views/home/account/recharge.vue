@@ -176,6 +176,7 @@
         input {
           width: 249px;
           height: 38px;
+          padding-left: 10px;
           background-color: #fff;
           border: solid 1px #bfc1c4;
         }

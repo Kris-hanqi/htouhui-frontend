@@ -8,7 +8,7 @@
     <ul class="withdrawMsgBox">
       <li>
         <span>账户余额：</span>
-        <span><i class="remainingSumColor">5,390,00</i>元</span>
+        <span><i class="remainingSumColor">{{ accountMoney | currency('') }}</i>元</span>
       </li>
       <li>
         <span>提现金额：</span>
@@ -51,7 +51,7 @@
   import { mapGetters } from 'vuex';
   import BankLimit from '../components/BankLimit.vue';
   import RequestBankFrom from '../components/RequestBankFrom.vue';
-  import { fetchWithdraw } from 'api/home/account';
+  import { fetchWithdraw, fetchAccountMoney } from 'api/home/account';
   
   export default {
     components: {
@@ -68,6 +68,7 @@
     data() {
       return {
         dialogBankLimitVisible: false,
+        accountMoney: '',
         requestData: {},
         withdrawData: {
           inputMoney: '',
@@ -87,12 +88,23 @@
           }
         })
       },
+      getAccountMoney() {
+        fetchAccountMoney()
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.accountMoney = response.data.data;
+            }
+          })
+      },
       showBankLimit() {
         this.dialogBankLimitVisible = true;
       },
       closeBankLimit() {
         this.dialogBankLimitVisible = false;
       }
+    },
+    created() {
+      this.getAccountMoney();
     }
   }
 </script>
