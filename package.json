@@ -17,6 +17,8 @@
   "dependencies": {
     "@tweenjs/tween.js": "^17.1.0",
     "axios": "^0.16.2",
+    "babel-preset-es2016": "^6.24.1",
+    "babel-preset-es2017": "^6.24.1",
     "chart.js": "^2.7.0",
     "echarts": "^3.7.0",
     "element-ui": "^1.4.7",
@@ -30,7 +32,6 @@
     "moment": "^2.19.1",
     "normalize.css": "^7.0.0",
     "swiper": "^3.4.2",
-    "ulid": "^2.2.1",
     "vue": "^2.4.2",
     "vue-awesome-swiper": "^2.6.2",
     "vue-chartjs": "^3.0.0",
