@@ -2,44 +2,75 @@
   <div class="tab-coupons">
     <div class="message">
       <div>
-        <p>加入金额：<span class="roboto-regular">1,000000.00</span><span>元</span></p>
-        <p>面值：<span class="roboto-regular">0.5%</span></p>
+        <p>加入金额：<span class="roboto-regular">{{ messageList.joinMoney }}</span><span>元</span></p>
+        <p>面值：<span class="roboto-regular">{{ messageList.couponType != 'plus_coupon' ? messageList.couponMoney : messageList.couponRate  }}{{ messageList.couponType != 'plus_coupon' ? '元' : '%'  }}</span></p>
       </div>
       <div>
-        <p>加入时间：<span class="roboto-regular">2017-08-25</span></p>
-        <p>到账时间：<span class="roboto-regular">2017-08-25</span></p>
+        <p>加入时间：<span class="roboto-regular">{{ messageList.joinTime }}</span></p>
+        <p>到账时间：<span class="roboto-regular">{{ messageList.couponEndTime }}</span></p>
       </div>
       <div>
-        <p>优惠券类型：<span>加息券</span></p>
+        <p>优惠券类型：<span>{{ messageList.couponType }}</span></p>
       </div>
     </div>
     <div class="message-list">
       <p class="title">贴息流水</p>
-      <el-table :data="tableData" style="width: 100%">
+      <el-table :data="list" style="width: 100%">
         <el-table-column prop="time" label="时间"></el-table-column>
-        <el-table-column prop="money" label="在投金额"></el-table-column>
+        <el-table-column prop="investMoney" label="在投金额"></el-table-column>
         <el-table-column prop="rate" label="贴息利率"></el-table-column>
-        <el-table-column prop="tieXiMoney" label="贴息金额"></el-table-column>
+        <el-table-column prop="money" label="贴息金额"></el-table-column>
       </el-table>
       <div class="pages small">
-        <p class="total-pages">共计<span class="roboto-regular">25</span>条记录（共<span class="roboto-regular">3</span>页）</p>
-        <el-pagination layout="prev, pager, next" :total="30"></el-pagination>
+        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+        <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.PageSize" layout="prev, pager, next" :total="total"></el-pagination>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import { queryPlatformAwardRecord } from 'api/home/quantify';
+
   export default {
+    props: [
+      'joinPlanId'
+    ],
     data() {
       return {
-        tableData: [{
-          time: '2017-08-17 14:52:17',
-          money: '10,00000.00元',
-          rate: '12.0%',
-          tieXiMoney: '0.32元'
-        }]
+        list: null,
+        messageList: null,
+        toatl: 0,
+        listQuery: {
+          joinId: this.joinPlanId,
+          type: 'coupon',
+          pageNo: 1,
+          PageSize: 10
+        }
       }
+    },
+    computed: {
+      getPageSize() {
+        return Math.ceil(this.total / this.listQuery.pageSize);
+      }
+    },
+    methods: {
+      getPageList() {
+        queryPlatformAwardRecord(this.listQuery).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.messageList = data.data.data;
+            this.total = data.data.count || 0;
+          }
+        })
+      },
+      handleCurrentChange(val) {
+        this.listQuery.pageNo = val;
+        this.getPageList();
+      }
+    },
+    created() {
+      this.getPageList();
     }
   }
 </script>

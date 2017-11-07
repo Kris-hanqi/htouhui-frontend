@@ -51,7 +51,7 @@
       <el-table-column prop="lockEndTime" label="即日起免手续费" width="135"></el-table-column>
       <el-table-column prop="award" label="平台奖励">
         <template scope="scope">
-          <el-button class="icon-award" @click="dialogVisible = true" type="text" size="small"></el-button>
+          <el-button class="icon-award" @click="getAward(scope.row.joinPlanId)" type="text" size="small"></el-button>
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="80">
@@ -74,10 +74,10 @@
       <div class="dialog-main">
         <el-tabs v-model="activeName" type="card">
           <el-tab-pane label="贴息" name="first">
-            <tab-tie-xi></tab-tie-xi>
+            <tab-tie-xi :joinPlan-id="joinPlanId"></tab-tie-xi>
           </el-tab-pane>
           <el-tab-pane label="优惠券" name="second">
-            <tab-coupons></tab-coupons>
+            <tab-coupons :joinPlan-id="joinPlanId"></tab-coupons>
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -119,7 +119,8 @@
         typeList: [
           { key: 'matched', value: '全部匹配' },
           { key: 'matching', value: '匹配中' }
-        ]
+        ],
+        joinPlanId: ''
       }
     },
     computed: {
@@ -129,7 +130,6 @@
     },
     methods: {
       getPageList() {
-        let dates = null;
         if (this.dateType !== 'other') {
           dates = getStartAndEndTime(this.dateType);
           this.listQuery.startTime = dates.startTime;
@@ -153,7 +153,6 @@
             return;
           }
         }
-        this.listLoading = true;
         joinRecord(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
@@ -175,6 +174,10 @@
       },
       lookJoinRegular(id) {
         this.$router.push('/quantify/lookRegular-joinRecord/' + id);
+      },
+      getAward(id) {
+        this.dialogVisible = true;
+        this.joinPlanId = id;
       }
     },
     created() {
