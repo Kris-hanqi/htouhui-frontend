@@ -6,8 +6,12 @@
         <span class="phone">{{ mobile || '无' }}</span>
       </el-form-item>
       <el-form-item label="验证码">
-        <el-input v-model="transactionPassword.authCode" placeholder="请输入验证码"></el-input>
-        <sms-timer @run="sendCode"></sms-timer>
+        <el-col :span="11">
+          <el-input v-model="transactionPassword.authCode" placeholder="请输入验证码"></el-input>
+        </el-col>
+        <el-col :span="11">
+          <sms-timer @run="sendCode"></sms-timer>
+        </el-col>
       </el-form-item>
     </el-form>
     <p class="yzmCodeSent">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
@@ -55,9 +59,10 @@
     },
     methods: {
       sendCode() {
-        fetchSendCode({ authType: 'set' }).then(response => {
-          window.open(response)
-        })
+        fetchSendCode({ authType: 'set' })
+          .then(response => {
+            window.open(response)
+          })
       },
       setPwd() {
         const requestData = {

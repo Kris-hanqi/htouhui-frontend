@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import uuid from 'utils/uuid';
 
-const TokenKey = 'token';
+const TokenKey = 'user_token';
 
 export function getToken() {
   return Cookies.get(TokenKey);
