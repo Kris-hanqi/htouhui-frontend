@@ -18,7 +18,7 @@
     <ul class="withdrawMsgBox">
       <li>
         <span>账户余额：</span>
-        <span><i class="remainingSumColor">5,390,00</i>元</span>
+        <span><i class="remainingSumColor">{{ balance | currency('') }}</i>元</span>
       </li>
       <li>
         <span>转入金额：</span>
@@ -58,7 +58,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import { fetchRecharge } from 'api/home/account';
+  import { fetchRecharge, fetchBalance } from 'api/home/account';
   import BankLimit from '../../components/BankLimit.vue';
   import RequestBankFrom from '../../components/RequestBankFrom.vue';
 
@@ -75,6 +75,7 @@
     data() {
       return {
         dialogBankLimitVisible: false,
+        balance: '',
         requestData: {},
         rechargeData: {
           money: '',
@@ -91,6 +92,14 @@
       closeBankLimit() {
         this.dialogBankLimitVisible = false;
       },
+      getBalance() {
+        fetchBalance()
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.balance = response.data.data;
+            }
+          })
+      },
       getRequestBankData() {
         fetchRecharge(this.rechargeData)
           .then(response => {
@@ -99,6 +108,9 @@
             }
           })
       }
+    },
+    created() {
+      this.getBalance();
     }
   }
 </script>

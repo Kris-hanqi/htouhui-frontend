@@ -48,6 +48,13 @@ export function fetchRecharge(data) {
   })
 }
 
+/** 获取账户可用余额 */
+export function fetchBalance() {
+  return fetch({
+    url: 'user/banlance'
+  })
+}
+
 /** 提现 */
 export function fetchWithdraw(data) {
   return fetch({
