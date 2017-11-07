@@ -15,6 +15,43 @@
             <img src="../../../../assets/images/home/icon-calendar.png" alt=""/>
           </div>
         </div>
+
+        <div class="event-detail2 active">
+          <div class="event-detail__top">
+            <p class="title"><span></span>2017年8月9日账单</p>
+          </div>
+          <div class="event-detail__body">
+            <div class="box">
+              <div class="title">升薪宝17090602</div>
+              <div class="box-main">
+                <div class="left-part">
+                  <p>投资金额<span class="roboto-regular">3,000</span>元</p>
+                  <p>本&nbsp;&nbsp;&nbsp;&nbsp;金<span class="roboto-regular">3,000</span>元</p>
+                </div>
+                <div class="right-part">
+                  <p>利&nbsp;&nbsp;&nbsp;&nbsp;息<span class="roboto-regular">0.81</span>元</p>
+                  <p>平台奖励<span class="roboto-regular">50</span>元</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="box">
+              <div class="title">升薪宝17090602</div>
+              <div class="box-main">
+                <div class="left-part">
+                  <p>投资金额<span class="roboto-regular">3,000</span>元</p>
+                  <p>本&nbsp;&nbsp;&nbsp;&nbsp;金<span class="roboto-regular">3,000</span>元</p>
+                </div>
+                <div class="right-part">
+                  <p>利&nbsp;&nbsp;&nbsp;&nbsp;息<span class="roboto-regular">0.81</span>元</p>
+                  <p>平台奖励<span class="roboto-regular">50</span>元</p>
+                </div>
+              </div>
+            </div>
+
+            <img src="../../../../assets/images/home/icon-bottom.png" alt=""/>
+          </div>
+        </div>
       </div>
     </panel>
   </div>
@@ -89,9 +126,12 @@
       margin-bottom: 45px;
     }
 
-    .event-detail {
+    .event-detail,
+    .event-detail2 {
       float: right;
+      display: none;
       width: 360px;
+      box-sizing: border-box;
       padding-top: 55px;
       text-align: center;
 
@@ -109,6 +149,81 @@
           border: solid 1px #ced9e4;
         }
       }
+    }
+
+    .event-detail2 {
+      padding: 20px 25px;
+      padding-top: 55px;
+
+      .event-detail__top {
+        margin-bottom: 25px;
+      }
+
+      .event-detail__body img {
+        width: 21px;
+        height: 13px;
+        cursor: pointer;
+      }
+
+      .title {
+        width: 100%;
+
+        span {
+          float: left;
+          width: 22px;
+          height: 22px;
+          margin: 0;
+          border: none;
+          background: url(../../../../assets/images/home/icon-left.png) no-repeat center;
+          cursor: pointer;
+        }
+      }
+
+      .box {
+        width: 100%;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e4eef8;
+        text-align: left;
+
+        .title {
+          margin-bottom: 15px;
+          border-left: 4px solid #50e3c2;
+          text-align: left;
+          padding-left: 5px;
+          font-size: 16px;
+          color: #35385a;
+        }
+
+        .box-main {
+          width: 100%;
+          padding-left: 10px;
+        }
+
+        .box-main > div {
+          display: inline-block;
+          width: 46%;
+        }
+
+        .box-main > div p {
+          margin-bottom: 15px;
+          font-size: 14px;
+          color: #727e90;
+        }
+
+        .box-main > div p span {
+          margin-left: 20px;
+          font-size: 14px;
+          color: #727e90;
+        }
+
+        .box-main > div.right-part p span {
+          color: #ff4f38;
+        }
+      }
+    }
+
+    .active {
+      display: inline-block;
     }
 
     .event-detail__body {
