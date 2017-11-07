@@ -51,7 +51,17 @@ export function fetchRecharge(data) {
 /** 获取账户可用余额 */
 export function fetchBalance() {
   return fetch({
-    url: 'user/banlance'
+    url: 'user/banlance',
+    method: 'get'
+  })
+}
+
+/** 获取充值费用 */
+export function fetchBalanceCost(data) {
+  return fetch({
+    url: 'user/calculateRechargeFee',
+    method: 'get',
+    params: data
   })
 }
 

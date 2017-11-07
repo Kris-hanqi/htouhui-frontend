@@ -25,7 +25,7 @@ export const constantRouterMap = [
       {
         path: '/funds',
         name: '资金流水',
-        component: _import('home/funds/index')
+        component: _import('home/account/funds')
       },
       {
         path: '/recharge',
