@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch';
+import fetch from 'utils/fetch';
 
 /** 加入记录债权详情页债权信息接口 */
 export function queryUserInvestList(data) {

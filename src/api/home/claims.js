@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch';
+import fetch from 'utils/fetch';
 
 /** 债权转让，转入接口 */
 export function debtTransfer(data) {

@@ -1,4 +1,4 @@
-import fetch from '../utils/fetch';
+import fetch from 'utils/fetch';
 
 /** Banner广告轮播 */
 export function banners() {

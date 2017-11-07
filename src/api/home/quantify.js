@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch';
+import fetch from 'utils/fetch';
 
 /** 升薪宝量化 */
 export function quantifyList() {

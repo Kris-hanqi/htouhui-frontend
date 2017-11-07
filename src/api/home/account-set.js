@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch';
+import fetch from 'utils/fetch';
 
 /** 银行卡解除绑定 */
 export function fetchUnlockBankCard() {

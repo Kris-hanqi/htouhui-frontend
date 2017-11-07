@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch';
+import fetch from 'utils/fetch';
 
 /** 获取资产统计信息 */
 export function fetchAsset() {

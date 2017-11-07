@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch';
+import fetch from 'utils/fetch';
 
 /** 资产详情-债权信息 */
 export function joinPlan(data) {

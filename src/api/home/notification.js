@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch';
+import fetch from 'utils/fetch';
 
 /** 获取站内消息列表 */
 export function fetchPageList(data) {

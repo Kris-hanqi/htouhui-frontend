@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch';
+import fetch from 'utils/fetch';
 
 /** 加入合同 */
 export function joinSignedFileUrl(data) {
