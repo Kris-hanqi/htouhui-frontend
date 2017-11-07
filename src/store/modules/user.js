@@ -1,5 +1,5 @@
-import { getUserInfo } from '@/api/login';
-import { getToken } from '@/utils/auth';
+import { getUserInfo } from 'api/login';
+import { getToken, getUuid } from 'utils/auth';
 
 function getUserStatus(data) {
   if (!data.isOpenAccount) { // 用户未开户
@@ -47,6 +47,7 @@ function isBorrower(data) {
 const user = {
   state: {
     token: getToken(),
+    uuid: getUuid(),
     username: '',
     realName: '',
     mobile: '',
@@ -64,6 +65,9 @@ const user = {
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token;
+    },
+    SET_UUID: (state, uuid) => {
+      state.uuid = uuid;
     },
     SET_USERNAME: (state, username) => {
       state.username = username;

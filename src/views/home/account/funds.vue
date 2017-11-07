@@ -1,5 +1,5 @@
 <template>
-  <div class="hom-right">
+  <div class="funds-wrapper">
     <div class="assetRunWaterSee personalCenterBoxShadow clearFix">
       <h1 class="personalCenterRightTitle">资金流水</h1>
       <div class="fl">
@@ -66,7 +66,7 @@
 
 <script>
   import { fetchFundsPageList } from 'api/home/account';
-  import { getStartAndEndTime, getDateString } from '@/utils';
+  import { getStartAndEndTime, getDateString } from 'utils/index';
   
   export default {
     data() {
@@ -162,16 +162,14 @@
 </script>
 
 <style lang="scss">
-  .hom-right {
-    float: right;
+  .funds-wrapper {
     width: 832px;
 
     .personalCenterBoxShadow {
-      -webkit-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
       box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
     }
 
-    .personalCenterRightTitle {
+    h1 {
       font-size: 20px;
       color: #274161;
       margin-left: 27px;

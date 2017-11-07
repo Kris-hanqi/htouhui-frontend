@@ -18,13 +18,13 @@
     <ul class="withdrawMsgBox">
       <li>
         <span>账户余额：</span>
-        <span><i class="remainingSumColor">5,390,00</i>元</span>
+        <span><i class="remainingSumColor">{{ balance | currency('') }}</i>元</span>
       </li>
       <li>
         <span>转入金额：</span>
-        <input v-model="rechargeData.money" type="text">
+        <input @blur="getBalanceCost" v-model="rechargeData.money" type="text">
         <span>元</span>
-        <a href="javascript:void(0)" @click="showBankLimit">(查看银行限额)</a>
+        <a @click.stop="showBankLimit">(查看银行限额)</a>
       </li>
       <li>
         <p class="remainingSumColor">中信银行每笔限额单笔5万，单日5万<br />大额充值请选择跨行转账或支付宝转账</p>
@@ -58,14 +58,15 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import { fetchRecharge } from 'api/home/account';
+  import { fetchRecharge, fetchBalance, fetchBalanceCost } from 'api/home/account';
   import BankLimit from '../../components/BankLimit.vue';
   import RequestBankFrom from '../../components/RequestBankFrom.vue';
 
   export default {
     computed: {
       ...mapGetters([
-        'bankCard'
+        'bankCard',
+        'uuid'
       ])
     },
     components: {
@@ -75,12 +76,13 @@
     data() {
       return {
         dialogBankLimitVisible: false,
+        balance: '',
         requestData: {},
         rechargeData: {
           money: '',
           source: 'pc',
-          sessionId: '4561321465451346',
-          callbackUrl: 'http://www.baidu.com'
+          sessionId: '',
+          callbackUrl: 'http://localhost:9600/home.html#/recharge'
         }
       }
     },
@@ -91,7 +93,26 @@
       closeBankLimit() {
         this.dialogBankLimitVisible = false;
       },
+      getBalance() {
+        fetchBalance()
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.balance = response.data.data;
+            }
+          })
+      },
+      getBalanceCost() {
+        if (!this.rechargeData.money) return;
+        fetchBalanceCost({ rechargeMoney: this.rechargeData.money })
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.balance = response.data.data;
+            }
+          })
+      },
       getRequestBankData() {
+        if (!this.rechargeData.money) return;
+        this.rechargeData.sessionId = this.uuid;
         fetchRecharge(this.rechargeData)
           .then(response => {
             if (response.data.meta.code === 200) {
@@ -99,6 +120,9 @@
             }
           })
       }
+    },
+    created() {
+      this.getBalance();
     }
   }
 </script>
