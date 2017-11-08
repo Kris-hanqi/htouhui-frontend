@@ -55,7 +55,7 @@ export function outRecord(data) {
 /** 平台奖励 */
 export function queryPlatformAwardRecord(data) {
   return fetch({
-    url: 'user/queryPlatformAwardRecord',
+    url: 'queryPlatformAwardRecord',
     method: 'get',
     params: data
   })

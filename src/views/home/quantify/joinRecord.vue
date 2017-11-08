@@ -179,7 +179,6 @@
       getAward(id) {
         this.dialogVisible = true;
         this.joinPlanId = id;
-        console.log(this.joinPlanId);
       }
     },
     created() {

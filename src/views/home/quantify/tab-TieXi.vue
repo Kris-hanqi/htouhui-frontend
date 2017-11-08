@@ -1,26 +1,40 @@
 <template>
   <div class="tab-TieXie">
-    <div class="message">
-      <div>
-        <p>加入金额：<span class="roboto-regular">{{ messageList.joinMoney }}</span><span>元</span></p>
-        <p>加入时间：<span class="roboto-regular">{{ messageList.joinTime }}</span></p>
+    <div>
+      <div class="message">
+        <div>
+          <p>加入金额：<span class="roboto-regular">{{ messageList.joinMoney }}</span><span>元</span></p>
+          <p>加入时间：<span class="roboto-regular">{{ messageList.joinTime }}</span></p>
+        </div>
+        <div>
+          <p>贴息到期时间：<span class="roboto-regular">{{ messageList.tiexiEndTime }}</span></p>
+          <p class="color-txt">贴息金额：<span class="roboto-regular">{{ messageList.tiexiMoney }}</span><span>元</span></p>
+        </div>
       </div>
-      <div>
-        <p>贴息到期时间：<span class="roboto-regular">{{ messageList.tiexiEndTime }}</span></p>
-        <p class="color-txt">贴息金额：<span class="roboto-regular">{{ messageList.tiexiMoney }}</span><span>元</span></p>
-      </div>
-    </div>
-    <div class="message-list">
-      <p class="title">贴息流水</p>
-      <el-table :data="list" style="width: 100%">
-        <el-table-column prop="time" label="时间"></el-table-column>
-        <el-table-column prop="investMoney" label="在投金额"></el-table-column>
-        <el-table-column prop="rate" label="贴息利率"></el-table-column>
-        <el-table-column prop="money" label="贴息金额"></el-table-column>
-      </el-table>
-      <div class="pages small">
-        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-        <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.PageSize" layout="prev, pager, next" :total="total"></el-pagination>
+      <div class="message-list">
+        <p class="title">贴息流水</p>
+        <el-table :data="list" style="width: 100%">
+          <el-table-column prop="time" label="时间"></el-table-column>
+          <el-table-column prop="investMoney" label="在投金额">
+            <template scope="scope">
+              {{ scope.row.investMoney + '元' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="rate" label="贴息利率">
+            <template scope="scope">
+              {{ scope.row.rate + '%' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="money" label="贴息金额">
+            <template scope="scope">
+              {{ scope.row.money + '元' }}
+            </template>
+          </el-table-column>
+        </el-table>
+        <div class="pages small">
+          <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+          <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.PageSize" layout="prev, pager, next" :total="total"></el-pagination>
+        </div>
       </div>
     </div>
   </div>
@@ -42,7 +56,7 @@
           joinId: '',
           type: 'tiexi',
           pageNo: 1,
-          PageSize: 10
+          pageSize: 10
         }
       }
     },
@@ -57,8 +71,10 @@
         queryPlatformAwardRecord(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            this.messageList = data.data.data || {};
-            this.list = data.data.data.data;
+            this.messageList = data.data || {};
+            this.list = data.data.data;
+            console.log('贴息');
+            console.log(this.messageList);
             this.total = data.data.count || 0;
           }
         })
