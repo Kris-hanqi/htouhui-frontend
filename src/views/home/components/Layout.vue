@@ -36,7 +36,8 @@
         </div>
       </div>
     </div>
-    <open-account :visible="dialogOpenAccountVisible" @close="closeOpenAccount"></open-account>
+    <open-account :visible="dialogOpenAccountVisible"
+                  @close="closeOpenAccount"></open-account>
     <hth-slider-bar></hth-slider-bar>
   </div>
 </template>
@@ -106,10 +107,10 @@
         this.dialogOpenAccountVisible = true;
       },
       toTransactionPassword() {
-        this.router.push('/accountSet/transactionPassword');
+        this.$router.push('/accountSet/bindBackCard');
       },
       toBindBackCard() {
-        this.router.push('/accountSet/bindBackCard');
+        this.$router.push('/accountSet/bindBackCard');
       },
       closeOpenAccount() {
         this.dialogOpenAccountVisible = false;
