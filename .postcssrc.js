@@ -1,5 +1,5 @@
 module.exports = {
-  browsers: ['ie >= 8', '> 1% in CN'],
+  browsers: ['ie >= 9', '> 1% in CN'],
   plugins: {
     autoprefixer: {}
   }

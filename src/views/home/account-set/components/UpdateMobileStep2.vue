@@ -34,8 +34,8 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import { fetchSendEmailCode } from '@/api/public';
-  import SmsTimer from '@/common/sms-timer';
+  import { fetchSendEmailCode } from 'api/public';
+  import SmsTimer from 'common/sms-timer';
   
   export default {
     components: {

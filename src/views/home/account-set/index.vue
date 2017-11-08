@@ -19,12 +19,12 @@
       </tr>
       <tr>
         <td>银行卡</td>
-        <td><i>{{ email ? email : '未绑定' }}</i><span v-if="email">（此卡是默认提现卡）</span></td>
-        <td><button :class="{ 'btn-blue': !bankCard }">{{ bankCard ? '解绑' : '绑定' }}</button></td>
+        <td><i>{{ bankCard ? bankCard : '未绑定' }}</i><span v-if="bankCard">（此卡是默认提现卡）</span></td>
+        <td><button class="hth-btn" @click="operationBackCard" :class="{ 'btn-blue': !bankCard }">{{ bankCard ? '解绑' : '绑定' }}</button></td>
       </tr>
       <tr>
         <td>电子账号</td>
-        <td>{{ accountId }}<button class="btnBlue">复制</button></td>
+        <td>{{ accountId }}<button class="btnBlue hth-btn">复制</button></td>
         <td>已认证</td>
       </tr>
       <tr class="borderNone">
@@ -40,12 +40,15 @@
       <tr>
         <td></td>
         <td>自动还款授权</td>
-        <td><button>解约</button></td>
+        <td><button class="hth-btn">解约</button></td>
       </tr>
       <tr class="borderNone">
         <td>交易密码</td>
         <td>{{ transactionPasswordStatus ? '已设置' : '未设置'}}</td>
-        <td rowspan="2" class="borderLine"><router-link to="transactionPassword"><button>{{ transactionPasswordStatus ? '修改' : '设置' }}</button></router-link></td>
+        <td rowspan="2" class="borderLine">
+          <router-link to="transactionPassword">
+            <button class="hth-btn">{{ transactionPasswordStatus ? '修改' : '设置' }}</button></router-link>
+        </td>
       </tr>
       <tr>
         <td colspan="2" class="tableSmallFontColor textAlignLeft tablePadding">保障资金安全，转入、转出、投资等资金相关操作时使用</td>
@@ -53,7 +56,7 @@
       <tr class="borderNone">
         <td>手机认证</td>
         <td>{{ mobile || '无' }}</td>
-        <td rowspan="2" class="borderLine"><router-link to="updateMobile"><button>修改</button></router-link></td>
+        <td rowspan="2" class="borderLine"><router-link to="updateMobile"><button class="hth-btn">修改</button></router-link></td>
       </tr>
       <tr>
         <td colspan="2" class="tableSmallFontColor textAlignLeft tablePadding">保障资金安全，转入、转出、投资等资金相关操作时使用</td>
@@ -61,7 +64,7 @@
       <tr class="borderNone">
         <td>登录密码</td>
         <td>已设置</td>
-        <td rowspan="2" class="borderLine"><router-link to="updateLoginPassword"><button>修改</button></router-link></td>
+        <td rowspan="2" class="borderLine"><router-link to="updateLoginPassword"><button class="hth-btn">修改</button></router-link></td>
       <tr>
         <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">登录密码已设置 上次登录时间： 2017-08-29 14:27:24</td>
       </tr>
@@ -70,10 +73,10 @@
         <td :class="{ 'text-warning': email }">{{ email ? email : '未绑定' }}</td>
         <td rowspan="2">
           <router-link to="updateMobileStep1" v-if="email">
-            <button :class="{ 'btn-blue': !email }">{{ email ? '修改' : '绑定'  }}</button>
+            <button class="hth-btn" :class="{ 'btn-blue': !email }">{{ email ? '修改' : '绑定'  }}</button>
           </router-link>
           <router-link to="bindEmail" v-else>
-            <button :class="{ 'btn-blue': !email }">{{ email ? '修改' : '绑定'  }}</button>
+            <button class="hth-btn" :class="{ 'btn-blue': !email }">{{ email ? '修改' : '绑定'  }}</button>
           </router-link>
         </td>
       </tr>
@@ -81,13 +84,21 @@
         <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">可用于获取账户资金变动通知和投资讯息</td>
       </tr>
     </table>
+  
+    <!-- 解绑银行卡 -->
+    <unlock-bank-card :visible="dialogUnlockBankCardVisible"
+                      @close="closeUnlockBankCard"></unlock-bank-card>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
+  import UnlockBankCard from '../components/UnlockBankCard.vue';
 
   export default {
+    components: {
+      UnlockBankCard
+    },
     computed: {
       ...mapGetters([
         'realName',
@@ -99,7 +110,21 @@
       ])
     },
     data() {
-      return {}
+      return {
+        dialogUnlockBankCardVisible: false
+      }
+    },
+    methods: {
+      operationBackCard() {
+        if (this.bankCard) {
+          this.dialogUnlockBankCardVisible = true;
+        } else {
+          this.$router.push('/accountSet/bindBackCard');
+        }
+      },
+      closeUnlockBankCard() {
+        this.dialogUnlockBankCardVisible = false;
+      }
     }
   }
 </script>
@@ -112,7 +137,7 @@
     padding-top: 21px;
     padding-bottom: 75px;
 
-    button {
+    button.hth-btn {
       width: 91px;
       height: 28px;
       border-radius: 100px;
