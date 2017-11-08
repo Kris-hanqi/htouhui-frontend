@@ -6788,10 +6788,6 @@ timers-browserify@^2.0.2:
   dependencies:
     setimmediate "^1.0.4"
 
-tiny-cookie@^1.0:
-  version "1.0.1"
-  resolved "http://registry.npm.taobao.org/tiny-cookie/download/tiny-cookie-1.0.1.tgz#753786079c642a3c3d0b2accad600f8de119ac2a"
-
 tiny-emitter@^2.0.0:
   version "2.0.2"
   resolved "http://registry.npm.taobao.org/tiny-emitter/download/tiny-emitter-2.0.2.tgz#82d27468aca5ade8e5fd1e6d22b57dd43ebdfb7c"
@@ -7063,12 +7059,6 @@ vue-clipboard2@^0.0.6:
   dependencies:
     clipboard "^1.5.16"
     vue "2"
-
-vue-cookie@^1.1.4:
-  version "1.1.4"
-  resolved "http://registry.npm.taobao.org/vue-cookie/download/vue-cookie-1.1.4.tgz#b8b46d112bda9f93a2f47017c2ed5282d2064fda"
-  dependencies:
-    tiny-cookie "^1.0"
 
 vue-echarts-v3@^1.0.5:
   version "1.0.5"
