@@ -8,14 +8,19 @@
 2. 安装Yarn(安装教程请查阅[yarn](https://yarnpkg.com/zh-Hans/))
 3. 安装开发依赖(命令行执行`yarn`)
 
-## 命令介绍
+## 使用方法
+```
+# 开发 
 
-* `yarn run dev` | `yarn run start ` 开发
-* `yarn run build` 项目打包
-* `yarn run unit` 单元测试
-* `yarn run e2e` 端对端测试
-* `yarn run test` 执行单元测试以及端对端测试
-* `yarn run lint` 代码审查
+yarn run dev || npm run dev 
+
+# 打包 
+
+yarn run build || npm run build 
+
+```
+
+注意: 本地默认访问9600端口，需要修改请修改`./config/index.js`
 
 ## 开发依赖介绍
 
