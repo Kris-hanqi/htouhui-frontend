@@ -1,40 +1,43 @@
 <template>
-  <div class="amendLoginPwd">
-    <h1 class="personalCenterRightTitle">修改邮箱</h1>
-    <div class="amendLoginPwdMsg">
-      <ul>
-        <li>
-          <label>用户名</label>
-          <span class="amendLoginName">{{ realName }}</span>
-        </li>
-        <li>
-          <label>原邮箱</label>
-          <span class="amendLoginName">{{ email }}</span>
-        </li>
-        <li style="margin-top: 20px;">
-          <label>验证码</label>
-          <input type="text" placeholder="请输入验证码">
-          <sms-timer @run="sendCode"></sms-timer>
-        </li>
-      </ul>
-      <p class="yzmCodeSent" v-if="showPrompt">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
-      <button class="submitBtn">提交</button>
-    </div>
-    <div class="splitLine"></div>
-    <div class="warmPrompt">
-      <h3>温馨提示</h3>
-      <p>请填写真实有效的邮箱地址，以保证及时收到邮件信息。</p>
-    </div>
+  <div class="update-mobile-step1">
+    <hth-panel title="修改邮箱">
+      <div class="amendLoginPwdMsg">
+        <ul>
+          <li>
+            <label>用户名</label>
+            <span class="amendLoginName">{{ realName }}</span>
+          </li>
+          <li>
+            <label>原邮箱</label>
+            <span class="amendLoginName">{{ email }}</span>
+          </li>
+          <li style="margin-top: 20px;">
+            <label>验证码</label>
+            <input type="text" placeholder="请输入验证码">
+            <sms-timer @run="sendCode"></sms-timer>
+          </li>
+        </ul>
+        <p class="yzmCodeSent" v-if="showPrompt">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
+        <button class="submitBtn">提交</button>
+      </div>
+      <div class="split-line"></div>
+      <div class="warmPrompt">
+        <h3>温馨提示</h3>
+        <p>请填写真实有效的邮箱地址，以保证及时收到邮件信息。</p>
+      </div>
+    </hth-panel>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
-  import { fetchSendEmailCode } from 'api/public';
+  import HthPanel from 'common/Panel/index.vue';
   import SmsTimer from 'common/sms-timer';
-  
+  import { fetchSendEmailCode } from 'api/public';
+
   export default {
     components: {
+      HthPanel,
       SmsTimer
     },
     computed: {
@@ -67,20 +70,9 @@
 </script>
 
 <style lang="scss">
-  .amendLoginPwd {
+  .update-mobile-step1 {
     width: 832px;
     height: 797px;
-    background-color: #fff;
-    box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-
-    .personalCenterRightTitle {
-      line-height: 1;
-      font-size: 20px;
-      color: #274161;
-      margin-left: 27px;
-      padding-top: 21px;
-      margin-bottom: 30px;
-    }
 
     .amendLoginPwdMsg {
       li:first-child {
@@ -171,14 +163,6 @@
         margin-left: 15px;
         cursor: pointer;
       }
-    }
-
-    .splitLine {
-      width: 759px;
-      height: 3px;
-      border-top: dashed 1px #aab2c9;
-      border-bottom: dashed 1px #aab2c9;
-      margin-left: 39px;
     }
 
     .warmPrompt {

@@ -1,47 +1,52 @@
 <template>
-  <div class="amendLoginPwd">
-    <h1 class="personalCenterRightTitle">修改登录密码</h1>
-    <div class="amendLoginPwdMsg">
-      <ul>
-        <li>
-          <label>用户名</label>
-          <span class="amendLoginName">xiaohai</span>
-        </li>
-        <li>
-          <label>原密码</label>
-          <input type="text" v-model="passwordData.oldPassword" placeholder="请输入原登录密码">
-        </li>
-        <li>
-          <i class="dangerousIcon"></i>
-          <span class="dangerousTxt">密码不可以为空</span>
-        </li>
-        <li>
-          <label>新密码</label>
-          <input type="text" v-model="passwordData.newPassword" placeholder="6-16位字母与数字组合">
-        </li>
-        <li>
-          <i class="dangerousIcon"></i>
-          <span class="dangerousTxt">新密码不可以为空</span>
-        </li>
-        <li>
-          <label>确认密码</label>
-          <input type="text" v-model="passwordData.confirmPassword" placeholder="再次输入您的新密码">
-        </li>
-      </ul>
-      <button class="submitBtn" @click="UpdatePassword">提交</button>
-    </div>
-    <div class="splitLine"></div>
-    <div class="warmPrompt">
-      <h3>温馨提示</h3>
-      <p>请定期更换密码，并确保登录密码的设置与交易密码不同。</p>
-    </div>
+  <div class="update-login-password-wrapper">
+    <hth-panel title="修改登录密码">
+      <div class="amendLoginPwdMsg">
+        <ul>
+          <li>
+            <label>用户名</label>
+            <span class="amendLoginName">xiaohai</span>
+          </li>
+          <li>
+            <label>原密码</label>
+            <input type="text" v-model="passwordData.oldPassword" placeholder="请输入原登录密码">
+          </li>
+          <li>
+            <i class="dangerousIcon"></i>
+            <span class="dangerousTxt">密码不可以为空</span>
+          </li>
+          <li>
+            <label>新密码</label>
+            <input type="text" v-model="passwordData.newPassword" placeholder="6-16位字母与数字组合">
+          </li>
+          <li>
+            <i class="dangerousIcon"></i>
+            <span class="dangerousTxt">新密码不可以为空</span>
+          </li>
+          <li>
+            <label>确认密码</label>
+            <input type="text" v-model="passwordData.confirmPassword" placeholder="再次输入您的新密码">
+          </li>
+        </ul>
+        <button class="submitBtn" @click="UpdatePassword">提交</button>
+      </div>
+      <div class="split-line"></div>
+      <div class="warmPrompt">
+        <h3>温馨提示</h3>
+        <p>请定期更换密码，并确保登录密码的设置与交易密码不同。</p>
+      </div>
+    </hth-panel>
   </div>
 </template>
 
 <script>
+  import HthPanel from 'common/Panel/index.vue';
   import { fetchUpdatePassword } from 'api/public';
   
   export default {
+    components: {
+      HthPanel
+    },
     data() {
       return {
         passwordData: {
@@ -69,21 +74,10 @@
 </script>
 
 <style lang="scss">
-  .amendLoginPwd {
+  .update-login-password-wrapper {
     width: 832px;
     height: 797px;
-    background-color: #fff;
-    box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-
-    .personalCenterRightTitle {
-      line-height: 1;
-      font-size: 20px;
-      color: #274161;
-      margin-left: 27px;
-      padding-top: 21px;
-      margin-bottom: 30px;
-    }
-
+    
     .amendLoginPwdMsg {
       li:first-child {
         margin-bottom: 20px;
@@ -150,14 +144,6 @@
         font-size: 18px;
         cursor: pointer;
       }
-    }
-
-    .splitLine {
-      width: 759px;
-      height: 3px;
-      border-top: dashed 1px #aab2c9;
-      border-bottom: dashed 1px #aab2c9;
-      margin-left: 39px;
     }
 
     .warmPrompt {
