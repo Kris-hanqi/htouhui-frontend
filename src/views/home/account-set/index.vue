@@ -20,7 +20,7 @@
       <tr>
         <td>银行卡</td>
         <td><i>{{ email ? email : '未绑定' }}</i><span v-if="email">（此卡是默认提现卡）</span></td>
-        <td><button :class="{ 'btn-blue': !bankCard }">{{ bankCard ? '解绑' : '绑定' }}</button></td>
+        <td><button @click="operationBackCard" :class="{ 'btn-blue': !bankCard }">{{ bankCard ? '解绑' : '绑定' }}</button></td>
       </tr>
       <tr>
         <td>电子账号</td>
@@ -98,8 +98,10 @@
         'transactionPasswordStatus'
       ])
     },
-    data() {
-      return {}
+    methods: {
+      operationBackCard() {
+        console.log(123);
+      }
     }
   }
 </script>

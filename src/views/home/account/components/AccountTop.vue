@@ -15,28 +15,20 @@
     <open-account :visible="dialogOpenAccountVisible"
                   @close="closeOpenAccount"></open-account>
     
-    <!-- 银行卡解绑提示 -->
-    <el-dialog title="提示"
-               size="tiny"
-               :visible.sync="dialogUnlockBankCardVisible">
-      <span style="font-size: 20px; color: #ee5544">确认解绑银行卡？</span>
-      <span slot="footer">
-        <el-button @click="dialogUnlockBankCardVisible = false">取 消</el-button>
-        <el-button type="primary"
-                   :loading="unlockBankCardLoading"
-                   @click="unlockBankCard">确 定</el-button>
-      </span>
-    </el-dialog>
+    <!-- 解绑银行卡 -->
+    <unlock-bank-card :visible="dialogUnlockBankCardVisible"
+                      @close="closeUnlockBankCard"></unlock-bank-card>
   </div>
 </template>
 <script>
   import { mapGetters } from 'vuex';
   import OpenAccount from '../../components/OpenAccount.vue';
-  import { fetchUnlockBankCard } from 'api/home/account-set';
+  import UnlockBankCard from '../../components/UnlockBankCard.vue';
   
   export default {
     components: {
-      OpenAccount
+      OpenAccount,
+      UnlockBankCard
     },
     computed: {
       ...mapGetters([
@@ -49,7 +41,6 @@
     data() {
       return {
         dialogOpenAccountVisible: false,
-        unlockBankCardLoading: false,
         dialogUnlockBankCardVisible: false
       }
     },
@@ -67,32 +58,14 @@
           this.dialogOpenAccountVisible = true
         }
       },
-      unlockBankCard() {
-        this.unlockBankCardLoading = true;
-        fetchUnlockBankCard().then(response => {
-          if (response.data.meta.code === 200) {
-            this.$store.commit('SET_BANK_NAME', '');
-            this.$store.commit('SET_BANK_CARD', '');
-            this.$store.commit('SET_STATUS', 2);
-            this.$message({
-              message: '银行卡解绑成功',
-              type: 'success'
-            });
-          } else {
-            this.$message({
-              message: '银行卡解绑失败: ' + response.data.meta.message,
-              type: 'error'
-            });
-          }
-          this.unlockBankCardLoading = false;
-          this.dialogUnlockBankCardVisible = false;
-        })
-      },
       toRouter(path) {
         this.$router.push('/' + path);
       },
       closeOpenAccount() {
         this.dialogOpenAccountVisible = false;
+      },
+      closeUnlockBankCard() {
+        this.dialogUnlockBankCardVisible = false;
       }
     }
   }
