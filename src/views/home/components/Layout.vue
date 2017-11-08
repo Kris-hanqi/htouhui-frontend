@@ -82,13 +82,13 @@
             status: 1,
             title: '设置交易密码可提高账号安全。',
             btnText: '立即设置',
-            fun: this.showOpenAccount
+            fun: this.toTransactionPassword
           },
           {
             status: 2,
             title: '您可以去充值投资啦，请在提现前绑定银行卡。',
             btnText: '去绑卡',
-            fun: this.showOpenAccount
+            fun: this.toBindBackCard
           }
         ],
         ARecommend: {}
@@ -104,6 +104,12 @@
       },
       showOpenAccount() {
         this.dialogOpenAccountVisible = true;
+      },
+      toTransactionPassword() {
+        this.router.push('/accountSet/transactionPassword');
+      },
+      toBindBackCard() {
+        this.router.push('/accountSet/bindBackCard');
       },
       closeOpenAccount() {
         this.dialogOpenAccountVisible = false;

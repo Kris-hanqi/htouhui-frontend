@@ -1,10 +1,19 @@
 import fetch from 'utils/fetch';
 
-/** 银行卡解除绑定 */
+/** 绑定银行卡 */
 export function fetchUnlockBankCard() {
   return fetch({
     url: 'user/unbinding',
     method: 'get'
+  })
+}
+
+/** 银行卡解除绑定 */
+export function fetchBindBankCard(code) {
+  return fetch({
+    url: 'user/bindingCard',
+    method: 'get',
+    params: { cardNo: code }
   })
 }
 
@@ -26,7 +35,7 @@ export function fetchCheckCurrentMobile(code) {
   })
 }
 
-/** 检验验证码(修改手机号) */
+/** 用户开户 */
 export function fetchOpenAccount(data) {
   return fetch({
     url: 'user/openAccount',
