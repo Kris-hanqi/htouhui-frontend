@@ -130,6 +130,7 @@
     },
     methods: {
       getPageList() {
+        let dates = null;
         if (this.dateType !== 'other') {
           dates = getStartAndEndTime(this.dateType);
           this.listQuery.startTime = dates.startTime;
@@ -178,6 +179,7 @@
       getAward(id) {
         this.dialogVisible = true;
         this.joinPlanId = id;
+        console.log(this.joinPlanId);
       }
     },
     created() {

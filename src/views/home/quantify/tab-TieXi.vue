@@ -37,7 +37,7 @@
       return {
         list: null,
         messageList: null,
-        toatl: 0,
+        total: 0,
         listQuery: {
           joinId: this.joinPlanId,
           type: 'tiexi',
@@ -53,11 +53,13 @@
     },
     methods: {
       getPageList() {
+        console.log(this.joinPlanId);
         queryPlatformAwardRecord(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            this.messageList = data.data.data;
+            this.messageList = data.data;
             this.list = data.data.data.data;
+            console.log(this.list);
             this.total = data.data.count || 0;
           }
         })
