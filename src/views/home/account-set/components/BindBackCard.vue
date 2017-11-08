@@ -32,6 +32,8 @@
             <input style="width: 266px;" class="form-control" type="text" placeholder="请输入标题">
           </div>
         </div>
+        
+        <button type="button" class="hth-btn hth-btn-primary hth-btn-lg">提交</button>
       </form>
     </hth-panel>
   </div>
