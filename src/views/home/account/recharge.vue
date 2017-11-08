@@ -1,28 +1,31 @@
 <template>
   <div class="recharge-wrapper">
-    <h1>我要充值</h1>
-    <el-tabs v-model="activeName" type="card">
-      <el-tab-pane label="快捷充值" name="one">
-        <fast-recharge></fast-recharge>
-      </el-tab-pane>
-      <el-tab-pane label="跨行转账" name="two">
-        <inter-bank-transfer :account-data="{ realName: realName, accountId: accountId }"></inter-bank-transfer>
-      </el-tab-pane>
-      <el-tab-pane label="支付宝转账" name="there">
-        <alipay-transfer :account-data="{ realName: realName, accountId: accountId }"></alipay-transfer>
-      </el-tab-pane>
-    </el-tabs>
+    <hth-panel title="我要充值">
+      <el-tabs v-model="activeName" type="card">
+        <el-tab-pane label="快捷充值" name="one">
+          <fast-recharge></fast-recharge>
+        </el-tab-pane>
+        <el-tab-pane label="跨行转账" name="two">
+          <inter-bank-transfer :account-data="{ realName: realName, accountId: accountId }"></inter-bank-transfer>
+        </el-tab-pane>
+        <el-tab-pane label="支付宝转账" name="there">
+          <alipay-transfer :account-data="{ realName: realName, accountId: accountId }"></alipay-transfer>
+        </el-tab-pane>
+      </el-tabs>
+    </hth-panel>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
+  import HthPanel from 'common/Panel/index.vue';
   import FastRecharge from './components/RechargeFastRecharge.vue';
   import AlipayTransfer from './components/RechargeAlipayTransfer.vue';
   import InterBankTransfer from './components/RechargeInterBankTransfer.vue';
 
   export default {
     components: {
+      HthPanel,
       FastRecharge,
       AlipayTransfer,
       InterBankTransfer
@@ -47,20 +50,6 @@
 
 <style lang="scss">
   .recharge-wrapper {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-
-    h1 {
-      padding-top: 30px;
-      line-height: 1;
-      font-size: 20px;
-      color: #274161;
-      margin-bottom: 25px;
-    }
-  
     .split-line {
       height: 3px;
       margin: 30px 0;
