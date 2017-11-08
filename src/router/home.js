@@ -164,6 +164,11 @@ export const constantRouterMap = [
             component: _import('home/account-set/components/BindEmail')
           },
           {
+            path: 'bindBackCard',
+            name: '绑定邮箱',
+            component: _import('home/account-set/components/BindBackCard')
+          },
+          {
             path: 'transactionPassword',
             name: '设置交易密码',
             component: _import('home/account-set/components/TransactionPassword')

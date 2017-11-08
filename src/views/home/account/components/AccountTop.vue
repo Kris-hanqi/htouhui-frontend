@@ -48,7 +48,7 @@
       // 操作银行卡
       operationBankCard() {
         if (!this.bankCard) {
-          cosole.log('跳转绑卡页面');
+          this.$router.push('/accountSet/bindBackCard');
         } else {
           this.dialogUnlockBankCardVisible = true;
         }

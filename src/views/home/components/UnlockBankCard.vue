@@ -26,6 +26,11 @@
         required: true
       }
     },
+    data() {
+      return {
+        unlockBankCardLoading: false
+      }
+    },
     methods: {
       unlockBankCard() {
         this.unlockBankCardLoading = true;
