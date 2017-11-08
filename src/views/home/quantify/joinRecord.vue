@@ -130,6 +130,7 @@
     },
     methods: {
       getPageList() {
+        let dates = null;
         if (this.dateType !== 'other') {
           dates = getStartAndEndTime(this.dateType);
           this.listQuery.startTime = dates.startTime;

@@ -36,8 +36,8 @@
     data() {
       return {
         list: null,
-        messageList: null,
-        toatl: 0,
+        messageList: {},
+        total: 0,
         listQuery: {
           joinId: this.joinPlanId,
           type: 'tiexi',
@@ -56,7 +56,7 @@
         queryPlatformAwardRecord(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            this.messageList = data.data.data;
+            this.messageList = data.data.data || {};
             this.list = data.data.data.data;
             this.total = data.data.count || 0;
           }
