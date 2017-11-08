@@ -104,3 +104,24 @@ i {
 .text-warning {
   color: $warning;
 }
+
+.hth-tips {
+  margin-top: 25px;
+  padding-bottom: 40px;
+
+  h3 {
+    font-size: 16px;
+    line-height: 1;
+    color: #394b67;
+    margin-left: 59px;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.79;
+    color: #727e90;
+    margin-left: 76px;
+    margin-right: 68px;
+  }
+}

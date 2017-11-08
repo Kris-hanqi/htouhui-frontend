@@ -17,7 +17,7 @@
       <p class="yzmCodeSent">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
       <button class="submitBtn" @click="setPwd">下一步</button>
       <div class="split-line"></div>
-      <div class="warmPrompt">
+      <div class="hth-tips">
         <h3>温馨提示</h3>
         <p>1、设置交易密码需获取手机验证码。</p>
         <p>2、提交手机验证码后会跳转至江西银行存管页面，为了保障你的资金安全，请定期更换你的密码，并确保登录设置与交易密码不同。</p>
@@ -156,27 +156,6 @@
       margin-bottom: 39px;
       font-size: 18px;
       cursor: pointer;
-    }
-
-    .warmPrompt {
-      margin-top: 25px;
-      padding-bottom: 40px;
-
-      h3 {
-        font-size: 16px;
-        line-height: 1;
-        color: #394b67;
-        margin-left: 59px;
-        margin-bottom: 15px;
-      }
-
-      p {
-        font-size: 14px;
-        line-height: 1.79;
-        color: #727e90;
-        margin-left: 76px;
-        margin-right: 68px;
-      }
     }
   }
 </style>

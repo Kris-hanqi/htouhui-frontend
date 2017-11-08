@@ -21,7 +21,7 @@
         <button class="submitBtn">提交</button>
       </div>
       <div class="split-line"></div>
-      <div class="warmPrompt">
+      <div class="hth-tips">
         <h3>温馨提示</h3>
         <p>为了您的账户安全，更换手机号码需填写原来绑定的手机号验证码。</p>
       </div>
@@ -165,27 +165,6 @@
         color: #7c86a2;
         margin-left: 15px;
         cursor: pointer;
-      }
-    }
-
-    .warmPrompt {
-      margin-top: 25px;
-      padding-bottom: 40px;
-
-      h3 {
-        font-size: 16px;
-        line-height: 1;
-        color: #394b67;
-        margin-left: 59px;
-        margin-bottom: 15px;
-      }
-
-      p {
-        font-size: 14px;
-        line-height: 1.79;
-        color: #727e90;
-        margin-left: 76px;
-        margin-right: 68px;
       }
     }
   }
