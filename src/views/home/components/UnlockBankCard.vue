@@ -43,6 +43,7 @@
               message: '银行卡解绑成功',
               type: 'success'
             });
+            this.$emit('close');
           } else {
             this.$message({
               message: '银行卡解绑失败: ' + response.data.meta.message,
