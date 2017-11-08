@@ -1,6 +1,6 @@
 <template>
   <div class="account-asset-wrapper">
-    <panel :title="'我的资产'">
+    <hth-panel title="我的资产">
       <div class="list">
         <div class="item">
           <p class="title">总资产</p>
@@ -19,16 +19,16 @@
           <p><i class="num-font">{{ (data.frozenMoney || 0) | currency('') }}</i>元</p>
         </div>
       </div>
-    </panel>
+    </hth-panel>
   </div>
 </template>
 
 <script>
-  import Panel from '../../components/panel.vue';
+  import HthPanel from 'common/Panel/index.vue';
   
   export default {
     components: {
-      Panel
+      HthPanel
     },
     props: ['data']
   }
@@ -36,13 +36,8 @@
 
 <style lang="scss">
   .account-asset-wrapper {
-    .panel-body {
-      padding-bottom: 45px;
-    }
-    
     .list {
       height: 100%;
-      padding-top: 10px;
       padding-bottom: 25px;
   
       .item {

@@ -161,7 +161,6 @@
 <style lang="scss">
   .cal-panel-wrapper {
     width: 361px;
-    margin: 33px 0 0 39px;
     background-color: #fff;
     border: 1px solid #ecf4fd;
     padding: 19px 0;

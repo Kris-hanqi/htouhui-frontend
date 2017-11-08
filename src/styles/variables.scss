@@ -35,3 +35,18 @@ $index-background:                 #F7FAFE !default;
 
 // z-index
 $z-index-back-top:                 10;
+$font-size-base:                   14px !default;
+
+$font-weight-light:                300 !default;
+$font-weight-normal:               400 !default;
+$font-weight-bold:                 700 !default;
+
+$btn-font-weight:                  $font-weight-normal !default;
+$border-radius-base:               4px !default;
+
+// Panels 面板
+$panel-bg:                         #fff !default;
+$panel-body-padding:               10px 28px !default;
+$panel-header-padding:             21px 28px 10px !default;
+$panel-footer-padding:             $panel-header-padding !default;
+$panel-border-radius:              $border-radius-base !default;

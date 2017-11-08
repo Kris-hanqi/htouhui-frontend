@@ -1,50 +1,52 @@
 <template>
   <div class="account-invest__wrapper">
-    <h1>我的投资</h1>
-    <div class="fl">
-      <invest-chart :chart-data="chartData"
-                    class="chart"
-                    :options="chartOptions"
-                    :width="200" :height="200"></invest-chart>
-    </div>
-    <div class="fr">
-      <table>
-        <thead>
+    <hth-panel title="我的投资">
+      <div class="fl">
+        <invest-chart :chart-data="chartData"
+                      class="chart"
+                      :options="chartOptions"
+                      :width="160" :height="160"></invest-chart>
+      </div>
+      <div class="fr">
+        <table>
+          <thead>
           <tr>
             <td class="td1"><i></i></td>
             <td class="td2">&nbsp本金</td>
             <td class="td3">收益</td>
             <td class="td4"><i></i></td>
           </tr>
-        </thead>
-        <tbody>
-        <tr v-for="item in list" :key="item.order">
-          <td class="td1">
-            <span v-bind:style="{ background: item.color}"></span>{{item.label}}
+          </thead>
+          <tbody>
+          <tr v-for="item in list" :key="item.order">
+            <td class="td1">
+              <span v-bind:style="{ background: item.color}"></span>{{item.label}}
           </td>
-          <td class="td2">
-            <span class="num">{{item.sum}}</span>元
+            <td class="td2">
+              <span class="num">{{item.sum}}</span>元
           </td>
-          <td class="td3">
-            <span class="num">{{item.interest}}</span>元
+            <td class="td3">
+              <span class="num">{{item.interest}}</span>元
           </td>
-          <td class="td4">
-            <button>立即投资</button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
+            <td class="td4">
+              <button>立即投资</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </hth-panel>
   </div>
 </template>
 <script>
   import InvestChart from './InvestChart.vue';
+  import HthPanel from 'common/Panel/index.vue';
   import { fetchInvest } from 'api/home/account';
   import { getInvestData } from 'utils/home/index';
 
   export default {
     components: {
+      HthPanel,
       InvestChart
     },
     data() {
@@ -100,34 +102,11 @@
 
 <style lang="scss">
   .account-invest__wrapper {
-    overflow: hidden;
-    width: 100%;
-    height: 384px;
-    margin-top: 16px;
-    background-color: #fff;
-    box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-
-    h1 {
-      font-size: 20px;
-      line-height: 1;
-      color: rgb(39, 65, 97);
-      padding-top: 20px;
-      margin-left: 27px;
-    }
-
     .chart {
-      margin-left: 20px;
-      margin-top: 60px;
-      height: 200px;
-      width: 200px;
-    }
-
-    .fl {
-      width: 232px;
-    }
-
-    .fr {
-      width: 600px;
+      display: inline-block;
+      margin-top: 100px;
+      height: 160px;
+      width: 160px;
     }
 
     table {

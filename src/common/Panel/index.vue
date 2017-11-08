@@ -1,7 +1,9 @@
 <template>
-  <div class="panel-wrapper">
-    <h1>{{ title }}</h1>
-    <div class="panel-body">
+  <div class="hth-panel">
+    <div class="hth-panel-header" v-if="title">
+      <h1 class="htn-panel-title">{{ title }}</h1>
+    </div>
+    <div class="hth-panel-body">
       <slot></slot>
     </div>
   </div>
@@ -11,8 +13,7 @@
   export default {
     props: {
       title: {
-        type: String,
-        required: true
+        type: String
       }
     }
   }
@@ -26,7 +27,7 @@
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-
+    
     h1 {
       font-size: 20px;
       line-height: 1;

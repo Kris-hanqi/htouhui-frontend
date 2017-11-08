@@ -47,5 +47,7 @@
 </script>
 
 <style lang="scss">
-
+  .event-calendar-wrapper {
+    display: inline-block;
+  }
 </style>

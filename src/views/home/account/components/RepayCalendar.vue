@@ -1,57 +1,57 @@
 <template>
   <div class="repayment-calendar-wrapper">
-    <panel :title="'定期还款日历'">
-      <div>
-        <event-calendar :dates="dates" class="calendar"
-                        @day-changed="handleDayChange"
-                        @month-changed="handleMonthChanged"></event-calendar>
-        <div class="event-detail" v-if="showViewType === 'month'">
-          <div class="event-detail__top">
-            <p class="title"><span></span>{{ month }}收益账单<span></span></p>
-          </div>
-          <div class="event-detail__body">
-            <p><i></i>本月待收 <span class="roboto-regular">{{ monthData.collectMoney | currency('') }}</span><span>元</span></p>
-            <p class="hasDone"><i></i>本月已收 <span class="roboto-regular">{{ monthData.receiptMoney | currency('')}}</span><span>元</span></p>
-            <img :src="img_icon_calendar"/>
-          </div>
+    <hth-panel title="定期还款日历">
+      <!-- 还款日历 -->
+      <event-calendar :dates="dates" class="calendar"
+                      @day-changed="handleDayChange"
+                      @month-changed="handleMonthChanged"></event-calendar>
+      
+      <div class="event-detail" v-if="showViewType === 'month'">
+        <div class="event-detail__top">
+          <p class="title"><span></span>{{ month }}收益账单<span></span></p>
         </div>
+        <div class="event-detail__body">
+          <p><i></i>本月待收 <span class="roboto-regular">{{ monthData.collectMoney | currency('') }}</span><span>元</span></p>
+          <p class="hasDone"><i></i>本月已收 <span class="roboto-regular">{{ monthData.receiptMoney | currency('')}}</span><span>元</span></p>
+          <img :src="img_icon_calendar"/>
+        </div>
+      </div>
 
-        <div class="event-detail2" v-else>
-          <div class="event-detail__top">
-            <p class="title"><span @click="switchViewType"></span>{{ dayData.date }}账单</p>
-          </div>
-          <div class="event-detail__body">
-            <div v-for="info in dayData.investRepayInfo" :key="info.loanNumber" class="box">
-              <div class="title">{{ info.loanName }}</div>
-              <div class="box-main">
-                <div class="left-part">
-                  <p>投资金额<span class="roboto-regular">{{ info.investMoeny | currency('') }}</span>元</p>
-                  <p>本&nbsp;&nbsp;&nbsp;&nbsp;金<span class="roboto-regular">{{ info.corpus | currency('') }}</span>元</p>
-                </div>
-                <div class="right-part">
-                  <p>利&nbsp;&nbsp;&nbsp;&nbsp;息<span class="roboto-regular">{{ info.interest | currency('') }}</span>元</p>
-                  <p>平台奖励<span class="roboto-regular">{{ info.extraEarning | currency('')}}</span>元</p>
-                </div>
+      <div class="event-detail2" v-else>
+        <div class="event-detail__top">
+          <p class="title"><span @click="switchViewType"></span>{{ dayData.date }}账单</p>
+        </div>
+        <div class="event-detail__body">
+          <div v-for="info in dayData.investRepayInfo" :key="info.loanNumber" class="box">
+            <div class="title">{{ info.loanName }}</div>
+            <div class="box-main">
+              <div class="left-part">
+                <p>投资金额<span class="roboto-regular">{{ info.investMoeny | currency('') }}</span>元</p>
+                <p>本&nbsp;&nbsp;&nbsp;&nbsp;金<span class="roboto-regular">{{ info.corpus | currency('') }}</span>元</p>
+              </div>
+              <div class="right-part">
+                <p>利&nbsp;&nbsp;&nbsp;&nbsp;息<span class="roboto-regular">{{ info.interest | currency('') }}</span>元</p>
+                <p>平台奖励<span class="roboto-regular">{{ info.extraEarning | currency('')}}</span>元</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </panel>
+    </hth-panel>
   </div>
 </template>
 
 <script>
+  import HthPanel from 'common/Panel/index.vue';
   import EventCalendar from 'common/event-calendar/index.vue';
-  import Panel from '../../components/panel.vue';
   import img_icon_calendar from 'assets/images/home/icon-calendar.png';
   import { fetchRepayCalendar } from 'api/home/account';
   import { formatDate } from 'utils/index'
 
   export default {
     components: {
-      EventCalendar,
-      Panel
+      HthPanel,
+      EventCalendar
     },
     data() {
       return {
@@ -115,12 +115,14 @@
 
 <style lang="scss">
   .repayment-calendar-wrapper {
-    height: 418px;
-
-    .calendar {
-      display: inline-block;
+    .hth-panel-body {
+      padding-bottom: 40px;
     }
-
+    
+    .event-calendar-wrapper {
+      padding-left: 20px;
+    }
+    
     .event-detail__top {
       margin-bottom: 45px;
     }
@@ -130,7 +132,7 @@
       float: right;
       width: 360px;
       box-sizing: border-box;
-      padding-top: 55px;
+      padding-top: 25px;
       text-align: center;
 
       .title {

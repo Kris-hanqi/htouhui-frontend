@@ -1,15 +1,13 @@
 <template>
   <div class="account-top-wrapper">
-    <div class="hth-panel">
-      <!-- 用户头像 -->
+    <hth-panel>
       <i class="icon-avatar"></i>
-      <!-- 优先显示用户真实姓名 -->
       <span>你好，<i class="num-font">{{ realName || username }}</i></span>
       <a class="icon-user" @click.stop="operationAccount" :class="{ 'icon-user-active': status }"></a>
       <a class="icon-bank-card" @click.stop="operationBankCard" :class="{ 'icon-bank-card-active': bankCard }"></a>
       <el-button :plain="true" @click="toRouter('recharge')" type="primary" class="recharge-btn">充值</el-button>
       <el-button type="primary" @click="toRouter('withdraw')" class="withdraw-btn">提现</el-button>
-    </div>
+    </hth-panel>
     
     <!-- 开户组件 -->
     <open-account :visible="dialogOpenAccountVisible"
@@ -22,11 +20,13 @@
 </template>
 <script>
   import { mapGetters } from 'vuex';
+  import HthPanel from 'common/Panel/index.vue';
   import OpenAccount from '../../components/OpenAccount.vue';
   import UnlockBankCard from '../../components/UnlockBankCard.vue';
   
   export default {
     components: {
+      HthPanel,
       OpenAccount,
       UnlockBankCard
     },
@@ -73,10 +73,10 @@
 
 <style lang="scss">
   .account-top-wrapper {
-    .hth-panel {
-      width: 100%;
+    .hth-panel-body {
       height: 73px;
-      padding: 0;
+      padding-top: 0;
+      padding-bottom: 0;
       line-height: 73px;
     }
     
@@ -91,7 +91,6 @@
       vertical-align: middle;
       width: 42px;
       height: 42px;
-      margin: 0 14px 0 27px;
       background: url(../../../../assets/images/icon-avatar.png) no-repeat;
     }
     
