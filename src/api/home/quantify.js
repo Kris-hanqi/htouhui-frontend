@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch';
+import fetch from 'utils/fetch';
 
 /** 升薪宝量化 */
 export function quantifyList() {
@@ -47,6 +47,15 @@ export function joinRecord(data) {
 export function outRecord(data) {
   return fetch({
     url: 'user/findExitPlanBill',
+    method: 'get',
+    params: data
+  })
+}
+
+/** 平台奖励 */
+export function queryPlatformAwardRecord(data) {
+  return fetch({
+    url: 'user/queryPlatformAwardRecord',
     method: 'get',
     params: data
   })

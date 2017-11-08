@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import { fetchBankLimit } from '@/api/home/public';
+  import { fetchBankLimit } from 'api/home/public';
   
   export default {
     props: {

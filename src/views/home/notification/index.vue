@@ -14,6 +14,7 @@
 
 <script>
   import nothing_data from 'assets/images/home/icon-nothing.jpg';
+  
   export default {
     data() {
       return {

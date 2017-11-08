@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch';
+import fetch from 'utils/fetch';
 
 /** 获取借款记录 */
 export function fetchLoanRecordPageList(data) {

@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch'
+import fetch from 'utils/fetch'
 
 /** 获取银行限额列表 */
 export function fetchBankLimit() {

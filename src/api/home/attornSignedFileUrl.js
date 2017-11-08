@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch';
+import fetch from 'utils/fetch';
 
 /** 债权合同 */
 export function attornSignedFileUrl(data) {

@@ -25,17 +25,17 @@ export const constantRouterMap = [
       {
         path: '/funds',
         name: '资金流水',
-        component: _import('home/funds/index')
+        component: _import('home/account/funds')
       },
       {
         path: '/recharge',
         name: '我要充值',
-        component: _import('home/recharge/index')
+        component: _import('home/account/recharge')
       },
       {
         path: '/withdraw',
         name: '我要提现',
-        component: _import('home/withdraw/index')
+        component: _import('home/account/withdraw')
       },
       {
         path: '/planNovice',
@@ -162,6 +162,11 @@ export const constantRouterMap = [
             path: 'bindEmail',
             name: '绑定邮箱',
             component: _import('home/account-set/components/BindEmail')
+          },
+          {
+            path: 'bindBackCard',
+            name: '绑定邮箱',
+            component: _import('home/account-set/components/BindBackCard')
           },
           {
             path: 'transactionPassword',

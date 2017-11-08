@@ -1,6 +1,6 @@
 <template>
-  <div class="iNeedWithdrawBox fr">
-    <h1 class="personalCenterRightTitle">我要提现</h1>
+  <div class="withdraw-wrapper">
+    <h1>我要提现</h1>
     <div class="bankCardMsg">
       <p class="bankName">{{ bankName || '无' }}</p>
       <p class="roboto-regular bankNum">{{ bankCard || '无' }}</p>
@@ -8,16 +8,16 @@
     <ul class="withdrawMsgBox">
       <li>
         <span>账户余额：</span>
-        <span><i class="remainingSumColor">5,390,00</i>元</span>
+        <span><i class="remainingSumColor">{{ accountMoney | currency('') }}</i>元</span>
       </li>
       <li>
         <span>提现金额：</span>
         <input v-model="withdrawData.inputMoney" type="text">
         <span>元</span>
-        <a href="javascript:void(0)" @click="showBankLimit">(查看银行限额)</a>
+        <a @click.stop="showBankLimit">(查看银行限额)</a>
       </li>
       <li>
-        <span>充值费用：</span>
+        <span>提现费用：</span>
         <span>0.00元</span>
       </li>
       <li>
@@ -51,7 +51,7 @@
   import { mapGetters } from 'vuex';
   import BankLimit from '../components/BankLimit.vue';
   import RequestBankFrom from '../components/RequestBankFrom.vue';
-  import { fetchWithdraw } from 'api/home/account';
+  import { fetchWithdraw, fetchAccountMoney } from 'api/home/account';
   
   export default {
     components: {
@@ -60,6 +60,7 @@
     },
     computed: {
       ...mapGetters([
+        'uuid',
         'bankCard',
         'bankName'
       ])
@@ -67,6 +68,7 @@
     data() {
       return {
         dialogBankLimitVisible: false,
+        accountMoney: '',
         requestData: {},
         withdrawData: {
           inputMoney: '',
@@ -86,23 +88,34 @@
           }
         })
       },
+      getAccountMoney() {
+        fetchAccountMoney()
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.accountMoney = response.data.data;
+            }
+          })
+      },
       showBankLimit() {
         this.dialogBankLimitVisible = true;
       },
       closeBankLimit() {
         this.dialogBankLimitVisible = false;
       }
+    },
+    created() {
+      this.getAccountMoney();
     }
   }
 </script>
 
 <style lang="scss">
-  .iNeedWithdrawBox {
+  .withdraw-wrapper {
     width: 832px;
     background-color: #fff;
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
 
-    .personalCenterRightTitle {
+    h1 {
       line-height: 1;
       font-size: 20px;
       color: #274161;

@@ -1,14 +1,14 @@
 <template>
-  <div class="hom-right">
+  <div class="funds-wrapper">
     <div class="assetRunWaterSee personalCenterBoxShadow clearFix">
       <h1 class="personalCenterRightTitle">资金流水</h1>
       <div class="fl">
         <ul class="allChoose">
           <li>选择时间：</li>
-          <li><a href="javascript:void(0)" @click="switchDateType('3day')" :class="{ active: dateType === '3day'}">近三天</a></li>
-          <li><a href="javascript:void(0)" @click="switchDateType('1month')" :class="{ active: dateType === '1month'}">近一个月</a></li>
-          <li><a href="javascript:void(0)" @click="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a></li>
-          <li><a href="javascript:void(0)" @click="switchDateType('other')" :class="{ active: dateType === 'other'}">自定义时间</a></li>
+          <li><a @click.stop="switchDateType('3day')" :class="{ active: dateType === '3day'}">近三天</a></li>
+          <li><a @click.stop="switchDateType('1month')" :class="{ active: dateType === '1month'}">近一个月</a></li>
+          <li><a @click.stop="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a></li>
+          <li><a @click.stop="switchDateType('other')" :class="{ active: dateType === 'other'}">自定义时间</a></li>
         </ul>
         <ul class="allChoose allChooseCalendar" v-show="dateType === 'other'">
           <el-date-picker
@@ -26,12 +26,12 @@
         </ul>
         <ul class="allChoose">
           <li>项目类型：</li>
-          <li><a href="javascript:void(0)" @click="switchProjectType('all')" :class="{ active: projectType === 'all'}">全部</a></li>
-          <li><a href="javascript:void(0)" @click="switchProjectType('investRecord')" :class="{ active: projectType === 'investRecord'}">投资</a></li>
-          <li><a href="javascript:void(0)" @click="switchProjectType('payRecord')" :class="{ active: projectType === 'payRecord'}">充值</a></li>
-          <li><a href="javascript:void(0)" @click="switchProjectType('tixianRecord')" :class="{ active: projectType === 'tixianRecord'}">提现</a></li>
-          <li><a href="javascript:void(0)" @click="switchProjectType('refundRecord')" :class="{ active: projectType === 'refundRecord'}">还款</a></li>
-          <li><a href="javascript:void(0)" @click="switchProjectType('other')" :class="{ active: projectType === 'other'}">其他</a></li>
+          <li><a @click.stop="switchProjectType('all')" :class="{ active: projectType === 'all'}">全部</a></li>
+          <li><a @click.stop="switchProjectType('investRecord')" :class="{ active: projectType === 'investRecord'}">投资</a></li>
+          <li><a @click.stop="switchProjectType('payRecord')" :class="{ active: projectType === 'payRecord'}">充值</a></li>
+          <li><a @click.stop="switchProjectType('tixianRecord')" :class="{ active: projectType === 'tixianRecord'}">提现</a></li>
+          <li><a @click.stop="switchProjectType('refundRecord')" :class="{ active: projectType === 'refundRecord'}">还款</a></li>
+          <li><a @click.stop="switchProjectType('other')" :class="{ active: projectType === 'other'}">其他</a></li>
         </ul>
       </div>
       <div class="fr">
@@ -66,7 +66,7 @@
 
 <script>
   import { fetchFundsPageList } from 'api/home/account';
-  import { getStartAndEndTime, getDateString } from '@/utils';
+  import { getStartAndEndTime, getDateString } from 'utils/index';
   
   export default {
     data() {
@@ -162,16 +162,14 @@
 </script>
 
 <style lang="scss">
-  .hom-right {
-    float: right;
+  .funds-wrapper {
     width: 832px;
 
     .personalCenterBoxShadow {
-      -webkit-box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
       box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
     }
 
-    .personalCenterRightTitle {
+    h1 {
       font-size: 20px;
       color: #274161;
       margin-left: 27px;

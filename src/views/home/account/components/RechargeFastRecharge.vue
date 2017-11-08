@@ -15,27 +15,27 @@
     <!-- 银行限额组件 -->
     <bank-limit :visible="dialogBankLimitVisible" @close="closeBankLimit"></bank-limit>
 
-    <ul class="withdrawMsgBox">
+    <ul class="withdrawMsgBox" v-loading="loading" :element-loading-text="loadText">
       <li>
         <span>账户余额：</span>
-        <span><i class="remainingSumColor">5,390,00</i>元</span>
+        <span><i class="remainingSumColor">{{ balance | currency('') }}</i>元</span>
       </li>
       <li>
         <span>转入金额：</span>
-        <input v-model="rechargeData.money" type="text">
+        <input @blur="getBalanceCost" v-model="rechargeData.money" type="text">
         <span>元</span>
-        <a href="javascript:void(0)" @click="showBankLimit">(查看银行限额)</a>
+        <a @click.stop="showBankLimit">(查看银行限额)</a>
       </li>
       <li>
         <p class="remainingSumColor">中信银行每笔限额单笔5万，单日5万<br />大额充值请选择跨行转账或支付宝转账</p>
       </li>
       <li>
         <span>充值费用：</span>
-        <span>0.00元</span>
+        <span>{{ commissionCharge | currency('')}}元</span>
       </li>
       <li>
         <span>支付金额：</span>
-        <span>0.00元</span>
+        <span>{{ (Number(rechargeData.money) + commissionCharge) | currency('') }}元</span>
       </li>
       <li class="withdrawBtn">
         <button @click="getRequestBankData">充值</button>
@@ -58,14 +58,15 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import { fetchRecharge } from 'api/home/account';
-  import BankLimit from '../components/BankLimit.vue';
-  import RequestBankFrom from '../components/RequestBankFrom.vue';
+  import { fetchRecharge, fetchAccountMoney, fetchBalanceCost } from 'api/home/account';
+  import BankLimit from '../../components/BankLimit.vue';
+  import RequestBankFrom from '../../components/RequestBankFrom.vue';
 
   export default {
     computed: {
       ...mapGetters([
-        'bankCard'
+        'bankCard',
+        'uuid'
       ])
     },
     components: {
@@ -74,13 +75,17 @@
     },
     data() {
       return {
+        loading: false,
+        loadText: '加载数据中...',
         dialogBankLimitVisible: false,
+        balance: '',
+        commissionCharge: 0,
         requestData: {},
         rechargeData: {
           money: '',
           source: 'pc',
-          sessionId: '4561321465451346',
-          callbackUrl: 'http://www.baidu.com'
+          sessionId: '',
+          callbackUrl: 'http://localhost:9600/home.html#/recharge'
         }
       }
     },
@@ -91,7 +96,30 @@
       closeBankLimit() {
         this.dialogBankLimitVisible = false;
       },
+      getBalance() {
+        fetchAccountMoney()
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.balance = response.data.data;
+            }
+          })
+      },
+      getBalanceCost() {
+        if (!this.rechargeData.money) return;
+        this.loading = true;
+        fetchBalanceCost({ rechargeMoney: this.rechargeData.money })
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.commissionCharge = response.data.data || 0;
+            }
+            this.loading = false;
+          })
+      },
       getRequestBankData() {
+        if (!this.rechargeData.money) return;
+        this.loading = true;
+        this.loadText = '充值中...';
+        this.rechargeData.sessionId = this.uuid;
         fetchRecharge(this.rechargeData)
           .then(response => {
             if (response.data.meta.code === 200) {
@@ -99,6 +127,9 @@
             }
           })
       }
+    },
+    created() {
+      this.getBalance();
     }
   }
 </script>

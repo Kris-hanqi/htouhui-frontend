@@ -5,11 +5,11 @@
         <img :src="img_logo" alt="海投汇"/>
       </div>
       <ul class="header-down__bar">
-        <li><a href="./index.html" active-class="active">首页</a></li>
-        <li><a href="">升薪宝量化</a></li>
-        <li><a href="">升薪宝定期</a></li>
-        <li><a href="">定期抵押</a></li>
-        <li><a href="">风控措施</a></li>
+        <li><a href="/" active-class="active">首页</a></li>
+        <li><a href="/plans">升薪宝量化</a></li>
+        <li><a href="/shengxinbaos">升薪宝定期</a></li>
+        <li><a href="/normalLoans">定期抵押</a></li>
+        <li><a href="/st_page/safe">风控措施</a></li>
         <li><a href="">关于我们</a></li>
         <li class="header-down__account">
           <a href="./home.html">
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import img_logo from '@/assets/images/logo.png';
+  import img_logo from 'assets/images/logo.png';
   export default {
     name: 'HthHeaderDown',
     data() {

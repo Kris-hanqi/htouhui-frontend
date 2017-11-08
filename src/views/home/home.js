@@ -22,15 +22,16 @@ import {
   Steps,
   Step,
   Radio,
+  Col,
   Checkbox
 } from 'element-ui'
 import VueClipboard from 'vue-clipboard2'
 import '@/styles/base.scss';
 import '@/styles/element-ui.scss';
+import Vue2Filters from 'vue2-filters';
 import * as filters from '@/filters' // 全局filter
 import router from '@/router/home';
 import store from '@/store';
-import uuid from '@/utils/uuid';
 import { setUuid, getUuid } from '@/utils/auth';
 import App from './App';
 // import '@/mock';
@@ -39,9 +40,8 @@ const uuidCode = getUuid();
 
 // 设置uuid
 if (!uuidCode) {
-  setUuid(uuid());
+  setUuid();
 }
-
 
 Vue.use(Button);
 Vue.use(Dialog);
@@ -60,6 +60,7 @@ Vue.use(Input);
 Vue.use(Steps);
 Vue.use(Step);
 Vue.use(Radio);
+Vue.use(Col);
 Vue.use(Checkbox);
 
 Vue.use(Loading.directive);
@@ -70,6 +71,7 @@ Vue.prototype.$confirm = MessageBox.confirm;
 Vue.prototype.$message = Message;
 
 Vue.use(VueClipboard);
+Vue.use(Vue2Filters);
 
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])

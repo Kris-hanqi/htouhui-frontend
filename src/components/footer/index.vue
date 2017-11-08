@@ -4,32 +4,32 @@
     <div class="wrap">
       <div class="hth-footer__box clearfix">
         <div class="hth-footer__box-nav">
-          <h3><a href="">关于我们</a></h3>
+          <h3><a href="/about/aboutus">关于我们</a></h3>
           <ul>
-            <li><a href="" class="nav-a">公司介绍</a></li>
-            <li><a href="" class="nav-a">团队介绍</a></li>
-            <li><a href="" class="nav-a">联系我们</a></li>
-            <li><a href="" class="nav-a">加入我们</a></li>
+            <li><a href="/about/aboutus" class="nav-a">公司介绍</a></li>
+            <li><a href="/about/team" class="nav-a">团队介绍</a></li>
+            <li><a href="/about/joinus" class="nav-a">联系我们</a></li>
+            <li><a href="/about/contactus" class="nav-a">加入我们</a></li>
           </ul>
         </div>
         <div class="hth-footer__box-nav">
-          <h3><a href="">法律法规</a></h3>
+          <h3><a href="/falv/flgw#">法律法规</a></h3>
           <ul>
-            <li><a href="" class="nav-a">法律顾问</a></li>
-            <li><a href="" class="nav-a">法律协议</a></li>
-            <li><a href="" class="nav-a">法律声明</a></li>
+            <li><a href="/falv/flgw" class="nav-a">法律顾问</a></li>
+            <li><a href="/falv/flxy" class="nav-a">法律协议</a></li>
+            <li><a href="/falv/flsm" class="nav-a">法律声明</a></li>
           </ul>
         </div>
         <div class="hth-footer__box-nav">
-          <h3><a href="">帮助中心</a></h3>
+          <h3><a href="/help/touzibidu">帮助中心</a></h3>
           <ul>
-            <li><a href="" class="nav-a">投资人必读</a></li>
-            <li><a href="" class="nav-a">新手指引</a></li>
-            <li><a href="" class="nav-a">充值提现指导</a></li>
+            <li><a href="/help/touzibidu" class="nav-a">投资人必读</a></li>
+            <li><a href="/help/touzibidu" class="nav-a">新手指引</a></li>
+            <li><a href="/help/chongzhibidu" class="nav-a">充值提现指导</a></li>
           </ul>
         </div>
         <div class="hth-footer__box-nav hth-footer__box-contact">
-          <h3><a href="">联系我们</a></h3>
+          <h3><a href="/about/contactus">联系我们</a></h3>
           <ul>
             <li>客服电话：400-698-8810（工作日 9:00-18:00）</li>
             <li>客服邮箱：callcenter@htouhui.com</li>

@@ -9,10 +9,10 @@
       <a class="info_trust" href="http://www.itrust.org.cn/yz/pjwx.asp?wm=1335541052" target="_blank">
         <img-toggle :img-info="info_trust"></img-toggle>
       </a>
-      <a class="info_norton" href="https://trustsealinfo.verisign.com/splash?form_file=fdf/splash.fdf&dn=www.htouhui.com&lang=zh_cn" target="_blank">
+      <a class="info_norton" href="https://trustsealinfo.verisign.com/splash?form_file=fdf/splash.fdf&amp;dn=www.htouhui.com&amp;lang=zh_cn" target="_blank">
         <img-toggle :img-info="info_norton"></img-toggle>
       </a>
-      <a class="info_cx" href="https://credit.cecdc.com/CX20150617010820010588.html" target="_blank">
+      <a class="info_cx" href="https://search.szfw.org/cert/l/CX20150617010820010588" target="_blank">
         <img-toggle :img-info="info_cx"></img-toggle>
       </a>
     </div>

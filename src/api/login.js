@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch'
+import fetch from 'utils/fetch'
 
 /** 用户登录 */
 export function fetchLogin(data) {

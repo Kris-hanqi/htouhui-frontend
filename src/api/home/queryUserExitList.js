@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch';
+import fetch from 'utils/fetch';
 
 /** 退出记录债权信息记录 */
 export function queryUserExitList(data) {

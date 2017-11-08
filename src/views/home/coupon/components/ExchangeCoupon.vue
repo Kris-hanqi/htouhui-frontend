@@ -20,6 +20,7 @@
 
 <script>
   import { fetchExchangeCoupon } from 'api/home/coupon';
+  
   export default {
     props: {
       visible: {

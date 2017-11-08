@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch';
+import fetch from 'utils/fetch';
 
 /** 获取资产统计信息 */
 export function fetchAsset() {
@@ -45,6 +45,23 @@ export function fetchRecharge(data) {
     url: 'user/recharge',
     method: 'post',
     data
+  })
+}
+
+/** 获取账户可用余额 -- 充值/提现 */
+export function fetchAccountMoney() {
+  return fetch({
+    url: 'user/banlance',
+    method: 'get'
+  })
+}
+
+/** 获取充值费用 */
+export function fetchBalanceCost(data) {
+  return fetch({
+    url: 'user/calculateRechargeFee',
+    method: 'get',
+    params: data
   })
 }
 

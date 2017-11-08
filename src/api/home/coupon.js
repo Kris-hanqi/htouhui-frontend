@@ -1,4 +1,4 @@
-import fetch from '@/utils/fetch'
+import fetch from 'utils/fetch';
 
 /** 获取优惠券列表 */
 export function fetchPageList(data) {

@@ -16,9 +16,9 @@
 
 <script>
   import { fetchAsset } from 'api/home/account';
-  import Top from './components/Top.vue';
-  import Asset from './components/Asset.vue';
-  import Invest from './components/Invest.vue';
+  import Top from './components/AccountTop.vue';
+  import Asset from './components/AccountAsset.vue';
+  import Invest from './components/AccountInvest.vue';
   import RepayCalendar from './components/RepayCalendar.vue';
   
   export default {
