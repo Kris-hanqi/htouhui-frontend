@@ -74,10 +74,10 @@
       <div class="dialog-main">
         <el-tabs v-model="activeName" type="card">
           <el-tab-pane label="贴息" name="first">
-            <tab-tie-xi :joinPlan-id="joinPlanId"></tab-tie-xi>
+            <tab-tie-xi :join-plan-id="joinPlanId"></tab-tie-xi>
           </el-tab-pane>
           <el-tab-pane label="优惠券" name="second">
-            <tab-coupons :joinPlan-id="joinPlanId"></tab-coupons>
+            <tab-coupons :join-plan-id="joinPlanId"></tab-coupons>
           </el-tab-pane>
         </el-tabs>
       </div>

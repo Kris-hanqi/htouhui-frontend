@@ -39,7 +39,7 @@
         messageList: {},
         total: 0,
         listQuery: {
-          joinId: this.joinPlanId,
+          joinId: '',
           type: 'tiexi',
           pageNo: 1,
           PageSize: 10
@@ -53,7 +53,7 @@
     },
     methods: {
       getPageList() {
-        console.log(this.joinPlanId);
+        this.listQuery.joinId = this.joinPlanId;
         queryPlatformAwardRecord(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
