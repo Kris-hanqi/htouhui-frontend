@@ -3,19 +3,19 @@
     <h1>{{ title }}</h1>
     <ul>
       <li>
-        <p><span>{{ data.totalUnRepayMoney }}<i>元</i></span></p>
+        <p><span>{{ data.totalUnRepayMoney | currency('') }}<i>元</i></span></p>
         <p class="title">待还总额</p>
       </li>
       <li>
-        <p><span>{{ data.curMonthUnRepayMoney }}<i>元</i></span></p>
+        <p><span>{{ data.curMonthUnRepayMoney | currency('') }}<i>元</i></span></p>
         <p class="title">本月待还金额</p>
       </li>
       <li>
-        <p><span>{{ data.curMonthUnRepayNum }}<i>笔</i></span></p>
+        <p><span>{{ data.curMonthUnRepayNum | currency('', 0) }}<i>笔</i></span></p>
         <p class="title">本月待还笔数</p>
       </li>
       <li>
-        <p><span>{{ data.totalOverdueMoney || data.rsCurMonthOverdueMoney}}<i>元</i></span></p>
+        <p><span>{{ (data.totalOverdueMoney || data.rsCurMonthOverdueMoney) | currency('')}}<i>元</i></span></p>
         <p class="title">逾期金额</p>
       </li>
     </ul>
@@ -40,7 +40,6 @@
   .loan-repayment-statistics {
     width: 100%;
     height: 200px;
-    margin-top: 16px;
     background-color: #fff;
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
   
