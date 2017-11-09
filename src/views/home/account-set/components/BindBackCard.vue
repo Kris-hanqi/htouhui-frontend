@@ -1,6 +1,6 @@
 <template>
   <div class="bind-back-card-wrapper">
-    <hth-panel title="绑定银行卡">
+    <hth-panel title="绑定银行卡" v-loading="loading" element-loading-text="银行卡绑定中...">
       <form class="form-horizontal">
         <div class="form-group">
           <label class="control-label">用户名</label>
@@ -32,7 +32,11 @@
             <input style="width: 266px;" v-model="bankCard" class="form-control" type="text" placeholder="请输入银行卡号">
           </div>
         </div>
-        <button type="button" @click="bindBankCard" class="hth-btn hth-btn-primary hth-btn-lg">提交</button>
+        <div class="form-group">
+          <div class="input-block" style="width: 200px;">
+            <button type="button" @click="bindBankCard" class="hth-btn hth-btn-primary hth-btn-lg hth-btn-block">提交</button>
+          </div>
+        </div>
       </form>
       <div class="split-line"></div>
       <div class="hth-tips">
@@ -64,19 +68,25 @@
     },
     data() {
       return {
+        loading: false,
         bankCard: '' // 银行卡号
       }
     },
     methods: {
       bindBankCard() {
+        this.loading = true;
         fetchBindBankCard(this.bankCard)
           .then(response => {
             if (response.data.meta.code === 200) {
+              this.$store.commit('SET_BANK_CARD', this.bankCard);
+              this.bankCard = '';
+              this.$router.push('/accountSet');
               this.$message({
                 message: '银行卡绑定成功！',
                 type: 'success'
               });
             }
+            this.loading = false;
           })
       }
     }
