@@ -1,9 +1,12 @@
 <template>
   <div class="tab-coupons">
-    <div>
+    <div class="empty" v-if="this.showNoAward">
+      <img src="../../../assets/images/home/icon-noAward.png" alt=""/>
+    </div>
+    <div v-else>
       <div class="message">
         <div>
-          <p>加入金额：<span class="roboto-regular">{{ messageList.joinMoney }}</span><span>元</span></p>
+          <p>加入金额：<span class="roboto-regular">{{ messageList.joinMoney | currency('') }}</span><span>元</span></p>
           <p>面值：<span class="roboto-regular">{{ messageList.couponType != 'plus_coupon' ? messageList.couponMoney : messageList.couponRate  }}{{ messageList.couponType != 'plus_coupon' ? '元' : '%'  }}</span></p>
         </div>
         <div>
@@ -20,7 +23,7 @@
           <el-table-column prop="time" label="时间"></el-table-column>
           <el-table-column prop="investMoney" label="在投金额">
             <template scope="scope">
-              {{ scope.row.investMoney + '元' }}
+              {{ scope.row.investMoney | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="rate" label="贴息利率">
@@ -30,7 +33,7 @@
           </el-table-column>
           <el-table-column prop="money" label="贴息金额">
             <template scope="scope">
-              {{ scope.row.money + '元' }}
+              {{ scope.row.money | currency('') + '元' }}
             </template>
           </el-table-column>
         </el-table>
@@ -60,7 +63,8 @@
           type: 'coupon',
           pageNo: 1,
           pageSize: 10
-        }
+        },
+        showNoAward: true
       }
     },
     computed: {
@@ -74,11 +78,15 @@
         queryPlatformAwardRecord(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            this.messageList = data.data || {};
-            this.list = data.data.data;
             console.log('优惠券');
-            console.log(this.list);
-            this.total = data.data.count || 0;
+            console.log(data);
+            if (data.data) {
+              this.showNoAward = false;
+              this.messageList = data.data;
+              this.list = data.data.data;
+              console.log(this.messageList);
+              this.total = data.data.count || 0;
+            }
           }
         })
       },
@@ -97,6 +105,16 @@
   .tab-coupons {
     width: 100%;
     margin-top: 15px;
+  }
+
+  .empty {
+    width: 100%;
+    text-align: center;
+
+    img {
+      width: 237px;
+      height: 174px;
+    }
   }
 
   .tab-coupons .message {

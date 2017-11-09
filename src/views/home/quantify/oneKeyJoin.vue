@@ -2,16 +2,16 @@
   <div class="oneKeyJoin">
     <p class="title">一键加入</p>
     <div class="main-1" v-if="show">
-        <p>可加入额<span class="roboto-regular">{{ messageList.canJoinMoney }}</span><span>元</span><i @click="isShow"></i></p>
+        <p>可加入额<span class="roboto-regular">{{ messageList.canJoinMoney | currency('') }}</span><span>元</span><i @click="isShow"></i></p>
     </div>
     <div class="main-2" v-else>
       <div class="use-money">
-        <p class="main-2-p-1">起投金额：<span class="roboto-regular">{{ messageList.startInvestMoney }}</span><span class="small-font">元</span></p>
-        <p>您目前还可加入<span class="roboto-regular">{{ messageList.canJoinMoney }}</span>元</p>
+        <p class="main-2-p-1">起投金额：<span class="roboto-regular">{{ messageList.startInvestMoney | currency('') }}</span><span class="small-font">元</span></p>
+        <p>您目前还可加入<span class="roboto-regular">{{ messageList.canJoinMoney | currency('') }}</span>元</p>
       </div>
       <input type="number" class="inputMoney" v-model="userMoney" :placeholder="'加入金额须为'+ messageList.incrMoney +'的整数倍'">
       <div class="canUseMoney">
-        <p>可用余额<span class="roboto-regular">{{ messageList.balance }}</span>元<router-link to="/recharge"><span>充值</span></router-link></p>
+        <p>可用余额<span class="roboto-regular">{{ messageList.balance | currency('') }}</span>元<router-link to="/recharge"><span>充值</span></router-link></p>
       </div>
       <div class="coupons-box">
         <div class="coupons-icon" @click="isUp">
@@ -28,8 +28,8 @@
                 <el-radio :disabled="!chooseCoupons(str.lowerLimitMoney)" v-model="radio" :label="str.userCouponId" name="coupons">
                   <div class="coupon-img" :id="str.userCouponId">{{ str.type == 'plus_coupon' ? str.rate : str.money }}{{ str.type | keyToValue(typeList) }}</div>
                   <div class="coupon-message">
-                    <p>满{{ str.lowerLimitMoney }}元可用</p>
-                    <p><span v-if="str.maxInterestMoney != null">最高计息金额：{{ str.maxInterestMoney }}元 </span><span v-if="str.interestDeadline != null"> 最高计息天数：{{ str.interestDeadline }}天</span></p>
+                    <p>满{{ str.lowerLimitMoney | currency('') }}元可用</p>
+                    <p><span v-if="str.maxInterestMoney != null">最高计息金额：{{ str.maxInterestMoney | currency('') }}元 </span><span v-if="str.interestDeadline != null"> 最高计息天数：{{ str.interestDeadline }}天</span></p>
                   </div>
                 </el-radio>
               </div>

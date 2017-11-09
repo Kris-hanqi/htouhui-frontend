@@ -35,7 +35,7 @@
       <el-table-column prop="joinTime" label="加入时间" width="135"></el-table-column>
       <el-table-column prop="joinMoney" label="加入金额">
         <template scope="scope">
-          {{ scope.row.joinMoney + '元' }}
+          {{ scope.row.joinMoney | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="lockPeriod" label="持有期限">

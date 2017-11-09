@@ -201,4 +201,13 @@ th {
   }
 }
 
+/*文字提示*/
+.el-tooltip__popper.is-dark {
+  color: #7c86a2;
+  background: #fff;
+  border: solid 1px #dfe8f0;
+}
 
+.el-tooltip__popper[x-placement^=top] .popper__arrow::after {
+  border-top-color: #fff;
+}

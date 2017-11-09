@@ -1,14 +1,23 @@
 <template>
   <div class="tab-TieXie">
-    <div>
+    <div class="empty" v-if="this.showNoAward">
+      <img src="../../../assets/images/home/icon-noAward.png" alt=""/>
+    </div>
+    <div v-else>
       <div class="message">
         <div>
-          <p>加入金额：<span class="roboto-regular">{{ messageList.joinMoney }}</span><span>元</span></p>
+          <p>加入金额：<span class="roboto-regular">{{ messageList.joinMoney | currency('') }}</span><span>元</span></p>
           <p>加入时间：<span class="roboto-regular">{{ messageList.joinTime }}</span></p>
         </div>
         <div>
           <p>贴息到期时间：<span class="roboto-regular">{{ messageList.tiexiEndTime }}</span></p>
-          <p class="color-txt">贴息金额：<span class="roboto-regular">{{ messageList.tiexiMoney }}</span><span>元</span></p>
+          <p class="color-txt">
+            贴息金额：<span class="roboto-regular">{{ messageList.tiexiMoney | currency('') }}</span><span>元</span>
+            <el-tooltip class="item" placement="top">
+              <div slot="content">贴息金额计算方式以<br/>四舍五入至后两位</div>
+              <i class="question"></i>
+            </el-tooltip>
+          </p>
         </div>
       </div>
       <div class="message-list">
@@ -17,7 +26,7 @@
           <el-table-column prop="time" label="时间"></el-table-column>
           <el-table-column prop="investMoney" label="在投金额">
             <template scope="scope">
-              {{ scope.row.investMoney + '元' }}
+              {{ scope.row.investMoney | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="rate" label="贴息利率">
@@ -27,7 +36,7 @@
           </el-table-column>
           <el-table-column prop="money" label="贴息金额">
             <template scope="scope">
-              {{ scope.row.money + '元' }}
+              {{ scope.row.money | currency('') + '元' }}
             </template>
           </el-table-column>
         </el-table>
@@ -57,7 +66,8 @@
           type: 'tiexi',
           pageNo: 1,
           pageSize: 10
-        }
+        },
+        showNoAward: true
       }
     },
     computed: {
@@ -71,11 +81,14 @@
         queryPlatformAwardRecord(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            this.messageList = data.data || {};
-            this.list = data.data.data;
-            console.log('贴息');
-            console.log(this.messageList);
-            this.total = data.data.count || 0;
+            if (data.data) {
+              this.showNoAward = false;
+              this.messageList = data.data;
+              this.list = data.data.data;
+              console.log('贴息');
+              console.log(this.messageList);
+              this.total = data.data.count || 0;
+            }
           }
         })
       },
@@ -94,6 +107,16 @@
   .tab-TieXie {
     width: 100%;
     margin-top: 15px;
+  }
+
+  .empty {
+    width: 100%;
+    text-align: center;
+
+    img {
+      width: 237px;
+      height: 174px;
+    }
   }
 
   .tab-TieXie .message {
@@ -116,6 +139,15 @@
 
       .color-txt span {
         color: #ff4a33;
+      }
+
+      .color-txt .question {
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        background: url(../../../assets/images/home/icon-question.png) no-repeat center;
+        margin-left: 5px;
+        cursor: pointer;
       }
     }
   }

@@ -8,14 +8,14 @@
       <div class="main">
         <div class="name">
           <p><img src="../../../assets/images/home/icon-shengXinBaoLiangHua.png" alt=""/></p>
-          <p>升薪宝量化90</p>
+          <p>{{ messageList.planName }}</p>
         </div>
         <div class="limit">
-          <p><span class="roboto-regular">90</span>天</p>
+          <p><span class="roboto-regular">{{ messageList.lockPeriod }}</span>天</p>
           <p>持有期限</p>
         </div>
         <div class="money">
-          <p><span class="roboto-regular">2104200.01</span>元</p>
+          <p><span class="roboto-regular">{{ messageList.joinMoney | currency('')  }}</span>元</p>
           <p>在投金额</p>
         </div>
       </div>
@@ -25,13 +25,29 @@
       <p class="title">您在升薪宝量化90的在投标的</p>
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
-        <el-table-column prop="loanMoney" label="借款金额" width="100"></el-table-column>
+        <el-table-column prop="loanMoney" label="借款金额" width="100">
+          <template scope="scope">
+            {{ scope.row.loanMoney | currency('') + '元' }}
+          </template>
+        </el-table-column>
         <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
         <el-table-column prop="perid" label="借款期限" width="70"></el-table-column>
-        <el-table-column prop="investMoney" label="投资金额" width="100"></el-table-column>
+        <el-table-column prop="investMoney" label="投资金额" width="100">
+          <template scope="scope">
+            {{ scope.row.investMoney | currency('') + '元' }}
+          </template>
+        </el-table-column>
         <el-table-column prop="repayTimeFormat" label="还款时间" width="80"></el-table-column>
-        <el-table-column prop="earnings" label="已收本息"></el-table-column>
-        <el-table-column prop="uncollectedRepayMoney" label="待收本息"></el-table-column>
+        <el-table-column prop="earnings" label="已收本息">
+          <template scope="scope">
+            {{ scope.row.earnings | currency('') + '元' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="uncollectedRepayMoney" label="待收本息">
+          <template scope="scope">
+            {{ scope.row.uncollectedRepayMoney | currency('') + '元' }}
+          </template>
+        </el-table-column>
         <el-table-column prop="status" label="状态" width="50"></el-table-column>
         <el-table-column prop="contract" label="查看" width="40">
           <template scope="scope">
@@ -49,6 +65,7 @@
 
 <script>
   import { queryUserAssetInfoList } from 'api/home/queryUserAssetInfoList';
+  import { joinPlan } from 'api/home/getJoinInfo';
 
   export default {
     data() {
@@ -59,7 +76,11 @@
           pageNo: 1,
           pageSize: 10
         },
-        total: 0
+        total: 0,
+        messageList: null,
+        messageQuery: {
+          joinPlanId: this.$route.params.id,
+        }
       }
     },
     computed: {
@@ -79,6 +100,16 @@
           }
         })
       },
+      getMessageList() {
+        joinPlan(this.messageQuery).then(response => {
+          const data = response.data;
+          if (data.meta.code === 200) {
+            this.messageList = data.data.data;
+            console.log('升薪宝量化查看标的上边列表' + this.messageList);
+            console.log(this.messageList);
+          }
+        })
+      },
       query() {
         this.getPageList();
       },
@@ -88,7 +119,8 @@
       }
     },
     created() {
-      this.getPageList()
+      this.getPageList();
+      this.getMessageList();
     }
   }
 </script>

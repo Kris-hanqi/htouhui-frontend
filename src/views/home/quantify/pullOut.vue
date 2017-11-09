@@ -2,8 +2,8 @@
   <div class="pullOut">
     <p class="title">{{ messageList.planName }}申请退出</p>
     <div class="canPullMoney">
-      <p class="inTimeLimitMoney">锁定期内可退金额<span class="roboto-regular">{{ messageList.lockExitMoney }}</span><span>元</span></p>
-      <p class="outTimeLimitMoney">锁定期外可退出金额<span class="roboto-regular">{{ messageList.unlockExitMoney }}</span><span>元</span></p>
+      <p class="inTimeLimitMoney">锁定期内可退金额<span class="roboto-regular">{{ messageList.lockExitMoney | currency('') }}</span><span>元</span></p>
+      <p class="outTimeLimitMoney">锁定期外可退出金额<span class="roboto-regular">{{ messageList.unlockExitMoney | currency('') }}</span><span>元</span></p>
     </div>
     <div class="main">
       <span>申请退出</span>

@@ -13,6 +13,7 @@ import {
   Dialog,
   MessageBox,
   Tabs,
+  Tooltip,
   Loading,
   TabPane,
   Message,
@@ -50,6 +51,7 @@ Vue.use(Select);
 Vue.use(Tabs);
 Vue.use(TabPane);
 Vue.use(Table);
+Vue.use(Tooltip);
 Vue.use(TableColumn);
 Vue.use(Pagination);
 Vue.use(Breadcrumb);

@@ -35,19 +35,19 @@
       <el-table-column prop="applyTime" label="申请时间" width="135"></el-table-column>
       <el-table-column prop="exitMoney" label="退出金额">
         <template scope="scope">
-          {{ scope.row.exitMoney + '元' }}
+          {{ scope.row.exitMoney | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="exitFee" label="退出手续费">
         <template scope="scope">
-          {{ scope.row.exitFee + '元' }}
+          {{ scope.row.exitFee | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="lockPeriod" label="持有期限"  width="60"></el-table-column>
       <el-table-column prop="actualExitTime" label="成功退出时间" width="135"></el-table-column>
       <el-table-column prop="actualMoney" label="实际到账金额">
         <template scope="scope">
-          {{ scope.row.actualMoney + '元' }}
+          {{ scope.row.actualMoney | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="80">
