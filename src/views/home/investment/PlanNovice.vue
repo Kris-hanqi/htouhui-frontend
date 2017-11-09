@@ -7,7 +7,13 @@
       </div>
       <div class="newUser-plan-main">
         <div class="newUser-plan-rate">
-          <p class="rate"><span class="roboto-regular"><interest-rate :value="planListData.rate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%</p>
+          <p class="rate">
+            <span class="roboto-regular">
+              <interest-rate :value="planListData.rate"
+                             :leftFontSize="36"
+                             :rightFontSize="24"></interest-rate>
+            </span>%
+          </p>
           <p>往期年化利率</p>
         </div>
         <div class="newUser-plan-day">
@@ -32,7 +38,13 @@
       </div>
       <div class="newUser-plan-main">
         <div class="newUser-plan-rate">
-          <p class="rate"><span class="roboto-regular"><interest-rate :value="joinPlanList.rate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%</p>
+          <p class="rate">
+            <span class="roboto-regular">
+              <interest-rate :value="joinPlanList.rate"
+                             :leftFontSize="36"
+                             :rightFontSize="24"></interest-rate>
+            </span>%
+          </p>
           <p>往期年化利率</p>
         </div>
         <div class="newUser-plan-day">
@@ -50,7 +62,7 @@
         <p class="status">状态<span>{{ joinPlanList.status == matched ? '全部匹配' : '匹配中' }}</span></p>
       </div>
     </div>
-
+    
     <!--table-->
     <div class="message">
       <p class="title">您购买的债权信息</p>
@@ -70,10 +82,14 @@
           </template>
         </el-table-column>
       </el-table>
-
+      
       <div class="pages">
         <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-        <el-pagination @current-change="handleCurrentChange" :current-page.sync="investQuery.pageNo" :page-size="investQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
+        <el-pagination @current-change="handleCurrentChange"
+                       :current-page.sync="investQuery.pageNo"
+                       :page-size="investQuery.size"
+                       layout="prev, pager, next"
+                       :total="total"></el-pagination>
       </div>
     </div>
   </div>
@@ -85,7 +101,7 @@
   import { joinPlan } from 'api/home/joinPlan';
   import { queryUserInvestList } from 'api/home/queryUserJoinInvestList';
   import interestRate from 'components/interest-rate';
-
+  
   export default {
     components: {
       interestRate
@@ -171,15 +187,15 @@
     padding: 20px 15px;
     background-color: #fff;
     margin-bottom: 20px;
-
+    
     .newUser-plan-title {
       width: 100%;
       margin-bottom: 50px;
-
+      
       p {
         font-size: 20px;
         color: #274161;
-
+        
         span {
           margin-left: 12px;
           font-size: 14px;
@@ -188,61 +204,61 @@
       }
     }
   }
-
+  
   .newUser-plan-main {
     width: 100%;
     margin-bottom: 40px;
-
+    
     > div {
       display: inline-block;
       width: 27%;
       text-align: center;
-
+      
       p {
         font-size: 14px;
         color: #727e90;
-
+        
         span {
           font-size: 36px;
         }
       }
-
+      
       .rate {
         font-size: 20px;
         color: #ff4a33;
-
+        
         .small-newUser-plan-rate {
           font-size: 24px;
         }
       }
-
+      
       .day {
         font-size: 20px;
         color: #394b67;
       }
-
+      
       .way {
         line-height: 1.5;
         font-size: 30px;
         color: #394b67;
       }
-
+      
       .money {
         font-size: 20px;
         color: #394b67;
       }
     }
-
+    
     .newUser-plan-day {
       margin: 0 50px;
     }
   }
-
+  
   .newUser-plan-btn {
     width: 100%;
     box-sizing: border-box;
     padding-right: 75px;
-
+    
     span {
       margin-left: 5px;
       border-radius: 40px;
@@ -252,7 +268,7 @@
       font-size: 14px;
       color: #727e90;
     }
-
+    
     .newUser-plan-join {
       float: right;
       margin-top: -15px;
@@ -261,7 +277,7 @@
       padding: 13px 34px;
       font-size: 18px;
       color: #0573f4;
-
+      
       &:hover {
         border: none;
         background-color: #378ff6;
@@ -269,7 +285,7 @@
       }
     }
   }
-
+  
   .message {
     width: 100%;
     height: 553px;
@@ -277,7 +293,7 @@
     padding: 20px 5px;
     background-color: #fff;
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-
+    
     .title {
       font-size: 20px;
       color: #274161;
@@ -285,26 +301,26 @@
       margin-bottom: 25px;
     }
   }
-
+  
   .newUser-plan-bottom {
     width: 100%;
     height: auto;
     border-top: solid 1px #dfe8f0;
     padding-top: 20px;
     padding-left: 15px;
-
+    
     p {
       display: inline-block;
       margin-right: 60px;
       font-size: 16px;
       color: #394b67;
-
+      
       span {
         margin-left: 10px;
       }
     }
   }
-
+  
   .icon-download {
     width: 20px;
     height: 21px;

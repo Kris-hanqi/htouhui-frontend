@@ -1,9 +1,5 @@
 <template>
-  <el-table :data="list"
-            v-loading="load"
-            element-loading-text="拼命加载中..."
-            :border="false"
-            style="width: 100%">
+  <el-table :data="list" :border="false" style="width: 100%">
     <el-table-column prop="name" label="项目名称" width="150"></el-table-column>
     <el-table-column prop="loanMoney" label="借款金额" width="110"></el-table-column>
     <el-table-column prop="repayMoney" label="还款金额" width="110"></el-table-column>
@@ -15,6 +11,6 @@
 
 <script>
   export default {
-    props: ['load', 'list']
+    props: ['list']
   }
 </script>

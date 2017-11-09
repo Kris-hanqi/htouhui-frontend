@@ -18,11 +18,11 @@
 </template>
 
 <script>
-  import regularRepaying from './regular-repaying.vue';
-  import regularBidSuccess from './regular-bid_success.vue';
-  import regularComplete from './regular-complete.vue';
-  import regularCancel from './regular-cancel.vue';
-
+  import regularRepaying from './components/regular-repaying.vue';
+  import regularBidSuccess from './components/regular-bid_success.vue';
+  import regularComplete from './components/regular-complete.vue';
+  import regularCancel from './components/regular-cancel.vue';
+  
   export default {
     components: {
       regularRepaying,

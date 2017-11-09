@@ -1,6 +1,5 @@
 <template>
   <div class="regular-repaying">
-
     <el-table :data="list" style="width: 100%">
       <el-table-column prop="projectName" label="项目名称" fixed width="170"></el-table-column>
       <el-table-column prop="investTime" label="投资时间" width="80"></el-table-column>
@@ -213,7 +212,7 @@
   .icon-award {
     width: 24px;
     height: 24px;
-    background: url(../../../assets/images/home/icon-award.png) no-repeat center;
+    background: url(../../../../assets/images/home/icon-award.png) no-repeat center;
   }
 
   .icon-plan {

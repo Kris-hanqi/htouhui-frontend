@@ -40,29 +40,29 @@ export const constantRouterMap = [
       {
         path: '/planNovice',
         name: '新手计划',
-        component: _import('home/plan-novice/index')
+        component: _import('home/investment/PlanNovice')
       },
       {
         path: '/plan21Day',
-        component: _import('home/plan21-day/index'),
+        component: Public,
         redirect: '/plan21Day/index',
         children: [
           {
             path: 'index',
             name: '21天计划',
-            component: _import('home/plan21-day/plan21day')
+            component: _import('home/investment/Plan21day')
           },
           {
             path: 'lookRegular/:id',
             name: '查看债权',
             props: true,
-            component: _import('home/plan21-day/lookRegular')
+            component: _import('home/investment/components/lookRegular')
           }
         ]
       },
       {
         path: '/quantify',
-        component: _import('home/quantify/index'),
+        component: Public,
         redirect: '/quantify/index',
         children: [
           {
@@ -110,7 +110,7 @@ export const constantRouterMap = [
       },
       {
         path: '/rolling21',
-        component: _import('home/rolling21/index'),
+        component: Public,
         redirect: 'rolling21/index',
         children: [
           {
@@ -141,7 +141,7 @@ export const constantRouterMap = [
       {
         path: '/regular',
         name: '定期项目',
-        component: _import('home/regular/index')
+        component: _import('home/investment/Regular')
       },
       {
         path: '/claims',
@@ -151,12 +151,12 @@ export const constantRouterMap = [
       {
         path: '/loanRecord',
         name: '借款记录',
-        component: _import('home/loan-record/index')
+        component: _import('home/loan/LoanRecord')
       },
       {
         path: '/recentlyRepayment',
         name: '最近借款',
-        component: _import('home/recently-repayment/index')
+        component: _import('home/loan/RecentlyRepayment')
       },
       {
         path: '/coupon',

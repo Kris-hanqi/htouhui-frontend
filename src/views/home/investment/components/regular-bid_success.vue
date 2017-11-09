@@ -1,8 +1,7 @@
 <template>
   <div class="regular-repaying">
-
     <el-table :data="list" style="width: 100%">
-      <el-table-column prop="projectName" fixed label="项目名称" width="170"></el-table-column>
+      <el-table-column prop="projectName" label="项目名称" fixed width="170"></el-table-column>
       <el-table-column prop="investTime" label="投资时间" width="80"></el-table-column>
       <el-table-column prop="investCash" label="投资金额" width="100">
         <template scope="scope">
@@ -14,15 +13,23 @@
           {{ scope.row.investRate + '%' }}
         </template>
       </el-table-column>
-      <el-table-column prop="paidPeriod" label="借款期限" width="110"></el-table-column>
-      <el-table-column prop="nextRepayDate" label="下次还款日"></el-table-column>
-      <el-table-column prop="remainingTime" label="剩余时间"></el-table-column>
+      <el-table-column prop="paidPeriod" label="已还期数/总期数" width="110">
+        <template scope="scope">
+          {{ scope.row.paidPeriod + '/' + scope.row.repayPeriod }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="loanTerm" label="借款期限">
+        <template scope="scope">
+          {{ scope.row.loanTerm + scope.row.loanTermCompany | keyToValue(dataList) }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="remainingTime" label="剩余时间" width="90"></el-table-column>
       <el-table-column prop="biddingSchedule" label="投标进度">
         <template scope="scope">
           {{ scope.row.biddingSchedule + '%' }}
         </template>
       </el-table-column>
-      <el-table-column prop="status" fixed="right"  label="投资状态" width="70">
+      <el-table-column prop="status" fixed="right" label="投资状态">
         <template scope="scope">
           {{ scope.row.status | keyToValue(typeList) }}
         </template>
@@ -43,7 +50,7 @@
     data() {
       return {
         listQuery: {
-          status: 'cancel',
+          status: 'bid_success',
           startTime: '',
           endTime: '',
           pageNo: 1,
@@ -56,6 +63,10 @@
           { key: 'bid_success', value: '投标中' },
           { key: 'complete', value: '已结清' },
           { key: 'cancel', value: '未成功' }
+        ],
+        dataList: [
+          { key: 'day', value: '天' },
+          { key: 'month', value: '个月' }
         ]
       }
     },
@@ -70,8 +81,6 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            console.log('定期项目' + this.list);
-            console.log(this.list);
             this.total = data.data.count || 0;
           }
         })
