@@ -8,14 +8,13 @@
       <div class="look-regular-main">
         <div class="look-regular-rate">
           <p class="rate">
-            <span class="roboto-regular"><interest-rate :value="joinPlanList.minRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>% ~
-            <span class="roboto-regular"><interest-rate :value="joinPlanList.maxRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%
+            <span class="roboto-regular"><interest-rate :value="joinPlanList.rate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%
           </p>
           <p>往期年化利率</p>
         </div>
         <div class="look-regular-day">
           <p class="day"><span class="roboto-regular">{{ joinPlanList.lockPeriod }}</span>天</p>
-          <p>持有期限</p>
+          <p>周期</p>
         </div>
         <div class="look-regular-money">
           <p class="money"><span class="roboto-regular">{{ joinPlanList.joinMoney | currency('') }}</span>元</p>
@@ -24,7 +23,6 @@
       </div>
       <div class="look-regular-bottom">
         <p>加入时间 <span class="roboto-regular">{{ joinPlanList.joinTime }}</span></p>
-        <p>即日起免手续费 <span class="roboto-regular">{{ joinPlanList.lockEndTime }}</span></p>
         <img v-if="joinPlanList.status == 'exited'" class="type-message" src="../../../assets/images/home/icon-success.png" alt=""/>
         <img v-else class="type-message" src="../../../assets/images/home/icon-outRecord.png" alt=""/>
       </div>
@@ -42,7 +40,7 @@
             {{ scope.row.loanMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
+        <el-table-column prop="rate" label="往期年化利率" width="70"></el-table-column>
         <el-table-column prop="perid" label="借款期限" width="60">
           <template scope="scope">
             {{ scope.row.perid | currency('') + '天' }}
@@ -122,18 +120,17 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.joinPlanList = data.data;
-            console.log('升薪宝量化加入记录债券信息' + this.joinPlanList);
+            console.log('升薪宝量化21加入记录债券信息' + this.joinPlanList);
             console.log(this.joinPlanList);
           }
         })
       },
       getPageList() {
-        this.listLoading = true;
         queryUserInvestList(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            console.log('升薪宝量化您购买的债券信息' + this.list);
+            console.log('升薪宝量化21您购买的债券信息' + this.list);
             console.log(this.list);
             this.total = data.data.count || 0;
           }
@@ -147,7 +144,7 @@
         this.getPageList();
       },
       returnPrevPages(id) {
-        this.$router.push('/quantify/transactionRecord/' + id);
+        this.$router.push('/rolling21/rolling21day/' + id);
       }
     },
     created() {

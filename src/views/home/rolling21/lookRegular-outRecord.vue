@@ -2,30 +2,22 @@
   <div class="look-regular">
     <div class="details">
       <div class="title-box">
-        <span class="title">加入记录-债权信息</span>
-        <a href="javascript:void(0)" class="return-prev-pages" @click="returnPrevPages(joinPlanList.planId)">返回上一页 ></a>
+        <span class="title">退出记录-债权信息</span>
+        <a href="javascript:void(0)" class="return-prev-pages" @click="returnPrevPages(outPlanList.planId)">返回上一页 ></a>
       </div>
       <div class="look-regular-main">
-        <div class="look-regular-rate">
-          <p class="rate">
-            <span class="roboto-regular"><interest-rate :value="joinPlanList.minRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>% ~
-            <span class="roboto-regular"><interest-rate :value="joinPlanList.maxRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%
-          </p>
-          <p>往期年化利率</p>
+        <div class="look-regular-money">
+          <p class="money"><span class="roboto-regular">{{ outPlanList.money | currency('') }}</span>元</p>
+          <p>退出金额</p>
         </div>
         <div class="look-regular-day">
-          <p class="day"><span class="roboto-regular">{{ joinPlanList.lockPeriod }}</span>天</p>
-          <p>持有期限</p>
-        </div>
-        <div class="look-regular-money">
-          <p class="money"><span class="roboto-regular">{{ joinPlanList.joinMoney | currency('') }}</span>元</p>
-          <p>加入金额</p>
+          <p class="day"><span class="roboto-regular">{{ outPlanList.exitedMoney }}</span>元</p>
+          <p>已退出金额</p>
         </div>
       </div>
       <div class="look-regular-bottom">
-        <p>加入时间 <span class="roboto-regular">{{ joinPlanList.joinTime }}</span></p>
-        <p>即日起免手续费 <span class="roboto-regular">{{ joinPlanList.lockEndTime }}</span></p>
-        <img v-if="joinPlanList.status == 'exited'" class="type-message" src="../../../assets/images/home/icon-success.png" alt=""/>
+        <p>申请时间 <span class="roboto-regular">{{ outPlanList.applyTime }}</span></p>
+        <img v-if="outPlanList.status == 'exited'" class="type-message" src="../../../assets/images/home/icon-success.png" alt=""/>
         <img v-else class="type-message" src="../../../assets/images/home/icon-outRecord.png" alt=""/>
       </div>
     </div>
@@ -33,7 +25,6 @@
     <div class="message">
       <div class="title">
         <span>您购买的债权信息</span>
-        <p class="title-message">目前已为您自动投标成功   <span>{{ joinPlanList.totalInvestMoney | currency('') }}</span></p>
       </div>
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
@@ -42,7 +33,7 @@
             {{ scope.row.loanMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
+        <el-table-column prop="rate" label="往期年化利率" width="70"></el-table-column>
         <el-table-column prop="perid" label="借款期限" width="60">
           <template scope="scope">
             {{ scope.row.perid | currency('') + '天' }}
@@ -53,22 +44,14 @@
             {{ scope.row.investMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="repayTimeFormat" label="还款时间" width="80"></el-table-column>
-        <el-table-column prop="earnings" label="已收本息">
+        <el-table-column prop="exitMoney" label="退出金额">
           <template scope="scope">
             {{ scope.row.earnings | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="uncollectedRepayMoney" label="待收本息">
+        <el-table-column prop="status" label="状态" width="50">
           <template scope="scope">
-            {{ scope.row.uncollectedRepayMoney | currency('') + '元' }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="status" label="状态" width="50"></el-table-column>
-        <el-table-column prop="contract" label="合同" width="40">
-          <template scope="scope">
-            <a v-if="scope.row.showContract" class="icon-download" type="text">点击下载</a>
-            <a v-else class="icon-downloadNo" type="text">放款后可查看</a>
+            {{ scope.row.status | keyToValue(typeList) }}
           </template>
         </el-table-column>
       </el-table>
@@ -81,8 +64,8 @@
 </template>
 
 <script>
-  import { joinPlan } from 'api/home/getJoinInfo';
-  import { queryUserInvestList } from 'api/home/queryUserJoinInvestList';
+  import { getRollPlanExitInfo } from 'api/home/getRollPlanExitInfo';
+  import { findExitPlanBill } from 'api/home/findExitPlanBill';
   import interestRate from 'components/interest-rate';
 
   export default {
@@ -91,8 +74,8 @@
     },
     data() {
       return {
-        joinPlanQuery: {
-          joinPlanId: this.$route.params.id
+        outPlanQuery: {
+          appointmentExitPlanId: this.$route.params.id
         },
         listQuery: {
           planId: this.$route.params.id,
@@ -103,12 +86,17 @@
           pageNo: 1,
           pageSize: 10
         },
+        outPlanList: null,
         joinPlanList: {
           minRate: '',
           maxRate: ''
         },
         list: null,
-        total: 0
+        total: 0,
+        typeList: [
+          { key: 'complete', value: '完成' },
+          { key: 'repaying', value: '还款中' }
+        ]
       }
     },
     computed: {
@@ -117,23 +105,21 @@
       }
     },
     methods: {
-      getJoinPlanList() {
-        joinPlan(this.joinPlanQuery).then(response => {
+      getOutPlanList() {
+        getRollPlanExitInfo(this.outPlanQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            this.joinPlanList = data.data;
-            console.log('升薪宝量化加入记录债券信息' + this.joinPlanList);
-            console.log(this.joinPlanList);
+            this.outPlanList = data.data;
           }
         })
       },
       getPageList() {
         this.listLoading = true;
-        queryUserInvestList(this.listQuery).then(response => {
+        findExitPlanBill(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            console.log('升薪宝量化您购买的债券信息' + this.list);
+            console.log('升薪宝量化21您购买的债券信息' + this.list);
             console.log(this.list);
             this.total = data.data.count || 0;
           }
@@ -152,7 +138,7 @@
     },
     created() {
       this.getPageList();
-      this.getJoinPlanList();
+      this.getOutPlanList();
     }
   }
 </script>
@@ -199,25 +185,12 @@
 
     > div {
       display: inline-block;
-      width: 27%;
+      width: 37%;
       text-align: center;
 
       p {
         font-size: 14px;
         color: #727e90;
-      }
-
-      .rate {
-        font-size: 20px;
-        color: #ff4a33;
-
-        span {
-          font-size: 36px;
-        }
-
-        .small-look-regular-rate {
-          font-size: 24px;
-        }
       }
 
       .day span {

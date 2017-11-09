@@ -109,6 +109,36 @@ export const constantRouterMap = [
         ]
       },
       {
+        path: '/rolling21',
+        component: _import('home/rolling21/index'),
+        redirect: 'rolling21/index',
+        children: [
+          {
+            path: 'index',
+            name: '升薪宝量化21天滚动',
+            component: _import('home/rolling21/rolling21day')
+          },
+          {
+            path: 'pullOut/:id',
+            name: '申请退出',
+            props: true,
+            component: _import('home/rolling21/pullOut')
+          },
+          {
+            path: 'lookRegular-joinRecord/:id',
+            name: '加入记录查看债权',
+            props: true,
+            component: _import('home/rolling21/lookRegular-joinRecord')
+          },
+          {
+            path: 'lookRegular-outRecord/:id',
+            name: '退出记录查看债权',
+            props: true,
+            component: _import('home/rolling21/lookRegular-outRecord')
+          }
+        ]
+      },
+      {
         path: '/regular',
         name: '定期项目',
         component: _import('home/regular/index')

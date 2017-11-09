@@ -3,21 +3,21 @@
     <div class="details">
       <div class="title-box">
         <span class="title">退出记录-债权信息</span>
-        <a href="javascript:void(0)" class="return-prev-pages" @click="returnPrevPages(outPlanQuery.planId)">返回上一页 ></a>
+        <a href="javascript:void(0)" class="return-prev-pages" @click="returnPrevPages(outPlanList.planId)">返回上一页 ></a>
       </div>
       <div class="look-regular-main">
         <div class="look-regular-money">
-          <p class="money"><span class="roboto-regular">{{ outPlanQuery.money | currency('') }}</span>元</p>
+          <p class="money"><span class="roboto-regular">{{ outPlanList.money | currency('') }}</span>元</p>
           <p>退出金额</p>
         </div>
         <div class="look-regular-day">
-          <p class="day"><span class="roboto-regular">{{ outPlanQuery.lockPeriod }}</span>天</p>
+          <p class="day"><span class="roboto-regular">{{ outPlanList.lockPeriod }}</span>天</p>
           <p>持有期限</p>
         </div>
       </div>
       <div class="look-regular-bottom">
-        <p>申请时间 <span class="roboto-regular">{{ outPlanQuery.applyTime }}</span></p>
-        <img v-if="outPlanQuery.status == 'exited'" class="type-message" src="../../../assets/images/home/icon-success.png" alt=""/>
+        <p>申请时间 <span class="roboto-regular">{{ outPlanList.applyTime }}</span></p>
+        <img v-if="outPlanList.status == 'exited'" class="type-message" src="../../../assets/images/home/icon-success.png" alt=""/>
         <img v-else class="type-message" src="../../../assets/images/home/icon-outRecord.png" alt=""/>
       </div>
     </div>
@@ -25,13 +25,21 @@
     <div class="message">
       <div class="title">
         <span>您购买的债权信息</span>
-        <p class="title-message">目前已为您成功退出   <span>{{ outPlanQuery.actualMoney | currency('') }}元</span></p>
+        <p class="title-message">目前已为您成功退出   <span>{{ outPlanList.actualMoney | currency('') }}元</span></p>
       </div>
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
-        <el-table-column prop="loanMoney" label="借款金额" width="100"></el-table-column>
+        <el-table-column prop="loanMoney" label="借款金额" width="100">
+          <template scope="scope">
+            {{ scope.row.loanMoney | currency('') + '元' }}
+          </template>
+        </el-table-column>
         <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
-        <el-table-column prop="perid" label="借款期限" width="60"></el-table-column>
+        <el-table-column prop="perid" label="借款期限" width="60">
+          <template scope="scope">
+            {{ scope.row.perid | currency('') + '天' }}
+          </template>
+        </el-table-column>
         <el-table-column prop="investMoney" label="投资金额" width="100">
           <template scope="scope">
             {{ scope.row.investMoney | currency('') + '元' }}
@@ -49,9 +57,10 @@
           </template>
         </el-table-column>
         <el-table-column prop="status" label="状态" width="50"></el-table-column>
-        <el-table-column prop="contract" label="查看" width="40">
+        <el-table-column prop="contract" label="合同" width="40">
           <template scope="scope">
-            <a class="icon-download" type="text">合同</a>
+            <a v-if="scope.row.showContract" class="icon-download" type="text">点击下载</a>
+            <a v-else class="icon-downloadNo" type="text">放款后可查看</a>
           </template>
         </el-table-column>
       </el-table>
@@ -86,6 +95,7 @@
           pageNo: 1,
           pageSize: 10
         },
+        outPlanList: null,
         joinPlanList: {
           minRate: '',
           maxRate: ''
@@ -100,11 +110,11 @@
       }
     },
     methods: {
-      getJoinPlanList() {
+      getOutPlanList() {
         getExitInfo(this.outPlanQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            this.outPlanQuery = data.data;
+            this.outPlanList = data.data;
           }
         })
       },
@@ -133,7 +143,7 @@
     },
     created() {
       this.getPageList();
-      this.getJoinPlanList();
+      this.getOutPlanList();
     }
   }
 </script>
@@ -141,6 +151,10 @@
 <style lang="scss" scoped>
   .icon-download {
     color: #0573f4;
+  }
+
+  .icon-downloadNo {
+    color: #727e90;
   }
 
   .details {
