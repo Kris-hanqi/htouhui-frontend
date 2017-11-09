@@ -13,6 +13,9 @@ const getters = {
   IDNumber: state => state.user.IDNumber,
   showNovicePlan: state => state.user.showNovicePlan,
   showNovicePlanMessage: state => state.user.showNovicePlanMessage,
+  isAutomaticBidding: state => state.user.isAutomaticBidding,
+  isAutomaticDebtTransfer: state => state.user.isAutomaticDebtTransfer,
+  isAutomaticRepayment: state => state.user.isAutomaticRepayment,
   isBorrower: state => state.user.isBorrower
 };
 
