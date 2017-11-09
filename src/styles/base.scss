@@ -105,6 +105,13 @@ i {
   color: $warning;
 }
 
+.split-line {
+  height: 3px;
+  margin: 30px 0;
+  border-top: dashed 1px #aab2c9;
+  border-bottom: dashed 1px #aab2c9;
+}
+
 .hth-tips {
   margin-top: 25px;
   padding-bottom: 40px;

@@ -30,12 +30,18 @@
         <tr class="borderNone">
           <td>已授权的服务</td>
           <td>自动投标授权</td>
-          <td>已授权</td>
+          <td>
+            <button @click="automaticBidding" v-if="!isAutomaticBidding" class="hth-btn">授权</button>
+            <span v-else>已授权</span>
+          </td>
         </tr>
         <tr class="borderNone">
           <td></td>
           <td>自动债权转让授权</td>
-          <td>已授权</td>
+          <td>
+            <button @click="automaticDebtTransfer" v-if="!isAutomaticDebtTransfer" class="hth-btn">授权</button>
+            <span v-else>已授权</span>
+          </td>
         </tr>
         <tr>
           <td></td>
@@ -89,6 +95,8 @@
     <!-- 解绑银行卡 -->
     <unlock-bank-card :visible="dialogUnlockBankCardVisible"
                       @close="closeUnlockBankCard"></unlock-bank-card>
+  
+    <request-bank-from :request-data="requestBankData"></request-bank-from>
   </div>
 </template>
 
@@ -96,25 +104,39 @@
   import { mapGetters } from 'vuex';
   import HthPanel from 'common/Panel/index.vue';
   import UnlockBankCard from '../components/UnlockBankCard.vue';
+  import RequestBankFrom from '../components/RequestBankFrom.vue';
+  import { fetchAutomaticBidding, fetchAutomaticDebtTransfer, fetchAutomaticRepayment } from 'api/home/account-set';
 
   export default {
     components: {
       HthPanel,
-      UnlockBankCard
+      UnlockBankCard,
+      RequestBankFrom
     },
     computed: {
       ...mapGetters([
         'realName',
         'mobile',
         'email',
+        'status',
+        'uuid',
         'bankCard',
         'accountId',
-        'transactionPasswordStatus'
+        'transactionPasswordStatus',
+        'isAutomaticBidding',
+        'isAutomaticDebtTransfer',
+        'isAutomaticRepayment'
       ])
     },
     data() {
       return {
-        dialogUnlockBankCardVisible: false
+        dialogUnlockBankCardVisible: false,
+        signingData: {
+          source: 'pc',
+          callbackUrl: 'http://www.baidu.com',
+          sessionId: ''
+        },
+        requestBankData: {}
       }
     },
     methods: {
@@ -127,6 +149,42 @@
       },
       closeUnlockBankCard() {
         this.dialogUnlockBankCardVisible = false;
+      },
+      automaticBidding() {
+        if (this.status === 0) {
+          this.$message({
+            message: '请先开户',
+            type: 'error'
+          });
+        }
+        this.signingData.sessionId = this.uuid;
+        fetchAutomaticBidding(this.signingData)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.requestBankData = response.data.data;
+            }
+          })
+      },
+      automaticDebtTransfer() {
+        if (!this.isAutomaticBidding) {
+          this.$message({
+            message: '请先授权自动投标签约',
+            type: 'error'
+          });
+        }
+        this.signingData.sessionId = this.uuid;
+        fetchAutomaticDebtTransfer(this.signingData)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.requestBankData = response.data.data;
+            }
+          })
+      },
+      automaticRepayment() {
+        fetchAutomaticRepayment()
+          .then(response => {
+            console.log(response);
+          })
       }
     }
   }

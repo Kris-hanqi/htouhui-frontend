@@ -50,13 +50,6 @@
 
 <style lang="scss">
   .recharge-wrapper {
-    .split-line {
-      height: 3px;
-      margin: 30px 0;
-      border-top: dashed 1px #aab2c9;
-      border-bottom: dashed 1px #aab2c9;
-    }
-  
     .recharge-wrapper__steps {
       p {
         margin-top: 24px;

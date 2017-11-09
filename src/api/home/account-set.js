@@ -62,4 +62,32 @@ export function fetchResetTransactionPassword(data) {
   })
 }
 
+/** 自动投标签约 */
+export function fetchAutomaticBidding(data) {
+  return fetch({
+    url: 'user/autoBidAuth',
+    method: 'post',
+    data
+  })
+}
+
+/** 自动债转签约 */
+export function fetchAutomaticDebtTransfer(data) {
+  return fetch({
+    url: 'user/autoCreditInvestAuth',
+    method: 'post',
+    data
+  })
+}
+
+/** 自动还款签约 */
+export function fetchAutomaticRepayment() {
+  return fetch({
+    url: 'user/authorizeAutoRepay',
+    method: 'get'
+  })
+}
+
+
+
 

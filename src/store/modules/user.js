@@ -55,8 +55,12 @@ const user = {
     bankCard: '', // 银行卡号
     bankName: '', // 银行名称
     accountId: '', // 电子账号
+    IDNumber: '',
     email: '', // 电子邮箱
     transactionPasswordStatus: false, // 是否设置交易密码
+    isAutomaticBidding: false, // 是否自动投标授权
+    isAutomaticDebtTransfer: false, // 是否自动债转授权
+    isAutomaticRepayment: false, // 是否自动还款
     showNovicePlan: false,
     showNovicePlanMessage: true,
     isBorrower: false // 是否是借款人
@@ -87,6 +91,9 @@ const user = {
     SET_ACCOUNT_ID: (state, accountId) => {
       state.accountId = accountId;
     },
+    SET_ID_NUMBER: (state, IDNumber) => {
+      state.IDNumber = IDNumber;
+    },
     SET_BANK_CARD: (state, bankCard) => {
       state.bankCard = bankCard;
     },
@@ -104,6 +111,15 @@ const user = {
     },
     SET_IS_BORROWER: (state, isBorrower) => {
       state.isBorrower = isBorrower;
+    },
+    SET_IS_AUTOMATIC_BIDDING: (state, isAutomaticBidding) => {
+      state.isAutomaticBidding = isAutomaticBidding;
+    },
+    SET_IS_AUTOMATIC_DEBT_TRANSFER: (state, isAutomaticDebtTransfer) => {
+      state.isAutomaticDebtTransfer = isAutomaticDebtTransfer;
+    },
+    SET_IS_AUTOMATIC_REPAYMENT: (state, isAutomaticRepayment) => {
+      state.isAutomaticRepayment = isAutomaticRepayment;
     }
   },
 
@@ -123,12 +139,16 @@ const user = {
             commit('SET_BANK_NAME', data.bankName);
             commit('SET_BANK_CARD', data.bankCard);
             commit('SET_ACCOUNT_ID', data.accountId);
+            commit('SET_ID_NUMBER', data.idCard);
             commit('SET_STATUS', status);
             commit('SET_TRANSACTION_PASSWORD_STATUS', data.isSetPassWord);
             commit('SET_EMAIL', data.email);
             commit('SET_SHOW_NOVICE_PLAN', showNovicePlan);
             commit('SET_SHOW_NOVICE_PLAN_MESSAGE', showNovicePlanMessage);
             commit('SET_IS_BORROWER', isBorrower(data));
+            commit('SET_IS_AUTOMATIC_BIDDING', data.isAutoBidAuth);
+            commit('SET_IS_AUTOMATIC_DEBT_TRANSFER', data.isAutoInvestAuth);
+            commit('SET_IS_AUTOMATIC_REPAYMENT', data.isAutoRepayAuth);
           }
           resolve(response)
         }).catch(error => {
