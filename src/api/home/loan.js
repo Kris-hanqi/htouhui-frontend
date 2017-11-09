@@ -28,10 +28,9 @@ export function fetchRecentlyRepaymentPageList(data) {
 }
 
 /** 获取近期还款统计结果 */
-export function fetchRecentlyRepaymentStatistic(data) {
+export function fetchRecentlyRepaymentStatistic() {
   return fetch({
     url: 'user/currentmonthstatistic',
-    method: 'get',
-    params: data
+    method: 'get'
   })
 }

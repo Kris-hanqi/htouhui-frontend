@@ -20,7 +20,7 @@
           </div>
           <!-- 广告位 -->
           <div v-else>
-            <div class="prompt-ad" v-show="ARecommend">
+            <div class="prompt-ad" v-if="ARecommend">
               <!-- 标题 -->
               <div>
                 <span class="title">{{ARecommend.title}}</span>
