@@ -55,6 +55,7 @@ const user = {
     bankCard: '', // 银行卡号
     bankName: '', // 银行名称
     accountId: '', // 电子账号
+    IDNumber: '',
     email: '', // 电子邮箱
     transactionPasswordStatus: false, // 是否设置交易密码
     showNovicePlan: false,
@@ -86,6 +87,9 @@ const user = {
     },
     SET_ACCOUNT_ID: (state, accountId) => {
       state.accountId = accountId;
+    },
+    SET_ID_NUMBER: (state, IDNumber) => {
+      state.IDNumber = IDNumber;
     },
     SET_BANK_CARD: (state, bankCard) => {
       state.bankCard = bankCard;
@@ -123,6 +127,7 @@ const user = {
             commit('SET_BANK_NAME', data.bankName);
             commit('SET_BANK_CARD', data.bankCard);
             commit('SET_ACCOUNT_ID', data.accountId);
+            commit('SET_ID_NUMBER', data.idCard);
             commit('SET_STATUS', status);
             commit('SET_TRANSACTION_PASSWORD_STATUS', data.isSetPassWord);
             commit('SET_EMAIL', data.email);
