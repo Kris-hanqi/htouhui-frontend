@@ -79,7 +79,7 @@
         total: 0,
         messageList: null,
         messageQuery: {
-          joinPlanId: this.$route.params.id,
+          joinPlanId: this.$route.params.id
         }
       }
     },
