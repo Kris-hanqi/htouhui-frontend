@@ -17,6 +17,8 @@
               <div slot="content">贴息金额计算方式以<br/>四舍五入至后两位</div>
               <i class="question"></i>
             </el-tooltip>
+            <img class="status-img" v-if="messageList.status == 'transfer_fail'" src="../../../assets/images/home/icon-haveToAccount.png" alt=""/>
+            <i class="status-txt" v-else>未发放</i>
           </p>
         </div>
       </div>
@@ -137,6 +139,10 @@
         }
       }
 
+      .color-txt {
+        position: relative;
+      }
+
       .color-txt span {
         color: #ff4a33;
       }
@@ -149,6 +155,28 @@
         margin-left: 5px;
         cursor: pointer;
       }
+    }
+
+    .status-txt {
+      display: inline-block;
+      width: 38px;
+      height: 15px;
+      box-sizing: border-box;
+      border-radius: 2px;
+      background-color: #ee544b;
+      border: solid 1px #dd443b;
+      line-height: 15px;
+      text-align: center;
+      font-size: 9px;
+      color: #fff;
+    }
+
+    .status-img {
+      position: absolute;
+      bottom: -10px;
+      right: 0;
+      width: 80px;
+      height: 78px;
     }
   }
 
