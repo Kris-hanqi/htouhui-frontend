@@ -32,7 +32,7 @@
             <input style="width: 266px;" v-model="bankCard" class="form-control" type="text" placeholder="请输入银行卡号">
           </div>
         </div>
-        <button type="button" class="hth-btn hth-btn-primary hth-btn-lg">提交</button>
+        <button type="button" @click="bindBankCard" class="hth-btn hth-btn-primary hth-btn-lg">提交</button>
       </form>
       <div class="split-line"></div>
       <div class="hth-tips">
@@ -69,14 +69,16 @@
     },
     methods: {
       bindBankCard() {
-        fetchBindBankCard(this.bankCard).then(response => {
-          console.log(response);
-        })
+        fetchBindBankCard(this.bankCard)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.$message({
+                message: '银行卡绑定成功！',
+                type: 'success'
+              });
+            }
+          })
       }
     }
   }
 </script>
-
-<style lang="scss">
-
-</style>
