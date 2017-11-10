@@ -3,16 +3,16 @@
     <p class="account">我的账户</p>
     <ul>
       <li class="nav">
-        <router-link to="/account" active-class="active">账户概览</router-link>
+        <router-link to="/account/index" active-class="active">账户概览</router-link>
       </li>
       <li class="nav">
-        <router-link to="/funds" active-class="active">资金流水</router-link>
+        <router-link to="/account/funds" active-class="active">资金流水</router-link>
       </li>
       <li class="nav">
-        <router-link to="/recharge" active-class="active">我要充值</router-link>
+        <router-link to="/account/recharge" active-class="active">我要充值</router-link>
       </li>
       <li class="nav">
-        <router-link to="/withdraw" active-class="active">我要提现</router-link>
+        <router-link to="/account/withdraw" active-class="active">我要提现</router-link>
       </li>
     </ul>
     <p class="investment">我的投资</p>
@@ -39,25 +39,25 @@
     <p class="borrow-money" v-if="showLoan">我的借款</p>
     <ul v-if="showLoan">
       <li class="nav">
-        <router-link to="/loanRecord" active-class="active">借款记录</router-link>
+        <router-link to="/loan/record" active-class="active">借款记录</router-link>
       </li>
       <li class="nav">
-        <router-link to="/recentlyRepayment" active-class="active">近期还款</router-link>
+        <router-link to="/loan/repayment" active-class="active">近期还款</router-link>
       </li>
     </ul>
     <p class="new-platform-rewards">平台奖励</p>
     <ul>
       <li class="nav">
-        <router-link to="/coupon" active-class="active">优惠券</router-link>
+        <router-link to="/reward/coupon" active-class="active">优惠券</router-link>
       </li>
     </ul>
     <p class="account-management">账户管理</p>
     <ul>
       <li class="nav">
-        <router-link to="/accountSet" active-class="active">账户设置</router-link>
+        <router-link to="/accountManage/set/index" active-class="active">账户设置</router-link>
       </li>
       <li class="nav">
-        <router-link to="/notification" active-class="active">站内通知</router-link>
+        <router-link to="/accountManage/notification" active-class="active">站内通知</router-link>
       </li>
     </ul>
   </div>

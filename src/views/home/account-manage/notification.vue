@@ -38,7 +38,7 @@
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
     padding-left: 28px;
     padding-right: 20px;
-
+    
     .notification-title {
       padding-top: 21px;
       margin-bottom: 32px;
@@ -46,10 +46,10 @@
       font-size: 20px;
       color: #274161;
     }
-
+    
     .notification-data {
       text-align: center;
-
+      
       img {
         margin-top: 80px;
       }

@@ -95,7 +95,7 @@
     <!-- 解绑银行卡 -->
     <unlock-bank-card :visible="dialogUnlockBankCardVisible"
                       @close="closeUnlockBankCard"></unlock-bank-card>
-  
+    
     <request-bank-from :request-data="requestBankData"></request-bank-from>
   </div>
 </template>
@@ -106,7 +106,7 @@
   import UnlockBankCard from '../components/UnlockBankCard.vue';
   import RequestBankFrom from '../components/RequestBankFrom.vue';
   import { fetchAutomaticBidding, fetchAutomaticDebtTransfer, fetchAutomaticRepayment } from 'api/home/account-set';
-
+  
   export default {
     components: {
       HthPanel,
@@ -194,7 +194,7 @@
   .account-set-wrapper {
     width: 832px;
     padding-bottom: 75px;
-
+    
     button.hth-btn {
       width: 91px;
       height: 28px;
@@ -203,29 +203,29 @@
       border: solid 1px #727e90;
       color: #727e90;
       cursor: pointer;
-
+      
       &:hover {
         background-color: #7c86a2;
         border: solid 1px #727e90;
         color: #fff;
       }
-
+      
       &.btn-blue {
         background-color: #fff;
         border: solid 1px #0671f0;
         color: #0671f0;
-
+        
         &:hover {
           background-color: #0671f0;
           color: #fff;
         }
       }
     }
-
+    
     .accountSetTable {
       width: 755px;
       margin-left: 20px;
-
+      
       td {
         font-size: 14px;
         color: #35385a;
@@ -233,33 +233,33 @@
         padding-top: 18px;
         padding-bottom: 18px;
       }
-
+      
       td:first-child {
         font-size: 16px;
       }
-
+      
       td.tableSmallFont {
         font-size: 12px;
         color: #727e90;
       }
-
+      
       td.tableSmallFontColor {
         font-size: 12px;
         color: #e75456;
       }
-
+      
       td.tableSmallFontColor01 {
         color: #ff7900;
       }
-
+      
       td.borderLine {
         border-bottom: solid 2px #dfe8f0 !important;
       }
-
+      
       td.tablePadding {
         padding-top: 3px;
       }
-
+      
       .iconDangerous {
         display: inline-block;
         vertical-align: bottom;
@@ -268,16 +268,16 @@
         background: url(../../../assets/images/home/center-ico-dangerous.png) no-repeat;
         margin-left: 5px;
       }
-
+      
       td:last-child {
         width: 100px;
         text-align: center;
       }
-
+      
       td.textAlignLeft {
         text-align: left;
       }
-
+      
       tr.borderNone td {
         border-bottom: none;
       }
