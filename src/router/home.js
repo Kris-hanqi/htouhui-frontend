@@ -175,9 +175,17 @@ export const constantRouterMap = [
         ]
       },
       {
-        path: '/coupon',
-        name: '优惠券',
-        component: _import('home/coupon/index')
+        path: '/reward',
+        name: '平台奖励',
+        component: Public,
+        redirect: '/reward/coupon',
+        children: [
+          {
+            path: 'coupon',
+            name: '优惠券',
+            component: _import('home/reward/coupon')
+          }
+        ]
       },
       {
         path: '/accountSet',

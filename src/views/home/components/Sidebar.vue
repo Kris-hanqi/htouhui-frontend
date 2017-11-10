@@ -48,7 +48,7 @@
     <p class="new-platform-rewards">平台奖励</p>
     <ul>
       <li class="nav">
-        <router-link to="/coupon" active-class="active">优惠券</router-link>
+        <router-link to="/reward/coupon" active-class="active">优惠券</router-link>
       </li>
     </ul>
     <p class="account-management">账户管理</p>
