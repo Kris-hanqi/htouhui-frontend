@@ -55,7 +55,7 @@ const user = {
     bankCard: '', // 银行卡号
     bankName: '', // 银行名称
     accountId: '', // 电子账号
-    IDNumber: '',
+    IDNumber: '', // 身份证号
     email: '', // 电子邮箱
     transactionPasswordStatus: false, // 是否设置交易密码
     isAutomaticBidding: false, // 是否自动投标授权

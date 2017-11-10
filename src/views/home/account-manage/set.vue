@@ -2,30 +2,35 @@
   <div class="account-set-wrapper">
     <hth-panel title="账户设置">
       <table border="0" cellspacing="0" cellpadding="0" class="accountSetTable">
-        <tr>
-          <td>真实姓名</td>
-          <td>{{ realName }}</td>
-          <td>已认证</td>
+        <tr><td>真实姓名</td><td>{{ realName || '无' }}</td><td>已认证</td>
         </tr>
-        <tr>
-          <td>身份证</td>
-          <td>010***********330</td>
-          <td>已认证</td>
-        </tr>
-        <tr>
-          <td>存管手机</td>
-          <td>137*****330</td>
-          <td>已认证</td>
-        </tr>
+        <tr><td>身份证</td><td>{{ IDNumber || '无' }}</td><td>已认证</td></tr>
+        <tr><td>存管手机</td><td>137*****330</td><td>已认证</td></tr>
         <tr>
           <td>银行卡</td>
-          <td><i>{{ bankCard ? bankCard : '未绑定' }}</i><span v-if="bankCard">（此卡是默认提现卡）</span></td>
-          <td><button class="hth-btn" @click="operationBackCard" :class="{ 'btn-blue': !bankCard }">{{ bankCard ? '解绑' : '绑定' }}</button></td>
+          <td>
+            <i>{{ bankCard ? bankCard : '未绑定' }}</i>
+            <span v-if="bankCard">（此卡是默认提现卡）</span>
+          </td>
+          <td>
+            <button class="hth-btn"
+                    @click="operationBackCard"
+                    :class="{ 'btn-blue': !bankCard }">
+              {{ bankCard ? '解绑' : '绑定' }}</button></td>
         </tr>
         <tr>
           <td>电子账号</td>
-          <td>{{ accountId }}<button class="btnBlue hth-btn">复制</button></td>
-          <td>已认证</td>
+          <td>{{ accountId }} &nbsp;&nbsp;
+              <button v-clipboard:copy="accountId"
+                      v-clipboard:success="handleCopySuccess"
+                      class="btnBlue hth-btn">复制</button>
+          </td>
+          <td>
+            <button v-if="!accountId" class="hth-btn"
+                    @click="operationAccount"
+                    :class="{ 'btn-blue': !accountId }">开户</button>
+            <span v-else>已认证</span>
+          </td>
         </tr>
         <tr class="borderNone">
           <td>已授权的服务</td>
@@ -46,7 +51,7 @@
         <tr>
           <td></td>
           <td>自动还款授权</td>
-          <td><button class="hth-btn">解约</button></td>
+          <td><button class="hth-btn" @click="automaticRepayment" :class="{ 'btn-blue': !isAutomaticRepayment }">{{ isAutomaticRepayment ? '解约' : '授权' }}</button></td>
         </tr>
         <tr class="borderNone">
           <td>交易密码</td>
@@ -99,7 +104,12 @@
     <!-- 解绑银行卡 -->
     <unlock-bank-card :visible="dialogUnlockBankCardVisible"
                       @close="closeUnlockBankCard"></unlock-bank-card>
+  
+    <!-- 开户组件 -->
+    <open-account :visible="dialogOpenAccountVisible"
+                  @close="closeOpenAccount"></open-account>
     
+    <!-- 网关接口调用组件 -->
     <request-bank-from :request-data="requestBankData"></request-bank-from>
   </div>
 </template>
@@ -107,6 +117,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import HthPanel from 'common/Panel/index.vue';
+  import OpenAccount from '../components/OpenAccount.vue';
   import UnlockBankCard from '../components/UnlockBankCard.vue';
   import RequestBankFrom from '../components/RequestBankFrom.vue';
   import { fetchAutomaticBidding, fetchAutomaticDebtTransfer, fetchAutomaticRepayment } from 'api/home/account-set';
@@ -114,6 +125,7 @@
   export default {
     components: {
       HthPanel,
+      OpenAccount,
       UnlockBankCard,
       RequestBankFrom
     },
@@ -123,6 +135,7 @@
         'mobile',
         'email',
         'status',
+        'IDNumber',
         'uuid',
         'bankCard',
         'accountId',
@@ -134,6 +147,7 @@
     },
     data() {
       return {
+        dialogOpenAccountVisible: false,
         dialogUnlockBankCardVisible: false,
         signingData: {
           source: 'pc',
@@ -150,6 +164,14 @@
         } else {
           this.$router.push('/accountManage/set/bindBackCard');
         }
+      },
+      operationAccount() {
+        if (this.status === 0) {
+          this.dialogOpenAccountVisible = true
+        }
+      },
+      closeOpenAccount() {
+        this.dialogOpenAccountVisible = false;
       },
       closeUnlockBankCard() {
         this.dialogUnlockBankCardVisible = false;
@@ -169,6 +191,9 @@
             }
           })
       },
+      handleCopySuccess() {
+        this.$message('拷贝成功');
+      },
       automaticDebtTransfer() {
         if (!this.isAutomaticBidding) {
           this.$message({
@@ -187,7 +212,9 @@
       automaticRepayment() {
         fetchAutomaticRepayment()
           .then(response => {
-            console.log(response);
+            if (response.data.meta.code) {
+              this.$store.commit('SET_IS_AUTOMATIC_REPAYMENT', !this.isAutomaticRepayment);
+            }
           })
       }
     }
@@ -205,6 +232,7 @@
       border-radius: 100px;
       background-color: #fff;
       border: solid 1px #727e90;
+      padding: 4px 12px;
       color: #727e90;
       cursor: pointer;
       
