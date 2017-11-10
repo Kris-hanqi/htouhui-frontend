@@ -15,27 +15,35 @@ export const constantRouterMap = [
   {
     path: '/',
     component: Layout,
-    redirect: '/account',
+    redirect: '/account/index',
     children: [
-      {
+      { // 我的账户路由定义
         path: '/account',
-        name: '账户概览',
-        component: _import('home/account/index')
-      },
-      {
-        path: '/funds',
-        name: '资金流水',
-        component: _import('home/account/funds')
-      },
-      {
-        path: '/recharge',
-        name: '我要充值',
-        component: _import('home/account/recharge')
-      },
-      {
-        path: '/withdraw',
-        name: '我要提现',
-        component: _import('home/account/withdraw')
+        name: '我的账户',
+        component: Public,
+        redirect: '/account/index',
+        children: [
+          {
+            path: 'index',
+            name: '账户概览',
+            component: _import('home/account/index')
+          },
+          {
+            path: 'funds',
+            name: '资金流水',
+            component: _import('home/account/funds')
+          },
+          {
+            path: 'recharge',
+            name: '我要充值',
+            component: _import('home/account/recharge')
+          },
+          {
+            path: 'withdraw',
+            name: '我要提现',
+            component: _import('home/account/withdraw')
+          }
+        ]
       },
       {
         path: '/planNovice',
@@ -149,14 +157,22 @@ export const constantRouterMap = [
         component: _import('home/claims/index')
       },
       {
-        path: '/loanRecord',
-        name: '借款记录',
-        component: _import('home/loan/LoanRecord')
-      },
-      {
-        path: '/recentlyRepayment',
-        name: '最近借款',
-        component: _import('home/loan/RecentlyRepayment')
+        path: '/loan',
+        name: '我的借款',
+        component: Public,
+        redirect: '/loan/record',
+        children: [
+          {
+            path: 'record',
+            name: '借款记录',
+            component: _import('home/loan/LoanRecord')
+          },
+          {
+            path: 'repayment',
+            name: '近期还款',
+            component: _import('home/loan/RecentlyRepayment')
+          }
+        ]
       },
       {
         path: '/coupon',

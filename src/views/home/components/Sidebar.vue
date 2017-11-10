@@ -3,16 +3,16 @@
     <p class="account">我的账户</p>
     <ul>
       <li class="nav">
-        <router-link to="/account" active-class="active">账户概览</router-link>
+        <router-link to="/account/index" active-class="active">账户概览</router-link>
       </li>
       <li class="nav">
-        <router-link to="/funds" active-class="active">资金流水</router-link>
+        <router-link to="/account/funds" active-class="active">资金流水</router-link>
       </li>
       <li class="nav">
-        <router-link to="/recharge" active-class="active">我要充值</router-link>
+        <router-link to="/account/recharge" active-class="active">我要充值</router-link>
       </li>
       <li class="nav">
-        <router-link to="/withdraw" active-class="active">我要提现</router-link>
+        <router-link to="/account/withdraw" active-class="active">我要提现</router-link>
       </li>
     </ul>
     <p class="investment">我的投资</p>
@@ -39,10 +39,10 @@
     <p class="borrow-money" v-if="showLoan">我的借款</p>
     <ul v-if="showLoan">
       <li class="nav">
-        <router-link to="/loanRecord" active-class="active">借款记录</router-link>
+        <router-link to="/loan/record" active-class="active">借款记录</router-link>
       </li>
       <li class="nav">
-        <router-link to="/recentlyRepayment" active-class="active">近期还款</router-link>
+        <router-link to="/loan/repayment" active-class="active">近期还款</router-link>
       </li>
     </ul>
     <p class="new-platform-rewards">平台奖励</p>
