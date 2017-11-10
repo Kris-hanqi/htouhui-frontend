@@ -52,7 +52,7 @@
           <p>持有期限</p>
         </div>
         <div class="newUser-plan-money">
-          <p class="money"><span>{{ joinPlanList.joinMoney }}</span>元</p>
+          <p class="money"><span>{{ joinPlanList.joinMoney | currency('') }}</span>元</p>
           <p>加入金额</p>
         </div>
       </div>
@@ -62,19 +62,39 @@
         <p class="status">状态<span>{{ joinPlanList.status == matched ? '全部匹配' : '匹配中' }}</span></p>
       </div>
     </div>
-    
+
     <!--table-->
     <div class="message">
       <p class="title">您购买的债权信息</p>
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
-        <el-table-column prop="loanMoney" label="借款金额" width="100"></el-table-column>
-        <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
+        <el-table-column prop="loanMoney" label="借款金额" width="100">
+          <template scope="scope">
+            {{ scope.row.loanMoney | currency('') + '元' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="rate" label="往期年利率" width="70">
+          <template scope="scope">
+            {{ scope.row.rate + '%' }}
+          </template>
+        </el-table-column>
         <el-table-column prop="perid" label="借款期限" width="60"></el-table-column>
-        <el-table-column prop="investMoney" label="投资金额" width="100"></el-table-column>
+        <el-table-column prop="investMoney" label="投资金额" width="100">
+          <template scope="scope">
+            {{ scope.row.investMoney | currency('') + '元' }}
+          </template>
+        </el-table-column>
         <el-table-column prop="repayTimeFormat" label="还款时间" width="80"></el-table-column>
-        <el-table-column prop="earnings" label="已收本息"></el-table-column>
-        <el-table-column prop="uncollectedRepayMoney" label="待收本息"></el-table-column>
+        <el-table-column prop="earnings" label="已收本息">
+          <template scope="scope">
+            {{ scope.row.earnings | currency('') + '元' }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="uncollectedRepayMoney" label="待收本息">
+          <template scope="scope">
+            {{ scope.row.uncollectedRepayMoney | currency('') + '元' }}
+          </template>
+        </el-table-column>
         <el-table-column prop="status" label="状态" width="50"></el-table-column>
         <el-table-column prop="contract" label="合同" width="40">
           <template scope="scope">
@@ -82,7 +102,7 @@
           </template>
         </el-table-column>
       </el-table>
-      
+
       <div class="pages">
         <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
         <el-pagination @current-change="handleCurrentChange"
@@ -101,7 +121,7 @@
   import { joinPlan } from 'api/home/joinPlan';
   import { queryUserInvestList } from 'api/home/queryUserJoinInvestList';
   import interestRate from 'components/interest-rate';
-  
+
   export default {
     components: {
       interestRate
@@ -141,7 +161,6 @@
     methods: {
       planList() {
         planNovice().then(data => {
-          console.log(data);
           if (data.data.meta.code === 200) {
             this.planListData = data.data.data;
             console.log('新手计划标的：' + this.planListData);
@@ -187,15 +206,15 @@
     padding: 20px 15px;
     background-color: #fff;
     margin-bottom: 20px;
-    
+
     .newUser-plan-title {
       width: 100%;
       margin-bottom: 50px;
-      
+
       p {
         font-size: 20px;
         color: #274161;
-        
+
         span {
           margin-left: 12px;
           font-size: 14px;
@@ -204,61 +223,61 @@
       }
     }
   }
-  
+
   .newUser-plan-main {
     width: 100%;
     margin-bottom: 40px;
-    
+
     > div {
       display: inline-block;
       width: 27%;
       text-align: center;
-      
+
       p {
         font-size: 14px;
         color: #727e90;
-        
+
         span {
           font-size: 36px;
         }
       }
-      
+
       .rate {
         font-size: 20px;
         color: #ff4a33;
-        
+
         .small-newUser-plan-rate {
           font-size: 24px;
         }
       }
-      
+
       .day {
         font-size: 20px;
         color: #394b67;
       }
-      
+
       .way {
         line-height: 1.5;
         font-size: 30px;
         color: #394b67;
       }
-      
+
       .money {
         font-size: 20px;
         color: #394b67;
       }
     }
-    
+
     .newUser-plan-day {
       margin: 0 50px;
     }
   }
-  
+
   .newUser-plan-btn {
     width: 100%;
     box-sizing: border-box;
     padding-right: 75px;
-    
+
     span {
       margin-left: 5px;
       border-radius: 40px;
@@ -268,7 +287,7 @@
       font-size: 14px;
       color: #727e90;
     }
-    
+
     .newUser-plan-join {
       float: right;
       margin-top: -15px;
@@ -277,7 +296,7 @@
       padding: 13px 34px;
       font-size: 18px;
       color: #0573f4;
-      
+
       &:hover {
         border: none;
         background-color: #378ff6;
@@ -285,7 +304,7 @@
       }
     }
   }
-  
+
   .message {
     width: 100%;
     height: 553px;
@@ -293,7 +312,7 @@
     padding: 20px 5px;
     background-color: #fff;
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-    
+
     .title {
       font-size: 20px;
       color: #274161;
@@ -301,26 +320,26 @@
       margin-bottom: 25px;
     }
   }
-  
+
   .newUser-plan-bottom {
     width: 100%;
     height: auto;
     border-top: solid 1px #dfe8f0;
     padding-top: 20px;
     padding-left: 15px;
-    
+
     p {
       display: inline-block;
       margin-right: 60px;
       font-size: 16px;
       color: #394b67;
-      
+
       span {
         margin-left: 10px;
       }
     }
   }
-  
+
   .icon-download {
     width: 20px;
     height: 21px;

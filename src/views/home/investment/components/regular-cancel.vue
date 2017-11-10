@@ -5,7 +5,7 @@
       <el-table-column prop="investTime" label="投资时间" width="80"></el-table-column>
       <el-table-column prop="investCash" label="投资金额" width="100">
         <template scope="scope">
-          {{ scope.row.investCash + '元' }}
+          {{ scope.row.investCash | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="investRate" label="年利率" width="60">

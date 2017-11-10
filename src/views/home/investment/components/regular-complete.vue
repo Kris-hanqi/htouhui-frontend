@@ -5,7 +5,7 @@
       <el-table-column prop="investTime" label="投资时间"></el-table-column>
       <el-table-column prop="investCash" label="投资金额">
         <template scope="scope">
-          {{ scope.row.investCash + '元' }}
+          {{ scope.row.investCash | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="investRate" label="年利率">
@@ -20,7 +20,7 @@
       </el-table-column>
       <el-table-column prop="profit" label="收益">
         <template scope="scope">
-          {{ scope.row.profit + '元' }}
+          {{ scope.row.profit | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="settlementTime" label="结清时间"></el-table-column>
@@ -49,32 +49,32 @@
           <el-table-column prop="period" label="期数" fixed width="30"></el-table-column>
           <el-table-column prop="corpus" label="本金">
             <template scope="scope">
-              {{ scope.row.corpus + '元' }}
+              {{ scope.row.corpus | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="interest" label="利息">
             <template scope="scope">
-              {{ scope.row.interest + '元' }}
+              {{ scope.row.interest | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="tiexiMoney" label="贴息">
             <template scope="scope">
-              {{ scope.row.tiexiMoney + '元' }}
+              {{ scope.row.tiexiMoney | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="defaultInterest" label="罚息">
             <template scope="scope">
-              {{ scope.row.defaultInterest + '元' }}
+              {{ scope.row.defaultInterest | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="fee" label="手续费">
             <template scope="scope">
-              {{ scope.row.fee + '元' }}
+              {{ scope.row.fee | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="loanUserFee" label="总额">
             <template scope="scope">
-              {{ scope.row.loanUserFee + '元' }}
+              {{ scope.row.loanUserFee | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="repayDay" label="还款日"></el-table-column>

@@ -42,7 +42,7 @@
       <el-table-column prop="successExitTime" label="退出成功时间" width="135"></el-table-column>
       <el-table-column prop="actualExitMoney" label="实际到账金额">
         <template scope="scope">
-          {{ scope.row.actualExitMoney | currency('') + '元' }}
+          {{ scope.row.actualExitMoney | currency('') + '元 ' }}
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="80">
