@@ -61,28 +61,62 @@ export const constantRouterMap = [
         ]
       },
       {
-        path: '/planNovice',
+        path: '/investment',
         meta: {
-          title: '新手计划'
+          title: '我的投资'
         },
-        name: 'planNovice',
-        component: _import('home/investment/PlanNovice')
-      },
-      {
-        path: '/plan21Day',
+        name: 'investment',
         component: Public,
-        redirect: '/plan21Day/index',
+        redirect: '/investment/plan21Day',
         children: [
           {
-            path: 'index',
-            name: '21天计划',
-            component: _import('home/investment/Plan21day')
+            path: 'planNovice',
+            meta: {
+              title: '新手计划'
+            },
+            name: 'investmentPlanNovice',
+            component: _import('home/investment/PlanNovice')
           },
           {
-            path: 'lookRegular/:id',
-            name: '查看债权',
-            props: true,
-            component: _import('home/investment/components/lookRegular')
+            path: 'plan21Day',
+            meta: {
+              title: '21天计划'
+            },
+            name: 'investmentPlan21Day',
+            component: Public,
+            redirect: '/investment/plan21Day/index',
+            children: [
+              {
+                path: 'index',
+                name: 'investmentPlan21DayIndex',
+                component: _import('home/investment/Plan21day')
+              },
+              {
+                path: 'lookRegular/:id',
+                meta: {
+                  title: '查看债权'
+                },
+                name: 'investmentPlan21DayLookRegular',
+                props: true,
+                component: _import('home/investment/components/lookRegular')
+              }
+            ]
+          },
+          {
+            path: 'regular',
+            meta: {
+              title: '定期项目'
+            },
+            name: 'investmentRegular',
+            component: _import('home/investment/Regular')
+          },
+          {
+            path: 'claims',
+            name: 'investmentClaims',
+            meta: {
+              title: '债券转让'
+            },
+            component: _import('home/investment/claims')
           }
         ]
       },
@@ -163,16 +197,6 @@ export const constantRouterMap = [
             component: _import('home/rolling21/lookRegular-outRecord')
           }
         ]
-      },
-      {
-        path: '/regular',
-        name: '定期项目',
-        component: _import('home/investment/Regular')
-      },
-      {
-        path: '/claims',
-        name: '债券转让',
-        component: _import('home/claims/index')
       },
       {
         path: '/loan',

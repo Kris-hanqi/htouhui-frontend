@@ -78,7 +78,7 @@
                 message: '邮箱绑定成功！',
                 type: 'success'
               });
-              this.$router.push('/accountSet/index')
+              this.$router.push('/accountManage/set/index')
             }
           });
       }

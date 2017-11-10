@@ -13,9 +13,9 @@
 </template>
 
 <script>
-  import hasTransferred from './hasTransferred.vue';
-  import haveTurnedOut from './haveTurnedOut.vue';
-
+  import hasTransferred from './components/hasTransferred.vue';
+  import haveTurnedOut from './components/haveTurnedOut.vue';
+  
   export default {
     components: {
       hasTransferred,
@@ -37,7 +37,7 @@
     padding: 20px 15px;
     background-color: #fff;
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-
+    
     .title {
       margin-bottom: 25px;
       font-size: 20px;

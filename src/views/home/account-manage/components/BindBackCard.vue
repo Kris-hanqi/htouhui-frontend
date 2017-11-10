@@ -80,7 +80,7 @@
             if (response.data.meta.code === 200) {
               this.$store.commit('SET_BANK_CARD', this.bankCard);
               this.bankCard = '';
-              this.$router.push('/accountSet');
+              this.$router.push('/accountManage/set/index');
               this.$message({
                 message: '银行卡绑定成功！',
                 type: 'success'
