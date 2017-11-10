@@ -64,7 +64,7 @@
 </template>
 
 <script>
-  import { outRecord } from 'api/home/quantify';
+  import { getAppointmentExitInfo } from 'api/home/getAppointmentExitInfo';
   import { getStartAndEndTime, getDateString } from '@/utils';
 
   export default {
@@ -122,7 +122,7 @@
           }
         }
         this.listLoading = true;
-        outRecord(this.listQuery).then(response => {
+        getAppointmentExitInfo(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;

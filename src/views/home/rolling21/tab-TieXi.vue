@@ -17,7 +17,7 @@
               <div slot="content">贴息金额计算方式以<br/>四舍五入至后两位</div>
               <i class="question"></i>
             </el-tooltip>
-            <img class="status-img" v-if="messageList.status == 'transfer_fail'" src="../../../assets/images/home/icon-haveToAccount.png" alt=""/>
+            <img class="status-img" v-if="messageList.status == 'transfered'" src="../../../assets/images/home/icon-haveToAccount.png" alt=""/>
             <i class="status-txt" v-else>未发放</i>
           </p>
         </div>
@@ -87,8 +87,6 @@
               this.showNoAward = false;
               this.messageList = data.data;
               this.list = data.data.data;
-              console.log('贴息');
-              console.log(this.messageList);
               this.total = data.data.count || 0;
             }
           }

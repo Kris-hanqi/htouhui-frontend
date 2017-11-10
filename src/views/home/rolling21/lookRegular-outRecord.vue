@@ -33,7 +33,11 @@
             {{ scope.row.loanMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="rate" label="往期年化利率" width="70"></el-table-column>
+        <el-table-column prop="rate" label="往期年化利率" width="100">
+          <template scope="scope">
+            {{ scope.row.rate + '%' }}
+          </template>
+        </el-table-column>
         <el-table-column prop="perid" label="借款期限" width="60">
           <template scope="scope">
             {{ scope.row.perid | currency('') + '天' }}

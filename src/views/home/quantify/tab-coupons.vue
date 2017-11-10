@@ -13,7 +13,7 @@
           <p>加入时间：<span class="roboto-regular">{{ messageList.joinTime }}</span></p>
           <p class="test-box">
             到账时间：<span class="roboto-regular">{{ messageList.couponEndTime }}</span>
-            <img class="status-img" v-if="messageList.status == 'transfer_fail'" src="../../../assets/images/home/icon-haveToAccount.png" alt=""/>
+            <img class="status-img" v-if="messageList.status == 'transfered'" src="../../../assets/images/home/icon-haveToAccount.png" alt=""/>
             <i class="status-txt" v-else>未发放</i>
           </p>
         </div>

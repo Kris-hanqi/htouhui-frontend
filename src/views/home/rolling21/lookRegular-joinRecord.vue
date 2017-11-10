@@ -3,7 +3,7 @@
     <div class="details">
       <div class="title-box">
         <span class="title">加入记录-债权信息</span>
-        <a href="javascript:void(0)" class="return-prev-pages" @click="returnPrevPages(joinPlanList.planId)">返回上一页 ></a>
+        <a href="javascript:void(0)" class="return-prev-pages" @click="returnPrevPages()">返回上一页 ></a>
       </div>
       <div class="look-regular-main">
         <div class="look-regular-rate">
@@ -23,15 +23,15 @@
       </div>
       <div class="look-regular-bottom">
         <p>加入时间 <span class="roboto-regular">{{ joinPlanList.joinTime }}</span></p>
-        <img v-if="joinPlanList.status == 'exited'" class="type-message" src="../../../assets/images/home/icon-success.png" alt=""/>
-        <img v-else class="type-message" src="../../../assets/images/home/icon-outRecord.png" alt=""/>
+        <img v-if="joinPlanList.status == 'matched'" class="type-message" src="../../../assets/images/home/icon-success.png" alt=""/>
+        <img v-else class="type-message" src="../../../assets/images/home/icon-auto.png" alt=""/>
       </div>
     </div>
 
     <div class="message">
       <div class="title">
         <span>您购买的债权信息</span>
-        <p class="title-message">目前已为您自动投标成功   <span>{{ joinPlanList.totalInvestMoney | currency('') }}</span></p>
+        <p class="title-message">目前已为您自动投标成功   <span>{{ joinPlanList.totalInvestMoney | currency('') }}</span>元</p>
       </div>
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
@@ -40,7 +40,11 @@
             {{ scope.row.loanMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="rate" label="往期年化利率" width="70"></el-table-column>
+        <el-table-column prop="rate" label="往期年化利率" width="100">
+          <template scope="scope">
+            {{ scope.row.rate + '%' }}
+          </template>
+        </el-table-column>
         <el-table-column prop="perid" label="借款期限" width="60">
           <template scope="scope">
             {{ scope.row.perid | currency('') + '天' }}
@@ -102,8 +106,7 @@
           pageSize: 10
         },
         joinPlanList: {
-          minRate: '',
-          maxRate: ''
+          rate: ''
         },
         list: null,
         total: 0
@@ -143,8 +146,8 @@
         this.listQuery.pageNo = val;
         this.getPageList();
       },
-      returnPrevPages(id) {
-        this.$router.push('/rolling21/rolling21day/' + id);
+      returnPrevPages() {
+        this.$router.push('/rolling21/index');
       }
     },
     created() {
