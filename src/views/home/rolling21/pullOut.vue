@@ -43,7 +43,7 @@
 </template>
 
 <script>
-  import { getAppointmentExitInfo } from 'api/home/getAppointmentExitInfo';
+  import { getAppointmentExitInfo } from 'api/home/rolling21day';
 
   export default {
     data() {

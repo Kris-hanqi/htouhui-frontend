@@ -38,11 +38,11 @@
           {{ scope.row.exitMoney | currency('') + '元' }}
         </template>
       </el-table-column>
-      <el-table-column prop="appointmentExitTime" label="预期退出时间"></el-table-column>
+      <el-table-column prop="appointmentExitTime" label="预期退出时间" width="135"></el-table-column>
       <el-table-column prop="successExitTime" label="退出成功时间" width="135"></el-table-column>
       <el-table-column prop="actualExitMoney" label="实际到账金额">
         <template scope="scope">
-          {{ scope.row.actualMoney | currency('') + '元' }}
+          {{ scope.row.actualExitMoney | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="80">
@@ -64,7 +64,7 @@
 </template>
 
 <script>
-  import { getAppointmentExitInfo } from 'api/home/getAppointmentExitInfo';
+  import { getAppointmentExitBill } from 'api/home/rolling21day';
   import { getStartAndEndTime, getDateString } from '@/utils';
 
   export default {
@@ -122,7 +122,7 @@
           }
         }
         this.listLoading = true;
-        getAppointmentExitInfo(this.listQuery).then(response => {
+        getAppointmentExitBill(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;

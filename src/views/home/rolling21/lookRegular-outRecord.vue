@@ -3,7 +3,7 @@
     <div class="details">
       <div class="title-box">
         <span class="title">退出记录-债权信息</span>
-        <a href="javascript:void(0)" class="return-prev-pages" @click="returnPrevPages(outPlanList.planId)">返回上一页 ></a>
+        <a href="javascript:void(0)" class="return-prev-pages" @click="returnPrevPages()">返回上一页 ></a>
       </div>
       <div class="look-regular-main">
         <div class="look-regular-money">
@@ -11,7 +11,7 @@
           <p>退出金额</p>
         </div>
         <div class="look-regular-day">
-          <p class="day"><span class="roboto-regular">{{ outPlanList.exitedMoney }}</span>元</p>
+          <p class="day"><span class="roboto-regular">{{ outPlanList.exitedMoney | currency('') }}</span>元</p>
           <p>已退出金额</p>
         </div>
       </div>
@@ -27,33 +27,33 @@
         <span>您购买的债权信息</span>
       </div>
       <el-table :data="list" style="width: 100%">
-        <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
-        <el-table-column prop="loanMoney" label="借款金额" width="100">
+        <el-table-column prop="loanId" label="项目编号" width="130"></el-table-column>
+        <el-table-column prop="loanMoney" label="借款金额">
           <template scope="scope">
             {{ scope.row.loanMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="rate" label="往期年化利率" width="100">
+        <el-table-column prop="rate" label="往期年化利率">
           <template scope="scope">
             {{ scope.row.rate + '%' }}
           </template>
         </el-table-column>
-        <el-table-column prop="perid" label="借款期限" width="60">
+        <el-table-column prop="perid" label="借款期限">
           <template scope="scope">
             {{ scope.row.perid | currency('') + '天' }}
           </template>
         </el-table-column>
-        <el-table-column prop="investMoney" label="投资金额" width="100">
+        <el-table-column prop="investMoney" label="投资金额">
           <template scope="scope">
             {{ scope.row.investMoney | currency('') + '元' }}
           </template>
         </el-table-column>
         <el-table-column prop="exitMoney" label="退出金额">
           <template scope="scope">
-            {{ scope.row.earnings | currency('') + '元' }}
+            {{ scope.row.exitMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="status" label="状态" width="50">
+        <el-table-column prop="status" label="状态" width="80">
           <template scope="scope">
             {{ scope.row.status | keyToValue(typeList) }}
           </template>
@@ -68,8 +68,7 @@
 </template>
 
 <script>
-  import { getRollPlanExitInfo } from 'api/home/getRollPlanExitInfo';
-  import { findExitPlanBill } from 'api/home/findExitPlanBill';
+  import { getRollPlanExitInfo, queryAppointmentExitInvest } from 'api/home/rolling21day';
   import interestRate from 'components/interest-rate';
 
   export default {
@@ -82,15 +81,13 @@
           appointmentExitPlanId: this.$route.params.id
         },
         listQuery: {
-          planId: this.$route.params.id,
-          type: '',
-          purpose: '',
-          startTime: '',
-          endTime: '',
+          appointmentExitPlanId: this.$route.params.id,
           pageNo: 1,
           pageSize: 10
         },
-        outPlanList: null,
+        outPlanList: {
+          money: ''
+        },
         joinPlanList: {
           minRate: '',
           maxRate: ''
@@ -119,11 +116,11 @@
       },
       getPageList() {
         this.listLoading = true;
-        findExitPlanBill(this.listQuery).then(response => {
+        queryAppointmentExitInvest(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            console.log('升薪宝量化21您购买的债券信息' + this.list);
+            console.log('升薪宝滚动21您购买的债券信息' + this.list);
             console.log(this.list);
             this.total = data.data.count || 0;
           }
@@ -136,8 +133,8 @@
         this.listQuery.pageNo = val;
         this.getPageList();
       },
-      returnPrevPages(id) {
-        this.$router.push('/quantify/transactionRecord/' + id);
+      returnPrevPages() {
+        this.$router.push('/rolling21/index');
       }
     },
     created() {
