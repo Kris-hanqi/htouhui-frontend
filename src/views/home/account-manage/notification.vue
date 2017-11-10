@@ -52,10 +52,6 @@
     
     .notification-data {
       text-align: center;
-      
-      img {
-        margin-top: 80px;
-      }
     }
   }
 </style>

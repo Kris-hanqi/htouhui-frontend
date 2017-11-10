@@ -10,7 +10,8 @@
       <div class="home-wrapper__account">
         <!-- 左侧菜单 -->
         <div class="home-wrapper__account-menu">
-          <hth-sidebar :show-novice-plan="showNovicePlan" :show-loan="isBorrower"></hth-sidebar>
+          <hth-sidebar :show-novice-plan="showNovicePlan"
+                       :show-loan="isBorrower"></hth-sidebar>
         </div>
         <div class="main-container">
           <!-- 步骤操作区域 -->
@@ -19,8 +20,8 @@
             <el-button @click="operationTips.fun">{{ operationTips.btnText }}</el-button>
           </div>
           <!-- 广告位 -->
-          <div v-else>
-            <div class="prompt-ad" v-if="ARecommend">
+          <div v-if="!operationTips && ARecommend">
+            <div class="prompt-ad">
               <!-- 标题 -->
               <div>
                 <span class="title">{{ARecommend.title}}</span>
