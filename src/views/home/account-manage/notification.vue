@@ -7,18 +7,21 @@
       <el-tab-pane label="已读" name="read"></el-tab-pane>
     </el-tabs>
     <div class="notification-data">
-      <img :src="nothing_data" />
+      <!-- 无数据显示 -->
+      <no-data></no-data>
     </div>
   </div>
 </template>
 
 <script>
-  import nothing_data from 'assets/images/home/icon-nothing.jpg';
+  import NoData from '../components/NoData.vue';
   
   export default {
+    components: {
+      NoData
+    },
     data() {
       return {
-        nothing_data,
         type: 'all'
       }
     },
