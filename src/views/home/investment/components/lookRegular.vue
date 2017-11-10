@@ -3,7 +3,7 @@
     <div class="details">
       <div class="title-box">
         <span class="title">资产详情-债权信息</span>
-        <router-link to="/plan21Day/index"><a href="#" class="return-prev-pages">返回上一页 ></a></router-link>
+        <router-link to="/investment/plan21Day/index"><a href="#" class="return-prev-pages">返回上一页 ></a></router-link>
       </div>
       <div class="look-regular-main">
         <div class="look-regular-rate">

@@ -61,7 +61,7 @@
         fetchUpdatePassword(this.passwordData)
           .then(response => {
             if (response.data.meta.code === 200) {
-              this.$router.push('/accountSet/index');
+              this.$router.push('/accountManage/set/index');
               this.$message({
                 message: '登录密码修改成功,请牢记你的登录密码!',
                 type: 'success'

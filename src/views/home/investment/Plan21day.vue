@@ -150,7 +150,7 @@
         this.getPageList();
       },
       goClaimsView(id) {
-        this.$router.push('/plan21Day/lookRegular/' + id);
+        this.$router.push('/investment/plan21Day/lookRegular/' + id);
       }
     },
     created() {

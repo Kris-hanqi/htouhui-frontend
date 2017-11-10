@@ -18,10 +18,10 @@
     <p class="investment">我的投资</p>
     <ul>
       <li class="nav" v-if="showNovicePlan">
-        <router-link to="/planNovice" active-class="active">新手计划</router-link>
+        <router-link to="/investment/planNovice" active-class="active">新手计划</router-link>
       </li>
       <li class="nav">
-        <router-link to="/plan21Day" active-class="active">21天计划</router-link>
+        <router-link to="/investment/plan21Day" active-class="active">21天计划</router-link>
       </li>
       <li class="nav">
         <router-link to="/rolling21" active-class="active">升薪宝滚动21</router-link>
@@ -30,10 +30,10 @@
         <router-link to="/quantify" active-class="active">升薪宝量化</router-link>
       </li>
       <li class="nav">
-        <router-link to="/regular" active-class="active">定期项目</router-link>
+        <router-link to="/investment/regular" active-class="active">定期项目</router-link>
       </li>
       <li class="nav">
-        <router-link to="/claims" active-class="active">债权转让</router-link>
+        <router-link to="/investment/claims" active-class="active">债权转让</router-link>
       </li>
     </ul>
     <p class="borrow-money" v-if="showLoan">我的借款</p>

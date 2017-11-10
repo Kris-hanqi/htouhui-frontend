@@ -52,7 +52,7 @@
           <td>交易密码</td>
           <td>{{ transactionPasswordStatus ? '已设置' : '未设置'}}</td>
           <td rowspan="2" class="borderLine">
-            <router-link to="transactionPassword">
+            <router-link to="/accountManage/set/transactionPassword">
               <button class="hth-btn">{{ transactionPasswordStatus ? '修改' : '设置' }}</button></router-link>
           </td>
         </tr>
@@ -62,7 +62,7 @@
         <tr class="borderNone">
           <td>手机认证</td>
           <td>{{ mobile || '无' }}</td>
-          <td rowspan="2" class="borderLine"><router-link to="updateMobile"><button class="hth-btn">修改</button></router-link></td>
+          <td rowspan="2" class="borderLine"><router-link to="/accountManage/set/updateMobile"><button class="hth-btn">修改</button></router-link></td>
         </tr>
         <tr>
           <td colspan="2" class="tableSmallFontColor textAlignLeft tablePadding">保障资金安全，转入、转出、投资等资金相关操作时使用</td>
@@ -70,7 +70,11 @@
         <tr class="borderNone">
           <td>登录密码</td>
           <td>已设置</td>
-          <td rowspan="2" class="borderLine"><router-link to="updateLoginPassword"><button class="hth-btn">修改</button></router-link></td>
+          <td rowspan="2" class="borderLine">
+            <router-link to="/accountManage/set/updateLoginPassword">
+              <button class="hth-btn">修改</button>
+            </router-link>
+          </td>
         <tr>
           <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">登录密码已设置 上次登录时间： 2017-08-29 14:27:24</td>
         </tr>
@@ -78,10 +82,10 @@
           <td>邮箱认证<i class="iconDangerous" v-if="!email"></i></td>
           <td :class="{ 'text-warning': email }">{{ email ? email : '未绑定' }}</td>
           <td rowspan="2">
-            <router-link to="updateMobileStep1" v-if="email">
+            <router-link to="/accountManage/set/updateEmailStep1" v-if="email">
               <button class="hth-btn" :class="{ 'btn-blue': !email }">{{ email ? '修改' : '绑定'  }}</button>
             </router-link>
-            <router-link to="bindEmail" v-else>
+            <router-link to="/accountManage/set/bindEmail" v-else>
               <button class="hth-btn" :class="{ 'btn-blue': !email }">{{ email ? '修改' : '绑定'  }}</button>
             </router-link>
           </td>
@@ -144,7 +148,7 @@
         if (this.bankCard) {
           this.dialogUnlockBankCardVisible = true;
         } else {
-          this.$router.push('/accountSet/bindBackCard');
+          this.$router.push('/accountManage/set/bindBackCard');
         }
       },
       closeUnlockBankCard() {

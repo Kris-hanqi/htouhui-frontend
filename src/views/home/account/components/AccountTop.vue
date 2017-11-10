@@ -5,8 +5,8 @@
       <span>你好，<i class="num-font">{{ realName || username }}</i></span>
       <a class="icon-user" @click.stop="operationAccount" :class="{ 'icon-user-active': status }"></a>
       <a class="icon-bank-card" @click.stop="operationBankCard" :class="{ 'icon-bank-card-active': bankCard }"></a>
-      <el-button :plain="true" @click="toRouter('recharge')" type="primary" class="recharge-btn">充值</el-button>
-      <el-button type="primary" @click="toRouter('withdraw')" class="withdraw-btn">提现</el-button>
+      <el-button :plain="true" @click="toRouter('account/recharge')" type="primary" class="recharge-btn">充值</el-button>
+      <el-button type="primary" @click="toRouter('account/withdraw')" class="withdraw-btn">提现</el-button>
     </hth-panel>
     
     <!-- 开户组件 -->
@@ -48,7 +48,7 @@
       // 操作银行卡
       operationBankCard() {
         if (!this.bankCard) {
-          this.$router.push('/accountSet/bindBackCard');
+          this.$router.push('/accountManage/set/bindBackCard');
         } else {
           this.dialogUnlockBankCardVisible = true;
         }

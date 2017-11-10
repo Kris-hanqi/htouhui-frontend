@@ -107,10 +107,10 @@
         this.dialogOpenAccountVisible = true;
       },
       toTransactionPassword() {
-        this.$router.push('/accountSet/bindBackCard');
+        this.$router.push('/accountManage/set/transactionPassword');
       },
       toBindBackCard() {
-        this.$router.push('/accountSet/bindBackCard');
+        this.$router.push('/accountManage/set/bindBackCard');
       },
       closeOpenAccount() {
         this.dialogOpenAccountVisible = false;
