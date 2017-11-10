@@ -31,35 +31,10 @@
 
         <!-- 优惠券 -->
         <div class="coupon-wrapper__list">
-          <div class="coupon-wrapper__box" v-for="coupon in list" :key="coupon.id">
-            <!--未开户-->
-            <div class="coupon-wrapper__box-open-account">
-              <a href="#">立即开户激活</a>
-            </div>
-            <div class="coupon-wrapper__box-top" v-bind:class="coupon.status == 'expire' ? 'expire' : ''">
-              <i class="icon-new" v-if="coupon.isNew === 1"></i>
-              <p class="title">
-                <span v-if="coupon.type === 'plus_coupon'"><span class="roboto-regular">{{ coupon.rate }}</span>%</span>
-                <span v-else=""><span class="roboto-regular">{{ coupon.money }}</span>元</span>
-              </p>
-              <p class="detail">现金券<span>［满{{ coupon.lowerLimitMoney }}可用］</span></p>
-              <p class="time">2017.07.01-2017.7.30</p>
-            </div>
-            <div class="coupon-wrapper__box-body">
-              <div class="content" v-if="coupon.type === 'plus_coupon'">
-                <p class="money">最高计息金额：<span class="roboto-regular">{{ coupon.maxInterestMoney }}</span>元</p>
-                <p class="money">最高计息天数：<span class="roboto-regular">{{ coupon.interestDeadline }}</span>天</p>
-                <p class="message" style="line-height: 1.67;">使用说明：{{ coupon.description }}</p>
-              </div>
-              <div class="content" v-else>
-                <p class="money">计息金额：<span class="roboto-regular">{{ coupon.maxInterestMoney }}</span>元</p>
-                <p class="message" style="line-height: 1.67;">使用说明：{{ coupon.description }}</p>
-              </div>
-              <a v-if="coupon.status == 'unused'" class="newUse" href="#">立即使用</a>
-              <img v-else-if="coupon.status == 'used'" class="pass" src="../../../assets/images/home/ico-used.png" alt=""/>
-              <img v-else class="pass" src="../../../assets/images/home/ico-perimir.png" alt=""/>
-            </div>
-          </div>
+          <coupon-card class="coupon-wrapper__box"
+                       v-for="item in list"
+                       :key="item.id"
+                       :data="item"></coupon-card>
         </div>
       </div>
 
@@ -78,12 +53,14 @@
 
 <script>
   import NoData from '../components/NoData.vue';
+  import CouponCard from './components/CouponCard.vue';
   import ExchangeCoupon from './components/ExchangeCoupon.vue';
   import { fetchPageList } from 'api/home/coupon';
 
   export default {
     components: {
       ExchangeCoupon,
+      CouponCard,
       NoData
     },
     data() {

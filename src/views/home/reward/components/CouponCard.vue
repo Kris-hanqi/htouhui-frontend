@@ -1,0 +1,55 @@
+<template>
+  <div class="coupon-container">
+    <div class="coupon-wrapper__box-open-account" v-if="status === 0">
+      <a href="#">立即开户激活</a>
+    </div>
+    <div v-else
+         class="coupon-wrapper__box-top"
+         :class="data.status === 'expire' ? 'expire' : ''">
+      <i class="icon-new" v-if="data.isNew === 1"></i>
+      <p class="title">
+        <span v-if="data.type === 'plus_coupon'">
+          <span class="roboto-regular">{{ data.rate }}</span>%
+        </span>
+        <span v-else>
+          <span class="roboto-regular">{{ data.money }}</span>元
+        </span>
+      </p>
+      <p class="detail">现金券<span>［满{{ data.lowerLimitMoney }}可用］</span></p>
+      <p class="time">{{ data.getTime }} - {{ data.endTime }}</p>
+    </div>
+    <div class="coupon-wrapper__box-body">
+      <div class="content" v-if="data.type === 'plus_coupon'">
+        <p class="money">最高计息金额：<span class="roboto-regular">{{ data.maxInterestMoney }}</span>元</p>
+        <p class="money">最高计息天数：<span class="roboto-regular">{{ data.interestDeadline }}</span>天</p>
+        <p class="message" style="line-height: 1.67;">使用说明：{{ data.description }}</p>
+      </div>
+      <div class="content" v-else>
+        <p class="money">计息金额：<span class="roboto-regular">{{ data.maxInterestMoney }}</span>元</p>
+        <p class="message" style="line-height: 1.67;">使用说明：{{ data.description }}</p>
+      </div>
+      <a v-if="data.status === 'unused'" class="newUse" href="#">立即使用</a>
+      <img v-else-if="data.status === 'used'" class="pass" src="../../../../assets/images/home/ico-used.png" />
+      <img v-else class="pass" src="../../../../assets/images/home/ico-perimir.png" />
+    </div>
+  </div>
+</template>
+
+<script>
+  import { mapGetters } from 'vuex';
+  
+  export default {
+    props: {
+      data: {
+        type: Object,
+        required: true
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'status'
+      ])
+    }
+  }
+</script>
+
