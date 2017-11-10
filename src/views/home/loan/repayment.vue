@@ -10,7 +10,7 @@
                     :total="total">
       <el-table :data="list" :border="false" style="width: 100%">
         <el-table-column prop="name" label="项目名称" width="150"></el-table-column>
-        <el-table-column prop="giveTime" label="放款时间" width="110"></el-table-column>
+        <el-table-column prop="giveTime" label="放款时间" width="140"></el-table-column>
         <el-table-column label="已还期数/总期数" width="110">
           <template scope="scope">
             {{ scope.row.period }}/{{ scope.row.deadline }}
@@ -22,7 +22,11 @@
         <el-table-column prop="repayDay" label="还款日" width="140"></el-table-column>
         <el-table-column prop="status" label="状态" width="100"></el-table-column>
         <el-table-column prop="trusteeship" label="管理平台" width="100"></el-table-column>
-        <el-table-column label="操作" fixed="right" width="100"></el-table-column>
+        <el-table-column label="操作" fixed="right" width="100">
+          <template scope="scope">
+            <el-button @click="repayment" type="text">还款</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </hth-data-table>
   </div>
@@ -68,6 +72,9 @@
             this.loanData = response.data.data;
           }
         })
+      },
+      repayment() {
+        console.log(123);
       },
       handlePageNoChange(val) {
         this.listQuery.pageNo = val;

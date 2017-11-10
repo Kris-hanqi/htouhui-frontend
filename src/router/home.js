@@ -19,35 +19,53 @@ export const constantRouterMap = [
     children: [
       { // 我的账户路由定义
         path: '/account',
-        name: '我的账户',
+        name: 'account',
+        meta: {
+          title: '我的账户'
+        },
         component: Public,
         redirect: '/account/index',
         children: [
           {
             path: 'index',
-            name: '账户概览',
+            meta: {
+              title: '账户概览'
+            },
+            name: 'accountIndex',
             component: _import('home/account/index')
           },
           {
             path: 'funds',
-            name: '资金流水',
+            meta: {
+              title: '资金流水'
+            },
+            name: 'accountFunds',
             component: _import('home/account/funds')
           },
           {
             path: 'recharge',
-            name: '我要充值',
+            meta: {
+              title: '我要充值'
+            },
+            name: 'accountRecharge',
             component: _import('home/account/recharge')
           },
           {
             path: 'withdraw',
-            name: '我要提现',
+            meta: {
+              title: '我要提现'
+            },
+            name: 'accountWithdraw',
             component: _import('home/account/withdraw')
           }
         ]
       },
       {
         path: '/planNovice',
-        name: '新手计划',
+        meta: {
+          title: '新手计划'
+        },
+        name: 'planNovice',
         component: _import('home/investment/PlanNovice')
       },
       {
@@ -158,86 +176,140 @@ export const constantRouterMap = [
       },
       {
         path: '/loan',
-        name: '我的借款',
+        name: 'loan',
+        meta: {
+          title: '我的借款'
+        },
         component: Public,
         redirect: '/loan/record',
         children: [
           {
             path: 'record',
-            name: '借款记录',
-            component: _import('home/loan/LoanRecord')
+            name: 'loanRecord',
+            meta: {
+              title: '借款记录'
+            },
+            component: _import('home/loan/record')
           },
           {
             path: 'repayment',
-            name: '近期还款',
-            component: _import('home/loan/RecentlyRepayment')
+            name: 'loanRepayment',
+            meta: {
+              title: '近期还款'
+            },
+            component: _import('home/loan/repayment')
           }
         ]
       },
       {
         path: '/reward',
-        name: '平台奖励',
+        name: 'reward',
+        meta: {
+          title: '平台奖励'
+        },
         component: Public,
         redirect: '/reward/coupon',
         children: [
           {
             path: 'coupon',
-            name: '优惠券',
+            meta: {
+              title: '优惠券'
+            },
+            name: 'rewardCoupon',
             component: _import('home/reward/coupon')
           }
         ]
       },
       {
-        path: '/accountSet',
+        path: '/accountManage',
+        name: 'accountManage',
+        meta: {
+          title: '账户管理'
+        },
         component: Public,
-        redirect: '/accountSet/index',
+        redirect: '/accountManage/set',
         children: [
           {
-            path: 'index',
-            name: '账户设置',
-            component: _import('home/account-set/index')
+            path: 'set',
+            component: Public,
+            name: 'AMS',
+            meta: {
+              title: '账户设置'
+            },
+            redirect: '/accountManage/set/index',
+            children: [
+              {
+                path: 'index',
+                name: 'AMSIndex',
+                component: _import('home/account-manage/set')
+              },
+              {
+                path: 'updateLoginPassword',
+                meta: {
+                  title: '修改密码'
+                },
+                name: 'AMSUpdatePassword',
+                component: _import('home/account-manage/components/UpdateLoginPassword')
+              },
+              {
+                path: 'bindEmail',
+                meta: {
+                  title: '绑定邮箱'
+                },
+                name: 'AMSBindEmail',
+                component: _import('home/account-manage/components/BindEmail')
+              },
+              {
+                path: 'updateEmailStep1',
+                meta: {
+                  title: '验证邮箱'
+                },
+                name: 'AMSUpdateEmailStep1',
+                component: _import('home/account-manage/components/UpdateEmailStep1')
+              },
+              {
+                path: 'updateEmailStep2',
+                meta: {
+                  title: '修改邮箱'
+                },
+                name: 'AMSUpdateEmailStep2',
+                component: _import('home/account-manage/components/UpdateEmailStep2')
+              },
+              {
+                path: 'bindBackCard',
+                meta: {
+                  title: '绑定银行卡'
+                },
+                name: 'AMSBindBackCard',
+                component: _import('home/account-manage/components/BindBackCard')
+              },
+              {
+                path: 'transactionPassword',
+                meta: {
+                  title: '设置交易密码'
+                },
+                name: 'AMSTransactionPassword',
+                component: _import('home/account-manage/components/TransactionPassword')
+              },
+              {
+                path: 'updateMobile',
+                meta: {
+                  title: '修改绑定手机号'
+                },
+                name: 'AMSUpdateMobile',
+                component: _import('home/account-manage/components/UpdateMobile')
+              }
+            ]
           },
           {
-            path: 'updateLoginPassword',
-            name: '修改密码',
-            component: _import('home/account-set/components/UpdateLoginPassword')
-          },
-          {
-            path: 'updateMobileStep1',
-            name: '验证邮箱',
-            component: _import('home/account-set/components/UpdateMobileStep1')
-          },
-          {
-            path: 'updateMobileStep2',
-            name: '修改邮箱',
-            component: _import('home/account-set/components/UpdateMobileStep2')
-          },
-          {
-            path: 'bindEmail',
-            name: '绑定邮箱',
-            component: _import('home/account-set/components/BindEmail')
-          },
-          {
-            path: 'bindBackCard',
-            name: '绑定邮箱',
-            component: _import('home/account-set/components/BindBackCard')
-          },
-          {
-            path: 'transactionPassword',
-            name: '设置交易密码',
-            component: _import('home/account-set/components/TransactionPassword')
-          },
-          {
-            path: 'updateMobile',
-            name: '修改绑定手机号',
-            component: _import('home/account-set/components/UpdateMobile')
+            path: 'notification',
+            meta: {
+              title: '站内通知'
+            },
+            name: 'AMN',
+            component: _import('home/account-manage/notification')
           }
         ]
-      },
-      {
-        path: '/notification',
-        name: '站内通知',
-        component: _import('home/notification/index')
       }
     ]
   }

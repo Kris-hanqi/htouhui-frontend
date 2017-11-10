@@ -3,7 +3,7 @@
     <el-breadcrumb separator=">">
       <el-breadcrumb-item @click.native="goToIndex">首页</el-breadcrumb-item>
       <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path" :to="item.path">
-       {{item.name}}
+       {{item.meta.title}}
       </el-breadcrumb-item>
     </el-breadcrumb>
   </div>
@@ -21,8 +21,8 @@
         window.location.href = 'index.html';
       },
       getBreadcrumb() {
-        let matched = this.$route.matched.filter(item => item.name);
-        matched = [{ name: '个人中心', path: '/' }].concat(matched);
+        let matched = this.$route.matched.filter(item => item.meta.title);
+        matched = [{ meta: { title: '个人中心' }, path: '/' }].concat(matched);
         this.levelList = matched
       }
     },
