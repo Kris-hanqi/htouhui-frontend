@@ -120,6 +120,7 @@
   import OpenAccount from '../components/OpenAccount.vue';
   import UnlockBankCard from '../components/UnlockBankCard.vue';
   import RequestBankFrom from '../components/RequestBankFrom.vue';
+  import { getLocationUrl } from 'utils/index';
   import { fetchAutomaticBidding, fetchAutomaticDebtTransfer, fetchAutomaticRepayment } from 'api/home/account-set';
   
   export default {
@@ -151,7 +152,7 @@
         dialogUnlockBankCardVisible: false,
         signingData: {
           source: 'pc',
-          callbackUrl: 'http://www.baidu.com',
+          callbackUrl: getLocationUrl() + '/user/home.html#/accountManage/set/index',
           sessionId: ''
         },
         requestBankData: {}
