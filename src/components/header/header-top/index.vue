@@ -5,6 +5,7 @@
     </span>
     <ul class="header-top_bar">
       <li><a href="./login.html">登录</a></li>
+      <li><a @click.stop="logout">退出</a></li>
       <li><a href="">注册</a></li>
       <li><a href="">信息披露</a></li>
       <li><a href="">网贷课堂</a></li>
@@ -25,8 +26,19 @@
 </template>
 
 <script>
+  import { removeToken } from 'utils/index';
+  
   export default {
-    name: 'HthHeaderTop'
+    name: 'HthHeaderTop',
+    data() {
+      return {}
+    },
+    methods: {
+      logout() {
+        removeToken();
+        window.location.href = '/layout';
+      }
+    }
   }
 </script>
 

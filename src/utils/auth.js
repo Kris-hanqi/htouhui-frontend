@@ -2,6 +2,7 @@ import Cookies from 'js-cookie';
 import uuid from 'utils/uuid';
 
 const TokenKey = 'user_token';
+const uuidKey = 'hth_uuid';
 
 export function getToken() {
   return Cookies.get(TokenKey);
@@ -14,8 +15,6 @@ export function setToken(token) {
 export function removeToken() {
   return Cookies.remove(TokenKey);
 }
-
-const uuidKey = 'hth-uuid';
 
 export function getUuid() {
   return Cookies.get(uuidKey);
