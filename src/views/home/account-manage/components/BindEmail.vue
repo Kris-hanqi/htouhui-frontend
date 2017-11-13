@@ -79,6 +79,13 @@
                 type: 'success'
               });
               this.$router.push('/accountManage/set/index')
+            } else {
+              this.$notify({
+                title: '错误',
+                message: '失败原因:' + data.meta.code.message,
+                type: 'error',
+                duration: 0
+              });
             }
           });
       }

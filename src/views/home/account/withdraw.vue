@@ -17,11 +17,11 @@
           <a @click.stop="showBankLimit">(查看银行限额)</a>
         </li>
         <li>
-          <span>提现费用：</span>
+          <span>手续费：</span>
           <span>0.00元</span>
         </li>
         <li>
-          <span>支付金额：</span>
+          <span>到账金额：</span>
           <span>0.00元</span>
         </li>
         <li class="withdrawBtn">
