@@ -80,5 +80,7 @@ export function getInvestData(data) {
     }
   }
 
+  list.sort((a, b) => a.order - b.order);
+
   return list;
 }
