@@ -12,17 +12,17 @@
         </li>
         <li>
           <span>提现金额：</span>
-          <input v-model="withdrawData.inputMoney" type="text">
+          <input @blur="getWithdrawCost" v-model="withdrawData.inputMoney" type="number">
           <span>元</span>
           <a @click.stop="showBankLimit">(查看银行限额)</a>
         </li>
         <li>
           <span>手续费：</span>
-          <span>0.00元</span>
+          <span>{{ commissionCharge | currency('')}} 元</span>
         </li>
         <li>
           <span>到账金额：</span>
-          <span>0.00元</span>
+          <span>{{ (Number(withdrawData.inputMoney) + commissionCharge) | currency('') }}元</span>
         </li>
         <li class="withdrawBtn">
           <button @click="withdraw">提现</button>
@@ -53,7 +53,7 @@
   import HthPanel from 'common/Panel/index.vue';
   import BankLimit from '../components/BankLimit.vue';
   import RequestBankFrom from '../components/RequestBankFrom.vue';
-  import { fetchWithdraw, fetchAccountMoney } from 'api/home/account';
+  import { fetchWithdraw, fetchWithdrawCost, fetchAccountMoney } from 'api/home/account';
   
   export default {
     components: {
@@ -79,7 +79,8 @@
           cnapNumber: '',
           cardNo: '',
           sessionId: 'YDADAVDAVDJAVDJAVJ001212'
-        }
+        },
+        commissionCharge: 0
       }
     },
     methods: {
@@ -90,6 +91,15 @@
             this.requestData = response.data.data;
           }
         })
+      },
+      getWithdrawCost() { // 获取提现手续费
+        if (!this.withdrawData.inputMoney) return;
+        fetchWithdrawCost({ money: this.withdrawData.inputMoney })
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.commissionCharge = response.data.data || 0;
+            }
+          })
       },
       getAccountMoney() {
         fetchAccountMoney()

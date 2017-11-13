@@ -73,3 +73,12 @@ export function fetchWithdraw(data) {
     data
   })
 }
+
+/** 获取提现费用 */
+export function fetchWithdrawCost(data) {
+  return fetch({
+    url: 'user/calculateFee',
+    method: 'get',
+    params: data
+  })
+}
