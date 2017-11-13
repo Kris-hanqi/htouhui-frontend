@@ -202,6 +202,7 @@
             type: 'error'
           });
         }
+        this.requestBankData = {};
         this.signingData.sessionId = this.uuid;
         fetchAutomaticDebtTransfer(this.signingData)
           .then(response => {
