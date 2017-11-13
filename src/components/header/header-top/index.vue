@@ -27,6 +27,7 @@
 <script>
   import img_smart_download02 from 'assets/images/components/smart_download02.jpg';
   import { removeToken } from 'utils/auth';
+  import { getLocationUrl } from 'utils/index';
   
   export default {
     name: 'HthHeaderTop',
@@ -38,7 +39,7 @@
     methods: {
       logout() {
         removeToken();
-        window.location.href = '/layout';
+        window.location.href = getLocationUrl() + '/layout';
       }
     }
   }
