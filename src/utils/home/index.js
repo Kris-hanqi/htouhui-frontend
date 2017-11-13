@@ -5,28 +5,34 @@ const mapData = {
     color: '#f8e71c',
     addressUrl: ''
   },
-  plan21Day: {
+  SxbScroll21: {
     order: 2,
-    label: '21天计划',
+    label: '升薪宝滚动21',
     color: '#ffa837',
     addressUrl: ''
   },
-  SxbQuantify: {
+  plan21Day: {
     order: 3,
-    label: '升薪宝量化',
+    label: '21天计划',
     color: '#b8e986',
     addressUrl: ''
   },
-  SxbRegular: {
+  SxbQuantify: {
     order: 4,
-    label: '升薪宝定期',
+    label: '升薪宝量化',
     color: '#50e3c2',
     addressUrl: ''
   },
-  regularMortgage: {
+  SxbRegular: {
     order: 5,
-    label: '定期抵押',
+    label: '升薪宝定期',
     color: '#06b7f0',
+    addressUrl: ''
+  },
+  regularMortgage: {
+    order: 6,
+    label: '定期抵押',
+    color: '#0671f0',
     addressUrl: ''
   }
 };
