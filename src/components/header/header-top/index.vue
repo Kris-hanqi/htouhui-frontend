@@ -16,7 +16,7 @@
         手机APP
         <div class="app-download">
           <i></i>
-          <img src="../../../assets/images/components/smart_download02.jpg" alt=""/>
+          <img :src="img_smart_download02" alt=""/>
           <p>手机客户端下载</p>
         </div>
       </li>
@@ -25,17 +25,21 @@
 </template>
 
 <script>
+  import img_smart_download02 from 'assets/images/components/smart_download02.jpg';
   import { removeToken } from 'utils/auth';
+  import { getLocationUrl } from 'utils/index'
   
   export default {
     name: 'HthHeaderTop',
     data() {
-      return {}
+      return {
+        img_smart_download02
+      }
     },
     methods: {
       logout() {
         removeToken();
-        window.location.href = '/layout';
+        window.location.href = getLocationUrl() + '/layout';
       }
     }
   }
