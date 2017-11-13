@@ -33,6 +33,7 @@
   import HthPanel from 'common/Panel/index.vue';
   import RequestBankFrom from '../../components/RequestBankFrom.vue';
   import { fetchSendCode } from 'api/public';
+  import { getLocationUrl } from 'utils/index';
   import { fetchSetTransactionPassword, fetchResetTransactionPassword } from 'api/home/account-set';
   
   export default {
@@ -57,7 +58,7 @@
           source: 'pc',
           authCode: '',
           sessionId: '',
-          callbackUrl: 'www.baidu.com'
+          callbackUrl: getLocationUrl() + '/home.html#/accountManage/set/transactionPassword'
         }
       }
     },
@@ -76,19 +77,21 @@
       setPwd() {
         this.transactionPassword.sessionId = this.uuid;
         if (!this.transactionPasswordStatus) {
-          fetchSetTransactionPassword(this.transactionPassword).then(response => {
-            const data = response.data;
-            if (data.meta.code === 200) {
-              this.requestBankData = data.data;
-            }
-          });
+          fetchSetTransactionPassword(this.transactionPassword)
+            .then(response => {
+              const data = response.data;
+              if (data.meta.code === 200) {
+                this.requestBankData = data.data;
+              }
+            });
         } else {
-          fetchResetTransactionPassword(this.transactionPassword).then(response => {
-            const data = response.data;
-            if (data.meta.code === 200) {
-              this.requestBankData = data.data;
-            }
-          });
+          fetchResetTransactionPassword(this.transactionPassword)
+            .then(response => {
+              const data = response.data;
+              if (data.meta.code === 200) {
+                this.requestBankData = data.data;
+              }
+            });
         }
       }
     },
