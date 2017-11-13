@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import { removeToken } from 'utils/index';
+  import { removeToken } from 'utils/auth';
   
   export default {
     name: 'HthHeaderTop',
