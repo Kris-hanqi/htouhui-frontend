@@ -78,7 +78,7 @@
           source: 'pc',
           cnapNumber: '',
           cardNo: '',
-          sessionId: 'YDADAVDAVDJAVDJAVJ001212'
+          sessionId: ''
         },
         commissionCharge: 0
       }
@@ -86,6 +86,7 @@
     methods: {
       withdraw() {
         this.withdrawData.cardNo = this.bankCard;
+        this.withdrawData.sessionId = this.uuid;
         fetchWithdraw(this.withdrawData).then(response => {
           if (response.data.meta.code === 200) {
             this.requestData = response.data.data;
