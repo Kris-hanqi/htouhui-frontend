@@ -4,7 +4,7 @@
       客服电话: <span class="roboto-regular">400-698-8810</span>（工作日 <span class="roboto-regular">09:00 - 18:00</span>）
     </span>
     <ul class="header-top_bar">
-      <li><a href="./login.html">登录</a></li>
+      <!--<li><a href="./login.html">登录</a></li>-->
       <li><a @click.stop="logout">退出</a></li>
       <!--<li><a href="./memberRegist">注册</a></li>-->
       <li><a href="/activity/information-discloture">信息披露</a></li>
