@@ -184,6 +184,7 @@
             type: 'error'
           });
         }
+        this.requestBankData = {};
         this.signingData.sessionId = this.uuid;
         fetchAutomaticBidding(this.signingData)
           .then(response => {
