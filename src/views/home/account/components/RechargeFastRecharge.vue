@@ -59,6 +59,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import { fetchRecharge, fetchAccountMoney, fetchBalanceCost } from 'api/home/account';
+  import { getLocationUrl } from 'utils/index';
   import BankLimit from '../../components/BankLimit.vue';
   import RequestBankFrom from '../../components/RequestBankFrom.vue';
 
@@ -85,7 +86,7 @@
           money: '',
           source: 'pc',
           sessionId: '',
-          callbackUrl: 'http://localhost:9600/home.html#/recharge'
+          callbackUrl: getLocationUrl() + '/home.html#/recharge'
         }
       }
     },
