@@ -1,39 +1,41 @@
+import store from '@/store';
+
 const mapData = {
   planNovice: {
     order: 1,
     label: '新手计划',
     color: '#f8e71c',
-    addressUrl: ''
+    url: '/plan'
   },
   SxbScroll21: {
     order: 2,
     label: '升薪宝滚动21',
     color: '#ffa837',
-    addressUrl: ''
+    url: '/plan'
   },
   plan21Day: {
     order: 3,
     label: '21天计划',
     color: '#b8e986',
-    addressUrl: ''
+    url: '/plan'
   },
   SxbQuantify: {
     order: 4,
     label: '升薪宝量化',
     color: '#50e3c2',
-    addressUrl: ''
+    url: '/plans'
   },
   SxbRegular: {
     order: 5,
     label: '升薪宝定期',
     color: '#06b7f0',
-    addressUrl: ''
+    url: '/shengxinbaos'
   },
   regularMortgage: {
     order: 6,
     label: '定期抵押',
     color: '#0671f0',
-    addressUrl: ''
+    url: '/normalLoans'
   }
 };
 
@@ -44,7 +46,7 @@ export function getInvestData(data) {
 
     const item = {};
 
-    if (key === 'noviceMap') {
+    if (key === 'noviceMap' && store.getters.showNovicePlan) {
       Object.assign(item, mapData.planNovice, value);
     }
 
@@ -64,7 +66,18 @@ export function getInvestData(data) {
       Object.assign(item, mapData.regularMortgage, value);
     }
 
-    list.push(item);
+    if (key === 'rollPlanMap') {
+      Object.assign(item, mapData.SxbScroll21, value);
+    }
+
+    // 添加计划ID
+    if (item.planId) {
+      item.url = item.url + '/' + item.planId;
+    }
+
+    if (item.order) {
+      list.push(item);
+    }
   }
 
   return list;

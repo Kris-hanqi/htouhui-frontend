@@ -137,7 +137,7 @@
               this.stepActive = 3;
             } else {
               this.$message({
-                message: '开户失败:' + response.data.meta.message,
+                message: '开户失败:' + response.data.meta.message + ',状态码: ' + response.data.meta.code,
                 type: 'error'
               });
             }

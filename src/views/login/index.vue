@@ -68,6 +68,7 @@
   import { Base64 } from 'js-base64';
   import { setToken } from 'utils/auth';
   import img_logo from 'assets/images/logo.png';
+  
   export default {
     data() {
       return {

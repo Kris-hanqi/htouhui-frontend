@@ -23,13 +23,13 @@
               <span v-bind:style="{ background: item.color}"></span>{{item.label}}
           </td>
             <td class="td2">
-              <span class="num">{{item.sum}}</span>元
+              <span class="num">{{ item.sum }}</span>元
           </td>
             <td class="td3">
-              <span class="num">{{item.interest}}</span>元
+              <span class="num">{{ item.interest }}</span>元
           </td>
             <td class="td4">
-              <button>立即投资</button>
+              <button @click.stop="toInvestPage(item.url)">立即投资</button>
             </td>
           </tr>
           </tbody>
@@ -43,6 +43,7 @@
   import HthPanel from 'common/Panel/index.vue';
   import { fetchInvest } from 'api/home/account';
   import { getInvestData } from 'utils/home/index';
+  import { getLocationUrl } from 'utils/index';
 
   export default {
     components: {
@@ -92,6 +93,9 @@
             this.chartData = chartData;
           }
         })
+      },
+      toInvestPage(url) {
+        window.location.href = getLocationUrl() + url;
       }
     },
     created() {
