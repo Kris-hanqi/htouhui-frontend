@@ -34,3 +34,12 @@ export function fetchRecentlyRepaymentStatistic() {
     method: 'get'
   })
 }
+
+/** 还款 */
+export function fetchRepayment(data) {
+  return fetch({
+    url: 'jixin/commonRepay',
+    method: 'get',
+    params: data
+  })
+}

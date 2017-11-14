@@ -24,7 +24,10 @@
         <el-table-column prop="trusteeship" label="管理平台" width="100"></el-table-column>
         <el-table-column label="操作" fixed="right" width="100">
           <template slot-scope="scope">
-            <el-button @click="repayment" type="text">还款</el-button>
+            <div>
+              <el-button v-if="scope.row.repayType === 1" @click="repayment(scope.row.id)" type="text">还款</el-button>
+              <span v-else>--</span>
+            </div>
           </template>
         </el-table-column>
       </el-table>
@@ -35,7 +38,7 @@
 <script>
   import HthDataTable from '../components/DataTable.vue';
   import LoanRepaymentStatistics from '../components/LoanRepaymentStatistics.vue';
-  import { fetchRecentlyRepaymentPageList, fetchRecentlyRepaymentStatistic } from 'api/home/loan';
+  import { fetchRecentlyRepaymentPageList, fetchRecentlyRepaymentStatistic, fetchRepayment } from 'api/home/loan';
   
   export default {
     components: {
@@ -73,8 +76,24 @@
           }
         })
       },
-      repayment() {
-        console.log(123);
+      repayment(id) {
+        console.log(typeof id);
+        this.$confirm('确认要还款吗?', '询问', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+          beforeClose: (action, instance, done) => {
+            if (action === 'confirm') {
+              fetchRepayment({ repayId: id }).then(response => {
+                if (response.data.meta.code === 200) {
+                  console.log(123);
+                }
+              })
+            } else {
+              done();
+            }
+          }
+        });
       },
       handlePageNoChange(val) {
         this.listQuery.pageNo = val;
