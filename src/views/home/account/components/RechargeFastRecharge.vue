@@ -86,7 +86,7 @@
           money: '',
           source: 'pc',
           sessionId: '',
-          callbackUrl: getLocationUrl() + '/home.html#/recharge'
+          callbackUrl: getLocationUrl() + '/home.html#/account/recharge'
         }
       }
     },
