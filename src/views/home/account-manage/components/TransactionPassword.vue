@@ -1,6 +1,6 @@
 <template>
   <div class="transaction-password-wrapper">
-    <hth-panel title="设置交易密码">
+    <hth-panel :title="title + '交易密码'">
       <el-form ref="transactionPassword" label-width="80px">
         <el-form-item label="手机号码">
           <span class="phone">{{ mobile || '无' }}</span>
@@ -53,6 +53,7 @@
       return {
         htmlStr: '',
         authType: 'set',
+        title: '设置',
         requestBankData: {},
         transactionPassword: {
           source: 'pc',
@@ -97,6 +98,13 @@
               const data = response.data;
               if (data.meta.code === 200) {
                 this.requestBankData = data.data;
+              } else {
+                this.$notify({
+                  title: '错误',
+                  message: '失败原因:' + data.meta.code.message,
+                  type: 'error',
+                  duration: 0
+                });
               }
             });
         }
@@ -105,6 +113,7 @@
     created() {
       if (this.transactionPasswordStatus) {
         this.authType = 'reset';
+        this.title = '修改';
       }
     }
   }
