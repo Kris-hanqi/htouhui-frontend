@@ -14,7 +14,7 @@
         return this.value.toString().split('.')[0];
       },
       rightValue() {
-        return this.value.toString().split('.')[1];
+        return this.value.toString().split('.')[1] || 0;
       }
     }
   }
