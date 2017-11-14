@@ -1,25 +1,24 @@
 <template>
-  <div class="tab-TieXie">
+  <div class="tab-coupons">
     <div class="empty" v-if="this.showNoAward">
-      <img src="../../../assets/images/home/icon-noAward.png" alt=""/>
+      <img src="../../../../assets/images/home/icon-noAward.png" alt=""/>
     </div>
     <div v-else>
       <div class="message">
         <div>
           <p>加入金额：<span class="roboto-regular">{{ messageList.joinMoney | currency('') }}</span><span>元</span></p>
-          <p>加入时间：<span class="roboto-regular">{{ messageList.joinTime }}</span></p>
+          <p>面值：<span class="roboto-regular">{{ messageList.couponType != 'plus_coupon' ? messageList.couponMoney : messageList.couponRate  }}{{ messageList.couponType != 'plus_coupon' ? '元' : '%'  }}</span></p>
         </div>
         <div>
-          <p>贴息到期时间：<span class="roboto-regular">{{ messageList.tiexiEndTime }}</span></p>
-          <p class="color-txt">
-            贴息金额：<span class="roboto-regular">{{ messageList.tiexiMoney | currency('') }}</span><span>元</span>
-            <el-tooltip class="item" placement="top">
-              <div slot="content">贴息金额计算方式以<br/>四舍五入至后两位</div>
-              <i class="question"></i>
-            </el-tooltip>
-            <img class="status-img" v-if="messageList.status == 'transfered'" src="../../../assets/images/home/icon-haveToAccount.png" alt=""/>
+          <p>加入时间：<span class="roboto-regular">{{ messageList.joinTime }}</span></p>
+          <p class="test-box">
+            到账时间：<span class="roboto-regular">{{ messageList.couponEndTime }}</span>
+            <img class="status-img" v-if="messageList.status == 'transfered'" src="../../../../assets/images/home/icon-haveToAccount.png" alt=""/>
             <i class="status-txt" v-else>未发放</i>
           </p>
+        </div>
+        <div>
+          <p>优惠券类型：<span>{{ messageList.couponType }}</span></p>
         </div>
       </div>
       <div class="message-list">
@@ -65,7 +64,7 @@
         total: 0,
         listQuery: {
           joinId: '',
-          type: 'tiexi',
+          type: 'coupon',
           pageNo: 1,
           pageSize: 10
         },
@@ -83,11 +82,12 @@
         queryPlatformAwardRecord(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
+            console.log('优惠券');
+            console.log(data);
             if (data.data) {
               this.showNoAward = false;
               this.messageList = data.data;
               this.list = data.data.data;
-              console.log('贴息');
               console.log(this.messageList);
               this.total = data.data.count || 0;
             }
@@ -106,7 +106,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .tab-TieXie {
+  .tab-coupons {
     width: 100%;
     margin-top: 15px;
   }
@@ -121,12 +121,13 @@
     }
   }
 
-  .tab-TieXie .message {
+  .tab-coupons .message {
     width: 100%;
 
     > div {
       display: inline-block;
-      width: 48%;
+      vertical-align: text-top;
+      width: 32%;
 
       p {
         margin-bottom: 20px;
@@ -139,48 +140,35 @@
         }
       }
 
-      .color-txt {
+      .test-box {
         position: relative;
+
+        .status-txt {
+          display: inline-block;
+          width: 38px;
+          height: 15px;
+          box-sizing: border-box;
+          border-radius: 2px;
+          background-color: #ee544b;
+          border: solid 1px #dd443b;
+          line-height: 15px;
+          text-align: center;
+          font-size: 9px;
+          color: #fff;
+        }
+
+        .status-img {
+          position: absolute;
+          bottom: -10px;
+          right: 0;
+          width: 80px;
+          height: 78px;
+        }
       }
-
-      .color-txt span {
-        color: #ff4a33;
-      }
-
-      .color-txt .question {
-        display: inline-block;
-        width: 13px;
-        height: 13px;
-        background: url(../../../assets/images/home/icon-question.png) no-repeat center;
-        margin-left: 5px;
-        cursor: pointer;
-      }
-    }
-
-    .status-txt {
-      display: inline-block;
-      width: 38px;
-      height: 15px;
-      box-sizing: border-box;
-      border-radius: 2px;
-      background-color: #ee544b;
-      border: solid 1px #dd443b;
-      line-height: 15px;
-      text-align: center;
-      font-size: 9px;
-      color: #fff;
-    }
-
-    .status-img {
-      position: absolute;
-      bottom: -10px;
-      right: 0;
-      width: 80px;
-      height: 78px;
     }
   }
 
-  .tab-TieXie .message-list {
+  .tab-coupons .message-list {
     width: 100%;
     padding-top: 15px;
     border-top: 1px dashed #aab2c9;

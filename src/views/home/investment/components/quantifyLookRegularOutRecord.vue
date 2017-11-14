@@ -17,8 +17,8 @@
       </div>
       <div class="look-regular-bottom">
         <p>申请时间 <span class="roboto-regular">{{ outPlanList.applyTime }}</span></p>
-        <img v-if="outPlanList.status == 'exited'" class="type-message" src="../../../assets/images/home/icon-success.png" alt=""/>
-        <img v-else class="type-message" src="../../../assets/images/home/icon-outRecord.png" alt=""/>
+        <img v-if="outPlanList.status == 'exited'" class="type-message" src="../../../../assets/images/home/icon-success.png" alt=""/>
+        <img v-else class="type-message" src="../../../../assets/images/home/icon-outRecord.png" alt=""/>
       </div>
     </div>
 
@@ -138,7 +138,7 @@
         this.getPageList();
       },
       returnPrevPages(id) {
-        this.$router.push('/quantify/transactionRecord/' + id);
+        this.$router.push('/investment/quantify/transactionRecord/' + id);
       }
     },
     created() {

@@ -12,8 +12,8 @@
 </template>
 
 <script>
-  import joinRecord from './joinRecord.vue';
-  import outRecord from './outRecord.vue';
+  import joinRecord from './quantifyJoinRecord.vue';
+  import outRecord from './quantifyOutRecord.vue';
 
   export default {
     components: {

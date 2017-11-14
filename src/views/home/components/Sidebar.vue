@@ -27,7 +27,7 @@
         <router-link to="/rolling21" active-class="active">升薪宝滚动21</router-link>
       </li>
       <li class="nav">
-        <router-link to="/quantify" active-class="active">升薪宝量化</router-link>
+        <router-link to="/investment/quantify" active-class="active">升薪宝量化</router-link>
       </li>
       <li class="nav">
         <router-link to="/investment/regular" active-class="active">定期项目</router-link>

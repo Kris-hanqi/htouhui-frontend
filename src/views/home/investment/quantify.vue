@@ -12,7 +12,8 @@
       <div class="shengxinbaolianghua-main">
         <div class="shengxinbaolianghua-rate">
           <p class="rate">
-            <span class="roboto-regular"><interest-rate :value="str.minRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%~<span class="roboto-regular"><interest-rate :value="str.maxRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%
+            <span class="roboto-regular"><interest-rate :value="str.minRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>
+            %~<span class="roboto-regular"><interest-rate :value="str.maxRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%
           </p>
           <p>往期年化利率</p>
         </div>
@@ -39,7 +40,7 @@
 <script>
   import { quantifyList } from 'api/home/quantify';
   import interestRate from 'components/interest-rate';
-
+  
   export default {
     components: {
       interestRate
@@ -56,16 +57,16 @@
         })
       },
       oneKeyJoin(id) {
-        this.$router.push('/quantify/oneKeyJoin/' + id);
+        this.$router.push('/investment/quantify/oneKeyJoin/' + id);
       },
       pullOut(id) {
-        this.$router.push('/quantify/pullOut/' + id);
+        this.$router.push('/investment/quantify/pullOut/' + id);
       },
       lookTarget(id) {
-        this.$router.push('/quantify/lookTarget/' + id);
+        this.$router.push('/investment/quantify/lookTarget/' + id);
       },
       transactionRecord(id) {
-        this.$router.push('/quantify/transactionRecord/' + id);
+        this.$router.push('/investment/quantify/transactionRecord/' + id);
       }
     },
     created() {
@@ -84,17 +85,17 @@
     background-color: #fff;
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
   }
-
+  
   .title-box {
     width: 100%;
     margin-bottom: 50px;
-
+    
     .title {
       font-size: 20px;
       color: #274161;
       margin-right: 25px;
     }
-
+    
     p {
       display: inline-block;
       margin-right: 8px;
@@ -105,18 +106,18 @@
       font-size: 14px;
       color: #727e90;
     }
-
+    
     .firstDay {
       border: solid 1px #2281f2;
       color: #0e76f1;
     }
-
+    
     .tradingParticulars-1 {
       float: right;
       font-size: 14px;
       color: #727e90;
       cursor: no-drop;
-
+      
       i {
         display: inline-block;
         vertical-align: middle;
@@ -126,12 +127,12 @@
         background: url(../../../assets/images/home/center-ico-019.png) no-repeat center;
       }
     }
-
+    
     .tradingParticulars-2 {
       float: right;
       font-size: 14px;
       color: #0573f4;
-
+      
       i {
         display: inline-block;
         vertical-align: middle;
@@ -142,49 +143,49 @@
       }
     }
   }
-
+  
   .shengxinbaolianghua-main {
     width: 100%;
     text-align: center;
     margin-bottom: 45px;
-
+    
     > div {
       display: inline-block;
       width: 25%;
-
+      
       p {
         font-size: 14px;
         color: #727e90;
       }
     }
-
+    
     .shengxinbaolianghua-rate {
       .rate {
         font-size: 18px;
         color: #ff4a33;
-
+        
         span {
           font-size: 36px;
         }
-
+        
         .small-shengxinbaolianghua-rate {
           font-size: 20px;
         }
       }
     }
-
+    
     .shengxinbaolianghua-money {
       .money {
         font-size: 20px;
         font-weight: 300;
         color: #394b67;
-
+        
         span {
           font-size: 36px;
         }
       }
     }
-
+    
     .btn-join {
       float: right;
       vertical-align: top;
@@ -198,13 +199,13 @@
       text-align: center;
       font-size: 18px;
       color: #0573f4;
-
+      
       &:hover {
         background-color: #378ff6;
         color: #fff;
       }
     }
-
+    
     .btn-out {
       float: right;
       vertical-align: top;
@@ -220,25 +221,25 @@
       color: #7c86a2;
     }
   }
-
+  
   .shengxinbaolianghua-bottom {
     width: 100%;
     height: auto;
     padding-top: 20px;
     border-top: 1px solid #dde8f3;
-
+    
     p {
       display: inline-block;
       font-size: 14px;
       color: #727e90;
       margin-right: 80px;
-
+      
       span {
         font-size: 20px;
         color: #394b67;
       }
     }
-
+    
     .seeBiao {
       float: right;
       width: 125px;

@@ -1,5 +1,5 @@
 <template>
-  <div class="join-record">
+  <div class="out-record">
     <div class="times-box">
       <ul class="times">
         <li>交易时间：</li>
@@ -32,26 +32,22 @@
     </div>
 
     <el-table :data="list" style="width: 100%">
-      <el-table-column prop="joinTime" label="加入时间" width="135"></el-table-column>
-      <el-table-column prop="joinMoney" label="加入金额">
+      <el-table-column prop="applyTime" label="申请时间" width="135"></el-table-column>
+      <el-table-column prop="exitMoney" label="退出金额">
         <template slot-scope="scope">
-          {{ scope.row.joinMoney | currency('') + '元' }}
+          {{ scope.row.exitMoney | currency('') + '元' }}
         </template>
       </el-table-column>
-      <el-table-column prop="lockPeriod" label="持有期限">
+      <el-table-column prop="exitFee" label="退出手续费">
         <template slot-scope="scope">
-          {{ scope.row.lockPeriod + '天' }}
+          {{ scope.row.exitFee | currency('') + '元' }}
         </template>
       </el-table-column>
-      <el-table-column prop="rate" label="往期年化利率">
+      <el-table-column prop="lockPeriod" label="持有期限"  width="60"></el-table-column>
+      <el-table-column prop="actualExitTime" label="成功退出时间" width="135"></el-table-column>
+      <el-table-column prop="actualMoney" label="实际到账金额">
         <template slot-scope="scope">
-          {{ scope.row.rate + '%' }}
-        </template>
-      </el-table-column>
-      <el-table-column prop="lockEndTime" label="即日起免手续费" width="135"></el-table-column>
-      <el-table-column prop="award" label="平台奖励">
-        <template slot-scope="scope">
-          <el-button class="icon-award" @click="getAward(scope.row.joinPlanId)" type="text" size="small"></el-button>
+          {{ scope.row.actualMoney | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="80">
@@ -59,9 +55,9 @@
           {{ scope.row.status | keyToValue(typeList) }}
         </template>
       </el-table-column>
-      <el-table-column prop="seeInterests" label="查看">
+      <el-table-column prop="lookEquity" label="查看"  width="70">
         <template slot-scope="scope">
-          <el-button class="icon-interests" @click="lookJoinRegular(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
+          <el-button class="icon-interests" type="text" @click="lookOutRegular(scope.row.userExitId)" size="small">查看债权</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -69,58 +65,35 @@
       <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
       <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
     </div>
-
-    <el-dialog title="平台奖励" :visible.sync="dialogVisible" width="30%">
-      <div class="dialog-main">
-        <el-tabs v-model="activeName" type="card">
-          <el-tab-pane label="贴息" name="first">
-            <tab-tie-xi :join-plan-id="joinPlanId"></tab-tie-xi>
-          </el-tab-pane>
-          <el-tab-pane label="优惠券" name="second">
-            <tab-coupons :join-plan-id="joinPlanId"></tab-coupons>
-          </el-tab-pane>
-        </el-tabs>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
 <script>
-  import { joinRecord } from 'api/home/quantify';
+  import { outRecord } from 'api/home/quantify';
   import { getStartAndEndTime, getDateString } from '@/utils';
-  import tabTieXi from './tab-TieXi.vue';
-  import tabCoupons from './tab-coupons.vue';
 
   export default {
-    components: {
-      tabTieXi,
-      tabCoupons
-    },
     data() {
       return {
         selectDates: {
           startTime: '',
           endTime: ''
         },
+        list: null,
         listQuery: {
           planId: this.$route.params.id,
-          type: '',
-          purpose: '',
           startTime: '',
           endTime: '',
           pageNo: 1,
           pageSize: 10
         },
         total: 0,
-        dialogVisible: false,
-        activeName: 'first',
-        list: null,
         dateType: '3day',
         typeList: [
-          { key: 'matched', value: '全部匹配' },
-          { key: 'matching', value: '匹配中' }
-        ],
-        joinPlanId: ''
+          { key: 'apply_exit', value: '申请退出' },
+          { key: 'exiting', value: '退出处理中' },
+          { key: 'exited', value: '已退出' }
+        ]
       }
     },
     computed: {
@@ -154,7 +127,8 @@
             return;
           }
         }
-        joinRecord(this.listQuery).then(response => {
+        this.listLoading = true;
+        outRecord(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
@@ -173,12 +147,8 @@
         this.listQuery.pageNo = val;
         this.getPageList();
       },
-      lookJoinRegular(id) {
-        this.$router.push('/quantify/lookRegular-joinRecord/' + id);
-      },
-      getAward(id) {
-        this.dialogVisible = true;
-        this.joinPlanId = id;
+      lookOutRegular(id) {
+        this.$router.push('/investment/quantify/lookRegular-outRecord/' + id);
       }
     },
     created() {
@@ -238,14 +208,8 @@
     }
   }
 
-  .join-record {
+  .out-record {
     margin-top: 20px;
-
-    .icon-award {
-      width: 24px;
-      height: 24px;
-      background: url(../../../assets/images/home/icon-award.png) no-repeat center;
-    }
 
     .icon-interests {
       color: #0573f4;

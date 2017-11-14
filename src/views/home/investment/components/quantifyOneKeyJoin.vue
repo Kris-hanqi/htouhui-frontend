@@ -217,7 +217,7 @@
       width: 25px;
       height: 25px;
       margin-left: 30px;
-      background: url(../../../assets/images/home/icon-reform.png) no-repeat center;
+      background: url(../../../../assets/images/home/icon-reform.png) no-repeat center;
       cursor: pointer;
     }
   }
@@ -298,7 +298,7 @@
         height: 26px;
         box-sizing: border-box;
         line-height: 26px;
-        background: url(../../../assets/images/home/icon-quan.png) no-repeat center;
+        background: url(../../../../assets/images/home/icon-quan.png) no-repeat center;
         text-align: center;
         font-size: 14px;
         color: #ff4a33;
@@ -344,7 +344,7 @@
       left: 25px;
       width: 12px;
       height: 7px;
-      background: url(../../../assets/images/home/icon-arrow-red.png) no-repeat center;
+      background: url(../../../../assets/images/home/icon-arrow-red.png) no-repeat center;
     }
 
     .title {

@@ -25,8 +25,8 @@
       <div class="look-regular-bottom">
         <p>加入时间 <span class="roboto-regular">{{ joinPlanList.joinTime }}</span></p>
         <p>即日起免手续费 <span class="roboto-regular">{{ joinPlanList.lockEndTime }}</span></p>
-        <img v-if="joinPlanList.status == 'exited'" class="type-message" src="../../../assets/images/home/icon-success.png" alt=""/>
-        <img v-else class="type-message" src="../../../assets/images/home/icon-outRecord.png" alt=""/>
+        <img v-if="joinPlanList.status == 'exited'" class="type-message" src="../../../../assets/images/home/icon-success.png" alt=""/>
+        <img v-else class="type-message" src="../../../../assets/images/home/icon-outRecord.png" alt=""/>
       </div>
     </div>
 
@@ -147,7 +147,7 @@
         this.getPageList();
       },
       returnPrevPages(id) {
-        this.$router.push('/quantify/transactionRecord/' + id);
+        this.$router.push('/investment/quantify/transactionRecord/' + id);
       }
     },
     created() {

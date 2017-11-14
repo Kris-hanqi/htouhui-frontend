@@ -17,7 +17,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/account/index',
     children: [
-      { // 我的账户路由定义
+      {
         path: '/account',
         name: 'account',
         meta: {
@@ -103,6 +103,72 @@ export const constantRouterMap = [
             ]
           },
           {
+            path: 'quantify',
+            component: Public,
+            meta: {
+              title: '升薪宝量化'
+            },
+            redirect: '/investment/quantify/index',
+            children: [
+              {
+                path: 'index',
+                name: 'investmentQuantify',
+                component: _import('home/investment/quantify')
+              },
+              {
+                path: 'oneKeyJoin/:id',
+                name: 'investmentQuantifyOneKeyJoin',
+                meta: {
+                  title: '一键加入'
+                },
+                props: true,
+                component: _import('home/investment/components/quantifyOneKeyJoin')
+              },
+              {
+                path: 'pullOut/:id',
+                name: 'investmentQuantifyPullOut',
+                meta: {
+                  title: '申请退出'
+                },
+                props: true,
+                component: _import('home/investment/components/quantifyPullOut')
+              },
+              {
+                path: 'transactionRecord/:id',
+                name: 'investmentQuantifyTransactionRecord',
+                meta: {
+                  title: '交易记录'
+                },
+                props: true,
+                component: _import('home/investment/components/quantifyTransactionRecord')
+              },
+              {
+                path: 'lookTarget/:id',
+                name: 'investmentQuantifyLookTarget',
+                meta: {
+                  title: '查看标的'
+                },
+                props: true,
+                component: _import('home/investment/components/quantifyJoinRecord')
+              },
+              {
+                path: 'lookRegular-joinRecord/:id',
+                name: '加入记录查看债权',
+                meta: {
+                  title: '加入记录查看债权'
+                },
+                props: true,
+                component: _import('home/investment/components/quantifyLookRegularJoinRecord')
+              },
+              {
+                path: 'lookRegular-outRecord/:id',
+                name: '退出记录查看债权',
+                props: true,
+                component: _import('home/investment/components/quantifyLookRegularOutRecord')
+              }
+            ]
+          },
+          {
             path: 'regular',
             meta: {
               title: '定期项目'
@@ -117,54 +183,6 @@ export const constantRouterMap = [
               title: '债券转让'
             },
             component: _import('home/investment/claims')
-          }
-        ]
-      },
-      {
-        path: '/quantify',
-        component: Public,
-        redirect: '/quantify/index',
-        children: [
-          {
-            path: 'index',
-            name: '升薪宝量化',
-            component: _import('home/quantify/shengXinBaoLiangHua')
-          },
-          {
-            path: 'oneKeyJoin/:id',
-            name: '一键加入',
-            props: true,
-            component: _import('home/quantify/oneKeyJoin')
-          },
-          {
-            path: 'pullOut/:id',
-            name: '申请退出',
-            props: true,
-            component: _import('home/quantify/pullOut')
-          },
-          {
-            path: 'transactionRecord/:id',
-            name: '交易记录',
-            props: true,
-            component: _import('home/quantify/transactionRecord')
-          },
-          {
-            path: 'lookTarget/:id',
-            name: '查看标的',
-            props: true,
-            component: _import('home/quantify/lookTarget')
-          },
-          {
-            path: 'lookRegular-joinRecord/:id',
-            name: '加入记录查看债权',
-            props: true,
-            component: _import('home/quantify/lookRegular-joinRecord')
-          },
-          {
-            path: 'lookRegular-outRecord/:id',
-            name: '退出记录查看债权',
-            props: true,
-            component: _import('home/quantify/lookRegular-outRecord')
           }
         ]
       },

@@ -7,7 +7,7 @@
       </div>
       <div class="main">
         <div class="name">
-          <p><img src="../../../assets/images/home/icon-shengXinBaoLiangHua.png" alt=""/></p>
+          <p><img src="../../../../assets/images/home/icon-shengXinBaoLiangHua.png" alt=""/></p>
           <p>{{ messageList.planName }}</p>
         </div>
         <div class="limit">
