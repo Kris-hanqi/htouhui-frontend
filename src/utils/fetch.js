@@ -23,7 +23,7 @@ service.interceptors.request.use(config => {
   }
   return config;
 }, error => {
-  console.log(error);
+  console.log(error);)
   return Promise.reject(error)
 });
 
@@ -42,7 +42,7 @@ service.interceptors.response.use(
           type: 'warning',
           beforeClose: (action, instance, done) => {
             if (action === 'confirm') {
-              window.open(getLocationUrl() + '/memberLoginPage');
+              window.open(getLocationUrl() + '/logout');
             } else {
               done();
             }
