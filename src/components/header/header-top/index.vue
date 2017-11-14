@@ -39,7 +39,7 @@
     methods: {
       logout() {
         removeToken();
-        window.location.href = getLocationUrl() + '/layout';
+        window.location.href = getLocationUrl() + '/logout';
       }
     }
   }
