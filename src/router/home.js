@@ -169,6 +169,45 @@ export const constantRouterMap = [
             ]
           },
           {
+            path: 'scroll21',
+            component: Public,
+            meta: {
+              title: '升薪宝滚动21'
+            },
+            redirect: '/investment/scroll21/index',
+            children: [
+              {
+                path: 'index',
+                name: 'investmentScroll21',
+                component: _import('home/investment/scroll21')
+              },
+              {
+                path: 'pullOut/:id',
+                meta: {
+                  title: '申请退出'
+                },
+                props: true,
+                component: _import('home/investment/components/scroll21PullOut')
+              },
+              {
+                path: 'lookRegular-joinRecord/:id',
+                meta: {
+                  title: '加入记录查看债权'
+                },
+                props: true,
+                component: _import('home/investment/components/scroll21LookRegularJoinRecord')
+              },
+              {
+                path: 'lookRegular-outRecord/:id',
+                meta: {
+                  title: '退出记录查看债权'
+                },
+                props: true,
+                component: _import('home/investment/components/scroll21LookRegularOutRecord')
+              }
+            ]
+          },
+          {
             path: 'regular',
             meta: {
               title: '定期项目'
@@ -183,36 +222,6 @@ export const constantRouterMap = [
               title: '债券转让'
             },
             component: _import('home/investment/claims')
-          }
-        ]
-      },
-      {
-        path: '/rolling21',
-        component: Public,
-        redirect: 'rolling21/index',
-        children: [
-          {
-            path: 'index',
-            name: '升薪宝量化21天滚动',
-            component: _import('home/rolling21/rolling21day')
-          },
-          {
-            path: 'pullOut/:id',
-            name: '申请退出',
-            props: true,
-            component: _import('home/rolling21/pullOut')
-          },
-          {
-            path: 'lookRegular-joinRecord/:id',
-            name: '加入记录查看债权',
-            props: true,
-            component: _import('home/rolling21/lookRegular-joinRecord')
-          },
-          {
-            path: 'lookRegular-outRecord/:id',
-            name: '退出记录查看债权',
-            props: true,
-            component: _import('home/rolling21/lookRegular-outRecord')
           }
         ]
       },
