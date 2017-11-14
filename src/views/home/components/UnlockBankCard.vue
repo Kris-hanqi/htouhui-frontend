@@ -1,13 +1,13 @@
 <template>
   <div class="unlock-bank-card-wrapper">
     <el-dialog title="提示"
-               size="tiny"
+               width="30%"
                :before-close="handleClose"
                :visible.sync="visible">
       <span class="text">确认解绑银行卡？</span>
       <span slot="footer">
-        <el-button @click="handleClose">取 消</el-button>
-        <el-button type="primary"
+        <el-button :round="true" @click="handleClose">取 消</el-button>
+        <el-button :round="true" type="primary"
                    :loading="unlockBankCardLoading"
                    @click="unlockBankCard">确 定</el-button>
       </span>

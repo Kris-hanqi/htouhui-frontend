@@ -29,32 +29,32 @@
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="loanId" label="项目编号" width="130"></el-table-column>
         <el-table-column prop="loanMoney" label="借款金额">
-          <template scope="scope">
+          <template slot-scope="scope">
             {{ scope.row.loanMoney | currency('') + '元' }}
           </template>
         </el-table-column>
         <el-table-column prop="rate" label="往期年化利率">
-          <template scope="scope">
+          <template slot-scope="scope">
             {{ scope.row.rate + '%' }}
           </template>
         </el-table-column>
         <el-table-column prop="perid" label="借款期限">
-          <template scope="scope">
+          <template slot-scope="scope">
             {{ scope.row.perid | currency('') + '天' }}
           </template>
         </el-table-column>
         <el-table-column prop="investMoney" label="投资金额">
-          <template scope="scope">
+          <template slot-scope="scope">
             {{ scope.row.investMoney | currency('') + '元' }}
           </template>
         </el-table-column>
         <el-table-column prop="exitMoney" label="退出金额">
-          <template scope="scope">
+          <template slot-scope="scope">
             {{ scope.row.exitMoney | currency('') + '元' }}
           </template>
         </el-table-column>
         <el-table-column prop="status" label="状态" width="80">
-          <template scope="scope">
+          <template slot-scope="scope">
             {{ scope.row.status | keyToValue(typeList) }}
           </template>
         </el-table-column>

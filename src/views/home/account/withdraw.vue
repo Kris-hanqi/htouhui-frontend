@@ -87,6 +87,10 @@
       withdraw() {
         this.withdrawData.cardNo = this.bankCard;
         this.withdrawData.sessionId = this.uuid;
+        // 大于五万属于大额提现
+        if (this.withdrawData.inputMoney > 50000) {
+          console.log(this.withdrawData.inputMoney);
+        }
         fetchWithdraw(this.withdrawData).then(response => {
           if (response.data.meta.code === 200) {
             this.requestData = response.data.data;

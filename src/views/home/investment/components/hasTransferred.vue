@@ -4,23 +4,23 @@
       <el-table-column prop="name" label="项目名称" width="140"></el-table-column>
       <el-table-column prop="time" label="投资时间" width="80"></el-table-column>
       <el-table-column prop="money" label="投资金额">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.money | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="repayPeriod" label="剩余时间" width="80"></el-table-column>
       <el-table-column prop="debtPrice" label="债权价格">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.debtPrice | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="unPaidMoney" label="待收本息">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.unPaidMoney | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column label="其它" width="100">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-button v-if="scope.row.isHasDetTransferCompact" class="icon-claim" type="text" size="small">债转合同</el-button>
           <el-button v-else-if="scope.row.isHasCompact" class="icon-plan" type="text" size="small">合同</el-button>
         </template>

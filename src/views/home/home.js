@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import 'normalize.css/normalize.css';
-import 'element-ui/lib/theme-default/index.css';
 import {
   Button,
   Select,

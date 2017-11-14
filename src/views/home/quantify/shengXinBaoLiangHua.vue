@@ -37,7 +37,7 @@
 </template>
 
 <script>
-  import { quantifyList } from '@/api/home/quantify';
+  import { quantifyList } from 'api/home/quantify';
   import interestRate from 'components/interest-rate';
 
   export default {

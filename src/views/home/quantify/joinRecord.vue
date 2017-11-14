@@ -34,33 +34,33 @@
     <el-table :data="list" style="width: 100%">
       <el-table-column prop="joinTime" label="加入时间" width="135"></el-table-column>
       <el-table-column prop="joinMoney" label="加入金额">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.joinMoney | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="lockPeriod" label="持有期限">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.lockPeriod + '天' }}
         </template>
       </el-table-column>
       <el-table-column prop="rate" label="往期年化利率">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.rate + '%' }}
         </template>
       </el-table-column>
       <el-table-column prop="lockEndTime" label="即日起免手续费" width="135"></el-table-column>
       <el-table-column prop="award" label="平台奖励">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-button class="icon-award" @click="getAward(scope.row.joinPlanId)" type="text" size="small"></el-button>
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="80">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.status | keyToValue(typeList) }}
         </template>
       </el-table-column>
       <el-table-column prop="seeInterests" label="查看">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-button class="icon-interests" @click="lookJoinRegular(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
         </template>
       </el-table-column>

@@ -4,33 +4,33 @@
       <el-table-column prop="projectName" label="项目名称" fixed width="170"></el-table-column>
       <el-table-column prop="investTime" label="投资时间" width="80"></el-table-column>
       <el-table-column prop="investCash" label="投资金额" width="100">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.investCash | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="investRate" label="年利率" width="60">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.investRate + '%' }}
         </template>
       </el-table-column>
       <el-table-column prop="paidPeriod" label="已还期数/总期数" width="110">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.paidPeriod + '/' + scope.row.repayPeriod }}
         </template>
       </el-table-column>
       <el-table-column prop="nextRepayDate" label="下次还款日" width="90"></el-table-column>
       <el-table-column prop="award" label="额外奖励" width="60">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-button class="icon-award" @click="getExtendEarn(scope.row.investId)" type="text" size="small"></el-button>
         </template>
       </el-table-column>
       <el-table-column prop="status" label="投资状态" width="70">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.status | keyToValue(typeList) }}
         </template>
       </el-table-column>
       <el-table-column prop="look" label="查看" fixed="right" width="100">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-button class="icon-plan" type="text" size="small" @click="getInvestRepaysList(scope.row.investId)">还款计划</el-button>
           <el-button class="icon-interests" type="text" size="small">合同</el-button>
         </template>
@@ -48,18 +48,18 @@
         <el-table :data="extendEarnList" style="width: 100%">
           <el-table-column prop="name" label="优惠券" width="140"></el-table-column>
           <el-table-column prop="rate" label="额外加息点数">
-            <template scope="scope">
+            <template slot-scope="scope">
               {{ scope.row.rate + '%' }}
             </template>
           </el-table-column>
           <el-table-column prop="money" label="额外利息">
-            <template scope="scope">
+            <template slot-scope="scope">
               {{ scope.row.money | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="repayTime" label="还款时间"></el-table-column>
           <el-table-column prop="status" label="状态">
-            <template scope="scope">
+            <template slot-scope="scope">
              {{ scope.row.status | keyToValue(extendEarnListStatus) }}
             </template>
           </el-table-column>
@@ -72,39 +72,39 @@
         <el-table :data="investRepaysList" style="width: 100%">
           <el-table-column prop="period" label="期数" fixed width="30"></el-table-column>
           <el-table-column prop="corpus" label="本金">
-            <template scope="scope">
+            <template slot-scope="scope">
               {{ scope.row.corpus | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="interest" label="利息">
-            <template scope="scope">
+            <template slot-scope="scope">
               {{ scope.row.interest | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="tiexiMoney" label="贴息">
-            <template scope="scope">
+            <template slot-scope="scope">
               {{ scope.row.tiexiMoney | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="defaultInterest" label="罚息">
-            <template scope="scope">
+            <template slot-scope="scope">
               {{ scope.row.defaultInterest | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="fee" label="手续费">
-            <template scope="scope">
+            <template slot-scope="scope">
               {{ scope.row.fee | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="loanUserFee" label="总额">
-            <template scope="scope">
+            <template slot-scope="scope">
               {{ scope.row.loanUserFee | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="repayDay" label="还款日"></el-table-column>
           <el-table-column prop="time" label="还款时间"></el-table-column>
           <el-table-column prop="status" label="状态" fixed="right">
-            <template scope="scope">
+            <template slot-scope="scope">
               {{ scope.row.status | keyToValue(statusList) }}
             </template>
           </el-table-column>

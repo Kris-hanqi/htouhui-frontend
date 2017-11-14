@@ -2,11 +2,15 @@
   <div class="account-top-wrapper">
     <hth-panel>
       <i class="icon-avatar"></i>
-      <span>你好，<i class="num-font">{{ realName || username }}</i></span>
-      <a class="icon-user" @click.stop="operationAccount" :class="{ 'icon-user-active': status }"></a>
-      <a class="icon-bank-card" @click.stop="operationBankCard" :class="{ 'icon-bank-card-active': bankCard }"></a>
-      <el-button :plain="true" @click="toRouter('account/recharge')" type="primary" class="recharge-btn">充值</el-button>
-      <el-button type="primary" @click="toRouter('account/withdraw')" class="withdraw-btn">提现</el-button>
+      <span class="text">你好，<i class="num-font">{{ realName || username }}</i></span>
+      <a @click.stop="operationAccount" style="margin-right: 8px;" :class="{ active: status }">
+        <i class="iconfont icon-user"></i>
+      </a>
+      <a @click.stop="operationBankCard" :class="{ active: bankCard }">
+        <i class="iconfont icon-bank-card"></i>
+      </a>
+      <el-button class="recharge-bth" :round="true" :plain="true" @click="toRouter('account/recharge')" type="primary">充值</el-button>
+      <el-button class="withdraw-btn" :round="true" type="primary" @click="toRouter('account/withdraw')">提现</el-button>
     </hth-panel>
     
     <!-- 开户组件 -->
@@ -80,10 +84,12 @@
       line-height: 73px;
     }
     
-    .recharge-btn {
+    button.top {
       float: right;
-      margin-top: 19px;
-      margin-right: 16px;
+    }
+    
+    .iconfont {
+      font-size: 23px;
     }
     
     .icon-avatar {
@@ -94,47 +100,30 @@
       background: url(../../../../assets/images/icon-avatar.png) no-repeat;
     }
     
-    span {
-      font-size: 16px;
-      vertical-align: middle;
+    .active {
+      color: #409eff;
+    }
+    
+    .recharge-bth,
+    .withdraw-btn {
+      float: right;
+      margin-top: 17px;
     }
     
     .withdraw-btn {
-      float: right;
-      margin-top: 19px;
-      background-color: #378ff6;
-      color: #fff;
       margin-right: 16px;
-      
-      &:hover {
-        background-color: #186dd1;
-      }
+    }
+    
+    span.text {
+      margin-right: 20px;
+      font-size: 16px;
+      vertical-align: middle;
     }
     
     a {
       display: inline-block;
       vertical-align: middle;
       width: 23px;
-    }
-    
-    a.icon-user {
-      height: 21px;
-      background: url(../../../../assets/images/home/account/icon-user.png) no-repeat;
-      margin-left: 40px;
-    }
-    
-    a.icon-user-active {
-      background: url(../../../../assets/images/home/account/icon-user-hover.png) no-repeat !important;
-    }
-    
-    a.icon-bank-card {
-      height: 18px;
-      background: url(../../../../assets/images/home/account/icon-bank-card.png) no-repeat;
-      margin-left: 7px;
-    }
-    
-    a.icon-bank-card-active {
-      background: url(../../../../assets/images/home/account/icon-bank-card-hover.png) no-repeat;
     }
   }
 </style>

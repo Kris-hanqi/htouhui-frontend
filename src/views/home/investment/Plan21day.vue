@@ -5,16 +5,16 @@
       <ul class="times">
         <li>交易时间：</li>
         <li>
-          <a href="javascript:void(0)" @click="switchDateType('3day')" :class="{ active: dateType === '3day'}">近三天</a>
+          <a @click.stop="switchDateType('3day')" :class="{ active: dateType === '3day'}">近三天</a>
         </li>
         <li>
-          <a href="javascript:void(0)" @click="switchDateType('1month')" :class="{ active: dateType === '1month'}">近一个月</a>
+          <a @click.stop="switchDateType('1month')" :class="{ active: dateType === '1month'}">近一个月</a>
         </li>
         <li>
-          <a href="javascript:void(0)" @click="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a>
+          <a @click.stop="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a>
         </li>
         <li>
-          <a href="javascript:void(0)" class="diy-time" @click="dateType = 'other'" :class="{ active: dateType === 'other'}">自定义时间</a>
+          <a @click.stop="dateType = 'other'" class="diy-time" :class="{ active: dateType === 'other'}">自定义时间</a>
         </li>
       </ul>
       <ul class="allChooseCalendar" v-show="dateType === 'other'">
@@ -35,28 +35,28 @@
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="joinTime" label="加入时间" width="135"></el-table-column>
         <el-table-column prop="joinMoney" label="加入金额">
-          <template scope="scope">
+          <template slot-scope="scope">
             {{ scope.row.joinMoney | currency('') + '元' }}
           </template>
         </el-table-column>
         <el-table-column prop="lockPeriod" label="持有期限">
-          <template scope="scope">
+          <template slot-scope="scope">
             {{ scope.row.lockPeriod + '天' }}
           </template>
         </el-table-column>
         <el-table-column prop="rate" label="往期年化利率">
-          <template scope="scope">
+          <template slot-scope="scope">
             {{ scope.row.rate + '%' }}
           </template>
         </el-table-column>
         <el-table-column prop="lockEndTime" label="持有期限截至" width="135"></el-table-column>
         <el-table-column prop="status" label="状态" width="80">
-          <template scope="scope">
+          <template slot-scope="scope">
             {{ scope.row.status | keyToValue(typeList) }}
           </template>
         </el-table-column>
         <el-table-column prop="seeInterests" label="查看">
-          <template scope="scope">
+          <template slot-scope="scope">
             <el-button class="icon-interests" @click="goClaimsView(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
           </template>
         </el-table-column>

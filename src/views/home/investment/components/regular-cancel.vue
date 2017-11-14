@@ -4,12 +4,12 @@
       <el-table-column prop="projectName" fixed label="项目名称" width="170"></el-table-column>
       <el-table-column prop="investTime" label="投资时间" width="80"></el-table-column>
       <el-table-column prop="investCash" label="投资金额" width="100">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.investCash | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="investRate" label="年利率" width="60">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.investRate + '%' }}
         </template>
       </el-table-column>
@@ -17,12 +17,12 @@
       <el-table-column prop="nextRepayDate" label="下次还款日"></el-table-column>
       <el-table-column prop="remainingTime" label="剩余时间"></el-table-column>
       <el-table-column prop="biddingSchedule" label="投标进度">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.biddingSchedule + '%' }}
         </template>
       </el-table-column>
       <el-table-column prop="status" fixed="right"  label="投资状态" width="70">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.status | keyToValue(typeList) }}
         </template>
       </el-table-column>

@@ -26,17 +26,17 @@
         <el-table :data="list" style="width: 100%">
           <el-table-column prop="time" label="时间"></el-table-column>
           <el-table-column prop="investMoney" label="在投金额">
-            <template scope="scope">
+            <template slot-scope="scope">
               {{ scope.row.investMoney | currency('') + '元' }}
             </template>
           </el-table-column>
           <el-table-column prop="rate" label="贴息利率">
-            <template scope="scope">
+            <template slot-scope="scope">
               {{ scope.row.rate + '%' }}
             </template>
           </el-table-column>
           <el-table-column prop="money" label="贴息金额">
-            <template scope="scope">
+            <template slot-scope="scope">
               {{ scope.row.money | currency('') + '元' }}
             </template>
           </el-table-column>

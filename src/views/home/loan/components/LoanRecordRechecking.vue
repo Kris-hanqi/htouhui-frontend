@@ -7,7 +7,7 @@
     <el-table-column prop="rateCount" label="年利率" width="110"></el-table-column>
     <el-table-column prop="rateCount" label="借款期限" width="110"></el-table-column>
     <el-table-column label="已还期数/总期数" width="110">
-      <template scope="scope">
+      <template slot-scope="scope">
         {{ scope.row.repayedTerm }}/{{ scope.row.repayedTerm + scope.row.unRepayTerm }}
       </template>
     </el-table-column>

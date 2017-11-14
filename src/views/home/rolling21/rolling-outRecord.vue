@@ -34,24 +34,24 @@
     <el-table :data="list" style="width: 100%">
       <el-table-column prop="applyTime" label="申请时间" width="135"></el-table-column>
       <el-table-column prop="exitMoney" label="退出金额">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.exitMoney | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="appointmentExitTime" label="预期退出时间" width="135"></el-table-column>
       <el-table-column prop="successExitTime" label="退出成功时间" width="135"></el-table-column>
       <el-table-column prop="actualExitMoney" label="实际到账金额">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.actualExitMoney | currency('') + '元 ' }}
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="80">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.status | keyToValue(typeList) }}
         </template>
       </el-table-column>
       <el-table-column prop="lookEquity" label="查看"  width="70">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-button class="icon-interests" type="text" @click="lookOutRegular(scope.row.appointmentExitId)" size="small">查看债权</el-button>
         </template>
       </el-table-column>

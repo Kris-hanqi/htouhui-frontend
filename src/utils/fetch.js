@@ -1,14 +1,19 @@
 import axios from 'axios';
-import store from '@/store'
+import store from '@/store';
+import { MessageBox } from 'element-ui'
 import BaseApi from './server-api';
 import { getToken } from 'utils/auth';
+import { getLocationUrl } from './index';
+import errorCode from './error-code';
+
+let openModalStatus = false;
 
 // 获取后端API地址
 const BaseUrl = BaseApi();
 
 const service = axios.create({
   baseURL: BaseUrl,     // api的base_url
-  timeout: 10000         // 请求超时时间
+  timeout: 30 * 1000       // 请求超时时间 30S
 });
 
 // 请求拦截器
@@ -25,9 +30,26 @@ service.interceptors.request.use(config => {
 // 响应拦截器
 service.interceptors.response.use(
   response => {
-    // const res = response.data;
+    const data = response.data;
+    // 用户未登录 / 登录失效
+    if (data.meta.code === errorCode.ESS_USER_IS_NOT_LOGIN) {
+      if (!openModalStatus) {
+        openModalStatus = true;
 
-    console.log('');
+        MessageBox.confirm('登录超时，可以取消继续留在该页面，或者重新登录', '确定登出', {
+          confirmButtonText: '重新登录',
+          cancelButtonText: '取消',
+          type: 'warning',
+          beforeClose: (action, instance, done) => {
+            if (action === 'confirm') {
+              window.open(getLocationUrl() + '/memberLoginPage');
+            } else {
+              done();
+            }
+          }
+        });
+      }
+    }
 
     return response;
   },

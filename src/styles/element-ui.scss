@@ -100,11 +100,6 @@ th {
   padding: 0;
 }
 
-.el-dialog__headerbtn {
-  padding-top: 10px;
-  padding-right: 10px;
-}
-
 .el-dialog__title {
   display: inline-block;
   height: 45px;
@@ -122,21 +117,6 @@ th {
 .el-dialog__footer {
   padding: 0 20px 30px;
   text-align: center;
-}
-
-.el-dialog .el-button {
-  padding: 0 42px;
-  border-radius: 100px;
-  line-height: 45px;
-  font-size: 18px;
-  border: solid 1px #979797;
-  color: #9b9b9b;
-}
-
-.el-dialog .el-button--primary {
-  background-color: #378ff6;
-  border-color: #378ff6;
-  color: #fff;
 }
 
 .pullOut .el-dialog--small {

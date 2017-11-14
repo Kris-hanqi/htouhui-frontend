@@ -26,31 +26,31 @@
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
         <el-table-column prop="loanMoney" label="借款金额" width="100">
-          <template scope="scope">
+          <template slot-scope="scope">
             {{ scope.row.loanMoney | currency('') + '元' }}
           </template>
         </el-table-column>
         <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
         <el-table-column prop="perid" label="借款期限" width="70"></el-table-column>
         <el-table-column prop="investMoney" label="投资金额" width="100">
-          <template scope="scope">
+          <template slot-scope="scope">
             {{ scope.row.investMoney | currency('') + '元' }}
           </template>
         </el-table-column>
         <el-table-column prop="repayTimeFormat" label="还款时间" width="80"></el-table-column>
         <el-table-column prop="earnings" label="已收本息">
-          <template scope="scope">
+          <template slot-scope="scope">
             {{ scope.row.earnings | currency('') + '元' }}
           </template>
         </el-table-column>
         <el-table-column prop="uncollectedRepayMoney" label="待收本息">
-          <template scope="scope">
+          <template slot-scope="scope">
             {{ scope.row.uncollectedRepayMoney | currency('') + '元' }}
           </template>
         </el-table-column>
         <el-table-column prop="status" label="状态" width="50"></el-table-column>
         <el-table-column prop="contract" label="查看" width="40">
-          <template scope="scope">
+          <template slot-scope="scope">
             <el-button class="icon-download" type="text" size="small">合同</el-button>
           </template>
         </el-table-column>

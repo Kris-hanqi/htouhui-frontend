@@ -5,12 +5,12 @@
       <el-table-column prop="applyTime" label="发起时间"></el-table-column>
       <el-table-column prop="endTime" label="到期时间"></el-table-column>
       <el-table-column prop="corpus" label="转让本金">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.corpus | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="premium" label="折让金">
-        <template scope="scope">
+        <template slot-scope="scope">
           {{ scope.row.premium | currency('') + '元' }}
         </template>
       </el-table-column>
