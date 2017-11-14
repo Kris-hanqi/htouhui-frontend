@@ -5,7 +5,7 @@
         <ul>
           <li>
             <label>用户名</label>
-            <span class="amendLoginName">xiaohai</span>
+            <span class="amendLoginName">{{ username || '无' }}</span>
           </li>
           <li>
             <label>原密码</label>
@@ -40,10 +40,16 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import HthPanel from 'common/Panel/index.vue';
   import { fetchUpdatePassword } from 'api/public';
   
   export default {
+    computed: {
+      ...mapGetters([
+        'username'
+      ])
+    },
     components: {
       HthPanel
     },
