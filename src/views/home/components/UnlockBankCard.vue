@@ -1,7 +1,7 @@
 <template>
   <div class="unlock-bank-card-wrapper">
     <el-dialog title="提示"
-               width="30%"
+               width="500px"
                :before-close="handleClose"
                :visible.sync="visible">
       <span class="text">确认解绑银行卡？</span>
