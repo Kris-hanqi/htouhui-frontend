@@ -57,8 +57,11 @@
           <td>交易密码</td>
           <td>{{ transactionPasswordStatus ? '已设置' : '未设置'}}</td>
           <td rowspan="2" class="borderLine">
-            <router-link to="/accountManage/set/transactionPassword">
-              <button class="hth-btn">{{ transactionPasswordStatus ? '修改' : '设置' }}</button></router-link>
+            <el-button class="hth-btn" size="small" @click="updateTransactionPassword" v-if="transactionPasswordStatus" round>修改</el-button>
+            <el-button class="hth-btn" type="primary" @click="setTransactionPassword" v-else plain round>设置</el-button>
+            
+            <!--<router-link to="/accountManage/set/transactionPassword">-->
+              <!--<button class="hth-btn">{{ transactionPasswordStatus ? '修改' : '设置' }}</button></router-link>-->
           </td>
         </tr>
         <tr>
@@ -121,7 +124,7 @@
   import UnlockBankCard from '../components/UnlockBankCard.vue';
   import RequestBankFrom from '../components/RequestBankFrom.vue';
   import { getLocationUrl } from 'utils/index';
-  import { fetchAutomaticBidding, fetchAutomaticDebtTransfer, fetchAutomaticRepayment } from 'api/home/account-set';
+  import { fetchAutomaticBidding, fetchAutomaticDebtTransfer, fetchAutomaticRepayment, fetchResetTransactionPassword } from 'api/home/account-set';
   
   export default {
     components: {
@@ -156,6 +159,11 @@
           callbackUrl: getLocationUrl() + '/user/home.html#/accountManage/set/index',
           sessionId: ''
         },
+        updateTransactionPasswordData: {
+          source: 'pc',
+          callbackUrl: getLocationUrl() + '/user/home.html#/accountManage/set/index',
+          sessionId: ''
+        },
         requestBankData: {}
       }
     },
@@ -177,6 +185,19 @@
       },
       closeUnlockBankCard() {
         this.dialogUnlockBankCardVisible = false;
+      },
+      setTransactionPassword() {
+        this.$router.push('/accountManage/set/transactionPassword');
+      },
+      // 修改交易密码
+      updateTransactionPassword() {
+        this.updateTransactionPasswordData.sessionId = this.uuid;
+        fetchResetTransactionPassword(this.updateTransactionPasswordData)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.requestBankData = response.data.data;
+            }
+          })
       },
       automaticBidding() {
         if (this.status === 0) {
@@ -229,6 +250,13 @@
   .account-set-wrapper {
     width: 832px;
     padding-bottom: 75px;
+    
+    button.hth-btn {
+      width: 91px;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 4px 12px;
+    }
     
     button.hth-btn {
       width: 91px;

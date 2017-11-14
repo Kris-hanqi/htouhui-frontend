@@ -1,6 +1,6 @@
 <template>
   <div class="transaction-password-wrapper">
-    <hth-panel :title="title + '交易密码'">
+    <hth-panel title="设置交易密码">
       <el-form ref="transactionPassword" label-width="80px">
         <el-form-item label="手机号码">
           <span class="phone">{{ mobile || '无' }}</span>
@@ -34,7 +34,7 @@
   import RequestBankFrom from '../../components/RequestBankFrom.vue';
   import { fetchSendCode } from 'api/public';
   import { getLocationUrl } from 'utils/index';
-  import { fetchSetTransactionPassword, fetchResetTransactionPassword } from 'api/home/account-set';
+  import { fetchSetTransactionPassword } from 'api/home/account-set';
   
   export default {
     components: {
@@ -45,15 +45,12 @@
     computed: {
       ...mapGetters([
         'mobile',
-        'uuid',
-        'transactionPasswordStatus'
+        'uuid'
       ])
     },
     data() {
       return {
         htmlStr: '',
-        authType: 'set',
-        title: '设置',
         requestBankData: {},
         transactionPassword: {
           source: 'pc',
@@ -77,43 +74,20 @@
       },
       setPwd() {
         this.transactionPassword.sessionId = this.uuid;
-        if (!this.transactionPasswordStatus) {
-          fetchSetTransactionPassword(this.transactionPassword)
-            .then(response => {
-              const data = response.data;
-              if (data.meta.code === 200) {
-                this.requestBankData = data.data;
-              } else {
-                this.$notify({
-                  title: '错误',
-                  message: '失败原因:' + data.meta.code.message,
-                  type: 'error',
-                  duration: 0
-                });
-              }
-            });
-        } else {
-          fetchResetTransactionPassword(this.transactionPassword)
-            .then(response => {
-              const data = response.data;
-              if (data.meta.code === 200) {
-                this.requestBankData = data.data;
-              } else {
-                this.$notify({
-                  title: '错误',
-                  message: '失败原因:' + data.meta.code.message,
-                  type: 'error',
-                  duration: 0
-                });
-              }
-            });
-        }
-      }
-    },
-    created() {
-      if (this.transactionPasswordStatus) {
-        this.authType = 'reset';
-        this.title = '修改';
+        fetchSetTransactionPassword(this.transactionPassword)
+          .then(response => {
+            const data = response.data;
+            if (data.meta.code === 200) {
+              this.requestBankData = data.data;
+            } else {
+              this.$notify({
+                title: '错误',
+                message: '失败原因:' + data.meta.code.message,
+                type: 'error',
+                duration: 0
+              });
+            }
+          });
       }
     }
   }
