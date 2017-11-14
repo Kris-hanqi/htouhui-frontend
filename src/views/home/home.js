@@ -23,7 +23,8 @@ import {
   Step,
   Radio,
   Col,
-  Checkbox
+  Checkbox,
+  Notification
 } from 'element-ui'
 import VueClipboard from 'vue-clipboard2'
 import '@/styles/base.scss';
@@ -70,6 +71,7 @@ Vue.use(Loading.directive);
 Vue.prototype.$loading = Loading.service;
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$confirm = MessageBox.confirm;
+Vue.prototype.$notify = Notification;
 Vue.prototype.$message = Message;
 
 Vue.use(VueClipboard);
