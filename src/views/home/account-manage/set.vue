@@ -81,7 +81,7 @@
             </router-link>
           </td>
         <tr>
-          <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">登录密码已设置 上次登录时间： 2017-08-29 14:27:24</td>
+          <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">登录密码已设置 上次登录时间： {{ lastLoginTime }}</td>
         </tr>
         <tr class="borderNone">
           <td>邮箱认证<i class="iconDangerous" v-if="!email"></i></td>
@@ -140,6 +140,7 @@
         'uuid',
         'bankCard',
         'accountId',
+        'lastLoginTime',
         'transactionPasswordStatus',
         'isAutomaticBidding',
         'isAutomaticDebtTransfer',

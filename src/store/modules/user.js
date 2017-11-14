@@ -57,6 +57,7 @@ const user = {
     accountId: '', // 电子账号
     IDNumber: '', // 身份证号
     email: '', // 电子邮箱
+    lastLoginTime: '',
     transactionPasswordStatus: false, // 是否设置交易密码
     isAutomaticBidding: false, // 是否自动投标授权
     isAutomaticDebtTransfer: false, // 是否自动债转授权
@@ -99,6 +100,9 @@ const user = {
     },
     SET_EMAIL: (state, email) => {
       state.email = email;
+    },
+    SET_LAST_LOGIN_TIME: (state, lastLoginTime) => {
+      state.lastLoginTime = lastLoginTime;
     },
     SET_TRANSACTION_PASSWORD_STATUS: (state, status) => {
       state.transactionPasswordStatus = status;
@@ -143,6 +147,7 @@ const user = {
             commit('SET_STATUS', status);
             commit('SET_TRANSACTION_PASSWORD_STATUS', data.isSetPassWord);
             commit('SET_EMAIL', data.email);
+            commit('SET_LAST_LOGIN_TIME', data.lastLoginTime);
             commit('SET_SHOW_NOVICE_PLAN', showNovicePlan);
             commit('SET_SHOW_NOVICE_PLAN_MESSAGE', showNovicePlanMessage);
             commit('SET_IS_BORROWER', isBorrower(data));
