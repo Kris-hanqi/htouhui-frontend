@@ -75,6 +75,9 @@ export function getInvestData(data) {
       item.url = item.url + '/' + item.planId;
     }
 
+    item.sum = item.sum || 0;
+    item.interest = item.interest || 0;
+
     if (item.order) {
       list.push(item);
     }

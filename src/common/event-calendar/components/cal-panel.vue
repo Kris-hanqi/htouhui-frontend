@@ -7,7 +7,7 @@
           <img :src="img_icon_left">
         </button>
         <button class="today">今天</button>
-        <button :disabled="nextSelect" @click="nextMonth" class="next">
+        <button @click="nextMonth" class="next">
           <img :src="img_icon_right">
         </button>
       </div>
@@ -67,11 +67,6 @@
       today() {
         const date = new Date();
         return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-      },
-      nextSelect() {
-        const list = this.yearMonthStr.split('-');
-        const date = new Date(list[0], list[1]);
-        return date > new Date();
       }
     },
     watch: {
