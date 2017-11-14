@@ -82,7 +82,7 @@
             } else {
               this.$notify({
                 title: '错误',
-                message: '失败原因:' + data.meta.code.message,
+                message: '失败原因:' + response.data.meta.message,
                 type: 'error',
                 duration: 0
               });
