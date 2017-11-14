@@ -2,6 +2,7 @@
   <!-- 开户组件 -->
   <div class="open-account-wrapper">
     <el-dialog title="平台开户"
+               width="730px"
                :before-close="handleClose"
                :visible.sync="visible">
       <el-steps :space="200" :active="stepActive">
