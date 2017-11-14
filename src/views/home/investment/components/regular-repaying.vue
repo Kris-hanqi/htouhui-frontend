@@ -43,7 +43,9 @@
     </div>
 
 
-    <el-dialog title="额外奖励" :visible.sync="dialogVisible" width="30%">
+    <el-dialog title="额外奖励"
+               :visible.sync="dialogVisible"
+               width="700px">
       <div class="dialog-main">
         <el-table :data="extendEarnList" style="width: 100%">
           <el-table-column prop="name" label="优惠券" width="140"></el-table-column>
@@ -67,10 +69,12 @@
       </div>
     </el-dialog>
 
-    <el-dialog title="还款计划" :visible.sync="investRepays" width="30%">
+    <el-dialog title="还款计划"
+               :visible.sync="investRepays"
+               width="700px">
       <div class="dialog-main">
         <el-table :data="investRepaysList" style="width: 100%">
-          <el-table-column prop="period" label="期数" fixed width="30"></el-table-column>
+          <el-table-column prop="period" label="期数" width="50"></el-table-column>
           <el-table-column prop="corpus" label="本金">
             <template slot-scope="scope">
               {{ scope.row.corpus | currency('') + '元' }}
