@@ -24,7 +24,7 @@
       <div class="look-regular-bottom">
         <p>加入时间 <span class="roboto-regular">{{ detailList.joinTime }}</span></p>
         <p>即日起免手续费 <span class="roboto-regular">{{ detailList.lockEndTime }}</span></p>
-        <img v-if="detailList.status == 'matched'" class="type-message" src="../../../../assets/images/home/icon-success.png" alt=""/>
+        <img v-if="detailList.status === 'matched'" class="type-message" src="../../../../assets/images/home/icon-success.png" alt=""/>
         <img v-else class="type-message" src="../../../../assets/images/home/icon-auto.png" alt=""/>
       </div>
     </div>
@@ -41,12 +41,12 @@
             {{ scope.row.loanMoney + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="rate" label="往期年利率" width="70">
+        <el-table-column prop="rate" label="往期年利率" width="80">
           <template slot-scope="scope">
             {{ scope.row.rate + '%' }}
           </template>
         </el-table-column>
-        <el-table-column prop="perid" label="借款期限" width="60"></el-table-column>
+        <el-table-column prop="perid" label="借款期限" width="80"></el-table-column>
         <el-table-column prop="investMoney" label="投资金额" width="100">
           <template slot-scope="scope">
             {{ scope.row.investMoney + '元' }}

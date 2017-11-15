@@ -1,0 +1,20 @@
+{
+    date:当日,
+    investRepayInfo:[
+  {
+      loanName:项目名称,
+      loanNumber:项目编号,
+      corpus:本金,
+      interest:利息,
+      extraEarning:额外收益,
+      investMoeny:投资金额
+  },{
+      loanName:项目名称,
+      loanNumber:项目编号,
+      corpus:本金,
+      interest:利息,
+      extraEarning:额外收益,
+      investMoeny:投资金额
+      }
+    ]
+  }

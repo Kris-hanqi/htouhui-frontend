@@ -5,8 +5,8 @@
       <event-calendar :dates="dates" class="calendar"
                       @day-changed="handleDayChange"
                       @month-changed="handleMonthChanged"></event-calendar>
-      
-      <div class="event-detail" v-if="showViewType === 'month'">
+
+      <div class="event-detail" v-if="false">
         <div class="event-detail__top">
           <p class="title"><span></span>{{ month }}收益账单<span></span></p>
         </div>
@@ -17,28 +17,36 @@
         </div>
       </div>
 
-      <div class="event-detail2" v-else>
+      <div class="event-detail2">
         <div class="event-detail__top">
           <p class="title"><span @click="switchViewType"></span>{{ dayData.date }}账单</p>
         </div>
         <div class="event-detail__body">
-          <div v-for="info in dayData.investRepayInfo" :key="info.loanNumber" class="box">
-            <div class="title">{{ info.loanName }}</div>
+          <div class="box">
+            <div class="title">{{ testData.loanName }}</div>
             <div class="box-main">
               <div class="left-part">
-                <p>投资金额<span class="roboto-regular">{{ info.investMoeny | currency('') }}</span>元</p>
-                <p>本&nbsp;&nbsp;&nbsp;&nbsp;金<span class="roboto-regular">{{ info.corpus | currency('') }}</span>元</p>
+                <p>投资金额<span class="roboto-regular">{{ testData.investMoeny | currency('') }}</span>元</p>
+                <p>本&nbsp;&nbsp;&nbsp;&nbsp;金<span class="roboto-regular">{{ testData.corpus | currency('') }}</span>元</p>
               </div>
               <div class="right-part">
-                <p>利&nbsp;&nbsp;&nbsp;&nbsp;息<span class="roboto-regular">{{ info.interest | currency('') }}</span>元</p>
-                <p>平台奖励<span class="roboto-regular">{{ info.extraEarning | currency('')}}</span>元</p>
+                <p>利&nbsp;&nbsp;&nbsp;&nbsp;息<span class="roboto-regular">{{ testData.interest | currency('') }}</span>元</p>
+                <p>平台奖励<span class="roboto-regular">{{ testData.extraEarning | currency('')}}</span>元</p>
               </div>
+            </div>
+            <div class="pages">
+              <div class="pages-content">
+                <button @click="handleDisableLeft"  class="leftbtn" :disabled="isLeftDisabled">&lt</button><ul class="pagelist"><li class="pageRadios"></li><li class="pageRadios"></li><li class="pageRadios"></li></ul><button @click="handleDisableRight" class="rightbtn" :disabled="isRightDisabled">&gt;</button>
+              </div>
+
             </div>
           </div>
         </div>
       </div>
+
     </hth-panel>
   </div>
+
 </template>
 
 <script>
@@ -46,7 +54,7 @@
   import EventCalendar from 'common/event-calendar/index.vue';
   import img_icon_calendar from 'assets/images/home/icon-calendar.png';
   import { fetchRepayCalendar } from 'api/home/account';
-  import { formatDate } from 'utils/index'
+  import { formatDate } from 'utils/index';
 
   export default {
     components: {
@@ -60,11 +68,49 @@
         events: null,
         showViewType: 'month',
         month: null,
+        isLeftDisabled: false,
+        isRightDisabled: false,
         monthData: {
           collectMoney: '', // 待收
           receiptMoney: ''  // 已收
         },
-        dayData: null
+        index: null,
+        testData: {},
+        dayData: {
+          date: '2017年8月9号',
+          datedetail: [],
+          investRepayInfo: [
+            {
+              page: 0,
+              isShow: true,
+              pageId: 1,
+              loanName: '项目名称',
+              loanNumber: '项目编号',
+              corpus: '本金',
+              interest: '利息',
+              extraEarning: '额外收益',
+              investMoeny: '投资金额'
+            }, {
+              isShow: false,
+              pageId: 2,
+              loanName: '项目名称2',
+              loanNumber: '项目编号',
+              corpus: '本金',
+              interest: '利息',
+              extraEarning: '额外收益',
+              investMoeny: '投资金额'
+            }, {
+              isShow: false,
+              pageId: 2,
+              loanName: '项目名称3',
+              loanNumber: '项目编号',
+              corpus: '本金',
+              interest: '利息',
+              extraEarning: '额外收益',
+              investMoeny: '投资金额'
+            }
+          ]
+        }
       }
     },
     methods: {
@@ -91,6 +137,26 @@
           this.showViewType = 'month';
         }
       },
+      handleDisableRight() {
+        this.index++;
+        this.testData = this.dayData.investRepayInfo[this.index];
+        this.isLeftDisabled = false;
+        if (this.index === this.dayData.investRepayInfo.length - 1) {
+          this.isRightDisabled = true;
+        } else {
+          this.isRightDisabled = false;
+        }
+      },
+      handleDisableLeft() {
+        this.index --;
+        this.testData = this.dayData.investRepayInfo[this.index];
+        this.isRightDisabled = false;
+        if (this.index === 0) {
+          this.isLeftDisabled = true;
+        } else {
+          this.isLeftDisabled = false;
+        }
+      },
       handleDayChange(date) {
         if (this.dates.indexOf(date) !== -1) {
           this.events.forEach(v => {
@@ -109,6 +175,9 @@
     created() {
       this.month = formatDate(null, 'YYYY-MM');
       this.repayCalendar();
+      this.index = 0;
+      this.testData = this.dayData.investRepayInfo[this.index];
+      this.isLeftDisabled = true;
     }
   }
 </script>
@@ -118,11 +187,11 @@
     .hth-panel-body {
       padding-bottom: 40px;
     }
-    
+
     .event-calendar-wrapper {
       padding-left: 20px;
     }
-    
+
     .event-detail__top {
       margin-bottom: 45px;
     }
@@ -149,11 +218,46 @@
           border: solid 1px #ced9e4;
         }
       }
+
+      .leftbtn {
+        display: block;
+        float: left;
+        width: 15px;
+        height: 15px;
+      }
+
+      .rightbtn {
+        display: block;
+        float: right;
+        width: 15px;
+        height: 15px;
+        background: #fff;
+        margin-top: -6px;
+      }
+
+      .page-content {
+        width: 75px;
+        height: 7.4px;
+      }
+
+      .pagelist {
+        width: 128px;
+        height: 7.4px;
+        margin-left: 87px;
+      }
+
+      .pageRadios {
+        float: left;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        margin: 10px 5px 0 0;
+        background: #a4b2d2;
+      }
     }
 
     .event-detail2 {
       padding: 20px 25px;
-      padding-top: 55px;
 
       .event-detail__top {
         margin-bottom: 25px;
@@ -199,11 +303,6 @@
           padding-left: 10px;
         }
 
-        .box-main > div {
-          display: inline-block;
-          width: 46%;
-        }
-
         .box-main > div p {
           margin-bottom: 15px;
           font-size: 14px;
@@ -218,6 +317,19 @@
 
         .box-main > div.right-part p span {
           color: #ff4f38;
+        }
+
+        .pages {
+          width: 188.3px;
+          height: 46.5px;
+          padding: 24px 0 0 100.7px;
+        }
+
+        .pages-top {
+          width: 233px;
+          height: 2px;
+          margin: 0 auto;
+          background: blue;
         }
       }
     }
