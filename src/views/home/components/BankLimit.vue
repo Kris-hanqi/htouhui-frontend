@@ -1,5 +1,7 @@
 <template>
-  <el-dialog class="bank-limit-wrapper" title="支持快捷支付的银行与限额参考表"
+  <el-dialog class="bank-limit-wrapper"
+             title="支持快捷支付的银行与限额参考表"
+             width="750px"
              :before-close="handleClose"
              :visible.sync="visible">
     <el-table :data="list">
