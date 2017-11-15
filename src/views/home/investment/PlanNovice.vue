@@ -28,7 +28,7 @@
       <div class="newUser-plan-btn">
         <span>新手专享</span>
         <span>限量发售</span>
-        <a class="newUser-plan-join" href="">立即加入</a>
+        <a class="newUser-plan-join" @click.stop="toNovicePlanPage">立即加入</a>
       </div>
     </div>
     <!--已投资-->
@@ -40,7 +40,7 @@
         <div class="newUser-plan-rate">
           <p class="rate">
             <span class="roboto-regular">
-              <interest-rate :value="joinPlanList.rate || ''"
+              <interest-rate :value="joinPlanList.rate"
                              :leftFontSize="36"
                              :rightFontSize="24"></interest-rate>
             </span>%
@@ -104,7 +104,8 @@
       </el-table>
 
       <div class="pages">
-        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>
+          条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
         <el-pagination @current-change="handleCurrentChange"
                        :current-page.sync="investQuery.pageNo"
                        :page-size="investQuery.size"
@@ -117,6 +118,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import { getLocationUrl } from 'utils/index';
   import { fetchNovicePlanInfo, fetchJoinPlanBill } from 'api/home/investmentPlanNovice';
   import { queryUserInvestList } from 'api/home/queryUserJoinInvestList';
   import interestRate from 'components/interest-rate';
@@ -173,6 +175,9 @@
             this.novicePlanInfo = data.data.data;
           }
         })
+      },
+      toNovicePlanPage() {
+        window.location.href = getLocationUrl() + '/plan/2';
       },
       joinPlanNoviceList() {
         fetchJoinPlanBill(this.listQuery).then(response => {
