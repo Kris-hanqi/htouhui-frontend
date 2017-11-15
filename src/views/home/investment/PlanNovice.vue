@@ -134,6 +134,7 @@
     data() {
       return {
         novicePlanInfo: {
+          planId: '',
           rate: '',
           lockPeriod: '',
           startInvestMoney: ''
@@ -178,7 +179,8 @@
         })
       },
       toNovicePlanPage() {
-        window.location.href = getLocationUrl() + '/plan/2';
+        if (!this.novicePlanInfo.planId) return;
+        window.location.href = getLocationUrl() + '/plan/' + this.novicePlanInfo.planId;
       },
       joinPlanNoviceList() {
         fetchJoinPlanBill(this.joinDetailsQuery).then(response => {
