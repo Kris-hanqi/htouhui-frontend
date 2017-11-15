@@ -1,35 +1,25 @@
 <template>
   <div class="update-login-password-wrapper">
     <hth-panel title="修改登录密码">
-      <div class="amendLoginPwdMsg">
-        <ul>
-          <li>
-            <label>用户名</label>
-            <span class="amendLoginName">{{ username || '无' }}</span>
-          </li>
-          <li>
-            <label>原密码</label>
-            <input type="text" v-model="passwordData.oldPassword" placeholder="请输入原登录密码">
-          </li>
-          <li>
-            <i class="dangerousIcon"></i>
-            <span class="dangerousTxt">密码不可以为空</span>
-          </li>
-          <li>
-            <label>新密码</label>
-            <input type="text" v-model="passwordData.newPassword" placeholder="6-16位字母与数字组合">
-          </li>
-          <li>
-            <i class="dangerousIcon"></i>
-            <span class="dangerousTxt">新密码不可以为空</span>
-          </li>
-          <li>
-            <label>确认密码</label>
-            <input type="text" v-model="passwordData.confirmPassword" placeholder="再次输入您的新密码">
-          </li>
-        </ul>
-        <button class="submitBtn" @click="UpdatePassword">提交</button>
-      </div>
+      <el-form style="width: 370px;"
+               :model="passwordData"
+               :rules="rules" label-width="80px">
+        <el-form-item label="用户名">
+          <span>{{ username || '无' }}</span>
+        </el-form-item>
+        <el-form-item label="原密码" prop="oldPassword">
+          <el-input type="password" v-model="passwordData.oldPassword" placeholder="请输入原密码"></el-input>
+        </el-form-item>
+        <el-form-item label="新密码" prop="newPassword">
+          <el-input type="password" v-model="passwordData.newPassword" placeholder="请输入新密码"></el-input>
+        </el-form-item>
+        <el-form-item label="确认密码" prop="confirmPassword">
+          <el-input type="password" v-model="passwordData.confirmPassword" placeholder="请重新输入"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="UpdatePassword" style="width: 200px" round>提交</el-button>
+        </el-form-item>
+      </el-form>
       <div class="split-line"></div>
       <div class="hth-tips">
         <h3>温馨提示</h3>
@@ -42,6 +32,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import HthPanel from 'common/Panel/index.vue';
+  import { validatePassword } from 'utils/validate';
   import { fetchUpdatePassword } from 'api/public';
   
   export default {
@@ -54,11 +45,36 @@
       HthPanel
     },
     data() {
+      const validatePW = (rule, value, callback) => {
+        if (!validatePassword(value)) {
+          callback(new Error('密码为6-16为数字与字母组合'))
+        } else {
+          callback()
+        }
+      };
+      const validateConfirmPassword = (rule, value, callback) => {
+        if (this.newPassword !== this.confirmPassword) {
+          callback(new Error('两次输入不一致'))
+        } else {
+          callback()
+        }
+      };
       return {
         passwordData: {
           oldPassword: '',
           newPassword: '',
           confirmPassword: ''
+        },
+        rules: {
+          oldPassword: [
+            { required: true, message: '请输入原密码', trigger: 'blur' }
+          ],
+          newPassword: [
+            { required: true, trigger: 'blur', validator: validatePW }
+          ],
+          confirmPassword: [
+            { required: true, trigger: 'blur', validator: validateConfirmPassword }
+          ]
         }
       }
     },
@@ -83,73 +99,5 @@
   .update-login-password-wrapper {
     width: 832px;
     height: 797px;
-    
-    .amendLoginPwdMsg {
-      li:first-child {
-        margin-bottom: 20px;
-      }
-
-      label {
-        display: inline-block;
-        vertical-align: middle;
-        width: 110px;
-        font-size: 16px;
-        line-height: 1;
-        text-align: right;
-        color: #727e90;
-      }
-
-      input {
-        width: 252px;
-        height: 54px;
-        background-color: #fff;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        border: solid 1px #bfc1c4;
-        padding-left: 14px;
-        margin-left: 10px;
-      }
-
-      input::-webkit-input-placeholder { color: #aab2c9; }
-
-      :-moz-placeholder { color: #aab2c9; }
-
-      ::-moz-placeholder { color: #aab2c9; }
-
-      :-ms-input-placeholder { color: #aab2c9; }
-
-      i.dangerousIcon {
-        display: inline-block;
-        vertical-align: middle;
-        width: 20px;
-        height: 18px;
-        margin: 10px 5px 10px 132px;
-        background: url(../../../../assets/images/home/center-ico-dangerous.png) no-repeat;
-      }
-
-      span.amendLoginName {
-        margin-left: 20px;
-        font-size: 16px;
-        color: #394b67;
-      }
-
-      span.dangerousTxt {
-        font-size: 14px;
-        color: #ff7900;
-      }
-
-      .submitBtn {
-        width: 203px;
-        height: 46px;
-        border-radius: 100px;
-        background-color: #378ff6;
-        color: #fff;
-        margin-left: 152px;
-        margin-top: 33px;
-        margin-bottom: 39px;
-        font-size: 18px;
-        cursor: pointer;
-      }
-    }
   }
 </style>

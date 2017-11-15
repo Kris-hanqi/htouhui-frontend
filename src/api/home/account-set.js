@@ -35,6 +35,15 @@ export function fetchCheckCurrentMobile(data) {
   })
 }
 
+/** 检验验证码(修改手机号) */
+export function fetchUpdateBindMobile(data) {
+  return fetch({
+    url: 'user/changeBindingMobileNumber',
+    method: 'get',
+    params: data
+  })
+}
+
 /** 用户开户 */
 export function fetchOpenAccount(data) {
   return fetch({

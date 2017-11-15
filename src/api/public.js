@@ -12,7 +12,7 @@ export function fetchSendCode(data) {
 /** 发送短信验证码 NEW */
 export function fetchSendCodeNew(data) {
   return fetch({
-    url: 'user/sendAuthCode',
+    url: 'sendAuthCode',
     method: 'get',
     params: data
   })
