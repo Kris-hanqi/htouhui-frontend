@@ -10,7 +10,7 @@
       <div class="home-wrapper__account">
         <!-- 左侧菜单 -->
         <div class="home-wrapper__account-menu">
-          <hth-sidebar :show-novice-plan="showNovicePlan"
+          <hth-sidebar :show-novice-plan="novicePlanStatus !== 3"
                        :show-loan="isBorrower"></hth-sidebar>
         </div>
         <div class="main-container">
@@ -62,7 +62,7 @@
     },
     computed: {
       ...mapGetters([
-        'showNovicePlan',
+        'novicePlanStatus',
         'isBorrower'
       ]),
       operationTips() {

@@ -17,20 +17,23 @@ function getUserStatus(data) {
   return 3;
 }
 
-function isShowNovicePlan(data) {
+/**
+ * 标记用户新手计划状态
+ *    1、新手
+ *    2、非新手参加过新手计划
+ *    3、非新手未参加过新手计划
+ */
+function getNovicePlanStatus(data) {
+  let status = null;
   if (data.isNovice) { // 新用户
-    return true;
+    status = 1;
   } else if (data.isJoinNovicePlan) {
-    return true;
+    status = 2;
   } else {
-    return false;
+    status = 3;
   }
-}
 
-function isShowNovicePlanMessage(data) {
-  if (data.isJoinNovicePlan) {
-    return true;
-  }
+  return status;
 }
 
 function isBorrower(data) {
@@ -62,8 +65,7 @@ const user = {
     isAutomaticBidding: false, // 是否自动投标授权
     isAutomaticDebtTransfer: false, // 是否自动债转授权
     isAutomaticRepayment: false, // 是否自动还款
-    showNovicePlan: false,
-    showNovicePlanMessage: true,
+    novicePlanStatus: 1,
     isBorrower: false // 是否是借款人
   },
 
@@ -107,11 +109,8 @@ const user = {
     SET_TRANSACTION_PASSWORD_STATUS: (state, status) => {
       state.transactionPasswordStatus = status;
     },
-    SET_SHOW_NOVICE_PLAN: (state, showNovicePlan) => {
-      state.showNovicePlan = showNovicePlan;
-    },
-    SET_SHOW_NOVICE_PLAN_MESSAGE: (state, showNovicePlanMessage) => {
-      state.showNovicePlanMessage = showNovicePlanMessage;
+    SET_NOVICE_PLAN_STATUS: (state, novicePlanStatus) => {
+      state.novicePlanStatus = novicePlanStatus;
     },
     SET_IS_BORROWER: (state, isBorrower) => {
       state.isBorrower = isBorrower;
@@ -135,8 +134,6 @@ const user = {
           if (response.data.meta.code === 200) {
             const data = response.data.data;
             const status = getUserStatus(data);
-            const showNovicePlan = isShowNovicePlan(data);
-            const showNovicePlanMessage = isShowNovicePlanMessage(data);
             commit('SET_USERNAME', data.userId);
             commit('SET_REAL_NAME', data.realName);
             commit('SET_MOBILE', data.mobileNumber);
@@ -148,8 +145,7 @@ const user = {
             commit('SET_TRANSACTION_PASSWORD_STATUS', data.isSetPassWord);
             commit('SET_EMAIL', data.email);
             commit('SET_LAST_LOGIN_TIME', data.lastLoginTime);
-            commit('SET_SHOW_NOVICE_PLAN', showNovicePlan);
-            commit('SET_SHOW_NOVICE_PLAN_MESSAGE', showNovicePlanMessage);
+            commit('SET_NOVICE_PLAN_STATUS', getNovicePlanStatus(data));
             commit('SET_IS_BORROWER', isBorrower(data));
             commit('SET_IS_AUTOMATIC_BIDDING', data.isAutoBidAuth);
             commit('SET_IS_AUTOMATIC_DEBT_TRANSFER', data.isAutoInvestAuth);

@@ -1,6 +1,6 @@
 import fetch from 'utils/fetch';
 
-/** 获取新手计划标的 */
+/** 获取新手计划标的信息 */
 export function fetchNovicePlanInfo() {
   return fetch({
     url: 'user/getNovicePlanInfo',
