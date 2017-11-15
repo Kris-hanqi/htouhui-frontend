@@ -9,8 +9,8 @@
       <a @click.stop="operationBankCard" :class="{ active: bankCard }">
         <i class="iconfont icon-bank-card"></i>
       </a>
-      <el-button class="recharge-bth" :round="true" :plain="true" @click="toRouter('account/recharge')" type="primary">充值</el-button>
-      <el-button class="withdraw-btn" :round="true" type="primary" @click="toRouter('account/withdraw')">提现</el-button>
+      <el-button class="recharge-bth" :round="true" :plain="true" @click="toRouter('account/withdraw')" type="primary">提现</el-button>
+      <el-button class="withdraw-btn" :round="true" type="primary" @click="toRouter('account/recharge')">充值</el-button>
     </hth-panel>
     
     <!-- 开户组件 -->
