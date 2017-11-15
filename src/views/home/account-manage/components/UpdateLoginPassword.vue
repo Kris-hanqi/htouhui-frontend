@@ -2,6 +2,7 @@
   <div class="update-login-password-wrapper">
     <hth-panel title="修改登录密码">
       <el-form style="width: 370px;"
+               ref="passwordForm"
                :model="passwordData"
                :rules="rules" label-width="80px">
         <el-form-item label="用户名">
@@ -53,7 +54,7 @@
         }
       };
       const validateConfirmPassword = (rule, value, callback) => {
-        if (this.newPassword !== this.confirmPassword) {
+        if (value !== this.passwordData.newPassword) {
           callback(new Error('两次输入不一致'))
         } else {
           callback()
@@ -73,23 +74,27 @@
             { required: true, trigger: 'blur', validator: validatePW }
           ],
           confirmPassword: [
-            { required: true, trigger: 'blur', validator: validateConfirmPassword }
+            { required: true, trigger: 'change', validator: validateConfirmPassword }
           ]
         }
       }
     },
     methods: {
       UpdatePassword() {
-        fetchUpdatePassword(this.passwordData)
-          .then(response => {
-            if (response.data.meta.code === 200) {
-              this.$router.push('/accountManage/set/index');
-              this.$message({
-                message: '登录密码修改成功,请牢记你的登录密码!',
-                type: 'success'
-              });
-            }
-          })
+        this.$refs['passwordForm'].validate(valid => { // eslint-disable-line
+          if (valid) {
+            fetchUpdatePassword(this.passwordData)
+              .then(response => {
+                if (response.data.meta.code === 200) {
+                  this.$router.push('/accountManage/set/index');
+                  this.$message({
+                    message: '登录密码修改成功,请牢记你的登录密码!',
+                    type: 'success'
+                  });
+                }
+              })
+          }
+        });
       }
     }
   }
