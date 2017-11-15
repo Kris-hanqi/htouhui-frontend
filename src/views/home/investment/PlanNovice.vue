@@ -31,86 +31,91 @@
         <a class="newUser-plan-join" @click.stop="toNovicePlanPage">立即加入</a>
       </div>
     </div>
-    <!--已投资-->
-    <div class="newUser-plan" v-else>
-      <div class="newUser-plan-title">
-        <p>加入记录</p>
-      </div>
-      <div class="newUser-plan-main">
-        <div class="newUser-plan-rate">
-          <p class="rate">
+    <!-- 老用户&&参加过新手计划 -->
+    <div v-else>
+      <div class="newUser-plan">
+        <div class="newUser-plan-title">
+          <p>加入记录</p>
+        </div>
+        <div class="newUser-plan-main">
+          <div class="newUser-plan-rate">
+            <p class="rate">
             <span class="roboto-regular">
-              <interest-rate :value="joinPlanList.rate"
+              <interest-rate :value="joinDetails.rate"
                              :leftFontSize="36"
                              :rightFontSize="24"></interest-rate>
             </span>%
           </p>
-          <p>往期年化利率</p>
+            <p>往期年化利率</p>
+          </div>
+          <div class="newUser-plan-day">
+            <p class="day">
+              <span class="roboto-regular">{{ joinDetails.lockPeriod }}</span>
+              {{ joinDetails.lockUnit === 'month' ? '月' : '日' }}
+            </p>
+            <p>持有期限</p>
+          </div>
+          <div class="newUser-plan-money">
+            <p class="money"><span>{{ joinDetails.joinMoney | currency('') }}</span>元</p>
+            <p>加入金额</p>
+          </div>
         </div>
-        <div class="newUser-plan-day">
-          <p class="day"><span class="roboto-regular">{{ joinPlanList.lockPeriod }}</span>天</p>
-          <p>持有期限</p>
-        </div>
-        <div class="newUser-plan-money">
-          <p class="money"><span>{{ joinPlanList.joinMoney | currency('') }}</span>元</p>
-          <p>加入金额</p>
+        <div class="newUser-plan-bottom">
+          <p class="join-time">加入时间<span class="roboto-regular">{{ joinDetails.joinTime }}</span></p>
+          <p class="day-stop">持有期限截至<span class="roboto-regular">{{ joinDetails.lockEndTime }}</span></p>
+          <p class="status">状态<span>{{ joinDetails.status === 'matched' ? '全部匹配' : '匹配中' }}</span></p>
         </div>
       </div>
-      <div class="newUser-plan-bottom">
-        <p class="join-time">加入时间<span class="roboto-regular">{{ joinPlanList.joinTime }}</span></p>
-        <p class="day-stop">持有期限截至<span class="roboto-regular">{{ joinPlanList.lockEndTime }}</span></p>
-        <p class="status">状态<span>{{ joinPlanList.status === 'matched' ? '全部匹配' : '匹配中' }}</span></p>
-      </div>
-    </div>
-
-    <!--table-->
-    <div class="message">
-      <p class="title">您购买的债权信息</p>
-      <el-table :data="list" style="width: 100%">
-        <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
-        <el-table-column prop="loanMoney" label="借款金额" width="100">
-          <template slot-scope="scope">
-            {{ scope.row.loanMoney | currency('') + '元' }}
+  
+      <!--table-->
+      <div class="message">
+        <p class="title">您购买的债权信息</p>
+        <el-table :data="claimsList" style="width: 100%">
+          <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
+          <el-table-column prop="loanMoney" label="借款金额" width="100">
+            <template slot-scope="scope">
+              {{ scope.row.loanMoney | currency('') + '元' }}
           </template>
-        </el-table-column>
-        <el-table-column prop="rate" label="往期年利率" width="70">
-          <template slot-scope="scope">
-            {{ scope.row.rate + '%' }}
+          </el-table-column>
+          <el-table-column prop="rate" label="往期年利率" width="70">
+            <template slot-scope="scope">
+              {{ scope.row.rate + '%' }}
           </template>
-        </el-table-column>
-        <el-table-column prop="perid" label="借款期限" width="60"></el-table-column>
-        <el-table-column prop="investMoney" label="投资金额" width="100">
-          <template slot-scope="scope">
-            {{ scope.row.investMoney | currency('') + '元' }}
+          </el-table-column>
+          <el-table-column prop="perid" label="借款期限" width="60"></el-table-column>
+          <el-table-column prop="investMoney" label="投资金额" width="100">
+            <template slot-scope="scope">
+              {{ scope.row.investMoney | currency('') + '元' }}
           </template>
-        </el-table-column>
-        <el-table-column prop="repayTimeFormat" label="还款时间" width="80"></el-table-column>
-        <el-table-column prop="earnings" label="已收本息">
-          <template slot-scope="scope">
-            {{ scope.row.earnings | currency('') + '元' }}
+          </el-table-column>
+          <el-table-column prop="repayTimeFormat" label="还款时间" width="80"></el-table-column>
+          <el-table-column prop="earnings" label="已收本息">
+            <template slot-scope="scope">
+              {{ scope.row.earnings | currency('') + '元' }}
           </template>
-        </el-table-column>
-        <el-table-column prop="uncollectedRepayMoney" label="待收本息">
-          <template slot-scope="scope">
-            {{ scope.row.uncollectedRepayMoney | currency('') + '元' }}
+          </el-table-column>
+          <el-table-column prop="uncollectedRepayMoney" label="待收本息">
+            <template slot-scope="scope">
+              {{ scope.row.uncollectedRepayMoney | currency('') + '元' }}
           </template>
-        </el-table-column>
-        <el-table-column prop="status" label="状态" width="50"></el-table-column>
-        <el-table-column prop="contract" label="合同" width="40">
-          <template slot-scope="scope">
-            <el-button class="icon-download" type="text" size="small"></el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-
-      <div class="pages">
-        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>
-          条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-        <el-pagination @current-change="handleCurrentChange"
-                       :current-page.sync="investQuery.pageNo"
-                       :page-size="investQuery.size"
-                       layout="prev, pager, next"
-                       :total="total"></el-pagination>
+          </el-table-column>
+          <el-table-column prop="status" label="状态" width="50"></el-table-column>
+          <el-table-column prop="contract" label="合同" width="40">
+            <template slot-scope="scope">
+              <el-button class="icon-download" type="text" size="small"></el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+    
+        <div class="pages">
+          <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>
+            条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+          <el-pagination @current-change="handleCurrentChange"
+                         :current-page.sync="claimsQuery.pageNo"
+                         :page-size="claimsQuery.size"
+                         layout="prev, pager, next"
+                         :total="total"></el-pagination>
+        </div>
       </div>
     </div>
   </div>
@@ -119,8 +124,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import { getLocationUrl } from 'utils/index';
-  import { fetchNovicePlanInfo, fetchJoinPlanBill } from 'api/home/investmentPlanNovice';
-  import { queryUserInvestList } from 'api/home/queryUserJoinInvestList';
+  import { fetchNovicePlanInfo, fetchJoinPlanBill, feachJoinInvestClaims } from 'api/home/investment';
   import interestRate from 'components/interest-rate';
 
   export default {
@@ -134,25 +138,22 @@
           lockPeriod: '',
           startInvestMoney: ''
         },
-        joinPlanList: {
+        joinDetails: {
           rate: '',
           joinMoney: '',
           lockPeriod: '',
+          lockUnit: '',
           lockEndTime: '',
           joinTime: '',
           status: ''
         },
-        list: null,
-        listQuery: {
-          planId: '',
+        claimsList: null,
+        joinDetailsQuery: {
           type: 'novice_plan',
-          purpose: '',
-          startTime: '',
-          endTime: '',
           pageNo: 1,
           pageSize: 1
         },
-        investQuery: {
+        claimsQuery: {
           joinPlanId: '',
           pageNo: 1,
           pageSize: 10
@@ -165,7 +166,7 @@
         'novicePlanStatus'
       ]),
       getPageSize() {
-        return Math.ceil(this.total / this.listQuery.pageSize);
+        return Math.ceil(this.total / this.claimsQuery.pageSize);
       }
     },
     methods: {
@@ -180,20 +181,18 @@
         window.location.href = getLocationUrl() + '/plan/2';
       },
       joinPlanNoviceList() {
-        fetchJoinPlanBill(this.listQuery).then(response => {
+        fetchJoinPlanBill(this.joinDetailsQuery).then(response => {
           if (response.data.meta.code === 200) {
-            this.joinPlanList = response.data.data.data;
-            console.log('新手计划加入记录：' + this.joinPlanList);
-            console.log(this.joinPlanList);
+            this.joinDetails = response.data.data.data[0];
+            this.claimsQuery.joinPlanId = this.joinDetails.joinPlanId;
+            this.getClaimsList();
           }
         })
       },
-      creditList() {
-        queryUserInvestList(this.investQuery).then(data => {
+      getClaimsList() {
+        feachJoinInvestClaims(this.claimsQuery).then(data => {
           if (data.data.meta.code === 200) {
-            this.list = data.data.data.data;
-            console.log('新手计划债权信息：' + this.list);
-            console.log(this.list);
+            this.claimsList = data.data.data.data;
           }
         })
       },
@@ -207,7 +206,6 @@
       } else {
         this.joinPlanNoviceList();
       }
-      this.creditList();
     }
   }
 </script>
