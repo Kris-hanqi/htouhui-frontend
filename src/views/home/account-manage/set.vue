@@ -36,7 +36,9 @@
           <td>已授权的服务</td>
           <td>自动投标授权</td>
           <td>
-            <button @click="automaticBidding" v-if="!isAutomaticBidding" class="hth-btn">授权</button>
+            <button @click="automaticBidding"
+                    :class="{ 'btn-blue': !isAutomaticBidding }"
+                    v-if="!isAutomaticBidding" class="hth-btn">授权</button>
             <span v-else>已授权</span>
           </td>
         </tr>
@@ -44,24 +46,25 @@
           <td></td>
           <td>自动债权转让授权</td>
           <td>
-            <button @click="automaticDebtTransfer" v-if="!isAutomaticDebtTransfer" class="hth-btn">授权</button>
+            <button @click="automaticDebtTransfer"
+                    :class="{ 'btn-blue': !isAutomaticDebtTransfer }"
+                    v-if="!isAutomaticDebtTransfer" class="hth-btn">授权</button>
             <span v-else>已授权</span>
           </td>
         </tr>
         <tr>
           <td></td>
           <td>自动还款授权</td>
-          <td><button class="hth-btn" @click="automaticRepayment" :class="{ 'btn-blue': !isAutomaticRepayment }">{{ isAutomaticRepayment ? '解约' : '授权' }}</button></td>
+          <td><button class="hth-btn" @click="automaticRepayment"
+                      :class="{ 'btn-blue': !isAutomaticRepayment }">
+            {{ isAutomaticRepayment ? '解约' : '授权' }}</button></td>
         </tr>
         <tr class="borderNone">
           <td>交易密码</td>
           <td>{{ transactionPasswordStatus ? '已设置' : '未设置'}}</td>
           <td rowspan="2" class="borderLine">
             <el-button class="hth-btn" size="small" @click="updateTransactionPassword" v-if="transactionPasswordStatus" round>修改</el-button>
-            <el-button class="hth-btn" type="primary" @click="setTransactionPassword" v-else plain round>设置</el-button>
-            
-            <!--<router-link to="/accountManage/set/transactionPassword">-->
-              <!--<button class="hth-btn">{{ transactionPasswordStatus ? '修改' : '设置' }}</button></router-link>-->
+            <el-button class="hth-btn btn-blue" type="primary" @click="setTransactionPassword" v-else plain round>设置</el-button>
           </td>
         </tr>
         <tr>
@@ -70,7 +73,11 @@
         <tr class="borderNone">
           <td>手机认证</td>
           <td>{{ mobile || '无' }}</td>
-          <td rowspan="2" class="borderLine"><router-link to="/accountManage/set/updateMobileStep1"><button class="hth-btn">修改</button></router-link></td>
+          <td rowspan="2" class="borderLine">
+            <router-link to="/accountManage/set/updateMobileStep1">
+              <button class="hth-btn">修改</button>
+            </router-link>
+          </td>
         </tr>
         <tr>
           <td colspan="2" class="tableSmallFontColor textAlignLeft tablePadding">保障资金安全，转入、转出、投资等资金相关操作时使用</td>
@@ -201,10 +208,20 @@
       },
       automaticBidding() {
         if (this.status === 0) {
-          this.$message({
-            message: '请先开户',
+          this.$notify({
+            title: '操作失败',
+            message: '原因: 请先开户',
             type: 'error'
           });
+          return;
+        }
+        if (!this.transactionPasswordStatus) {
+          this.$notify({
+            title: '操作失败',
+            message: '原因: 请先设置交易密码',
+            type: 'error'
+          });
+          return;
         }
         this.requestBankData = {};
         this.signingData.sessionId = this.uuid;
@@ -213,6 +230,13 @@
             if (response.data.meta.code === 200) {
               this.requestBankData = response.data.data;
             }
+            if (response.data.meta.code === 9999) {
+              this.$notify({
+                title: '操作失败',
+                message: '原因:' + response.data.meta.message,
+                type: 'error'
+              });
+            }
           })
       },
       handleCopySuccess() {
@@ -220,10 +244,12 @@
       },
       automaticDebtTransfer() {
         if (!this.isAutomaticBidding) {
-          this.$message({
-            message: '请先授权自动投标签约',
+          this.$notify({
+            title: '操作失败',
+            message: '原因: 请先授权自动投标签约',
             type: 'error'
           });
+          return;
         }
         this.requestBankData = {};
         this.signingData.sessionId = this.uuid;
@@ -231,6 +257,13 @@
           .then(response => {
             if (response.data.meta.code === 200) {
               this.requestBankData = response.data.data;
+            }
+            if (response.data.meta.code === 9999) {
+              this.$notify({
+                title: '操作失败',
+                message: '原因:' + response.data.meta.message,
+                type: 'error'
+              });
             }
           })
       },
