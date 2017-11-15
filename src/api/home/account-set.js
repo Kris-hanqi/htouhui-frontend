@@ -27,11 +27,11 @@ export function fetchBindEmail(data) {
 }
 
 /** 检验验证码(修改手机号) */
-export function fetchCheckCurrentMobile(code) {
+export function fetchCheckCurrentMobile(data) {
   return fetch({
     url: 'user/checkCurrentMobile',
     method: 'get',
-    params: { authCode: code }
+    params: data
   })
 }
 

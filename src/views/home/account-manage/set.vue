@@ -70,7 +70,7 @@
         <tr class="borderNone">
           <td>手机认证</td>
           <td>{{ mobile || '无' }}</td>
-          <td rowspan="2" class="borderLine"><router-link to="/accountManage/set/updateMobile"><button class="hth-btn">修改</button></router-link></td>
+          <td rowspan="2" class="borderLine"><router-link to="/accountManage/set/updateMobileStep1"><button class="hth-btn">修改</button></router-link></td>
         </tr>
         <tr>
           <td colspan="2" class="tableSmallFontColor textAlignLeft tablePadding">保障资金安全，转入、转出、投资等资金相关操作时使用</td>

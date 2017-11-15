@@ -343,12 +343,20 @@ export const constantRouterMap = [
                 component: _import('home/account-manage/components/TransactionPassword')
               },
               {
-                path: 'updateMobile',
+                path: 'updateMobileStep1',
                 meta: {
-                  title: '修改绑定手机号'
+                  title: '验证手机号'
                 },
                 name: 'AMSUpdateMobile',
-                component: _import('home/account-manage/components/UpdateMobile')
+                component: _import('home/account-manage/components/UpdateMobileStep1')
+              },
+              {
+                path: 'updateMobileStep2',
+                meta: {
+                  title: '修改手机号'
+                },
+                name: 'AMSUpdateMobile',
+                component: _import('home/account-manage/components/UpdateMobileStep2')
               }
             ]
           },

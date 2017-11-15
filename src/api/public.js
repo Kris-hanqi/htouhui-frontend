@@ -9,6 +9,15 @@ export function fetchSendCode(data) {
   })
 }
 
+/** 发送短信验证码 NEW */
+export function fetchSendCodeNew(data) {
+  return fetch({
+    url: 'user/sendAuthCode',
+    method: 'get',
+    params: data
+  })
+}
+
 /** 发送邮箱验证码 */
 export function fetchSendEmailCode(data) {
   return fetch({
