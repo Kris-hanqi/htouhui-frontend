@@ -1,15 +1,15 @@
 <template>
   <div class="plan-novice">
-    <!--未投资-->
-    <div class="newUser-plan" v-if="showNovicePlanMessage">
+    <!-- 未投资 显示标的信息 -->
+    <div class="newUser-plan" v-if="novicePlanStatus === 1">
       <div class="newUser-plan-title">
-        <p>新手计划<span>{{ planListData.startInvestMoeny }}元起投，最高可投1万元 ，每人仅限1次 </span></p>
+        <p>新手计划<span>{{ novicePlanInfo.startInvestMoney }}元起投，最高可投1万元 ，每人仅限1次 </span></p>
       </div>
       <div class="newUser-plan-main">
         <div class="newUser-plan-rate">
           <p class="rate">
             <span class="roboto-regular">
-              <interest-rate :value="planListData.rate"
+              <interest-rate :value="novicePlanInfo.rate"
                              :leftFontSize="36"
                              :rightFontSize="24"></interest-rate>
             </span>%
@@ -17,7 +17,7 @@
           <p>往期年化利率</p>
         </div>
         <div class="newUser-plan-day">
-          <p class="day"><span class="roboto-regular">{{ planListData.lockPeriod }}</span>天</p>
+          <p class="day"><span class="roboto-regular">{{ novicePlanInfo.lockPeriod }}</span>天</p>
           <p>持有期限</p>
         </div>
         <div class="newUser-plan-way">
@@ -40,7 +40,7 @@
         <div class="newUser-plan-rate">
           <p class="rate">
             <span class="roboto-regular">
-              <interest-rate :value="joinPlanList.rate"
+              <interest-rate :value="joinPlanList.rate || ''"
                              :leftFontSize="36"
                              :rightFontSize="24"></interest-rate>
             </span>%
@@ -59,7 +59,7 @@
       <div class="newUser-plan-bottom">
         <p class="join-time">加入时间<span class="roboto-regular">{{ joinPlanList.joinTime }}</span></p>
         <p class="day-stop">持有期限截至<span class="roboto-regular">{{ joinPlanList.lockEndTime }}</span></p>
-        <p class="status">状态<span>{{ joinPlanList.status == matched ? '全部匹配' : '匹配中' }}</span></p>
+        <p class="status">状态<span>{{ joinPlanList.status === 'matched' ? '全部匹配' : '匹配中' }}</span></p>
       </div>
     </div>
 
@@ -127,10 +127,19 @@
     },
     data() {
       return {
-        planListData: {
-          rate: ''
+        novicePlanInfo: {
+          rate: '',
+          lockPeriod: '',
+          startInvestMoney: ''
         },
-        joinPlanList: null,
+        joinPlanList: {
+          rate: '',
+          joinMoney: '',
+          lockPeriod: '',
+          lockEndTime: '',
+          joinTime: '',
+          status: ''
+        },
         list: null,
         listQuery: {
           planId: '',
@@ -151,19 +160,17 @@
     },
     computed: {
       ...mapGetters([
-        'showNovicePlanMessage'
+        'novicePlanStatus'
       ]),
       getPageSize() {
         return Math.ceil(this.total / this.listQuery.pageSize);
       }
     },
     methods: {
-      planList() {
+      getNovicePlanInfo() {
         fetchNovicePlanInfo().then(data => {
           if (data.data.meta.code === 200) {
-            this.planListData = data.data.data;
-            console.log('新手计划标的：' + this.planListData);
-            console.log(this.planListData);
+            this.novicePlanInfo = data.data.data;
           }
         })
       },
@@ -190,8 +197,11 @@
       }
     },
     created() {
-      this.joinPlanNoviceList();
-      this.planList();
+      if (this.novicePlanStatus === 1) {
+        this.getNovicePlanInfo();
+      } else {
+        this.joinPlanNoviceList();
+      }
       this.creditList();
     }
   }

@@ -46,7 +46,7 @@ export function getInvestData(data) {
 
     const item = {};
 
-    if (key === 'noviceMap' && store.getters.showNovicePlan) {
+    if (key === 'noviceMap' && store.getters.novicePlanStatus !== 3) {
       Object.assign(item, mapData.planNovice, value);
     }
 
