@@ -35,10 +35,8 @@ service.interceptors.response.use(
     if (data.meta.code === errorCode.ESS_USER_IS_NOT_LOGIN) {
       if (!openModalStatus) {
         openModalStatus = true;
-
-        MessageBox.confirm('登录超时，可以取消继续留在该页面，或者重新登录', '确定登出', {
+        MessageBox.alert('登录超时，请重新登录', '提示', {
           confirmButtonText: '重新登录',
-          cancelButtonText: '取消',
           type: 'warning',
           beforeClose: (action, instance, done) => {
             if (action === 'confirm') {
