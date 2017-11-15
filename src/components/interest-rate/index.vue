@@ -11,7 +11,7 @@
     props: ['value', 'leftFontSize', 'rightFontSize'],
     computed: {
       leftValue() {
-        return this.value.toString().split('.')[0];
+        return this.value.toString().split('.')[0] || 0;
       },
       rightValue() {
         return this.value.toString().split('.')[1] || 0;

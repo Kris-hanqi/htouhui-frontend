@@ -117,8 +117,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import { planNovice } from 'api/home/plan-novice';
-  import { joinPlan } from 'api/home/joinPlan';
+  import { fetchNovicePlanInfo, fetchJoinPlanBill } from 'api/home/investmentPlanNovice';
   import { queryUserInvestList } from 'api/home/queryUserJoinInvestList';
   import interestRate from 'components/interest-rate';
 
@@ -160,7 +159,7 @@
     },
     methods: {
       planList() {
-        planNovice().then(data => {
+        fetchNovicePlanInfo().then(data => {
           if (data.data.meta.code === 200) {
             this.planListData = data.data.data;
             console.log('新手计划标的：' + this.planListData);
@@ -169,7 +168,7 @@
         })
       },
       joinPlanNoviceList() {
-        joinPlan(this.listQuery).then(response => {
+        fetchJoinPlanBill(this.listQuery).then(response => {
           if (response.data.meta.code === 200) {
             this.joinPlanList = response.data.data.data;
             console.log('新手计划加入记录：' + this.joinPlanList);
