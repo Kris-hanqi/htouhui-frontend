@@ -77,21 +77,33 @@
         })
       },
       repayment(id) {
-        console.log(typeof id);
         this.$confirm('确认要还款吗?', '询问', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
           beforeClose: (action, instance, done) => {
+            done();
             if (action === 'confirm') {
               fetchRepayment({ repayId: id }).then(response => {
                 if (response.data.meta.code === 200) {
-                  console.log(123);
+                  this.$notify({
+                    title: '还款成功',
+                    message: '描述:' + response.data.meta.message,
+                    type: 'success',
+                    position: 'top-left'
+                  });
+                  this.getPageList();
+                } else {
+                  this.$notify({
+                    title: '还款失败',
+                    message: '描述:' + response.data.meta.message,
+                    type: 'error',
+                    position: 'top-left'
+                  });
                 }
               })
-            } else {
-              done();
             }
+            done();
           }
         });
       },
