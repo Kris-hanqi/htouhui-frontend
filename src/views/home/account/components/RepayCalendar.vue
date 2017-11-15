@@ -6,7 +6,7 @@
                       @day-changed="handleDayChange"
                       @month-changed="handleMonthChanged"></event-calendar>
 
-      <div class="event-detail" v-if="false">
+      <div class="event-detail" v-if ="showViewType ==='month'">
         <div class="event-detail__top">
           <p class="title"><span></span>{{ month }}收益账单<span></span></p>
         </div>
@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <div class="event-detail2">
+      <div class="event-detail2" v-else>
         <div class="event-detail__top">
           <p class="title"><span @click="switchViewType"></span>{{ dayData.date }}账单</p>
         </div>
@@ -35,8 +35,15 @@
               </div>
             </div>
             <div class="pages">
+              <div class="pages-top"></div>
               <div class="pages-content">
-                <button @click="handleDisableLeft"  class="leftbtn" :disabled="isLeftDisabled">&lt</button><ul class="pagelist"><li class="pageRadios"></li><li class="pageRadios"></li><li class="pageRadios"></li></ul><button @click="handleDisableRight" class="rightbtn" :disabled="isRightDisabled">&gt;</button>
+                <button @click="handleDisableLeft"  class="leftbtn" :disabled="isLeftDisabled">&lt</button>
+                <ul class="pagelist">
+                  <li class="pageRadios"></li>
+                  <li class="pageRadios"></li>
+                  <li class="pageRadios"></li>
+                </ul>
+                <button @click="handleDisableRight" class="rightbtn" :disabled="isRightDisabled">&gt;</button>
               </div>
 
             </div>
@@ -232,18 +239,19 @@
         width: 15px;
         height: 15px;
         background: #fff;
-        margin-top: -6px;
+        margin-top: -7px;
       }
 
-      .page-content {
-        width: 75px;
-        height: 7.4px;
+      .pages-content {
+        width: 74.7px;
+        height: 13px;
+        margin: 22.2px auto;
       }
 
       .pagelist {
-        width: 128px;
+        width: 28px;
         height: 7.4px;
-        margin-left: 87px;
+        margin-left: 30px;
       }
 
       .pageRadios {
@@ -251,7 +259,7 @@
         width: 5px;
         height: 5px;
         border-radius: 50%;
-        margin: 10px 5px 0 0;
+        margin: 10px 4px 0 0;
         background: #a4b2d2;
       }
     }
@@ -320,16 +328,16 @@
         }
 
         .pages {
-          width: 188.3px;
-          height: 46.5px;
-          padding: 24px 0 0 100.7px;
+          width: 233px;
+          height: 70.5px;
+          padding: 0 24.5px 0 31.5px;
         }
 
         .pages-top {
           width: 233px;
           height: 2px;
           margin: 0 auto;
-          background: blue;
+          background: #a4b2d2;
         }
       }
     }
