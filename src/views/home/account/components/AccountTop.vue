@@ -61,13 +61,7 @@
       // 操作银行卡
       operationBankCard() {
         if (this.status === 0) {
-          this.$alert('你尚未开户，请先开户', '提示', {
-            confirmButtonText: '去开户',
-            type: 'warning',
-            callback: () => {
-              this.dialogOpenAccountVisible = true;
-            }
-          });
+          this.isOpenAccount();
           return;
         }
         if (!this.bankCard) {
@@ -81,7 +75,22 @@
           this.dialogOpenAccountVisible = true
         }
       },
+      isOpenAccount() {
+        this.$alert('你尚未开户，请先开户', '提示', {
+          confirmButtonText: '去开户',
+          type: 'warning',
+          callback: action => {
+            if (action === 'confirm') {
+              this.dialogOpenAccountVisible = true;
+            }
+          }
+        });
+      },
       toRouter(path) {
+        if (this.status === 0) {
+          this.isOpenAccount();
+          return;
+        }
         this.$router.push('/' + path);
       },
       closeOpenAccount() {
