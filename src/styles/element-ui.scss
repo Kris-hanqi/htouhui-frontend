@@ -131,7 +131,7 @@ th {
   width: 708px;
 }
 
-/*tabs*/
+/** tabs */
 .el-tabs__header {
   border: none;
   background-color: #f6f9fe;
@@ -157,6 +157,15 @@ th {
   border-top: 2px solid #0573f4;
   background-color: #fff;
   border-radius: 0;
+}
+
+.el-tabs--card>.el-tabs__header .el-tabs__nav {
+  border: 0;
+}
+
+.el-tabs--card>.el-tabs__header .el-tabs__item {
+  border-bottom: 0;
+  border-right: 0;
 }
 
 /*单选框*/
