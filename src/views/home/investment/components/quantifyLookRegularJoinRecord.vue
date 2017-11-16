@@ -85,7 +85,7 @@
   import { queryUserInvestList } from 'api/home/queryUserJoinInvestList';
   import interestRate from 'components/interest-rate';
   import img_icon_success from 'assets/images/home/icon-success.png';
-  import img_icon_out_record from 'assets/images/home/icon-outRecord.png.png';
+  import img_icon_out_record from 'assets/images/home/icon-outRecord.png';
 
   export default {
     components: {
