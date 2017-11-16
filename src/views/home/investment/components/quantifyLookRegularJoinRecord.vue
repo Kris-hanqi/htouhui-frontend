@@ -25,8 +25,8 @@
       <div class="look-regular-bottom">
         <p>加入时间 <span class="roboto-regular">{{ joinPlanList.joinTime }}</span></p>
         <p>即日起免手续费 <span class="roboto-regular">{{ joinPlanList.lockEndTime }}</span></p>
-        <img v-if="joinPlanList.status == 'exited'" class="type-message" src="../../../../assets/images/home/icon-success.png" alt=""/>
-        <img v-else class="type-message" src="../../../../assets/images/home/icon-outRecord.png" alt=""/>
+        <img v-if="joinPlanList.status === 'matched'" class="type-message" :src="img_icon_success" />
+        <img v-else class="type-message" :src="img_icon_out_record" />
       </div>
     </div>
 
@@ -84,6 +84,8 @@
   import { joinPlan } from 'api/home/getJoinInfo';
   import { queryUserInvestList } from 'api/home/queryUserJoinInvestList';
   import interestRate from 'components/interest-rate';
+  import img_icon_success from 'assets/images/home/icon-success.png';
+  import img_icon_out_record from 'assets/images/home/icon-outRecord.png.png';
 
   export default {
     components: {
@@ -91,6 +93,8 @@
     },
     data() {
       return {
+        img_icon_success,
+        img_icon_out_record,
         joinPlanQuery: {
           joinPlanId: this.$route.params.id
         },
