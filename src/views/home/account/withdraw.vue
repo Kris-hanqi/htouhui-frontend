@@ -1,16 +1,7 @@
 <template>
   <div class="withdraw-wrapper">
     <hth-panel title="我要提现">
-      <!--未绑卡-->
-      <div class="noBankCardMsg" v-if="!bankCard">
-        <span class="addBankCard"></span>
-        <p class="noBankCardTxt">您暂未绑定银行卡</p>
-      </div>
-      
-      <div class="bankCardMsg" v-else>
-        <p class="bankName">{{ bankName || '无' }}</p>
-        <p class="roboto-regular bankNum">{{ bankCard || '无' }}</p>
-      </div>
+      <bank-card></bank-card>
       
       <ul class="withdrawMsgBox">
         <li>
@@ -59,6 +50,7 @@
   import { mapGetters } from 'vuex';
   import HthPanel from 'common/Panel/index.vue';
   import BankLimit from '../components/BankLimit.vue';
+  import BankCard from '../components/BackCard.vue';
   import RequestBankFrom from '../components/RequestBankFrom.vue';
   import { fetchWithdraw, fetchWithdrawCost, fetchAccountMoney } from 'api/home/account';
   
@@ -66,6 +58,7 @@
     components: {
       HthPanel,
       BankLimit,
+      BankCard,
       RequestBankFrom
     },
     computed: {
@@ -137,10 +130,6 @@
 <style lang="scss">
   .withdraw-wrapper {
     width: 832px;
-    
-    .noBankCardMsg {
-      margin-top: 10px;
-    }
 
     .bankCardMsg {
       width: 300px;
