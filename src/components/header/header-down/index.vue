@@ -14,7 +14,7 @@
         <li class="header-down__account">
           <a href="./home.html">
             <div class="portrait">
-              <i class="fa fa-user-o" aria-hidden="true"></i>
+              <i class="iconfont icon-avatar"></i>
             </div>
             <span>我的账户</span>
           </a>
