@@ -1,12 +1,12 @@
 <template>
   <div class="cal-panel-wrapper">
     <div class="cal-panel__header">
-      <span class="title">{{ yearMonthStr }}</span>
+      <span class="title"></span>
       <div class="menus">
         <button @click="preMonth" class="pre">
           <img :src="img_icon_left">
         </button>
-        <button class="today">今天</button>
+        <button class="today">{{ yearMonthStr }}</button>
         <button @click="nextMonth" class="next">
           <img :src="img_icon_right">
         </button>
@@ -166,12 +166,6 @@
       padding-left: 20px;
       margin-bottom: 10px;
       
-      .title {
-        display: inline-block;
-        font-size: 18px;
-        color: #717e9c;
-      }
-      
       .menus {
         position: absolute;
         top: -2px;
@@ -205,13 +199,13 @@
       }
       
       button.today {
-        width: 51px;
+        width: auto;
         height: 22px;
-        border-radius: 100px;
-        background-color: #ebf2ff;
-        font-size: 14px;
+        font-size: 16px;
+        background-color: transparent;
         text-align: center;
-        color: #7b8fbe;
+        color: #717e9c;
+        cursor: auto;
       }
     }
   
