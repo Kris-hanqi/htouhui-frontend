@@ -38,12 +38,8 @@ service.interceptors.response.use(
         MessageBox.alert('登录超时，请重新登录', '提示', {
           confirmButtonText: '重新登录',
           type: 'warning',
-          beforeClose: (action, instance, done) => {
-            if (action === 'confirm') {
-              window.open(getLocationUrl() + '/logout');
-            } else {
-              done();
-            }
+          callback: () => {
+            window.open(getLocationUrl() + '/logout');
           }
         });
       }
