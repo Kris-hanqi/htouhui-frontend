@@ -1,7 +1,7 @@
 <template>
   <div class="account-top-wrapper">
     <hth-panel>
-      <i class="icon-avatar"></i>
+      <avatar size="large" icon="icon-avatar"></avatar>
       <span class="text">你好，<i class="num-font">{{ realName || username }}</i></span>
       <a @click.stop="operationAccount"
          style="margin-right: 8px;"
@@ -34,12 +34,14 @@
 <script>
   import { mapGetters } from 'vuex';
   import HthPanel from 'common/Panel/index.vue';
+  import Avatar from 'common/components/avatar/index';
   import OpenAccount from '../../components/OpenAccount.vue';
   import UnlockBankCard from '../../components/UnlockBankCard.vue';
   
   export default {
     components: {
       HthPanel,
+      Avatar,
       OpenAccount,
       UnlockBankCard
     },
@@ -118,14 +120,6 @@
     
     .iconfont {
       font-size: 23px;
-    }
-    
-    .icon-avatar {
-      display: inline-block;
-      vertical-align: middle;
-      width: 42px;
-      height: 42px;
-      background: url(../../../../assets/images/icon-avatar.png) no-repeat;
     }
     
     .active {
