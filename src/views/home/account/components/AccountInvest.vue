@@ -23,10 +23,10 @@
               <span v-bind:style="{ background: item.color}"></span>{{item.label}}
           </td>
             <td class="td2">
-              <span class="num">{{ item.sum }}</span>元
+              <span class="num">{{ item.sum | currency('') }}</span>元
           </td>
             <td class="td3">
-              <span class="num">{{ item.interest }}</span>元
+              <span class="num">{{ item.interest | currency('') }}</span>元
           </td>
             <td class="td4">
               <button @click.stop="toInvestPage(item.url)">立即投资</button>

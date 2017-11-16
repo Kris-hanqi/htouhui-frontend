@@ -2,7 +2,6 @@ import Vue from 'vue';
 import 'normalize.css/normalize.css';
 import {
   Button,
-  Select,
   Table,
   TableColumn,
   Pagination,
@@ -21,6 +20,8 @@ import {
   Input,
   Steps,
   Step,
+  Select,
+  Option,
   Radio,
   Col,
   Checkbox,
@@ -64,6 +65,8 @@ Vue.use(Steps);
 Vue.use(Step);
 Vue.use(Radio);
 Vue.use(Col);
+Vue.use(Select);
+Vue.use(Option);
 Vue.use(Checkbox);
 
 Vue.use(Loading.directive);
