@@ -14,6 +14,7 @@
 <script>
   import joinRecord from './components/scroll21JoinRecord.vue';
   import outRecord from './components/scroll21OutRecord.vue';
+  import { param2Obj } from 'utils/index';
   
   export default {
     components: {
@@ -24,6 +25,16 @@
       return {
         activeName: 'first'
       };
+    },
+    created() {
+      const data = param2Obj(window.location.href);
+      if (data.message === 'success') {
+        this.$message({
+          showClose: true,
+          message: '加入成功',
+          type: 'success'
+        });
+      }
     }
   };
 </script>
