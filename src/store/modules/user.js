@@ -57,6 +57,7 @@ const user = {
     status: 0, // 用户状态
     bankCard: '', // 银行卡号
     bankName: '', // 银行名称
+    bankNo: '', // 银行背景
     accountId: '', // 电子账号
     IDNumber: '', // 身份证号
     email: '', // 电子邮箱
@@ -90,6 +91,9 @@ const user = {
     },
     SET_BANK_NAME: (state, bankName) => {
       state.bankName = bankName;
+    },
+    SET_BANK_NO: (state, bankNo) => {
+      state.bankNo = bankNo;
     },
     SET_ACCOUNT_ID: (state, accountId) => {
       state.accountId = accountId;
@@ -138,6 +142,7 @@ const user = {
             commit('SET_REAL_NAME', data.realName);
             commit('SET_MOBILE', data.mobileNumber);
             commit('SET_BANK_NAME', data.bankName);
+            commit('SET_BANK_NO', data.bankNo);
             commit('SET_BANK_CARD', data.bankCard);
             commit('SET_ACCOUNT_ID', data.accountId);
             commit('SET_ID_NUMBER', data.idCard);
