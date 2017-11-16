@@ -1,10 +1,17 @@
 <template>
   <div class="withdraw-wrapper">
     <hth-panel title="我要提现">
-      <div class="bankCardMsg">
+      <!--未绑卡-->
+      <div class="noBankCardMsg" v-if="!bankCard">
+        <span class="addBankCard"></span>
+        <p class="noBankCardTxt">您暂未绑定银行卡</p>
+      </div>
+      
+      <div class="bankCardMsg" v-else>
         <p class="bankName">{{ bankName || '无' }}</p>
         <p class="roboto-regular bankNum">{{ bankCard || '无' }}</p>
       </div>
+      
       <ul class="withdrawMsgBox">
         <li>
           <span>账户余额：</span>
@@ -130,6 +137,10 @@
 <style lang="scss">
   .withdraw-wrapper {
     width: 832px;
+    
+    .noBankCardMsg {
+      margin-top: 10px;
+    }
 
     .bankCardMsg {
       width: 300px;

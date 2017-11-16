@@ -49,6 +49,31 @@
 </script>
 
 <style lang="scss">
+  .noBankCardMsg {
+    width: 300px;
+    height: 125px;
+    border-radius: 11px;
+    background-color: #f6f9fe;
+    margin-top: 44px;
+    margin-left: 54px;
+    padding-top: 38px;
+    
+    span.addBankCard {
+      display: block;
+      width: 62px;
+      height: 62px;
+      margin: 0 auto;
+      background: url(../../../assets/images/home/center-recharge-addBankCard.png) no-repeat;
+    }
+    
+    p.noBankCardTxt {
+      font-size: 16px;
+      color: #5c6b82;
+      text-align: center;
+      margin-top: 15px;
+    }
+  }
+  
   .recharge-wrapper {
     .recharge-wrapper__steps {
       p {
@@ -91,31 +116,6 @@
         border-top: 3px solid #0573f4;
         color: #0573f4;
         background-color: #fff;
-      }
-    }
-
-    .noBankCardMsg {
-      width: 300px;
-      height: 125px;
-      border-radius: 11px;
-      background-color: #f6f9fe;
-      margin-top: 44px;
-      margin-left: 54px;
-      padding-top: 38px;
-
-      span.addBankCard {
-        display: block;
-        width: 62px;
-        height: 62px;
-        margin: 0 auto;
-        background: url(../../../assets/images/home/center-recharge-addBankCard.png) no-repeat;
-      }
-
-      p.noBankCardTxt {
-        font-size: 16px;
-        color: #5c6b82;
-        text-align: center;
-        margin-top: 15px;
       }
     }
 
