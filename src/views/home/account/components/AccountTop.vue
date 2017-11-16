@@ -99,12 +99,6 @@
       closeUnlockBankCard() {
         this.dialogUnlockBankCardVisible = false;
       }
-    },
-    created() {
-      // 未开户，提示开户
-      if (this.status === 0) {
-        this.dialogOpenAccountVisible = true;
-      }
     }
   }
 </script>
