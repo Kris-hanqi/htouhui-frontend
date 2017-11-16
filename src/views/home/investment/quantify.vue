@@ -2,7 +2,7 @@
   <div>
     <div class="shengxinbaolianghua" v-for="str in quantifyData">
       <div class="title-box">
-        <span class="title">{{ str.planName }}</span>
+        <a @click.stop="toPlanPage(str.planId)" class="title">{{ str.planName }}</a>
         <p class="firstDay" v-show="str.isTiexi">首{{ str.tiexiPeriod }}天贴息</p>
         <p>随时可退</p>
         <p>满{{ str.lockPeriod }}天免手续费</p>
@@ -40,6 +40,7 @@
 <script>
   import { quantifyList } from 'api/home/quantify';
   import interestRate from 'components/interest-rate';
+  import { getLocationUrl } from 'utils/index';
   
   export default {
     components: {
@@ -67,6 +68,9 @@
       },
       transactionRecord(id) {
         this.$router.push('/investment/quantify/transactionRecord/' + id);
+      },
+      toPlanPage(id) {
+        window.location.href = getLocationUrl() + '/plan/' + id;
       }
     },
     created() {
