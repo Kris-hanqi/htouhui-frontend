@@ -4,7 +4,7 @@
       <el-tab-pane label="加入记录" name="first"></el-tab-pane>
       <el-tab-pane label="退出记录" name="second"></el-tab-pane>
     </el-tabs>
-    <join-record v-if="activeName === first"></join-record>
+    <join-record v-if="activeName === 'first'"></join-record>
     <out-record v-else=""></out-record>
   </div>
 </template>
