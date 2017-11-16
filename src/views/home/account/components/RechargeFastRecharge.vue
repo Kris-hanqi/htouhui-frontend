@@ -1,17 +1,8 @@
 <template>
   <div class="shortcutRecharge">
-    <!--未绑卡-->
-    <div class="noBankCardMsg" v-if="!bankCard">
-      <span class="addBankCard"></span>
-      <p class="noBankCardTxt">您暂未绑定银行卡</p>
-    </div>
-
-    <!--已绑卡-->
-    <div class="bankCardMsg" v-else>
-      <p class="bankName">兴业银行</p>
-      <p class="roboto-regular bankNum">{{ bankCard }}</p>
-    </div>
-
+    
+    <bank-card></bank-card>
+    
     <!-- 银行限额组件 -->
     <bank-limit :visible="dialogBankLimitVisible" @close="closeBankLimit"></bank-limit>
 
@@ -61,18 +52,19 @@
   import { fetchRecharge, fetchAccountMoney, fetchBalanceCost } from 'api/home/account';
   import { getLocationUrl } from 'utils/index';
   import BankLimit from '../../components/BankLimit.vue';
+  import BankCard from '../../components/BackCard.vue';
   import RequestBankFrom from '../../components/RequestBankFrom.vue';
 
   export default {
     computed: {
       ...mapGetters([
-        'bankCard',
         'uuid'
       ])
     },
     components: {
       RequestBankFrom,
-      BankLimit
+      BankLimit,
+      BankCard
     },
     data() {
       return {

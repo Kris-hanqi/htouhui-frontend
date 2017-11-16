@@ -1,25 +1,28 @@
 <template>
   <div class="update-mobile-step1">
     <hth-panel title="修改邮箱">
-      <div class="amendLoginPwdMsg">
-        <ul>
-          <li>
-            <label>用户名</label>
-            <span class="amendLoginName">{{ realName }}</span>
-          </li>
-          <li>
-            <label>原邮箱</label>
-            <span class="amendLoginName">{{ email }}</span>
-          </li>
-          <li style="margin-top: 20px;">
-            <label>验证码</label>
-            <input type="text" placeholder="请输入验证码">
+      <el-form :model="emailData" label-width="80px">
+        <el-form-item label="用户名">
+          <span>{{ username }}</span>
+        </el-form-item>
+        <el-form-item label="原邮箱">
+          <span>{{ email }}</span>
+        </el-form-item>
+        <el-form-item label="验证码">
+          <el-col :span="8">
+            <el-input v-model="emailData.authCode" :maxlength="6" placeholder="请输入验证码"></el-input>
+          </el-col>
+          <el-col :span="11">
             <sms-timer @run="sendCode"></sms-timer>
-          </li>
-        </ul>
-        <p class="yzmCodeSent" v-if="showPrompt">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
-        <button class="submitBtn">提交</button>
-      </div>
+          </el-col>
+        </el-form-item>
+        <el-form-item v-if="showPrompt">
+          <span>校验码已发出，请注意查看邮箱，如果没有收到，你可以在60秒后要求系统重新发送</span>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="checkCurrentEmail" style="width: 200px" round>提交</el-button>
+        </el-form-item>
+      </el-form>
       <div class="split-line"></div>
       <div class="hth-tips">
         <h3>温馨提示</h3>
@@ -42,13 +45,16 @@
     },
     computed: {
       ...mapGetters([
-        'realName',
+        'username',
         'email'
       ])
     },
     data() {
       return {
-        showPrompt: false
+        showPrompt: false,
+        emailData: {
+          authCode: ''
+        }
       }
     },
     methods: {
@@ -64,6 +70,9 @@
               });
             }
           });
+      },
+      checkCurrentEmail() {
+        console.log(123);
       }
     }
   }
@@ -73,96 +82,5 @@
   .update-mobile-step1 {
     width: 832px;
     height: 797px;
-
-    .amendLoginPwdMsg {
-      li:first-child {
-        margin-bottom: 20px;
-      }
-
-      li.marginTop {
-        margin-top: 18px;
-      }
-
-      label {
-        display: inline-block;
-        vertical-align: middle;
-        width: 110px;
-        font-size: 16px;
-        line-height: 1;
-        text-align: right;
-        color: #727e90;
-      }
-
-      input {
-        width: 252px;
-        height: 54px;
-        background-color: #fff;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        border: solid 1px #bfc1c4;
-        padding-left: 14px;
-        margin-left: 10px;
-      }
-
-      input::-webkit-input-placeholder { color: #aab2c9; }
-
-      :-moz-placeholder { color: #aab2c9; }
-
-      ::-moz-placeholder { color: #aab2c9; }
-
-      :-ms-input-placeholder { color: #aab2c9; }
-
-      i.dangerousIcon {
-        display: inline-block;
-        vertical-align: middle;
-        width: 20px;
-        height: 18px;
-        margin: 10px 5px 10px 132px;
-        background: url(../../../../assets/images/home/center-ico-dangerous.png) no-repeat;
-      }
-
-      span.amendLoginName {
-        margin-left: 20px;
-        font-size: 16px;
-        color: #394b67;
-      }
-
-      span.dangerousTxt {
-        font-size: 14px;
-        color: #ff7900;
-      }
-
-      p.yzmCodeSent {
-        font-size: 14px;
-        color: #838d9d;
-        margin-left: 124px;
-        margin-top: 14px;
-      }
-
-      .submitBtn {
-        width: 203px;
-        height: 46px;
-        border-radius: 100px;
-        background-color: #378ff6;
-        color: #fff;
-        margin-left: 152px;
-        margin-top: 33px;
-        margin-bottom: 39px;
-        font-size: 18px;
-        cursor: pointer;
-      }
-
-      .getYzmCode {
-        height: 46px;
-        border-radius: 100px;
-        background-color: #dfe8f0;
-        font-size: 16px;
-        text-align: center;
-        padding: 0 20px;
-        color: #7c86a2;
-        margin-left: 15px;
-        cursor: pointer;
-      }
-    }
   }
 </style>

@@ -98,10 +98,6 @@
         },
         listQuery: {
           planId: this.$route.params.id,
-          type: '',
-          purpose: '',
-          startTime: '',
-          endTime: '',
           pageNo: 1,
           pageSize: 10
         },

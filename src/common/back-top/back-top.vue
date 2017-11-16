@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import { scrollTop } from '@/utils/assist';
+  import { scrollTop } from 'utils/assist';
   const prefixCls = 'back-top';
 
   export default {

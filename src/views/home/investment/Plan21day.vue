@@ -71,7 +71,7 @@
 
 <script>
   import { plan21dayJoin } from 'api/home/plan-21day';
-  import { getStartAndEndTime, getDateString } from '@/utils';
+  import { getStartAndEndTime, formatDate } from 'utils/index';
 
   export default {
     data() {
@@ -119,8 +119,8 @@
               });
               return;
             }
-            this.listQuery.startTime = getDateString(this.selectDates.startTime);
-            this.listQuery.endTime = getDateString(this.selectDates.endTime);
+            this.listQuery.startTime = formatDate(this.selectDates.startTime);
+            this.listQuery.endTime = formatDate(this.selectDates.endTime);
           } else {
             this.$message({
               message: '请选择时间',

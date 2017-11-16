@@ -75,7 +75,7 @@
         img_logo,
         loginType: 0,
         loginData: {
-          username: '11100000221',
+          username: '11100011123',
           password: '123abc'
         }
       }

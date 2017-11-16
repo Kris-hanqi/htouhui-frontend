@@ -94,55 +94,6 @@
       }
     }
 
-    .noBankCardMsg {
-      width: 300px;
-      height: 125px;
-      border-radius: 11px;
-      background-color: #f6f9fe;
-      margin-top: 44px;
-      margin-left: 54px;
-      padding-top: 38px;
-
-      span.addBankCard {
-        display: block;
-        width: 62px;
-        height: 62px;
-        margin: 0 auto;
-        background: url(../../../assets/images/home/center-recharge-addBankCard.png) no-repeat;
-      }
-
-      p.noBankCardTxt {
-        font-size: 16px;
-        color: #5c6b82;
-        text-align: center;
-        margin-top: 15px;
-      }
-    }
-
-    .bankCardMsg {
-      width: 300px;
-      height: 163px;
-      background: url(../../../assets/images/home/group-4.png) no-repeat;
-      margin-top: 45px;
-      margin-left: 54px;
-
-      p {
-        color: #fff;
-      }
-
-      p.bankName {
-        font-size: 20px;
-        margin-left: 62px;
-        padding-top: 15px;
-      }
-
-      p.bankNum {
-        font-size: 26px;
-        margin-top: 44px;
-        margin-left: 37px;
-      }
-    }
-
     .withdrawMsgBox {
       margin-top: 10px;
 

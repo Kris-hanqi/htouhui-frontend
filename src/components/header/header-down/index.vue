@@ -13,9 +13,7 @@
         <li><a href="">关于我们</a></li>
         <li class="header-down__account">
           <a href="./home.html">
-            <div class="portrait">
-              <i class="fa fa-user-o" aria-hidden="true"></i>
-            </div>
+            <avatar icon="icon-avatar"></avatar>
             <span>我的账户</span>
           </a>
         </li>
@@ -25,9 +23,12 @@
 </template>
 
 <script>
+  import Avatar from 'common/components/avatar/index';
   import img_logo from 'assets/images/logo.png';
   export default {
-    name: 'HthHeaderDown',
+    components: {
+      Avatar
+    },
     data() {
       return {
         img_logo
@@ -87,22 +88,6 @@
 
       &:hover {
         color: #2875d9;
-      }
-    }
-  }
-
-  .header-down__account {
-    .portrait {
-      display: inline-block;
-      position: relative;
-      height: 30px;
-      width: 30px;
-      border-radius: 50%;
-      line-height: 30px;
-      background: #eef2fe;
-
-      i {
-        color: #8b93ad;
       }
     }
   }
