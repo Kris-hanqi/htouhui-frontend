@@ -6,7 +6,7 @@
                       @day-changed="handleDayChange"
                       @month-changed="handleMonthChanged"></event-calendar>
 
-      <div class="event-detail" v-if ="showViewType ==='month'">
+      <div class="event-detail" v-if ="false">
         <div class="event-detail__top">
           <p class="title"><span></span>{{ month }}收益账单<span></span></p>
         </div>
@@ -37,13 +37,13 @@
             <div class="pages">
               <div class="pages-top"></div>
               <div class="pages-content">
-                <button @click="handleDisableLeft"  class="leftbtn" :disabled="isLeftDisabled">&lt</button>
+                <button @click="handleDisableLeft"  class="leftbtn" :disabled="isLeftDisabled"><i class="iconfont icon-left_"></i></button>
                 <ul class="pagelist">
                   <li class="pageRadios"></li>
                   <li class="pageRadios"></li>
                   <li class="pageRadios"></li>
                 </ul>
-                <button @click="handleDisableRight" class="rightbtn" :disabled="isRightDisabled">&gt;</button>
+                <button @click="handleDisableRight" class="rightbtn" :disabled="isRightDisabled"><i class="iconfont icon-right_1"></i></button>
               </div>
 
             </div>
@@ -231,6 +231,14 @@
         float: left;
         width: 15px;
         height: 15px;
+      }
+
+      .icon-left_ {
+        font-size: 12px;
+      }
+
+      .icon-right_1 {
+        font-size: 12px;
       }
 
       .rightbtn {
