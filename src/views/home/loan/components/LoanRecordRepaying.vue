@@ -4,7 +4,11 @@
     <el-table-column prop="giveTime" label="放款时间" width="140"></el-table-column>
     <el-table-column prop="loanMoney" label="借款金额" width="110"></el-table-column>
     <el-table-column prop="realLoanMoney" label="实际借款金额" width="110"></el-table-column>
-    <el-table-column prop="rateCount" label="年利率" width="110"></el-table-column>
+    <el-table-column prop="rateCount" label="年利率" width="110">
+      <template slot-scope="scope">
+        {{ scope.row.rateCount + '%' }}
+      </template>
+    </el-table-column>
     <el-table-column prop="unPaidMoney" label="待还总额" width="110"></el-table-column>
     <el-table-column label="已还期数/总期数" width="110">
       <template slot-scope="scope">

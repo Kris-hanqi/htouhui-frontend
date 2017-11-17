@@ -37,7 +37,7 @@
   import SmsTimer from 'common/sms-timer';
   import HthPanel from 'common/Panel/index.vue';
   import { fetchSendCodeNew } from 'api/public';
-  import { fetchCheckCurrentMobile } from 'api/home/account-set';
+  import { fetchUpdateBindMobile } from 'api/home/account-set';
   
   export default {
     components: {
@@ -55,7 +55,8 @@
         showCodePrompt: false,
         mobileInfo: {
           type: 'change_binding_mobile_number',
-          mobileNumber: ''
+          mobileNumber: '',
+          authCode: ''
         }
       }
     },
@@ -73,7 +74,7 @@
           })
       },
       bindMobile() {
-        fetchCheckCurrentMobile(this.mobileInfo)
+        fetchUpdateBindMobile(this.mobileInfo)
           .then(response => {
             if (response.data.meta.code === 200) {
               this.$router.push('/accountManage/set/index');

@@ -26,7 +26,7 @@ export function fetchBindEmail(data) {
   })
 }
 
-/** 检验验证码(修改手机号) */
+/** 检验验证码 */
 export function fetchCheckCurrentMobile(data) {
   return fetch({
     url: 'user/checkCurrentMobile',
@@ -35,7 +35,7 @@ export function fetchCheckCurrentMobile(data) {
   })
 }
 
-/** 检验验证码(修改手机号) */
+/** 修改手机号 */
 export function fetchUpdateBindMobile(data) {
   return fetch({
     url: 'user/changeBindingMobileNumber',
