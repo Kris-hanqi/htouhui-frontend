@@ -5,7 +5,7 @@
         <tr><td>真实姓名</td><td>{{ realName || '无' }}</td><td>已认证</td>
         </tr>
         <tr><td>身份证</td><td>{{ IDNumber || '无' }}</td><td>已认证</td></tr>
-        <tr><td>存管手机</td><td>137*****330</td><td>已认证</td></tr>
+        <tr><td>存管手机</td><td>{{ mobile }}</td><td>已认证</td></tr>
         <tr>
           <td>银行卡</td>
           <td>

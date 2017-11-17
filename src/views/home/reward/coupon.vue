@@ -2,9 +2,13 @@
   <div class="coupon-wrapper">
     <div class="coupon-wrapper__top">
       <p>优惠券</p>
-      <el-button type="text">优惠券使用说明</el-button>
+      <el-button @click="showCouponDescription" type="text">优惠券使用说明</el-button>
       <el-button :plain="true" @click="showExchangeCoupon" type="info">兑换优惠券</el-button>
     </div>
+    
+    <!-- 优惠券使用说明 -->
+    <coupon-description :visible="couponDescriptionVisible"
+                        @close="couponDescriptionVisible = false;"></coupon-description>
 
     <!-- 兑换优惠券组件 -->
     <exchange-coupon :visible="exchangeCouponVisible"
@@ -21,9 +25,9 @@
 
       <div v-loading="listLoading" element-loading-text="拼命加载中">
         <div class="coupon-wrapper__menu">
-          <a href="javascript:void(0)" @click="switchStatus('unused')" :class="{ active: listQuery.status === 'unused'}">未使用</a>
-          <a href="javascript:void(0)" @click="switchStatus('used')" :class="{ active: listQuery.status === 'used'}">已使用</a>
-          <a href="javascript:void(0)" @click="switchStatus('expire')" :class="{ active: listQuery.status === 'expire'}">已过期</a>
+          <a @click.stop="switchStatus('unused')" :class="{ active: listQuery.status === 'unused'}">未使用</a>
+          <a @click.stop="switchStatus('used')" :class="{ active: listQuery.status === 'used'}">已使用</a>
+          <a @click.stop="switchStatus('expire')" :class="{ active: listQuery.status === 'expire'}">已过期</a>
         </div>
 
         <!-- 无数据显示 -->
@@ -55,10 +59,12 @@
   import NoData from '../components/NoData.vue';
   import CouponCard from './components/CouponCard.vue';
   import ExchangeCoupon from './components/ExchangeCoupon.vue';
+  import CouponDescription from './components/CouponDescription.vue';
   import { fetchPageList } from 'api/home/coupon';
 
   export default {
     components: {
+      CouponDescription,
       ExchangeCoupon,
       CouponCard,
       NoData
@@ -74,6 +80,7 @@
           type: 'all',
           status: 'unused'
         },
+        couponDescriptionVisible: false,
         exchangeCouponVisible: false,
         exchangeCode: ''
       }
@@ -115,6 +122,10 @@
       // 打开兑换优惠券modal
       showExchangeCoupon() {
         this.exchangeCouponVisible = true;
+      },
+      // 打开优惠券使用说明
+      showCouponDescription() {
+        this.couponDescriptionVisible = true;
       },
       // 兑换成功事件
       successExchangeCoupon() {

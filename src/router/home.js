@@ -149,7 +149,7 @@ export const constantRouterMap = [
                   title: '查看标的'
                 },
                 props: true,
-                component: _import('home/investment/components/quantifyJoinRecord')
+                component: _import('home/investment/components/quantifyLookTarget')
               },
               {
                 path: 'lookRegular-joinRecord/:id',

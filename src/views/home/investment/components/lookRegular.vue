@@ -2,7 +2,7 @@
   <div class="look-regular">
     <div class="details">
       <div class="title-box">
-        <span class="title">资产详情-债权信息</span>
+        <span class="title">加入记录-债权信息</span>
         <router-link to="/investment/plan21Day/index"><a href="#" class="return-prev-pages">返回上一页 ></a></router-link>
       </div>
       <div class="look-regular-main">
@@ -46,7 +46,7 @@
             {{ scope.row.rate + '%' }}
           </template>
         </el-table-column>
-        <el-table-column prop="perid" label="借款期限" width="80"></el-table-column>
+        <el-table-column prop="period" label="借款期限" width="80"></el-table-column>
         <el-table-column prop="investMoney" label="投资金额" width="100">
           <template slot-scope="scope">
             {{ scope.row.investMoney + '元' }}
@@ -66,7 +66,7 @@
         <el-table-column prop="status" label="状态" width="50"></el-table-column>
         <el-table-column prop="contract" label="查看" width="40">
           <template slot-scope="scope">
-            <a class="icon-download" type="text">合同</a>
+            <a class="ico-download" type="text">合同</a>
           </template>
         </el-table-column>
       </el-table>
@@ -151,7 +151,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .icon-download {
+  .ico-download {
     color: #0573f4;
   }
 
