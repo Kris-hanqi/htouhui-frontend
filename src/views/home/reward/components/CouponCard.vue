@@ -15,7 +15,7 @@
           <span class="roboto-regular">{{ data.money }}</span>元
         </span>
       </p>
-      <p class="detail">现金券<span>［满{{ data.lowerLimitMoney }}可用］</span></p>
+      <p class="detail">{{ data.type | keyToValue(typeList) }}劵<span>［满{{ data.lowerLimitMoney }}可用］</span></p>
       <p class="time">{{ data.getTime }} - {{ data.endTime }}</p>
     </div>
     <div class="coupon-wrapper__box-body">
@@ -44,6 +44,16 @@
       data: {
         type: Object,
         required: true
+      }
+    },
+    data() {
+      return {
+        typeList: [
+          { key: 'tiexi_coupon', value: '贴息' },
+          { key: 'lijin', value: '礼金' },
+          { key: 'plus_coupon', value: '加息' },
+          { key: 'cash', value: '现金' }
+        ]
       }
     },
     computed: {
