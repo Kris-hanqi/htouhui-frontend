@@ -38,7 +38,6 @@
       height: 125px;
       border-radius: 11px;
       background-color: #f6f9fe;
-      margin-left: 54px;
       padding-top: 38px;
       
       i {
@@ -61,7 +60,6 @@
     .card {
       width: 300px;
       height: 163px;
-      margin-left: 54px;
   
       p {
         font-size: 26px;

@@ -37,13 +37,13 @@
             <div class="pages">
               <div class="pages-top"></div>
               <div class="pages-content">
-                <button @click="handleDisableLeft"  class="leftbtn" :disabled="isLeftDisabled"><i class="iconfont icon-left_"></i></button>
+                <button @click="handleDisableLeft"  class="leftbtn" :disabled="isLeftDisabled"><i class="iconfont icon-left-1"></i></button>
                 <ul class="pagelist">
                   <li class="pageRadios"></li>
                   <li class="pageRadios"></li>
                   <li class="pageRadios"></li>
                 </ul>
-                <button @click="handleDisableRight" class="rightbtn" :disabled="isRightDisabled"><i class="iconfont icon-right_1"></i></button>
+                <button @click="handleDisableRight" class="rightbtn" :disabled="isRightDisabled"><i class="iconfont icon-right-1"></i></button>
               </div>
 
             </div>

@@ -187,7 +187,6 @@
 </script>
 
 <style lang="scss">
-
   .withdraw-wrapper {
     width: 832px;
 

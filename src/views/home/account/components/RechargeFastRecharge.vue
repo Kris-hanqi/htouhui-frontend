@@ -1,37 +1,47 @@
 <template>
-  <div class="shortcutRecharge">
+  <div class="recharge-fast-recharge">
     
+    <!-- 显示银行卡 -->
     <bank-card></bank-card>
     
     <!-- 银行限额组件 -->
     <bank-limit :visible="dialogBankLimitVisible" @close="closeBankLimit"></bank-limit>
-
-    <ul class="withdrawMsgBox" v-loading="loading" :element-loading-text="loadText">
-      <li>
-        <span>账户余额：</span>
-        <span><i class="remainingSumColor">{{ balance | currency('') }}</i>元</span>
-      </li>
-      <li>
-        <span>转入金额：</span>
-        <input @blur="getBalanceCost" v-model="rechargeData.money" type="text">
-        <span>元</span>
-        <a @click.stop="showBankLimit">(查看银行限额)</a>
-      </li>
-      <li>
-        <p class="remainingSumColor">中信银行每笔限额单笔5万，单日5万<br />大额充值请选择跨行转账或支付宝转账</p>
-      </li>
-      <li>
-        <span>充值费用：</span>
-        <span>{{ commissionCharge | currency('')}}元</span>
-      </li>
-      <li>
-        <span>支付金额：</span>
-        <span>{{ (Number(rechargeData.money) + commissionCharge) | currency('') }}元</span>
-      </li>
-      <li class="withdrawBtn">
-        <button @click="getRequestBankData">充值</button>
-      </li>
-    </ul>
+  
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="control-label">账户余额</label>
+        <div class="input-block">
+          <div class="form-control-static">{{ balance | currency('') }}元</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">转入金额</label>
+        <div class="input-block">
+          <el-col :span="11">
+            <input style="width: 285px;" v-model="rechargeData.money" class="form-control" type="text" placeholder="请输入充值金额">
+          </el-col>
+          <el-col :span="11" style="line-height: 45px">
+            <span>元</span>
+            <a @click.stop="showBankLimit">(查看银行限额)</a>
+          </el-col>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">支付金额</label>
+        <div class="input-block">
+          <div class="form-control-static">{{ (rechargeData.money || 0) | currency('') }}元</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-block">
+          <el-button type="primary"
+                     @click="getRequestBankData"
+                     :loading="loading" round
+                     style="width: 180px;">充值</el-button>
+        </div>
+      </div>
+    </form>
+    
     <div class="split-line"></div>
     <div class="warmPrompt">
       <h3>温馨提示</h3>
@@ -49,7 +59,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import { fetchRecharge, fetchAccountMoney, fetchBalanceCost } from 'api/home/account';
+  import { fetchRecharge, fetchAccountMoney } from 'api/home/account';
   import { getLocationUrl } from 'utils/index';
   import BankLimit from '../../components/BankLimit.vue';
   import BankCard from '../../components/BackCard.vue';
@@ -97,24 +107,21 @@
             }
           })
       },
-      getBalanceCost() {
-        if (!this.rechargeData.money) return;
-        this.loading = true;
-        fetchBalanceCost({ rechargeMoney: this.rechargeData.money })
-          .then(response => {
-            if (response.data.meta.code === 200) {
-              this.commissionCharge = response.data.data || 0;
-            }
-            this.loading = false;
-          })
-      },
       getRequestBankData() {
         if (!this.rechargeData.money) return;
+        if (this.rechargeData.money > this.balance) {
+          this.$notify({
+            title: '警告',
+            message: '账户余额不足',
+            type: 'error'
+          });
+          return;
+        }
         this.loading = true;
-        this.loadText = '充值中...';
         this.rechargeData.sessionId = this.uuid;
         fetchRecharge(this.rechargeData)
           .then(response => {
+            this.loading = false;
             if (response.data.meta.code === 200) {
               this.requestData = response.data.data;
             }
@@ -126,3 +133,17 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .recharge-fast-recharge {
+    .back-card-wrapper {
+      margin: 30px 34px;
+    }
+    
+    a {
+      font-size: 14px;
+      color: #4990e2;
+    }
+  }
+
+</style>
