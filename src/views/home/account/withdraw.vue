@@ -1,8 +1,9 @@
 <template>
+
   <div class="withdraw-wrapper">
     <hth-panel title="我要提现">
       <bank-card></bank-card>
-      
+
       <ul class="withdrawMsgBox">
         <li>
           <span>账户余额：</span>
@@ -13,6 +14,42 @@
           <input @blur="getWithdrawCost" v-model="withdrawData.inputMoney" type="number">
           <span>元</span>
           <a @click.stop="showBankLimit">(查看银行限额)</a>
+        </li>
+        <li>
+          <span>银行联行号：</span>
+          <input type="number" placeholder="人民银行分配的12位联行号">
+          <button type="text" @click="dialogTableVisible = true" class="queryBtn">查询</button>
+          <el-dialog title="联行号查询" :visible.sync="dialogTableVisible" id="dialog" :top="'65px'">
+            <span id="prvince-sp">省份：</span>
+            <el-select id="prvinceSelect" v-model="options[0]" @change = "changePrvince">
+              <el-option
+                v-for="item in options"
+                :key="item"
+                :label="item"
+                :value="item">
+              </el-option>
+          </el-select>
+            <span id="city-sp">城市：</span>
+            <el-select id="citySelect" v-model="cityOptions[0]" @change="">
+              <el-option
+                v-for="item in cityOptions"
+                :key="item"
+                :label="item"
+                :value="item"
+              ></el-option>
+            </el-select>
+            <span id="keyword-sp">关键词：</span>
+            <input id="keywordInput" type="text"><button class="queryAddress">查询</button>
+            <el-table :data="gridData">
+              <el-table-column property="date" label="序号"></el-table-column>
+              <el-table-column property="name" label="联行行号"></el-table-column>
+              <el-table-column property="address" label="银行名称"></el-table-column>
+              <el-table-column property="address" label="地址"></el-table-column>
+              <el-table-column property="address" label="选择"></el-table-column>
+            </el-table>
+            <button class="cancelBtn">取消</button>
+            <button class="confirmBtn">确认</button>
+          </el-dialog>
         </li>
         <li>
           <span>手续费：</span>
@@ -39,9 +76,9 @@
         <p>8、如果提现出现任何疑问，请联系客服，400-698-8810</p>
       </div>
     </hth-panel>
-    
+
     <bank-limit :visible="dialogBankLimitVisible" @close="closeBankLimit"></bank-limit>
-  
+
     <request-bank-from :request-data="requestData"></request-bank-from>
   </div>
 </template>
@@ -52,8 +89,8 @@
   import BankLimit from '../components/BankLimit.vue';
   import BankCard from '../components/BackCard.vue';
   import RequestBankFrom from '../components/RequestBankFrom.vue';
-  import { fetchWithdraw, fetchWithdrawCost, fetchAccountMoney } from 'api/home/account';
-  
+  import { fetchWithdraw, fetchWithdrawCost, fetchAccountMoney, fetchPrvince, fetchCity } from 'api/home/account';
+
   export default {
     components: {
       HthPanel,
@@ -70,6 +107,11 @@
     },
     data() {
       return {
+        options: [],
+        changeprovice: '',
+        cityOptions: [],
+        gridData: [],
+        dialogTableVisible: false,
         dialogBankLimitVisible: false,
         accountMoney: '',
         requestData: {},
@@ -119,17 +161,126 @@
       },
       closeBankLimit() {
         this.dialogBankLimitVisible = false;
+      },
+      createdFetchPrvince() {
+        fetchPrvince().then(response => {
+          if (response.data.meta.code === 200) {
+            this.options = response.data.data;
+          }
+        })
+      },
+      changePrvince(prvincedata) {
+        console.log(prvincedata)
+        fetchCity({ province: prvincedata })
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.cityOptions = response.data.data
+            }
+          })
       }
     },
     created() {
       this.getAccountMoney();
+      this.createdFetchPrvince();
     }
   }
 </script>
 
 <style lang="scss">
+
   .withdraw-wrapper {
     width: 832px;
+
+    .el-dialog {
+      width: 747px;
+      height: 372px;
+    }
+
+    .el-dialog__wrapper {
+      overflow: hidden;
+      left: 200px;
+      top: 200px;
+    }
+
+    .el-dialog__body {
+      padding-top: 5px;
+      padding-right: 0;
+    }
+
+    #prvinceSelect {
+      width: 102px;
+      height: 26px;
+    }
+
+    #prvince-sp {
+      font-size: 14px;
+    }
+
+    #city-sp {
+      font-size: 14px;
+      margin-left: 24px;
+    }
+
+    .el-select .el-input .el-select__caret {
+      line-height: 43px;
+    }
+
+    #keywordInput {
+      width: 200px;
+      height: 30px;
+    }
+
+    #citySelect {
+      width: 102px;
+      height: 26px;
+    }
+
+    .queryAddress {
+      display: inline-block;
+      width: 65px;
+      height: 26px;
+      border-radius: 100px;
+      background: #0671f0;
+      color: white;
+      margin-left: 20px;
+    }
+
+    .el-table--enable-row-hover {
+      width: 688px;
+      margin-top: 31px;
+    }
+
+    #keyword-sp {
+      font-size: 14px;
+      margin-left: 24px;
+    }
+
+    .cancelBtn {
+      width: 120px;
+      height: 40px;
+      border-radius: 100px;
+      background-color: #fff;
+      border: solid 1px #979797;
+      font-family: SourceHanSansCN;
+      font-size: 18px;
+      text-align: center;
+      color: #9b9b9b;
+      margin-left: 238px;
+      margin-top: 57px;
+    }
+
+    .confirmBtn {
+      width: 120px;
+      height: 40px;
+      border-radius: 100px;
+      font-family: SourceHanSansCN;
+      font-size: 18px;
+      text-align: center;
+      background-color: #378ff6;
+      color: #fff;
+      margin-left: 22px;
+      margin-top: 57px;
+    }
 
     .bankCardMsg {
       width: 300px;
@@ -173,6 +324,14 @@
           border: solid 1px #bfc1c4;
         }
 
+        .queryBtn {
+          width: 97px;
+          height: 34.6px;
+          background-color: #378ff6;
+          border-radius: 100px;
+          color: #fff;
+        }
+
         a {
           font-size: 14px;
           color: #4990e2;
@@ -198,7 +357,7 @@
         }
       }
     }
-    
+
     .warmPrompt {
       margin-top: 25px;
       padding-bottom: 40px;
