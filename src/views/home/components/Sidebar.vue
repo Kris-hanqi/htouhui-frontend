@@ -1,6 +1,7 @@
 <template>
   <div class="sidebar-wrapper">
-    <p class="account">我的账户</p>
+
+    <p class="account"><i class="iconfont icon-account"></i>我的账户</p>
     <ul>
       <li class="nav">
         <router-link to="/account/index" active-class="active">账户概览</router-link>
@@ -15,7 +16,7 @@
         <router-link to="/account/withdraw" active-class="active">我要提现</router-link>
       </li>
     </ul>
-    <p class="investment">我的投资</p>
+    <p class="investment"><i class="iconfont icon-money"></i>我的投资</p>
     <ul>
       <li class="nav" v-if="showNovicePlan">
         <router-link to="/investment/planNovice" active-class="active">新手计划</router-link>
@@ -36,7 +37,7 @@
         <router-link to="/investment/claims" active-class="active">债权转让</router-link>
       </li>
     </ul>
-    <p class="borrow-money" v-if="showLoan">我的借款</p>
+    <p class="borrow-money" v-if="showLoan"><i class="iconfont .icon-jiekuanxiangqing"></i>我的借款</p>
     <ul v-if="showLoan">
       <li class="nav">
         <router-link to="/loan/record" active-class="active">借款记录</router-link>
@@ -45,13 +46,13 @@
         <router-link to="/loan/repayment" active-class="active">近期还款</router-link>
       </li>
     </ul>
-    <p class="new-platform-rewards">平台奖励</p>
+    <p class="new-platform-rewards"><i class="iconfont icon-jiangli-"></i>平台奖励</p>
     <ul>
       <li class="nav">
         <router-link to="/reward/coupon" active-class="active">优惠券</router-link>
       </li>
     </ul>
-    <p class="account-management">账户管理</p>
+    <p class="account-management"><i class="iconfont icon-set"></i>账户管理</p>
     <ul>
       <li class="nav">
         <router-link to="/accountManage/set/index" active-class="active">账户设置</router-link>
@@ -98,50 +99,34 @@
       padding-left: 42px;
       background-color: #f6f9ff;
 
-      &:after {
-        content: '';
-        display: block;
+      .icon-account {
+        font-size: 24px;
         position: absolute;
-      }
-
-      &.account:after {
-        left: 16px;
-        top: 13px;
-        width: 18px;
-        height: 18px;
-        background: url(../../../assets/images/home/icons/icon-account.png) no-repeat;
-      }
-
-      &.investment:after {
-        left: 13px;
-        top: 11px;
-        width: 24px;
-        height: 24px;
-        background: url(../../../assets/images/home/icons/icon-money.png) no-repeat;
-      }
-
-      &.borrow-money:after {
         left: 15px;
-        top: 9px;
-        width: 25px;
-        height: 24px;
-        background: url(../../../assets/images/home/icons/icon-loan.png) no-repeat;
       }
 
-      &.new-platform-rewards:after {
-        left: 17px;
-        top: 10px;
-        width: 16px;
-        height: 24px;
-        background: url(../../../assets/images/home/icons/icon-reward.png) no-repeat;
-      }
-
-      &.account-management:after {
+      .icon-jiekuanxiangqing {
+        font-size: 24px;
+        position: absolute;
         left: 15px;
-        top: 12px;
-        width: 22px;
-        height: 22px;
-        background: url(../../../assets/images/home/icons/icon-set.png) no-repeat;
+      }
+
+      .icon-money {
+        font-size: 24px;
+        position: absolute;
+        left: 15px;
+      }
+
+      .icon-jiangli- {
+        font-size: 24px;
+        position: absolute;
+        left: 15px;
+      }
+
+      .icon-set {
+        font-size: 24px;
+        position: absolute;
+        left: 15px;
       }
     }
 
