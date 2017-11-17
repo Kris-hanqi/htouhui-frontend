@@ -1,7 +1,8 @@
 <template>
   <div class="sidebar-wrapper">
-
-    <p class="account"><i class="iconfont icon-account"></i>我的账户</p>
+    <p class="account">
+      <i class="iconfont icon-account"></i>我的账户
+    </p>
     <ul>
       <li class="nav">
         <router-link to="/account/index" active-class="active">账户概览</router-link>
@@ -16,7 +17,9 @@
         <router-link to="/account/withdraw" active-class="active">我要提现</router-link>
       </li>
     </ul>
-    <p class="investment"><i class="iconfont icon-money"></i>我的投资</p>
+    <p class="investment">
+      <i class="iconfont icon-investment"></i>我的投资
+    </p>
     <ul>
       <li class="nav" v-if="showNovicePlan">
         <router-link to="/investment/planNovice" active-class="active">新手计划</router-link>
@@ -37,7 +40,9 @@
         <router-link to="/investment/claims" active-class="active">债权转让</router-link>
       </li>
     </ul>
-    <p class="borrow-money" v-if="showLoan"><i class="iconfont .icon-jiekuanxiangqing"></i>我的借款</p>
+    <p class="borrow-money" v-if="showLoan">
+      <i class="iconfont icon-loan"></i>我的借款
+    </p>
     <ul v-if="showLoan">
       <li class="nav">
         <router-link to="/loan/record" active-class="active">借款记录</router-link>
@@ -46,13 +51,17 @@
         <router-link to="/loan/repayment" active-class="active">近期还款</router-link>
       </li>
     </ul>
-    <p class="new-platform-rewards"><i class="iconfont icon-jiangli-"></i>平台奖励</p>
+    <p class="new-platform-rewards">
+      <i class="iconfont icon-reward"></i>平台奖励
+    </p>
     <ul>
       <li class="nav">
         <router-link to="/reward/coupon" active-class="active">优惠券</router-link>
       </li>
     </ul>
-    <p class="account-management"><i class="iconfont icon-set"></i>账户管理</p>
+    <p class="account-management">
+      <i class="iconfont icon-set"></i>账户管理
+    </p>
     <ul>
       <li class="nav">
         <router-link to="/accountManage/set/index" active-class="active">账户设置</router-link>
@@ -99,34 +108,11 @@
       padding-left: 42px;
       background-color: #f6f9ff;
 
-      .icon-account {
-        font-size: 24px;
+      i {
         position: absolute;
         left: 15px;
-      }
-
-      .icon-jiekuanxiangqing {
         font-size: 24px;
-        position: absolute;
-        left: 15px;
-      }
-
-      .icon-money {
-        font-size: 24px;
-        position: absolute;
-        left: 15px;
-      }
-
-      .icon-jiangli- {
-        font-size: 24px;
-        position: absolute;
-        left: 15px;
-      }
-
-      .icon-set {
-        font-size: 24px;
-        position: absolute;
-        left: 15px;
+        color: #7c86a2;
       }
     }
 
