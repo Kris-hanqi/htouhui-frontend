@@ -20,8 +20,8 @@
       <form class="form-horizontal">
         <div class="form-group">
           <div class="input-block">
-            <input style="width: 266px;" class="form-control" type="text" placeholder="请输入项目名称">
-            <button style="width: 90px" type="button" class="hth-btn hth-btn-primary">查询</button>
+            <input style="width: 266px;" v-model="listQuery.name" class="form-control" type="text" placeholder="请输入项目名称">
+            <button style="width: 90px" :disabled="!listQuery.name" @click="query" type="button" class="hth-btn hth-btn-primary">查询</button>
           </div>
         </div>
       </form>
@@ -79,15 +79,21 @@
     },
     methods: {
       getPageList() {
+        this.list = null;
+        this.total = 0;
         this.listLoading = true;
         fetchLoanRecordPageList(this.listQuery).then(response => {
           const data = response.data;
+          console.log(data);
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            this.total = data.data.total;
+            this.total = data.data.count || 0;
           }
           this.listLoading = false
         })
+      },
+      query() {
+        this.getPageList();
       },
       getStatistic() {
         fetchLoanRecordStatistic().then(response => {

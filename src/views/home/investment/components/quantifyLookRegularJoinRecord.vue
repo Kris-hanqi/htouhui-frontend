@@ -3,7 +3,7 @@
     <div class="details">
       <div class="title-box">
         <span class="title">加入记录-债权信息</span>
-        <a href="javascript:void(0)" class="return-prev-pages" @click="returnPrevPages(joinPlanList.planId)">返回上一页 ></a>
+        <a class="return-prev-pages" @click.stop="returnPrevPages(joinPlanList.planId)">返回上一页 ></a>
       </div>
       <div class="look-regular-main">
         <div class="look-regular-rate">

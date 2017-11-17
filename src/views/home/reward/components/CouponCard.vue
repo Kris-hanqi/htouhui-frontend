@@ -15,7 +15,7 @@
           <span class="roboto-regular">{{ data.money }}</span>元
         </span>
       </p>
-      <p class="detail">现金券<span>［满{{ data.lowerLimitMoney }}可用］</span></p>
+      <p class="detail">{{ data.type | keyToValue(typeList) }}劵<span>［满{{ data.lowerLimitMoney }}可用］</span></p>
       <p class="time">{{ data.getTime }} - {{ data.endTime }}</p>
     </div>
     <div class="coupon-wrapper__box-body">
@@ -38,12 +38,18 @@
 <script>
   import { mapGetters } from 'vuex';
   import { getLocationUrl } from 'utils/index';
+  import { couponTypeList } from 'utils/home/index';
   
   export default {
     props: {
       data: {
         type: Object,
         required: true
+      }
+    },
+    data() {
+      return {
+        typeList: couponTypeList
       }
     },
     computed: {

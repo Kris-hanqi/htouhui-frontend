@@ -39,6 +39,7 @@ service.interceptors.response.use(
           confirmButtonText: '重新登录',
           type: 'warning',
           callback: action => {
+            openModalStatus = false;
             if (action === 'confirm') {
               window.open(getLocationUrl() + '/logout');
             }
