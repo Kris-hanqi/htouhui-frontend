@@ -196,6 +196,13 @@
       height: 372px;
     }
 
+    .el-dialog__title {
+      font-family: SourceHanSansCN;
+      font-size: 22px !important;
+      line-height: 45px !important;
+      color: #fff !important;
+    }
+
     .el-dialog__wrapper {
       overflow: hidden;
       left: 200px;
