@@ -18,7 +18,7 @@
           </p>
         </div>
         <div>
-          <p>优惠券类型：<span>{{ messageList.couponType }}</span></p>
+          <p>优惠券类型：<span>{{ messageList.couponType | keyToValue(typeList) }}券</span></p>
         </div>
       </div>
       <div class="message-list">
@@ -52,6 +52,7 @@
 
 <script>
   import { queryPlatformAwardRecord } from 'api/home/quantify';
+  import { couponTypeList } from 'utils/home/index';
 
   export default {
     props: [
@@ -68,6 +69,7 @@
           pageNo: 1,
           pageSize: 10
         },
+        typeList: couponTypeList,
         showNoAward: true
       }
     },

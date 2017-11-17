@@ -87,3 +87,10 @@ export function getInvestData(data) {
 
   return list;
 }
+
+export const couponTypeList = [
+  { key: 'tiexi_coupon', value: '贴息' },
+  { key: 'lijin', value: '礼金' },
+  { key: 'plus_coupon', value: '加息' },
+  { key: 'cash', value: '现金' }
+];

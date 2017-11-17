@@ -38,6 +38,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import { getLocationUrl } from 'utils/index';
+  import { couponTypeList } from 'utils/home/index';
   
   export default {
     props: {
@@ -48,12 +49,7 @@
     },
     data() {
       return {
-        typeList: [
-          { key: 'tiexi_coupon', value: '贴息' },
-          { key: 'lijin', value: '礼金' },
-          { key: 'plus_coupon', value: '加息' },
-          { key: 'cash', value: '现金' }
-        ]
+        typeList: couponTypeList
       }
     },
     computed: {
