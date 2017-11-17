@@ -46,12 +46,10 @@
                 :border="false"
                 style="width: 100%">
         <el-table-column prop="time" label="交易时间" width="150"></el-table-column>
-        <el-table-column prop="projectName" label="项目名称" width="110"></el-table-column>
+        <el-table-column prop="projectName" label="项目名称" width="150"></el-table-column>
         <el-table-column prop="typeinfo" label="类型" width="110"></el-table-column>
         <el-table-column prop="money" label="变动金额" width="100"></el-table-column>
-        <el-table-column prop="trusteeship" label="管理平台" width="140"></el-table-column>
-        <el-table-column prop="balance" label="可用余额" width="100"></el-table-column>
-        <el-table-column prop="detail" :show-overflow-tooltip="true" label="备注" width="100"></el-table-column>
+        <el-table-column prop="detail" :show-overflow-tooltip="true" label="备注"></el-table-column>
       </el-table>
       <div class="pages" v-show="!listLoading">
         <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
