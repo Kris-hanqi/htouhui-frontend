@@ -6,7 +6,7 @@
                       @day-changed="handleDayChange"
                       @month-changed="handleMonthChanged"></event-calendar>
 
-      <div class="event-detail" v-if ="false">
+      <div class="event-detail" v-if ="showViewType === 'month'">
         <div class="event-detail__top">
           <p class="title"><span></span>{{ month }}收益账单<span></span></p>
         </div>
@@ -231,6 +231,7 @@
         float: left;
         width: 15px;
         height: 15px;
+        background: #fff;
       }
 
       .icon-left_ {
@@ -244,10 +245,10 @@
       .rightbtn {
         display: block;
         float: right;
-        width: 15px;
+        width: 17px;
         height: 15px;
         background: #fff;
-        margin-top: -7px;
+        margin-top: -17px;
       }
 
       .pages-content {
@@ -260,6 +261,7 @@
         width: 28px;
         height: 7.4px;
         margin-left: 30px;
+        padding-top: 10px;
       }
 
       .pageRadios {
@@ -267,7 +269,7 @@
         width: 5px;
         height: 5px;
         border-radius: 50%;
-        margin: 10px 4px 0 0;
+        margin: 0 4px 0 0;
         background: #a4b2d2;
       }
     }
