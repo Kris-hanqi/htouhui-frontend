@@ -30,7 +30,7 @@
               </el-option>
           </el-select>
             <span id="city-sp">城市：</span>
-            <el-select id="citySelect" v-model="cityOptions[0]" @change="">
+            <el-select id="citySelect" v-model="cityOptions[0]" @change="changeCity">
               <el-option
                 v-for="item in cityOptions"
                 :key="item"
@@ -41,11 +41,11 @@
             <span id="keyword-sp">关键词：</span>
             <input id="keywordInput" type="text"><button class="queryAddress">查询</button>
             <el-table :data="gridData">
-              <el-table-column property="date" label="序号"></el-table-column>
-              <el-table-column property="name" label="联行行号"></el-table-column>
-              <el-table-column property="address" label="银行名称"></el-table-column>
+              <el-table-column property="id" label="序号"></el-table-column>
+              <el-table-column property="cnapsNo" label="联行行号"></el-table-column>
+              <el-table-column property="bankName" label="银行名称"></el-table-column>
               <el-table-column property="address" label="地址"></el-table-column>
-              <el-table-column property="address" label="选择"></el-table-column>
+              <el-table-column property="" label="选择"></el-table-column>
             </el-table>
             <button class="cancelBtn">取消</button>
             <button class="confirmBtn">确认</button>
@@ -89,7 +89,7 @@
   import BankLimit from '../components/BankLimit.vue';
   import BankCard from '../components/BackCard.vue';
   import RequestBankFrom from '../components/RequestBankFrom.vue';
-  import { fetchWithdraw, fetchWithdrawCost, fetchAccountMoney, fetchPrvince, fetchCity } from 'api/home/account';
+  import { fetchWithdraw, fetchWithdrawCost, fetchAccountMoney, fetchPrvince, fetchCity, fetchLineNumber } from 'api/home/account';
 
   export default {
     components: {
@@ -108,6 +108,7 @@
     data() {
       return {
         options: [],
+        prvinceData: [],
         changeprovice: '',
         cityOptions: [],
         gridData: [],
@@ -170,11 +171,21 @@
         })
       },
       changePrvince(prvincedata) {
-        console.log(prvincedata)
         fetchCity({ province: prvincedata })
           .then(response => {
             if (response.data.meta.code === 200) {
               this.cityOptions = response.data.data
+              this.prvinceData = prvincedata
+            }
+          })
+      },
+      changeCity(citydata) {
+        console.log(this.prvinceData)
+        console.log(citydata)
+        fetchLineNumber({ province: this.prvinceData, city: citydata })
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.gridData = response.data.data
             }
           })
       }
@@ -191,7 +202,7 @@
     width: 832px;
 
     .el-dialog {
-      width: 747px;
+      width: 760px;
       height: 372px;
     }
 
@@ -209,6 +220,8 @@
     }
 
     .el-dialog__body {
+      overflow: auto;
+      height: 244px;
       padding-top: 5px;
       padding-right: 0;
     }
