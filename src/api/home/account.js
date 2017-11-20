@@ -65,6 +65,15 @@ export function fetchBalanceCost(data) {
   })
 }
 
+/** 查询是否允许大额提现 */
+export function fetchAllowLargeWithdraw(data) {
+  return fetch({
+    url: 'user/largeWithdrawals',
+    method: 'get',
+    params: data
+  })
+}
+
 /** 提现 */
 export function fetchWithdraw(data) {
   return fetch({
@@ -78,6 +87,34 @@ export function fetchWithdraw(data) {
 export function fetchWithdrawCost(data) {
   return fetch({
     url: 'user/calculateFee',
+    method: 'get',
+    params: data
+  })
+}
+
+/** 获取省 */
+export function fetchGetProvince() {
+  return fetch({
+    url: 'user/province',
+    method: 'get'
+  })
+}
+
+/** 获取市 */
+export function fetchGetCity(data) {
+  return fetch({
+    url: 'user/city',
+    method: 'get',
+    params: {
+      province: data
+    }
+  })
+}
+
+/** 获取联行号 */
+export function fetchGetUnionBank(data) {
+  return fetch({
+    url: 'user/cnapsNo',
     method: 'get',
     params: data
   })
