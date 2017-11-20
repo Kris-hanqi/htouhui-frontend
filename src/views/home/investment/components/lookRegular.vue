@@ -23,7 +23,7 @@
       </div>
       <div class="look-regular-bottom">
         <p>加入时间 <span class="roboto-regular">{{ detailList.joinTime }}</span></p>
-        <p>即日起免手续费 <span class="roboto-regular">{{ detailList.lockEndTime }}</span></p>
+        <p>持有期限截止 <span class="roboto-regular">{{ detailList.lockEndTime }}</span></p>
         <img v-if="detailList.status === 'matched'" class="type-message" src="../../../../assets/images/home/icon-success.png" alt=""/>
         <img v-else class="type-message" src="../../../../assets/images/home/icon-auto.png" alt=""/>
       </div>

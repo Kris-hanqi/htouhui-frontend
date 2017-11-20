@@ -7,17 +7,17 @@
     </div>
     <div class="main">
       <span>申请退出</span>
-      <input type="number" class="putOutMoney">
+      <input type="number" class="putOutMoney" v-model.number="message">
       <el-button type="text" @click="dialogVisible = true"><p class="btn-out">退出</p></el-button>
       <el-button type="text" @click="dialogVisible = true"><p class="btn-allOut">全部退出</p></el-button>
       <el-dialog title="退出金额中" :visible.sync="dialogVisible" width="30%">
         <div class="dialog-main">
           <div>
-            <p class="first-p"><span class="roboto-regular">900</span>元</p>
+            <p class="first-p"><span class="roboto-regular">{{ message | currency('')  }}</span>元</p>
             <p>退出金额</p>
           </div>
           <div>
-            <p class="first-p"><span class="roboto-regular">18.00</span>元</p>
+            <p class="first-p"><span class="roboto-regular">{{ message * messageList.feeRate | currency('')  }}</span>元</p>
             <p>退出手续费</p>
           </div>
           <div class="txt">
@@ -35,7 +35,7 @@
       <p class="hint-title">温馨提示</p>
       <div class="hint-txt">
         <p>1.申请退出后，T+3个工作日为您处理，实际到账时间取决于银行自动债权转让的速度；</p>
-        <p>2.退出金额中属于锁定期内的金额，收取退出金额的 2%手续费，属于锁定期外的金额，免手续费，退出时系统将优先退出锁定期外金额。</p>
+        <p>2.退出金额中属于锁定期内的金额，收取退出金额的{{ messageList.feeRateFormat }}%手续费，属于锁定期外的金额，免手续费，退出时系统将优先退出锁定期外金额。</p>
       </div>
     </div>
   </div>
