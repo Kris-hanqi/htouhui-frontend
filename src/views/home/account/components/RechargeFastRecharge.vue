@@ -43,7 +43,7 @@
     </form>
     
     <div class="split-line"></div>
-    <div class="warmPrompt">
+    <div class="hth-tips">
       <h3>温馨提示</h3>
       <p>1、请在充值前完成江西银行开户及交易密码设置。</p>
       <p>2、为了您的资金安全，江西银行电子账户将采用同卡进出规则，您的账户资金只能提现至已绑定银行卡内，且当您电子账户余额与待收金额同时为零时，才可更换银行卡。</p>
@@ -88,7 +88,7 @@
           money: '',
           source: 'pc',
           sessionId: '',
-          callbackUrl: getLocationUrl() + '/user/home.html#/account/recharge'
+          callbackUrl: getLocationUrl() + '/user/home.html#/account/index'
         }
       }
     },
@@ -109,14 +109,6 @@
       },
       getRequestBankData() {
         if (!this.rechargeData.money) return;
-        if (this.rechargeData.money > this.balance) {
-          this.$notify({
-            title: '警告',
-            message: '账户余额不足',
-            type: 'error'
-          });
-          return;
-        }
         this.loading = true;
         this.rechargeData.sessionId = this.uuid;
         fetchRecharge(this.rechargeData)
