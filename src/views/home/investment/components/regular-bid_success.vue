@@ -1,7 +1,7 @@
 <template>
   <div class="regular-repaying">
     <el-table :data="list" style="width: 100%">
-      <el-table-column prop="projectName" label="项目名称" fixed width="170"></el-table-column>
+      <el-table-column prop="projectName" label="项目名称" width="170"></el-table-column>
       <el-table-column prop="investTime" label="投资时间" width="80"></el-table-column>
       <el-table-column prop="investCash" label="投资金额" width="100">
         <template slot-scope="scope">
@@ -11,11 +11,6 @@
       <el-table-column prop="investRate" label="年利率" width="60">
         <template slot-scope="scope">
           {{ scope.row.investRate + '%' }}
-        </template>
-      </el-table-column>
-      <el-table-column prop="paidPeriod" label="已还期数/总期数" width="110">
-        <template slot-scope="scope">
-          {{ scope.row.paidPeriod + '/' + scope.row.repayPeriod }}
         </template>
       </el-table-column>
       <el-table-column prop="loanTerm" label="借款期限">
@@ -29,7 +24,7 @@
           {{ scope.row.biddingSchedule + '%' }}
         </template>
       </el-table-column>
-      <el-table-column prop="status" fixed="right" label="投资状态">
+      <el-table-column prop="status" label="投资状态">
         <template slot-scope="scope">
           {{ scope.row.status | keyToValue(typeList) }}
         </template>

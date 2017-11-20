@@ -59,8 +59,8 @@
     data() {
       return {
         checked: {
-          one: false,
-          two: false
+          one: true,
+          two: true
         },
         radio: 0,
         baseUrl: getLocationUrl(),
