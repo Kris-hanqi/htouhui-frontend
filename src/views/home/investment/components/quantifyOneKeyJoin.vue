@@ -16,7 +16,7 @@
       <div class="coupons-box">
         <div class="coupons-icon" @click="isUp">
           优惠券
-          <i class="fa fa-lg" :class="coupons ? 'fa-angle-down' : 'fa-angle-up'" aria-hidden="true"></i>
+          <i class="iconfont" :class="coupons ? 'icon-bottom' : 'icon-top'"></i>
           <div class="coupons-content" v-if="coupons">
             <i></i>
             <p class="title">可用券： 当前有<span class="roboto-regular">{{ couponsList.count }}</span>张可用的优惠券</p>
