@@ -23,7 +23,7 @@
       <el-table-column fixed="right" label="操作" width="120">
         <template slot-scope="scope">
           <el-button @click="openRepaymentPlan(scope.row.id)" type="text">还款计划</el-button>
-          <el-button @click="contractDownload(scope.row.id)" type="text">合同</el-button>
+          <el-button @click="contractDownload(scope.row)" type="text">合同</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -58,8 +58,10 @@
       closeRepaymentPlan() {
         this.visible = false;
       },
-      contractDownload(id) {
-        fetchContractDownload(id);
+      contractDownload(data) {
+        if (data.isEnsignContract) {
+          fetchContractDownload(data.id);
+        }
       }
     }
   }

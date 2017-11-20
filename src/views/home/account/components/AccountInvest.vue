@@ -3,9 +3,13 @@
     <hth-panel title="我的投资">
       <div class="fl">
         <invest-chart :chart-data="chartData"
+                      v-if="showChart !== 0"
                       class="chart"
                       :options="chartOptions"
                       :width="160" :height="160"></invest-chart>
+        <div class="chart" v-else="">
+          <i class="iconfont icon-round"></i>
+        </div>
       </div>
       <div class="fr">
         <table>
@@ -29,7 +33,11 @@
               <span class="num">{{ item.interest | currency('') }}</span>元
           </td>
             <td class="td4">
-              <button @click.stop="toInvestPage(item.url)">立即投资</button>
+              <el-button round
+                         :disabled="item.disabled"
+                         type="primary"
+                         size="mini"
+                         @click="toInvestPage(item.url)" plain>立即投资</el-button>
             </td>
           </tr>
           </tbody>
@@ -52,6 +60,7 @@
     },
     data() {
       return {
+        showChart: 0,
         dialogVisible: false,
         chartData: null,
         chartOptions: {
@@ -88,6 +97,7 @@
                 chartData.labels.push(v.label);
                 chartData.datasets[0].backgroundColor.push(v.color);
                 chartData.datasets[0].data.push(v.sum);
+                this.showChart = v.sum + this.showChart;
               });
             }
             this.chartData = chartData;
@@ -111,6 +121,11 @@
       margin-top: 100px;
       height: 160px;
       width: 160px;
+    }
+    
+    .icon-round {
+      font-size: 150px;
+      color: #eee;
     }
 
     table {
@@ -165,23 +180,6 @@
       .td4 {
         width: 160px;
         text-align: right;
-
-        button {
-          display: inline-block;
-          width: 80px;
-          height: 26px;
-          margin-right: 20px;
-          border-radius: 100px;
-          background-color: #fff;
-          border: solid 1px #378ff6;
-          color: #0671f0;
-          font-size: 14px;
-        }
-  
-        button:hover {
-          background-color: #0671f0;
-          color: #fff;
-        }
       }
     }
   }
