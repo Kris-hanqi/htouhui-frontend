@@ -63,7 +63,7 @@
         <div class="newUser-plan-bottom">
           <p class="join-time">加入时间<span class="roboto-regular">{{ joinDetails.joinTime }}</span></p>
           <p class="day-stop">持有期限截至<span class="roboto-regular">{{ joinDetails.lockEndTime }}</span></p>
-          <p class="status">状态<span>{{ joinDetails.status === 'matched' ? '全部匹配' : '匹配中' }}</span></p>
+          <p class="status">状态<span>{{ joinDetails.status === 'matched' ? '成功' : '自动投标中' }}</span></p>
         </div>
       </div>
 
