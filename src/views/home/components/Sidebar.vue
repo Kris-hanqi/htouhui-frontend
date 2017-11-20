@@ -25,7 +25,7 @@
         <router-link to="/investment/planNovice" active-class="active">新手计划</router-link>
       </li>
       <li class="nav">
-        <router-link to="/investment/plan21Day" active-class="active">21天计划</router-link>
+        <router-link to="/investment/plan21Day" active-class="active">我的计划</router-link>
       </li>
       <li class="nav">
         <router-link to="/investment/scroll21" active-class="active">升薪宝滚动21</router-link>
