@@ -18,7 +18,7 @@
           </p>
         </div>
         <div>
-          <p>优惠券类型：<span>{{ messageList.couponType }}</span></p>
+          <p>优惠券类型：<span>{{ messageList.couponType | keyToValue(typeList) }}</span></p>
         </div>
       </div>
       <div class="message-list">
@@ -68,7 +68,12 @@
           pageNo: 1,
           pageSize: 10
         },
-        showNoAward: true
+        showNoAward: true,
+        typeList: [
+          { key: 'plus_coupon', value: '加息券' },
+          { key: 'cash', value: '现金券' },
+          { key: 'lijin', value: '礼金券' }
+        ]
       }
     },
     computed: {
@@ -82,8 +87,6 @@
         queryPlatformAwardRecord(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            console.log('优惠券');
-            console.log(data);
             if (data.data) {
               this.showNoAward = false;
               this.messageList = data.data;
