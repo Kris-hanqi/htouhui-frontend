@@ -20,7 +20,7 @@
       </el-table-column>
       <el-table-column prop="loanTerm" label="借款期限">
         <template slot-scope="scope">
-          {{ scope.row.loanTerm + scope.row.loanTermCompany | keyToValue(dataList) }}
+          {{ scope.row.loanTerm }}{{ scope.row.loanTermCompany | keyToValue(dataList) }}
         </template>
       </el-table-column>
       <el-table-column prop="remainingTime" label="剩余时间" width="90"></el-table-column>

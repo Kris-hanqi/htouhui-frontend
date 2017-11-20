@@ -18,7 +18,7 @@
           {{ scope.row.paidPeriod + '/' + scope.row.repayPeriod }}
         </template>
       </el-table-column>
-      <el-table-column prop="nextRepayDate" label="下次还款日" width="90"></el-table-column>
+      <el-table-column prop="nextRepayDate" label="下次还款日" width="80"></el-table-column>
       <el-table-column prop="award" label="额外奖励" width="60">
         <template slot-scope="scope">
           <el-button class="icon-award" @click="getExtendEarn(scope.row.investId)" type="text" size="small"></el-button>
