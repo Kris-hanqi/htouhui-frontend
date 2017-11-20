@@ -106,7 +106,8 @@
           <el-table-column prop="status" label="状态" width="50"></el-table-column>
           <el-table-column prop="contract" label="合同" width="40">
             <template slot-scope="scope">
-              <el-button class="ico-download" type="text" size="small"></el-button>
+              <el-button v-if="scope.row.showContract" class="ico-download" type="text" size="small"></el-button>
+              <p v-else class="ico-download-hui">合同</p>
             </template>
           </el-table-column>
         </el-table>
@@ -362,5 +363,11 @@
     width: 20px;
     height: 21px;
     background: url(../../../assets/images/home/icons/icon-download.png) no-repeat center;
+  }
+
+  .ico-download-hui {
+    width: 20px;
+    height: 21px;
+    background: url(../../../assets/images/home/icons/icon-downloadhui.png) no-repeat center;
   }
 </style>
