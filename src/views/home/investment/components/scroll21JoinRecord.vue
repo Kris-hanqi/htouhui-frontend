@@ -13,7 +13,7 @@
           <a @click.stop="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a>
         </li>
         <li>
-          <a class="diy-time" @@click.stop="dateType = 'other'" :class="{ active: dateType === 'other'}">自定义时间</a>
+          <a class="diy-time" @click.stop="dateType = 'other'" :class="{ active: dateType === 'other'}">自定义时间</a>
         </li>
       </ul>
       <ul class="allChooseCalendar" v-show="dateType === 'other'">
