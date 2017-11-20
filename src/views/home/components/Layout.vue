@@ -20,17 +20,7 @@
             <el-button @click="operationTips.fun">{{ operationTips.btnText }}</el-button>
           </div>
           <!-- 广告位 -->
-          <div v-if="!operationTips && ARecommend">
-            <div class="prompt-ad">
-              <!-- 标题 -->
-              <div>
-                <span class="title">{{ARecommend.title}}</span>
-                <span>{{ ARecommend.couponInfo }}</span>
-                <!-- 按钮 -->
-                <a class="fr" :href="ARecommend.address">立即加入</a>
-              </div>
-            </div>
-          </div>
+          <div v-if="!operationTips && ARecommend"  :href="ARecommend.address"></div>
           <div class="main-container__router">
             <router-view></router-view>
           </div>
@@ -129,7 +119,7 @@
     width: 1000px;
     margin: 0 auto;
   }
-  
+
   .home-wrapper__breadcrumb {
     margin: 20px 0;
     font-size: 16px;
@@ -143,20 +133,20 @@
   .main-container {
     float: right;
     width: 832px;
-  
+
     .prompt-message {
       width: 100%;
       height: 54px;
       margin-bottom: 15px;
       background-color: #fcf8e3;
       line-height: 54px;
-  
+
       span {
         font-size: 14px;
         color: #ce9764;
         margin-left: 9px;
       }
-  
+
       button {
         float: right;
         height: 36px;
@@ -171,7 +161,7 @@
         margin-top: 10px;
       }
     }
-    
+
     .prompt-ad {
       overflow: hidden;
       width: 832px;
@@ -180,20 +170,20 @@
       margin-bottom: 15px;
       background: url(../../../assets/images/home/ad-recommend.png) no-repeat #fff;
       box-shadow: 0 2px 4px 0 rgba(67, 135, 186, 0.14);
-      
+
       span.title {
         padding-left: 35px;
         font-size: 20px;
         font-weight: bold;
         color: #fff;
       }
-      
+
       span {
         padding-left: 60px;
         font-size: 18px;
         color: #4a4949;
       }
-      
+
       a {
         width: 100px;
         height: 36px;
