@@ -44,8 +44,8 @@
       </div>
     </div>
     <div class="checkboxes">
-      <p><input id="checkOne" type="checkbox" v-model="checked.one"><label for="checkOne">我同意<a href="#" target="_blank">《 升薪宝量化服务协议 》</a></label></p>
-      <p><input id="checkTwo" type="checkbox" v-model="checked.two"><label for="checkTwo">我同意<a href="#" target="_blank">《 委托系统自动出借及债权转让授权书 》</a></label></p>
+      <p><input id="checkOne" type="checkbox" v-model="checked.one"><label for="checkOne">我同意<a :href="baseUrl + '/hetong/shengxinbaolhfuwuxieyi'" target="_blank">《 升薪宝量化服务协议 》</a></label></p>
+      <p><input id="checkTwo" type="checkbox" v-model="checked.two"><label for="checkTwo">我同意<a :href="baseUrl + '/hetong/weituoautoshouquanshu'" target="_blank">《 委托系统自动出借及债权转让授权书 》</a></label></p>
     </div>
     <button class="btn-join" :class="{ 'btn-join-default': checked.one && checked.two }">一键加入</button>
   </div>
@@ -53,6 +53,7 @@
 
 <script>
   import { getUserQuantizationInfo, userCouponList } from 'api/home/quantify';
+  import { getLocationUrl } from 'utils/index';
 
   export default {
     data() {
@@ -62,6 +63,7 @@
           two: false
         },
         radio: 0,
+        baseUrl: getLocationUrl(),
         show: true,
         coupons: false,
         userMoney: '',
