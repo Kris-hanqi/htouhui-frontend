@@ -3,7 +3,9 @@
     <div class="detail">
       <div class="title-box">
         <p class="title">资产详情-债权信息</p>
-        <router-link to="/quantify/index"><p class="return">返回上一页 <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i></p></router-link>
+        <router-link to="/investment/quantify/index">
+          <p class="return">返回上一页 <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i></p>
+        </router-link>
       </div>
       <div class="main">
         <div class="name">
@@ -77,7 +79,7 @@
           pageSize: 10
         },
         total: 0,
-        messageList: null,
+        messageList: {},
         messageQuery: {
           joinPlanId: this.$route.params.id
         }
@@ -94,7 +96,8 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            this.total = data.data.totalPage || 0;
+            console.log(this.list);
+            this.total = data.data.count || 0;
             console.log('升薪宝量化查看标的下边列表' + this.list);
             console.log(this.list);
           }
@@ -104,7 +107,7 @@
         joinPlan(this.messageQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            this.messageList = data.data.data;
+            this.messageList = data.data;
             console.log('升薪宝量化查看标的上边列表' + this.messageList);
             console.log(this.messageList);
           }
