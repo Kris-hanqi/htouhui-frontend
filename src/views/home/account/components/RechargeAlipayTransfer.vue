@@ -79,7 +79,7 @@
       </table>
     </div>
     <div class="split-line"></div>
-    <div class="prompt">
+    <div class="hth-tips">
       <h3>温馨提示</h3>
       <p>1、严禁信用卡充值、套现等行为；</p>
       <p>2、选择支付宝、网银转账方式充值后请在个人中心手动刷新余额；</p>
@@ -192,25 +192,6 @@
       th:nth-child(3) {
         width: 206px;
       }
-    }
-  }
-
-  .prompt {
-    padding-bottom: 40px;
-
-    h3 {
-      font-size: 16px;
-      line-height: 1;
-      color: #394b67;
-      margin-left: 20px;
-      margin-bottom: 15px;
-    }
-
-    p {
-      font-size: 14px;
-      line-height: 1.79;
-      color: #727e90;
-      margin-left: 30px;
     }
   }
 </style>

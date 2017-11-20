@@ -56,7 +56,7 @@
           source: 'pc',
           authCode: '',
           sessionId: '',
-          callbackUrl: getLocationUrl() + '/home.html#/accountManage/set/transactionPassword'
+          callbackUrl: getLocationUrl() + '/user/home.html#/accountManage/set'
         }
       }
     },

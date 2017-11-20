@@ -1,4 +1,5 @@
 <template>
+  <!-- 解绑银行卡组件 -->
   <div class="unlock-bank-card-wrapper">
     <el-dialog title="提示"
                width="500px"
@@ -36,6 +37,7 @@
         this.unlockBankCardLoading = true;
         fetchUnlockBankCard().then(response => {
           if (response.data.meta.code === 200) {
+            // 更新全局状态
             this.$store.commit('SET_BANK_NAME', '');
             this.$store.commit('SET_BANK_CARD', '');
             this.$store.commit('SET_STATUS', 2);
