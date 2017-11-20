@@ -5,12 +5,13 @@
                width="730px"
                :before-close="handleClose"
                :visible.sync="visible">
-      <el-steps :space="200" :active="stepActive">
+      <el-steps :space="200" style="margin-left: 130px" :active="stepActive">
         <el-step title="注册"></el-step>
         <el-step title="开户"></el-step>
         <el-step title="交易密码"></el-step>
       </el-steps>
-      <el-form class="hth-from open-account"
+      <el-form class="open-account"
+               style="margin-left: 100px"
                label-position="right"
                label-width="90px"
                v-if="stepActive === 2">
@@ -53,6 +54,7 @@
       </el-form>
     </el-dialog>
   
+    <!-- 网关交互组件 -->
     <request-bank-from :request-data="requestData"></request-bank-from>
   </div>
 </template>
@@ -63,6 +65,7 @@
   import RequestBankFrom from './RequestBankFrom.vue';
   import { fetchOpenAccount, fetchSetTransactionPassword } from 'api/home/account-set';
   import { fetchSendCode } from 'api/public';
+  import { getLocationUrl } from 'utils/index';
   
   export default {
     components: {
@@ -98,7 +101,7 @@
           authCode: '',
           source: 'pc',
           sessionId: '',
-          callbackUrl: ''
+          callbackUrl: getLocationUrl() + '/user/home.html'
         }
       }
     },
@@ -151,10 +154,6 @@
 
 <style lang="scss">
   .open-account-wrapper {
-    .el-dialog__body {
-      padding-left: 85px;
-    }
-    
     .open-account {
       input {
         width: 320px;

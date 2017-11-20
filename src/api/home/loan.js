@@ -35,6 +35,15 @@ export function fetchRecentlyRepaymentStatistic() {
   })
 }
 
+/** 获取还款计划 */
+export function feachgRepaymentPlan(data) {
+  return fetch({
+    url: 'user/loanAdvanceRepayinfo',
+    method: 'get',
+    params: data
+  })
+}
+
 /** 还款 */
 export function fetchRepayment(data) {
   return fetch({

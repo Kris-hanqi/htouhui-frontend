@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="split-line"></div>
-    <div class="warmPrompt">
+    <div class="hth-tips">
       <h3>温馨提示</h3>
       <p>1、严禁信用卡充值、套现等行为；</p>
       <p>2、选择支付宝、网银转账方式充值后请在个人中心手动刷新余额；</p>

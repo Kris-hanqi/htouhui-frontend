@@ -7,6 +7,9 @@
     <!-- 银行限额组件 -->
     <bank-limit :visible="dialogBankLimitVisible" @close="closeBankLimit"></bank-limit>
   
+    <!-- 网关交互组件 -->
+    <request-bank-from :request-data="requestData"></request-bank-from>
+  
     <form class="form-horizontal">
       <div class="form-group">
         <label class="control-label">账户余额</label>
@@ -35,6 +38,7 @@
       <div class="form-group">
         <div class="input-block">
           <el-button type="primary"
+                     :disabled="rechargeData.money === ''"
                      @click="getRequestBankData"
                      :loading="loading" round
                      style="width: 180px;">充值</el-button>
@@ -52,8 +56,6 @@
       <p>5、禁止洗钱、信用卡套现、虚假交易等行为，一经发现并确认，将终止该账户的使用。</p>
       <p>6、如果充值金额没有及时到账，请联系客服，400-698-8810。</p>
     </div>
-  
-    <request-bank-from :request-data="requestData"></request-bank-from>
   </div>
 </template>
 
