@@ -200,3 +200,9 @@ th {
 .el-tooltip__popper[x-placement^=top] .popper__arrow::after {
   border-top-color: #fff;
 }
+
+.el-picker-panel__footer {
+  .el-button--text {
+    display: none;
+  }
+}
