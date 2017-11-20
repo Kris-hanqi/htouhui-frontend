@@ -84,13 +84,10 @@
         queryPlatformAwardRecord(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            console.log('优惠券');
-            console.log(data);
             if (data.data) {
               this.showNoAward = false;
               this.messageList = data.data;
               this.list = data.data.data;
-              console.log(this.messageList);
               this.total = data.data.count || 0;
             }
           }

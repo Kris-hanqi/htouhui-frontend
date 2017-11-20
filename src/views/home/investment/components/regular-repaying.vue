@@ -183,8 +183,6 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.investRepaysList = data.data;
-            console.log('还款计划' + this.investRepaysList);
-            console.log(this.investRepaysList);
           }
         })
       },
@@ -195,8 +193,6 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.extendEarnList = data.data;
-            console.log('额外奖励' + this.extendEarnList);
-            console.log(this.extendEarnList);
           }
         })
       },
