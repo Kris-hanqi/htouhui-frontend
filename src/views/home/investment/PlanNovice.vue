@@ -66,12 +66,16 @@
           <p class="status">状态<span>{{ joinDetails.status === 'matched' ? '全部匹配' : '匹配中' }}</span></p>
         </div>
       </div>
-  
+
       <!--table-->
       <div class="message">
         <p class="title">您购买的债权信息</p>
         <el-table :data="claimsList" style="width: 100%">
-          <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
+          <el-table-column prop="loanId" label="项目编号" width="120">
+            <template slot-scope="scope">
+              <a :href="scope.row.loanTargetUrl" target="_blank">{{ scope.row.loanId }}</a>
+            </template>
+          </el-table-column>
           <el-table-column prop="loanMoney" label="借款金额" width="100">
             <template slot-scope="scope">
               {{ scope.row.loanMoney | currency('') + '元' }}
@@ -102,11 +106,11 @@
           <el-table-column prop="status" label="状态" width="50"></el-table-column>
           <el-table-column prop="contract" label="合同" width="40">
             <template slot-scope="scope">
-              <el-button class="icon-download" type="text" size="small"></el-button>
+              <el-button class="ico-download" type="text" size="small"></el-button>
             </template>
           </el-table-column>
         </el-table>
-    
+
         <div class="pages">
           <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>
             条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
@@ -354,7 +358,7 @@
     }
   }
 
-  .icon-download {
+  .ico-download {
     width: 20px;
     height: 21px;
     background: url(../../../assets/images/home/icons/icon-download.png) no-repeat center;

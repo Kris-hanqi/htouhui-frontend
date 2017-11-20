@@ -34,7 +34,11 @@
         <p class="title-message">目前已为您自动投标成功   <span>{{ joinPlanList.totalInvestMoney | currency('') }}</span>元</p>
       </div>
       <el-table :data="list" style="width: 100%">
-        <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
+        <el-table-column prop="loanId" label="项目编号" width="120">
+          <template slot-scope="scope">
+            <a :href="scope.row.loanTargetUrl" target="_blank">{{ scope.row.loanId }}</a>
+          </template>
+        </el-table-column>
         <el-table-column prop="loanMoney" label="借款金额" width="100">
           <template slot-scope="scope">
             {{ scope.row.loanMoney | currency('') + '元' }}
