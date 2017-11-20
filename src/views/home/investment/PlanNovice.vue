@@ -197,9 +197,10 @@
         })
       },
       getClaimsList() {
-        feachJoinInvestClaims(this.claimsQuery).then(data => {
-          if (data.data.meta.code === 200) {
-            this.claimsList = data.data.data.data;
+        feachJoinInvestClaims(this.claimsQuery).then(response => {
+          if (response.data.meta.code === 200) {
+            this.claimsList = response.data.data.data;
+            this.total = response.data.data.count || 0;
           }
         })
       },
