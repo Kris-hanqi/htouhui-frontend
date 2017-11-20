@@ -51,7 +51,6 @@
     },
     methods: {
       openRepaymentPlan(id) {
-        console.log(id);
         this.loanId = id;
         this.$refs['repayment-plan'].getList(id);
         this.visible = true;

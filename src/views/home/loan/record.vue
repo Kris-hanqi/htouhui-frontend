@@ -82,14 +82,14 @@
         this.list = null;
         this.total = 0;
         this.listLoading = true;
-        fetchLoanRecordPageList(this.listQuery).then(response => {
-          const data = response.data;
-          if (data.meta.code === 200) {
-            this.list = data.data.data;
-            this.total = data.data.count || 0;
-          }
-          this.listLoading = false
-        })
+        fetchLoanRecordPageList(this.listQuery)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.list = response.data.data.data;
+              this.total = response.data.data.count || 0;
+            }
+            this.listLoading = false
+          })
       },
       query() {
         this.getPageList();
