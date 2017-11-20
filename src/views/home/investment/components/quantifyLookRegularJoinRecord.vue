@@ -26,7 +26,7 @@
         <p>加入时间 <span class="roboto-regular">{{ joinPlanList.joinTime }}</span></p>
         <p>即日起免手续费 <span class="roboto-regular">{{ joinPlanList.lockEndTime }}</span></p>
         <img v-if="joinPlanList.status === 'matched'" class="type-message" :src="img_icon_success" />
-        <img v-else class="type-message" :src="img_icon_out_record" />
+        <img v-else class="type-message" :src="img_icon_auto" />
       </div>
     </div>
 
@@ -85,7 +85,7 @@
   import { queryUserInvestList } from 'api/home/queryUserJoinInvestList';
   import interestRate from 'components/interest-rate';
   import img_icon_success from 'assets/images/home/icon-success.png';
-  import img_icon_out_record from 'assets/images/home/icon-outRecord.png';
+  import img_icon_auto from 'assets/images/home/icon-auto.png';
 
   export default {
     components: {
@@ -94,7 +94,7 @@
     data() {
       return {
         img_icon_success,
-        img_icon_out_record,
+        img_icon_auto,
         joinPlanQuery: {
           joinPlanId: this.$route.params.id
         },
@@ -126,8 +126,6 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.joinPlanList = data.data;
-            console.log('升薪宝量化加入记录债券信息' + this.joinPlanList);
-            console.log(this.joinPlanList);
           }
         })
       },
@@ -137,8 +135,6 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            console.log('升薪宝量化您购买的债券信息' + this.list);
-            console.log(this.list);
             this.total = data.data.count || 0;
           }
         })
