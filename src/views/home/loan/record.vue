@@ -84,7 +84,6 @@
         this.listLoading = true;
         fetchLoanRecordPageList(this.listQuery).then(response => {
           const data = response.data;
-          console.log(data);
           if (data.meta.code === 200) {
             this.list = data.data.data;
             this.total = data.data.count || 0;

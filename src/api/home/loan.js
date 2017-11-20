@@ -52,3 +52,25 @@ export function fetchRepayment(data) {
     params: data
   })
 }
+
+/** 提前还款 */
+export function fetchAdvanceRepayment(id) {
+  return fetch({
+    url: 'jixin/advanceRepay',
+    method: 'get',
+    params: {
+      loanId: id
+    }
+  })
+}
+
+/** 合同下载 */
+export function fetchContractDownload(id) {
+  return fetch({
+    url: 'user/borrowerEnsignFileDownload',
+    method: 'get',
+    params: {
+      loanId: id
+    }
+  })
+}
