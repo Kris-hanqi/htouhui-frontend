@@ -1,6 +1,6 @@
 <template>
   <div class="account-invest__wrapper">
-    <hth-panel title="我的投资">
+    <hth-panel title="我的投资" v-loading="loading" element-loading-text="数据加载中...">
       <div class="fl">
         <invest-chart :chart-data="chartData"
                       v-show="showChart !== 0"
@@ -60,6 +60,7 @@
     },
     data() {
       return {
+        loading: false,
         showChart: 0,
         dialogVisible: false,
         chartData: null,
@@ -79,6 +80,7 @@
     },
     methods: {
       getData() {
+        this.loading = true;
         fetchInvest().then(response => {
           const data = response.data;
           if (data.meta.code === 200 && data.data) {
@@ -102,6 +104,7 @@
             }
             this.chartData = chartData;
           }
+          this.loading = false;
         })
       },
       toInvestPage(url) {
