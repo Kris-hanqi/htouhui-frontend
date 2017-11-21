@@ -37,10 +37,11 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   $hth-header-down-height: 70px;
 
   .header-down {
+    display: inline-block;
     width: 100%;
     height: $hth-header-down-height;
     line-height: $hth-header-down-height;
@@ -52,10 +53,9 @@
       height: $hth-header-down-height;
       margin: 0 auto;
     }
-  
-    ol,
+    
     ul {
-      margin: 0;
+      margin-bottom: 0;
     }
   }
 
