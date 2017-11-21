@@ -3,11 +3,11 @@
     <hth-panel title="我的投资">
       <div class="fl">
         <invest-chart :chart-data="chartData"
-                      v-if="showChart !== 0"
+                      v-show="showChart !== 0"
                       class="chart"
                       :options="chartOptions"
                       :width="160" :height="160"></invest-chart>
-        <div class="chart" v-else="">
+        <div class="chart" v-show="showChart === 0">
           <i class="iconfont icon-round"></i>
         </div>
       </div>
