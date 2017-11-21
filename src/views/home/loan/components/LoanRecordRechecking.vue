@@ -9,7 +9,11 @@
         {{ scope.row.yearRate + '%' }}
       </template>
     </el-table-column>
-    <el-table-column prop="deadline" label="借款期限" width="90"></el-table-column>
+    <el-table-column label="借款期限" width="90">
+      <template slot-scope="scope">
+        {{ scope.row.deadline + '月' }}
+      </template>
+    </el-table-column>
     <el-table-column prop="nextRepayMoney" label="下次还款数" width="100"></el-table-column>
     <el-table-column prop="status" label="状态" width="100"></el-table-column>
   </el-table>

@@ -12,7 +12,11 @@
         {{ scope.row.yearRate + '%' }}
       </template>
     </el-table-column>
-    <el-table-column prop="deadline" label="借款期限" width="140"></el-table-column>
+    <el-table-column label="借款期限" width="140">
+      <template slot-scope="scope">
+        {{ scope.row.deadline + '月' }}
+      </template>
+    </el-table-column>
     <el-table-column prop="status" label="状态"></el-table-column>
   </el-table>
 </template>
