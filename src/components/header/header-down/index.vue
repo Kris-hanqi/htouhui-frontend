@@ -52,6 +52,11 @@
       height: $hth-header-down-height;
       margin: 0 auto;
     }
+  
+    ol,
+    ul {
+      margin: 0;
+    }
   }
 
   .header-down__logo {
