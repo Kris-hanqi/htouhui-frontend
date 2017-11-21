@@ -2,7 +2,7 @@
   <el-table :data="list" :border="false" style="width: 100%">
     <el-table-column prop="name" label="项目名称" width="100"></el-table-column>
     <el-table-column prop="loanMoney" label="借款金额" width="100"></el-table-column>
-    <el-table-column prop="realRaisedMoney" label="实际募捐金额" width="100"></el-table-column>
+    <el-table-column prop="realRaisedMoney" label="实际募集金额" width="100"></el-table-column>
     <el-table-column prop="predictInterst" label="预计利息" width="110"></el-table-column>
     <el-table-column label="年利率" width="70">
       <template slot-scope="scope">
