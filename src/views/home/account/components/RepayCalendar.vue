@@ -5,52 +5,13 @@
       <event-calendar :dates="dates" class="calendar"
                       @day-changed="handleDayChange"
                       @month-changed="handleMonthChanged"></event-calendar>
-
-      <div class="event-detail" v-if ="showViewType === 'month'">
-        <div class="event-detail__top">
-          <p class="title"><span></span>{{ month }}收益账单<span></span></p>
-        </div>
-        <div class="event-detail__body">
-          <p><i></i>本月待收 <span class="roboto-regular">{{ monthData.collectMoney | currency('') }}</span><span>元</span></p>
-          <p class="hasDone"><i></i>本月已收 <span class="roboto-regular">{{ monthData.receiptMoney | currency('')}}</span><span>元</span></p>
-          <img :src="img_icon_calendar"/>
-        </div>
-      </div>
-
-      <div class="event-detail2" v-else>
-        <div class="event-detail__top">
-          <p class="title"><span @click="switchViewType"></span>{{ dayData.date }}账单</p>
-        </div>
-        <div class="event-detail__body">
-          <div class="box">
-            <div class="title">{{ testData.loanName }}</div>
-            <div class="box-main">
-              <div class="left-part">
-                <p>投资金额<span class="roboto-regular">{{ testData.investMoeny | currency('') }}</span>元</p>
-                <p>本&nbsp;&nbsp;&nbsp;&nbsp;金<span class="roboto-regular">{{ testData.corpus | currency('') }}</span>元</p>
-              </div>
-              <div class="right-part">
-                <p>利&nbsp;&nbsp;&nbsp;&nbsp;息<span class="roboto-regular">{{ testData.interest | currency('') }}</span>元</p>
-                <p>平台奖励<span class="roboto-regular">{{ testData.extraEarning | currency('')}}</span>元</p>
-              </div>
-            </div>
-            <div class="pages">
-              <div class="pages-top"></div>
-              <div class="pages-content">
-                <button @click="handleDisableLeft"  class="leftbtn" :disabled="isLeftDisabled"><i class="iconfont icon-left-1"></i></button>
-                <ul class="pagelist">
-                  <li class="pageRadios"></li>
-                  <li class="pageRadios"></li>
-                  <li class="pageRadios"></li>
-                </ul>
-                <button @click="handleDisableRight" class="rightbtn" :disabled="isRightDisabled"><i class="iconfont icon-right-1"></i></button>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
+  
+      <!-- 数据展示 -->
+      <event-calendar-data :view-type="showViewType"
+                           @switch-view-type="switchViewType"
+                           :month-str="month"
+                           :month-data="monthData"
+                           :day-data="dayData"></event-calendar-data>
     </hth-panel>
   </div>
 
@@ -59,64 +20,28 @@
 <script>
   import HthPanel from 'common/Panel/index.vue';
   import EventCalendar from 'common/event-calendar/index.vue';
-  import img_icon_calendar from 'assets/images/home/icon-calendar.png';
+  import EventCalendarData from './EventCalendarData.vue';
   import { fetchRepayCalendar } from 'api/home/account';
   import { formatDate } from 'utils/index';
 
   export default {
     components: {
       HthPanel,
-      EventCalendar
+      EventCalendar,
+      EventCalendarData
     },
     data() {
       return {
-        img_icon_calendar,
         dates: [],
         events: null,
         showViewType: 'month',
         month: null,
-        isLeftDisabled: false,
-        isRightDisabled: false,
         monthData: {
           collectMoney: '', // 待收
           receiptMoney: ''  // 已收
         },
-        index: null,
-        testData: {},
         dayData: {
-          date: '2017年8月9号',
-          datedetail: [],
-          investRepayInfo: [
-            {
-              page: 0,
-              isShow: true,
-              pageId: 1,
-              loanName: '项目名称',
-              loanNumber: '项目编号',
-              corpus: '本金',
-              interest: '利息',
-              extraEarning: '额外收益',
-              investMoeny: '投资金额'
-            }, {
-              isShow: false,
-              pageId: 2,
-              loanName: '项目名称2',
-              loanNumber: '项目编号',
-              corpus: '本金',
-              interest: '利息',
-              extraEarning: '额外收益',
-              investMoeny: '投资金额'
-            }, {
-              isShow: false,
-              pageId: 2,
-              loanName: '项目名称3',
-              loanNumber: '项目编号',
-              corpus: '本金',
-              interest: '利息',
-              extraEarning: '额外收益',
-              investMoeny: '投资金额'
-            }
-          ]
+          investRepayInfo: []
         }
       }
     },
@@ -138,31 +63,7 @@
           })
       },
       switchViewType() {
-        if (this.showViewType === 'month') {
-          this.showViewType = 'day';
-        } else {
-          this.showViewType = 'month';
-        }
-      },
-      handleDisableRight() {
-        this.index++;
-        this.testData = this.dayData.investRepayInfo[this.index];
-        this.isLeftDisabled = false;
-        if (this.index === this.dayData.investRepayInfo.length - 1) {
-          this.isRightDisabled = true;
-        } else {
-          this.isRightDisabled = false;
-        }
-      },
-      handleDisableLeft() {
-        this.index --;
-        this.testData = this.dayData.investRepayInfo[this.index];
-        this.isRightDisabled = false;
-        if (this.index === 0) {
-          this.isLeftDisabled = true;
-        } else {
-          this.isLeftDisabled = false;
-        }
+        this.showViewType = 'month';
       },
       handleDayChange(date) {
         if (this.dates.indexOf(date) !== -1) {
@@ -182,9 +83,6 @@
     created() {
       this.month = formatDate(null, 'YYYY-MM');
       this.repayCalendar();
-      this.index = 0;
-      this.testData = this.dayData.investRepayInfo[this.index];
-      this.isLeftDisabled = true;
     }
   }
 </script>
