@@ -1,61 +1,66 @@
 <template>
   <div class="oneKeyJoin">
-    <p class="title">一键加入</p>
-    <div class="main-1" v-if="show">
-        <p>可加入额<span class="roboto-regular">{{ messageList.canJoinMoney | currency('') }}</span><span>元</span><i @click="isShow"></i></p>
-    </div>
-    <div class="main-2" v-else>
-      <div class="use-money">
-        <p class="main-2-p-1">起投金额：<span class="roboto-regular">{{ messageList.startInvestMoney | currency('') }}</span><span class="small-font">元</span></p>
-        <p>您目前还可加入<span class="roboto-regular">{{ messageList.canJoinMoney | currency('') }}</span>元</p>
+    <hth-panel title="一键加入">
+      <div class="main-1" v-if="show">
+        <p>可加入额<span class="roboto-regular">{{ messageList.canJoinMoney | currency('') }}</span><span>元</span><i class="iconfont icon-update" @click="isShow"></i></p>
       </div>
-      <input type="number" class="inputMoney" v-model="userMoney" :placeholder="'加入金额须为'+ messageList.incrMoney +'的整数倍'">
-      <div class="canUseMoney">
-        <p>可用余额<span class="roboto-regular">{{ messageList.balance | currency('') }}</span>元<router-link to="/recharge"><span>充值</span></router-link></p>
-      </div>
-      <div class="coupons-box">
-        <div class="coupons-icon" @click="isUp">
-          优惠券
-          <i class="iconfont" :class="coupons ? 'icon-bottom' : 'icon-top'"></i>
-          <div class="coupons-content" v-if="coupons">
-            <i></i>
-            <p class="title">可用券： 当前有<span class="roboto-regular">{{ couponsList.count }}</span>张可用的优惠券</p>
-            <div class="noUse">
-              <el-radio v-model="radio" :label="0" name="coupons">不使用优惠券</el-radio>
-            </div>
-            <div class="coupons-list">
-              <div class="coupon" v-for="str in couponsList.userCouponInfos">
-                <el-radio :disabled="!chooseCoupons(str.lowerLimitMoney)" v-model="radio" :label="str.userCouponId" name="coupons">
-                  <div class="coupon-img" :id="str.userCouponId">{{ str.type == 'plus_coupon' ? str.rate : str.money }}{{ str.type | keyToValue(typeList) }}</div>
-                  <div class="coupon-message">
-                    <p>满{{ str.lowerLimitMoney | currency('') }}元可用</p>
-                    <p><span v-if="str.maxInterestMoney != null">最高计息金额：{{ str.maxInterestMoney | currency('') }}元 </span><span v-if="str.interestDeadline != null"> 最高计息天数：{{ str.interestDeadline }}天</span></p>
-                  </div>
-                </el-radio>
+      <div class="main-2" v-else>
+        <div class="use-money">
+          <p class="main-2-p-1">起投金额：<span class="roboto-regular">{{ messageList.startInvestMoney | currency('') }}</span><span class="small-font">元</span></p>
+          <p>您目前还可加入<span class="roboto-regular">{{ messageList.canJoinMoney | currency('') }}</span>元</p>
+        </div>
+        <input type="number" class="inputMoney" v-model="userMoney" :placeholder="'加入金额须为'+ messageList.incrMoney +'的整数倍'">
+        <div class="canUseMoney">
+          <p>可用余额<span class="roboto-regular">{{ messageList.balance | currency('') }}</span>元<router-link to="/recharge"><span>充值</span></router-link></p>
+        </div>
+        <div class="coupons-box">
+          <div class="coupons-icon" @click="isUp">
+            优惠券
+            <i class="iconfont" :class="coupons ? 'icon-bottom' : 'icon-top'"></i>
+            <div class="coupons-content" v-if="coupons">
+              <i></i>
+              <p class="title">可用券： 当前有<span class="roboto-regular">{{ couponsList.count }}</span>张可用的优惠券</p>
+              <div class="noUse">
+                <el-radio v-model="radio" :label="0" name="coupons">不使用优惠券</el-radio>
+              </div>
+              <div class="coupons-list">
+                <div class="coupon" v-for="str in couponsList.userCouponInfos">
+                  <el-radio :disabled="!chooseCoupons(str.lowerLimitMoney)" v-model="radio" :label="str.userCouponId" name="coupons">
+                    <div class="coupon-img" :id="str.userCouponId">{{ str.type == 'plus_coupon' ? str.rate : str.money }}{{ str.type | keyToValue(typeList) }}</div>
+                    <div class="coupon-message">
+                      <p>满{{ str.lowerLimitMoney | currency('') }}元可用</p>
+                      <p><span v-if="str.maxInterestMoney != null">最高计息金额：{{ str.maxInterestMoney | currency('') }}元 </span><span v-if="str.interestDeadline != null"> 最高计息天数：{{ str.interestDeadline }}天</span></p>
+                    </div>
+                  </el-radio>
+                </div>
+              </div>
+              <div class="coupons-btn">
+                <p class="sure" @click="sureCoupon">确定</p>
+                <p class="cancel" @click.stop="isDown">取消</p>
               </div>
             </div>
-            <div class="coupons-btn">
-              <p class="sure" @click="sureCoupon">确定</p>
-              <p class="cancel" @click.stop="isDown">取消</p>
-            </div>
           </div>
+          <p class="usedCoupon" v-show="showUsedCoupon">已使用{{ usedCouponText }}券</p>
         </div>
-        <p class="usedCoupon" v-show="showUsedCoupon">已使用{{ usedCouponText }}券</p>
       </div>
-    </div>
-    <div class="checkboxes">
-      <p><input id="checkOne" type="checkbox" v-model="checked.one"><label for="checkOne">我同意<a :href="baseUrl + '/hetong/shengxinbaolhfuwuxieyi'" target="_blank">《 升薪宝量化服务协议 》</a></label></p>
-      <p><input id="checkTwo" type="checkbox" v-model="checked.two"><label for="checkTwo">我同意<a :href="baseUrl + '/hetong/weituoautoshouquanshu'" target="_blank">《 委托系统自动出借及债权转让授权书 》</a></label></p>
-    </div>
-    <button class="btn-join" :class="{ 'btn-join-default': checked.one && checked.two }">一键加入</button>
+      <div class="checkboxes">
+        <p><input id="checkOne" type="checkbox" v-model="checked.one"><label for="checkOne">我同意<a :href="baseUrl + '/hetong/shengxinbaolhfuwuxieyi'" target="_blank">《 升薪宝量化服务协议 》</a></label></p>
+        <p><input id="checkTwo" type="checkbox" v-model="checked.two"><label for="checkTwo">我同意<a :href="baseUrl + '/hetong/weituoautoshouquanshu'" target="_blank">《 委托系统自动出借及债权转让授权书 》</a></label></p>
+      </div>
+      <button class="btn-join" :class="{ 'btn-join-default': checked.one && checked.two }">一键加入</button>
+    </hth-panel>
   </div>
 </template>
 
 <script>
   import { getUserQuantizationInfo, userCouponList } from 'api/home/quantify';
   import { getLocationUrl } from 'utils/index';
+  import HthPanel from 'common/Panel/index.vue';
 
   export default {
+    components: {
+      HthPanel
+    },
     data() {
       return {
         checked: {
@@ -142,22 +147,8 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .oneKeyJoin {
-    position: relative;
-    width: 100%;
-    height: auto;
-    box-sizing: border-box;
-    padding: 20px 50px 25px 25px;
-    background-color: #fff;
-    box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-
-    .title {
-      margin-bottom: 40px;
-      font-size: 20px;
-      color: #274161;
-    }
-
     .checkboxes {
       padding-left: 40px;
 
@@ -187,6 +178,9 @@
     }
 
     .btn-join-default {
+      float: right;
+      position: static;
+      margin-top: -90px;
       border: solid 1px #0573f4;
       color: #0573f4;
       cursor: pointer;
@@ -216,10 +210,9 @@
 
     i {
       display: inline-block;
-      width: 25px;
-      height: 25px;
+      font-size: 25px;
       margin-left: 30px;
-      background: url(../../../../assets/images/home/icon-reform.png) no-repeat center;
+      color: #0573f4;
       cursor: pointer;
     }
   }
