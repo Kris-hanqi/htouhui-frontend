@@ -46,15 +46,15 @@
       </div>
       <div class="pages day-footer" v-show="dayData.investRepayInfo && dayData.investRepayInfo.length > 1">
         <div class="pages-content">
-          <button @click="handleDisableLeft" :disabled="isLeftDisabled">
+          <el-button type="text" @click="handleDisableLeft" :disabled="isLeftDisabled">
             <i class="iconfont icon-left-1"></i>
-          </button>
+          </el-button>
           <span class="pagination-bullet"></span>
           <span class="pagination-bullet"></span>
           <span class="pagination-bullet"></span>
-          <button @click="handleDisableRight" :disabled="isRightDisabled">
+          <el-button type="text" @click="handleDisableRight" :disabled="isRightDisabled">
             <i class="iconfont icon-right-1"></i>
-          </button>
+          </el-button>
         </div>
       </div>
     </div>
@@ -88,8 +88,8 @@
       return {
         img_icon_calendar,
         index: 0,
-        isRightDisabled: true,
-        isLeftDisabled: false,
+        isRightDisabled: false,
+        isLeftDisabled: true,
         dataOne: {
           loanName: '',
           investMoeny: '',
@@ -112,12 +112,14 @@
       },
       handleDisableRight() {
         this.index++;
-        this.dataOne = this.dayData.investRepayInfo[this.index];
-        this.isLeftDisabled = false;
-        if (this.index === this.dayData.investRepayInfo.length - 1) {
-          this.isRightDisabled = true;
-        } else {
-          this.isRightDisabled = false;
+        if (this.index <= this.dayData.investRepayInfo.length - 1) {
+          this.dataOne = this.dayData.investRepayInfo[this.index];
+          this.isLeftDisabled = false;
+          if (this.index === this.dayData.investRepayInfo.length - 1) {
+            this.isRightDisabled = true;
+          } else {
+            this.isRightDisabled = false;
+          }
         }
       },
       handleDisableLeft() {
@@ -312,7 +314,6 @@
         .iconfont {
           font-size: 20px;
           color: #989292;
-          cursor: pointer;
         }
         
         button {
