@@ -2,11 +2,10 @@
   <div class="account-set-wrapper">
     <hth-panel title="账户设置">
       <table border="0" cellspacing="0" cellpadding="0" class="accountSetTable">
-        <tr><td>真实姓名</td><td>{{ realName || '无' }}</td><td>已认证</td>
-        </tr>
-        <tr><td>身份证</td><td>{{ IDNumber || '无' }}</td><td>已认证</td></tr>
-        <tr><td>存管手机</td><td>{{ mobile }}</td><td>已认证</td></tr>
-        <tr>
+        <tr v-if="status !== 0"><td>真实姓名</td><td>{{ realName || '无' }}</td><td>已认证</td></tr>
+        <tr v-if="status !== 0"><td>身份证</td><td>{{ IDNumber || '无' }}</td><td>已认证</td></tr>
+        <tr v-if="status !== 0"><td>存管手机</td><td>{{ mobile }}</td><td>已认证</td></tr>
+        <tr v-if="status !== 0">
           <td>银行卡</td>
           <td>
             <i>{{ bankCard ? bankCard : '未绑定' }}</i>
@@ -18,7 +17,7 @@
                     :class="{ 'btn-blue': !bankCard }">
               {{ bankCard ? '解绑' : '绑定' }}</button></td>
         </tr>
-        <tr>
+        <tr v-if="status !== 0">
           <td>电子账号</td>
           <td>{{ accountId }} &nbsp;&nbsp;
               <button v-clipboard:copy="accountId"
@@ -32,7 +31,7 @@
             <span v-else>已认证</span>
           </td>
         </tr>
-        <tr class="borderNone">
+        <tr v-if="status !== 0" class="borderNone">
           <td>已授权的服务</td>
           <td>自动投标授权</td>
           <td>
@@ -42,7 +41,7 @@
             <span v-else>已授权</span>
           </td>
         </tr>
-        <tr class="borderNone">
+        <tr v-if="status !== 0" class="borderNone">
           <td></td>
           <td>自动债权转让授权</td>
           <td>
@@ -52,14 +51,14 @@
             <span v-else>已授权</span>
           </td>
         </tr>
-        <tr>
+        <tr v-if="status !== 0">
           <td></td>
           <td>自动还款授权</td>
           <td><button class="hth-btn" @click="automaticRepayment"
                       :class="{ 'btn-blue': !isAutomaticRepayment }">
             {{ isAutomaticRepayment ? '解约' : '授权' }}</button></td>
         </tr>
-        <tr class="borderNone">
+        <tr v-if="status !== 0" class="borderNone">
           <td>交易密码</td>
           <td>{{ transactionPasswordStatus ? '已设置' : '未设置'}}</td>
           <td rowspan="2" class="borderLine">
@@ -67,7 +66,7 @@
             <el-button class="hth-btn btn-blue" type="primary" @click="setTransactionPassword" v-else plain round>设置</el-button>
           </td>
         </tr>
-        <tr>
+        <tr v-if="status !== 0">
           <td colspan="2" class="tableSmallFontColor textAlignLeft tablePadding">保障资金安全，转入、转出、投资等资金相关操作时使用</td>
         </tr>
         <tr class="borderNone">
