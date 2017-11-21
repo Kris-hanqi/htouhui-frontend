@@ -1,4 +1,5 @@
 <template>
+  <!-- 新手计划组件 -->
   <div class="plan-novice">
     <!-- 未投资 显示标的信息 -->
     <div class="newUser-plan" v-if="novicePlanStatus === 1">
