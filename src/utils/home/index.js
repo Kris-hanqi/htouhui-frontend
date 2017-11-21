@@ -17,7 +17,7 @@ const mapData = {
   },
   plan21Day: {
     order: 3,
-    label: '21天计划',
+    label: '我的计划',
     color: '#b8e986',
     url: '/plan',
     disabled: false
