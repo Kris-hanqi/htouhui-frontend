@@ -27,7 +27,8 @@ import {
   Checkbox,
   Notification
 } from 'element-ui'
-import VueClipboard from 'vue-clipboard2'
+import VueClipboard from 'vue-clipboard2';
+import '@/styles/bootstrap.scss';
 import '@/styles/base.scss';
 import '@/styles/index.scss';
 import '@/styles/element-ui.scss';

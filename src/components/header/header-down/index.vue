@@ -58,7 +58,6 @@
     display: inline-block;
     width: 149px;
     height: 41px;
-    margin-top: 15px;
 
     img {
       width: 100%;
