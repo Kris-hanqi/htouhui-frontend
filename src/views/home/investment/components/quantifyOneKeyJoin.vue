@@ -39,7 +39,7 @@
               </div>
               <div class="coupons-btn">
                 <el-button type="danger" size="mini" round @click.stop="sureCoupon">确定</el-button>
-                <el-button @click="operationalCouponsListView" size="mini" round>取消</el-button>
+                <el-button @click.stop="operationalCouponsListView" size="mini" round>取消</el-button>
               </div>
             </div>`
           </div>
@@ -168,6 +168,9 @@
         }
         this.joinBthLoading = true;
         // 处理请求数据
+        if (this.radio !== 0) {
+          this.joinPlanData.userCouponId = this.radio;
+        }
         this.joinPlanData.planId = this.planId;
         this.joinPlanData.joinMoney = this.userMoney;
         fetchJoinPlan(this.joinPlanData)
@@ -203,8 +206,10 @@
             this.usedCouponText = document.getElementById(this.radio).innerHTML;
             this.showUsedCoupon = true;
           }
+        } else {
+          this.showUsedCoupon = false;
         }
-        this.showCouponsList = false;
+        this.operationalCouponsListView();
       }
     },
     created() {
@@ -344,6 +349,8 @@
     }
 
     .coupons-box {
+      display: flex;
+      
       .coupons-icon {
         display: inline-block;
         position: relative;
@@ -365,7 +372,7 @@
 
       .usedCoupon {
         display: inline-block;
-        width: 120px;
+        width: auto;
         height: 25px;
         box-sizing: border-box;
         background-color: #f8fafb;
