@@ -13,7 +13,7 @@
           <p>加入时间：<span class="roboto-regular">{{ messageList.joinTime }}</span></p>
           <p class="test-box">
             到账时间：<span class="roboto-regular">{{ messageList.couponEndTime }}</span>
-            <img class="status-img" v-if="messageList.status == 'transfered'" src="../../../../assets/images/home/icon-haveToAccount.png" alt=""/>
+            <img class="status-img" v-if="messageList.status === 'transfered'" src="../../../../assets/images/home/icon-haveToAccount.png" alt=""/>
             <i class="status-txt" v-else>未发放</i>
           </p>
         </div>
@@ -21,7 +21,7 @@
           <p>优惠券类型：<span>{{ messageList.couponType | keyToValue(typeList) }}券</span></p>
         </div>
       </div>
-      <div class="message-list">
+      <div class="message-list" v-if="messageList.couponType !== 'cash'">
         <p class="title">贴息流水</p>
         <el-table :data="list" style="width: 100%">
           <el-table-column prop="time" label="时间"></el-table-column>
