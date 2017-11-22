@@ -18,6 +18,24 @@ export function fetchJoinPlanBill(data) {
   })
 }
 
+/** 获取退出标的页面信息 */
+export function fetchGetExitInfo(data) {
+  return fetch({
+    url: 'user/applyExitInfo',
+    method: 'get',
+    params: data
+  })
+}
+
+/** 退出标的 */
+export function fetchExitPlan(data) {
+  return fetch({
+    url: 'user/exitPlan',
+    method: 'post',
+    data
+  })
+}
+
 /** 资产详情页债权信息 */
 export function feachAssetInfoClaims(data) {
   return fetch({
