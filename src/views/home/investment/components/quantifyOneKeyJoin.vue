@@ -41,7 +41,7 @@
                 <p class="sure" @click="sureCoupon">确定</p>
                 <p class="cancel" @click.stop="isDown">取消</p>
               </div>
-            </div>
+            </div>`
           </div>
           <p class="usedCoupon" v-show="showUsedCoupon">已使用{{ usedCouponText }}券</p>
         </div>
@@ -51,13 +51,14 @@
         <br>
         <el-checkbox v-model="checked.two">我同意<a :href="baseUrl + '/hetong/weituoautoshouquanshu'" target="_blank">《 委托系统自动出借及债权转让授权书 》</a></el-checkbox>
       </div>
-      <button class="btn-join" :class="{ 'btn-join-default': checked.one && checked.two }">一键加入</button>
+      <button class="btn-join" @click="joinPlan" :class="{ 'btn-join-default': checked.one && checked.two }">一键加入</button>
     </hth-panel>
   </div>
 </template>
 
 <script>
   import { fetchGetOneKeyJoinInfo, userCouponList } from 'api/home/investment-quantify';
+  import { fetchJoinPlan } from 'api/home/investment';
   import { getLocationUrl } from 'utils/index';
   import HthPanel from 'common/Panel/index.vue';
 
@@ -67,6 +68,7 @@
     },
     data() {
       return {
+        planId: '',
         checked: {
           one: true,
           two: true
@@ -84,6 +86,12 @@
           startInvestMoney: 0, // 起投金额
           incrMoney: 10, // 递增金额
           balance: 0 // 用户余额
+        },
+        joinPlanData: {
+          planId: '',
+          joinMoney: '',
+          userCouponId: '',
+          source: 'pc'
         },
         couponsList: [],
         typeList: [
@@ -137,6 +145,23 @@
             }
           })
       },
+      // 加入标的
+      joinPlan() {
+        // 处理请求数据
+        this.joinPlanData.planId = this.planId;
+        this.joinPlanData.joinMoney = this.userMoney;
+        fetchJoinPlan(this.joinPlanData)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.$message({
+                message: '加入成功',
+                type: 'success'
+              });
+              // 跳转加入记录页面
+              this.$router.push('/investment/quantify/transactionRecord/' + this.planId);
+            }
+          })
+      },
       getCouponsList(id) {
         userCouponList(id).then(response => {
           const data = response.data;
@@ -162,6 +187,7 @@
       }
     },
     created() {
+      this.planId = this.$route.params.id;
       this.getOneKeyJoinInfo();
       this.getCouponsList(this.$route.params.id)
     }
