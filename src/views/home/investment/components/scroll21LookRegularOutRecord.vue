@@ -27,7 +27,11 @@
         <span>您购买的债权信息</span>
       </div>
       <el-table :data="list" style="width: 100%">
-        <el-table-column prop="loanId" label="项目编号" width="130"></el-table-column>
+        <el-table-column prop="loanId" label="项目编号" width="130">
+          <template slot-scope="scope">
+            <a :href="scope.row.loanTargetUrl" target="_blank">{{ scope.row.loanId }}</a>
+          </template>
+        </el-table-column>
         <el-table-column prop="loanMoney" label="借款金额">
           <template slot-scope="scope">
             {{ scope.row.loanMoney | currency('') + '元' }}
@@ -40,7 +44,7 @@
         </el-table-column>
         <el-table-column prop="perid" label="借款期限">
           <template slot-scope="scope">
-            {{ scope.row.perid | currency('') + '天' }}
+            {{ scope.row.perid }}
           </template>
         </el-table-column>
         <el-table-column prop="investMoney" label="投资金额">
