@@ -1,6 +1,15 @@
 import fetch from 'utils/fetch';
 
-/** 加入记录 */
+/** 加入标的 */
+export function fetchJoinPlan(data) {
+  return fetch({
+    url: 'user/joinPlan',
+    method: 'post',
+    data
+  })
+}
+
+/** 获取加入记录 */
 export function fetchJoinPlanBill(data) {
   return fetch({
     url: 'user/findJoinPlanBill',
@@ -34,4 +43,3 @@ export function fetchNovicePlanInfo() {
     method: 'get'
   })
 }
-

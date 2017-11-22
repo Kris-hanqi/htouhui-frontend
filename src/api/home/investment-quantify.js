@@ -27,7 +27,7 @@ export function applyExitInfo(data) {
   })
 }
 
-/** 优惠券 */
+/** 获取可使用优惠券 */
 export function userCouponList(id) {
   return fetch({
     url: 'findUserCouponList/' + id,

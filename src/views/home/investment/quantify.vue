@@ -1,44 +1,50 @@
 <template>
-  <div>
-    <div class="shengxinbaolianghua" v-for="str in quantifyData">
-      <div class="title-box">
-        <a @click.stop="toPlanPage(str.planId)" class="title">{{ str.planName }}</a>
-        <p class="firstDay" v-show="str.isTiexi">首{{ str.tiexiPeriod }}天贴息</p>
+  <div class="quantify-wrapper">
+    <!-- 升薪宝量化标的信息 -->
+    <div class="quantify-card" v-for="item in quantifyData" :key="item.planId">
+      <!-- header -->
+      <div class="quantify-card__head">
+        <!-- 跳转到详情页 -->
+        <a class="title" :href="baseUrl + '/plan/' + item.planId">{{ item.planName }}</a>
+        <p class="firstDay" v-if="item.isTiexi">首{{ item.tiexiPeriod }}天贴息</p>
         <p>随时可退</p>
-        <p>满{{ str.lockPeriod }}天免手续费</p>
-        <a href="javascript:void(0)" class="tradingParticulars-2" v-if="str.joinPlan" @click="transactionRecord(str.planId)"><i></i>交易详情</a>
-        <a href="javascript:void(0)" class="tradingParticulars-1" v-else><i></i>交易详情</a>
+        <p>满{{ item.lockPeriod }}天免手续费</p>
+        <div class="details pull-right" :class="{ disabled: !item.joinPlan }">
+          <i class="iconfont icon-icon-details"></i>
+          <el-button @click="toRouter('/investment/quantify/transactionRecord', item.planId)" :disabled="!item.joinPlan" type="text">交易详情</el-button>
+        </div>
       </div>
-      <div class="shengxinbaolianghua-main">
+      <!-- body -->
+      <div class="quantify-card__body">
         <div class="shengxinbaolianghua-rate">
           <p class="rate">
-            <span class="roboto-regular"><interest-rate :value="str.minRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>
-            %~<span class="roboto-regular"><interest-rate :value="str.maxRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%
+            <span class="roboto-regular"><interest-rate :value="item.minRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>
+            %~<span class="roboto-regular"><interest-rate :value="item.maxRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%
           </p>
           <p>往期年化利率</p>
         </div>
         <div class="shengxinbaolianghua-money">
-          <p class="money"><span class="roboto-regular">{{ str.startInvestMoeny | currency('') }}</span>元</p>
+          <p class="money"><span class="roboto-regular">{{ item.startInvestMoeny | currency('') }}</span>元</p>
           <p>起投金额</p>
         </div>
         <div class="shengxinbaolianghua-money">
-          <p class="money"><span class="roboto-regular">{{ str.raisingMoney | currency('') }}</span>元</p>
+          <p class="money"><span class="roboto-regular">{{ item.raisingMoney | currency('') }}</span>元</p>
           <p>当前剩余金额</p>
         </div>
-        <a class="btn-join" href="javascript:void(0)" @click="oneKeyJoin(str.planId)">一键加入</a>
-        <a class="btn-out" href="javascript:void(0)" @click="pullOut(str.planId)" v-if="str.joinPlan">申请退出</a>
+        <a class="btn-join" @click.stop="oneKeyJoin(item.planId)">一键加入</a>
+        <a class="btn-out" v-if="item.joinPlan" @click.stop="pullOut(item.planId)">申请退出</a>
       </div>
-      <div class="shengxinbaolianghua-bottom" v-if="str.joinPlan">
-        <p>在投金额（元）<span class="roboto-regular">{{ str.investMoney | currency('') }}</span></p>
-        <p>累计收益（元）<span class="roboto-regular">{{ str.accumulatedEarnings | currency('') }}</span></p>
-        <a href="javascript:void(0)" @click="lookTarget(str.planId)" class="seeBiao">查看标的</a>
+      <div class="quantify-card__footer" v-if="item.joinPlan">
+        <p>在投金额（元）<span class="roboto-regular">{{ item.investMoney | currency('') }}</span></p>
+        <p>累计收益（元）<span class="roboto-regular">{{ item.accumulatedEarnings | currency('') }}</span></p>
+        <a href="javascript:void(0)" @click="lookTarget(item.planId)" class="seeBiao">查看标的</a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import { quantifyList } from 'api/home/quantify';
+  import { fetchGetList } from 'api/home/investment-quantify';
   import interestRate from 'components/interest-rate';
   import { getLocationUrl } from 'utils/index';
 
@@ -48,14 +54,19 @@
     },
     data() {
       return {
-        quantifyData: []
+        quantifyData: [],
+        baseUrl: getLocationUrl()
       }
     },
     methods: {
-      getQuantifyList() {
-        quantifyList().then(data => {
+      getList() {
+        fetchGetList().then(data => {
           this.quantifyData = data.data.data;
         })
+      },
+      toRouter(path, id) {
+        const str = `${path}/${id}`;
+        this.$router.push(str);
       },
       oneKeyJoin(id) {
         this.$router.push('/investment/quantify/oneKeyJoin/' + id);
@@ -68,19 +79,21 @@
       },
       transactionRecord(id) {
         this.$router.push('/investment/quantify/transactionRecord/' + id);
-      },
-      toPlanPage(id) {
-        window.location.href = getLocationUrl() + '/plan/' + id;
       }
     },
     created() {
-      this.getQuantifyList();
+      this.getList();
     }
   }
 </script>
 
-<style lang="scss" scoped>
-  .shengxinbaolianghua {
+<style lang="scss">
+  .quantify-wrapper {
+    width: 100%;
+    height: auto;
+  }
+  
+  .quantify-card {
     width: 100%;
     height: auto;
     margin-bottom: 20px;
@@ -90,16 +103,16 @@
     box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
   }
 
-  .title-box {
+  .quantify-card__head {
     width: 100%;
     margin-bottom: 50px;
-
+  
     .title {
       font-size: 20px;
       color: #274161;
       margin-right: 25px;
     }
-
+  
     p {
       display: inline-block;
       margin-right: 8px;
@@ -110,45 +123,37 @@
       font-size: 14px;
       color: #727e90;
     }
-
+  
     .firstDay {
       border: solid 1px #2281f2;
       color: #0e76f1;
     }
-
-    .tradingParticulars-1 {
-      float: right;
-      font-size: 14px;
-      color: #727e90;
-      cursor: no-drop;
-
+  
+    .details {
+      display: inline-block;
+      border: none;
+      color: #409eff;
+      background: transparent;
+      
       i {
         display: inline-block;
-        vertical-align: middle;
-        width: 30px;
-        height: 30px;
-        margin-right: 5px;
-        background: url(../../../assets/images/home/center-ico-019.png) no-repeat center;
+        vertical-align: baseline;
+        font-size: 30px;
+        line-height: 1;
+      }
+      
+      button {
+        margin-top: -10px;
+        margin-left: -5px;
       }
     }
-
-    .tradingParticulars-2 {
-      float: right;
-      font-size: 14px;
-      color: #0573f4;
-
-      i {
-        display: inline-block;
-        vertical-align: middle;
-        width: 30px;
-        height: 30px;
-        margin-right: 5px;
-        background: url(../../../assets/images/home/center-ico-019.png) no-repeat center;
-      }
+  
+    .details.disabled i {
+      color: #b4bccc;
     }
   }
 
-  .shengxinbaolianghua-main {
+  .quantify-card__body {
     width: 100%;
     text-align: center;
     margin-bottom: 45px;
@@ -225,7 +230,7 @@
     }
   }
 
-  .shengxinbaolianghua-bottom {
+  .quantify-card__footer {
     width: 100%;
     height: auto;
     padding-top: 20px;

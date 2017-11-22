@@ -117,7 +117,7 @@ export const constantRouterMap = [
               },
               {
                 path: 'oneKeyJoin/:id',
-                name: 'investmentQuantifyOneKeyJoin',
+                name: 'IQOneKeyJoin',
                 meta: {
                   title: '一键加入'
                 },
