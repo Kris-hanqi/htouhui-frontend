@@ -123,8 +123,6 @@
         joinPlan(this.detailQuery).then(response => {
           if (response.data.meta.code === 200) {
             this.detailList = response.data.data;
-            console.log('21天计划债权' + this.detailList);
-            console.log(this.detailList);
           }
         })
       },
@@ -134,8 +132,6 @@
           if (data.meta.code === 200) {
             this.list = data.data.data;
             this.total = data.data.count || 0;
-            console.log('21天计划债权列表' + this.list);
-            console.log(this.list);
           }
         })
       },
