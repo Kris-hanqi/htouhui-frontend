@@ -2,9 +2,9 @@
   <!-- 升薪宝量化一键加入组件 -->
   <div class="oneKeyJoin">
     <hth-panel title="一键加入">
-      <div class="main-1" v-if="show">
+      <div class="main-1" v-if="operationalStatus === 'initial'">
         <p>可加入额<span class="roboto-regular">{{ joinMoney | currency('') }}</span>
-          <span>元</span><i class="iconfont icon-update" @click="isShow"></i>
+          <span>元</span><i class="iconfont icon-update" @click="operationalStatus = 'update'"></i>
         </p>
       </div>
       <div class="main-2" v-else>
@@ -17,10 +17,10 @@
           <p>可用余额<span class="roboto-regular">{{ oneKeyJoinInfo.balance | currency('') }}</span>元<router-link to="/recharge"><span>充值</span></router-link></p>
         </div>
         <div class="coupons-box">
-          <div class="coupons-icon" @click="isUp">
+          <div class="coupons-icon" @click="operationalCouponsListView">
             优惠券
-            <i class="iconfont" :class="coupons ? 'icon-bottom' : 'icon-top'"></i>
-            <div class="coupons-content" v-if="coupons">
+            <i class="iconfont" :class="showCouponsList ? 'icon-bottom' : 'icon-top'"></i>
+            <div class="coupons-content" v-show="showCouponsList">
               <i></i>
               <p class="title">可用券： 当前有<span class="roboto-regular">{{ couponsList.count }}</span>张可用的优惠券</p>
               <div class="noUse">
@@ -38,8 +38,8 @@
                 </div>
               </div>
               <div class="coupons-btn">
-                <p class="sure" @click="sureCoupon">确定</p>
-                <p class="cancel" @click.stop="isDown">取消</p>
+                <el-button type="danger" size="mini" round @click.stop="sureCoupon">确定</el-button>
+                <el-button @click="operationalCouponsListView" size="mini" round>取消</el-button>
               </div>
             </div>`
           </div>
@@ -47,11 +47,16 @@
         </div>
       </div>
       <div class="checkboxes">
-        <el-checkbox v-model="checked.one">我同意<a :href="baseUrl + '/hetong/shengxinbaolhfuwuxieyi'" target="_blank">《 升薪宝量化服务协议 》</a></el-checkbox>
+        <el-checkbox v-model="protocolList.one">我同意<a :href="baseUrl + '/hetong/shengxinbaolhfuwuxieyi'" target="_blank">《 升薪宝量化服务协议 》</a></el-checkbox>
         <br>
-        <el-checkbox v-model="checked.two">我同意<a :href="baseUrl + '/hetong/weituoautoshouquanshu'" target="_blank">《 委托系统自动出借及债权转让授权书 》</a></el-checkbox>
+        <el-checkbox v-model="protocolList.two">我同意<a :href="baseUrl + '/hetong/weituoautoshouquanshu'" target="_blank">《 委托系统自动出借及债权转让授权书 》</a></el-checkbox>
       </div>
-      <button class="btn-join" @click="joinPlan" :class="{ 'btn-join-default': checked.one && checked.two }">一键加入</button>
+      <el-button class="btn-join"
+                 :loading="joinBthLoading"
+                 type="primary"
+                 @click="joinPlan"
+                 :disabled="!protocolList.one || !protocolList.two"
+                 plain>一键加入</el-button>
     </hth-panel>
   </div>
 </template>
@@ -68,15 +73,16 @@
     },
     data() {
       return {
-        planId: '',
-        checked: {
+        planId: '', // 标的Id
+        operationalStatus: 'initial', // 操作状态  -- 标记是否点击修改金额(initial: 初始，update: 修改)
+        showCouponsList: false, // 是否显示优惠券
+        protocolList: { // 协议数据
           one: true,
           two: true
         },
+        joinBthLoading: false,
         radio: 0,
         baseUrl: getLocationUrl(),
-        show: true,
-        coupons: false,
         userMoney: '',
         listQuery: {
           planId: this.$route.params.id
@@ -104,7 +110,7 @@
       }
     },
     computed: {
-      // 及时可加入金额
+      // 计算加入金额
       joinMoney() {
         const money = Math.min(this.oneKeyJoinInfo.canJoinMoney, this.oneKeyJoinInfo.balance);
         const joinMoney = Math.floor(money / this.oneKeyJoinInfo.incrMoney) * this.oneKeyJoinInfo.incrMoney;
@@ -113,11 +119,11 @@
       }
     },
     methods: {
-      isShow() {
-        this.show = false;
+      operationalCouponsListView() {
+        this.showCouponsList = !this.showCouponsList;
       },
-      isUp() {
-        this.coupons = true;
+      toggleOperationalStatus() {
+        this.operationalStatus = 'update'
       },
       chooseCoupons(value) {
         if (!this.userMoney) {
@@ -129,9 +135,6 @@
             return false;
           }
         }
-      },
-      isDown() {
-        this.coupons = false;
       },
       // 获取一键加入所需信息
       getOneKeyJoinInfo() {
@@ -147,6 +150,23 @@
       },
       // 加入标的
       joinPlan() {
+        // 加入金额不能大于账户余额以及还可加入金额
+        if (this.userMoney > this.oneKeyJoinInfo.canJoinMoney) {
+          this.$message({
+            message: '加入金额不能大于可加入金额',
+            type: 'error'
+          });
+          return;
+        }
+        // 加入金额不能大于账户余额以及还可加入金额
+        if (this.userMoney > this.oneKeyJoinInfo.balance) {
+          this.$message({
+            message: '账户余额不足，请充值',
+            type: 'error'
+          });
+          return;
+        }
+        this.joinBthLoading = true;
         // 处理请求数据
         this.joinPlanData.planId = this.planId;
         this.joinPlanData.joinMoney = this.userMoney;
@@ -160,6 +180,7 @@
               // 跳转加入记录页面
               this.$router.push('/investment/quantify/transactionRecord/' + this.planId);
             }
+            this.joinBthLoading = false;
           })
       },
       getCouponsList(id) {
@@ -181,15 +202,15 @@
           if (obj) {
             this.usedCouponText = document.getElementById(this.radio).innerHTML;
             this.showUsedCoupon = true;
-            this.coupons = false;
           }
         }
+        this.showCouponsList = false;
       }
     },
     created() {
       this.planId = this.$route.params.id;
       this.getOneKeyJoinInfo();
-      this.getCouponsList(this.$route.params.id)
+      this.getCouponsList(this.planId)
     }
   }
 </script>
@@ -208,8 +229,8 @@
 
     .btn-join {
       position: absolute;
-      top: 150px;
-      right: 55px;
+      top: 270px;
+      right: 180px;
       width: 170px;
       height: 50px;
       box-sizing: border-box;
@@ -221,16 +242,6 @@
       text-align: center;
       line-height: 50px;
       color: #7c86a2;
-      cursor: no-drop;
-    }
-
-    .btn-join-default {
-      float: right;
-      position: static;
-      margin-top: -90px;
-      border: solid 1px #0573f4;
-      color: #0573f4;
-      cursor: pointer;
     }
   }
 
@@ -336,6 +347,7 @@
       .coupons-icon {
         display: inline-block;
         position: relative;
+        z-index: 40;
         width: 83px;
         height: 26px;
         box-sizing: border-box;
