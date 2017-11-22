@@ -243,7 +243,7 @@
       font-size: 12px;
       text-align: center;
       color: rgba(0, 0, 0, 0.5);
-      margin-bottom: 20px;
+      margin-bottom: 5px;
 
       span {
         color: #fff;
