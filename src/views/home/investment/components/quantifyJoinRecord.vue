@@ -117,8 +117,8 @@
         list: null,
         dateType: '3day',
         typeList: [
-          { key: 'matched', value: '全部匹配' },
-          { key: 'matching', value: '匹配中' }
+          { key: 'matched', value: '完成' },
+          { key: 'matching', value: '自动投标中' }
         ],
         joinPlanId: ''
       }

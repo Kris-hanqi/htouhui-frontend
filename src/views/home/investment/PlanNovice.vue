@@ -234,7 +234,7 @@
 
     .newUser-plan-title {
       width: 100%;
-      margin-bottom: 50px;
+      margin-bottom: 25px;
 
       p {
         font-size: 20px;
