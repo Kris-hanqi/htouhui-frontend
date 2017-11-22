@@ -61,7 +61,7 @@
       </el-table-column>
       <el-table-column prop="regular" label="债权信息">
         <template slot-scope="scope">
-          <el-button class="icon-interests" v-if="scope.row.status == 'matched'" @click="lookJoinRegular(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
+          <el-button class="icon-interests" v-if="scope.row.status === 'matched'" @click="lookJoinRegular(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
           <p v-else>查看债权</p>
         </template>
       </el-table-column>
@@ -76,7 +76,11 @@
       <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
     </div>
 
-    <el-dialog title="平台奖励" :visible.sync="dialogVisible" width="700px">
+    <el-dialog title="平台奖励"
+               @close="showTest = false;"
+               v-if="showTest"
+               :visible.sync="dialogVisible"
+               width="700px">
       <div class="dialog-main">
         <el-tabs v-model="activeName" type="card">
           <el-tab-pane label="贴息" name="first">
@@ -104,6 +108,7 @@
     },
     data() {
       return {
+        showTest: false,
         selectDates: {
           startTime: '',
           endTime: ''
@@ -183,6 +188,8 @@
         this.$router.push('/investment/scroll21/lookRegular-joinRecord/' + id);
       },
       getAward(id) {
+        this.activeName = 'first';
+        this.showTest = true;
         this.dialogVisible = true;
         this.joinPlanId = id;
       },
