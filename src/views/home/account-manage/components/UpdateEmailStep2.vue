@@ -18,7 +18,7 @@
           <li>
             <label>验证码</label>
             <input type="text" placeholder="请输入验证码">
-            <sms-timer @run="sendCode"></sms-timer>
+            <sms-timer :start="startSmsTimer" @countDown="startSmsTimer = false" @click.native='sendCode'></sms-timer>
           </li>
         </ul>
         <p class="yzmCodeSent">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
@@ -51,6 +51,7 @@
     },
     data() {
       return {
+        startSmsTimer: false,
         showPrompt: false
       }
     },
@@ -60,6 +61,7 @@
         fetchSendEmailCode({ email: this.email })
           .then(response => {
             if (response.data.meta.code === 200) {
+              this.startSmsTimer = true;
               this.showPrompt = true;
               this.$message({
                 message: '邮箱验证码已发送',

@@ -13,7 +13,7 @@
             <el-input v-model="bindEmailData.authCode" :maxlength="6" placeholder="请输入验证码"></el-input>
           </el-col>
           <el-col :span="11">
-            <sms-timer @run="sendCode"></sms-timer>
+            <sms-timer :start="startSmsTimer" @countDown="startSmsTimer = false" @click.native='sendCode'></sms-timer>
           </el-col>
         </el-form-item>
         <el-form-item v-if="showPrompt">
@@ -51,6 +51,7 @@
     },
     data() {
       return {
+        startSmsTimer: false,
         bindEmailData: {
           email: '',
           authCode: ''
@@ -63,6 +64,7 @@
         fetchSendEmailCode({ email: this.bindEmailData.email })
           .then(response => {
             if (response.data.meta.code === 200) {
+              this.startSmsTimer = true;
               this.showPrompt = true;
               this.$message({
                 message: '邮箱验证码已发送',

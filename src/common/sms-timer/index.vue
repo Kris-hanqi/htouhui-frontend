@@ -1,8 +1,10 @@
 <template>
-  <button class="sms-timer" type="button" :disabled="disabled || time > 0">{{ text }}</button>
+  <button class="sms-timer" type="button" :disabled="disabled || time > 0">{{time | change}}</button>
 </template>
 
 <script>
+  let flag = true;
+  
   export default{
     props: {
       second: {
@@ -16,8 +18,8 @@
     },
     data() {
       return {
-        time: 0,
-        disabled: false
+        disabled: false,
+        time: '获取验证码'
       }
     },
     watch: {
@@ -29,25 +31,31 @@
     },
     methods: {
       countDown() {
-        this.$emit('run');
         this.time = this.second;
-        this.timer();
-      },
-      setDisabled(val) {
-        this.disabled = val;
-      },
-      timer() {
-        if (this.time > 0) {
-          this.time--;
-          setTimeout(this.timer, 1000);
-        } else {
-          this.disabled = false;
-        }
+        this.disabled = true;
+        const time = setInterval(() => {
+          this.time --;
+          if (this.time === 0) {
+            this.$emit('countDown');
+            this.time = '获取验证码';
+            this.disabled = false;
+            flag = true;
+            clearInterval(time)
+          }
+        }, 1000)
       }
     },
-    computed: {
-      text() {
-        return this.time > 0 ? '重新获取' + this.time + 'S' : '获取验证码';
+    filters: {
+      change(value) {
+        if (!value) return '';
+        if (!isNaN(value)) {
+          if (flag === true) {
+            return `重新发送${value}S`
+          }
+          return value + 'S'
+        } else {
+          return value
+        }
       }
     }
   }

@@ -13,7 +13,7 @@
             <el-input v-model="mobileInfo.authCode" :maxlength="6" placeholder="请输入验证码"></el-input>
           </el-col>
           <el-col :span="11">
-            <sms-timer @run="sendCode"></sms-timer>
+            <sms-timer :start="startSmsTimer" @countDown="startSmsTimer = false" @click.native='sendCode'></sms-timer>
           </el-col>
         </el-form-item>
         <el-form-item v-if="showCodePrompt">
@@ -52,6 +52,7 @@
     },
     data() {
       return {
+        startSmsTimer: false,
         showCodePrompt: false,
         mobileInfo: {
           authCode: ''
@@ -63,6 +64,7 @@
         fetchSendCode({ authType: 'change_binding_mobile_number' })
           .then(response => {
             if (response.data.meta.code === 200) {
+              this.startSmsTimer = true;
               this.showCodePrompt = true;
               this.$message({
                 message: '手机验证码已发送',

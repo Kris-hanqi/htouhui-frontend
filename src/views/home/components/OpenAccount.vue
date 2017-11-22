@@ -43,7 +43,7 @@
             <el-input v-model="transactionPasswordData.authCode"></el-input>
           </el-col>
           <el-col :span="11">
-            <sms-timer @click.native.stop="sendCode" :start="startSmsTimer"></sms-timer>
+            <sms-timer :start="startSmsTimer" @countDown="startSmsTimer = false" @click.native='sendCode'></sms-timer>
           </el-col>
         </el-form-item>
         <el-form-item label="">
@@ -123,6 +123,7 @@
         this.$emit('close');
       },
       setTransactionPassword() {
+        if (!this.transactionPasswordData.authCode) return;
         this.transactionPasswordData.sessionId = this.uuid;
         fetchSetTransactionPassword(this.transactionPasswordData)
           .then(response => {

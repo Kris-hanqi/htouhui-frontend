@@ -10,7 +10,7 @@
             <el-input v-model="transactionPassword.authCode" placeholder="请输入验证码"></el-input>
           </el-col>
           <el-col :span="11">
-            <sms-timer @click.native.stop="sendCode" :start="startSmsTimer"></sms-timer>
+            <sms-timer :start="startSmsTimer" @countDown="startSmsTimer = false" @click.native='sendCode'></sms-timer>
           </el-col>
         </el-form-item>
       </el-form>
@@ -75,6 +75,7 @@
           })
       },
       setPwd() {
+        if (!this.transactionPasswordData.authCode) return;
         this.transactionPassword.sessionId = this.uuid;
         fetchSetTransactionPassword(this.transactionPassword)
           .then(response => {
