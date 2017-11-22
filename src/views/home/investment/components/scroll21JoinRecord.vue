@@ -32,15 +32,20 @@
     </div>
 
     <el-table :data="list" style="width: 100%">
-      <el-table-column prop="joinTime" label="加入时间" width="135"></el-table-column>
+      <el-table-column prop="joinTime" label="加入时间" width="135" fixed></el-table-column>
       <el-table-column prop="joinMoney" label="加入金额">
         <template slot-scope="scope">
           {{ scope.row.joinMoney | currency('') + '元' }}
         </template>
       </el-table-column>
-      <el-table-column prop="rate" label="往期年化利率">
+      <el-table-column prop="rate" label="往期年化利率" width="100">
         <template slot-scope="scope">
           {{ scope.row.rate + '%' }}
+        </template>
+      </el-table-column>
+      <el-table-column label="可退出金额">
+        <template slot-scope="scope">
+          {{ scope.row.canExitMoney | currency('') + '元' }}
         </template>
       </el-table-column>
       <el-table-column prop="canExitTime" label="可退出时间" width="135"></el-table-column>
@@ -60,7 +65,7 @@
           <p v-else>查看债权</p>
         </template>
       </el-table-column>
-      <el-table-column prop="todo" label="操作">
+      <el-table-column prop="todo" label="操作" fixed="right">
         <template slot-scope="scope">
           <el-button class="icon-interests" @click="goPullOut(scope.row.joinPlanId)" type="text" size="small">预约退出</el-button>
         </template>
