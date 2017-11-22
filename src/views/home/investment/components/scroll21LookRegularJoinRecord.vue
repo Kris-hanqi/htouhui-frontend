@@ -101,7 +101,7 @@
           joinPlanId: this.$route.params.id
         },
         listQuery: {
-          planId: this.$route.params.id,
+          joinPlanId: this.$route.params.id,
           pageNo: 1,
           pageSize: 10
         },
