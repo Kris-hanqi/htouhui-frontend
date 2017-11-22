@@ -53,8 +53,8 @@
             if (response.data.meta.code === 200) {
               const data = response.data.data;
               this.events = data.dayRepayInfo || [];
-              this.monthData.collectMoney = data.totalColletedMoney || 0;
-              this.monthData.receiptMoney = data.totalUncolletedMoney || 0;
+              this.monthData.collectMoney = data.totalUncolletedMoney || 0;
+              this.monthData.receiptMoney = data.totalColletedMoney || 0;
 
               this.events.forEach(v => {
                 this.dates.push(v.date);
