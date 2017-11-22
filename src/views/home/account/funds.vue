@@ -51,7 +51,7 @@
         <el-table-column prop="money" label="变动金额" width="100"></el-table-column>
         <el-table-column prop="detail" :show-overflow-tooltip="true" label="备注"></el-table-column>
       </el-table>
-      <div class="pages" v-show="!listLoading">
+      <div class="pages" v-if="!listLoading">
         <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
         <el-pagination
           @current-change="handleCurrentChange"
@@ -146,11 +146,13 @@
       switchDateType(type) {
         this.dateType = type;
         if (this.dateType !== 'other') {
+          this.listQuery.pageNo = 1;
           this.getPageList();
         }
       },
       switchProjectType(type) {
         this.projectType = type;
+        this.listQuery.pageNo = 1;
         this.getPageList();
       },
       handleCurrentChange(val) {
