@@ -57,7 +57,11 @@
             {{ scope.row.investMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="repayTimeFormat" label="还款时间" width="80"></el-table-column>
+        <el-table-column prop="repayTimeFormat" label="还款时间" width="80">
+          <template slot-scope="scope">
+            {{ scope.row.repayTimeFormat || '--' }}
+          </template>
+        </el-table-column>
         <el-table-column prop="earnings" label="已收本息">
           <template slot-scope="scope">
             {{ scope.row.earnings | currency('') + '元' }}

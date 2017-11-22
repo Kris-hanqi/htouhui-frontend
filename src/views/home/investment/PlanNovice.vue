@@ -91,7 +91,7 @@
           <el-table-column prop="investMoney" label="投资金额" width="100">
             <template slot-scope="scope">
               {{ scope.row.investMoney | currency('') + '元' }}
-          </template>
+            </template>
           </el-table-column>
           <el-table-column label="还款时间" width="80">
             <template slot-scope="scope">
