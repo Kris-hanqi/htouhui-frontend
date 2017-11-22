@@ -57,7 +57,8 @@
         </el-table-column>
         <el-table-column prop="seeInterests" label="查看">
           <template slot-scope="scope">
-            <el-button class="icon-interests" @click="goClaimsView(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
+            <el-button class="icon-interests" v-if="scope.row.status == 'matched'" @click="goClaimsView(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
+            <p v-else>查看债权</p>
           </template>
         </el-table-column>
       </el-table>
