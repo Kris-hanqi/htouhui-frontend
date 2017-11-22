@@ -1,37 +1,34 @@
 <template>
   <div class="pullOut">
-    <p class="title">{{ messageList.planName }}申请退出</p>
+    <p class="title">{{ reservationExitData.planName }}申请退出</p>
     <div class="canPullMoney">
-      <p class="inTimeLimitMoney">可退出金额<span class="roboto-regular">{{ messageList.canExitMoney | currency('') }}</span><span>元</span></p>
-      <p class="outTimeLimitMoney">预期退出时间<span class="roboto-regular">{{ messageList.appointmentExitTime }}</span></p>
+      <p class="inTimeLimitMoney">可退出金额<span class="roboto-regular">{{ reservationExitData.canExitMoney | currency('') }}</span><span>元</span></p>
+      <p class="outTimeLimitMoney">预期退出时间<span class="roboto-regular">{{ reservationExitData.appointmentExitTime }}</span></p>
     </div>
     <div class="main">
       <span>申请退出</span>
-      <input type="number" class="putOutMoney">
-      <el-button type="text" @click="dialogVisible = true"><p class="btn-out">退出</p></el-button>
-      <el-button type="text" @click="dialogVisible = true"><p class="btn-allOut">全部退出</p></el-button>
-
-      <el-dialog title="退出金额中" :visible.sync="dialogVisible" width="30%">
-        <div class="dialog-main">
-          <div>
-            <p class="first-p"><span class="roboto-regular">900</span>元</p>
-            <p>退出金额</p>
-          </div>
-          <div>
-            <p class="first-p"><span class="roboto-regular">18.00</span>元</p>
-            <p>退出手续费</p>
-          </div>
-          <div class="txt">
-            <p>圣上！不要退出！</p>
-            <p>放在里面可以继续<span>钱滚钱</span>啊！</p>
-          </div>
-        </div>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-        </div>
-      </el-dialog>
+      <input type="text" v-model.number="exitMoney" class="putOutMoney">
+      <el-button type="text" @click="showReservationExit"><p class="btn-out">退出</p></el-button>
+      <el-button type="text" @click="showReservationExit('all')"><p class="btn-allOut">全部退出</p></el-button>
     </div>
+  
+    <el-dialog title="退出金额中" :visible.sync="dialogVisible" width="500px">
+      <div class="dialog-main">
+        <div>
+          <p class="first-p"><span class="roboto-regular">{{ exitMoney }}</span>元</p>
+          <p>退出金额</p>
+        </div>
+        <div class="txt">
+          <p>圣上！不要退出！</p>
+          <p>放在里面可以继续<span>钱滚钱</span>啊！</p>
+        </div>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" :loading="exitButLoading" @click="reservationExit">确 定</el-button>
+      </div>
+    </el-dialog>
+    
     <div class="hint">
       <p class="hint-title">温馨提示</p>
       <div class="hint-txt">
@@ -43,32 +40,84 @@
 </template>
 
 <script>
-  import { getAppointmentExitInfo } from 'api/home/rolling21day';
+  import { fetchGetReservationExitInfo, fetchReservationExit } from 'api/home/investment-scroll21';
 
   export default {
     data() {
       return {
+        planId: '',
         dialogVisible: false,
-        listQuery: {
-          joinPlanId: this.$route.params.id
+        reservationExitData: {
+          joinPlanId: '',              // 加入计划ID
+          canExitMoney: '',            // 可退出金额
+          appointmentExitTime: '',     // 预期退出时间
+          planName: '',                // 计划名称
+          incrMoney: '',               // 退出递增金额(预约退出金额必须为该金额倍数)
+          canAppointExit: ''           // 是否可预约退出
         },
-        messageList: {}
+        exitMoney: '',
+        exitButLoading: false
       }
     },
     methods: {
-      getMessageList() {
-        getAppointmentExitInfo(this.listQuery).then(response => {
-          const data = response.data;
-          if (data.meta.code === 200) {
-            this.messageList = data.data;
-            console.log('21天申请退出页面' + this.messageList);
-            console.log(this.messageList);
-          }
-        })
+      getReservationExitInfo(id) {
+        fetchGetReservationExitInfo(id)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.reservationExitData.joinPlanId = response.data.data.joinPlanId;
+              this.reservationExitData.canExitMoney = response.data.data.canExitMoney;
+              this.reservationExitData.appointmentExitTime = response.data.data.appointmentExitTime;
+              this.reservationExitData.planName = response.data.data.planName;
+              this.reservationExitData.incrMoney = response.data.data.incrMoney;
+              this.reservationExitData.canAppointExit = response.data.data.canAppointExit;
+            }
+          })
+      },
+      showReservationExit(type) {
+        if (type === 'all') {
+          this.exitMoney = this.reservationExitData.canExitMoney;
+        }
+        // 数据校验
+        if (!this.exitMoney) return;
+        if (this.exitMoney > this.reservationExitData.canExitMoney) {
+          this.$message({
+            message: '退出金额大于总可退出金额',
+            type: 'error'
+          });
+          return;
+        }
+        if (this.exitMoney % this.reservationExitData.incrMoney !== 0) {
+          this.$message({
+            message: `退出金额必须是${this.reservationExitData.incrMoney}的倍数`,
+            type: 'error'
+          });
+          return;
+        }
+        this.dialogVisible = true;
+      },
+      reservationExit() {
+        this.exitButLoading = true;
+        const exitData = {};
+        exitData.money = this.exitMoney;
+        exitData.joinPlanId = this.reservationExitData.joinPlanId;
+        fetchReservationExit(exitData)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.$message({
+                message: '预约退出成功!',
+                type: 'success'
+              });
+              this.dialogVisible = false;
+              // 跳转加入记录页面
+              this.$router.push('/investment/scroll21/index');
+            }
+            this.exitButLoading = false;
+          })
       }
     },
     created() {
-      this.getMessageList();
+      this.planId = this.$route.params.id;
+      this.getReservationExitInfo(this.planId);
     }
   };
 </script>
@@ -186,9 +235,7 @@
 
   .pullOut .dialog-main {
     > div {
-      display: inline-block;
       text-align: center;
-      margin-left: 95px;
 
       p {
         display: block;
