@@ -14,7 +14,7 @@
       <el-table-column label="已还期数/总期数" width="110">
         <template slot-scope="scope">
           {{ scope.row.unRepayTerm }}/{{ scope.row.repayedTerm + scope.row.unRepayTerm }}
-      </template>
+        </template>
       </el-table-column>
       <el-table-column prop="payDay" label="下次还款日" width="140"></el-table-column>
       <el-table-column prop="nextRepayMoney" label="下次还款数" width="100"></el-table-column>
