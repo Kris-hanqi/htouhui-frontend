@@ -53,7 +53,7 @@ export function getInvestData(data) {
     const item = {};
 
     if (key === 'noviceMap' && store.getters.novicePlanStatus === 1) {
-      mapData.disabled = false;
+      mapData.planNovice.disabled = false;
     }
 
     if (key === 'noviceMap' && store.getters.novicePlanStatus !== 3) {
