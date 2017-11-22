@@ -33,7 +33,7 @@
     <div class="message">
       <div class="title">
         <span>您购买的债权信息</span>
-        <p class="title-message">目前已为您自动投标成功   <span>{{ joinPlanList.totalInvestMoney | currency('') }}</span></p>
+        <p class="title-message">目前已为您自动投标成功   <span>{{ joinPlanList.totalInvestMoney | currency('') }}</span>元</p>
       </div>
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="loanId" label="项目编号" width="120">
@@ -46,12 +46,12 @@
             {{ scope.row.loanMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
-        <el-table-column prop="perid" label="借款期限" width="80">
+        <el-table-column prop="rate" label="往期年利率" width="70">
           <template slot-scope="scope">
-            {{ scope.row.perid | currency('') + '天' }}
+            {{ scope.row.rate + '%' }}
           </template>
         </el-table-column>
+        <el-table-column prop="period" label="借款期限" width="80"></el-table-column>
         <el-table-column prop="investMoney" label="投资金额" width="100">
           <template slot-scope="scope">
             {{ scope.row.investMoney | currency('') + '元' }}
@@ -71,7 +71,7 @@
         <el-table-column prop="status" label="状态" width="50"></el-table-column>
         <el-table-column prop="contract" label="合同" width="40">
           <template slot-scope="scope">
-            <a v-if="scope.row.showContract" class="icon-download" type="text">点击下载</a>
+            <el-button v-if="scope.row.showContract" type="text">下载</el-button>
             <a v-else class="icon-downloadNo" type="text">放款后可查看</a>
           </template>
         </el-table-column>
@@ -267,7 +267,7 @@
 
   .message {
     width: 100%;
-    height: 553px;
+    height: auto;
     box-sizing: border-box;
     padding: 20px 10px;
     background-color: #fff;
