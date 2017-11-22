@@ -10,7 +10,7 @@
             <el-input v-model="transactionPassword.authCode" placeholder="请输入验证码"></el-input>
           </el-col>
           <el-col :span="11">
-            <sms-timer @run="sendCode"></sms-timer>
+            <sms-timer @click.native.stop="sendCode" :start="startSmsTimer"></sms-timer>
           </el-col>
         </el-form-item>
       </el-form>
@@ -51,6 +51,7 @@
     data() {
       return {
         htmlStr: '',
+        startSmsTimer: false,
         requestBankData: {},
         transactionPassword: {
           source: 'pc',
@@ -65,6 +66,7 @@
         fetchSendCode({ authType: 'set' })
           .then(response => {
             if (response.data.meta.code === 200) {
+              this.startSmsTimer = true;
               this.$message({
                 message: '验证码发送成功!',
                 type: 'success'
