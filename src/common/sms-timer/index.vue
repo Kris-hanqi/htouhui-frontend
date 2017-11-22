@@ -1,5 +1,5 @@
 <template>
-  <button class="sms-timer" type="button" @click="run" :disabled="disabled || time > 0">{{ text }}</button>
+  <button class="sms-timer" type="button" :disabled="disabled || time > 0">{{ text }}</button>
 </template>
 
 <script>
@@ -8,6 +8,10 @@
       second: {
         type: Number,
         default: 60
+      },
+      start: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
@@ -16,12 +20,16 @@
         disabled: false
       }
     },
+    watch: {
+      start(value) {
+        if (value === true) {
+          this.countDown()
+        }
+      }
+    },
     methods: {
-      run() {
+      countDown() {
         this.$emit('run');
-        this.start();
-      },
-      start() {
         this.time = this.second;
         this.timer();
       },
@@ -39,7 +47,7 @@
     },
     computed: {
       text() {
-        return this.time > 0 ? this.time + 's 后重获取' : '获取验证码';
+        return this.time > 0 ? '重新获取' + this.time + 'S' : '获取验证码';
       }
     }
   }

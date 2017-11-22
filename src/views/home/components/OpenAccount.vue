@@ -28,28 +28,28 @@
           <el-checkbox v-model="checked">江西银行存管协议</el-checkbox>
         </el-form-item>
         <el-form-item label="">
-          <el-button type="primary" @click="openAccount">下一步</el-button>
+          <el-button type="primary" :loading="openAccountButLoading" @click="openAccount">下一步</el-button>
         </el-form-item>
       </el-form>
-      <el-form class="hth-from"
-               label-position="right"
+      <el-form label-position="right"
+               style="margin-left: 130px; margin-top: 40px;"
                label-width="90px"
                v-if="stepActive === 3">
         <el-form-item class="mobile" label="手机号码">
-          <span>{{ mobile }}</span>
+          <p style="margin-top: -10px">{{ mobile }}</p>
         </el-form-item>
         <el-form-item class="sms-code" label="验证码">
           <el-col :span="11">
             <el-input v-model="transactionPasswordData.authCode"></el-input>
           </el-col>
           <el-col :span="11">
-            <sms-timer style="margin-top: 5px;" @run="sendCode"></sms-timer>
+            <sms-timer @click.native.stop="sendCode" :start="startSmsTimer"></sms-timer>
           </el-col>
         </el-form-item>
         <el-form-item label="">
           <el-button type="primary next"
                      :loading="openAccountButLoading"
-                     @click="setTransactionPassword">下一步</el-button>
+                     @click="setTransactionPassword">提交</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -88,6 +88,7 @@
     data() {
       return {
         checked: true,
+        startSmsTimer: false,
         openAccountButLoading: false,
         dialogOpenAccountVisible: false,
         stepActive: 2,
@@ -110,6 +111,7 @@
         fetchSendCode({ authType: 'set' })
           .then(response => {
             if (response.data.meta.code === 200) {
+              this.startSmsTimer = true;
               this.$message({
                 message: '验证码发送成功!',
                 type: 'success'
@@ -138,6 +140,7 @@
                 message: '恭喜，开户成功!',
                 type: 'success'
               });
+              this.$store.commit('SET_STATUS', 1);
               this.stepActive = 3;
             } else {
               this.$message({
@@ -163,20 +166,6 @@
     .mobile {
       .el-form-item__content {
         padding-top: 10px;
-      }
-    }
-   
-    button.next {
-      width: 310px;
-      height: 48px;
-      border-radius: 100px;
-      background-color: #0671f0;
-      
-      span {
-        width: 48px;
-        height: 16px;
-        font-size: 16px;
-        color: #fff;
       }
     }
   }
