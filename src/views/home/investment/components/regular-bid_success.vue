@@ -55,7 +55,7 @@
         total: 0,
         typeList: [
           { key: 'repaying', value: '还款中' },
-          { key: 'bid_success', value: '投标中' },
+          { key: 'bid_success', value: '投资成功' },
           { key: 'complete', value: '已结清' },
           { key: 'cancel', value: '未成功' }
         ],
