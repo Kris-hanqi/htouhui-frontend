@@ -72,7 +72,7 @@
             {{ scope.row.uncollectedRepayMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="status" label="状态" width="50"></el-table-column>
+        <el-table-column prop="status" label="状态" width="60"></el-table-column>
         <el-table-column prop="contract" label="合同" width="40">
           <template slot-scope="scope">
             <el-button v-if="scope.row.showContract" type="text">下载</el-button>

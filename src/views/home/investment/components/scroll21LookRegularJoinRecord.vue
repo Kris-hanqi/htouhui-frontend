@@ -44,7 +44,7 @@
             {{ scope.row.loanMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="rate" label="往期年化利率" width="100">
+        <el-table-column prop="rate" label="往期年化利率" width="90">
           <template slot-scope="scope">
             {{ scope.row.rate + '%' }}
           </template>
@@ -70,7 +70,7 @@
             {{ scope.row.uncollectedRepayMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="status" label="状态" width="50"></el-table-column>
+        <el-table-column prop="status" label="状态" width="60"></el-table-column>
         <el-table-column prop="contract" label="合同" width="40">
           <template slot-scope="scope">
             <a v-if="scope.row.showContract" class="icon-download" type="text">点击下载</a>
