@@ -15,7 +15,7 @@
         <p class="title">本月待还笔数</p>
       </li>
       <li>
-        <p><span>{{ (data.totalOverdueMoney || data.rsCurMonthOverdueMoney) | currency('')}}<i>元</i></span></p>
+        <p><span>{{ (data.totalOverdueMoney || data.rsCurMonthOverdueMoney || 0) | currency('')}}<i>元</i></span></p>
         <p class="title">逾期金额</p>
       </li>
     </ul>

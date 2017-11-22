@@ -6,7 +6,7 @@
           <span>{{ username }}</span>
         </el-form-item>
         <el-form-item label="新手机号">
-          <el-input style="width: 380px" v-model="mobileInfo.mobileNumber" :maxlength="11" placeholder="请输入手机号"></el-input>
+          <el-input style="width: 380px" v-model="mobileInfo.mobile" :maxlength="11" placeholder="请输入手机号"></el-input>
         </el-form-item>
         <el-form-item label="验证码">
           <el-col :span="8">
@@ -55,7 +55,7 @@
         showCodePrompt: false,
         mobileInfo: {
           type: 'change_binding_mobile_number',
-          mobileNumber: '',
+          mobile: '',
           authCode: ''
         }
       }

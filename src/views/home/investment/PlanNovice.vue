@@ -1,4 +1,5 @@
 <template>
+  <!-- 新手计划组件 -->
   <div class="plan-novice">
     <!-- 未投资 显示标的信息 -->
     <div class="newUser-plan" v-if="novicePlanStatus === 1">
@@ -81,22 +82,26 @@
               {{ scope.row.loanMoney | currency('') + '元' }}
           </template>
           </el-table-column>
-          <el-table-column prop="rate" label="往期年利率" width="70">
+          <el-table-column prop="rate" label="往期年利率" width="80">
             <template slot-scope="scope">
               {{ scope.row.rate + '%' }}
           </template>
           </el-table-column>
-          <el-table-column prop="perid" label="借款期限" width="60"></el-table-column>
+          <el-table-column prop="perid" label="借款期限" width="70"></el-table-column>
           <el-table-column prop="investMoney" label="投资金额" width="100">
             <template slot-scope="scope">
               {{ scope.row.investMoney | currency('') + '元' }}
           </template>
           </el-table-column>
-          <el-table-column prop="repayTimeFormat" label="还款时间" width="80"></el-table-column>
+          <el-table-column label="还款时间" width="80">
+            <template slot-scope="scope">
+              {{ scope.row.repayTimeFormat || '--' }}
+            </template>
+          </el-table-column>
           <el-table-column prop="earnings" label="已收本息">
             <template slot-scope="scope">
               {{ scope.row.earnings | currency('') + '元' }}
-          </template>
+            </template>
           </el-table-column>
           <el-table-column prop="uncollectedRepayMoney" label="待收本息">
             <template slot-scope="scope">
@@ -197,9 +202,10 @@
         })
       },
       getClaimsList() {
-        feachJoinInvestClaims(this.claimsQuery).then(data => {
-          if (data.data.meta.code === 200) {
-            this.claimsList = data.data.data.data;
+        feachJoinInvestClaims(this.claimsQuery).then(response => {
+          if (response.data.meta.code === 200) {
+            this.claimsList = response.data.data.data;
+            this.total = response.data.data.count || 0;
           }
         })
       },

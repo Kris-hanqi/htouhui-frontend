@@ -1,41 +1,47 @@
-import store from '@/store';
+import store from '@/store/index';
 
 const mapData = {
   planNovice: {
     order: 1,
     label: '新手计划',
     color: '#f8e71c',
-    url: '/plan'
+    url: '/plan',
+    disabled: true
   },
   SxbScroll21: {
     order: 2,
     label: '升薪宝滚动21',
     color: '#ffa837',
-    url: '/plan'
+    url: '/plan',
+    disabled: false
   },
   plan21Day: {
     order: 3,
-    label: '21天计划',
+    label: '我的计划',
     color: '#b8e986',
-    url: '/plan'
+    url: '/plan',
+    disabled: false
   },
   SxbQuantify: {
     order: 4,
     label: '升薪宝量化',
     color: '#50e3c2',
-    url: '/plans'
+    url: '/plans',
+    disabled: false
   },
   SxbRegular: {
     order: 5,
     label: '升薪宝定期',
     color: '#06b7f0',
-    url: '/shengxinbaos'
+    url: '/shengxinbaos',
+    disabled: false
   },
   regularMortgage: {
     order: 6,
     label: '定期抵押',
     color: '#0671f0',
-    url: '/normalLoans'
+    url: '/normalLoans',
+    disabled: false
   }
 };
 
@@ -45,6 +51,10 @@ export function getInvestData(data) {
     const value = data[key]; // eslint-disable-line
 
     const item = {};
+
+    if (key === 'noviceMap' && store.getters.novicePlanStatus === 1) {
+      mapData.disabled = false;
+    }
 
     if (key === 'noviceMap' && store.getters.novicePlanStatus !== 3) {
       Object.assign(item, mapData.planNovice, value);
@@ -84,6 +94,8 @@ export function getInvestData(data) {
   }
 
   list.sort((a, b) => a.order - b.order);
+
+  console.log(list);
 
   return list;
 }

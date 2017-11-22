@@ -5,7 +5,7 @@
       <el-tab-pane label="已转入的债权" name="first">
         <has-transferred></has-transferred>
       </el-tab-pane>
-      <el-tab-pane label="已转出的债权转账" name="second">
+      <el-tab-pane label="已转出的债权" name="second">
         <have-turned-out></have-turned-out>
       </el-tab-pane>
     </el-tabs>

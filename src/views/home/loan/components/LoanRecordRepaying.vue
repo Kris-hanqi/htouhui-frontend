@@ -13,7 +13,7 @@
       <el-table-column prop="unPaidMoney" label="待还总额" width="110"></el-table-column>
       <el-table-column label="已还期数/总期数" width="110">
         <template slot-scope="scope">
-          {{ scope.row.repayedTerm }}/{{ scope.row.repayedTerm + scope.row.unRepayTerm }}
+          {{ scope.row.unRepayTerm }}/{{ scope.row.repayedTerm + scope.row.unRepayTerm }}
       </template>
       </el-table-column>
       <el-table-column prop="payDay" label="下次还款日" width="140"></el-table-column>
@@ -23,20 +23,21 @@
       <el-table-column fixed="right" label="操作" width="120">
         <template slot-scope="scope">
           <el-button @click="openRepaymentPlan(scope.row.id)" type="text">还款计划</el-button>
-          <el-button type="text">合同</el-button>
+          <el-button @click="contractDownload(scope.row)" type="text">合同</el-button>
         </template>
       </el-table-column>
     </el-table>
   
     <!-- 还款计划 -->
     <repayment-plan :visible="visible"
-                    :loan-id="loanId"
+                    ref="repayment-plan"
                     @close="closeRepaymentPlan"></repayment-plan>
   </div>
 </template>
 
 <script>
   import RepaymentPlan from './repaymentPlan.vue';
+  import { fetchContractDownload } from 'api/home/loan';
   
   export default {
     components: {
@@ -45,17 +46,22 @@
     props: ['list'],
     data() {
       return {
-        visible: false,
-        loanId: ''
+        visible: false
       }
     },
     methods: {
       openRepaymentPlan(id) {
         this.loanId = id;
+        this.$refs['repayment-plan'].getList(id);
         this.visible = true;
       },
       closeRepaymentPlan() {
         this.visible = false;
+      },
+      contractDownload(data) {
+        if (data.isEnsignContract) {
+          fetchContractDownload(data.id);
+        }
       }
     }
   }

@@ -78,7 +78,10 @@
         fetchBindBankCard(this.bankCard)
           .then(response => {
             if (response.data.meta.code === 200) {
-              this.$store.commit('SET_BANK_CARD', this.bankCard);
+              this.$store.commit('SET_BANK_CARD', response.data.data.cardNo);
+              this.$store.commit('SET_BANK_NAME', response.data.data.bankName);
+              this.$store.commit('SET_BANK_NO', response.data.data.bankNo);
+              this.$store.commit('SET_STATUS', 3);
               this.bankCard = '';
               this.$router.push('/accountManage/set/index');
               this.$message({

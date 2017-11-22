@@ -5,52 +5,13 @@
       <event-calendar :dates="dates" class="calendar"
                       @day-changed="handleDayChange"
                       @month-changed="handleMonthChanged"></event-calendar>
-
-      <div class="event-detail" v-if ="showViewType === 'month'">
-        <div class="event-detail__top">
-          <p class="title"><span></span>{{ month }}收益账单<span></span></p>
-        </div>
-        <div class="event-detail__body">
-          <p><i></i>本月待收 <span class="roboto-regular">{{ monthData.collectMoney | currency('') }}</span><span>元</span></p>
-          <p class="hasDone"><i></i>本月已收 <span class="roboto-regular">{{ monthData.receiptMoney | currency('')}}</span><span>元</span></p>
-          <img :src="img_icon_calendar"/>
-        </div>
-      </div>
-
-      <div class="event-detail2" v-else>
-        <div class="event-detail__top">
-          <p class="title"><span @click="switchViewType"></span>{{ dayData.date }}账单</p>
-        </div>
-        <div class="event-detail__body">
-          <div class="box">
-            <div class="title">{{ testData.loanName }}</div>
-            <div class="box-main">
-              <div class="left-part">
-                <p>投资金额<span class="roboto-regular">{{ testData.investMoeny | currency('') }}</span>元</p>
-                <p>本&nbsp;&nbsp;&nbsp;&nbsp;金<span class="roboto-regular">{{ testData.corpus | currency('') }}</span>元</p>
-              </div>
-              <div class="right-part">
-                <p>利&nbsp;&nbsp;&nbsp;&nbsp;息<span class="roboto-regular">{{ testData.interest | currency('') }}</span>元</p>
-                <p>平台奖励<span class="roboto-regular">{{ testData.extraEarning | currency('')}}</span>元</p>
-              </div>
-            </div>
-            <div class="pages">
-              <div class="pages-top"></div>
-              <div class="pages-content">
-                <button @click="handleDisableLeft"  class="leftbtn" :disabled="isLeftDisabled"><i class="iconfont icon-left-1"></i></button>
-                <ul class="pagelist">
-                  <li class="pageRadios"></li>
-                  <li class="pageRadios"></li>
-                  <li class="pageRadios"></li>
-                </ul>
-                <button @click="handleDisableRight" class="rightbtn" :disabled="isRightDisabled"><i class="iconfont icon-right-1"></i></button>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
+  
+      <!-- 数据展示 -->
+      <event-calendar-data :view-type="showViewType"
+                           @switch-view-type="switchViewType"
+                           :month-str="month"
+                           :month-data="monthData"
+                           :day-data="dayData"></event-calendar-data>
     </hth-panel>
   </div>
 
@@ -59,64 +20,28 @@
 <script>
   import HthPanel from 'common/Panel/index.vue';
   import EventCalendar from 'common/event-calendar/index.vue';
-  import img_icon_calendar from 'assets/images/home/icon-calendar.png';
+  import EventCalendarData from './EventCalendarData.vue';
   import { fetchRepayCalendar } from 'api/home/account';
   import { formatDate } from 'utils/index';
 
   export default {
     components: {
       HthPanel,
-      EventCalendar
+      EventCalendar,
+      EventCalendarData
     },
     data() {
       return {
-        img_icon_calendar,
         dates: [],
         events: null,
         showViewType: 'month',
         month: null,
-        isLeftDisabled: false,
-        isRightDisabled: false,
         monthData: {
           collectMoney: '', // 待收
           receiptMoney: ''  // 已收
         },
-        index: null,
-        testData: {},
         dayData: {
-          date: '2017年8月9号',
-          datedetail: [],
-          investRepayInfo: [
-            {
-              page: 0,
-              isShow: true,
-              pageId: 1,
-              loanName: '项目名称',
-              loanNumber: '项目编号',
-              corpus: '本金',
-              interest: '利息',
-              extraEarning: '额外收益',
-              investMoeny: '投资金额'
-            }, {
-              isShow: false,
-              pageId: 2,
-              loanName: '项目名称2',
-              loanNumber: '项目编号',
-              corpus: '本金',
-              interest: '利息',
-              extraEarning: '额外收益',
-              investMoeny: '投资金额'
-            }, {
-              isShow: false,
-              pageId: 2,
-              loanName: '项目名称3',
-              loanNumber: '项目编号',
-              corpus: '本金',
-              interest: '利息',
-              extraEarning: '额外收益',
-              investMoeny: '投资金额'
-            }
-          ]
+          investRepayInfo: []
         }
       }
     },
@@ -135,34 +60,11 @@
                 this.dates.push(v.date);
               })
             }
+            this.showViewType = 'month';
           })
       },
       switchViewType() {
-        if (this.showViewType === 'month') {
-          this.showViewType = 'day';
-        } else {
-          this.showViewType = 'month';
-        }
-      },
-      handleDisableRight() {
-        this.index++;
-        this.testData = this.dayData.investRepayInfo[this.index];
-        this.isLeftDisabled = false;
-        if (this.index === this.dayData.investRepayInfo.length - 1) {
-          this.isRightDisabled = true;
-        } else {
-          this.isRightDisabled = false;
-        }
-      },
-      handleDisableLeft() {
-        this.index --;
-        this.testData = this.dayData.investRepayInfo[this.index];
-        this.isRightDisabled = false;
-        if (this.index === 0) {
-          this.isLeftDisabled = true;
-        } else {
-          this.isLeftDisabled = false;
-        }
+        this.showViewType = 'month';
       },
       handleDayChange(date) {
         if (this.dates.indexOf(date) !== -1) {
@@ -182,9 +84,6 @@
     created() {
       this.month = formatDate(null, 'YYYY-MM');
       this.repayCalendar();
-      this.index = 0;
-      this.testData = this.dayData.investRepayInfo[this.index];
-      this.isLeftDisabled = true;
     }
   }
 </script>
@@ -193,208 +92,6 @@
   .repayment-calendar-wrapper {
     .hth-panel-body {
       padding-bottom: 40px;
-    }
-
-    .event-calendar-wrapper {
-      padding-left: 20px;
-    }
-
-    .event-detail__top {
-      margin-bottom: 45px;
-    }
-
-    .event-detail,
-    .event-detail2 {
-      float: right;
-      width: 360px;
-      box-sizing: border-box;
-      padding-top: 25px;
-      text-align: center;
-
-      .title {
-        font-size: 18px;
-        letter-spacing: 0.7px;
-        text-align: center;
-        color: #35385a;
-
-        span {
-          display: inline-block;
-          vertical-align: middle;
-          width: 40px;
-          margin: 0 15px;
-          border: solid 1px #ced9e4;
-        }
-      }
-
-      .leftbtn {
-        display: block;
-        float: left;
-        width: 15px;
-        height: 15px;
-        background: #fff;
-      }
-
-      .icon-left_ {
-        font-size: 12px;
-      }
-
-      .icon-right_1 {
-        font-size: 12px;
-      }
-
-      .rightbtn {
-        display: block;
-        float: right;
-        width: 17px;
-        height: 15px;
-        background: #fff;
-        margin-top: -17px;
-      }
-
-      .pages-content {
-        width: 74.7px;
-        height: 13px;
-        margin: 22.2px auto;
-      }
-
-      .pagelist {
-        width: 28px;
-        height: 7.4px;
-        margin-left: 30px;
-        padding-top: 10px;
-      }
-
-      .pageRadios {
-        float: left;
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        margin: 0 4px 0 0;
-        background: #a4b2d2;
-      }
-    }
-
-    .event-detail2 {
-      padding: 20px 25px;
-
-      .event-detail__top {
-        margin-bottom: 25px;
-      }
-
-      .event-detail__body img {
-        width: 21px;
-        height: 13px;
-        cursor: pointer;
-      }
-
-      .title {
-        width: 100%;
-
-        span {
-          float: left;
-          width: 22px;
-          height: 22px;
-          margin: 0;
-          border: none;
-          background: url(../../../../assets/images/home/icon-left.png) no-repeat center;
-          cursor: pointer;
-        }
-      }
-
-      .box {
-        width: 100%;
-        margin-bottom: 20px;
-        border-bottom: 1px solid #e4eef8;
-        text-align: left;
-
-        .title {
-          margin-bottom: 15px;
-          border-left: 4px solid #50e3c2;
-          text-align: left;
-          padding-left: 5px;
-          font-size: 16px;
-          color: #35385a;
-        }
-
-        .box-main {
-          width: 100%;
-          padding-left: 10px;
-        }
-
-        .box-main > div p {
-          margin-bottom: 15px;
-          font-size: 14px;
-          color: #727e90;
-        }
-
-        .box-main > div p span {
-          margin-left: 20px;
-          font-size: 14px;
-          color: #727e90;
-        }
-
-        .box-main > div.right-part p span {
-          color: #ff4f38;
-        }
-
-        .pages {
-          width: 233px;
-          height: 70.5px;
-          padding: 0 24.5px 0 31.5px;
-        }
-
-        .pages-top {
-          width: 233px;
-          height: 2px;
-          margin: 0 auto;
-          background: #a4b2d2;
-        }
-      }
-    }
-
-    .event-detail__body {
-      img {
-        display: inline-block;
-        width: 207px;
-        height: 64px;
-      }
-
-      p {
-        margin-bottom: 35px;
-        font-size: 16px;
-        color: #727e90;
-
-        i {
-          display: inline-block;
-          vertical-align: text-bottom;
-          width: 26px;
-          height: 21px;
-          margin-right: 5px;
-          background: url(../../../../assets/images/home/icon-calendar-01.png) no-repeat center;
-        }
-
-        span {
-          font-size: 14px;
-        }
-
-        span.roboto-regular {
-          font-size: 26px;
-          color: #ff4a33;
-        }
-      }
-
-      p.hasDone {
-        i {
-          width: 22px;
-          height: 22px;
-          background: url(../../../../assets/images/home/icon-calendar-02.png) no-repeat center;
-        }
-
-        span.roboto-regular {
-          font-size: 26px;
-          color: #727e90;
-        }
-      }
     }
   }
 </style>

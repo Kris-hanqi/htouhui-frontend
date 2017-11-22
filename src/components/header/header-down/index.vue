@@ -37,10 +37,11 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   $hth-header-down-height: 70px;
 
   .header-down {
+    display: inline-block;
     width: 100%;
     height: $hth-header-down-height;
     line-height: $hth-header-down-height;
@@ -52,13 +53,16 @@
       height: $hth-header-down-height;
       margin: 0 auto;
     }
+    
+    ul {
+      margin-bottom: 0;
+    }
   }
 
   .header-down__logo {
     display: inline-block;
     width: 149px;
     height: 41px;
-    margin-top: 15px;
 
     img {
       width: 100%;
