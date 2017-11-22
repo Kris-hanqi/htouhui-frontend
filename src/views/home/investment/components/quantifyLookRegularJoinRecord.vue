@@ -24,7 +24,7 @@
       </div>
       <div class="look-regular-bottom">
         <p>加入时间 <span class="roboto-regular">{{ joinPlanList.joinTime }}</span></p>
-        <p>即日起免手续费 <span class="roboto-regular">{{ joinPlanList.lockEndTime }}</span></p>
+        <p>持有期限截至 <span class="roboto-regular">{{ joinPlanList.lockEndTime }}</span></p>
         <img v-if="joinPlanList.status === 'matched'" class="type-message" :src="img_icon_success" />
         <img v-else class="type-message" :src="img_icon_auto" />
       </div>
