@@ -49,84 +49,96 @@ function isBorrower(data) {
 
 const user = {
   state: {
-    token: getToken(),
-    uuid: getUuid(),
-    username: '',
-    realName: '',
-    mobile: '',
-    status: 0, // 用户状态
-    bankCard: '', // 银行卡号
-    bankName: '', // 银行名称
-    bankNo: '', // 银行背景
-    accountId: '', // 电子账号
-    IDNumber: '', // 身份证号
-    email: '', // 电子邮箱
-    lastLoginTime: '',
-    transactionPasswordStatus: false, // 是否设置交易密码
-    isAutomaticBidding: false, // 是否自动投标授权
-    isAutomaticDebtTransfer: false, // 是否自动债转授权
-    isAutomaticRepayment: false, // 是否自动还款
-    novicePlanStatus: 1,
-    isBorrower: false // 是否是借款人
+    token: getToken(),                 // token
+    uuid: getUuid(),                   // uuid
+    username: '',                      // 用户名
+    realName: '',                      // 真实姓名
+    mobile: '',                        // 手机号
+    status: 0,                         // 用户状态
+    bankCard: '',                      // 银行卡号
+    bankName: '',                      // 银行名称
+    bankNo: '',                        // 银行背景
+    accountId: '',                     // 电子账号
+    IDNumber: '',                      // 身份证号
+    email: '',                         // 电子邮箱
+    lastLoginTime: '',                 // 最后登录时间
+    transactionPasswordStatus: false,  // 是否设置交易密码
+    isOpenAccount: false,              // 是否开户
+    isTransactionPassword: false,      // 是否设置交易密码
+    isBankCard: false,                 // 是否绑卡
+    isAutomaticBidding: false,         // 是否自动投标授权
+    isAutomaticDebtTransfer: false,    // 是否自动债转授权
+    isAutomaticRepayment: false,       // 是否自动还款
+    novicePlanStatus: 1,               // 新手计划状态
+    isBorrower: false                  // 是否是借款人
   },
 
   mutations: {
-    SET_TOKEN: (state, token) => {
-      state.token = token;
+    SET_TOKEN: (state, data) => {
+      state.token = data;
     },
-    SET_UUID: (state, uuid) => {
-      state.uuid = uuid;
+    SET_UUID: (state, data) => {
+      state.uuid = data;
     },
-    SET_USERNAME: (state, username) => {
-      state.username = username;
+    SET_USERNAME: (state, data) => {
+      state.username = data;
     },
-    SET_REAL_NAME: (state, realName) => {
-      state.realName = realName;
+    SET_REAL_NAME: (state, data) => {
+      state.realName = data;
     },
-    SET_STATUS: (state, status) => {
-      state.status = status;
+    SET_STATUS: (state, data) => {
+      state.status = data;
     },
-    SET_MOBILE: (state, mobile) => {
-      state.mobile = mobile;
+    SET_MOBILE: (state, data) => {
+      state.mobile = data;
     },
-    SET_BANK_NAME: (state, bankName) => {
-      state.bankName = bankName;
+    SET_BANK_NAME: (state, data) => {
+      state.bankName = data;
     },
-    SET_BANK_NO: (state, bankNo) => {
-      state.bankNo = bankNo;
+    SET_BANK_NO: (state, data) => {
+      state.bankNo = data;
     },
-    SET_ACCOUNT_ID: (state, accountId) => {
-      state.accountId = accountId;
+    SET_ACCOUNT_ID: (state, data) => {
+      state.accountId = data;
     },
-    SET_ID_NUMBER: (state, IDNumber) => {
-      state.IDNumber = IDNumber;
+    SET_ID_NUMBER: (state, data) => {
+      state.IDNumber = data;
     },
-    SET_BANK_CARD: (state, bankCard) => {
-      state.bankCard = bankCard;
+    SET_BANK_CARD: (state, data) => {
+      state.bankCard = data;
     },
-    SET_EMAIL: (state, email) => {
-      state.email = email;
+    SET_EMAIL: (state, data) => {
+      state.email = data;
     },
-    SET_LAST_LOGIN_TIME: (state, lastLoginTime) => {
-      state.lastLoginTime = lastLoginTime;
+    SET_LAST_LOGIN_TIME: (state, data) => {
+      state.lastLoginTime = data;
     },
-    SET_TRANSACTION_PASSWORD_STATUS: (state, status) => {
-      state.transactionPasswordStatus = status;
+    SET_TRANSACTION_PASSWORD_STATUS: (state, data) => {
+      state.transactionPasswordStatus = data;
     },
-    SET_NOVICE_PLAN_STATUS: (state, novicePlanStatus) => {
-      state.novicePlanStatus = novicePlanStatus;
+    SET_NOVICE_PLAN_STATUS: (state, data) => {
+      state.novicePlanStatus = data;
     },
-    SET_IS_BORROWER: (state, isBorrower) => {
-      state.isBorrower = isBorrower;
+    SET_IS_OPEN_ACCOUNT: (state, data) => {
+      state.isOpenAccount = data;
     },
-    SET_IS_AUTOMATIC_BIDDING: (state, isAutomaticBidding) => {
-      state.isAutomaticBidding = isAutomaticBidding;
+    SET_IS_TRANSACTION_PASSWORD: (state, data) => {
+      state.isTransactionPassword = data;
     },
-    SET_IS_AUTOMATIC_DEBT_TRANSFER: (state, isAutomaticDebtTransfer) => {
-      state.isAutomaticDebtTransfer = isAutomaticDebtTransfer;
+    SET_IS_BANK_CARD: (state, data) => {
+      state.isBankCard = data;
     },
-    SET_IS_AUTOMATIC_REPAYMENT: (state, isAutomaticRepayment) => {
-      state.isAutomaticRepayment = isAutomaticRepayment;
+    SET_IS_BORROWER: (state, data) => {
+      state.isBorrower = data;
+    },
+    SET_IS_AUTOMATIC_BIDDING: (state, data) => {
+      state.isAutomaticBidding = data;
+    },
+    SET_IS_AUTOMATIC_DEBT_TRANSFER: (state, data) => {
+      state.isAutomaticDebtTransfer = data;
+    },
+    SET_IS_AUTOMATIC_REPAYMENT: (state, data) => {
+      state.isAutomaticRepayment = data;
     }
   },
 
@@ -152,6 +164,9 @@ const user = {
             commit('SET_LAST_LOGIN_TIME', data.lastLoginTime);
             commit('SET_NOVICE_PLAN_STATUS', getNovicePlanStatus(data));
             commit('SET_IS_BORROWER', isBorrower(data));
+            commit('SET_IS_OPEN_ACCOUNT', data.isOpenAccount);
+            commit('SET_IS_TRANSACTION_PASSWORD', data.isOpenAccount);
+            commit('SET_IS_BANK_CARD', !!data.bankCard);
             commit('SET_IS_AUTOMATIC_BIDDING', data.isAutoBidAuth);
             commit('SET_IS_AUTOMATIC_DEBT_TRANSFER', data.isAutoInvestAuth);
             commit('SET_IS_AUTOMATIC_REPAYMENT', data.isAutoRepayAuth);

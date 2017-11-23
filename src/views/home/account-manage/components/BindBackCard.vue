@@ -3,38 +3,38 @@
     <hth-panel title="绑定银行卡" v-loading="loading" element-loading-text="银行卡绑定中...">
       <form class="form-horizontal">
         <div class="form-group">
-          <label class="control-label">用户名</label>
-          <div class="input-block">
-            <div class="form-control-static">{{ username }}</div>
+          <label class="col-md-2 control-label">用户名</label>
+          <div class="col-md-5">
+            <p class="form-control-static">{{ username || '无' }}</p>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label">手机号</label>
-          <div class="input-block">
-            <div class="form-control-static">{{ mobile }}</div>
+          <label class="col-md-2 control-label">手机号</label>
+          <div class="col-md-5">
+            <p class="form-control-static">{{ mobile || '无' }}</p>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label">真实姓名</label>
-          <div class="input-block">
-            <div class="form-control-static">{{ realName }}</div>
+          <label class="col-md-2 control-label">真实姓名</label>
+          <div class="col-md-5">
+            <p class="form-control-static">{{ realName || '无' }}</p>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label">身份证号</label>
-          <div class="input-block">
-            <div class="form-control-static">{{ IDNumber }}</div>
+          <label class="col-md-2 control-label">身份证号</label>
+          <div class="col-md-5">
+            <p class="form-control-static">{{ IDNumber || '无' }}</p>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label">银行卡号</label>
-          <div class="input-block">
-            <input style="width: 266px;" v-model="bankCard" class="form-control" type="text" placeholder="请输入银行卡号">
+          <label class="col-md-2 control-label">银行卡号</label>
+          <div class="col-md-5">
+            <input type="text" v-model.number="bankCard" class="form-control" placeholder="请输入银行卡号">
           </div>
         </div>
         <div class="form-group">
-          <div class="input-block" style="width: 200px;">
-            <button type="button" @click="bindBankCard" class="hth-btn hth-btn-primary hth-btn-lg hth-btn-block">提交</button>
+          <div class="col-md-offset-2 col-md-4">
+            <el-button class="btn-block" type="primary" @click="bindBankCard" :loading="loading" round>提交</el-button>
           </div>
         </div>
       </form>
@@ -79,6 +79,7 @@
           .then(response => {
             if (response.data.meta.code === 200) {
               this.$store.commit('SET_BANK_CARD', response.data.data.cardNo);
+              this.$store.commit('SET_IS_BANK_CARD', true);
               this.$store.commit('SET_BANK_NAME', response.data.data.bankName);
               this.$store.commit('SET_BANK_NO', response.data.data.bankNo);
               this.$store.commit('SET_STATUS', 3);

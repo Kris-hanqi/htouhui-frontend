@@ -23,8 +23,8 @@
     </hth-panel>
     
     <!-- 开户组件 -->
-    <open-account :visible="dialogOpenAccountVisible"
-                  @close="closeOpenAccount"></open-account>
+    <guide-operational :visible="dialogOpenAccountVisible"
+                  @close="closeOpenAccount"></guide-operational>
     
     <!-- 解绑银行卡 -->
     <unlock-bank-card :visible="dialogUnlockBankCardVisible"
@@ -35,14 +35,14 @@
   import { mapGetters } from 'vuex';
   import HthPanel from 'common/Panel/index.vue';
   import Avatar from 'common/components/avatar/index';
-  import OpenAccount from '../../components/OpenAccount.vue';
+  import GuideOperational from '../../components/GuideOperational.vue';
   import UnlockBankCard from '../../components/UnlockBankCard.vue';
   
   export default {
     components: {
       HthPanel,
       Avatar,
-      OpenAccount,
+      GuideOperational,
       UnlockBankCard
     },
     computed: {

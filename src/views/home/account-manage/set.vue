@@ -113,10 +113,6 @@
     <!-- 解绑银行卡 -->
     <unlock-bank-card :visible="dialogUnlockBankCardVisible"
                       @close="closeUnlockBankCard"></unlock-bank-card>
-  
-    <!-- 开户组件 -->
-    <open-account :visible="dialogOpenAccountVisible"
-                  @close="closeOpenAccount"></open-account>
     
     <!-- 网关接口调用组件 -->
     <request-bank-from :request-data="requestBankData"></request-bank-from>
@@ -126,7 +122,6 @@
 <script>
   import { mapGetters } from 'vuex';
   import HthPanel from 'common/Panel/index.vue';
-  import OpenAccount from '../components/OpenAccount.vue';
   import UnlockBankCard from '../components/UnlockBankCard.vue';
   import RequestBankFrom from '../components/RequestBankFrom.vue';
   import { getLocationUrl } from 'utils/index';
@@ -135,7 +130,6 @@
   export default {
     components: {
       HthPanel,
-      OpenAccount,
       UnlockBankCard,
       RequestBankFrom
     },
@@ -158,7 +152,6 @@
     },
     data() {
       return {
-        dialogOpenAccountVisible: false,
         dialogUnlockBankCardVisible: false,
         signingData: {
           source: 'pc',
@@ -185,9 +178,6 @@
         if (this.status === 0) {
           this.dialogOpenAccountVisible = true
         }
-      },
-      closeOpenAccount() {
-        this.dialogOpenAccountVisible = false;
       },
       closeUnlockBankCard() {
         this.dialogUnlockBankCardVisible = false;

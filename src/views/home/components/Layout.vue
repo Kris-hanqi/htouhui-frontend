@@ -27,8 +27,6 @@
         </div>
       </div>
     </div>
-    <open-account :visible="dialogOpenAccountVisible"
-                  @close="closeOpenAccount"></open-account>
     <hth-slider-bar></hth-slider-bar>
   </div>
 </template>
@@ -38,7 +36,6 @@
   import HthHeader from 'components/header';
   import HthSliderBar from 'common/slider-bar';
   import HthBreadcrumb from './breadcrumb';
-  import OpenAccount from './OpenAccount.vue';
   import HthSidebar from './Sidebar';
   import { fetchAdRecommend } from 'api/home/public';
 
@@ -47,8 +44,7 @@
       HthHeader,
       HthSliderBar,
       HthBreadcrumb,
-      HthSidebar,
-      OpenAccount
+      HthSidebar
     },
     computed: {
       ...mapGetters([
@@ -62,7 +58,6 @@
     data() {
       return {
         status: this.$store.state.user.status,
-        dialogOpenAccountVisible: false,
         operationTipsArray: [
           {
             status: 0,
@@ -102,9 +97,6 @@
       },
       toBindBackCard() {
         this.$router.push('/accountManage/set/bindBackCard');
-      },
-      closeOpenAccount() {
-        this.dialogOpenAccountVisible = false;
       }
     },
     created() {
