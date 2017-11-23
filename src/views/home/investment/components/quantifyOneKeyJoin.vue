@@ -16,7 +16,8 @@
         <div class="canUseMoney">
           <p>可用余额<span class="roboto-regular">{{ oneKeyJoinInfo.balance | currency('') }}</span>元<router-link to="/recharge"><span>充值</span></router-link></p>
         </div>
-        <div class="coupons-box">
+        <div  v-if="couponsList.count == 0" class="coupons-no">暂无优惠券</div>
+        <div v-else class="coupons-box">
           <div class="coupons-icon" @click="operationalCouponsListView">
             优惠券
             <i class="iconfont" :class="showCouponsList ? 'icon-bottom' : 'icon-top'"></i>
@@ -348,6 +349,14 @@
           color: #ff5f4b;
         }
       }
+    }
+
+    .coupons-no {
+      display: inline-block;
+      border: 1px solid #aaa;
+      padding: 0 10px;
+      color: #aaa;
+      cursor: pointer;
     }
 
     .coupons-box {
