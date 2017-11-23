@@ -29,7 +29,7 @@
         </div>
         <div class="shengxinbaolianghua-money">
           <p class="money" v-if="item.raisingMoney.length < 5"><span class="roboto-regular">{{ item.raisingMoney | currency('') }}</span>元</p>
-          <p class="money"><span class="roboto-regular">{{ (item.raisingMoney / 10000) | currency('') }}</span>万元</p>
+          <p class="money" v-else=""><span class="roboto-regular">{{ (item.raisingMoney / 10000) | currency('') }}</span>万元</p>
           <p>当前剩余金额</p>
         </div>
         <a class="btn-join" @click.stop="oneKeyJoin(item.planId)">一键加入</a>
