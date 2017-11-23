@@ -102,8 +102,6 @@
             this.list = data.data.data;
             console.log(this.list);
             this.total = data.data.count || 0;
-            console.log('升薪宝量化查看标的下边列表' + this.list);
-            console.log(this.list);
           }
         })
       },
@@ -112,8 +110,6 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.messageList = data.data;
-            console.log('升薪宝量化查看标的上边列表' + this.messageList);
-            console.log(this.messageList);
           }
         })
       },

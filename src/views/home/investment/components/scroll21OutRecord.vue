@@ -39,10 +39,15 @@
         </template>
       </el-table-column>
       <el-table-column prop="appointmentExitTime" label="预期退出时间" width="150"></el-table-column>
-      <el-table-column prop="successExitTime" label="退出成功时间" width="150"></el-table-column>
+      <el-table-column prop="successExitTime" label="退出成功时间" width="150">
+        <template slot-scope="scope">
+          {{ scope.row.successExitTime || '--' }}
+        </template>
+      </el-table-column>
       <el-table-column prop="actualExitMoney" label="实际到账金额">
         <template slot-scope="scope">
-          {{ scope.row.actualExitMoney | currency('') + '元 ' }}
+          <p v-if="scope.row.actualExitMoney != null">{{ scope.row.actualExitMoney | currency('') + '元' }}</p>
+          <p v-else>{{ '--' }}</p>
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="80">
@@ -52,7 +57,7 @@
       </el-table-column>
       <el-table-column prop="lookEquity" label="查看"  width="70">
         <template slot-scope="scope">
-          <el-button class="icon-interests" type="text" @click="lookOutRegular(scope.row.appointmentExitId)" size="small">查看债权</el-button>
+          <p>暂无债权</p>
         </template>
       </el-table-column>
     </el-table>
