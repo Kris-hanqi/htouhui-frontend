@@ -19,7 +19,9 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(config => {
   if (store.getters.token && config.url !== '/web-api/loginByPassword') {
-    config.headers['token'] = getToken(); // eslint-disable-line
+    if (getToken()) {
+      config.headers['token'] = getToken(); // eslint-disable-line
+    }
   }
   return config;
 }, error => {

@@ -37,7 +37,7 @@ import Vue2Filters from 'vue2-filters';
 import * as filters from '@/filters' // 全局filter
 import router from '@/router/home';
 import store from '@/store';
-import { setUuid, getUuid } from '@/utils/auth';
+import { setUuid, getUuid, getToken, setToken } from '@/utils/auth';
 import App from './App';
 // import '@/mock';
 
@@ -84,6 +84,7 @@ Vue.use(VueClipboard);
 Vue.use(Vue2Filters);
 
 router.afterEach(to => {
+  setToken(getToken());
   if (store.getters.username && !store.getters.isOpenAccount && to.path !== '/accountManage/set/openAccount') {
     MessageBox.alert('尚未开户', '提示', {
       confirmButtonText: '确认',
