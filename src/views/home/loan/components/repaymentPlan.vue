@@ -9,7 +9,6 @@
           <el-table-column property="period" label="期数" width="40"></el-table-column>
           <el-table-column property="corpus" label="本金" width="80"></el-table-column>
           <el-table-column property="iint" label="利息" width="80"></el-table-column>
-          <el-table-column property="corpus" label="贴息" width="80"></el-table-column>
           <el-table-column property="defaultInterest" label="罚息" width="80"></el-table-column>
           <el-table-column property="fee" label="手续费" width="80"></el-table-column>
           <el-table-column property="totalMoney" label="总额" width="80"></el-table-column>
