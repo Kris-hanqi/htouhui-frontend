@@ -2,7 +2,7 @@
   <div class="loan-record-wrapper">
     <!-- 统计信息 -->
     <loan-repayment-statistics title="借款记录" :data="loanData"></loan-repayment-statistics>
-    
+
     <hth-data-table :page-no="listQuery.pageNo"
                     :page-size="listQuery.size"
                     @page-no-change="handlePageNoChange"
@@ -16,7 +16,7 @@
         <el-tab-pane label="已结清" name="finished"></el-tab-pane>
         <el-tab-pane label="流标" name="fail"></el-tab-pane>
       </el-tabs>
-  
+
       <form class="form-horizontal">
         <div class="form-group">
           <div class="input-block">
@@ -25,7 +25,7 @@
           </div>
         </div>
       </form>
-      
+
       <repaying :list="list" v-if="listQuery.type === 'repaying'"></repaying>
       <rechecking :list="list" v-if="listQuery.type === 'rechecking'"></rechecking>
       <waiting :list="list" v-if="listQuery.type === 'waiting'"></waiting>
@@ -46,7 +46,7 @@
   import Finished from './components/LoanRecordFinished.vue';
   import Fail from './components/LoanRecordFail.vue';
   import { fetchLoanRecordPageList, fetchLoanRecordStatistic } from 'api/home/loan';
-  
+
   export default {
     components: {
       HthDataTable,
@@ -109,6 +109,7 @@
           this.total = 0;
           this.listQuery.pageNo = 1;
           this.getPageList();
+          this.listQuery.name = '';
         }
       },
       handlePageNoChange(val) {
@@ -128,31 +129,31 @@
     .el-tabs__item {
       width: 132px;
     }
-    
+
     .el-tabs__nav-prev,
     .el-tabs__nav-next {
       display: none;
     }
-    
+
     .el-tabs__nav-wrap.is-scrollable {
       padding: 0;
     }
-  
+
     .form-horizontal .input-block {
       margin-left: 0;
     }
-  
+
     .form-horizontal .form-control {
       display: inline-block;
     }
-    
+
     .loan-record-wrapper__header {
       width: 100%;
       height: 200px;
       margin-top: 16px;
       background-color: #fff;
       box-shadow: 0 2px 6px 0 rgba(67, 135, 186, 0.14);
-      
+
       h1 {
         font-size: 20px;
         line-height: 1;
