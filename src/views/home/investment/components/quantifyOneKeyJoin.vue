@@ -222,6 +222,8 @@
 
 <style lang="scss">
   .oneKeyJoin {
+    position: relative;
+
     .checkboxes {
       padding-left: 40px;
 
@@ -234,8 +236,8 @@
 
     .btn-join {
       position: absolute;
-      top: 270px;
-      right: 180px;
+      top: 140px;
+      right: 50px;
       width: 170px;
       height: 50px;
       box-sizing: border-box;
@@ -254,7 +256,7 @@
     width: 100%;
     box-sizing: border-box;
     padding-left: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 
     p {
       font-size: 18px;
@@ -350,7 +352,7 @@
 
     .coupons-box {
       display: flex;
-      
+
       .coupons-icon {
         display: inline-block;
         position: relative;
