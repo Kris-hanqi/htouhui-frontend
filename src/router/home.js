@@ -303,6 +303,14 @@ export const constantRouterMap = [
                 component: _import('home/account-manage/components/UpdateLoginPassword')
               },
               {
+                path: 'openAccount',
+                meta: {
+                  title: '存管开户'
+                },
+                name: 'AMSOpenAccount',
+                component: _import('home/account-manage/components/OpenAccount')
+              },
+              {
                 path: 'bindEmail',
                 meta: {
                   title: '绑定邮箱'
