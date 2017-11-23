@@ -94,7 +94,7 @@
         },
         dateType: '3day',
         typeList: [
-          { key: 'matched', value: '完成' },
+          { key: 'matched', value: '成功' },
           { key: 'matching', value: '自动投标中' }
         ]
       }
