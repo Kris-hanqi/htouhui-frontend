@@ -16,56 +16,54 @@
       <!-- 交互表单 -->
       <form class="form-horizontal" style="margin-top: 20px;">
         <div class="form-group">
-          <label class="control-label">账户余额</label>
-          <div class="input-block">
-            <div class="form-control-static">{{ accountMoney | currency('') }}元</div>
+          <label class="col-md-2 control-label">账户余额</label>
+          <div class="col-md-5">
+            <p class="form-control-static">{{ accountMoney | currency('') }}元</p>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label">提现金额</label>
-          <div class="input-block">
-            <el-col :span="11">
-              <input @blur="getWithdrawCost" style="width: 285px;" v-model="withdrawData.inputMoney"
-                     class="form-control" type="text" placeholder="请输入提现金额">
-            </el-col>
-            <el-col :span="11" style="line-height: 45px">
-              <span>元</span>
-              <a @click.stop="showBankLimit">(查看银行限额)</a>
-            </el-col>
+          <label class="col-md-2 control-label">转入金额</label>
+          <div class="col-md-5">
+            <input type="text"
+                   @blur="getWithdrawCost"
+                   v-model.number="withdrawData.inputMoney"
+                   class="form-control" placeholder="请输入提现金额">
+          </div>
+          <div class="col-md-4">
+            <p class="form-control-static"><a @click.stop="showBankLimit">(查看银行限额)</a></p>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label">银行联行号</label>
-          <div class="input-block">
-            <el-col :span="11">
-              <input @blur="getWithdrawCost" style="width: 285px;" v-model="withdrawData.cnapNumber"
-                     class="form-control" type="text" placeholder="人民银行分配的12位联行号">
-            </el-col>
-            <el-col :span="11" style="line-height: 45px">
-              <el-button type="primary"
-                         @click="openUnionBank" round>查询</el-button>
-            </el-col>
+          <label class="col-md-2 control-label">银行联行号</label>
+          <div class="col-md-5">
+            <input v-model="withdrawData.cnapNumber"
+                   class="form-control" type="text" placeholder="人民银行分配的12位联行号">
+          </div>
+          <div class="col-md-4">
+            <el-button type="info"
+                       size="small"
+                       @click="openUnionBank" round>查询</el-button>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label">手续费</label>
-          <div class="input-block">
-            <div class="form-control-static">{{ (commissionCharge || 0) | currency('') }}元</div>
+          <label class="col-md-2 control-label">手续费</label>
+          <div class="col-md-5">
+            <p class="form-control-static">{{ (commissionCharge || 0) | currency('') }}元</p>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label">到账金额</label>
-          <div class="input-block">
-            <div class="form-control-static">{{ (Number(withdrawData.inputMoney) - commissionCharge) | currency('') }}元</div>
+          <label class="col-md-2 control-label">到账金额</label>
+          <div class="col-md-5">
+            <p class="form-control-static">{{ (Number(withdrawData.inputMoney) - commissionCharge) | currency('') }}元</p>
           </div>
         </div>
         <div class="form-group">
-          <div class="input-block">
+          <div class="col-md-offset-2 col-md-4">
             <el-button type="primary"
+                       class="btn-block"
                        :disabled="withdrawData.inputMoney === ''"
                        @click="withdraw"
-                       :loading="loading" round
-                       style="width: 180px;">提现</el-button>
+                       :loading="loading" round>充值</el-button>
           </div>
         </div>
       </form>
@@ -152,9 +150,6 @@
         this.getRequestWithdrawData();
       },
       getRequestWithdrawData() {
-//        if (type === 'large') {
-//
-//        }
         fetchWithdraw(this.withdrawData).then(response => {
           if (response.data.meta.code === 200) {
             this.requestData = response.data.data;
@@ -212,5 +207,9 @@
 <style lang="scss">
   .withdraw-wrapper {
     width: 832px;
+  
+    .form-horizontal .control-label {
+      width: 120px;
+    }
   }
 </style>

@@ -1,42 +1,8 @@
 <template>
   <div class="open-account">
     <hth-panel title="存管开户">
-      <form class="form-horizontal">
-        <div class="form-group">
-          <label class="col-md-2 control-label">用户名</label>
-          <div class="col-md-5">
-            <p class="form-control-static">{{ balance }}</p>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-2 control-label">真实姓名</label>
-          <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="请输入真实姓名">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-2 control-label">身份证号</label>
-          <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="请输入真实姓名">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-2 control-label">银行卡号</label>
-          <div class="col-md-5">
-            <input type="text" class="form-control" placeholder="请输入真实姓名">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-offset-2 col-md-5">
-            <el-checkbox v-model="checked">同意 <a href="" target="_blank">《江西银行存管协议》</a></el-checkbox>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-offset-2 col-md-5">
-            <el-button type="primary" round>提交</el-button>
-          </div>
-        </div>
-      </form>
+      <!-- 开户操作组件 -->
+      <open-account @success="openAccountSuccess"></open-account>
       <div class="split-line"></div>
       <div class="hth-tips">
         <h3>温馨提示</h3>
@@ -51,14 +17,30 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import HthPanel from 'common/Panel/index.vue';
+  import OpenAccount from '../../components/OpenAccount.vue';
   
   export default {
     components: {
-      HthPanel
+      HthPanel,
+      OpenAccount
+    },
+    computed: {
+      ...mapGetters([
+        'username',
+        'baseUrl'
+      ])
     },
     data() {
-      return {}
+      return {
+        protocolChecked: true
+      }
+    },
+    methods: {
+      openAccountSuccess() {
+        this.$router.push('/account/index');
+      }
     }
   }
 </script>

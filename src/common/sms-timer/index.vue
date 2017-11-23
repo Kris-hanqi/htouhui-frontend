@@ -1,5 +1,5 @@
 <template>
-  <button class="sms-timer" type="button" :disabled="disabled || time > 0">{{time | change}}</button>
+  <el-button type="info" size="small" round :disabled="disabled || time > 0" >{{time | change}}</el-button>
 </template>
 
 <script>
@@ -60,17 +60,3 @@
     }
   }
 </script>
-
-<style lang="scss">
-  .sms-timer {
-    height: 46px;
-    border-radius: 100px;
-    background-color: #dfe8f0;
-    font-size: 16px;
-    text-align: center;
-    padding: 0 20px;
-    color: #7c86a2;
-    margin-left: 15px;
-    cursor: pointer;
-  }
-</style>

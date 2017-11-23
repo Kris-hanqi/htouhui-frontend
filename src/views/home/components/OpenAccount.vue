@@ -1,173 +1,126 @@
 <template>
-  <!-- 开户组件 -->
-  <div class="open-account-wrapper">
-    <el-dialog title="平台开户"
-               width="730px"
-               :before-close="handleClose"
-               :visible.sync="visible">
-      <el-steps :space="200" style="margin-left: 130px" :active="stepActive">
-        <el-step title="注册"></el-step>
-        <el-step title="开户"></el-step>
-        <el-step title="交易密码"></el-step>
-      </el-steps>
-      <el-form class="open-account"
-               style="margin-left: 100px"
-               label-position="right"
-               label-width="90px"
-               v-if="stepActive === 2">
-        <el-form-item label="姓名">
-          <el-input v-model="openAccountData.realName"></el-input>
-        </el-form-item>
-        <el-form-item label="身份证号">
-          <el-input v-model="openAccountData.idCard"></el-input>
-        </el-form-item>
-        <el-form-item label="绑定银行卡">
-          <el-input v-model="openAccountData.cardNo"></el-input>
-        </el-form-item>
-        <el-form-item label="">
-          <el-checkbox v-model="checked">江西银行存管协议</el-checkbox>
-        </el-form-item>
-        <el-form-item label="">
-          <el-button type="primary" :loading="openAccountButLoading" @click="openAccount">下一步</el-button>
-        </el-form-item>
-      </el-form>
-      <el-form label-position="right"
-               style="margin-left: 130px; margin-top: 40px;"
-               label-width="90px"
-               v-if="stepActive === 3">
-        <el-form-item class="mobile" label="手机号码">
-          <p style="margin-top: -10px">{{ mobile }}</p>
-        </el-form-item>
-        <el-form-item class="sms-code" label="验证码">
-          <el-col :span="11">
-            <el-input v-model="transactionPasswordData.authCode"></el-input>
-          </el-col>
-          <el-col :span="11">
-            <sms-timer :start="startSmsTimer" @countDown="startSmsTimer = false" @click.native='sendCode'></sms-timer>
-          </el-col>
-        </el-form-item>
-        <el-form-item label="">
-          <el-button type="primary next"
-                     :loading="openAccountButLoading"
-                     @click="setTransactionPassword">提交</el-button>
-        </el-form-item>
-      </el-form>
-    </el-dialog>
-  
-    <!-- 网关交互组件 -->
-    <request-bank-from :request-data="requestData"></request-bank-from>
+  <div class="open-account">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="col-md-2 control-label">用户名</label>
+        <div class="col-md-5">
+          <p class="form-control-static">{{ username || '无' }}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">真实姓名</label>
+        <div class="col-md-5">
+          <input type="text" v-model="openAccountData.realName" class="form-control" placeholder="请输入真实姓名">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">身份证号</label>
+        <div class="col-md-5">
+          <input type="text" v-model="openAccountData.idCard" class="form-control" placeholder="请输入身份证号">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">银行卡号</label>
+        <div class="col-md-5">
+          <input type="text" v-model.number="openAccountData.cardNo"  class="form-control" placeholder="请输入银行卡号">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-5">
+          <el-checkbox v-model="protocolChecked"
+                       :class="{ shake: showAnimate }"
+                       class="animated">
+            同意<a :href="baseUrl + '/hetong/20161102021037'" target="_blank">《江西银行存管协议》</a>
+          </el-checkbox>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-5">
+          <el-button type="primary" @click="openAccount" :loading="loading" round>提交</el-button>
+        </div>
+      </div>
+    </form>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
-  import SmsTimer from 'common/sms-timer/index.vue';
-  import RequestBankFrom from './RequestBankFrom.vue';
-  import { fetchOpenAccount, fetchSetTransactionPassword } from 'api/home/account-set';
-  import { fetchSendCode } from 'api/public';
-  import { getLocationUrl } from 'utils/index';
+  import { validateIdCard } from 'utils/validate';
+  import { fetchOpenAccount } from 'api/home/account-set';
   
   export default {
-    components: {
-      SmsTimer,
-      RequestBankFrom
-    },
-    props: {
-      visible: {
-        type: Boolean,
-        default: false,
-        required: true
-      }
-    },
     computed: {
       ...mapGetters([
-        'mobile',
-        'uuid'
+        'username',
+        'baseUrl'
       ])
     },
     data() {
       return {
-        checked: true,
-        startSmsTimer: false,
-        openAccountButLoading: false,
-        dialogOpenAccountVisible: false,
-        stepActive: 2,
+        showAnimate: false,
+        loading: false,
+        protocolChecked: true,
         openAccountData: {
           realName: '',
           idCard: '',
           cardNo: ''
-        },
-        requestData: {},
-        transactionPasswordData: {
-          authCode: '',
-          source: 'pc',
-          sessionId: '',
-          callbackUrl: getLocationUrl() + '/user/home.html'
         }
       }
     },
     methods: {
-      sendCode() {
-        fetchSendCode({ authType: 'set' })
-          .then(response => {
-            if (response.data.meta.code === 200) {
-              this.startSmsTimer = true;
-              this.$message({
-                message: '验证码发送成功!',
-                type: 'success'
-              });
-            }
-          })
-      },
-      handleClose() {
-        this.$emit('close');
-      },
-      setTransactionPassword() {
-        if (!this.transactionPasswordData.authCode) return;
-        this.transactionPasswordData.sessionId = this.uuid;
-        fetchSetTransactionPassword(this.transactionPasswordData)
-          .then(response => {
-            if (response.data.meta.code === 200) {
-              this.requestData = response.data.data;
-            }
-          })
-      },
       openAccount() { // 开户操作
-        this.openAccountButLoading = true;
+        // 校验是否勾选协议
+        if (!this.protocolChecked) {
+          this.showAnimate = true;
+          setTimeout(() => {
+            this.showAnimate = false;
+          }, 2000);
+          return;
+        }
+        // 校验用户姓名
+        if (!this.openAccountData.realName) {
+          this.$message({
+            message: '真实姓名不能为空',
+            type: 'warning'
+          });
+          return;
+        }
+        // 校验身份证号
+        if (!validateIdCard(this.openAccountData.idCard)) {
+          this.$message({
+            message: '身份证号不合法',
+            type: 'warning'
+          });
+          return;
+        }
+        // 校验银行卡号
+        if (!this.openAccountData.cardNo) {
+          this.$message({
+            message: '银行卡号不能为空',
+            type: 'warning'
+          });
+          return;
+        }
+        this.loading = true;
         fetchOpenAccount(this.openAccountData)
           .then(response => {
             if (response.data.meta.code === 200) {
+              this.$store.commit('SET_STATUS', 1);
+              this.$store.commit('SET_REAL_NAME', response.data.data.realName);
+              this.$store.commit('SET_ACCOUNT_ID', response.data.data.accountId);
+              this.$store.commit('SET_BANK_CARD', response.data.data.cardNo);
+              this.$store.commit('SET_BANK_NO', response.data.data.bankNo);
+              this.$store.commit('SET_IS_OPEN_ACCOUNT', true);
+              this.$store.commit('SET_IS_BANK_CARD', true);
+              this.$emit('success');
               this.$message({
                 message: '恭喜，开户成功!',
                 type: 'success'
               });
-              this.$store.commit('SET_STATUS', 1);
-              this.stepActive = 3;
-            } else {
-              this.$message({
-                message: '开户失败:' + response.data.meta.message + ',状态码: ' + response.data.meta.code,
-                type: 'error'
-              });
             }
-            this.openAccountButLoading = false;
+            this.loading = false;
           })
       }
     }
   }
 </script>
-
-<style lang="scss">
-  .open-account-wrapper {
-    .open-account {
-      input {
-        width: 320px;
-      }
-    }
-    
-    .mobile {
-      .el-form-item__content {
-        padding-top: 10px;
-      }
-    }
-  }
-</style>

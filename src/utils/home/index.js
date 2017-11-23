@@ -12,7 +12,7 @@ const mapData = {
     order: 2,
     label: '升薪宝滚动21',
     color: '#ffa837',
-    url: '/plan',
+    url: '/rollPlan',
     disabled: false
   },
   plan21Day: {
