@@ -10,7 +10,7 @@ export function getToken() {
 
 /** 设置失效时间为20分钟 */
 export function setToken(token) {
-  return Cookies.set(TokenKey, token, { expires: 1/96 });
+  return Cookies.set(TokenKey, token, { expires: 1 / 96 });
 }
 
 export function removeToken() {
