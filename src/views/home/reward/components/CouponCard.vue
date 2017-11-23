@@ -25,7 +25,6 @@
         <p class="message" style="line-height: 1.67;">使用说明：{{ data.description }}</p>
       </div>
       <div class="content" v-else>
-        <p class="money">计息金额：<span class="roboto-regular">{{ data.maxInterestMoney }}</span>元</p>
         <p class="message" style="line-height: 1.67;">使用说明：{{ data.description }}</p>
       </div>
       <a v-if="data.status === 'unused'" class="newUse" @click="toIndexPage">立即使用</a>
@@ -39,7 +38,7 @@
   import { mapGetters } from 'vuex';
   import { getLocationUrl } from 'utils/index';
   import { couponTypeList } from 'utils/home/index';
-  
+
   export default {
     props: {
       data: {
