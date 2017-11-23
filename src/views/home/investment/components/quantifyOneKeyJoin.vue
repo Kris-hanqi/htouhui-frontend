@@ -64,6 +64,7 @@
 
 <script>
   import { fetchGetOneKeyJoinInfo, userCouponList } from 'api/home/investment-quantify';
+  import operationalValidate from 'utils/home/operationalValidate';
   import { fetchJoinPlan } from 'api/home/investment';
   import { getLocationUrl } from 'utils/index';
   import HthPanel from 'common/Panel/index.vue';
@@ -107,7 +108,8 @@
           { key: 'plus_coupon', value: '%加息' }
         ],
         showUsedCoupon: false,
-        usedCouponText: ''
+        usedCouponText: '',
+        operationalValidateData: ['openAccount', 'transactionPassword', 'bankCard']
       }
     },
     computed: {
@@ -151,6 +153,8 @@
       },
       // 加入标的
       joinPlan() {
+        const result = operationalValidate(this.operationalValidateData);
+        if (!result) return;
         // 加入金额不能大于账户余额以及还可加入金额
         if (this.userMoney > this.oneKeyJoinInfo.canJoinMoney) {
           this.$message({
