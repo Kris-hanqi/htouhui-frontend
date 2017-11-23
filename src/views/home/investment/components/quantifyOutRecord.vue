@@ -44,7 +44,11 @@
         </template>
       </el-table-column>
       <el-table-column prop="lockPeriod" label="持有期限"  width="60"></el-table-column>
-      <el-table-column prop="actualExitTime" label="成功退出时间" width="135"></el-table-column>
+      <el-table-column prop="actualExitTime" label="成功退出时间" width="135">
+        <template slot-scope="scope">
+          {{ scope.row.actualExitTime || '--' }}
+        </template>
+      </el-table-column>
       <el-table-column prop="actualMoney" label="实际到账金额">
         <template slot-scope="scope">
           {{ scope.row.actualMoney | currency('') + '元' }}

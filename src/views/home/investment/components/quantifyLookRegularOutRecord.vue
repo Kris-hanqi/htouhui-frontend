@@ -25,7 +25,7 @@
     <div class="message">
       <div class="title">
         <span>您购买的债权信息</span>
-        <p class="title-message">目前已为您成功退出   <span>{{ outPlanList.actualMoney | currency('') }}元</span></p>
+        <p class="title-message">目前已为您成功退出   <span>{{ outPlanList.exitedMoney | currency('') }}元</span></p>
       </div>
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
@@ -95,7 +95,9 @@
           pageNo: 1,
           pageSize: 10
         },
-        outPlanList: null,
+        outPlanList: {
+          money: ''
+        },
         joinPlanList: {
           minRate: '',
           maxRate: ''
@@ -124,8 +126,6 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            console.log('升薪宝量化您购买的债券信息' + this.list);
-            console.log(this.list);
             this.total = data.data.count || 0;
           }
         })
