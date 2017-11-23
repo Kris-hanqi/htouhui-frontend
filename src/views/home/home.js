@@ -83,6 +83,20 @@ Vue.prototype.$message = Message;
 Vue.use(VueClipboard);
 Vue.use(Vue2Filters);
 
+router.afterEach(to => {
+  if (store.getters.username && !store.getters.isOpenAccount && to.path !== '/accountManage/set/openAccount') {
+    MessageBox.alert('尚未开户', '提示', {
+      confirmButtonText: '确认',
+      type: 'warning',
+      callback: action => {
+        if (action === 'confirm') {
+          router.push('/accountManage/set/openAccount');
+        }
+      }
+    });
+  }
+});
+
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 });
