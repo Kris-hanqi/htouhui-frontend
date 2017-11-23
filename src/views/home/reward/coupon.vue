@@ -5,7 +5,7 @@
       <el-button @click="showCouponDescription" type="text">优惠券使用说明</el-button>
       <el-button :plain="true" @click="showExchangeCoupon" type="info">兑换优惠券</el-button>
     </div>
-    
+
     <!-- 优惠券使用说明 -->
     <coupon-description :visible="couponDescriptionVisible"
                         @close="couponDescriptionVisible = false;"></coupon-description>
@@ -162,6 +162,7 @@
 
     p {
       display: inline-block;
+      margin: 0;
       font-size: 20px;
       color: #274161;
     }
