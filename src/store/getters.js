@@ -1,4 +1,5 @@
 const getters = {
+  // user
   token: state => state.user.token,
   uuid: state => state.user.uuid,
   mobile: state => state.user.mobile,
@@ -17,7 +18,9 @@ const getters = {
   isAutomaticBidding: state => state.user.isAutomaticBidding,
   isAutomaticDebtTransfer: state => state.user.isAutomaticDebtTransfer,
   isAutomaticRepayment: state => state.user.isAutomaticRepayment,
-  isBorrower: state => state.user.isBorrower
+  isBorrower: state => state.user.isBorrower,
+  // app
+  baseUrl: state => state.app.baseUrl
 };
 
 export default getters;

@@ -1,17 +1,12 @@
+import { getLocationUrl } from 'utils/index';
+
 const app = {
   state: {
-    sidebar: {
-      opened: true
-    }
+    baseUrl: getLocationUrl()
   },
   mutations: {
-    TOGGLE_SIDEBAR: state => {
-      state.sidebar.opened = !state.sidebar.opened;
-    }
-  },
-  actions: {
-    ToggleSidebar: ({ commit }) => {
-      commit('TOGGLE_SIDEBAR');
+    SET_BASE_URL: (state, baseUrl) => {
+      state.baseUrl = baseUrl;
     }
   }
 };
