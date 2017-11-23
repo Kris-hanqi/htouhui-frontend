@@ -49,9 +49,9 @@
             {{ scope.row.rate + '%' }}
           </template>
         </el-table-column>
-        <el-table-column prop="perid" label="借款期限">
+        <el-table-column prop="period" label="借款期限">
           <template slot-scope="scope">
-            {{ scope.row.perid | currency('') + '天' }}
+            {{ scope.row.period }}
           </template>
         </el-table-column>
         <el-table-column prop="investMoney" label="投资金额" width="100">
@@ -59,7 +59,11 @@
             {{ scope.row.investMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="repayTimeFormat" label="还款时间" width="80"></el-table-column>
+        <el-table-column prop="repayTimeFormat" label="还款时间" width="80">
+          <template slot-scope="scope">
+            {{ scope.row.repayTimeFormat || '--' }}
+          </template>
+        </el-table-column>
         <el-table-column prop="earnings" label="已收本息">
           <template slot-scope="scope">
             {{ scope.row.earnings | currency('') + '元' }}
@@ -70,10 +74,10 @@
             {{ scope.row.uncollectedRepayMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="status" label="状态" width="60"></el-table-column>
-        <el-table-column prop="contract" label="合同" width="40" fixed="right">
+        <el-table-column prop="status" label="状态" width="70"></el-table-column>
+        <el-table-column prop="contract" label="合同" width="90" fixed="right">
           <template slot-scope="scope">
-            <a v-if="scope.row.showContract" class="icon-download" type="text">点击下载</a>
+            <a v-if="scope.row.showContract" class="ico-download" type="text">点击下载</a>
             <a v-else class="icon-downloadNo" type="text">放款后可查看</a>
           </template>
         </el-table-column>
@@ -154,7 +158,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .icon-download {
+  .ico-download {
     color: #0573f4;
   }
 
