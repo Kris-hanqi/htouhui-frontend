@@ -122,8 +122,6 @@
     .chart {
       display: inline-block;
       margin-top: 100px;
-      height: 160px;
-      width: 160px;
     }
     
     .icon-round {
