@@ -48,7 +48,13 @@
         <el-table-column prop="time" label="交易时间" width="150"></el-table-column>
         <el-table-column prop="projectName" label="项目名称" width="150"></el-table-column>
         <el-table-column prop="typeinfo" label="类型" width="110"></el-table-column>
-        <el-table-column prop="money" label="变动金额" width="100"></el-table-column>
+        <el-table-column label="变动金额" width="100">
+          <template slot-scope="scope">
+            <span>
+               {{ scope.row.type | keyToValue(fundsTypes) }}{{ scope.row.money }}
+            </span>
+          </template>
+        </el-table-column>
         <el-table-column prop="detail" :show-overflow-tooltip="true" label="备注"></el-table-column>
       </el-table>
       <div class="pages" v-if="!listLoading">
@@ -84,6 +90,13 @@
           endTime: '',
           type: ''
         },
+        fundsTypes: [
+          { key: 'ti_balance', value: '+' },
+          { key: 'to_balance', value: '-' },
+          { key: 'freeze', value: '-' },
+          { key: 'unfreeze', value: '' },
+          { key: 'to_frozen', value: '' }
+        ],
         pickerOptions: {
           disabledDate(date) {
             return date > new Date();

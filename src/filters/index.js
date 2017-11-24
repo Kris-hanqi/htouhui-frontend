@@ -5,15 +5,17 @@
  * @returns {string}
  */
 export function keyToValue(key, list) {
-  let value = '';
+  let value = null;
 
   list.forEach(item => {
     if (item.key === key) {
-      value += item.value;
+      value = item.value;
     }
   });
 
-  value = value || 'ERROR';
+  if (value === null) {
+    value = 'ERROR';
+  }
 
   return value;
 }
