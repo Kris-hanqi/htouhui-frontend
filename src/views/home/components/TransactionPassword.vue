@@ -33,6 +33,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import operationalValidate from 'utils/home/operationalValidate';
   import { fetchSetTransactionPassword } from 'api/home/account-set';
   import { fetchSendCode } from 'api/public';
   import SmsTimer from 'common/sms-timer';
@@ -60,7 +61,8 @@
           authCode: '',
           sessionId: '',
           callbackUrl: ''
-        }
+        },
+        operationalValidateData: ['openAccount']
       }
     },
     methods: {
@@ -77,6 +79,8 @@
           })
       },
       setTransactionPassword() {
+        const result = operationalValidate(this.operationalValidateData);
+        if (!result) return;
         if (!this.transactionPassword.authCode) return;
         this.transactionPassword.sessionId = this.uuid;
         this.transactionPassword.callbackUrl = `${this.baseUrl}/user/home.html#/accountManage/set`;
