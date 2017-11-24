@@ -61,10 +61,10 @@
             <p>加入金额</p>
           </div>
         </div>
-        <div class="newUser-plan-bottom">
-          <p class="join-time">加入时间<span class="roboto-regular">{{ joinDetails.joinTime }}</span></p>
-          <p class="day-stop">持有期限截至<span class="roboto-regular">{{ joinDetails.lockEndTime }}</span></p>
-          <p class="status">状态<span>{{ joinDetails.status === 'matched' ? '成功' : '自动投标中' }}</span></p>
+        <div class="newUser-plan-bottom row">
+          <p class="join-time col-md-4">加入时间<span class="roboto-regular">{{ joinDetails.joinTime }}</span></p>
+          <p class="day-stop col-md-5">持有期限截至<span class="roboto-regular">{{ joinDetails.lockEndTime }}</span></p>
+          <p class="status col-md-3">状态<span>{{ joinDetails.status === 'matched' ? '成功' : '自动投标中' }}</span></p>
         </div>
       </div>
 
@@ -350,12 +350,9 @@
     width: 100%;
     height: auto;
     border-top: solid 1px #dfe8f0;
-    padding-top: 20px;
-    padding-left: 15px;
+    padding: 15px;
 
     p {
-      display: inline-block;
-      margin-right: 60px;
       font-size: 16px;
       color: #394b67;
 
