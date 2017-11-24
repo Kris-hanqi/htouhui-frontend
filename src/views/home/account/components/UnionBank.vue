@@ -16,7 +16,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="城市">
-          <el-select v-model="cityName" placeholder="请选择城市">
+          <el-select v-model="listQuery.city" placeholder="请选择城市">
             <el-option
               v-for="item in cityList"
               :key="item"
@@ -26,19 +26,34 @@
           </el-select>
         </el-form-item>
         <el-form-item label="关键词">
-          <el-input v-model="keyWords" placeholder="请输入关键词"></el-input>
+          <el-input v-model="listQuery.keyWords" placeholder="请输入关键词"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button @click="query" type="primary">查询</el-button>
         </el-form-item>
       </el-form>
-      <el-table :data="list">
-        <el-table-column property="id" label="序号"></el-table-column>
-        <el-table-column property="cnapsNo" label="联行行号"></el-table-column>
-        <el-table-column property="bankName" label="银行名称"></el-table-column>
-        <el-table-column property="address" label="地址"></el-table-column>
-        <el-table-column property="" label="选择"></el-table-column>
+      
+      <el-table :data="list" v-loading="listLoading" element-loading-text="拼命加载中">
+        <el-table-column width="50" property="id" label="序号"></el-table-column>
+        <el-table-column width="100" property="cnapsNo" label="联行行号"></el-table-column>
+        <el-table-column width="260" property="bankName" label="银行名称"></el-table-column>
+        <el-table-column width="320" property="address" label="地址"></el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button @click="selectUnionBank(scope.row.cnapsNo)" type="text">选择</el-button>
+          </template>
+        </el-table-column>
       </el-table>
+  
+      <!-- 分页 -->
+      <div class="pages" v-show="!listLoading">
+        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+        <el-pagination
+          @current-change="handleCurrentChange"
+          :current-page.sync="listQuery.pageNo"
+          :page-size="listQuery.pageSize"
+          layout="prev, pager, next" :total="total"></el-pagination>
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -53,33 +68,48 @@
         required: true
       }
     },
+    computed: {
+      getPageSize() {
+        return Math.ceil(this.total / this.listQuery.pageSize);
+      }
+    },
     data() {
       return {
         list: null,
-        keyWords: '',
+        total: 0,
+        listLoading: false,
         provinceName: '',
         provinceList: [],
-        cityName: '',
-        cityList: []
+        cityList: [],
+        listQuery: {
+          province: '',
+          city: '',
+          keyWords: '',
+          pageNo: 1,
+          pageSize: 10
+        }
       }
     },
     watch: {
       provinceName: function (val) { // eslint-disable-line
         this.getCity(val);
-        console.log(val);
       }
     },
     methods: {
-      getUnionBank() {
-        const requestData = {};
-        requestData.province = this.provinceName;
-        requestData.city = this.cityName;
-        requestData.keyWords = this.keyWords;
-        fetchGetUnionBank().then(response => {
-          console.log(response);
+      getPageList() {
+        this.listQuery.province = this.provinceName;
+        fetchGetUnionBank(this.listQuery).then(response => {
+          if (response.data.meta.code === 200) {
+            this.list = response.data.data.data;
+            this.total = response.data.data.count || 0;
+          }
         })
       },
       handleClose() {
+        this.$emit('close');
+      },
+      selectUnionBank(value) {
+        this.$emit('select-union-bank', value);
         this.$emit('close');
       },
       getProvince() {
@@ -97,8 +127,26 @@
           }
         })
       },
+      handleCurrentChange(val) {
+        this.listQuery.pageNo = val;
+        this.getPageList();
+      },
       query() {
-        this.getUnionBank();
+        if (!this.provinceName) {
+          this.$message({
+            message: '请选择省份',
+            type: 'warning'
+          });
+          return;
+        }
+        if (!this.listQuery.city) {
+          this.$message({
+            message: '请选择城市',
+            type: 'warning'
+          });
+          return;
+        }
+        this.getPageList();
       }
     },
     created() {

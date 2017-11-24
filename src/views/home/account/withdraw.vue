@@ -11,7 +11,7 @@
       <request-bank-from :request-data="requestData"></request-bank-from>
       
       <!-- 获取联行号 -->
-      <union-bank :visible="dialogUnionBankVisible" @close="closeUnionBank"></union-bank>
+      <union-bank :visible="dialogUnionBankVisible" @close="closeUnionBank" @select-union-bank="selectUnionBank"></union-bank>
   
       <!-- 交互表单 -->
       <form class="form-horizontal" style="margin-top: 20px;">
@@ -22,18 +22,17 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-md-2 control-label">转入金额</label>
+          <label class="col-md-2 control-label">提现金额</label>
           <div class="col-md-5">
             <input type="text"
-                   @blur="getWithdrawCost"
-                   v-model.number="withdrawData.inputMoney"
+                   v-model.number="money"
                    class="form-control" placeholder="请输入提现金额">
           </div>
           <div class="col-md-4">
             <p class="form-control-static"><a @click.stop="showBankLimit">(查看银行限额)</a></p>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" v-if="showUnionBankInput">
           <label class="col-md-2 control-label">银行联行号</label>
           <div class="col-md-5">
             <input v-model="withdrawData.cnapNumber"
@@ -54,16 +53,16 @@
         <div class="form-group">
           <label class="col-md-2 control-label">到账金额</label>
           <div class="col-md-5">
-            <p class="form-control-static">{{ (Number(withdrawData.inputMoney) - commissionCharge) | currency('') }}元</p>
+            <p class="form-control-static">{{ (Number(money) - commissionCharge) | currency('') }}元</p>
           </div>
         </div>
         <div class="form-group">
           <div class="col-md-offset-2 col-md-4">
             <el-button type="primary"
                        class="btn-block"
-                       :disabled="withdrawData.inputMoney === ''"
+                       :disabled="money === ''"
                        @click="withdraw"
-                       :loading="loading" round>充值</el-button>
+                       :loading="loading" round>提现</el-button>
           </div>
         </div>
       </form>
@@ -110,10 +109,12 @@
     data() {
       return {
         loading: false,
+        total: 0,
         showUnionBankInput: false,
         dialogBankLimitVisible: false,
         dialogUnionBankVisible: false,
         accountMoney: '',
+        money: '',
         requestData: {},
         withdrawData: {
           inputMoney: '',
@@ -125,23 +126,33 @@
         commissionCharge: 0
       }
     },
+    watch: {
+      money: function (val) { // eslint-disable-line
+        this.getWithdrawCost(val);
+      }
+    },
     methods: {
       // 提现
       withdraw() {
         this.withdrawData.cardNo = this.bankCard;
+        this.withdrawData.inputMoney = this.money;
         this.withdrawData.sessionId = this.uuid;
+        this.loading = true;
         // 大于五万属于大额提现
-        if (this.withdrawData.inputMoney > 50000) {
+        if (this.withdrawData.inputMoney >= 50000) {
           // 查看是否允许大额提现
-          fetchAllowLargeWithdraw({ money: this.withdrawData.inputMoney })
+          fetchAllowLargeWithdraw({ money: this.money, cardNo: this.bankCard })
             .then(response => {
               if (response.data.meta.code === 200) {
-                if (response.data.meta.data === 'allow_large_withdraw') {
+                if (response.data.data === 'allow_large_withdraw') {
                   this.showUnionBankInput = true;
                   this.getRequestWithdrawData('large');
                 }
               } else {
-                console.log(response)
+                this.$notify.error({
+                  title: '提示',
+                  message: response.data.meta.message
+                });
               }
             });
           return;
@@ -150,25 +161,20 @@
         this.getRequestWithdrawData();
       },
       getRequestWithdrawData() {
+        this.withdrawData.inputMoney = this.money;
         fetchWithdraw(this.withdrawData).then(response => {
           if (response.data.meta.code === 200) {
             this.requestData = response.data.data;
           }
+          this.loading = false;
         })
       },
       // 获取提现手续费
-      getWithdrawCost() {
-        if (!this.withdrawData.inputMoney) return;
-        if (this.accountMoney < this.withdrawData.inputMoney) {
-          this.$message({
-            message: '提现金额大于账户余额!',
-            type: 'error'
-          });
-          return;
-        }
+      getWithdrawCost(val) {
+        if (!val) return;
+        if (this.accountMoney < val) return;
         this.loading = true;
-        if (!this.withdrawData.inputMoney) return;
-        fetchWithdrawCost({ money: this.withdrawData.inputMoney })
+        fetchWithdrawCost({ money: this.money })
           .then(response => {
             if (response.data.meta.code === 200) {
               this.commissionCharge = response.data.data || 0;
@@ -178,7 +184,7 @@
       },
       // 获取账户余额
       getAccountMoney() {
-        fetchAccountMoney()
+        return fetchAccountMoney()
           .then(response => {
             if (response.data.meta.code === 200) {
               this.accountMoney = response.data.data;
@@ -190,6 +196,11 @@
       },
       closeUnionBank() {
         this.dialogUnionBankVisible = false;
+      },
+      selectUnionBank(value) {
+        if (value) {
+          this.withdrawData.cnapNumber = value;
+        }
       },
       showBankLimit() {
         this.dialogBankLimitVisible = true;

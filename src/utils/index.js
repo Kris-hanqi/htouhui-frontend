@@ -88,5 +88,3 @@ export function param2Obj(url) {
 export function getLocationUrl() {
   return window.location.protocol + '//' + window.location.host;
 }
-
-
