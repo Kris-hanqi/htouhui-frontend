@@ -65,6 +65,7 @@
         startSmsTimer: false,
         bindEmailData: {
           email: '',
+          type: 'binding_email',
           authCode: ''
         }
       }
@@ -78,7 +79,7 @@
           });
           return;
         }
-        fetchSendEmailCode({ email: this.bindEmailData.email })
+        fetchSendEmailCode(this.bindEmailData)
           .then(response => {
             if (response.data.meta.code === 200) {
               this.startSmsTimer = true;
@@ -98,7 +99,8 @@
           });
           return;
         }
-        if (this.bindEmailData.authCode) return;
+        if (!this.bindEmailData.authCode) return;
+        this.loading = true;
         fetchBindEmail(this.bindEmailData)
           .then(response => {
             if (response.data.meta.code === 200) {
@@ -111,12 +113,12 @@
               this.$router.push('/accountManage/set/index')
             } else {
               this.$notify({
-                title: '错误',
-                message: '失败原因:' + response.data.meta.message,
-                type: 'error',
-                duration: 0
+                title: '提示',
+                message: '操作失败:' + response.data.meta.message,
+                type: 'error'
               });
             }
+            this.loading = false;
           });
       }
     }
