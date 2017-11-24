@@ -44,7 +44,7 @@
         </el-table>
         <div class="pages small">
           <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-          <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.PageSize" layout="prev, pager, next" :total="total"></el-pagination>
+          <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.curPage" :page-size="listQuery.PageSize" layout="prev, pager, next" :total="total"></el-pagination>
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@
         listQuery: {
           joinId: '',
           type: 'tiexi',
-          pageNo: 1,
+          curPage: 1,
           pageSize: 10
         },
         showNoAward: true
@@ -87,8 +87,6 @@
               this.showNoAward = false;
               this.messageList = data.data;
               this.list = data.data.data;
-              console.log('贴息');
-              console.log(this.messageList);
               this.total = data.data.count || 0;
             }
           }

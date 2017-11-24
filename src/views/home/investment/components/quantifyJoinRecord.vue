@@ -178,6 +178,7 @@
         this.$router.push('/investment/quantify/lookRegular-joinRecord/' + id);
       },
       getAward(id) {
+        this.activeName = 'first';
         this.dialogVisible = true;
         this.joinPlanId = id;
       }
