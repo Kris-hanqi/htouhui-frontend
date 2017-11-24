@@ -90,7 +90,7 @@
         })
       },
       showOpenAccount() {
-        this.dialogOpenAccountVisible = true;
+        this.$router.push('/accountManage/set/openAccount');
       },
       toTransactionPassword() {
         this.$router.push('/accountManage/set/transactionPassword');
