@@ -143,7 +143,7 @@
         this.withdrawData.sessionId = this.uuid;
         this.loading = true;
         // 大于五万属于大额提现
-        if (this.withdrawData.inputMoney >= 50000) {
+        if (this.withdrawData.inputMoney >= 50002) {
           // 查看是否允许大额提现
           fetchAllowLargeWithdraw({ money: this.money, cardNo: this.bankCard })
             .then(response => {
@@ -164,7 +164,14 @@
         // 普通提现
         this.getRequestWithdrawData();
       },
-      getRequestWithdrawData() {
+      getRequestWithdrawData(type) {
+        if (type === 'large' && !this.withdrawData.cnapNumber) {
+          this.$message({
+            message: '大额提现请查询联行号',
+            type: 'warning'
+          });
+          return;
+        }
         this.withdrawData.inputMoney = this.money;
         fetchWithdraw(this.withdrawData).then(response => {
           if (response.data.meta.code === 200) {
