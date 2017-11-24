@@ -20,7 +20,11 @@
             <el-button @click="operationTips.fun">{{ operationTips.btnText }}</el-button>
           </div>
           <!-- 广告位 -->
-          <div v-if="!operationTips && ARecommend"  :href="ARecommend.address"></div>
+          <div v-if="!operationTips && ARecommend" class="prompt-ad">
+            <a :href="ARecommend.address" target="_blank">
+              <img :src="ARecommend.pictureUrl">
+            </a>
+          </div>
           <div class="main-container__router">
             <router-view></router-view>
           </div>
@@ -158,36 +162,8 @@
       overflow: hidden;
       width: 832px;
       height: 54px;
-      line-height: 54px;
+      cursor: pointer;
       margin-bottom: 15px;
-      background: url(../../../assets/images/home/ad-recommend.png) no-repeat #fff;
-      box-shadow: 0 2px 4px 0 rgba(67, 135, 186, 0.14);
-
-      span.title {
-        padding-left: 35px;
-        font-size: 20px;
-        font-weight: bold;
-        color: #fff;
-      }
-
-      span {
-        padding-left: 60px;
-        font-size: 18px;
-        color: #4a4949;
-      }
-
-      a {
-        width: 100px;
-        height: 36px;
-        margin-top: 10px;
-        margin-right: 30px;
-        line-height: 36px;
-        font-size: 16px;
-        text-align: center;
-        color: #fff;
-        border-radius: 100px;
-        background-color: #ff6a40;
-      }
     }
   }
 </style>
