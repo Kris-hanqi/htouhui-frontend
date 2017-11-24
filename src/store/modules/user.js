@@ -165,7 +165,7 @@ const user = {
             commit('SET_NOVICE_PLAN_STATUS', getNovicePlanStatus(data));
             commit('SET_IS_BORROWER', isBorrower(data));
             commit('SET_IS_OPEN_ACCOUNT', data.isOpenAccount);
-            commit('SET_IS_TRANSACTION_PASSWORD', data.isOpenAccount);
+            commit('SET_IS_TRANSACTION_PASSWORD', data.isSetPassWord);
             commit('SET_IS_BANK_CARD', !!data.bankCard);
             commit('SET_IS_AUTOMATIC_BIDDING', data.isAutoBidAuth);
             commit('SET_IS_AUTOMATIC_DEBT_TRANSFER', data.isAutoInvestAuth);
