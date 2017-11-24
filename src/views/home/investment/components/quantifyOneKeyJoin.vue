@@ -12,7 +12,7 @@
           <p class="main-2-p-1">起投金额：<span class="roboto-regular">{{ oneKeyJoinInfo.startInvestMoney | currency('') }}</span><span class="small-font">元</span></p>
           <p>您目前还可加入<span class="roboto-regular">{{ oneKeyJoinInfo.canJoinMoney | currency('') }}</span>元</p>
         </div>
-        <input type="number" class="inputMoney" v-model="userMoney" :placeholder="'加入金额须为'+ oneKeyJoinInfo.incrMoney +'的整数倍'">
+        <input type="text" class="inputMoney" v-model.number="userMoney" :placeholder="'加入金额须为'+ oneKeyJoinInfo.incrMoney +'的整数倍'">
         <div class="canUseMoney">
           <p>可用余额<span class="roboto-regular">{{ oneKeyJoinInfo.balance | currency('') }}</span>元<router-link to="/recharge"><span>充值</span></router-link></p>
         </div>
