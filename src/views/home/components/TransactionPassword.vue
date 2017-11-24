@@ -12,7 +12,7 @@
         <div class="col-md-5">
           <input class="form-control"
                  type="text"
-                 v-model.number="transactionPassword.authCode"
+                 v-model="transactionPassword.authCode"
                  maxlength="6" placeholder="请输入短信验证码">
         </div>
         <div class="col-md-5">
