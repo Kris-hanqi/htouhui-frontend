@@ -1,7 +1,7 @@
 <template>
   <div class="coupon-container">
     <div class="coupon-wrapper__box-open-account" v-if="status === 0">
-      <a href="#">立即开户激活</a>
+      <a @click.stop="toOpenAccount">立即开户激活</a>
     </div>
     <div v-else
          class="coupon-wrapper__box-top"
@@ -59,6 +59,9 @@
     methods: {
       toIndexPage() {
         window.location.href = getLocationUrl();
+      },
+      toOpenAccount() {
+        this.$router.push('/accountManage/set/openAccount');
       }
     }
   }
