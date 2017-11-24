@@ -91,6 +91,11 @@
                     message: '登录密码修改成功,请牢记你的登录密码!',
                     type: 'success'
                   });
+                } else {
+                  this.$message({
+                    message: response.data.meta.message,
+                    type: 'error'
+                  });
                 }
               })
           }
