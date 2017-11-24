@@ -1,7 +1,7 @@
 <template>
   <div class="quantify-wrapper">
     <!-- 升薪宝量化标的信息 -->
-    <div class="quantify-card" v-for="item in quantifyData" :key="item.planId">
+    <div class="quantify-card" v-if="quantifyData && quantifyData.length > 0" v-for="item in quantifyData" :key="item.planId">
       <!-- header -->
       <div class="quantify-card__head">
         <!-- 跳转到详情页 -->
@@ -41,17 +41,22 @@
         <a href="javascript:void(0)" @click="lookTarget(item.planId)" class="seeBiao">查看标的</a>
       </div>
     </div>
+    <div class="not-data" v-show="quantifyData.length === 0">
+      <no-data></no-data>
+    </div>
   </div>
 </template>
 
 <script>
   import { fetchGetList } from 'api/home/investment-quantify';
   import interestRate from 'components/interest-rate';
+  import NoData from '../components/NoData.vue';
   import { getLocationUrl } from 'utils/index';
 
   export default {
     components: {
-      interestRate
+      interestRate,
+      NoData
     },
     data() {
       return {
@@ -92,6 +97,12 @@
   .quantify-wrapper {
     width: 100%;
     height: auto;
+    
+    .not-data {
+      width: 100%;
+      background-color: #fff;
+      height: auto;
+    }
   }
   
   .quantify-card {

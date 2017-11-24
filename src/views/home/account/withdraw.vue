@@ -84,6 +84,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import operationalValidate from 'utils/home/operationalValidate';
   import HthPanel from 'common/Panel/index.vue';
   import BankLimit from '../components/BankLimit.vue';
   import BankCard from '../components/BackCard.vue';
@@ -123,7 +124,8 @@
           cardNo: '',
           sessionId: ''
         },
-        commissionCharge: 0
+        commissionCharge: 0,
+        operationalValidateData: ['openAccount', 'transactionPassword', 'bankCard']
       }
     },
     watch: {
@@ -134,6 +136,8 @@
     methods: {
       // 提现
       withdraw() {
+        const result = operationalValidate(this.operationalValidateData);
+        if (!result) return;
         this.withdrawData.cardNo = this.bankCard;
         this.withdrawData.inputMoney = this.money;
         this.withdrawData.sessionId = this.uuid;
