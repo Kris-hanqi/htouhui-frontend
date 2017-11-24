@@ -16,13 +16,14 @@
         <el-tab-pane label="已结清" name="finished"></el-tab-pane>
         <el-tab-pane label="流标" name="fail"></el-tab-pane>
       </el-tabs>
-
-      <form class="form-horizontal">
+  
+      <form class="form-inline" style="margin-bottom: 15px;">
         <div class="form-group">
-          <div class="input-block">
-            <input style="width: 266px;" v-model="listQuery.name" class="form-control" type="text" placeholder="请输入项目名称">
-            <button style="width: 90px" :disabled="!listQuery.name" @click="query" type="button" class="hth-btn hth-btn-primary">查询</button>
-          </div>
+          <label></label>
+          <input v-model="listQuery.name" class="form-control" type="text" placeholder="请输入项目名称">
+        </div>
+        <div class="form-group">
+          <button style="width: 100px" :disabled="!listQuery.name" @click="query" type="button" class="hth-btn hth-btn-primary">查询</button>
         </div>
       </form>
 

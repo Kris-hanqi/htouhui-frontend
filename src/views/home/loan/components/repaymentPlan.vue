@@ -18,7 +18,7 @@
           <el-table-column label="操作">
             <template slot-scope="scope">
               <div>
-                <el-button @click="repayment(scope.row.id)" v-if="scope.row.manual === 1" type="text">还款</el-button>
+                <el-button @click="repayment(scope.row.repayId)" v-if="scope.row.manual === 1" type="text">还款</el-button>
                 <span v-else>--</span>
               </div>
             </template>
@@ -112,7 +112,7 @@
         });
       },
       advanceRepayment() {
-        this.$confirm('确认要还款吗?', '询问', {
+        this.$confirm('确认要提前还款吗?', '询问', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
