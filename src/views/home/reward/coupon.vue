@@ -117,6 +117,7 @@
       // 切换优惠券状态
       switchStatus(data) {
         this.listQuery.status = data;
+        this.listQuery.pageNo = 1;
         this.getPageList();
       },
       // 打开兑换优惠券modal
