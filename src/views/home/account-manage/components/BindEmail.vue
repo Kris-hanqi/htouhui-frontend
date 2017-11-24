@@ -1,28 +1,37 @@
 <template>
   <div class="bind-email-wrapper">
     <hth-panel title="绑定邮箱">
-      <el-form :model="bindEmailData" label-width="80px">
-        <el-form-item label="用户名">
-          <span>{{ username }}</span>
-        </el-form-item>
-        <el-form-item label="邮箱">
-          <el-input style="width: 360px;" v-model="bindEmailData.email" placeholder="请输入电子邮箱"></el-input>
-        </el-form-item>
-        <el-form-item label="验证码">
-          <el-col :span="8">
-            <el-input v-model="bindEmailData.authCode" :maxlength="6" placeholder="请输入验证码"></el-input>
-          </el-col>
-          <el-col :span="11">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="col-md-2 control-label">用户名</label>
+          <div class="col-md-5">
+            <p class="form-control-static">{{ username || '无' }}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">邮箱</label>
+          <div class="col-md-5">
+            <input type="text" class="form-control" v-model="bindEmailData.email" placeholder="请输入电子邮箱">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">验证码</label>
+          <div class="col-md-3">
+            <input class="form-control"
+                   type="text"
+                   v-model="bindEmailData.authCode"
+                   maxlength="6" placeholder="请输入邮箱验证码">
+          </div>
+          <div class="col-md-5">
             <sms-timer :start="startSmsTimer" @countDown="startSmsTimer = false" @click.native='sendCode'></sms-timer>
-          </el-col>
-        </el-form-item>
-        <el-form-item v-if="showPrompt">
-          <span>校验码已发出，请注意查看邮箱，如果没有收到，你可以在60秒后要求系统重新发送</span>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="bindEmail" style="width: 200px" round>提交</el-button>
-        </el-form-item>
-      </el-form>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-5">
+            <el-button type="primary" @click="bindEmail" :loading="loading" round>提交</el-button>
+          </div>
+        </div>
+      </form>
       <div class="split-line"></div>
       <div class="hth-tips">
         <h3>温馨提示</h3>
@@ -34,10 +43,11 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import HthPanel from 'common/Panel/index.vue';
-  import SmsTimer from 'common/sms-timer';
+  import { validateEmail } from 'utils/validate';
   import { fetchSendEmailCode } from 'api/public';
   import { fetchBindEmail } from 'api/home/account-set';
+  import HthPanel from 'common/Panel/index.vue';
+  import SmsTimer from 'common/sms-timer';
   
   export default {
     components: {
@@ -51,29 +61,44 @@
     },
     data() {
       return {
+        loading: false,
         startSmsTimer: false,
         bindEmailData: {
           email: '',
           authCode: ''
-        },
-        showPrompt: false
+        }
       }
     },
     methods: {
       sendCode() {
+        if (!validateEmail(this.bindEmailData.email)) {
+          this.$message({
+            message: '邮箱不合法，请重新输入',
+            type: 'warning'
+          });
+          return;
+        }
         fetchSendEmailCode({ email: this.bindEmailData.email })
           .then(response => {
             if (response.data.meta.code === 200) {
               this.startSmsTimer = true;
               this.showPrompt = true;
               this.$message({
-                message: '邮箱验证码已发送',
+                message: '邮箱验证码已发送,请前往邮箱查看',
                 type: 'success'
               });
             }
           });
       },
       bindEmail() {
+        if (!validateEmail(this.bindEmailData.email)) {
+          this.$message({
+            message: '邮箱不合法，请重新输入',
+            type: 'warning'
+          });
+          return;
+        }
+        if (this.bindEmailData.authCode) return;
         fetchBindEmail(this.bindEmailData)
           .then(response => {
             if (response.data.meta.code === 200) {

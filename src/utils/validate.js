@@ -10,6 +10,12 @@ export function validateMoney(str) {
   return reg.test(str)
 }
 
+/** 金额校验 */
+export function validateEmail(str) {
+  const reg = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+  return reg.test(str)
+}
+
 /** 大写字母*/
 export function validateUpperCase(str) {
   const reg = /^[A-Z]+$/;
