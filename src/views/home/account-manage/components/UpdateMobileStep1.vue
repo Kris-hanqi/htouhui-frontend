@@ -1,28 +1,37 @@
 <template>
   <div class="update-mobile-wrapper">
     <hth-panel title="验证手机号">
-      <el-form :model="mobileInfo" label-width="80px">
-        <el-form-item label="用户名">
-          <span>{{ username }}</span>
-        </el-form-item>
-        <el-form-item label="手机号">
-          <span>{{ mobile }}</span>
-        </el-form-item>
-        <el-form-item label="验证码">
-          <el-col :span="8">
-            <el-input v-model="mobileInfo.authCode" :maxlength="6" placeholder="请输入验证码"></el-input>
-          </el-col>
-          <el-col :span="11">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="col-md-2 control-label">用户名</label>
+          <div class="col-md-5">
+            <p class="form-control-static">{{ username || '无' }}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">手机号</label>
+          <div class="col-md-5">
+            <p class="form-control-static">{{ mobile || '无' }}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">验证码</label>
+          <div class="col-md-3">
+            <input class="form-control"
+                   type="text"
+                   v-model="mobileInfo.authCode"
+                   maxlength="6" placeholder="请输入短信验证码">
+          </div>
+          <div class="col-md-5">
             <sms-timer :start="startSmsTimer" @countDown="startSmsTimer = false" @click.native='sendCode'></sms-timer>
-          </el-col>
-        </el-form-item>
-        <el-form-item v-if="showCodePrompt">
-          <span>校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</span>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="checkCurrentMobile" style="width: 200px" round>提交</el-button>
-        </el-form-item>
-      </el-form>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-5">
+            <el-button type="primary" @click="checkCurrentMobile" :loading="loading" round>提交</el-button>
+          </div>
+        </div>
+      </form>
       <div class="split-line"></div>
       <div class="hth-tips">
         <h3>温馨提示</h3>
@@ -52,6 +61,7 @@
     },
     data() {
       return {
+        loading: false,
         startSmsTimer: false,
         showCodePrompt: false,
         mobileInfo: {
@@ -74,7 +84,8 @@
           })
       },
       checkCurrentMobile() {
-        console.log(this.mobileInfo);
+        if (!this.mobileInfo.authCode) return;
+        this.loading = true;
         fetchCheckCurrentMobile(this.mobileInfo)
           .then(response => {
             if (response.data.meta.code === 200) {
@@ -87,6 +98,7 @@
                 type: 'error'
               });
             }
+            this.loading = false;
           })
       }
     }

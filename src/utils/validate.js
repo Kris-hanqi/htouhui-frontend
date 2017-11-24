@@ -10,9 +10,15 @@ export function validateMoney(str) {
   return reg.test(str)
 }
 
-/** 金额校验 */
+/** 邮箱校验 */
 export function validateEmail(str) {
   const reg = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+  return reg.test(str)
+}
+
+/** 手机号校验 */
+export function validateMobile(str) {
+  const reg = /^1[34578]\d{9}$/;
   return reg.test(str)
 }
 

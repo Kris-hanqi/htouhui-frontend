@@ -1,28 +1,40 @@
 <template>
   <div class="update-mobile-wrapper">
     <hth-panel title="验证手机号">
-      <el-form :model="mobileInfo" label-width="80px">
-        <el-form-item label="用户名">
-          <span>{{ username }}</span>
-        </el-form-item>
-        <el-form-item label="新手机号">
-          <el-input style="width: 380px" v-model="mobileInfo.mobile" :maxlength="11" placeholder="请输入手机号"></el-input>
-        </el-form-item>
-        <el-form-item label="验证码">
-          <el-col :span="8">
-            <el-input v-model="mobileInfo.authCode" :maxlength="6" placeholder="请输入验证码"></el-input>
-          </el-col>
-          <el-col :span="11">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="col-md-2 control-label">用户名</label>
+          <div class="col-md-5">
+            <p class="form-control-static">{{ username || '无' }}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">新手机号</label>
+          <div class="col-md-5">
+            <input class="form-control"
+                   type="text"
+                   v-model="mobileInfo.mobile"
+                   maxlength="11" placeholder="请输入新手机号">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">验证码</label>
+          <div class="col-md-3">
+            <input class="form-control"
+                   type="text"
+                   v-model="mobileInfo.authCode"
+                   maxlength="6" placeholder="请输入短信验证码">
+          </div>
+          <div class="col-md-5">
             <sms-timer :start="startSmsTimer" @countDown="startSmsTimer = false" @click.native='sendCode'></sms-timer>
-          </el-col>
-        </el-form-item>
-        <el-form-item v-if="showCodePrompt">
-          <span>校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</span>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="bindMobile" style="width: 200px" round>提交</el-button>
-        </el-form-item>
-      </el-form>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-5">
+            <el-button type="primary" @click="bindMobile" :loading="loading" round>提交</el-button>
+          </div>
+        </div>
+      </form>
       <div class="split-line"></div>
       <div class="hth-tips">
         <h3>温馨提示</h3>
@@ -34,6 +46,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import { validateMobile } from 'utils/validate';
   import SmsTimer from 'common/sms-timer';
   import HthPanel from 'common/Panel/index.vue';
   import { fetchSendCodeNew } from 'api/public';
@@ -52,8 +65,8 @@
     },
     data() {
       return {
+        loading: false,
         startSmsTimer: false,
-        showCodePrompt: false,
         mobileInfo: {
           type: 'change_binding_mobile_number',
           mobile: '',
@@ -63,6 +76,13 @@
     },
     methods: {
       sendCode() {
+        if (!validateMobile(this.mobileInfo.mobile)) {
+          this.$message({
+            message: '手机号不合法，请重新输入',
+            type: 'warning'
+          });
+          return;
+        }
         fetchSendCodeNew(this.mobileInfo)
           .then(response => {
             if (response.data.meta.code === 200) {
@@ -76,6 +96,15 @@
           })
       },
       bindMobile() {
+        if (!validateMobile(this.mobileInfo.mobile)) {
+          this.$message({
+            message: '手机号不合法，请重新输入',
+            type: 'warning'
+          });
+          return;
+        }
+        if (!this.mobileInfo.authCode) return;
+        this.loading = true;
         fetchUpdateBindMobile(this.mobileInfo)
           .then(response => {
             if (response.data.meta.code === 200) {
@@ -93,6 +122,7 @@
                 type: 'error'
               });
             }
+            this.loading = false;
           })
       }
     }
