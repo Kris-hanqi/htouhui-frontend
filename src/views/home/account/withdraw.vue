@@ -141,7 +141,6 @@
         this.withdrawData.cardNo = this.bankCard;
         this.withdrawData.inputMoney = this.money;
         this.withdrawData.sessionId = this.uuid;
-        this.loading = true;
         // 大于五万属于大额提现
         if (this.withdrawData.inputMoney >= 50002) {
           // 查看是否允许大额提现
@@ -172,6 +171,7 @@
           });
           return;
         }
+        this.loading = true;
         this.withdrawData.inputMoney = this.money;
         fetchWithdraw(this.withdrawData).then(response => {
           if (response.data.meta.code === 200) {
