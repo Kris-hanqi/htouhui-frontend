@@ -1,17 +1,19 @@
 <template>
   <div class="account-invest__wrapper">
     <hth-panel title="我的投资" v-loading="loading" element-loading-text="数据加载中...">
-      <div class="fl">
-        <invest-chart :chart-data="chartData"
-                      v-show="showChart !== 0"
-                      class="chart"
-                      :options="chartOptions"
-                      :width="160" :height="160"></invest-chart>
-        <div style="margin-top: 40px;" v-show="showChart === 0">
-          <i class="iconfont icon-round"></i>
+      <div class="col-row">
+        <div class="col-md-4" style="padding: 40px">
+          <invest-chart :chart-data="chartData"
+                        style="margin-top: 50px"
+                        v-show="showChart !== 0"
+                        :options="chartOptions"
+                        :width="160" :height="160"></invest-chart>
+          <div style="margin-top: 40px;" v-show="showChart === 0">
+            <i class="iconfont icon-round"></i>
+          </div>
         </div>
       </div>
-      <div class="fr">
+      <div class="col-md-8" style="padding: 0">
         <table>
           <thead>
           <tr>
@@ -119,11 +121,6 @@
 
 <style lang="scss">
   .account-invest__wrapper {
-    .chart {
-      display: inline-block;
-      margin-top: 100px;
-    }
-    
     .icon-round {
       font-size: 150px;
       color: #eee;
