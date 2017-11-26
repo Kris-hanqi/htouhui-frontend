@@ -8,11 +8,11 @@
 │   │   ├── dev.env.js
 │   │   └── test.env.js
 │   ├── 数字函数
-│   │   ├── dev.env.js
-│   │   ├── dev.env.js
-│   │   ├── dev.env.js
-│   │   ├── dev.env.js
-│   │   ├── [abs()](#2.5 abs())
+│   │   ├── percentage()
+│   │   ├── round()
+│   │   ├── ceil()
+│   │   ├── floor()
+│   │   ├── abs()
 │   │   └── test.env.js
 │   └── webpack.test.conf.js
 ├── test                     # 第三方不打包资源
@@ -24,14 +24,14 @@
 ```
 
 # 导航
-1. [函数](#函数)
-  * [字符串函数](#字符串函数)
-  * [数字函数](#数字函数)
-    * [percentage()](#percentage())
-    * [round()](#round())
-    * [ceil()](#ceil())
-    * [floor()](floor())
-    * [abs()](#abs())
+* [函数](#函数)
+   * [字符串函数](#字符串函数)
+   * [数字函数](#数字函数)
+      * [percentage](#percentage)
+      * [round](#round)
+      * [ceil](#ceil)
+      * [floor](#floor)
+      * [abs](#abs)
 
 # 函数
 
@@ -39,7 +39,7 @@
 
 ## 数字函数
 
-### percentage()
+### percentage
 
 > percentage($number) 将一个不带单位的数值转成百分比。
 
@@ -62,7 +62,7 @@
 
 ```
 
-### round()
+### round
 
 > round($number) 将$number 四舍五入为整数，$number可带单位。
 
@@ -77,7 +77,7 @@
 }
 ```
 
-### ceil()
+### ceil
 
 > ceil($number) 大于 $number ，向上取整。
 
@@ -99,7 +99,7 @@
 }
 ```
 
-### floor()
+### floor
 
 > 与 ceil()相反，floor($number) 去除 $number 小数，向下取整。
 
@@ -121,7 +121,7 @@
 }
 ```
 
-### abs()
+### abs
 
 > abs($number)，返回 $number 的绝对值。
 
