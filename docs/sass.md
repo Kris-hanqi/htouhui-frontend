@@ -24,21 +24,22 @@
 ```
 
 # 导航
-1. [函数](#一、函数)
-  * [字符串函数](#1、字符串函数)
-  * [数字函数](#2、数字函数)
-    * [percentage()](#2.1、percentage())
-    * [abs()](#2.5、abs())
+1. [函数](#函数)
+  * [字符串函数](#字符串函数)
+  * [数字函数](#数字函数)
+    * [percentage()](#percentage())
+    * [round()](#round())
+    * [ceil()](#ceil())
+    * [floor()](floor())
+    * [abs()](#abs())
 
-# 一、函数
+# 函数
 
-## 1、字符串函数
+## 字符串函数
 
-### 1.1 
+## 数字函数
 
-## 2、数字函数
-
-### 2.1、percentage()
+### percentage()
 
 > percentage($number) 将一个不带单位的数值转成百分比。
 
@@ -61,7 +62,7 @@
 
 ```
 
-### 2.2、round()
+### round()
 
 > round($number) 将$number 四舍五入为整数，$number可带单位。
 
@@ -76,7 +77,7 @@
 }
 ```
 
-### 2.3、ceil()
+### ceil()
 
 > ceil($number) 大于 $number ，向上取整。
 
@@ -98,7 +99,7 @@
 }
 ```
 
-### 2.4、floor()
+### floor()
 
 > 与 ceil()相反，floor($number) 去除 $number 小数，向下取整。
 
@@ -120,7 +121,7 @@
 }
 ```
 
-### 2.5、abs()
+### abs()
 
 > abs($number)，返回 $number 的绝对值。
 
