@@ -44,7 +44,7 @@ export function feachgRepaymentPlan(data) {
   })
 }
 
-/** 还款 */
+/** 还款(正常还款和逾期还款) */
 export function fetchRepayment(data) {
   return fetch({
     url: 'jixin/commonRepay',
@@ -64,11 +64,15 @@ export function fetchAdvanceRepayment(id) {
   })
 }
 
-/** 合同下载 */
+/** e签宝合同下载 */
 export function fetchContractDownload(id) {
   return fetch({
     url: 'user/borrowerEnsignFileDownload',
     method: 'get',
+    responseType: 'blob',
+    headers: {
+      Accept: 'application/zip'
+    },
     params: {
       loanId: id
     }
