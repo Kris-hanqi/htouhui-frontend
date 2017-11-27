@@ -136,6 +136,12 @@
                       type: 'error'
                     });
                   }
+                  if (response.data.meta.code === 707) {
+                    this.$message({
+                      message: '已经操作过还款',
+                      type: 'error'
+                    });
+                  }
                 })
             }
             done();

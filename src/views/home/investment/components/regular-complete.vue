@@ -43,10 +43,10 @@
     </div>
 
 
-    <el-dialog title="收款详情" :visible.sync="paymentDetail" width="30%">
+    <el-dialog title="收款详情" :visible.sync="paymentDetail" width="800px">
       <div class="dialog-main">
         <el-table :data="paymentDetailList" style="width: 100%">
-          <el-table-column prop="period" label="期数" fixed width="30"></el-table-column>
+          <el-table-column prop="period" label="期数" fixed width="50"></el-table-column>
           <el-table-column prop="corpus" label="本金">
             <template slot-scope="scope">
               {{ scope.row.corpus | currency('') + '元' }}
