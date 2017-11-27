@@ -72,6 +72,13 @@
     },
     methods: {
       sendCode() {
+        if (!this.bindEmailData.email) {
+          this.$message({
+            message: '请输入邮箱',
+            type: 'warning'
+          });
+          return;
+        }
         if (!validateEmail(this.bindEmailData.email)) {
           this.$message({
             message: '邮箱不合法，请重新输入',
@@ -91,6 +98,13 @@
           });
       },
       bindEmail() {
+        if (!this.bindEmailData.email) {
+          this.$message({
+            message: '请输入邮箱',
+            type: 'warning'
+          });
+          return;
+        }
         if (!validateEmail(this.bindEmailData.email)) {
           this.$message({
             message: '邮箱不合法，请重新输入',
