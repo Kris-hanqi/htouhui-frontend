@@ -40,10 +40,10 @@
 </template>
 
 <script>
-  import RepaymentPlan from './repaymentPlan.vue';
-  import { fetchContractDownload } from 'api/home/loan';
   import { mapGetters } from 'vuex';
-
+  import { fetchContractDownload } from 'api/home/loan';
+  import RepaymentPlan from './repaymentPlan.vue';
+  
   export default {
     components: {
       RepaymentPlan
