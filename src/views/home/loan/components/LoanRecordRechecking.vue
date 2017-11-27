@@ -15,7 +15,7 @@
     </el-table-column>
     <el-table-column label="借款期限" width="100">
       <template slot-scope="scope">
-        {{ scope.row.deadline + '月' }}
+        {{ scope.row.deadline + '天' }}
       </template>
     </el-table-column>
     <el-table-column prop="status" label="状态" width="110"></el-table-column>
