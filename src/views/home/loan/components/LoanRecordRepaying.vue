@@ -69,7 +69,8 @@
         this.visible = false;
       },
       contractDownload(data) {
-        if (data.isEnsignContract) {
+        // e签宝下载
+        if (data.ensignContract) {
           fetchContractDownload(data.id);
         }
       }

@@ -34,7 +34,7 @@ service.interceptors.response.use(
   response => {
     const data = response.data;
     // 用户未登录 / 登录失效
-    if (data.meta.code === errorCode.ESS_USER_IS_NOT_LOGIN) {
+    if (data.meta && data.meta.code === errorCode.ESS_USER_IS_NOT_LOGIN) {
       if (!openModalStatus) {
         openModalStatus = true;
         MessageBox.alert('登录超时，请重新登录', '提示', {

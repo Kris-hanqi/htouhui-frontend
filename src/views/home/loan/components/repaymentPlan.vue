@@ -99,7 +99,7 @@
                     type: 'success',
                     position: 'top-left'
                   });
-                  this.getPageList();
+                  this.$emit('close')
                 } else {
                   this.$notify({
                     title: '还款失败',
@@ -128,8 +128,9 @@
                       message: '提前还款成功!',
                       type: 'success'
                     });
+                    this.$emit('close')
                   }
-                  if (response.data.meta.code !== 500) {
+                  if (response.data.meta.code === 9999) {
                     this.$message({
                       message: response.data.meta.message,
                       type: 'error'
