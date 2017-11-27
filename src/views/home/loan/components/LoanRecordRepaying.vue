@@ -41,6 +41,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import fileSaver from 'file-saver';
   import { fetchContractDownload } from 'api/home/loan';
   import RepaymentPlan from './repaymentPlan.vue';
   
@@ -71,7 +72,10 @@
       contractDownload(data) {
         // e签宝下载
         if (data.ensignContract) {
-          fetchContractDownload(data.id);
+          fetchContractDownload(data.id)
+            .then(response => {
+              fileSaver.saveAs(response.data, '海投汇-合同.zip');
+            });
         }
       }
     }
