@@ -103,6 +103,7 @@
     computed: {
       ...mapGetters([
         'uuid',
+        'baseUrl',
         'bankCard',
         'bankName'
       ])
@@ -122,7 +123,8 @@
           source: 'pc',
           cnapNumber: '',
           cardNo: '',
-          sessionId: ''
+          sessionId: '',
+          callbackUrl: ''
         },
         commissionCharge: 0,
         operationalValidateData: ['openAccount', 'transactionPassword', 'bankCard']
@@ -173,6 +175,7 @@
         }
         this.loading = true;
         this.withdrawData.inputMoney = this.money;
+        this.withdrawData.callbackUrl = this.baseUrl + '/user/home.html';
         fetchWithdraw(this.withdrawData).then(response => {
           if (response.data.meta.code === 200) {
             this.requestData = response.data.data;
