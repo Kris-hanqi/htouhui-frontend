@@ -62,7 +62,7 @@
       <el-table-column prop="regular" label="债权信息">
         <template slot-scope="scope">
           <el-button class="icon-interests" v-if="scope.row.status === 'matched'" @click="lookJoinRegular(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
-          <p v-else>查看债权</p>
+          <p v-else>暂无债权</p>
         </template>
       </el-table-column>
       <el-table-column prop="todo" label="操作" fixed="right">
@@ -265,6 +265,7 @@
 
     .icon-interests {
       color: #0573f4;
+      font-size: 14px;
     }
   }
 </style>
