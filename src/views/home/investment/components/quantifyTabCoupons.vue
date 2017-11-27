@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="message-list" v-if="messageList.couponType !== 'cash'">
-        <p class="title">贴息流水</p>
+        <p class="title">加息流水</p>
         <el-table :data="list" style="width: 100%">
           <el-table-column prop="time" label="时间"></el-table-column>
           <el-table-column prop="investMoney" label="在投金额">
@@ -30,12 +30,12 @@
               {{ scope.row.investMoney | currency('') + '元' }}
             </template>
           </el-table-column>
-          <el-table-column prop="rate" label="贴息利率">
+          <el-table-column prop="rate" label="加息利率">
             <template slot-scope="scope">
               {{ scope.row.rate + '%' }}
             </template>
           </el-table-column>
-          <el-table-column prop="money" label="贴息金额">
+          <el-table-column prop="money" label="加息金额">
             <template slot-scope="scope">
               {{ scope.row.money | currency('') + '元' }}
             </template>
