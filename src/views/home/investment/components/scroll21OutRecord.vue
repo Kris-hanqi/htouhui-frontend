@@ -57,7 +57,8 @@
       </el-table-column>
       <el-table-column prop="lookEquity" label="查看"  width="70">
         <template slot-scope="scope">
-          <p>暂无债权</p>
+          <el-button v-if="scope.row.status == 'exited'" class="icon-interests" type="text" @click="lookOutRegular(scope.row.appointmentExitId)" size="small">查看债权</el-button>
+          <p v-else>暂无债权</p>
         </template>
       </el-table-column>
     </el-table>
@@ -89,9 +90,9 @@
         total: 0,
         dateType: '3day',
         typeList: [
-          { key: 'apply_exit', value: '预约退出中' },
-          { key: 'exiting', value: '预约退出中' },
-          { key: 'exited', value: '成功' }
+          { key: 'apply_exit', value: '退出处理中' },
+          { key: 'exiting', value: '退出处理中' },
+          { key: 'exited', value: '已退出' }
         ]
       }
     },

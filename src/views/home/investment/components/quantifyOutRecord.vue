@@ -94,7 +94,7 @@
         total: 0,
         dateType: '3day',
         typeList: [
-          { key: 'apply_exit', value: '申请退出' },
+          { key: 'apply_exit', value: '退出处理中' },
           { key: 'exiting', value: '退出处理中' },
           { key: 'exited', value: '已退出' }
         ]

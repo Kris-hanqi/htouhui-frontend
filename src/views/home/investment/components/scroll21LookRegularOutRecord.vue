@@ -99,8 +99,8 @@
         list: null,
         total: 0,
         typeList: [
-          { key: 'complete', value: '完成' },
-          { key: 'repaying', value: '还款中' }
+          { key: 'complete', value: '成功' },
+          { key: 'repaying', value: '退出处理中' }
         ]
       }
     },
@@ -124,8 +124,6 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            console.log('升薪宝滚动21您购买的债券信息' + this.list);
-            console.log(this.list);
             this.total = data.data.count || 0;
           }
         })
