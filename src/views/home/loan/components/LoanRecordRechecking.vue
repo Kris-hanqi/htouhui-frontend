@@ -2,7 +2,7 @@
   <el-table :data="list" :border="false" style="width: 100%">
     <el-table-column prop="name" label="项目名称" width="140">
       <template slot-scope="scope">
-        <a :href="base + '/loan/' + scope.row.id" target="_blank">{{ scope.row.name }}</a>
+        <a :href="baseUrl + '/loan/' + scope.row.id" target="_blank">{{ scope.row.name }}</a>
       </template>
     </el-table-column>
     <el-table-column prop="loanMoney" label="借款金额" width="130"></el-table-column>
