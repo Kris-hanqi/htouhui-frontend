@@ -18,7 +18,7 @@
           <el-table-column label="操作">
             <template slot-scope="scope">
               <div>
-                <el-button @click="repayment(scope.row.repayId)" v-if="scope.row.manual === 1" type="text">还款</el-button>
+                <el-button @click="repayment(scope.row.repayId)" v-if="scope.row.manual === 1 && this.recordType !== 'finished'" type="text">还款</el-button>
                 <span v-else>--</span>
               </div>
             </template>
@@ -31,7 +31,7 @@
           <span>罚息: {{ publishFee }}</span>
           <span>利息: {{ interst }}</span>
           <el-button size="small"
-                     v-if="canAdvance === 1"
+                     v-if="canAdvance === 1 && this.recordType !== 'finished'"
                      @click="advanceRepayment"
                      type="primary" round>提前还款</el-button>
         </div>
@@ -49,6 +49,9 @@
         type: Boolean,
         default: false,
         required: true
+      },
+      recordType: {
+        type: String
       }
     },
     data() {

@@ -21,6 +21,7 @@
 
     <!-- 还款计划 -->
     <repayment-plan :visible="visible"
+                    :record-type="'finished'"
                     ref="repayment-plan"
                     @close="closeRepaymentPlan"></repayment-plan>
   </div>
