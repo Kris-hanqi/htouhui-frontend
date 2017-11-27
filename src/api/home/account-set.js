@@ -17,7 +17,7 @@ export function fetchBindBankCard(code) {
   })
 }
 
-/** 绑定邮箱 */
+/** 绑定||换绑邮箱 */
 export function fetchBindEmail(data) {
   return fetch({
     url: 'user/bindEmail',
@@ -26,7 +26,16 @@ export function fetchBindEmail(data) {
   })
 }
 
-/** 检验验证码 */
+/** 校验原邮箱 */
+export function fetchCheckCurrentEmail(data) {
+  return fetch({
+    url: 'user/checkCurrentEmail',
+    method: 'get',
+    params: data
+  })
+}
+
+/** 检验手机验证码 */
 export function fetchCheckCurrentMobile(data) {
   return fetch({
     url: 'user/checkCurrentMobile',

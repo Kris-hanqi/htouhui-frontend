@@ -1,29 +1,39 @@
 <template>
   <div class="amendLoginPwd">
     <hth-panel title="修改邮箱">
-      <div class="amendLoginPwdMsg">
-        <ul>
-          <li>
-            <label>用户名</label>
-            <span class="amendLoginName">{{ realName }}</span>
-          </li>
-          <li class="marginTop">
-            <label>邮箱</label>
-            <input type="text" placeholder="请输新邮箱">
-          </li>
-          <li>
-            <i class="dangerousIcon"></i>
-            <span class="dangerousTxt">新邮箱不可与原邮箱相同！</span>
-          </li>
-          <li>
-            <label>验证码</label>
-            <input type="text" placeholder="请输入验证码">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="col-md-2 control-label">用户名</label>
+          <div class="col-md-5">
+            <p class="form-control-static">{{ username || '无' }}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">新邮箱</label>
+          <div class="col-md-5">
+            <input class="form-control"
+                   type="text"
+                   v-model="info.email" placeholder="请输入新邮箱">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">验证码</label>
+          <div class="col-md-3">
+            <input class="form-control"
+                   type="text"
+                   v-model="info.authCode"
+                   maxlength="6" placeholder="请输入邮箱验证码">
+          </div>
+          <div class="col-md-5">
             <sms-timer :start="startSmsTimer" @countDown="startSmsTimer = false" @click.native='sendCode'></sms-timer>
-          </li>
-        </ul>
-        <p class="yzmCodeSent">校验码已发出，请注意查收短信，如果没有收到，你可以在60秒后要求系统重新发送</p>
-        <button class="submitBtn">提交</button>
-      </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-5">
+            <el-button type="primary" @click="bindEmail" :loading="loading" round>提交</el-button>
+          </div>
+        </div>
+      </form>
       <div class="split-line"></div>
       <div class="hth-tips">
         <h3>温馨提示</h3>
@@ -35,9 +45,11 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import { validateEmail } from 'utils/validate';
+  import { fetchSendEmailCode } from 'api/public';
+  import { fetchBindEmail } from 'api/home/account-set';
   import SmsTimer from 'common/sms-timer';
   import HthPanel from 'common/Panel/index.vue';
-  import { fetchSendEmailCode } from 'api/public';
   
   export default {
     components: {
@@ -46,19 +58,38 @@
     },
     computed: {
       ...mapGetters([
-        'realName'
+        'username',
+        'email'
       ])
     },
     data() {
       return {
+        loading: false,
         startSmsTimer: false,
-        showPrompt: false
+        info: {
+          email: '',
+          type: 'change_binding_email',
+          authCode: ''
+        }
       }
     },
     methods: {
       sendCode() {
-        if (!this.email) return;
-        fetchSendEmailCode({ email: this.email })
+        if (!validateEmail(this.info.email)) {
+          this.$message({
+            message: '邮箱不合法，请重新输入',
+            type: 'warning'
+          });
+          return;
+        }
+        if (this.info.email === this.email) {
+          this.$message({
+            message: '不能与原邮箱一致',
+            type: 'warning'
+          });
+          return;
+        }
+        fetchSendEmailCode(this.info)
           .then(response => {
             if (response.data.meta.code === 200) {
               this.startSmsTimer = true;
@@ -69,6 +100,42 @@
               });
             }
           });
+      },
+      bindEmail() {
+        if (!validateEmail(this.info.email)) {
+          this.$message({
+            message: '邮箱不合法，请重新输入',
+            type: 'warning'
+          });
+          return;
+        }
+        if (this.info.email === this.email) {
+          this.$message({
+            message: '不能与原邮箱一致',
+            type: 'warning'
+          });
+          return;
+        }
+        if (!this.info.authCode) return;
+        this.loading = true;
+        fetchBindEmail(this.info)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.$store.commit('SET_EMAIL', this.info.email);
+              this.$message({
+                message: '邮箱绑定成功！',
+                type: 'success'
+              });
+              this.$router.push('/accountManage/set/index')
+            } else {
+              this.$notify({
+                title: '提示',
+                message: '操作失败:' + response.data.meta.message,
+                type: 'error'
+              });
+            }
+            this.loading = false;
+          });
       }
     }
   }
@@ -78,96 +145,5 @@
   .amendLoginPwd {
     width: 832px;
     height: 797px;
-
-    .amendLoginPwdMsg {
-      li:first-child {
-        margin-bottom: 20px;
-      }
-
-      li.marginTop {
-        margin-top: 18px;
-      }
-
-      label {
-        display: inline-block;
-        vertical-align: middle;
-        width: 110px;
-        font-size: 16px;
-        line-height: 1;
-        text-align: right;
-        color: #727e90;
-      }
-
-      input {
-        width: 252px;
-        height: 54px;
-        background-color: #fff;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        border: solid 1px #bfc1c4;
-        padding-left: 14px;
-        margin-left: 10px;
-      }
-
-      input::-webkit-input-placeholder { color: #aab2c9; }
-
-      :-moz-placeholder { color: #aab2c9; }
-
-      ::-moz-placeholder { color: #aab2c9; }
-
-      :-ms-input-placeholder { color: #aab2c9; }
-
-      i.dangerousIcon {
-        display: inline-block;
-        vertical-align: middle;
-        width: 20px;
-        height: 18px;
-        margin: 10px 5px 10px 132px;
-        background: url(../../../../assets/images/home/center-ico-dangerous.png) no-repeat;
-      }
-
-      span.amendLoginName {
-        margin-left: 20px;
-        font-size: 16px;
-        color: #394b67;
-      }
-
-      span.dangerousTxt {
-        font-size: 14px;
-        color: #ff7900;
-      }
-
-      p.yzmCodeSent {
-        font-size: 14px;
-        color: #838d9d;
-        margin-left: 124px;
-        margin-top: 14px;
-      }
-
-      .submitBtn {
-        width: 203px;
-        height: 46px;
-        border-radius: 100px;
-        background-color: #378ff6;
-        color: #fff;
-        margin-left: 152px;
-        margin-top: 33px;
-        margin-bottom: 39px;
-        font-size: 18px;
-        cursor: pointer;
-      }
-
-      .getYzmCode {
-        height: 46px;
-        border-radius: 100px;
-        background-color: #dfe8f0;
-        font-size: 16px;
-        text-align: center;
-        padding: 0 20px;
-        color: #7c86a2;
-        margin-left: 15px;
-        cursor: pointer;
-      }
-    }
   }
 </style>

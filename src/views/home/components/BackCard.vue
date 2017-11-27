@@ -35,7 +35,7 @@
   .back-card-wrapper {
     .no-bank-card {
       width: 300px;
-      height: 125px;
+      height: 170px;
       border-radius: 11px;
       background-color: #f6f9fe;
       padding-top: 38px;
