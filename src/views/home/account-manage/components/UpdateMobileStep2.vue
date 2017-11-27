@@ -69,6 +69,7 @@
         startSmsTimer: false,
         mobileInfo: {
           type: 'change_binding_mobile_number',
+          mobile: '',
           mobileNumber: '',
           authCode: ''
         }
@@ -120,6 +121,7 @@
         }
         if (!this.mobileInfo.authCode) return;
         this.loading = true;
+        this.mobileInfo.mobile = this.mobileInfo.mobileNumber;
         fetchUpdateBindMobile(this.mobileInfo)
           .then(response => {
             if (response.data.meta.code === 200) {
