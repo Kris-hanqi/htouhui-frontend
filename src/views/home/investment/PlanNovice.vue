@@ -4,7 +4,7 @@
     <!-- 未投资 显示标的信息 -->
     <div class="newUser-plan" v-if="novicePlanStatus === 1">
       <div class="newUser-plan-title">
-        <p>新手计划{{ novicePlanInfo.planId }}<span>{{ novicePlanInfo.startInvestMoney }}元起投，最高可投1万元 ，每人仅限1次 </span></p>
+        <p>{{ novicePlanInfo.planName }}<span>{{ novicePlanInfo.startInvestMoney }}元起投，最高可投1万元 ，每人仅限1次 </span></p>
       </div>
       <div class="newUser-plan-main">
         <div class="newUser-plan-rate">
@@ -19,7 +19,7 @@
         </div>
         <div class="newUser-plan-day">
           <p class="day"><span class="roboto-regular">{{ novicePlanInfo.lockPeriod }}</span>天</p>
-          <p>持有期限</p>
+          <p>到期自动退出</p>
         </div>
         <div class="newUser-plan-way">
           <p class="way">即投即生息</p>
@@ -54,7 +54,7 @@
               <span class="roboto-regular">{{ joinDetails.lockPeriod }}</span>
               {{ joinDetails.lockUnit === 'month' ? '月' : '日' }}
             </p>
-            <p>持有期限</p>
+            <p>到期自动退出</p>
           </div>
           <div class="newUser-plan-money">
             <p class="money"><span>{{ joinDetails.joinMoney | currency('') }}</span>元</p>
