@@ -98,7 +98,13 @@
           });
           return;
         }
-        if (!this.bindEmailData.authCode) return;
+        if (!this.bindEmailData.authCode) {
+          this.$message({
+            message: '请输入验证码',
+            type: 'warning'
+          });
+          return;
+        }
         this.loading = true;
         fetchBindEmail(this.bindEmailData)
           .then(response => {

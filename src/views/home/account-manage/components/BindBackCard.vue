@@ -29,7 +29,7 @@
         <div class="form-group">
           <label class="col-md-2 control-label">银行卡号</label>
           <div class="col-md-5">
-            <input type="text" v-model.number="bankCard" class="form-control" placeholder="请输入银行卡号">
+            <input type="text" v-model="bankCard" class="form-control" placeholder="请输入银行卡号">
           </div>
         </div>
         <div class="form-group">

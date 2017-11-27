@@ -234,7 +234,7 @@
     .title {
       text-align: center;
       font-size: 20px;
-      padding: 0;
+      margin: 0;
       color: #fff;
 
       span {

@@ -73,7 +73,7 @@
             display: false
           },
           tooltips: {
-            enabled: true
+            enabled: false // 关闭提示
           },
           cutoutPercentage: 70
         },

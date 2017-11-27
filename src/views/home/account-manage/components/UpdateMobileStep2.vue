@@ -13,7 +13,7 @@
           <div class="col-md-5">
             <input class="form-control"
                    type="text"
-                   v-model="mobileInfo.mobile"
+                   v-model="mobileInfo.mobileNumber"
                    maxlength="11" placeholder="请输入新手机号">
           </div>
         </div>
@@ -69,16 +69,24 @@
         startSmsTimer: false,
         mobileInfo: {
           type: 'change_binding_mobile_number',
-          mobile: '',
+          mobileNumber: '',
           authCode: ''
         }
       }
     },
     methods: {
       sendCode() {
-        if (!validateMobile(this.mobileInfo.mobile)) {
+        if (!this.mobileInfo.mobileNumber) return;
+        if (!validateMobile(this.mobileInfo.mobileNumber)) {
           this.$message({
             message: '手机号不合法，请重新输入',
+            type: 'warning'
+          });
+          return;
+        }
+        if (this.mobileInfo.mobileNumber === this.mobile) {
+          this.$message({
+            message: '与原手机号一致，请重新输入',
             type: 'warning'
           });
           return;
@@ -96,9 +104,16 @@
           })
       },
       bindMobile() {
-        if (!validateMobile(this.mobileInfo.mobile)) {
+        if (!validateMobile(this.mobileInfo.mobileNumber)) {
           this.$message({
             message: '手机号不合法，请重新输入',
+            type: 'warning'
+          });
+          return;
+        }
+        if (this.mobileInfo.mobileNumber === this.mobile) {
+          this.$message({
+            message: '与原手机号一致，请重新输入',
             type: 'warning'
           });
           return;
