@@ -83,7 +83,6 @@
           .then(response => {
             if (response.data.meta.code === 200) {
               this.startSmsTimer = true;
-              this.showPrompt = true;
               this.$message({
                 message: '邮箱验证码已发送,请前往邮箱查看',
                 type: 'success'

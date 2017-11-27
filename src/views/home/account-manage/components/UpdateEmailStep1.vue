@@ -1,28 +1,37 @@
 <template>
   <div class="update-mobile-step1">
-    <hth-panel title="修改邮箱">
-      <el-form :model="emailData" label-width="80px">
-        <el-form-item label="用户名">
-          <span>{{ username }}</span>
-        </el-form-item>
-        <el-form-item label="原邮箱">
-          <span>{{ email }}</span>
-        </el-form-item>
-        <el-form-item label="验证码">
-          <el-col :span="8">
-            <el-input v-model="emailData.authCode" :maxlength="6" placeholder="请输入验证码"></el-input>
-          </el-col>
-          <el-col :span="11">
+    <hth-panel title="验证邮箱">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="col-md-2 control-label">用户名</label>
+          <div class="col-md-5">
+            <p class="form-control-static">{{ username || '无' }}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">原邮箱</label>
+          <div class="col-md-5">
+            <p class="form-control-static">{{ email || '无' }}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">验证码</label>
+          <div class="col-md-3">
+            <input class="form-control"
+                   type="text"
+                   v-model="emailData.authCode"
+                   maxlength="6" placeholder="请输入邮箱验证码">
+          </div>
+          <div class="col-md-5">
             <sms-timer :start="startSmsTimer" @countDown="startSmsTimer = false" @click.native='sendCode'></sms-timer>
-          </el-col>
-        </el-form-item>
-        <el-form-item v-if="showPrompt">
-          <span>校验码已发出，请注意查看邮箱，如果没有收到，你可以在60秒后要求系统重新发送</span>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="checkCurrentEmail" style="width: 200px" round>提交</el-button>
-        </el-form-item>
-      </el-form>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-5">
+            <el-button type="primary" @click="checkCurrentEmail" :loading="loading" round>提交</el-button>
+          </div>
+        </div>
+      </form>
       <div class="split-line"></div>
       <div class="hth-tips">
         <h3>温馨提示</h3>
@@ -37,6 +46,7 @@
   import HthPanel from 'common/Panel/index.vue';
   import SmsTimer from 'common/sms-timer';
   import { fetchSendEmailCode } from 'api/public';
+  import { fetchCheckCurrentEmail } from 'api/home/account-set';
 
   export default {
     components: {
@@ -51,8 +61,8 @@
     },
     data() {
       return {
+        loading: false,
         startSmsTimer: false,
-        showPrompt: false,
         emailData: {
           authCode: ''
         }
@@ -61,7 +71,7 @@
     methods: {
       sendCode() {
         if (!this.email) return;
-        fetchSendEmailCode({ email: this.email })
+        fetchSendEmailCode({ email: this.email, type: 'change_binding_email' })
           .then(response => {
             if (response.data.meta.code === 200) {
               this.startSmsTimer = true;
@@ -74,7 +84,22 @@
           });
       },
       checkCurrentEmail() {
-        console.log(123);
+        if (!this.emailData.authCode) return;
+        this.loading = true;
+        fetchCheckCurrentEmail(this.emailData)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.$router.push('/accountManage/set/updateEmailStep2');
+            }
+            if (response.data.meta.code === 9999) {
+              this.$notify({
+                title: '验证失败',
+                message: response.data.meta.message,
+                type: 'error'
+              });
+            }
+            this.loading = false;
+          });
       }
     }
   }
