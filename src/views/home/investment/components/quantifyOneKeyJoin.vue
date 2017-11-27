@@ -14,7 +14,9 @@
         </div>
         <input type="text" class="inputMoney" v-model.number="userMoney" :placeholder="'加入金额须为'+ oneKeyJoinInfo.incrMoney +'的整数倍'">
         <div class="canUseMoney">
-          <p>可用余额<span class="roboto-regular">{{ oneKeyJoinInfo.balance | currency('') }}</span>元<router-link to="/recharge"><span>充值</span></router-link></p>
+          <p>可用余额<span class="roboto-regular">{{ oneKeyJoinInfo.balance | currency('') }}</span>元
+           <el-button type="text" @click="goRecharge">充值</el-button>
+          </p>
         </div>
         <div  v-if="couponsList.count == 0" class="coupons-no">暂无优惠券</div>
         <div v-else class="coupons-box">
@@ -33,7 +35,7 @@
                     <div class="coupon-img" :id="str.userCouponId">{{ str.type == 'plus_coupon' ? str.rate : str.money }}{{ str.type | keyToValue(typeList) }}</div>
                     <div class="coupon-message">
                       <p>满{{ str.lowerLimitMoney | currency('') }}元可用</p>
-                      <p><span v-if="str.maxInterestMoney !== null">最高计息金额：{{ str.maxInterestMoney | currency('') }}元 </span><span v-if="str.interestDeadline != null"> 最高计息天数：{{ str.interestDeadline }}天</span></p>
+                      <p><span v-if="str.maxInterestMoney !== null">最高计息金额：{{ str.maxInterestMoney | currency('') }}元 </span><span v-if="str.interestDeadline !== null"> 最高计息天数：{{ str.interestDeadline }}天</span></p>
                     </div>
                   </el-radio>
                 </div>
@@ -215,6 +217,9 @@
           this.showUsedCoupon = false;
         }
         this.operationalCouponsListView();
+      },
+      goRecharge() {
+        this.$router.push({ path: '/account/recharge', query: { type: 'oneKeyJoin', id: this.planId } });
       }
     },
     created() {

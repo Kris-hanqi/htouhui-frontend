@@ -38,12 +38,19 @@
     },
     data() {
       return {
+        type: '',
         accountData: {
           name: this.name,
           accountId: this.accountId
         },
         activeName: 'one'
       };
+    },
+    created() {
+      if (this.$route.query.type) {
+        this.type = this.$route.query.type;
+        console.log(this.type);
+      }
     }
   }
 </script>
