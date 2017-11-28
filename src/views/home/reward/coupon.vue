@@ -43,7 +43,7 @@
       </div>
 
       <!-- 分页 -->
-      <div class="pages" v-show="!listLoading">
+      <div class="pages" v-show="!listLoading && list">
         <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
         <el-pagination
           @current-change="handleCurrentChange"
@@ -93,6 +93,7 @@
     methods: {
       // 切换优惠券列表
       getPageList() {
+        console.log(this.listQuery);
         this.listLoading = true;
         fetchPageList(this.listQuery).then(response => {
           const data = response.data;
@@ -105,6 +106,7 @@
       },
       // 切换优惠券类型
       handleTabClick(tab) {
+        this.listQuery.pageNo = 1;
         this.listQuery.type = tab.name;
         this.listQuery.status = 'unused';
         this.getPageList();
@@ -116,8 +118,8 @@
       },
       // 切换优惠券状态
       switchStatus(data) {
-        this.listQuery.status = data;
         this.listQuery.pageNo = 1;
+        this.listQuery.status = data;
         this.getPageList();
       },
       // 打开兑换优惠券modal
