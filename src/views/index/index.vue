@@ -75,7 +75,7 @@
   import HthBanner from 'components/swiper'; // 轮播
   import HthHeader from 'components/header';
   import HthFooter from 'components/footer';
-  import HthSliderBar from 'common/slider-bar';
+  import HthSliderBar from 'components/slider-bar';
   import NoticeTopBox from './components/index-notice-top.vue'; // 最新公告
   import NewUserPlan from './components/index-newUser-plan.vue'; // 新手计划
   import AdvertisingBoard from './components/index-advertising-borad.vue'; //  广告位

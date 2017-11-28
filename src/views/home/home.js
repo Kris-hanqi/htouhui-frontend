@@ -13,6 +13,7 @@ import {
   Tabs,
   Tooltip,
   Loading,
+  Popover,
   TabPane,
   Message,
   Form,
@@ -63,6 +64,7 @@ Vue.use(DatePicker);
 Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(Input);
+Vue.use(Popover);
 Vue.use(Steps);
 Vue.use(Step);
 Vue.use(Radio);

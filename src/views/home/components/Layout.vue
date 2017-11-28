@@ -38,7 +38,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import HthHeader from 'components/header';
-  import HthSliderBar from 'common/slider-bar';
+  import HthSliderBar from 'components/slider-bar';
   import HthBreadcrumb from './breadcrumb';
   import HthSidebar from './Sidebar';
   import { fetchAdRecommend } from 'api/home/public';

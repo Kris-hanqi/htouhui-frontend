@@ -1,7 +1,18 @@
 <template>
   <div class="slider-bar">
+    <!-- 收益计算器 -->
+    <el-popover
+      ref="popover1"
+      placement="left"
+      popper-class="gain-calculator-popover"
+      :visible-arrow="false"
+      width="320"
+      trigger="hover">
+      <gain-calculator></gain-calculator>
+    </el-popover>
+    
     <!--计算器-->
-    <div class="count"></div>
+    <div class="count" v-popover:popover1></div>
     <!--在线客服-->
     <div class="online-service">
       <div class="slider-bar-box">
@@ -17,16 +28,23 @@
 
 <script>
   import HthBackTop from 'common/back-top';
+  import GainCalculator from '../gain-calculator';
 
   export default {
     name: 'SliderBar',
     components: {
-      HthBackTop
+      HthBackTop,
+      GainCalculator
     }
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+  .gain-calculator-popover {
+    border: 2px solid #4181dc;
+    padding: 0;
+  }
+  
   .slider-bar {
     position: fixed;
     right: 15px;
