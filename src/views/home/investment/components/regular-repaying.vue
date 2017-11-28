@@ -71,7 +71,7 @@
 
     <el-dialog title="还款计划"
                :visible.sync="investRepays"
-               width="700px">
+               width="830px">
       <div class="dialog-main">
         <el-table :data="investRepaysList" style="width: 100%">
           <el-table-column prop="period" label="期数" width="50"></el-table-column>
@@ -107,7 +107,7 @@
           </el-table-column>
           <el-table-column prop="repayDay" label="还款日"></el-table-column>
           <el-table-column prop="time" label="还款时间"></el-table-column>
-          <el-table-column prop="status" label="状态" fixed="right">
+          <el-table-column prop="status" label="状态">
             <template slot-scope="scope">
               {{ scope.row.status | keyToValue(statusList) }}
             </template>
@@ -183,6 +183,9 @@
           const data = response.data;
           if (data.meta.code === 200) {
             this.investRepaysList = data.data;
+            if (this.investRepaysList) {
+              this.investRepaysList.sort((a, b) => a.period - b.period);
+            }
           }
         })
       },
@@ -208,7 +211,6 @@
 </script>
 
 <style lang="scss" scoped>
-
   .icon-award {
     width: 24px;
     height: 24px;
@@ -222,5 +224,4 @@
   .icon-interests {
     color: #0573f4;
   }
-
 </style>
