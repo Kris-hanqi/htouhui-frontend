@@ -3,7 +3,7 @@
     <div class="details">
       <div class="title-box">
         <span class="title">退出记录-债权信息</span>
-        <a href="javascript:void(0)" class="return-prev-pages" @click="returnPrevPages(outPlanList.planId)">返回上一页 ></a>
+        <a class="return-prev-pages" @click.stop="returnPrevPages(outPlanList.planId)">返回上一页 ></a>
       </div>
       <div class="look-regular-main">
         <div class="look-regular-money">
@@ -126,7 +126,7 @@
       },
       getPageList() {
         this.listQuery.exitPlanId = this.listQuery.planId;
-          this.listLoading = true;
+        this.listLoading = true;
         feachGetExitList(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {

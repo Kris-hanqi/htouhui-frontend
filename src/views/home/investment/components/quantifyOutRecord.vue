@@ -4,16 +4,16 @@
       <ul class="times">
         <li>交易时间：</li>
         <li>
-          <a href="javascript:void(0)" @click="switchDateType('3day')" :class="{ active: dateType === '3day'}">近三天</a>
+          <a @click.stop="switchDateType('3day')" :class="{ active: dateType === '3day'}">近三天</a>
         </li>
         <li>
-          <a href="javascript:void(0)" @click="switchDateType('1month')" :class="{ active: dateType === '1month'}">近一个月</a>
+          <a @click.stop="switchDateType('1month')" :class="{ active: dateType === '1month'}">近一个月</a>
         </li>
         <li>
-          <a href="javascript:void(0)" @click="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a>
+          <a @click.stop="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a>
         </li>
         <li>
-          <a href="javascript:void(0)" class="diy-time" @click="dateType = 'other'" :class="{ active: dateType === 'other'}">自定义时间</a>
+          <a @click.stop="dateType = 'other'" class="diy-time" :class="{ active: dateType === 'other'}">自定义时间</a>
         </li>
       </ul>
       <ul class="allChooseCalendar" v-show="dateType === 'other'">
@@ -61,7 +61,10 @@
       </el-table-column>
       <el-table-column prop="lookEquity" label="查看"  width="70">
         <template slot-scope="scope">
-          <el-button class="icon-interests" type="text" @click="lookOutRegular(scope.row.userExitId)" size="small">查看债权</el-button>
+          <div>
+            <el-button class="icon-interests" v-if="scope.row.isHaveInvest" type="text" @click="lookOutRegular(scope.row.userExitId)">查看债权</el-button>
+            <p v-else="">暂无债权</p>
+          </div>
         </template>
       </el-table-column>
     </el-table>
@@ -73,8 +76,8 @@
 </template>
 
 <script>
-  import { outRecord } from 'api/home/quantify';
-  import { getStartAndEndTime, getDateString } from '@/utils';
+  import { feachExitPlanBill } from 'api/home/investment';
+  import { getStartAndEndTime, getDateString } from 'utils/index';
 
   export default {
     data() {
@@ -132,7 +135,7 @@
           }
         }
         this.listLoading = true;
-        outRecord(this.listQuery).then(response => {
+        feachExitPlanBill(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
