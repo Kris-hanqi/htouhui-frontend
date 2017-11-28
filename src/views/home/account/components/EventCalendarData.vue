@@ -46,13 +46,14 @@
       </div>
       <div class="pages day-footer" v-show="dayData.investRepayInfo && dayData.investRepayInfo.length > 1">
         <div class="pages-content">
-          <el-button type="text" @click="handleDisableLeft" :disabled="isLeftDisabled">
+          <el-button type="text" @click="handleDisableLeft">
             <i class="iconfont icon-left-1"></i>
           </el-button>
-          <span class="pagination-bullet"></span>
-          <span class="pagination-bullet"></span>
-          <span class="pagination-bullet"></span>
-          <el-button type="text" @click="handleDisableRight" :disabled="isRightDisabled">
+          <span v-for="value in length"
+                :key="value"
+                :class="{'pagination-bullet-active': (value - 1) === index}"
+                class="pagination-bullet"></span>
+          <el-button type="text" @click="handleDisableRight">
             <i class="iconfont icon-right-1"></i>
           </el-button>
         </div>
@@ -88,8 +89,7 @@
       return {
         img_icon_calendar,
         index: 0,
-        isRightDisabled: false,
-        isLeftDisabled: true,
+        length: 0,
         dataOne: {
           loanName: '',
           investMoeny: '',
@@ -100,9 +100,14 @@
       }
     },
     watch: {
-      dayData: function (val) { // eslint-disable-line
-        this.index = 0;
-        this.dataOne = val.investRepayInfo[this.index];
+      index(val) {
+        if (val >= 0 && this.index < this.length) {
+          this.dataOne = this.dayData.investRepayInfo[val];
+        }
+      },
+      dayData(val) {
+        this.dataOne = val.investRepayInfo[0];
+        this.length = val.investRepayInfo.length;
       }
     },
     methods: {
@@ -111,25 +116,19 @@
         this.$emit('switch-view-type');
       },
       handleDisableRight() {
-        this.index++;
-        if (this.index <= this.dayData.investRepayInfo.length - 1) {
-          this.dataOne = this.dayData.investRepayInfo[this.index];
-          this.isLeftDisabled = false;
-          if (this.index === this.dayData.investRepayInfo.length - 1) {
-            this.isRightDisabled = true;
-          } else {
-            this.isRightDisabled = false;
-          }
+        if (!this.length) return;
+        if (this.index >= this.length - 1) {
+          this.index = 0;
+        } else {
+          this.index++;
         }
       },
       handleDisableLeft() {
-        this.index--;
-        this.testData = this.dayData.investRepayInfo[this.index];
-        this.isRightDisabled = false;
-        if (this.index === 0) {
-          this.isLeftDisabled = true;
+        if (!this.length) return;
+        if (this.index <= 0) {
+          this.index = this.length - 1;
         } else {
-          this.isLeftDisabled = false;
+          this.index--;
         }
       }
     }
@@ -324,12 +323,13 @@
           display: inline-block;
           width: 8px;
           height: 8px;
+          margin: 0 2px;
           border-radius: 100%;
           background: #ccc;
         }
   
         .pagination-bullet-active {
-          background: #007aff;
+          background: #50e3c2;
         }
       }
     }
