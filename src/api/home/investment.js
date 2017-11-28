@@ -71,3 +71,13 @@ export function feachJoinPlanDetails(data) {
   })
 }
 
+/** 退出记录债权详情页债权信息 */
+export function feachGetExitList(data) {
+  return fetch({
+    url: 'user/queryUserExitList',
+    method: 'get',
+    params: data
+  })
+}
+
+

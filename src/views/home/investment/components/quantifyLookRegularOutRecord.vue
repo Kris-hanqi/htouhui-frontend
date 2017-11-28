@@ -17,7 +17,7 @@
       </div>
       <div class="look-regular-bottom">
         <p>申请时间 <span class="roboto-regular">{{ outPlanList.applyTime }}</span></p>
-        <img v-if="outPlanList.status == 'exited'" class="type-message" src="../../../../assets/images/home/icon-success.png" alt=""/>
+        <img v-if="outPlanList.status === 'exited'" class="type-message" src="../../../../assets/images/home/icon-success.png" alt=""/>
         <img v-else class="type-message" src="../../../../assets/images/home/icon-outRecord.png" alt=""/>
       </div>
     </div>
@@ -28,39 +28,43 @@
         <p class="title-message">目前已为您成功退出   <span>{{ outPlanList.exitedMoney | currency('') }}元</span></p>
       </div>
       <el-table :data="list" style="width: 100%">
-        <el-table-column prop="loanId" label="项目编号" width="120"></el-table-column>
+        <el-table-column prop="loanId" label="项目编号" width="100"></el-table-column>
         <el-table-column prop="loanMoney" label="借款金额" width="100">
           <template slot-scope="scope">
             {{ scope.row.loanMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
-        <el-table-column prop="perid" label="借款期限" width="60">
+        <el-table-column label="往期年利率" width="80">
+          <template slot-scope="scope">
+            {{ scope.row.rate + '%' }}
+          </template>
+        </el-table-column>
+        <el-table-column label="借款期限" width="80">
           <template slot-scope="scope">
             {{ scope.row.perid | currency('') + '天' }}
           </template>
         </el-table-column>
-        <el-table-column prop="investMoney" label="投资金额" width="100">
+        <el-table-column label="投资金额" width="80">
           <template slot-scope="scope">
             {{ scope.row.investMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="repayTimeFormat" label="还款时间" width="80"></el-table-column>
-        <el-table-column prop="earnings" label="已收本息">
+        <el-table-column prop="repayTimeFormat" label="还款时间" width="70"></el-table-column>
+        <el-table-column label="已收本息" width="70">
           <template slot-scope="scope">
             {{ scope.row.earnings | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="uncollectedRepayMoney" label="待收本息">
+        <el-table-column label="待收本息" width="80">
           <template slot-scope="scope">
             {{ scope.row.uncollectedRepayMoney | currency('') + '元' }}
           </template>
         </el-table-column>
         <el-table-column prop="status" label="状态" width="60"></el-table-column>
-        <el-table-column prop="contract" label="合同" width="40">
+        <el-table-column prop="contract" label="合同" width="80">
           <template slot-scope="scope">
-            <a v-if="scope.row.showContract" class="icon-download" type="text">点击下载</a>
-            <a v-else class="icon-downloadNo" type="text">放款后可查看</a>
+            <el-button v-if="scope.row.showContract" type="text">点击下载</el-button>
+            <a v-else type="text">放款后可查看</a>
           </template>
         </el-table-column>
       </el-table>
@@ -74,7 +78,7 @@
 
 <script>
   import { getExitInfo } from 'api/home/getExitInfo';
-  import { findExitPlanBill } from 'api/home/findExitPlanBill';
+  import { feachGetExitList } from 'api/home/investment';
   import interestRate from 'components/interest-rate';
 
   export default {
@@ -121,8 +125,9 @@
         })
       },
       getPageList() {
-        this.listLoading = true;
-        findExitPlanBill(this.listQuery).then(response => {
+        this.listQuery.exitPlanId = this.listQuery.planId;
+          this.listLoading = true;
+        feachGetExitList(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
