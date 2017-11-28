@@ -84,7 +84,12 @@
           })
       },
       checkCurrentMobile() {
-        if (!this.mobileInfo.authCode) return;
+        if (!this.mobileInfo.authCode) {
+          this.$message({
+            message: '请填写验证码',
+            type: 'warning'
+          });
+        }
         this.loading = true;
         fetchCheckCurrentMobile(this.mobileInfo)
           .then(response => {
