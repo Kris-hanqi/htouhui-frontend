@@ -3,7 +3,7 @@
     <hth-panel title="我要充值">
       <el-tabs v-model="activeName" type="card">
         <el-tab-pane label="快捷充值" name="one">
-          <fast-recharge></fast-recharge>
+          <fast-recharge :type="type" :loan-id="loanId"></fast-recharge>
         </el-tab-pane>
         <el-tab-pane label="跨行转账" name="two">
           <inter-bank-transfer :account-data="{ realName: realName, accountId: accountId }"></inter-bank-transfer>
@@ -39,6 +39,7 @@
     data() {
       return {
         type: '',
+        loanId: '',
         accountData: {
           name: this.name,
           accountId: this.accountId
@@ -49,7 +50,7 @@
     created() {
       if (this.$route.query.type) {
         this.type = this.$route.query.type;
-        console.log(this.type);
+        this.loanId = this.$route.query.id;
       }
     }
   }

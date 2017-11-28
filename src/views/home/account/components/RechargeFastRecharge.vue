@@ -68,13 +68,22 @@
   export default {
     computed: {
       ...mapGetters([
-        'uuid'
+        'uuid',
+        'baseUrl'
       ])
     },
     components: {
       RequestBankFrom,
       BankLimit,
       BankCard
+    },
+    props: {
+      type: {
+        type: String
+      },
+      loanId: {
+        type: String
+      }
     },
     data() {
       return {
@@ -117,6 +126,11 @@
             message: '充值金额输入不合法，请重新输入',
             type: 'warning'
           });
+        }
+        if (this.type && this.type === 'oneKeyJoin' && this.loanId) {
+          this.rechargeData.callbackUrl = `${this.baseUrl}/user/home.html/#/investment/quantify/oneKeyJoin/${this.loanId}`;
+        } else {
+          this.rechargeData.callbackUrl = `${this.baseUrl}/user/home.html`;
         }
         this.loading = true;
         this.rechargeData.sessionId = this.uuid;

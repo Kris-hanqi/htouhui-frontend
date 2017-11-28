@@ -61,7 +61,7 @@
 </template>
 
 <script>
-  import img_inter_bank_step from '@/assets/images/home/recharge/inter-bank-step.png';
+  import img_inter_bank_step from 'assets/images/home/recharge/inter-bank-step.png';
   
   export default {
     props: ['accountData'],
