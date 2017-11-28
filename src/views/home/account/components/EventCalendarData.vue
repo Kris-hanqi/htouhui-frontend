@@ -32,14 +32,18 @@
       <div class="event-detail__body day-body">
         <div class="box">
           <div class="title">{{ dataOne.loanName }}</div>
-          <div class="box-main">
-            <div class="left-part">
-              <p>投资金额<span class="roboto-regular">{{ dataOne.investMoeny | currency('') }}</span>元</p>
-              <p>本&nbsp;&nbsp;&nbsp;&nbsp;金<span class="roboto-regular">{{ dataOne.corpus | currency('') }}</span>元</p>
+          <div class="box-main row">
+            <div class="col-xs-4" style="padding-right: 0;">
+              <p>投资金额</p>
+              <p>本&nbsp;&nbsp;&nbsp;&nbsp;金</p>
+              <p>利&nbsp;&nbsp;&nbsp;&nbsp;息</p>
+              <p>平台奖励</p>
             </div>
-            <div class="right-part">
-              <p>利&nbsp;&nbsp;&nbsp;&nbsp;息<span class="roboto-regular">{{ dataOne.interest | currency('') }}</span>元</p>
-              <p>平台奖励<span class="roboto-regular">{{ dataOne.extraEarning | currency('')}}</span>元</p>
+            <div class="col-xs-8" style="padding-left: 0;">
+              <p>{{ dataOne.investMoeny | currency('') }}元</p>
+              <p>{{ dataOne.corpus | currency('') }}元</p>
+              <p>{{ dataOne.interest | currency('') }}元</p>
+              <p>{{ dataOne.extraEarning | currency('') }}元</p>
             </div>
           </div>
         </div>
@@ -274,7 +278,6 @@
     
         .box-main {
           width: 100%;
-          padding-left: 10px;
         }
     
         .box-main > div p {
