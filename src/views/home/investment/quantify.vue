@@ -38,7 +38,7 @@
       <div class="quantify-card__footer" v-if="item.joinPlan">
         <p>在投金额（元）<span class="roboto-regular">{{ item.investMoney | currency('') }}</span></p>
         <p>累计收益（元）<span class="roboto-regular">{{ item.accumulatedEarnings | currency('') }}</span></p>
-        <a href="javascript:void(0)" @click="lookTarget(item.planId)" class="seeBiao">查看标的</a>
+        <a @click.stop="lookTarget(item)" class="seeBiao">查看标的</a>
       </div>
     </div>
     <div class="not-data" v-show="quantifyData.length === 0">
@@ -80,8 +80,12 @@
       pullOut(id) {
         this.$router.push('/investment/quantify/pullOut/' + id);
       },
-      lookTarget(id) {
-        this.$router.push('/investment/quantify/lookTarget/' + id);
+      lookTarget(item) {
+        const queryData = {};
+        queryData.lockPeriod = item.lockPeriod;
+        queryData.investMoney = item.investMoney;
+        queryData.planName = item.planName;
+        this.$router.push({ path: '/investment/quantify/lookTarget/' + item.planId, query: queryData });
       },
       transactionRecord(id) {
         this.$router.push('/investment/quantify/transactionRecord/' + id);

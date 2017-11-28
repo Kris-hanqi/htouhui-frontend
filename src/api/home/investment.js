@@ -61,3 +61,13 @@ export function fetchNovicePlanInfo() {
     method: 'get'
   })
 }
+
+/** 资产详情-债权信息 */
+export function feachJoinPlanDetails(data) {
+  return fetch({
+    url: 'user/getJoinInfo',
+    method: 'get',
+    params: data
+  })
+}
+

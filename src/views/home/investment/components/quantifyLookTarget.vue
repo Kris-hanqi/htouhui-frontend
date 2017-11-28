@@ -1,4 +1,5 @@
 <template>
+  <!-- 升薪宝量化 查看标的 -->
   <div class="lookTarget">
     <div class="detail">
       <div class="title-box">
@@ -9,22 +10,22 @@
       </div>
       <div class="main">
         <div class="name">
-          <p><img src="../../../../assets/images/home/icon-shengXinBaoLiangHua.png" alt=""/></p>
-          <p>{{ messageList.planName }}</p>
+          <p><img :src="img_icon_sxb" alt=""/></p>
+          <p>{{ planInfo.planName }}</p>
         </div>
         <div class="limit">
-          <p><span class="roboto-regular">{{ messageList.lockPeriod }}</span>天</p>
+          <p><span class="roboto-regular">{{ planInfo.lockPeriod }}</span>天</p>
           <p>持有期限</p>
         </div>
         <div class="money">
-          <p><span class="roboto-regular">{{ messageList.joinMoney | currency('')  }}</span>元</p>
+          <p><span class="roboto-regular">{{ planInfo.investMoney | currency('')  }}</span>元</p>
           <p>在投金额</p>
         </div>
       </div>
     </div>
 
     <div class="message-list">
-      <p class="title">您在升薪宝量化90的在投标的</p>
+      <p class="title">您在{{ planInfo.planName }}的在投标的</p>
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="loanId" label="项目编号" width="120">
           <template slot-scope="scope">
@@ -62,8 +63,14 @@
         </el-table-column>
       </el-table>
       <div class="pages">
-        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-        <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
+        <p class="total-pages">共计
+          <span class="roboto-regular">{{ total }}</span>
+          条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）
+        </p>
+        <el-pagination @current-change="handleCurrentChange"
+                       :current-page.sync="listQuery.pageNo"
+                       :page-size="listQuery.size"
+                       layout="prev, pager, next" :total="total"></el-pagination>
       </div>
     </div>
   </div>
@@ -71,19 +78,24 @@
 
 <script>
   import { queryUserAssetInfoList } from 'api/home/queryUserAssetInfoList';
-  import { joinPlan } from 'api/home/getJoinInfo';
+  import img_icon_sxb from 'assets/images/home/icon-shengXinBaoLiangHua.png';
 
   export default {
     data() {
       return {
+        img_icon_sxb,
         list: null,
+        planInfo: {
+          lockPeriod: '',
+          investMoney: 0,
+          planName: ''
+        },
         listQuery: {
           planId: this.$route.params.id,
           pageNo: 1,
           pageSize: 10
         },
         total: 0,
-        messageList: {},
         messageQuery: {
           joinPlanId: this.$route.params.id
         }
@@ -105,14 +117,6 @@
           }
         })
       },
-      getMessageList() {
-        joinPlan(this.messageQuery).then(response => {
-          const data = response.data;
-          if (data.meta.code === 200) {
-            this.messageList = data.data;
-          }
-        })
-      },
       query() {
         this.getPageList();
       },
@@ -123,7 +127,9 @@
     },
     created() {
       this.getPageList();
-      this.getMessageList();
+      this.planInfo.lockPeriod = this.$route.query.lockPeriod;
+      this.planInfo.investMoney = this.$route.query.investMoney;
+      this.planInfo.planName = this.$route.query.planName;
     }
   }
 </script>
