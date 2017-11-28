@@ -89,3 +89,13 @@ export function feachGetExitList(data) {
   })
 }
 
+/** 资产详情页债权信息接口 */
+export function feachAssetInfoList(data) {
+  return fetch({
+    url: 'user/queryUserAssetInfoList',
+    method: 'get',
+    params: data
+  })
+}
+
+

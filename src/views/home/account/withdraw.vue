@@ -47,13 +47,15 @@
         <div class="form-group">
           <label class="col-md-2 control-label">手续费</label>
           <div class="col-md-5">
-            <p class="form-control-static">{{ (commissionCharge || 0) | currency('') }}元</p>
+            <p v-if="!money" class="form-control-static">{{ 0 | currency('') }}元</p>
+            <p v-else="" class="form-control-static">{{ (commissionCharge || 0) | currency('') }}元</p>
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-2 control-label">到账金额</label>
           <div class="col-md-5">
-            <p class="form-control-static">{{ (Number(money) - commissionCharge) | currency('') }}元</p>
+            <p v-if="!money" class="form-control-static">{{ 0 | currency('') }}元</p>
+            <p v-else="" class="form-control-static">{{ (Number(money) - commissionCharge) | currency('') }}元</p>
           </div>
         </div>
         <div class="form-group">
