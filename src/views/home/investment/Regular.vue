@@ -1,18 +1,18 @@
 <template>
   <div class="regular">
     <el-tabs v-model="activeName" type="card">
-      <el-tab-pane label="还款中" name="first">
-        <regular-repaying></regular-repaying>
-      </el-tab-pane>
-      <el-tab-pane label="投标中" name="second">
-        <regular-bid-success></regular-bid-success>
-      </el-tab-pane>
-      <el-tab-pane label="已结清" name="third">
-        <regular-complete></regular-complete>
-      </el-tab-pane>
-      <el-tab-pane label="未成功" name="four">
-        <regular-cancel></regular-cancel>
-      </el-tab-pane>
+      <el-tab-pane label="还款中" name="first"></el-tab-pane>
+      <el-tab-pane label="投标中" name="second"></el-tab-pane>
+      <el-tab-pane label="已结清" name="third"></el-tab-pane>
+      <el-tab-pane label="未成功" name="four"></el-tab-pane>
+  
+      <regular-repaying v-if="activeName === 'first'"></regular-repaying>
+  
+      <regular-bid-success v-if="activeName === 'second'"></regular-bid-success>
+  
+      <regular-complete v-if="activeName === 'third'"></regular-complete>
+  
+      <regular-cancel v-if="activeName === 'four'"></regular-cancel>
     </el-tabs>
   </div>
 </template>
@@ -32,7 +32,13 @@
     },
     data() {
       return {
+        type: '',
         activeName: 'first'
+      }
+    },
+    created() {
+      if (this.$route.query.tagName) {
+        this.activeName = this.$route.query.tagName;
       }
     }
   }
