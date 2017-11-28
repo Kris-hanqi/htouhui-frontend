@@ -93,7 +93,6 @@
     methods: {
       // 切换优惠券列表
       getPageList() {
-        console.log(this.listQuery);
         this.listLoading = true;
         fetchPageList(this.listQuery).then(response => {
           const data = response.data;
@@ -107,8 +106,8 @@
       // 切换优惠券类型
       handleTabClick(tab) {
         this.listQuery.pageNo = 1;
-        this.listQuery.type = tab.name;
         this.listQuery.status = 'unused';
+        this.listQuery.type = tab.name;
         this.getPageList();
       },
       // 优惠券分页
