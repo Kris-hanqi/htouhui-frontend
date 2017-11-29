@@ -33,6 +33,9 @@
           type: 'success'
         });
       }
+      if (this.$route.query.tagName === 'second') {
+        this.activeName = 'second';
+      }
     }
   };
 </script>
