@@ -52,7 +52,7 @@
           <div class="newUser-plan-day">
             <p class="day">
               <span class="roboto-regular">{{ joinDetails.lockPeriod }}</span>
-              {{ joinDetails.lockUnit === 'month' ? '月' : '日' }}
+              {{ joinDetails.lockUnit === 'month' ? '月' : '天' }}
             </p>
             <p>到期自动退出</p>
           </div>
