@@ -43,7 +43,7 @@
       if (this.$route.query.message) {
         this.$notify.info({
           title: '提示',
-          message: this.$route.query.message
+          message: '加入成功'
         });
       }
     }
