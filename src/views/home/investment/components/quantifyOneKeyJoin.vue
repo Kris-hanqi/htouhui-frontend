@@ -101,7 +101,7 @@
           planId: '',
           joinMoney: '',
           userCouponId: '',
-          source: 'pc'
+          source: 'web'
         },
         couponsList: [],
         typeList: [
