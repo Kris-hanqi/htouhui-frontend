@@ -50,9 +50,13 @@
         </div>
       </div>
       <div class="checkboxes">
-        <el-checkbox v-model="protocolList.one" class="checkbox-p">我同意<a :href="baseUrl + '/hetong/shengxinbaolhfuwuxieyi'" target="_blank">《 升薪宝量化服务协议 》</a></el-checkbox>
+        <el-checkbox v-model="protocolList.one" class="checkbox-p">
+          <span style="color: #727e90;">我同意</span>
+          <a :href="baseUrl + '/hetong/shengxinbaolhfuwuxieyi'" target="_blank">《 升薪宝量化服务协议 》</a></el-checkbox>
         <br>
-        <el-checkbox v-model="protocolList.two" class="checkbox-p">我同意<a :href="baseUrl + '/hetong/weituoautoshouquanshu'" target="_blank">《 委托系统自动出借及债权转让授权书 》</a></el-checkbox>
+        <el-checkbox v-model="protocolList.two" class="checkbox-p">
+          <span style="color: #727e90;">我同意</span>
+          <a :href="baseUrl + '/hetong/weituoautoshouquanshu'" target="_blank">《 委托系统自动出借及债权转让授权书 》</a></el-checkbox>
       </div>
       <el-button class="btn-join"
                  :loading="joinBthLoading"
