@@ -21,7 +21,7 @@
           <p>优惠券类型：<span>{{ messageList.couponType | keyToValue(typeList) }}</span></p>
         </div>
       </div>
-      <div class="message-list">
+      <div class="message-list" v-if="messageList.couponType == 'plus_coupon'">
         <p class="title">加息流水</p>
         <el-table :data="list" style="width: 100%">
           <el-table-column prop="time" label="时间"></el-table-column>
