@@ -67,7 +67,8 @@
       </el-table-column>
       <el-table-column prop="todo" label="操作" fixed="right">
         <template slot-scope="scope">
-          <el-button class="icon-interests" @click="goPullOut(scope.row.joinPlanId)" type="text" size="small">预约退出</el-button>
+          <p v-if="scope.row.canExitMoney == '' || scope.row.canExitMoney == null">--</p>
+          <el-button v-else class="icon-interests" @click="goPullOut(scope.row.joinPlanId)" type="text" size="small">预约退出</el-button>
         </template>
       </el-table-column>
     </el-table>
