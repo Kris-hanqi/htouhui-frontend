@@ -86,6 +86,13 @@
           return;
         }
         // 校验身份证号
+        if (!this.openAccountData.idCard) {
+          this.$message({
+            message: '身份证号不能为空',
+            type: 'warning'
+          });
+          return;
+        }
         if (!validateIdCard(this.openAccountData.idCard)) {
           this.$message({
             message: '身份证号不合法',
