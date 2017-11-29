@@ -41,3 +41,11 @@ export function fetchUpdatePassword(data) {
   })
 }
 
+/** 收益计算器 */
+export function feachGainCalculator(data) {
+  const path = `invest-calculator/${data.money}/${data.type}/${data.deadline}/${data.rate}`;
+  return fetch({
+    url: path,
+    method: 'get'
+  })
+}

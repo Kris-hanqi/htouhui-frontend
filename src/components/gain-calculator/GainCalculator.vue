@@ -9,7 +9,7 @@
         <div class="form-group">
           <label class="col-xs-4 control-label">投资金额</label>
           <div class="col-xs-7">
-            <input type="text" class="form-control" placeholder="请输入投资金额">
+            <input type="text" v-model.number="gainData.money" class="form-control" placeholder="请输入投资金额">
           </div>
         </div>
         <div class="form-group">
@@ -17,26 +17,26 @@
           <div class="col-xs-7">
             <div class="radio">
               <label>
-                <input type="radio" name="optionsRadios" value="option1">
-                1个月
+                <input type="radio" v-model="gainData.deadline" name="time" value="1">
+                1个月  <span><i>7.2</i>%</span>
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" name="optionsRadios" value="option2">
-                3个月
+                <input type="radio" v-model="gainData.deadline" name="time" value="3">
+                3个月 <span><i>8.0</i>%</span>
               </label>
             </div>
-            <div class="radio disabled">
+            <div class="radio">
               <label>
-                <input type="radio" name="optionsRadios" value="option3">
-                6个月
+                <input type="radio" v-model="gainData.deadline" name="time" value="6">
+                6个月 <span><i>9.5</i>%</span>
               </label>
             </div>
-            <div class="radio disabled">
+            <div class="radio">
               <label>
-                <input type="radio" name="optionsRadios" value="option3">
-                12个月
+                <input type="radio" v-model="gainData.deadline" name="time" value="12">
+                12个月 <span><i>11.0</i>%</span>
               </label>
             </div>
           </div>
@@ -47,11 +47,9 @@
             <p class="form-control-static box">{{ gain }}元</p>
           </div>
         </div>
-        <div class="form-group">
-          <button>计算收益</button>
-        </div>
-        <div class="form-group">
-          <p>以上结果为先息后本计算方式</p>
+        <div class="form-group" style="margin: 0 40px; text-align: center;">
+          <el-button type="primary" @click="getGain" style="width: 100%" round>计算收益</el-button>
+          <p style="margin-top: 20px">以上结果为先息后本计算方式</p>
         </div>
       </form>
     </div>
@@ -59,10 +57,38 @@
 </template>
 
 <script>
+  import { feachGainCalculator } from 'api/public';
   export default {
     data() {
       return {
+        gainData: {
+          money: '',
+          type: 'loan_type_3',
+          rate: '',
+          deadline: 1
+        },
+        configData: [
+          { time: 1, rate: 7.2 },
+          { time: 3, rate: 8 },
+          { time: 6, rate: 9.5 },
+          { time: 12, rate: 11 }
+        ],
         gain: 0
+      }
+    },
+    methods: {
+      getGain() {
+        if (!this.gainData.money) return;
+        this.configData.forEach(v => {
+          if (v.time === this.gainData.deadline) {
+            this.gainData.rate = v.rate;
+          }
+        });
+        feachGainCalculator(this.gainData).then(response => {
+          if (response.data.meta.code === 200) {
+            this.gain = response.data.data.anticipatedInterest;
+          }
+        })
       }
     }
   }
@@ -87,6 +113,10 @@
     
     .body {
       padding: 20px 0;
+    }
+    
+    i {
+      color: #ff5f5f;
     }
     
     .box {
