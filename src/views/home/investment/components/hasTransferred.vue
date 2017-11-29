@@ -1,14 +1,22 @@
 <template>
   <div class="has-transferred">
     <el-table :data="list" style="width: 100%">
-      <el-table-column prop="name" label="项目名称" width="140"></el-table-column>
+      <el-table-column prop="name" label="项目名称" width="140">
+        <template slot-scope="scope">
+          <a :href="scope.row.targetUrl" target="_blank">{{ scope.row.name }}</a>
+        </template>
+      </el-table-column>
       <el-table-column prop="time" label="投资时间" width="80"></el-table-column>
       <el-table-column prop="money" label="投资金额">
         <template slot-scope="scope">
           {{ scope.row.money | currency('') + '元' }}
         </template>
       </el-table-column>
-      <el-table-column prop="repayPeriod" label="剩余时间" width="80"></el-table-column>
+      <el-table-column prop="repayPeriod" label="剩余时间" width="80">
+        <template slot-scope="scope">
+          {{ scope.row.repayPeriod + '天' }}
+        </template>
+      </el-table-column>
       <el-table-column prop="debtPrice" label="债权价格">
         <template slot-scope="scope">
           {{ scope.row.debtPrice | currency('') + '元' }}

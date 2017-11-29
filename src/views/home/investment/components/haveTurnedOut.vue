@@ -1,7 +1,11 @@
 <template>
   <div class="have-turned-out">
     <el-table :data="list" style="width: 100%">
-      <el-table-column prop="name" label="项目名称" width="120"></el-table-column>
+      <el-table-column prop="name" label="项目名称" width="120">
+        <template slot-scope="scope">
+          <a :href="scope.row.targetUrl" target="_blank">{{ scope.row.name }}</a>
+        </template>
+      </el-table-column>
       <el-table-column prop="applyTime" label="发起时间"></el-table-column>
       <el-table-column prop="endTime" label="到期时间"></el-table-column>
       <el-table-column prop="corpus" label="转让本金">
