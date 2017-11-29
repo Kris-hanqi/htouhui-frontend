@@ -129,7 +129,7 @@
           return;
         }
         if (this.type && this.type === 'oneKeyJoin' && this.loanId) {
-          this.rechargeData.callbackUrl = `${this.baseUrl}/user/home.html/#/investment/quantify/oneKeyJoin/${this.loanId}`;
+          this.rechargeData.callbackUrl = `${this.baseUrl}/user/home.html#/investment/quantify/oneKeyJoin/${this.loanId}`;
         } else {
           this.rechargeData.callbackUrl = `${this.baseUrl}/user/home.html`;
         }
