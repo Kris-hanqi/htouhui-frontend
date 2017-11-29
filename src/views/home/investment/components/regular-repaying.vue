@@ -51,7 +51,7 @@
           <el-table-column prop="name" label="优惠券" width="140"></el-table-column>
           <el-table-column prop="rate" label="额外加息点数">
             <template slot-scope="scope">
-              {{ scope.row.rate + '%' }}
+              {{ scope.row.rate * 100 + '%' }}
             </template>
           </el-table-column>
           <el-table-column prop="money" label="额外利息">
@@ -59,7 +59,7 @@
               {{ scope.row.money | currency('') + '元' }}
             </template>
           </el-table-column>
-          <el-table-column prop="repayTime" label="还款时间"></el-table-column>
+          <el-table-column prop="repayTime" label="还款时间" width="140"></el-table-column>
           <el-table-column prop="status" label="状态">
             <template slot-scope="scope">
              {{ scope.row.status | keyToValue(extendEarnListStatus) }}
