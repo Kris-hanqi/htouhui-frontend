@@ -4,7 +4,7 @@
     <!-- 未投资 显示标的信息 -->
     <div class="newUser-plan" v-if="novicePlanStatus === 1">
       <div class="newUser-plan-title">
-        <p>{{ novicePlanInfo.planName }}<span>{{ novicePlanInfo.startInvestMoney }}元起投，最高可投1万元 ，每人仅限1次 </span></p>
+        <p>{{ novicePlanInfo.planName }}<span>{{ novicePlanInfo.startInvestMoney }}元起投，最高可投{{ novicePlanInfo.joinMoneyLimit }}元 ，每人仅限1次 </span></p>
       </div>
       <div class="newUser-plan-main">
         <div class="newUser-plan-rate">
