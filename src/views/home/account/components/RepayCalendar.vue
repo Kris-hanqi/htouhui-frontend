@@ -67,13 +67,18 @@
         this.showViewType = 'month';
       },
       handleDayChange(date) {
-        if (this.dates.indexOf(date) !== -1) {
-          this.events.forEach(v => {
-            if (v.date === date) {
-              this.dayData = v;
-            }
-          });
-          this.showViewType = 'day';
+        if (date) {
+          const arr = date.split('-');
+          arr[1] = '0' + arr[1];
+          date = arr.join('-');
+          if (this.dates.indexOf(date) !== -1) {
+            this.events.forEach(v => {
+              if (v.date === date) {
+                this.dayData = v;
+              }
+            });
+            this.showViewType = 'day';
+          }
         }
       },
       handleMonthChanged(date) {
