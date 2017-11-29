@@ -142,6 +142,13 @@
       withdraw() {
         const result = operationalValidate(this.operationalValidateData);
         if (!result) return;
+        if (this.withdrawData.inputMoney > this.accountMoney || this.withdrawData.inputMoney <= 1) {
+          this.$message({
+            message: '提现金额应该在1.01和' + this.accountMoney + '之间',
+            type: 'warning'
+          });
+          return;
+        }
         this.withdrawData.cardNo = this.bankCard;
         this.withdrawData.inputMoney = this.money;
         this.withdrawData.sessionId = this.uuid;
