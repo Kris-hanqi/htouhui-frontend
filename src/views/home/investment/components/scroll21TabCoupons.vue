@@ -91,7 +91,6 @@
               this.showNoAward = false;
               this.messageList = data.data;
               this.list = data.data.data;
-              console.log(this.messageList);
               this.total = data.data.count || 0;
             }
           }

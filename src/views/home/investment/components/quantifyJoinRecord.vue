@@ -71,7 +71,11 @@
       <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
     </div>
 
-    <el-dialog title="平台奖励" :visible.sync="dialogVisible" width="700px">
+    <el-dialog title="平台奖励"
+               @close="showTest = false;"
+               v-if="showTest"
+               :visible.sync="dialogVisible"
+               width="700px">
       <div class="dialog-main">
         <el-tabs v-model="activeName" type="card">
           <el-tab-pane label="贴息" name="first">
@@ -99,6 +103,7 @@
     },
     data() {
       return {
+        showTest: false,
         selectDates: {
           startTime: '',
           endTime: ''
@@ -179,6 +184,7 @@
       },
       getAward(id) {
         this.activeName = 'first';
+        this.showTest = true;
         this.dialogVisible = true;
         this.joinPlanId = id;
       }
