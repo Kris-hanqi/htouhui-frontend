@@ -30,7 +30,7 @@
           <el-checkbox v-model="protocolChecked"
                        :class="{ shake: showAnimate }"
                        class="animated">
-            同意<a :href="baseUrl + '/hetong/20161102021037'" target="_blank">《江西银行存管协议》</a>
+            同意<a :href="baseUrl + '/hetong/20161108105926'" target="_blank">《江西银行存管协议》</a>
           </el-checkbox>
         </div>
       </div>
