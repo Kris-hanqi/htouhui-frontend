@@ -125,6 +125,7 @@
           this.$parent.calendarOptions.params.curMonth = 0;
         }
         this.curYearMonth();
+        this.selectedDate = '';
         this.$emit('month-changed', this.yearMonthStr);
         this.dayList();
       },
