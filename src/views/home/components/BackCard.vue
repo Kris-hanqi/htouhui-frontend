@@ -4,7 +4,7 @@
     <div class="card" :class="classes" v-if="bankCard">
       <p>{{ bankCard }}</p>
     </div>
-    <div class="no-bank-card" v-else="">
+    <div class="no-bank-card" v-else="" @click="toBindBackCard">
       <i class="iconfont icon-add"></i>
       <p>您暂未绑定银行卡</p>
     </div>
@@ -25,6 +25,11 @@
           `card-${this.bankNo}`
         ];
       }
+    },
+    methods: {
+      toBindBackCard() {
+        this.$router.push('/accountManage/set/bindBackCard');
+      }
     }
   }
 </script>
@@ -39,6 +44,7 @@
       border-radius: 11px;
       background-color: #f6f9fe;
       padding-top: 38px;
+      cursor: pointer;
       
       i {
         display: block;
