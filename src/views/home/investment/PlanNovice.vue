@@ -109,9 +109,9 @@
           </template>
           </el-table-column>
           <el-table-column prop="status" label="状态" width="60"></el-table-column>
-          <el-table-column prop="contract" label="合同" width="40">
+          <el-table-column prop="contract" label="操作" width="40">
             <template slot-scope="scope">
-              <el-button v-if="scope.row.showContract" class="ico-download" type="text" size="small"></el-button>
+              <el-button v-if="scope.row.showContract" class="ico-download" type="text" size="small">下载合同</el-button>
               <p v-else class="ico-download-hui"></p>
             </template>
           </el-table-column>
@@ -363,9 +363,7 @@
   }
 
   .ico-download {
-    width: 20px;
-    height: 21px;
-    background: url(../../../assets/images/home/icons/icon-download.png) no-repeat center;
+    color: #0573f4;
   }
 
   .ico-download-hui {
