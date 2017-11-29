@@ -107,10 +107,18 @@
                 message: '预约退出成功!',
                 type: 'success'
               });
-              this.dialogVisible = false;
+              this.exitMoney = '';
               // 跳转加入记录页面
-              this.$router.push('/investment/scroll21/index');
+              this.$router.push({ path: '/investment/scroll21/index', query: { tagName: 'second' } });
             }
+  
+            if (response.data.meta.code === 9999) {
+              this.$notify.error({
+                title: '操作失败',
+                message: response.data.meta.message
+              });
+            }
+            this.dialogVisible = false;
             this.exitButLoading = false;
           })
       }
