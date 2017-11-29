@@ -77,7 +77,7 @@
           },
           {
             status: 2,
-            title: '您可以去充值投资啦，请在提现前绑定银行卡。',
+            title: ' 您可以去充值投资啦，请绑定银行卡。',
             btnText: '去绑卡',
             fun: this.toBindBackCard
           }
