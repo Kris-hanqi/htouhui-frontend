@@ -40,6 +40,12 @@
       if (this.$route.query.tagName) {
         this.activeName = this.$route.query.tagName;
       }
+      if (this.$route.query.message) {
+        this.$notify.info({
+          title: '提示',
+          message: this.$route.query.message
+        });
+      }
     }
   }
 </script>
