@@ -22,7 +22,7 @@
       <i></i>
     </div>
     <!-- 回到顶部 -->
-    <hth-back-top class="top" :right="0" :height="100"></hth-back-top>
+    <hth-back-top class="top" :right="14" :height="100"></hth-back-top>
   </div>
 </template>
 

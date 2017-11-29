@@ -44,8 +44,14 @@
         <div class="form-group">
           <label class="col-xs-4 control-label">享受收益</label>
           <div class="col-xs-7">
-            <input type="text" class="form-control" placeholder="请输入投资金额">
+            <p class="form-control-static box">{{ gain }}元</p>
           </div>
+        </div>
+        <div class="form-group">
+          <button>计算收益</button>
+        </div>
+        <div class="form-group">
+          <p>以上结果为先息后本计算方式</p>
         </div>
       </form>
     </div>
@@ -55,7 +61,9 @@
 <script>
   export default {
     data() {
-      return {}
+      return {
+        gain: 0
+      }
     }
   }
 </script>
@@ -79,6 +87,13 @@
     
     .body {
       padding: 20px 0;
+    }
+    
+    .box {
+      width: 176px;
+      background-color: #ebf3ff;
+      outline: none;
+      text-align: center;
     }
   }
 </style>

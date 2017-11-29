@@ -38,7 +38,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
-        <el-table-column prop="perid" label="借款期限" width="70"></el-table-column>
+        <el-table-column prop="period" label="借款期限" width="70"></el-table-column>
         <el-table-column prop="investMoney" label="投资金额" width="100">
           <template slot-scope="scope">
             {{ scope.row.investMoney | currency('') + '元' }}
@@ -58,7 +58,7 @@
         <el-table-column prop="status" label="状态" width="50"></el-table-column>
         <el-table-column prop="contract" label="查看" width="40">
           <template slot-scope="scope">
-            <el-button class="icon-download" type="text" size="small">合同</el-button>
+            <el-button type="text" size="small">合同</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -135,12 +135,9 @@
 </script>
 
 <style lang="scss" scoped>
-  .icon-download {
-    color: #0573f4;
-  }
-
   .lookTarget {
     width: 100%;
+    height: auto;
 
     .detail {
       width: 100%;
@@ -221,7 +218,7 @@
 
     .message-list {
       width: 100%;
-      height: 630px;
+      height: auto;
       box-sizing: border-box;
       padding: 25px 10px;
       background-color: #fff;
