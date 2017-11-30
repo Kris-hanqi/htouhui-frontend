@@ -99,7 +99,6 @@
                     type: 'success',
                     position: 'top-left'
                   });
-                  this.$emit('close')
                 } else {
                   this.$notify({
                     title: '还款失败',
@@ -108,6 +107,7 @@
                     position: 'top-left'
                   });
                 }
+                this.$emit('close');
               })
             }
             done();
@@ -128,7 +128,6 @@
                       message: '提前还款成功!',
                       type: 'success'
                     });
-                    this.$emit('close')
                   }
                   if (response.data.meta.code === 9999) {
                     this.$message({
@@ -142,6 +141,7 @@
                       type: 'error'
                     });
                   }
+                  this.$emit('close');
                 })
             }
             done();
