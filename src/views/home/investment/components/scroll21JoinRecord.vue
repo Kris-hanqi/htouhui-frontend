@@ -61,7 +61,7 @@
       </el-table-column>
       <el-table-column prop="regular" label="债权信息">
         <template slot-scope="scope">
-          <el-button class="icon-interests" v-if="scope.row.status === 'matched'" @click="lookJoinRegular(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
+          <el-button class="icon-interests" v-if="scope.row.haveInvest" @click="lookJoinRegular(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
           <p v-else>暂无债权</p>
         </template>
       </el-table-column>
