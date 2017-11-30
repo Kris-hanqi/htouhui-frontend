@@ -112,7 +112,7 @@
           <el-table-column prop="contract" label="操作" width="40">
             <template slot-scope="scope">
               <el-button v-if="scope.row.showContract" class="ico-download" type="text" size="small">下载合同</el-button>
-              <p v-else class="ico-download-hui"></p>
+              <p v-else>下载合同</p>
             </template>
           </el-table-column>
         </el-table>
@@ -364,12 +364,5 @@
 
   .ico-download {
     color: #0573f4;
-  }
-
-  .ico-download-hui {
-    width: 20px;
-    height: 21px;
-    margin: 0 auto;
-    background: url(../../../assets/images/home/icons/icon-downloadhui.png) no-repeat center;
   }
 </style>
