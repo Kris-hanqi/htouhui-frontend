@@ -26,16 +26,43 @@
         </el-tab-pane>
         
         <el-tab-pane label="待放款" name="rechecking">
+          <form class="form-inline" style="margin-bottom: 15px;">
+            <div class="form-group">
+              <label></label>
+              <input v-model="listQuery.name" class="form-control" type="text" placeholder="请输入项目名称">
+            </div>
+            <div class="form-group">
+              <button style="width: 100px" :disabled="!listQuery.name" @click="query" type="button" class="hth-btn hth-btn-primary">查询</button>
+            </div>
+          </form>
           <hth-data-table :data="list"
                           :col-configs="recheckingColConfigs"></hth-data-table>
         </el-tab-pane>
         
         <el-tab-pane label="待发布" name="waiting">
+          <form class="form-inline" style="margin-bottom: 15px;">
+            <div class="form-group">
+              <label></label>
+              <input v-model="listQuery.name" class="form-control" type="text" placeholder="请输入项目名称">
+            </div>
+            <div class="form-group">
+              <button style="width: 100px" :disabled="!listQuery.name" @click="query" type="button" class="hth-btn hth-btn-primary">查询</button>
+            </div>
+          </form>
           <hth-data-table :data="list"
                           :col-configs="waitingColConfigs"></hth-data-table>
         </el-tab-pane>
         
         <el-tab-pane label="筹集中" name="raising">
+          <form class="form-inline" style="margin-bottom: 15px;">
+            <div class="form-group">
+              <label></label>
+              <input v-model="listQuery.name" class="form-control" type="text" placeholder="请输入项目名称">
+            </div>
+            <div class="form-group">
+              <button style="width: 100px" :disabled="!listQuery.name" @click="query" type="button" class="hth-btn hth-btn-primary">查询</button>
+            </div>
+          </form>
           <hth-data-table :data="list"
                           :col-configs="raisingColConfigs"></hth-data-table>
         </el-tab-pane>
@@ -43,6 +70,15 @@
         <el-tab-pane label="已结清" name="finished">
           <hth-data-table :data="list"
                           :col-configs="finishedColConfigs">
+            <form class="form-inline" style="margin-bottom: 15px;">
+              <div class="form-group">
+                <label></label>
+                <input v-model="listQuery.name" class="form-control" type="text" placeholder="请输入项目名称">
+              </div>
+              <div class="form-group">
+                <button style="width: 100px" :disabled="!listQuery.name" @click="query" type="button" class="hth-btn hth-btn-primary">查询</button>
+              </div>
+            </form>
             <el-table-column fixed="right" label="操作" width="120">
               <template slot-scope="scope">
                 <el-button @click="openRepaymentPlan(scope.row.id)" type="text">还款计划</el-button>
@@ -53,6 +89,15 @@
         </el-tab-pane>
         
         <el-tab-pane label="流标" name="fail">
+          <form class="form-inline" style="margin-bottom: 15px;">
+            <div class="form-group">
+              <label></label>
+              <input v-model="listQuery.name" class="form-control" type="text" placeholder="请输入项目名称">
+            </div>
+            <div class="form-group">
+              <button style="width: 100px" :disabled="!listQuery.name" @click="query" type="button" class="hth-btn hth-btn-primary">查询</button>
+            </div>
+          </form>
           <hth-data-table :data="list"
                           :col-configs="failColConfigs">
             <el-table-column fixed="right" label="操作" width="120">
