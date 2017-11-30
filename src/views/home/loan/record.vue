@@ -20,7 +20,7 @@
               <template slot-scope="scope">
                 <el-button @click="openRepaymentPlan(scope.row.id)" type="text">还款计划</el-button>
                 <el-button v-if="scope.row.ensignContract" @click="contractDownload(scope.row)" type="text">合同</el-button>
-                <a v-else="" :href="'/contract.html?loanId=' + scope.row.id" target="_blank">合同</a>
+                <a v-else="" style="color: #409EFF;" :href="'/contract.html?loanId=' + scope.row.id" target="_blank">合同</a>
               </template>
             </el-table-column>
           </hth-data-table>
@@ -83,7 +83,8 @@
             <el-table-column fixed="right" label="操作" width="120">
               <template slot-scope="scope">
                 <el-button @click="openRepaymentPlan(scope.row.id)" type="text">还款计划</el-button>
-                <el-button @click="contractDownload(scope.row)" type="text">合同</el-button>
+                <el-button v-if="scope.row.ensignContract" @click="contractDownload(scope.row)" type="text">合同</el-button>
+                <a v-else="" style="color: #409EFF;" :href="'/contract.html?loanId=' + scope.row.id" target="_blank">合同</a>
               </template>
             </el-table-column>
           </hth-data-table>
@@ -104,7 +105,8 @@
             <el-table-column fixed="right" label="操作" width="120">
               <template slot-scope="scope">
                 <el-button @click="openRepaymentPlan(scope.row.id)" type="text">还款计划</el-button>
-                <el-button @click="contractDownload(scope.row)" type="text">合同</el-button>
+                <el-button v-if="scope.row.ensignContract" @click="contractDownload(scope.row)" type="text">合同</el-button>
+                <a v-else="" style="color: #409EFF;" :href="'/contract.html?loanId=' + scope.row.id" target="_blank">合同</a>
               </template>
             </el-table-column>
           </hth-data-table>
