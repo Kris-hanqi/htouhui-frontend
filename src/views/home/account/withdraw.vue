@@ -133,7 +133,7 @@
       }
     },
     watch: {
-      money: function (val) { // eslint-disable-line
+      money(val) {
         this.getWithdrawCost(val);
       }
     },
@@ -142,7 +142,7 @@
       withdraw() {
         const result = operationalValidate(this.operationalValidateData);
         if (!result) return;
-        if (this.withdrawData.inputMoney > this.accountMoney || this.withdrawData.inputMoney <= 1) {
+        if (!(this.money <= this.accountMoney && this.money > 1)) {
           this.$message({
             message: '提现金额应该在1.01和' + this.accountMoney + '之间',
             type: 'warning'
@@ -241,6 +241,10 @@
 <style lang="scss">
   .withdraw-wrapper {
     width: 832px;
+    
+    .back-card-wrapper {
+      margin-left: 20px;
+    }
   
     .form-horizontal .control-label {
       width: 120px;
