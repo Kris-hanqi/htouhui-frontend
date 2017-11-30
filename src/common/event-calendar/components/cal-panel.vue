@@ -24,7 +24,7 @@
       <ul class="dates">
         <li class="item" :class="{
                 'item-selected': date.status,
-                'item-event-selected': date.date === selectedDate && date.date,
+                'item-event-selected': date.date === selectedDate,
                 'item-event': date.event && date.status
               }"
             @click="handleChangeCurDay(date)"
@@ -137,6 +137,7 @@
           this.$parent.calendarOptions.params.curMonth = 11;
         }
         this.curYearMonth();
+        this.selectedDate = '';
         this.$emit('month-changed', this.yearMonthStr);
         this.dayList();
       },
