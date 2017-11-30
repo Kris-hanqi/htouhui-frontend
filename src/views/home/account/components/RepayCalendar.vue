@@ -69,7 +69,13 @@
       handleDayChange(date) {
         if (date) {
           const arr = date.split('-');
-          arr[1] = '0' + arr[1];
+          if (arr[1].length === 1) {
+            arr[1] = '0' + arr[1];
+          }
+  
+          if (arr[2].length === 1) {
+            arr[2] = '0' + arr[2];
+          }
           date = arr.join('-');
           if (this.dates.indexOf(date) !== -1) {
             this.events.forEach(v => {

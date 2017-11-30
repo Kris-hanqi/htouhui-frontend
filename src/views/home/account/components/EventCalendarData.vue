@@ -110,6 +110,7 @@
         }
       },
       dayData(val) {
+        this.index = 0;
         this.dataOne = val.investRepayInfo[0];
         this.length = val.investRepayInfo.length;
       }
