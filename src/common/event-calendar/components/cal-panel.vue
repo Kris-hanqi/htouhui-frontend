@@ -24,7 +24,7 @@
       <ul class="dates">
         <li class="item" :class="{
                 'item-selected': date.status,
-                'item-event-selected': date.date == selectedDate,
+                'item-event-selected': date.date === selectedDate && date.date,
                 'item-event': date.event && date.status
               }"
             @click="handleChangeCurDay(date)"
