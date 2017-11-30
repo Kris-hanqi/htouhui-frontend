@@ -21,7 +21,7 @@
         <div  v-if="couponsList.count == 0" class="coupons-no">暂无优惠券</div>
         <div v-else class="coupons-box">
           <div class="coupons-icon" @click="operationalCouponsListView">
-            优惠券
+            <span style="padding-left: 10px">优惠券</span>
             <i class="iconfont" :class="showCouponsList ? 'icon-bottom' : 'icon-top'"></i>
             <div class="coupons-content" v-show="showCouponsList">
               <i></i>
