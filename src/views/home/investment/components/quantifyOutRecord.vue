@@ -51,7 +51,8 @@
       </el-table-column>
       <el-table-column prop="actualMoney" label="实际到账金额">
         <template slot-scope="scope">
-          {{ scope.row.actualMoney | currency('') + '元' }}
+          <span v-if="scope.row.actualMoney">{{ scope.row.actualMoney | currency('') + '元' }}</span>
+          <span v-else="">--</span>
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="80">
