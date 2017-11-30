@@ -12,12 +12,12 @@
         <div>
           <p>贴息到期时间：<span class="roboto-regular">{{ messageList.tiexiEndTime }}</span></p>
           <p class="color-txt">
-            贴息金额：<span class="roboto-regular">{{ messageList.tiexiMoney | currency('') }}</span><span>元</span>
+            贴息金额：<span class="roboto-regular">{{ messageList.tiexiMoney | currency('', 4) }}</span><span>元</span>
             <el-tooltip class="item" placement="top">
               <div slot="content">贴息金额计算方式以<br/>四舍五入至后两位</div>
               <i class="question"></i>
             </el-tooltip>
-            <img class="status-img" v-if="messageList.status == 'transfered'" src="../../../../assets/images/home/icon-haveToAccount.png" alt=""/>
+            <img class="status-img" v-if="messageList.status === 'transfered'" src="../../../../assets/images/home/icon-haveToAccount.png" alt=""/>
             <i class="status-txt" v-else>未发放</i>
           </p>
         </div>
