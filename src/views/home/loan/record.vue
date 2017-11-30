@@ -255,6 +255,7 @@
       toggleType(tab) {
         if (tab && tab.name) {
           this.listLoading = false;
+          this.listQuery.pageNo = 1;
           this.listQuery.type = tab.name;
           this.listQuery.name = '';
           this.getPageList();
