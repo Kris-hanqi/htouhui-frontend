@@ -2,9 +2,9 @@
   <div class="breadcrumb-wrapper">
     <el-breadcrumb separator=">">
       <el-breadcrumb-item @click.native="goToIndex">首页</el-breadcrumb-item>
-      <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path" :to="item.path">
-        {{item.meta.title}}
-      </el-breadcrumb-item>
+      <el-breadcrumb-item v-for="(item, index) in levelList"
+                          :key="item.path"
+                          :to="item.path">{{item.meta.title}}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
@@ -43,6 +43,17 @@
     .el-breadcrumb__inner,
     .el-breadcrumb__inner a {
       font-size: 16px;
+      font-weight: 500;
+      color: #274161;
+      
+      &:hover {
+        color: #0671f0;
+      }
+    }
+    
+    .el-breadcrumb__separator {
+      margin: 0 5px;
+      font-weight: 500;
       color: #274161;
     }
   }

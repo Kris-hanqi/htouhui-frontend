@@ -133,7 +133,7 @@
           disabledDate(date) {
             return date > new Date();
           }
-        },
+        }
       }
     },
     computed: {
