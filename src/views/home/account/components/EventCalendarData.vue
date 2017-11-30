@@ -208,11 +208,11 @@
     }
     
     .event-detail-day {
-      float: right;
       width: 360px;
       height: auto;
       box-sizing: border-box;
       text-align: center;
+      padding: 20px 0;
       
       .day-header {
         width: 100%;

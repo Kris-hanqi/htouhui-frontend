@@ -1,17 +1,19 @@
 <template>
   <div class="repayment-calendar-wrapper">
     <hth-panel title="定期还款日历">
-      <!-- 还款日历 -->
-      <event-calendar :dates="dates" class="calendar"
-                      @day-changed="handleDayChange"
-                      @month-changed="handleMonthChanged"></event-calendar>
-  
-      <!-- 数据展示 -->
-      <event-calendar-data :view-type="showViewType"
-                           @switch-view-type="switchViewType"
-                           :month-str="month"
-                           :month-data="monthData"
-                           :day-data="dayData"></event-calendar-data>
+      <div class="row">
+          <!-- 还款日历 -->
+          <event-calendar :dates="dates" class="calendar col-sm-6"
+                          @day-changed="handleDayChange"
+                          @month-changed="handleMonthChanged"></event-calendar>
+        <!-- 数据展示 -->
+        <event-calendar-data :view-type="showViewType"
+                             class="col-sm-6"
+                             @switch-view-type="switchViewType"
+                             :month-str="month"
+                             :month-data="monthData"
+                             :day-data="dayData"></event-calendar-data>
+      </div>
     </hth-panel>
   </div>
 
