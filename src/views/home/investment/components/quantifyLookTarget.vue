@@ -26,7 +26,10 @@
 
     <div class="message-list">
       <p class="title">您在{{ planInfo.planName }}的在投标的</p>
-      <el-table :data="list" style="width: 100%">
+      <el-table :data="list"
+                style="width: 100%"
+                v-loading="listLoading"
+                element-loading-text="拼命加载中...">
         <el-table-column prop="loanId" label="项目编号" width="120">
           <template slot-scope="scope">
             <a :href="scope.row.loanTargetUrl" target="_blank">{{ scope.row.loanId }}</a>
@@ -37,7 +40,11 @@
             {{ scope.row.loanMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="rate" label="往期年利率" width="70"></el-table-column>
+        <el-table-column label="往期年利率" width="70">
+          <template slot-scope="scope">
+            {{ scope.row.rate + '%' }}
+          </template>
+        </el-table-column>
         <el-table-column prop="period" label="借款期限" width="70"></el-table-column>
         <el-table-column prop="investMoney" label="投资金额" width="100">
           <template slot-scope="scope">
@@ -59,14 +66,16 @@
             {{ scope.row.uncollectedRepayMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="status" label="状态" width="50"></el-table-column>
-        <el-table-column prop="contract" label="查看" width="40">
+        <el-table-column prop="status" label="状态" width="80"></el-table-column>
+        <el-table-column fixed="right" prop="contract" label="合同" width="120">
           <template slot-scope="scope">
-            <el-button type="text" size="small">合同</el-button>
+            <el-button v-if="scope.row.showContract" type="text" size="small">合同</el-button>
+            <p v-else="">放款后可查看</p>
           </template>
         </el-table-column>
       </el-table>
-      <div class="pages">
+      
+      <div class="pages" v-if="!listLoading && list">
         <p class="total-pages">共计
           <span class="roboto-regular">{{ total }}</span>
           条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）
@@ -89,6 +98,7 @@
       return {
         img_icon_sxb,
         list: null,
+        listLoading: false,
         planInfo: {
           lockPeriod: '',
           investMoney: 0,
@@ -112,13 +122,14 @@
     },
     methods: {
       getPageList() {
+        this.listLoading = true;
         queryUserAssetInfoList(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
-            console.log(this.list);
             this.total = data.data.count || 0;
           }
+          this.listLoading = false;
         })
       },
       query() {
