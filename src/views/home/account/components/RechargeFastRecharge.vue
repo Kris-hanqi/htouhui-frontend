@@ -120,7 +120,13 @@
       getRequestBankData() {
         const result = operationalValidate(this.operationalValidateData);
         if (!result) return;
-        if (!this.rechargeData.money) return;
+        if (!this.rechargeData.money) {
+          this.$message({
+            message: '充值金额不能为空或0',
+            type: 'warning'
+          });
+          return;
+        }
         if (!validateMoney(this.rechargeData.money)) {
           this.$message({
             message: '充值金额输入不合法，请重新输入',
