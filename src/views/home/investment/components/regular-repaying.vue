@@ -106,7 +106,11 @@
             </template>
           </el-table-column>
           <el-table-column prop="repayDay" label="还款日"></el-table-column>
-          <el-table-column prop="time" label="还款时间"></el-table-column>
+          <el-table-column label="还款时间">
+            <template slot-scope="scope">
+              {{ scope.row.time || '--'  }}
+            </template>
+          </el-table-column>
           <el-table-column prop="status" label="状态">
             <template slot-scope="scope">
               {{ scope.row.status | keyToValue(statusList) }}
