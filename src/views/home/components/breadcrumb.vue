@@ -19,7 +19,7 @@
     },
     methods: {
       goToIndex() {
-        window.location.href = `${getLocationUrl()}/index.html`;
+        window.location.href = getLocationUrl();
       },
       getBreadcrumb() {
         let matched = this.$route.matched.filter(item => item.meta.title);
