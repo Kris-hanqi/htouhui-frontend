@@ -3,13 +3,14 @@
     <el-breadcrumb separator=">">
       <el-breadcrumb-item @click.native="goToIndex">首页</el-breadcrumb-item>
       <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path" :to="item.path">
-       {{item.meta.title}}
+        {{item.meta.title}}
       </el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
 
 <script>
+  import { getLocationUrl } from 'utils/index';
   export default {
     data() {
       return {
@@ -18,7 +19,7 @@
     },
     methods: {
       goToIndex() {
-        window.location.href = 'index.html';
+        window.location.href = `${getLocationUrl()}/index.html`;
       },
       getBreadcrumb() {
         let matched = this.$route.matched.filter(item => item.meta.title);
@@ -36,3 +37,13 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .breadcrumb-wrapper {
+    .el-breadcrumb__inner,
+    .el-breadcrumb__inner a {
+      font-size: 16px;
+      color: #274161;
+    }
+  }
+</style>
