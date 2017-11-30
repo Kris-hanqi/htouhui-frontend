@@ -98,4 +98,25 @@ export function feachAssetInfoList(data) {
   })
 }
 
+/** 下载加入合同 */
+export function feachDownLoadJoinContract(id) {
+  return fetch({
+    url: 'user/joinSignedFileUrl',
+    method: 'get',
+    params: {
+      planId: id
+    }
+  })
+}
+
+/** 下载债转合同 */
+export function feachDownLoadClaimsContract(id) {
+  return fetch({
+    url: 'user/joinSignedFileUrl',
+    method: 'get',
+    params: {
+      investId: id
+    }
+  })
+}
 

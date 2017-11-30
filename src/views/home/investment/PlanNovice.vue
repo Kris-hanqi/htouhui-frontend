@@ -69,15 +69,17 @@
       </div>
 
       <!--table-->
-      <div class="message">
+      <div class="message"
+           v-loading="listLoading"
+           element-loading-text="拼命加载中...">
         <p class="title">您购买的债权信息</p>
         <el-table :data="claimsList" style="width: 100%">
-          <el-table-column prop="loanId" label="项目编号" width="120">
+          <el-table-column prop="loanId" label="项目编号" width="100">
             <template slot-scope="scope">
               <a :href="scope.row.loanTargetUrl" target="_blank">{{ scope.row.loanId }}</a>
             </template>
           </el-table-column>
-          <el-table-column prop="loanMoney" label="借款金额" width="100">
+          <el-table-column prop="loanMoney" label="借款金额" width="80">
             <template slot-scope="scope">
               {{ scope.row.loanMoney | currency('') + '元' }}
           </template>
@@ -87,8 +89,8 @@
               {{ scope.row.rate + '%' }}
           </template>
           </el-table-column>
-          <el-table-column prop="period" label="借款期限" width="70"></el-table-column>
-          <el-table-column prop="investMoney" label="投资金额" width="100">
+          <el-table-column prop="period" label="借款期限" width="80"></el-table-column>
+          <el-table-column prop="investMoney" label="投资金额" width="80">
             <template slot-scope="scope">
               {{ scope.row.investMoney | currency('') + '元' }}
             </template>
@@ -98,20 +100,20 @@
               {{ scope.row.repayTimeFormat || '--' }}
             </template>
           </el-table-column>
-          <el-table-column prop="earnings" label="已收本息">
+          <el-table-column prop="earnings" width="80" label="已收本息">
             <template slot-scope="scope">
               {{ scope.row.earnings | currency('') + '元' }}
             </template>
           </el-table-column>
-          <el-table-column prop="uncollectedRepayMoney" label="待收本息">
+          <el-table-column prop="uncollectedRepayMoney" width="80" label="待收本息">
             <template slot-scope="scope">
               {{ scope.row.uncollectedRepayMoney | currency('') + '元' }}
           </template>
           </el-table-column>
-          <el-table-column prop="status" label="状态" width="60"></el-table-column>
-          <el-table-column prop="contract" label="操作" width="40">
+          <el-table-column prop="status" label="状态" width="80"></el-table-column>
+          <el-table-column prop="contract" label="操作">
             <template slot-scope="scope">
-              <el-button v-if="scope.row.showContract" class="ico-download" type="text" size="small">下载合同</el-button>
+              <el-button v-if="scope.row.showContract" @click="downLoadContract(scope.row.loanId)" type="text">下载合同</el-button>
               <p v-else>下载合同</p>
             </template>
           </el-table-column>
@@ -134,7 +136,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import { getLocationUrl } from 'utils/index';
-  import { fetchNovicePlanInfo, fetchJoinPlanBill, feachJoinInvestClaims } from 'api/home/investment';
+  import { fetchNovicePlanInfo, fetchJoinPlanBill, feachJoinInvestClaims, feachDownLoadJoinContract } from 'api/home/investment';
   import interestRate from 'components/interest-rate';
 
   export default {
@@ -149,6 +151,7 @@
           lockPeriod: '',
           startInvestMoney: ''
         },
+        listLoading: false,
         joinDetails: {
           rate: '',
           joinMoney: '',
@@ -193,12 +196,14 @@
         window.location.href = getLocationUrl() + '/plan/' + this.novicePlanInfo.planId;
       },
       joinPlanNoviceList() {
+        this.listLoading = true;
         fetchJoinPlanBill(this.joinDetailsQuery).then(response => {
           if (response.data.meta.code === 200) {
             this.joinDetails = response.data.data.data[0];
             this.claimsQuery.joinPlanId = this.joinDetails.joinPlanId;
             this.getClaimsList();
           }
+          this.listLoading = false;
         })
       },
       getClaimsList() {
@@ -209,16 +214,19 @@
           }
         })
       },
+      downLoadContract(id) {
+        feachDownLoadJoinContract(id)
+          .then(response => {
+            console.log(response);
+          })
+      },
       handleCurrentChange() {
         this.getPageList();
       }
     },
     created() {
-      if (this.novicePlanStatus === 1) {
-        this.getNovicePlanInfo();
-      } else {
-        this.joinPlanNoviceList();
-      }
+      this.getNovicePlanInfo();
+      this.joinPlanNoviceList();
     }
   }
 </script>
