@@ -1,6 +1,8 @@
 <template>
   <div class="hth-data-table">
     <el-table :data="data">
+      <no-data slot="empty"></no-data>
+      
       <template v-for="col in colConfigs">
         <slot v-if="col.slot"></slot>
         <component
@@ -9,6 +11,7 @@
           :col-config="col">
         </component>
         <el-table-column v-else
+                         :show-overflow-tooltip="col.showOverflowTooltip"
                          :prop='col.prop'
                          :fixed='col.fixed'
                          :label='col.label'
@@ -19,7 +22,20 @@
 </template>
 
 <script>
+  import NoData from '../NoData.vue';
+  
   export default {
+    components: {
+      NoData
+    },
     props: ['colConfigs', 'data']
   }
 </script>
+
+<style lang="scss">
+  .hth-data-table {
+    .el-table__empty-block {
+      min-height: 260px;
+    }
+  }
+</style>

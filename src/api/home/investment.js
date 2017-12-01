@@ -112,7 +112,7 @@ export function feachDownLoadJoinContract(id) {
 /** 下载债转合同 */
 export function feachDownLoadClaimsContract(id) {
   return fetch({
-    url: 'user/joinSignedFileUrl',
+    url: 'user/attornSignedFileUrl',
     method: 'get',
     params: {
       investId: id

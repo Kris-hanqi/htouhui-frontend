@@ -114,16 +114,16 @@
       </el-tabs>
       
       <!-- 分页 -->
-      <div class="pagination-view" v-if="!listLoading && list">
+      <div class="pagination-view" v-if="list && list.length">
         <p class="total-pages">
           共计<span class="roboto-regular">{{ total }}</span>条记录
-       （共<span class="roboto-regular">{{ getPageSize }}</span>页）
-      </p>
-      <el-pagination
-        @current-change="handleCurrentChange"
-        :current-page.sync="listQuery.pageNo"
-        :page-size="listQuery.size"
-        layout="prev, pager, next" :total="total"></el-pagination>
+         （共<span class="roboto-regular">{{ getPageSize }}</span>页）
+        </p>
+        <el-pagination
+          @current-change="handleCurrentChange"
+          :current-page.sync="listQuery.pageNo"
+          :page-size="listQuery.size"
+          layout="prev, pager, next" :total="total"></el-pagination>
       </div>
   
       <!-- 还款计划 -->

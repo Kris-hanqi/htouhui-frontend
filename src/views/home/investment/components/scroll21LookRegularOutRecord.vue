@@ -136,7 +136,7 @@
         this.getPageList();
       },
       returnPrevPages() {
-        this.$router.push({ path: '/investment/scroll21/index', query: {tagName: 'second'} });
+        this.$router.push({ path: '/investment/scroll21/index', query: { tagName: 'second' } });
       }
     },
     created() {

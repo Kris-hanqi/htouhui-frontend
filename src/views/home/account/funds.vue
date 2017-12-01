@@ -40,24 +40,13 @@
       </div>
     </hth-panel>
     <div class="assetRunWaterTable">
-      <el-table :data="list"
-                v-loading="listLoading"
-                element-loading-text="拼命加载中..."
-                :border="false"
-                style="width: 100%">
-        <el-table-column prop="time" label="交易时间" width="150"></el-table-column>
-        <el-table-column prop="projectName" label="项目名称" width="150"></el-table-column>
-        <el-table-column prop="typeinfo" label="类型" width="110"></el-table-column>
-        <el-table-column label="变动金额" width="100">
-          <template slot-scope="scope">
-            <span>
-               {{ scope.row.type | keyToValue(fundsTypes) }}{{ scope.row.money }}
-            </span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="detail" :show-overflow-tooltip="true" label="备注"></el-table-column>
-      </el-table>
-      <div class="pages" v-if="!listLoading">
+  
+      <hth-data-table :data="list"
+                      v-loading="listLoading"
+                      element-loading-text="拼命加载中..."
+                      :col-configs="colConfigs"></hth-data-table>
+      
+      <div class="pages" v-if="list && list.length">
         <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
         <el-pagination
           @current-change="handleCurrentChange"
@@ -71,12 +60,15 @@
 
 <script>
   import HthPanel from 'common/Panel/index.vue';
+  import HthDataTable from '../components/hth-data-table/HthDataTable.vue';
+  import RowChangeMoney from '../components/hth-data-table/RowChangeMoney.vue';
   import { fetchFundsPageList } from 'api/home/account';
   import { getStartAndEndTime, getDateString } from 'utils/index';
   
   export default {
     components: {
-      HthPanel
+      HthPanel,
+      HthDataTable
     },
     data() {
       return {
@@ -90,12 +82,12 @@
           endTime: '',
           type: ''
         },
-        fundsTypes: [
-          { key: 'ti_balance', value: '+' },
-          { key: 'to_balance', value: '-' },
-          { key: 'freeze', value: '-' },
-          { key: 'unfreeze', value: '' },
-          { key: 'to_frozen', value: '' }
+        colConfigs: [
+          { label: '交易时间', width: '150', prop: 'time' },
+          { label: '项目名称', width: '150', prop: 'projectName' },
+          { label: '类型', width: '100', prop: 'typeinfo' },
+          { label: '变动金额', width: '100', component: RowChangeMoney },
+          { label: '备注', showOverflowTooltip: true, prop: 'detail' }
         ],
         pickerOptions: {
           disabledDate(date) {
