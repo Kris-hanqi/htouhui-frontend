@@ -1,7 +1,11 @@
 <template>
   <div class="regular-repaying">
     <el-table :data="list" style="width: 100%">
-      <el-table-column prop="projectName" label="项目名称" fixed width="170"></el-table-column>
+      <el-table-column label="项目名称" fixed width="170">
+        <template slot-scope="scope">
+          {{ scope.row.projectName + ' ' + scope.row.projectNameId }}
+        </template>
+      </el-table-column>
       <el-table-column prop="investTime" label="投资时间"></el-table-column>
       <el-table-column prop="investCash" label="投资金额">
         <template slot-scope="scope">
