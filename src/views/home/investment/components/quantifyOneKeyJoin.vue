@@ -115,7 +115,7 @@
         ],
         showUsedCoupon: false,
         usedCouponText: '',
-        operationalValidateData: ['openAccount', 'transactionPassword', 'bankCard']
+        operationalValidateData: ['openAccount', 'transactionPassword', 'bankCard', 'automaticTender', 'automaticDebtTransfer']
       }
     },
     computed: {
