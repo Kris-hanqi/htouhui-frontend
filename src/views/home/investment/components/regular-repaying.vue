@@ -55,7 +55,7 @@
           <el-table-column prop="name" label="优惠券" width="140"></el-table-column>
           <el-table-column prop="rate" label="额外加息点数">
             <template slot-scope="scope">
-              {{ scope.row.rate * 100 + '%' }}
+              {{ scope.row.rate + '%' }}
             </template>
           </el-table-column>
           <el-table-column prop="money" label="额外利息">
@@ -153,10 +153,10 @@
           { key: 'cancel', value: '未成功' }
         ],
         extendEarnListStatus: [
-          { key: 'not_opened', value: '未开户' },
-          { key: 'wait_repay', value: '等待代偿' },
-          { key: 'success', value: '成功' },
-          { key: 'fail', value: '失败' }
+          { key: 'not_opened', value: '未发放' },
+          { key: 'wait_repay', value: '未发放' },
+          { key: 'success', value: '已发放' },
+          { key: 'fail', value: '未发放' }
         ],
         statusList: [
           { key: 'complete', value: '完成' },
