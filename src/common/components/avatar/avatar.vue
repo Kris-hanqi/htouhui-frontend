@@ -15,7 +15,7 @@
   import { oneOf } from '../../utils/assist';
 
   const prefixClass = 'kui-avatar';
-  
+
   export default {
     name: 'Avatar',
     props: {

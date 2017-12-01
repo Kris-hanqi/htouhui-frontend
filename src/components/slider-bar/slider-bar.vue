@@ -10,7 +10,7 @@
       trigger="hover">
       <gain-calculator></gain-calculator>
     </el-popover>
-    
+
     <!--计算器-->
     <div class="count" v-popover:popover1></div>
     <!--在线客服-->
@@ -44,7 +44,7 @@
     border: 2px solid #4181dc;
     padding: 0;
   }
-  
+
   .slider-bar {
     position: fixed;
     right: 15px;

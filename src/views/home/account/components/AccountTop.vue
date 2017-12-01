@@ -1,7 +1,17 @@
 <template>
   <div class="account-top-wrapper">
     <hth-panel>
-      <avatar size="large" icon="icon-avatar"></avatar>
+      <el-upload
+        class="avatar-uploader"
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :show-file-list="false"
+        :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload">
+
+        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        <avatar size="large" icon="icon-avatar"></avatar>
+      </el-upload>
       <span class="text">你好，<i class="num-font">{{ realName || username }}</i></span>
       <a @click.stop="operationAccount"
          style="margin-right: 8px;"
@@ -21,11 +31,11 @@
                  type="primary"
                  @click="toRouter('account/recharge')">充值</el-button>
     </hth-panel>
-    
+
     <!-- 开户组件 -->
     <guide-operational :visible="dialogOpenAccountVisible"
                   @close="closeOpenAccount"></guide-operational>
-    
+
     <!-- 解绑银行卡 -->
     <unlock-bank-card :visible="dialogUnlockBankCardVisible"
                       @close="closeUnlockBankCard"></unlock-bank-card>
@@ -37,7 +47,7 @@
   import Avatar from 'common/components/avatar/index';
   import GuideOperational from '../../components/GuideOperational.vue';
   import UnlockBankCard from '../../components/UnlockBankCard.vue';
-  
+
   export default {
     components: {
       HthPanel,
@@ -56,7 +66,8 @@
     data() {
       return {
         dialogOpenAccountVisible: false,
-        dialogUnlockBankCardVisible: false
+        dialogUnlockBankCardVisible: false,
+        imageUrl: ''
       }
     },
     methods: {
@@ -100,6 +111,22 @@
       },
       closeUnlockBankCard() {
         this.dialogUnlockBankCardVisible = false;
+      },
+      // element-ui upload组件方法
+      handleAvatarSuccess(res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw);
+      },
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+        const isPNG = file.type === 'image/png';
+        if (!isJPG && !isPNG) {
+          this.$message.error('上传头像图片只能是 JPG或者PNG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return (isJPG || isPNG) && isLt2M;
       }
     }
   }
@@ -113,39 +140,48 @@
       padding-bottom: 0;
       line-height: 73px;
     }
-    
+
     button.top {
       float: right;
     }
-    
+
     .iconfont {
       font-size: 23px;
     }
-    
+
     .active {
       color: #409eff;
     }
-    
+
     .recharge-bth,
     .withdraw-btn {
       float: right;
       margin-top: 17px;
     }
-    
+
     .withdraw-btn {
       margin-right: 16px;
     }
-    
+
     span.text {
       margin-right: 20px;
       font-size: 16px;
       vertical-align: middle;
     }
-    
+
     a {
       display: inline-block;
       vertical-align: middle;
       width: 23px;
     }
   }
+
+  .uploadimg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
 </style>

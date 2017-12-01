@@ -26,7 +26,8 @@ import {
   Radio,
   Col,
   Checkbox,
-  Notification
+  Notification,
+  upload
 } from 'element-ui'
 import VueClipboard from 'vue-clipboard2';
 import '@/styles/bootstrap.scss';
@@ -72,6 +73,7 @@ Vue.use(Col);
 Vue.use(Select);
 Vue.use(Option);
 Vue.use(Checkbox);
+Vue.use(upload);
 
 Vue.use(Loading.directive);
 
