@@ -3,7 +3,7 @@
     <div class="details">
       <div class="title-box">
         <span class="title">退出记录-债权信息</span>
-        <a href="javascript:void(0)" class="return-prev-pages" @click="returnPrevPages()">返回上一页 ></a>
+        <a class="return-prev-pages" @click.stop="returnPrevPages()">返回上一页 ></a>
       </div>
       <div class="look-regular-main">
         <div class="look-regular-money">
@@ -17,7 +17,7 @@
       </div>
       <div class="look-regular-bottom">
         <p>申请时间 <span class="roboto-regular">{{ outPlanList.applyTime }}</span></p>
-        <img v-if="outPlanList.status == 'exited'" class="type-message" src="../../../../assets/images/home/icon-success.png" alt=""/>
+        <img v-if="outPlanList.status === 'exited'" class="type-message" src="../../../../assets/images/home/icon-success.png" alt=""/>
         <img v-else class="type-message" src="../../../../assets/images/home/icon-outRecord.png" alt=""/>
       </div>
     </div>
@@ -136,7 +136,7 @@
         this.getPageList();
       },
       returnPrevPages() {
-        this.$router.push('/investment/scroll21/index');
+        this.$router.push({ path: '/investment/scroll21/index', query: {tagName: 'second'} });
       }
     },
     created() {
