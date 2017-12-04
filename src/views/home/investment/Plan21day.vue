@@ -32,38 +32,21 @@
       </ul>
     </div>
     <div class="message">
-      <el-table :data="list" style="width: 100%">
-        <el-table-column prop="joinTime" label="加入时间" width="135"></el-table-column>
-        <el-table-column prop="joinMoney" label="加入金额">
+  
+      <hth-data-table :data="list"
+                      v-loading="listLoading"
+                      element-loading-text="拼命加载中..."
+                      :col-configs="colConfigs">
+        <el-table-column label="操作" width="150">
           <template slot-scope="scope">
-            {{ scope.row.joinMoney | currency('') + '元' }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="lockPeriod" label="持有期限">
-          <template slot-scope="scope">
-            {{ scope.row.lockPeriod + '天' }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="rate" label="往期年化利率">
-          <template slot-scope="scope">
-            {{ scope.row.rate + '%' }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="lockEndTime" label="持有期限截至" width="135"></el-table-column>
-        <el-table-column prop="status" label="状态" width="80">
-          <template slot-scope="scope">
-            {{ scope.row.status | keyToValue(typeList) }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="seeInterests" label="查看">
-          <template slot-scope="scope">
-            <el-button class="icon-interests" v-if="scope.row.status == 'matched'" @click="goClaimsView(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
+            <el-button v-if="scope.row.status === 'matched'"
+                       @click="goClaimsView(scope.row.joinPlanId)" type="text">查看债权</el-button>
             <p v-else>查看债权</p>
           </template>
         </el-table-column>
-      </el-table>
+      </hth-data-table>
     </div>
-    <div class="pages">
+    <div class="pages" v-if="list && list.length">
       <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
       <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
     </div>
@@ -73,11 +56,23 @@
 <script>
   import { plan21dayJoin } from 'api/home/plan-21day';
   import { getStartAndEndTime, formatDate } from 'utils/index';
+  import HthDataTable from '../components/hth-data-table/HthDataTable.vue';
+  import RowUnit from '../components/hth-data-table/RowUnit.vue';
+  import RowFilterGetValue from '../components/hth-data-table/RowFilterGetValue.vue';
+  
+  const typeList = [
+    { key: 'matched', value: '成功' },
+    { key: 'matching', value: '自动投标中' }
+  ];
 
   export default {
+    components: {
+      HthDataTable
+    },
     data() {
       return {
         list: null,
+        listLoading: false,
         total: 0,
         listQuery: {
           planId: '',
@@ -96,6 +91,15 @@
         typeList: [
           { key: 'matched', value: '成功' },
           { key: 'matching', value: '自动投标中' }
+        ],
+        colConfigs: [
+          { label: '加入时间', width: '140', prop: 'joinTime', component: '' },
+          { label: '加入金额', width: '100', prop: 'joinMoney', component: RowUnit, unit: '元' },
+          { label: '持有期限', width: '100', prop: 'lockPeriod' },
+          { label: '往期年化利率', width: '140', prop: 'rate', component: RowUnit, unit: '%' },
+          { label: '持有期限截至', width: '140', prop: 'lockEndTime' },
+          { label: '状态', width: '100', prop: 'status', component: RowFilterGetValue, listData: typeList },
+          { slot: 'opt' }
         ]
       }
     },
@@ -137,6 +141,7 @@
             this.list = data.data.data;
             this.total = data.data.count || 0;
           }
+          this.listLoading = false;
         })
       },
       query() {
