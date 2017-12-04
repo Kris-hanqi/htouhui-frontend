@@ -204,7 +204,7 @@
           { label: '发布时间', prop: 'verifyTime' },
           { label: '借款金额', prop: 'loanMoney' },
           { label: '剩余时间', prop: 'remainTime' },
-          { label: '进度', prop: 'process' },
+          { label: '进度', prop: 'process', component: RowUnit, unit: '%' },
           { label: '状态', prop: 'status' }
         ],
         finishedColConfigs: [
