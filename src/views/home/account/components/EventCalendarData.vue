@@ -8,11 +8,11 @@
       </div>
       <div class="event-detail__body month-body">
         <p>
-          <i class="iconfont icon-money-pig"></i>本月待收
+          <i class="ku-icon icon-collect-money"></i>本月待收
           <span class="roboto-regular" style="color: #ff4a33;">{{ monthData.collectMoney | currency('') }}</span><span>元</span>
         </p>
         <p>
-          <i class="iconfont icon-save-money"></i>本月已收
+          <i class="ku-icon icon-check-mark"></i>本月已收
           <span class="roboto-regular">{{ monthData.receiptMoney | currency('')}}</span><span>元</span>
         </p>
       </div>
@@ -25,7 +25,7 @@
     <div class="event-detail-day" v-show="viewType !== 'month'">
       <div class="day-header">
         <span class="return-btn">
-           <i @click="switchViewType" class="iconfont icon-left-1"></i>
+           <i @click="switchViewType" class="ku-icon icon-left"></i>
         </span>
         {{ dayData.date }}账单
       </div>
@@ -51,14 +51,14 @@
       <div class="pages day-footer" v-show="dayData.investRepayInfo && dayData.investRepayInfo.length > 1">
         <div class="pages-content">
           <el-button type="text" @click="handleDisableLeft">
-            <i class="iconfont icon-left-1"></i>
+            <i class="ku-icon icon-left"></i>
           </el-button>
           <span v-for="value in length"
                 :key="value"
                 :class="{'pagination-bullet-active': (value - 1) === index}"
                 class="pagination-bullet"></span>
           <el-button type="text" @click="handleDisableRight">
-            <i class="iconfont icon-right-1"></i>
+            <i class="ku-icon icon-right"></i>
           </el-button>
         </div>
       </div>
@@ -198,7 +198,7 @@
         padding-left: 70px;
       }
       
-      .month-body .iconfont {
+      .month-body .ku-icon {
         font-size: 25px;
       }
       
@@ -314,7 +314,7 @@
       .day-footer {
         text-align: center;
         
-        .iconfont {
+        .ku-icon {
           font-size: 20px;
           color: #989292;
         }

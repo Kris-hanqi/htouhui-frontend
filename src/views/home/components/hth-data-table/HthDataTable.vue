@@ -1,9 +1,9 @@
 <template>
   <div class="hth-data-table">
     <el-table :data="data">
+      <!-- 无数据时显示 -->
       <no-data slot="empty"></no-data>
-      
-      <template v-for="col in colConfigs">
+      <template v-for="col in orderBy(colConfigs, 'order')">
         <slot v-if="col.slot"></slot>
         <component
           v-else-if="col.component"
