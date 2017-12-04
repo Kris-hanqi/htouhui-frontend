@@ -43,7 +43,7 @@
   import Avatar from 'common/components/avatar/index';
   import GuideOperational from '../../components/GuideOperational.vue';
   import UnlockBankCard from '../../components/UnlockBankCard.vue';
-  import { uploadimghead } from 'api/home/uploadimghead';
+  import { feachUploadAvatar } from 'api/home/account';
 
   export default {
     components: {
@@ -123,7 +123,7 @@
         }
         const fromData = new FormData();
         fromData.append('file', file);
-        uploadimghead(fromData)
+        feachUploadAvatar(fromData)
           .then(response => {
             console.log(response);
           });

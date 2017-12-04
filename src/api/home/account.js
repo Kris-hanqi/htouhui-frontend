@@ -1,5 +1,14 @@
 import fetch from 'utils/fetch';
 
+/** 上传头像 */
+export function feachUploadAvatar(data) {
+  return fetch({
+    url: 'user/uploadHeadSculpture',
+    method: 'post',
+    data
+  })
+}
+
 /** 获取资产统计信息 */
 export function fetchAsset() {
   return fetch({
