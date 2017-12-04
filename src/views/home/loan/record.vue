@@ -16,11 +16,11 @@
             </div>
           </form>
           <hth-data-table :data="list" :col-configs="repayingColConfigs">
-            <el-table-column fixed="right" label="操作" width="120">
+            <el-table-column fixed="right" label="操作" width="150">
               <template slot-scope="scope">
                 <el-button @click="openRepaymentPlan(scope.row.id)" type="text">还款计划</el-button>
-                <el-button v-if="scope.row.ensignContract" @click="contractDownload(scope.row)" type="text">合同</el-button>
-                <a v-else="" style="color: #409EFF;" :href="'/user/contract.html?loanId=' + scope.row.id" target="_blank">合同</a>
+                <el-button v-if="scope.row.ensignContract" @click="contractDownload(scope.row)" type="text">下载合同</el-button>
+                <a v-else="" style="color: #409EFF;" :href="'/user/contract.html?loanId=' + scope.row.id" target="_blank">下载合同</a>
               </template>
             </el-table-column>
           </hth-data-table>
@@ -80,11 +80,11 @@
                 <button style="width: 100px" :disabled="!listQuery.name" @click="query" type="button" class="hth-btn hth-btn-primary">查询</button>
               </div>
             </form>
-            <el-table-column fixed="right" label="操作" width="120">
+            <el-table-column fixed="right" label="操作" width="150">
               <template slot-scope="scope">
                 <el-button @click="openRepaymentPlan(scope.row.id)" type="text">还款计划</el-button>
-                <el-button v-if="scope.row.ensignContract" @click="contractDownload(scope.row)" type="text">合同</el-button>
-                <a v-else="" style="color: #409EFF;" :href="'/user/contract.html?loanId=' + scope.row.id" target="_blank">合同</a>
+                <el-button v-if="scope.row.ensignContract" @click="contractDownload(scope.row)" type="text">下载合同</el-button>
+                <a v-else="" style="color: #409EFF;" :href="'/user/contract.html?loanId=' + scope.row.id" target="_blank">下载合同</a>
               </template>
             </el-table-column>
           </hth-data-table>
@@ -102,11 +102,11 @@
           </form>
           <hth-data-table :data="list"
                           :col-configs="failColConfigs">
-            <el-table-column fixed="right" label="操作" width="120">
+            <el-table-column fixed="right" label="操作" width="150">
               <template slot-scope="scope">
                 <el-button @click="openRepaymentPlan(scope.row.id)" type="text">还款计划</el-button>
-                <el-button v-if="scope.row.ensignContract" @click="contractDownload(scope.row)" type="text">合同</el-button>
-                <a v-else="" style="color: #409EFF;" :href="'/user/contract.html?loanId=' + scope.row.id" target="_blank">合同</a>
+                <el-button v-if="scope.row.ensignContract" @click="contractDownload(scope.row)" type="text">下载合同</el-button>
+                <a v-else="" style="color: #409EFF;" :href="'/user/contract.html?loanId=' + scope.row.id" target="_blank">下载合同</a>
               </template>
             </el-table-column>
           </hth-data-table>
