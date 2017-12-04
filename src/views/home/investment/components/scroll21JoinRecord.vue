@@ -35,6 +35,8 @@
               v-loading="listLoading"
               element-loading-text="拼命加载中..."
               style="width: 100%">
+      <!-- 无数据时显示 -->
+      <no-data slot="empty"></no-data>
       <el-table-column prop="joinTime" label="加入时间" width="135" fixed></el-table-column>
       <el-table-column prop="joinMoney" label="加入金额">
         <template slot-scope="scope">
@@ -104,11 +106,13 @@
   import { getStartAndEndTime, getDateString } from 'utils/index';
   import tabTieXi from './scroll21TabTieXi.vue';
   import tabCoupons from './scroll21TabCoupons.vue';
+  import NoData from '../../components/NoData.vue';
 
   export default {
     components: {
       tabTieXi,
-      tabCoupons
+      tabCoupons,
+      NoData
     },
     data() {
       return {
@@ -210,7 +214,8 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+  
   .times-box {
     width: 100%;
     height: 40px;
@@ -268,6 +273,10 @@
       width: 24px;
       height: 24px;
       background: url(../../../../assets/images/home/icon-award.png) no-repeat center;
+    }
+  
+    .el-table__empty-block {
+      min-height: 260px;
     }
 
     .icon-interests {
