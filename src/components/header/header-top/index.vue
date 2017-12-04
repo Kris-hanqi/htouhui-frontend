@@ -1,19 +1,15 @@
 <template>
   <!-- 头部组件 顶部 -->
   <div class="header-top">
-    <span>
-      客服电话: <span class="roboto-regular">400-698-8810</span>（工作日 <span class="roboto-regular">09:00 - 18:00</span>）
-    </span>
+    <span>客服电话: 400-698-8810（工作日09:00 - 18:00）</span>
     <ul class="header-top_bar">
-      <!--<li><a href="./login.html">登录</a></li>-->
       <li><a @click.stop="logout">退出</a></li>
-      <!--<li><a href="./memberRegist">注册</a></li>-->
       <li><a href="/activity/information-discloture">信息披露</a></li>
       <li><a href="/education_column_list">网贷课堂</a></li>
       <li><a href="/latestActivityList">最新活动</a></li>
       <li><a href="/new-user/guide">帮助中心</a></li>
       <li>
-        <i class="icon-mobile"></i>
+        <i class="ku-icon icon-phone"></i>
         手机APP
         <div class="app-download">
           <i></i>
@@ -69,15 +65,6 @@
     &:last-child {
       position: relative;
       cursor: default;
-
-      .icon-mobile {
-        display: inline-block;
-        vertical-align: middle;
-        width: 13px;
-        height: 19px;
-        background: url(../../../assets/images/index-ico-phone.png) no-repeat center;
-        margin-right: 5px;
-      }
 
       .app-download {
         display: none;

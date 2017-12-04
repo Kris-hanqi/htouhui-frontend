@@ -24,7 +24,7 @@
     <!-- 日视图 -->
     <div class="event-detail-day" v-show="viewType !== 'month'">
       <div class="day-header">
-        <span class="return-btn">
+        <span class="return-btn pull-left">
            <i @click="switchViewType" class="ku-icon icon-left"></i>
         </span>
         {{ dayData.date }}账单
@@ -212,7 +212,7 @@
       height: auto;
       box-sizing: border-box;
       text-align: center;
-      padding: 20px 0;
+      padding: 20px;
       
       .day-header {
         width: 100%;
@@ -239,15 +239,12 @@
         }
         
         i {
-          font-size: 20px;
+          margin-left: 6px;
+          font-size: 16px;
           color: #b2b2b2;
         }
       }
-  
-      .day-body {
-        padding-left: 40px;
-      }
-  
+      
       .title {
         width: 100%;
     

@@ -14,7 +14,7 @@
 <script>
   import { oneOf } from '../../utils/assist';
 
-  const prefixClass = 'kui-avatar';
+  const prefixClass = 'ku-avatar';
 
   export default {
     name: 'Avatar',
