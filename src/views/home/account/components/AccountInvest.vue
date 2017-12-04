@@ -9,7 +9,7 @@
                         :options="chartOptions"
                         :width="160" :height="160"></invest-chart>
           <div style="margin-top: 40px;" v-show="showChart === 0">
-            <i class="iconfont icon-round"></i>
+            <i class="ku-icon icon-round"></i>
           </div>
         </div>
       </div>
