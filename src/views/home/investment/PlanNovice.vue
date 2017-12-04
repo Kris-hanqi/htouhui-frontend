@@ -113,7 +113,7 @@
           <el-table-column prop="status" label="状态" width="80"></el-table-column>
           <el-table-column prop="contract" label="操作">
             <template slot-scope="scope">
-              <el-button v-if="scope.row.showContract" @click="downLoadContract(scope.row.loanId)" type="text">下载合同</el-button>
+              <el-button v-if="scope.row.showContract" @click="downLoadContract(scope.row.investId)" type="text">下载合同</el-button>
               <p v-else>下载合同</p>
             </template>
           </el-table-column>
@@ -136,7 +136,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import { getLocationUrl } from 'utils/index';
-  import { fetchNovicePlanInfo, fetchJoinPlanBill, feachJoinInvestClaims, feachDownLoadJoinContract } from 'api/home/investment';
+  import { fetchNovicePlanInfo, fetchJoinPlanBill, feachJoinInvestClaims, feachDownLoadClaimsContract } from 'api/home/investment';
   import interestRate from 'components/interest-rate';
 
   export default {
@@ -197,14 +197,15 @@
       },
       joinPlanNoviceList() {
         this.listLoading = true;
-        fetchJoinPlanBill(this.joinDetailsQuery).then(response => {
-          if (response.data.meta.code === 200) {
-            this.joinDetails = response.data.data.data[0];
-            this.claimsQuery.joinPlanId = this.joinDetails.joinPlanId;
-            this.getClaimsList();
-          }
-          this.listLoading = false;
-        })
+        fetchJoinPlanBill(this.joinDetailsQuery)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.joinDetails = response.data.data.data[0];
+              this.claimsQuery.joinPlanId = this.joinDetails.joinPlanId;
+              this.getClaimsList();
+            }
+            this.listLoading = false;
+          })
       },
       getClaimsList() {
         feachJoinInvestClaims(this.claimsQuery).then(response => {
@@ -215,9 +216,12 @@
         })
       },
       downLoadContract(id) {
-        feachDownLoadJoinContract(id)
+        feachDownLoadClaimsContract(id)
           .then(response => {
-            console.log(response);
+            if (response.data.meta.code === 200) {
+              window.open(response.data.dat);
+              console.log(response);
+            }
           })
       },
       handleCurrentChange() {

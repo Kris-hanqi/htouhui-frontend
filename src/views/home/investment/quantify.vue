@@ -10,7 +10,7 @@
         <p>随时可退</p>
         <p>满{{ item.lockPeriod }}天免手续费</p>
         <div class="details pull-right" :class="{ disabled: !item.joinPlan }">
-          <i class="iconfont icon-icon-details"></i>
+          <i class="ku-icon icon-icon-details"></i>
           <el-button @click="toRouter('/investment/quantify/transactionRecord', item.planId)" :disabled="!item.joinPlan" type="text">交易详情</el-button>
         </div>
       </div>

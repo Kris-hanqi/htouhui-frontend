@@ -31,7 +31,10 @@
       </ul>
     </div>
 
-    <el-table :data="list" style="width: 100%">
+    <el-table :data="list"
+              v-loading="listLoading"
+              element-loading-text="拼命加载中..."
+              style="width: 100%">
       <el-table-column prop="joinTime" label="加入时间" width="135" fixed></el-table-column>
       <el-table-column prop="joinMoney" label="加入金额">
         <template slot-scope="scope">
@@ -72,7 +75,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <div class="pages">
+    <div class="pages" v-if="list && list.length">
       <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
       <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
     </div>
@@ -127,6 +130,7 @@
         dialogVisible: false,
         activeName: 'first',
         list: null,
+        listLoading: false,
         dateType: '3day',
         typeList: [
           { key: 'matched', value: '成功' },
@@ -166,12 +170,14 @@
             return;
           }
         }
+        this.listLoading = true;
         joinRecord(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
             this.total = data.data.count || 0;
           }
+          this.listLoading = false;
         })
       },
       query() {

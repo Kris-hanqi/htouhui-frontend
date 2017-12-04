@@ -4,7 +4,7 @@
     <hth-panel title="一键加入">
       <div class="main-1" v-if="operationalStatus === 'initial'">
         <p>可加入额<span class="roboto-regular">{{ joinMoney | currency('') }}</span>
-          <span>元</span><i class="iconfont icon-update" @click="operationalStatus = 'update'"></i>
+          <span>元</span><i class="ku-icon icon-edit" @click="operationalStatus = 'update'"></i>
         </p>
       </div>
       <div class="main-2" v-else>
@@ -22,7 +22,7 @@
         <div v-else class="coupons-box">
           <div class="coupons-icon" @click="operationalCouponsListView">
             <span style="padding-left: 10px">优惠券</span>
-            <i class="iconfont" :class="showCouponsList ? 'icon-bottom' : 'icon-top'"></i>
+            <i class="ku-icon" :class="showCouponsList ? 'icon-bottom' : 'icon-top'"></i>
             <div class="coupons-content" v-show="showCouponsList">
               <i></i>
               <p class="title">可用券： 当前有<span class="roboto-regular">{{ couponsList.count }}</span>张可用的优惠券</p>
