@@ -6,7 +6,7 @@
         action="https://jsonplaceholder.typicode.com/posts/"
         :show-file-list="false"
         :before-upload="beforeAvatarUpload">
-        <avatar size="large" icon="icon-avatar"></avatar>
+        <avatar size="large" icon="icon-avatar" :src="headImg"></avatar>
       </el-upload>
       <span class="text">你好，<i class="num-font">{{ realName || username }}</i></span>
       <a @click.stop="operationAccount"
@@ -57,7 +57,8 @@
         'realName',
         'username',
         'status',
-        'bankCard'
+        'bankCard',
+        'headImg'
       ])
     },
     data() {
@@ -125,7 +126,7 @@
         fromData.append('file', file);
         feachUploadAvatar(fromData)
           .then(response => {
-            console.log(response);
+            this.$store.commit('SET_HEAD_IMG', response.data.data.imgUrl);
           });
         return false;
       }
@@ -141,7 +142,7 @@
       padding-bottom: 0;
       line-height: 73px;
     }
-  
+
     .ku-icon {
       font-size: 20px;
     }
@@ -187,7 +188,7 @@
       height: 40px;
     }
 
-    .kui-avatar {
+    .ku-avatar {
       vertical-align: top;
     }
 
