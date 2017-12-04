@@ -1,4 +1,5 @@
 <template>
+  <!-- 封装element table组件 -->
   <div class="hth-data-table">
     <el-table :data="data">
       <!-- 无数据时显示 -->
