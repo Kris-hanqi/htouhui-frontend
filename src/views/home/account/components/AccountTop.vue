@@ -5,11 +5,7 @@
         class="avatar-uploader"
         action="https://jsonplaceholder.typicode.com/posts/"
         :show-file-list="false"
-        :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload">
-
-        <img v-if="imageUrl" :src="imageUrl" class="avatar">
-        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         <avatar size="large" icon="icon-avatar"></avatar>
       </el-upload>
       <span class="text">你好，<i class="num-font">{{ realName || username }}</i></span>
@@ -47,6 +43,7 @@
   import Avatar from 'common/components/avatar/index';
   import GuideOperational from '../../components/GuideOperational.vue';
   import UnlockBankCard from '../../components/UnlockBankCard.vue';
+  import { uploadimghead } from 'api/home/uploadimghead';
 
   export default {
     components: {
@@ -66,8 +63,7 @@
     data() {
       return {
         dialogOpenAccountVisible: false,
-        dialogUnlockBankCardVisible: false,
-        imageUrl: ''
+        dialogUnlockBankCardVisible: false
       }
     },
     methods: {
@@ -113,20 +109,23 @@
         this.dialogUnlockBankCardVisible = false;
       },
       // element-ui upload组件方法
-      handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-      },
       beforeAvatarUpload(file) {
         const isJPG = file.type === 'image/jpeg';
         const isLt2M = file.size / 1024 / 1024 < 2;
         const isPNG = file.type === 'image/png';
         if (!isJPG && !isPNG) {
           this.$message.error('上传头像图片只能是 JPG或者PNG 格式!');
+          return false;
         }
         if (!isLt2M) {
           this.$message.error('上传头像图片大小不能超过 2MB!');
+          return false;
         }
-        return (isJPG || isPNG) && isLt2M;
+        const fromData = new FormData();
+        fromData.append('logo', file);
+        uploadimghead(fromData).then(response => {
+          console.log(response);
+        })
       }
     }
   }
@@ -174,14 +173,39 @@
       vertical-align: middle;
       width: 23px;
     }
-  }
 
-  .uploadimg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    .avatar-uploader {
+      display: inline-block;
+      vertical-align: middle;
+      width: 40px;
+      height: 40px;
+    }
+
+    .kui-avatar {
+      vertical-align: top;
+    }
+
+    .avatar-uploader .el-upload {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .avatar-uploader .el-upload:hover {
+      border-color: #409eff;
+    }
+
+    .el-upload__input {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
   }
 
 </style>

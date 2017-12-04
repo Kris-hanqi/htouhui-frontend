@@ -22,6 +22,7 @@ const getters = {
   isAutomaticDebtTransfer: state => state.user.isAutomaticDebtTransfer,
   isAutomaticRepayment: state => state.user.isAutomaticRepayment,
   isBorrower: state => state.user.isBorrower,
+  headimg: state => state.user.headimg,
   // app
   baseUrl: state => state.app.baseUrl
 };
