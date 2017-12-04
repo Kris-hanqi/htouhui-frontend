@@ -5,7 +5,7 @@
       <p>{{ bankCard }}</p>
     </div>
     <div class="no-bank-card" v-else="" @click="toBindBackCard">
-      <i class="iconfont icon-add"></i>
+      <i class="ku-icon icon-plus-outline"></i>
       <p>您暂未绑定银行卡</p>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar-wrapper">
     <p class="account">
-      <i class="iconfont icon-account"></i>我的账户
+      <i class="ku-icon icon-account"></i>我的账户
     </p>
     <ul>
       <li class="nav">
@@ -18,7 +18,7 @@
       </li>
     </ul>
     <p class="investment">
-      <i class="iconfont icon-investment"></i>我的投资
+      <i class="ku-icon icon-investment"></i>我的投资
     </p>
     <ul>
       <li class="nav" v-if="showNovicePlan">
@@ -41,7 +41,7 @@
       </li>
     </ul>
     <p class="borrow-money" v-if="showLoan">
-      <i class="iconfont icon-loan"></i>我的借款
+      <i class="ku-icon icon-loan"></i>我的借款
     </p>
     <ul v-if="showLoan">
       <li class="nav">
@@ -52,7 +52,7 @@
       </li>
     </ul>
     <p class="new-platform-rewards">
-      <i class="iconfont icon-reward"></i>平台奖励
+      <i class="ku-icon icon-reward"></i>平台奖励
     </p>
     <ul>
       <li class="nav">
@@ -60,7 +60,7 @@
       </li>
     </ul>
     <p class="account-management">
-      <i class="iconfont icon-set"></i>账户管理
+      <i class="ku-icon icon-set"></i>账户管理
     </p>
     <ul>
       <li class="nav">
@@ -110,8 +110,9 @@
 
       i {
         position: absolute;
+        top: 12px;
         left: 15px;
-        font-size: 24px;
+        font-size: 20px;
         color: #7c86a2;
       }
     }
