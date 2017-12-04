@@ -13,7 +13,7 @@
         <li><a href="">关于我们</a></li>
         <li class="header-down__account">
           <a href="./home.html">
-            <avatar icon="icon-avatar"></avatar>
+            <avatar :src="headImg" icon="icon-avatar"></avatar>
             <span>我的账户</span>
           </a>
         </li>
@@ -23,11 +23,18 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import Avatar from 'common/components/avatar/index';
   import img_logo from 'assets/images/logo.png';
+  
   export default {
     components: {
       Avatar
+    },
+    computed: {
+      ...mapGetters([
+        'headImg'
+      ])
     },
     data() {
       return {

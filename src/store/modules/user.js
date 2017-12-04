@@ -71,7 +71,7 @@ const user = {
     isAutomaticRepayment: false,       // 是否自动还款
     novicePlanStatus: 1,               // 新手计划状态
     isBorrower: false,                 // 是否是借款人
-    headImg: ''                      // 头像url
+    headImg: ''                        // 头像url
   },
 
   mutations: {
@@ -142,7 +142,7 @@ const user = {
       state.isAutomaticRepayment = data;
     },
     SET_HEAD_IMG: (state, data) => {
-      state.headimg = data;
+      state.headImg = data;
     }
   },
 
@@ -174,7 +174,7 @@ const user = {
             commit('SET_IS_AUTOMATIC_BIDDING', data.isAutoBidAuth);
             commit('SET_IS_AUTOMATIC_DEBT_TRANSFER', data.isAutoInvestAuth);
             commit('SET_IS_AUTOMATIC_REPAYMENT', data.isAutoRepayAuth);
-            commit('SET_HEAD_IMG', data.headerimg);
+            commit('SET_HEAD_IMG', data.photo);
           }
           resolve(response)
         }).catch(error => {
