@@ -32,7 +32,7 @@
               <div class="coupons-list">
                 <div class="coupon" v-for="str in couponsList.userCouponInfos">
                   <el-radio :disabled="!chooseCoupons(str.lowerLimitMoney)" v-model="radio" :label="str.userCouponId" name="coupons">
-                    <div class="coupon-img" :id="str.userCouponId">{{ str.type == 'plus_coupon' ? str.rate : str.money }}{{ str.type | keyToValue(typeList) }}</div>
+                    <div class="coupon-img" :id="str.userCouponId">{{ str.type === 'plus_coupon' ? str.rate : str.money }}{{ str.type | keyToValue(typeList) }}</div>
                     <div class="coupon-message">
                       <p>满{{ str.lowerLimitMoney | currency('') }}元可用</p>
                       <p><span v-if="str.maxInterestMoney !== null">最高计息金额：{{ str.maxInterestMoney | currency('') }}元 </span><span v-if="str.interestDeadline !== null"> 最高计息天数：{{ str.interestDeadline }}天</span></p>
@@ -137,12 +137,11 @@
       chooseCoupons(value) {
         if (!this.userMoney) {
           return false;
+        }
+        if (this.userMoney >= value) {
+          return true;
         } else {
-          if (this.userMoney > value) {
-            return true;
-          } else {
-            return false;
-          }
+          return false;
         }
       },
       // 获取一键加入所需信息

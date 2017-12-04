@@ -28,40 +28,34 @@
         <p class="title-message">目前已为您成功退出   <span>{{ outPlanList.exitedMoney | currency('') }}元</span></p>
       </div>
       <el-table :data="list" style="width: 100%">
-        <el-table-column prop="loanId" label="项目编号" width="100"></el-table-column>
-        <el-table-column prop="loanMoney" label="借款金额" width="100">
+        <el-table-column prop="loanId" label="项目编号" width="140"></el-table-column>
+        <el-table-column prop="loanMoney" label="借款金额" width="120">
           <template slot-scope="scope">
             {{ scope.row.loanMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column label="往期年利率" width="80">
+        <el-table-column label="往期年利率" width="90">
           <template slot-scope="scope">
             {{ scope.row.rate + '%' }}
           </template>
         </el-table-column>
-        <el-table-column label="借款期限" width="80">
+        <el-table-column label="借款期限" width="90">
           <template slot-scope="scope">
             {{ scope.row.perid | currency('') + '天' }}
           </template>
         </el-table-column>
-        <el-table-column label="投资金额" width="80">
+        <el-table-column label="投资金额" width="90">
           <template slot-scope="scope">
             {{ scope.row.investMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="repayTimeFormat" label="还款时间" width="70"></el-table-column>
-        <el-table-column label="已收本息" width="70">
+        <el-table-column label="退出金额" width="100">
           <template slot-scope="scope">
-            {{ scope.row.earnings | currency('') + '元' }}
+            {{ scope.row.exitMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column label="待收本息" width="80">
-          <template slot-scope="scope">
-            {{ scope.row.uncollectedRepayMoney | currency('') + '元' }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="status" label="状态" width="60"></el-table-column>
-        <el-table-column prop="contract" label="合同" width="80">
+        <el-table-column prop="status" label="状态" width="80"></el-table-column>
+        <el-table-column prop="contract" label="合同">
           <template slot-scope="scope">
             <el-button v-if="scope.row.showContract" type="text">点击下载</el-button>
             <a v-else type="text">放款后可查看</a>
@@ -70,7 +64,10 @@
       </el-table>
       <div class="pages">
         <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-        <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
+        <el-pagination @current-change="handleCurrentChange"
+                       :current-page.sync="listQuery.pageNo"
+                       :page-size="listQuery.size"
+                       layout="prev, pager, next" :total="total"></el-pagination>
       </div>
     </div>
   </div>
