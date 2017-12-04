@@ -24,8 +24,10 @@
       <div class="look-regular-bottom">
         <p>加入时间 <span class="roboto-regular">{{ detailList.joinTime }}</span></p>
         <p>持有期限截止 <span class="roboto-regular">{{ detailList.lockEndTime }}</span></p>
-        <img v-if="detailList.status === 'matched'" class="type-message" src="../../../../assets/images/home/icon-success.png" alt=""/>
-        <img v-else class="type-message" src="../../../../assets/images/home/icon-auto.png" alt=""/>
+      </div>
+      <div class="hth-mark">
+        <i v-if="detailList.status === 'matched'" class="ku-icon icon-mark-success"></i>
+        <i v-else="" class="ku-icon icon-mark-auto-tender"></i>
       </div>
     </div>
 
@@ -72,16 +74,23 @@
           </template>
         </el-table-column>
         <el-table-column prop="status" label="状态" width="60"></el-table-column>
-        <el-table-column prop="contract" label="查看" width="40">
+        <el-table-column prop="contract" fixed="right" label="操作" width="100">
           <template slot-scope="scope">
-            <a class="ico-download" type="text">合同</a>
+            <el-button @click="downLoadContract(scope.row.investId)" type="text">合同下载</el-button>
           </template>
         </el-table-column>
       </el-table>
 
       <div class="pages">
-        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-        <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
+        <p class="total-pages">共计
+          <span class="roboto-regular">{{ total }}</span>条记录
+          （共<span class="roboto-regular">{{ getPageSize }}</span>页）
+        </p>
+        <el-pagination @current-change="handleCurrentChange"
+                       :current-page.sync="listQuery.pageNo"
+                       :page-size="listQuery.size"
+                       layout="prev, pager, next"
+                       :total="total"></el-pagination>
       </div>
     </div>
   </div>
@@ -89,7 +98,7 @@
 
 <script>
   import { joinPlan } from 'api/home/getJoinInfo';
-  import { queryUserInvestList } from 'api/home/queryUserJoinInvestList';
+  import { feachJoinInvestClaims, feachDownLoadClaimsContract } from 'api/home/investment';
   import interestRate from 'components/interest-rate';
 
   export default {
@@ -131,7 +140,7 @@
         })
       },
       getPageList() {
-        queryUserInvestList(this.listQuery).then(response => {
+        feachJoinInvestClaims(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
             this.list = data.data.data;
@@ -145,6 +154,21 @@
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
         this.getPageList();
+      },
+      downLoadContract(id) {
+        if (!id) return;
+        feachDownLoadClaimsContract(id)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              window.open(response.data.data);
+            }
+            if (response.data.meta.code === 9999) {
+              this.$notify.error({
+                title: '合同下载失败',
+                message: response.data.meta.message
+              });
+            }
+          })
       }
     },
     created() {
@@ -158,7 +182,20 @@
   .ico-download {
     color: #0573f4;
   }
-
+  
+  .look-regular {
+    .hth-mark {
+      float: right;
+      margin-top: -96px;
+      margin-right: 8px;
+    }
+  
+    .ku-icon {
+      font-size: 100px;
+      color: #ec4d4c;
+    }
+  }
+  
   .details {
     width: 100%;
     height: auto;
@@ -232,7 +269,6 @@
   }
 
   .look-regular-bottom {
-    position: relative;
     width: 100%;
     height: auto;
     padding-top: 20px;

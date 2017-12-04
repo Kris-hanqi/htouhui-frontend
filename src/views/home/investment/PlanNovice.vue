@@ -219,8 +219,7 @@
         feachDownLoadClaimsContract(id)
           .then(response => {
             if (response.data.meta.code === 200) {
-              window.open(response.data.dat);
-              console.log(response);
+              window.open(response.data.data);
             }
           })
       },
