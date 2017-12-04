@@ -9,6 +9,9 @@
   
     <!-- 网关交互组件 -->
     <request-bank-from :request-data="requestData"></request-bank-from>
+    
+    <!-- 验证用户操作组件 -->
+    <operational-validate ref="validateSteps"></operational-validate>
   
     <!-- 充值表单 -->
     <form class="form-horizontal">
@@ -37,7 +40,7 @@
         <div class="col-md-offset-2 col-md-4">
           <el-button type="primary"
                      class="btn-block"
-                     :disabled="rechargeData.money === ''"
+                     :disabled="!rechargeData.money"
                      @click="getRequestBankData"
                      :loading="loading" round>充值</el-button>
         </div>
@@ -59,11 +62,11 @@
 <script>
   import { mapGetters } from 'vuex';
   import { validateMoney } from 'utils/validate';
-  import operationalValidate from 'utils/home/operationalValidate';
   import { fetchRecharge, fetchAccountMoney } from 'api/home/account';
   import BankLimit from '../../components/BankLimit.vue';
   import BankCard from '../../components/BackCard.vue';
   import RequestBankFrom from '../../components/RequestBankFrom.vue';
+  import OperationalValidate from '../../components/OperationalValidate.vue';
 
   export default {
     computed: {
@@ -74,6 +77,7 @@
     },
     components: {
       RequestBankFrom,
+      OperationalValidate,
       BankLimit,
       BankCard
     },
@@ -98,8 +102,7 @@
           source: 'pc',
           sessionId: '',
           callbackUrl: this.$store.getters.baseUrl
-        },
-        operationalValidateData: ['openAccount', 'transactionPassword', 'bankCard']
+        }
       }
     },
     methods: {
@@ -118,7 +121,9 @@
           })
       },
       getRequestBankData() {
-        const result = operationalValidate(this.operationalValidateData);
+        // 充值必须 开户、设置交易密码、绑卡
+        const validateSteps = ['openAccount', 'transactionPassword', 'bankCard'];
+        const result = this.$refs['validateSteps'].validate(validateSteps); // eslint-disable-line
         if (!result) return;
         if (!this.rechargeData.money) {
           this.$message({

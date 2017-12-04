@@ -12,10 +12,10 @@
       <a @click.stop="operationAccount"
          style="margin-right: 8px;"
          :class="{ active: status }">
-        <i class="iconfont icon-user"></i>
+        <i class="ku-icon icon-user"></i>
       </a>
       <a @click.stop="operationBankCard" :class="{ active: bankCard }">
-        <i class="iconfont icon-bank-card"></i>
+        <i class="ku-icon icon-bank-card"></i>
       </a>
       <el-button class="recharge-bth"
                  :round="true"
@@ -122,10 +122,12 @@
           return false;
         }
         const fromData = new FormData();
-        fromData.append('logo', file);
-        uploadimghead(fromData).then(response => {
-          console.log(response);
-        })
+        fromData.append('file', file);
+        uploadimghead(fromData)
+          .then(response => {
+            console.log(response);
+          });
+        return false;
       }
     }
   }
@@ -138,6 +140,10 @@
       padding-top: 0;
       padding-bottom: 0;
       line-height: 73px;
+    }
+  
+    .ku-icon {
+      font-size: 20px;
     }
 
     button.top {
@@ -207,5 +213,4 @@
       opacity: 0;
     }
   }
-
 </style>
