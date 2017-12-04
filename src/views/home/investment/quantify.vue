@@ -44,6 +44,9 @@
     <div class="not-data" v-show="quantifyData.length === 0">
       <no-data></no-data>
     </div>
+  
+    <!-- 验证用户操作组件 -->
+    <operational-validate ref="validateSteps"></operational-validate>
   </div>
 </template>
 
@@ -51,11 +54,13 @@
   import { fetchGetList } from 'api/home/investment-quantify';
   import interestRate from 'components/interest-rate';
   import NoData from '../components/NoData.vue';
+  import OperationalValidate from '../components/OperationalValidate.vue';
   import { getLocationUrl } from 'utils/index';
 
   export default {
     components: {
       interestRate,
+      OperationalValidate,
       NoData
     },
     data() {
@@ -75,6 +80,9 @@
         this.$router.push(str);
       },
       oneKeyJoin(id) {
+        const validateSteps = ['openAccount', 'transactionPassword', 'bankCard', 'automaticTender', 'automaticDebtTransfer'];
+        const result = this.$refs['validateSteps'].validate(validateSteps); // eslint-disable-line
+        if (!result) return;
         this.$router.push('/investment/quantify/oneKeyJoin/' + id);
       },
       pullOut(id) {
