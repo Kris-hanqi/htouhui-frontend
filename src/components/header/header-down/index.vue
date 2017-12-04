@@ -2,7 +2,7 @@
   <div class="header-down">
     <div class="contain">
       <div class="header-down__logo">
-        <img :src="img_logo" alt="海投汇"/>
+        <i class="ku-icon icon-logo"></i>
       </div>
       <ul class="header-down__bar">
         <li><a href="/" active-class="active">首页</a></li>
@@ -61,11 +61,11 @@
 
   .header-down__logo {
     display: inline-block;
-    width: 149px;
-    height: 41px;
-
-    img {
-      width: 100%;
+    
+    i {
+      margin-top: 7px;
+      font-size: 55px;
+      color: #176ff0;
     }
   }
 

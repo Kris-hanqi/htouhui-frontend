@@ -1,4 +1,5 @@
 <template>
+  <!-- 头部组件 顶部 -->
   <div class="header-top">
     <span>
       客服电话: <span class="roboto-regular">400-698-8810</span>（工作日 <span class="roboto-regular">09:00 - 18:00</span>）
