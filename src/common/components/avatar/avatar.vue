@@ -2,7 +2,7 @@
 <template>
   <span :class="classes">
     <img :src="src" v-if="src">
-    <i class="iconfont" :class="icon" v-else-if="icon"></i>
+    <i class="ku-icon" :class="icon" v-else-if="icon"></i>
     <span ref="children"
           :class="[prefixCls + '-string']"
           :style="childrenStyle" v-else>
