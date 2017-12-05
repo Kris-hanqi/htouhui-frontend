@@ -81,7 +81,13 @@
       setTransactionPassword() {
         const result = operationalValidate(this.operationalValidateData);
         if (!result) return;
-        if (!this.transactionPassword.authCode) return;
+        if (!this.transactionPassword.authCode) {
+          this.$message({
+            message: '验证码不能为空!',
+            type: 'warning'
+          });
+          return;
+        }
         this.transactionPassword.sessionId = this.uuid;
         this.transactionPassword.callbackUrl = `${this.baseUrl}/user/home.html#/accountManage/set`;
         fetchSetTransactionPassword(this.transactionPassword)
