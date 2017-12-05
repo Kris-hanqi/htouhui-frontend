@@ -185,6 +185,9 @@
         })
       },
       query() {
+        this.listQuery.pageNo = 1;
+        this.total = 0;
+        this.list = null;
         this.getPageList();
       },
       switchDateType(type) {
@@ -199,6 +202,9 @@
         this.$router.push('/investment/scroll21/lookRegular-joinRecord/' + id);
       },
       getAward(id) {
+        this.listQuery.pageNo = 1;
+        this.total = 0;
+        this.list = null;
         this.activeName = 'first';
         this.showTest = true;
         this.dialogVisible = true;
