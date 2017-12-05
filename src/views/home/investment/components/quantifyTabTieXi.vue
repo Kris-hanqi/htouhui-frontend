@@ -12,7 +12,7 @@
         <div>
           <p>贴息到期时间：<span class="roboto-regular">{{ messageList.tiexiEndTime }}</span></p>
           <p class="color-txt">
-            贴息金额：<span class="roboto-regular">{{ messageList.tiexiMoney | currency('', 4) }}</span><span>元</span>
+            贴息金额：<span class="roboto-regular">{{ messageList.tiexiMoney | currency('') }}</span><span>元</span>
             <el-tooltip class="item" placement="top">
               <div slot="content">贴息金额计算方式以<br/>四舍五入至后两位</div>
               <i class="question"></i>
@@ -38,7 +38,7 @@
           </el-table-column>
           <el-table-column prop="money" label="贴息金额">
             <template slot-scope="scope">
-              {{ scope.row.money | currency('') + '元' }}
+              {{ scope.row.money | currency('', 4) + '元' }}
             </template>
           </el-table-column>
         </el-table>
