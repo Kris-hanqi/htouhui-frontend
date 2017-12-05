@@ -114,6 +114,7 @@
             if (response.data.meta.code === 200) {
               this.$store.commit('SET_STATUS', 1);
               this.$store.commit('SET_REAL_NAME', response.data.data.realName);
+              this.$store.commit('SET_ID_NUMBER', response.data.data.idCard);
               this.$store.commit('SET_ACCOUNT_ID', response.data.data.accountId);
               this.$store.commit('SET_BANK_CARD', response.data.data.cardNo);
               this.$store.commit('SET_BANK_NO', response.data.data.bankNo);
