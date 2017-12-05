@@ -93,18 +93,15 @@
             if (action === 'confirm') {
               fetchRepayment({ repayId: id }).then(response => {
                 if (response.data.meta.code === 200) {
-                  this.$notify({
-                    title: '还款成功',
-                    message: '描述:' + response.data.meta.message,
-                    type: 'success',
-                    position: 'top-left'
+                  this.$message({
+                    message: '还款成功!',
+                    type: 'success'
                   });
                 } else {
                   this.$notify({
                     title: '还款失败',
-                    message: '描述:' + response.data.meta.message,
-                    type: 'error',
-                    position: 'top-left'
+                    message: response.data.meta.message,
+                    type: 'error'
                   });
                 }
                 this.$emit('close');
@@ -129,15 +126,31 @@
                       type: 'success'
                     });
                   }
-                  if (response.data.meta.code === 9999) {
-                    this.$message({
+                  if (response.data.meta.code === 707) {
+                    this.$notify({
+                      title: '还款失败',
                       message: response.data.meta.message,
                       type: 'error'
                     });
                   }
-                  if (response.data.meta.code === 707) {
-                    this.$message({
-                      message: '已经操作过还款',
+                  if (response.data.meta.code === 2002) {
+                    this.$notify({
+                      title: '还款失败',
+                      message: response.data.meta.message,
+                      type: 'error'
+                    });
+                  }
+                  if (response.data.meta.code === 710) {
+                    this.$notify({
+                      title: '还款失败',
+                      message: response.data.meta.message,
+                      type: 'error'
+                    });
+                  }
+                  if (response.data.meta.code === 2001) {
+                    this.$notify({
+                      title: '还款失败',
+                      message: response.data.meta.message,
                       type: 'error'
                     });
                   }
