@@ -18,7 +18,7 @@
            <el-button type="text" @click="goRecharge">充值</el-button>
           </p>
         </div>
-        <div  v-if="couponsList.count == 0" class="coupons-no">暂无优惠券</div>
+        <div v-if="couponsList.count == 0" class="coupons-no">暂无优惠券</div>
         <div v-else class="coupons-box">
           <div class="coupons-icon" @click="operationalCouponsListView">
             <span style="padding-left: 10px">优惠券</span>
@@ -81,25 +81,25 @@
     },
     data() {
       return {
-        planId: '', // 标的Id
+        planId: '',                   // 标的Id
         operationalStatus: 'initial', // 操作状态  -- 标记是否点击修改金额(initial: 初始，update: 修改)
-        showCouponsList: false, // 是否显示优惠券
-        protocolList: { // 协议数据
+        showCouponsList: false,       // 是否显示优惠券
+        protocolList: {               // 协议数据
           one: true,
           two: true
         },
         joinBthLoading: false,
-        radio: 0,
+        radio: 0,                    // 优惠券ID
         baseUrl: getLocationUrl(),
         userMoney: '',
         listQuery: {
           planId: this.$route.params.id
         },
         oneKeyJoinInfo: {
-          canJoinMoney: 0, // 可加入金额
+          canJoinMoney: 0,     // 可加入金额
           startInvestMoney: 0, // 起投金额
-          incrMoney: 10, // 递增金额
-          balance: 0 // 用户余额
+          incrMoney: 10,       // 递增金额
+          balance: 0           // 用户余额
         },
         joinPlanData: {
           planId: '',
@@ -107,7 +107,7 @@
           userCouponId: '',
           source: 'web'
         },
-        couponsList: [],
+        couponsList: [],       // 优惠券List
         typeList: [
           { key: 'cash', value: '元现金' },
           { key: 'lijin', value: '元礼金' },
@@ -176,11 +176,27 @@
           });
           return;
         }
-        this.joinBthLoading = true;
-        // 处理请求数据
+        // 判断优惠券逻辑
         if (this.radio !== 0) {
-          this.joinPlanData.userCouponId = this.radio;
+          if (this.couponsList.userCouponInfos && this.couponsList.userCouponInfos.length) {
+            let coupon = null;
+            this.couponsList.userCouponInfos.forEach(v => {
+              if (this.radio === v.userCouponId) {
+                coupon = v;
+              }
+            });
+            if (coupon.lowerLimitMoney > this.userMoney) {
+              this.$message({
+                message: '加入金额与选择的优惠券不匹配',
+                type: 'waring'
+              });
+              return;
+            } else {
+              this.joinPlanData.userCouponId = this.radio;
+            }
+          }
         }
+        this.joinBthLoading = true;
         this.joinPlanData.planId = this.planId;
         this.joinPlanData.joinMoney = this.userMoney;
         fetchJoinPlan(this.joinPlanData)
