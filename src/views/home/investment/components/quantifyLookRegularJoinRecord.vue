@@ -36,7 +36,7 @@
         <p class="title-message">目前已为您自动投标成功   <span>{{ joinPlanList.totalInvestMoney | currency('') }}</span>元</p>
       </div>
       <el-table :data="list" style="width: 100%">
-        <el-table-column prop="loanId" label="项目编号" width="120">
+        <el-table-column prop="loanId" label="项目编号" width="120" fixed>
           <template slot-scope="scope">
             <a :href="scope.row.loanTargetUrl" target="_blank">{{ scope.row.loanId }}</a>
           </template>
@@ -73,7 +73,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="status" label="状态" width="60"></el-table-column>
-        <el-table-column prop="contract" label="合同" width="40">
+        <el-table-column prop="contract" label="合同" width="100" fixed="right">
           <template slot-scope="scope">
             <el-button v-if="scope.row.showContract" type="text">下载</el-button>
             <a v-else class="icon-downloadNo" type="text">放款后可查看</a>
