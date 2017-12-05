@@ -24,6 +24,11 @@
       return {
         activeName: 'first'
       };
+    },
+    created() {
+      if (this.$route.query.tabName) {
+        this.activeName = 'second';
+      }
     }
   };
 </script>

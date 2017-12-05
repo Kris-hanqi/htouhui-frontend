@@ -120,8 +120,8 @@
           .then(response => {
             if (response.data.meta.code === 200) {
               this.dialogVisible = false;
-              // 跳转加入记录页面
-              this.$router.push('/investment/quantify/transactionRecord/' + this.planId);
+              // 跳转加入记录页面 -- 退出tab
+              this.$router.push({ path: '/investment/quantify/transactionRecord/' + this.planId, query: { tabName: 'second' } });
             }
             this.exitButLoading = false;
           })
