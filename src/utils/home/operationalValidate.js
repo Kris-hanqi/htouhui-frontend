@@ -56,9 +56,15 @@ export default function(stepsList) {
       type: 'warning',
       callback: action => {
         if (action === 'confirm') {
-          if (stepData.storeName === 'isOpenAccount' || stepData.storeName === 'isTransactionPassword') {
+          if (stepData.storeName === 'isOpenAccount') {
             if (store.getters.thirdPartyName === 'KONG_ZHONG') {
               window.location.href = store.getters.baseUrl + '/jixin/open-account';
+              return;
+            }
+          }
+          if (stepData.storeName === 'isTransactionPassword') {
+            if (store.getters.thirdPartyName === 'KONG_ZHONG') {
+              window.location.href = store.getters.baseUrl + '/setCashPassword';
               return;
             }
           }

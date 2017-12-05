@@ -103,7 +103,7 @@
       },
       toTransactionPassword() {
         if (this.$store.getters.thirdPartyName === 'KONG_ZHONG') {
-          window.location.href = this.baseUrl + '/jixin/open-account';
+          window.location.href = this.baseUrl + '/setCashPassword';
           return;
         }
         this.$router.push('/accountManage/set/transactionPassword');
