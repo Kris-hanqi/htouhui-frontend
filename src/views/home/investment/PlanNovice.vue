@@ -74,7 +74,7 @@
            element-loading-text="拼命加载中...">
         <p class="title">您购买的债权信息</p>
         <el-table :data="claimsList" style="width: 100%">
-          <el-table-column prop="loanId" label="项目编号" width="100">
+          <el-table-column prop="loanId" label="项目编号" width="110">
             <template slot-scope="scope">
               <a :href="scope.row.loanTargetUrl" target="_blank">{{ scope.row.loanId }}</a>
             </template>
@@ -111,7 +111,7 @@
           </template>
           </el-table-column>
           <el-table-column prop="status" label="状态" width="80"></el-table-column>
-          <el-table-column prop="contract" label="操作">
+          <el-table-column prop="contract" label="操作" width="70">
             <template slot-scope="scope">
               <el-button v-if="scope.row.showContract" @click="downLoadContract(scope.row.investId)" type="text">下载合同</el-button>
               <p v-else>下载合同</p>
