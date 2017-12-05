@@ -37,7 +37,7 @@
                       v-loading="listLoading"
                       element-loading-text="拼命加载中..."
                       :col-configs="colConfigs">
-        <el-table-column label="操作" width="150">
+        <el-table-column slot="opt" label="操作" width="150">
           <template slot-scope="scope">
             <el-button v-if="scope.row.status === 'matched'"
                        @click="goClaimsView(scope.row.joinPlanId)" type="text">查看债权</el-button>
@@ -93,9 +93,9 @@
           { key: 'matching', value: '自动投标中' }
         ],
         colConfigs: [
-          { label: '加入时间', width: '140', prop: 'joinTime', component: '' },
+          { label: '加入时间', width: '140', prop: 'joinTime' },
           { label: '加入金额', width: '100', prop: 'joinMoney', component: RowUnit, unit: '元' },
-          { label: '持有期限', width: '100', prop: 'lockPeriod' },
+          { label: '持有期限', width: '100', prop: 'lockPeriod', component: RowUnit, unit: '天' },
           { label: '往期年化利率', width: '140', prop: 'rate', component: RowUnit, unit: '%' },
           { label: '持有期限截至', width: '140', prop: 'lockEndTime' },
           { label: '状态', width: '100', prop: 'status', component: RowFilterGetValue, listData: typeList },

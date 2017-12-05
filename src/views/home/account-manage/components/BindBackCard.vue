@@ -90,6 +90,12 @@
                 type: 'success'
               });
             }
+            if (response.data.meta.code === 9999) {
+              this.$notify.error({
+                title: '银行卡绑定失败',
+                message: response.data.meta.message
+              });
+            }
             this.loading = false;
           })
       }
