@@ -15,7 +15,7 @@
           <el-table-column slot="opt" fixed="right" label="操作" width="150">
             <template slot-scope="scope">
               <el-button type="text" @click="getInvestRepays(scope.row.investId)">还款计划</el-button>
-              <el-button type="text">合同</el-button>
+              <el-button type="text" @click="downLoadContract(scope.row.investId)">合同下载</el-button>
             </template>
           </el-table-column>
           <template slot-scope="scope">
@@ -37,7 +37,7 @@
           <el-table-column slot="opt" fixed="right" label="操作" width="150">
             <template slot-scope="scope">
               <el-button type="text" @click="getInvestRepays(scope.row.investId)">还款计划</el-button>
-              <el-button type="text">合同</el-button>
+              <el-button type="text" @click="downLoadContract(scope.row.investId)">合同下载</el-button>
             </template>
           </el-table-column>
         </hth-data-table>
@@ -147,6 +147,7 @@
   import RowFilterGetValue from '../components/hth-data-table/RowFilterGetValue.vue';
   import RowLoanData from '../components/hth-data-table/RowLoanData.vue';
   import { fetchGetPageList, feachExtendEarn, fetchInvestRepays } from 'api/home/investment-regular';
+  import { feachDownLoadClaimsContract } from 'api/home/investment';
   
   const typeList = [
     { key: 'repaying', value: '还款中' },
@@ -281,6 +282,14 @@
             const data = response.data;
             if (data.meta.code === 200) {
               this.investRepaysList = data.data;
+            }
+          })
+      },
+      downLoadContract(id) {
+        feachDownLoadClaimsContract(id)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              window.open(response.data.data);
             }
           })
       },
