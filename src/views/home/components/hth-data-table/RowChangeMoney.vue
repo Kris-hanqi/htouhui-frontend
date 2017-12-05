@@ -3,7 +3,7 @@
   <el-table-column :label="colConfig.label">
     <template slot-scope="scope">
       <span>
-      {{ scope.row.type | keyToValue(fundsTypes) }}{{ scope.row.money }}
+      {{ scope.row.type | keyToValue(fundsTypes) }}{{ scope.row.money | currency('') + '元' }}
       </span>
     </template>
   </el-table-column>

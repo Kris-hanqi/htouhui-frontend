@@ -84,7 +84,7 @@
           type: ''
         },
         colConfigs: [
-          { label: '交易时间', width: '150', prop: 'time'},
+          { label: '交易时间', width: '150', prop: 'time' },
           { label: '项目名称', width: '150', prop: 'projectName', component: RowString },
           { label: '类型', width: '100', prop: 'typeinfo' },
           { label: '变动金额', width: '100', component: RowChangeMoney },
