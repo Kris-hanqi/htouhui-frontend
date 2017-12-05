@@ -62,6 +62,7 @@
   import HthPanel from 'common/Panel/index.vue';
   import HthDataTable from '../components/hth-data-table/HthDataTable.vue';
   import RowChangeMoney from '../components/hth-data-table/RowChangeMoney.vue';
+  import RowString from '../components/hth-data-table/RowString.vue';
   import { fetchFundsPageList } from 'api/home/account';
   import { getStartAndEndTime, getDateString } from 'utils/index';
   
@@ -83,8 +84,8 @@
           type: ''
         },
         colConfigs: [
-          { label: '交易时间', width: '150', prop: 'time' },
-          { label: '项目名称', width: '150', prop: 'projectName' },
+          { label: '交易时间', width: '150', prop: 'time'},
+          { label: '项目名称', width: '150', prop: 'projectName', component: RowString },
           { label: '类型', width: '100', prop: 'typeinfo' },
           { label: '变动金额', width: '100', component: RowChangeMoney },
           { label: '备注', showOverflowTooltip: true, prop: 'detail' }
