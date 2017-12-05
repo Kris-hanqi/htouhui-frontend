@@ -7,12 +7,20 @@
                         element-loading-text="拼命加载中..."
                         :data="list"
                         :col-configs="firstColConfigs">
-          <el-table-column fixed="right" label="操作" width="150">
+          <el-table-column slot="opt0" width="100" label="额外奖励">
             <template slot-scope="scope">
-              <el-button type="text">还款计划</el-button>
+              <el-button @click="getExtendEarn(scope.row.investId)" class="icon-award" type="text"></el-button>
+            </template>
+          </el-table-column>
+          <el-table-column slot="opt" fixed="right" label="操作" width="150">
+            <template slot-scope="scope">
+              <el-button type="text" @click="getInvestRepays(scope.row.investId)">还款计划</el-button>
               <el-button type="text">合同</el-button>
             </template>
           </el-table-column>
+          <template slot-scope="scope">
+            <el-button class="icon-award" type="text"></el-button>
+          </template>
         </hth-data-table>
       </el-tab-pane>
       <el-tab-pane label="投标中" name="bid_success">
@@ -26,9 +34,9 @@
                         element-loading-text="拼命加载中..."
                         :data="list"
                         :col-configs="completeColConfigs">
-          <el-table-column fixed="right" label="操作" width="150">
+          <el-table-column slot="opt" fixed="right" label="操作" width="150">
             <template slot-scope="scope">
-              <el-button type="text">还款计划</el-button>
+              <el-button type="text" @click="getInvestRepays(scope.row.investId)">还款计划</el-button>
               <el-button type="text">合同</el-button>
             </template>
           </el-table-column>
@@ -41,6 +49,92 @@
                         :col-configs="cancelColConfigs"></hth-data-table>
       </el-tab-pane>
     </el-tabs>
+  
+    <div class="pages" v-if="list && list.length">
+      <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录
+      （共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+      <el-pagination @current-change="handleCurrentChange"
+                     :current-page.sync="listQuery.pageNo"
+                     :page-size="listQuery.pageSize"
+                     layout="prev, pager, next" :total="total"></el-pagination>
+    </div>
+    
+    <el-dialog title="额外奖励"
+               :visible.sync="dialogVisible"
+               width="700px">
+      <div class="dialog-main">
+        <el-table :data="extendEarnList" style="width: 100%">
+          <el-table-column prop="name" label="优惠券" width="140"></el-table-column>
+          <el-table-column prop="rate" label="额外加息点数">
+            <template slot-scope="scope">
+              {{ scope.row.rate + '%' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="money" label="额外利息">
+            <template slot-scope="scope">
+              {{ scope.row.money | currency('') + '元' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="repayTime" label="还款时间" width="140"></el-table-column>
+          <el-table-column prop="status" label="状态">
+            <template slot-scope="scope">
+              {{ scope.row.status | keyToValue(extendEarnListStatus) }}
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+    </el-dialog>
+  
+    <el-dialog title="还款计划"
+               :visible.sync="investRepaysDialogVisible"
+               width="830px">
+      <div class="dialog-main">
+        <el-table :data="investRepaysList" style="width: 100%">
+          <el-table-column prop="period" label="期数" width="50"></el-table-column>
+          <el-table-column prop="corpus" label="本金">
+            <template slot-scope="scope">
+              {{ scope.row.corpus | currency('') + '元' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="interest" label="利息">
+            <template slot-scope="scope">
+              {{ scope.row.interest | currency('') + '元' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="tiexiMoney" label="贴息">
+            <template slot-scope="scope">
+              {{ scope.row.tiexiMoney | currency('') + '元' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="defaultInterest" label="罚息">
+            <template slot-scope="scope">
+              {{ scope.row.defaultInterest | currency('') + '元' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="fee" label="手续费">
+            <template slot-scope="scope">
+              {{ scope.row.fee | currency('') + '元' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="loanUserFee" label="总额">
+            <template slot-scope="scope">
+              {{ scope.row.loanUserFee | currency('') + '元' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="repayDay" label="还款日"></el-table-column>
+          <el-table-column label="还款时间">
+            <template slot-scope="scope">
+              {{ scope.row.time || '--'  }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="status" label="状态">
+            <template slot-scope="scope">
+              {{ scope.row.status | keyToValue(statusList) }}
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -50,10 +144,9 @@
   import RowRegularProjectName from '../components/hth-data-table/RowRegularProjectName.vue';
   import RowRepaymentPeriod from '../components/hth-data-table/RowRepaymentPeriod.vue';
   import RowRegularInvestCash from '../components/hth-data-table/RowRegularInvestCash.vue';
-  import RowAdditionalRewards from '../components/hth-data-table/RowAdditionalRewards.vue';
   import RowFilterGetValue from '../components/hth-data-table/RowFilterGetValue.vue';
   import RowLoanData from '../components/hth-data-table/RowLoanData.vue';
-  import { fetchGetPageList } from 'api/home/investment-regular';
+  import { fetchGetPageList, feachExtendEarn, fetchInvestRepays } from 'api/home/investment-regular';
   
   const typeList = [
     { key: 'repaying', value: '还款中' },
@@ -70,6 +163,11 @@
   export default {
     components: {
       HthDataTable
+    },
+    computed: {
+      getPageSize() {
+        return Math.ceil(this.total / this.listQuery.pageSize);
+      }
     },
     data() {
       return {
@@ -88,7 +186,7 @@
           { label: '年利率', width: '100', prop: 'investRate', component: RowUnit, unit: '%' },
           { label: '已还期数/总期数', width: '140', component: RowRepaymentPeriod, returned: 'paidPeriod', total: 'repayPeriod' },
           { label: '下次还款日', width: '140', prop: 'nextRepayDate' },
-          { label: '额外奖励', width: '140', component: RowAdditionalRewards },
+          { label: '额外奖励', slot: 'opt0' },
           { label: '投资状态', width: '140', prop: 'status', component: RowFilterGetValue, listData: typeList },
           { slot: 'opt' }
         ],
@@ -121,11 +219,29 @@
           { label: '剩余时间', width: '100', prop: 'remainingTime' },
           { label: '投标进度', width: '90', prop: 'biddingSchedule', component: RowUnit, unit: '%' },
           { label: '投资状态', width: '100', prop: 'status', component: RowFilterGetValue, listData: typeList }
+        ],
+        extendEarnList: null,
+        dialogVisible: false,
+        extendEarnListStatus: [
+          { key: 'not_opened', value: '未发放' },
+          { key: 'wait_repay', value: '未发放' },
+          { key: 'success', value: '已发放' },
+          { key: 'fail', value: '未发放' }
+        ],
+        investRepaysList: null,
+        investRepaysDialogVisible: false,
+        statusList: [
+          { key: 'complete', value: '完成' },
+          { key: 'overdue', value: '逾期的' },
+          { key: 'repaying', value: '还款中' },
+          { key: 'waiting_transfer', value: '-' },
+          { key: 'wait_transfer_confirm', value: '-' }
         ]
       }
     },
     methods: {
       getPageList() {
+        this.listLoading = true;
         fetchGetPageList(this.listQuery)
           .then(response => {
             const data = response.data;
@@ -133,6 +249,7 @@
               this.list = data.data.data;
               this.total = data.data.count || 0;
             }
+            this.listLoading = false;
           })
       },
       toggleType(tab) {
@@ -144,6 +261,32 @@
           this.listQuery.status = tab.name;
           this.getPageList();
         }
+      },
+      getExtendEarn(id) {
+        this.extendEarnList = null;
+        this.dialogVisible = true;
+        feachExtendEarn({ investId: id })
+          .then(response => {
+            const data = response.data;
+            if (data.meta.code === 200) {
+              this.extendEarnList = data.data;
+            }
+          })
+      },
+      getInvestRepays(id) {
+        this.investRepaysList = null;
+        this.investRepaysDialogVisible = true;
+        fetchInvestRepays({ investId: id })
+          .then(response => {
+            const data = response.data;
+            if (data.meta.code === 200) {
+              this.investRepaysList = data.data;
+            }
+          })
+      },
+      handleCurrentChange(val) {
+        this.listQuery.pageNo = val;
+        this.getPageList();
       }
     },
     created() {
@@ -169,5 +312,11 @@
     padding: 30px 15px;
     background-color: #fff;
     margin-bottom: 20px;
+  
+    .icon-award {
+      width: 24px;
+      height: 24px;
+      background: url(../../../assets/images/home/icon-award.png) no-repeat center;
+    }
   }
 </style>

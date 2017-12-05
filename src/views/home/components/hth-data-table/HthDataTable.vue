@@ -5,7 +5,7 @@
       <!-- 无数据时显示 -->
       <no-data slot="empty"></no-data>
       <template v-for="col in orderBy(colConfigs, 'order')">
-        <slot v-if="col.slot"></slot>
+        <slot :name="col.slot" v-if="col.slot"></slot>
         <component
           v-else-if="col.component"
           :is="col.component"

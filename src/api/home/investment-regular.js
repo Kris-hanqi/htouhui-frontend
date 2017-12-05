@@ -10,7 +10,7 @@ export function fetchGetPageList(data) {
 }
 
 /** 定期项目还款计划 */
-export function investRepays(data) {
+export function fetchInvestRepays(data) {
   return fetch({
     url: 'user/investRepays',
     method: 'get',
@@ -19,7 +19,7 @@ export function investRepays(data) {
 }
 
 /** 定期项目额外收益 */
-export function extendEarn(data) {
+export function feachExtendEarn(data) {
   return fetch({
     url: 'user/extendEarn',
     method: 'get',
