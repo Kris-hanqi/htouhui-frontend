@@ -49,7 +49,7 @@
                         :col-configs="cancelColConfigs"></hth-data-table>
       </el-tab-pane>
     </el-tabs>
-  
+
     <div class="pages" v-if="list && list.length">
       <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录
       （共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
@@ -58,7 +58,7 @@
                      :page-size="listQuery.pageSize"
                      layout="prev, pager, next" :total="total"></el-pagination>
     </div>
-    
+
     <el-dialog title="额外奖励"
                :visible.sync="dialogVisible"
                width="700px">
@@ -84,7 +84,7 @@
         </el-table>
       </div>
     </el-dialog>
-  
+
     <el-dialog title="还款计划"
                :visible.sync="investRepaysDialogVisible"
                width="830px">
@@ -148,7 +148,7 @@
   import RowLoanData from '../components/hth-data-table/RowLoanData.vue';
   import { fetchGetPageList, feachExtendEarn, fetchInvestRepays } from 'api/home/investment-regular';
   import { feachDownLoadClaimsContract } from 'api/home/investment';
-  
+
   const typeList = [
     { key: 'repaying', value: '还款中' },
     { key: 'bid_success', value: '投标中' },
@@ -160,7 +160,7 @@
     { key: 'yeepay', value: '易宝支付' },
     { key: 'jixin', value: '江西银行' }
   ];
-  
+
   export default {
     components: {
       HthDataTable
@@ -321,7 +321,7 @@
     padding: 30px 15px;
     background-color: #fff;
     margin-bottom: 20px;
-  
+
     .icon-award {
       width: 24px;
       height: 24px;
