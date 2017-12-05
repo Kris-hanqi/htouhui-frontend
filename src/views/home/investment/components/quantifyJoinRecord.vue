@@ -66,7 +66,7 @@
           <el-button class="icon-interests" v-if="scope.row.status === 'matched'"
                      @click="lookJoinRegular(scope.row.joinPlanId)" type="text">查看债权</el-button>
           <p v-else>暂无债权</p>
-          <el-button v-if="scope.row.status === 'matched'" @click="downLoadContract(scope.row.joinPlanId)" type="text">点击下载</el-button>
+          <el-button @click="downLoadContract(scope.row.joinPlanId)" type="text">点击下载</el-button>
         </template>
       </el-table-column>
     </el-table>
