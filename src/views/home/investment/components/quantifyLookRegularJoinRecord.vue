@@ -38,7 +38,7 @@
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="loanId" label="项目编号" width="120" fixed>
           <template slot-scope="scope">
-            <a :href="scope.row.loanTargetUrl" target="_blank">{{ scope.row.loanId }}</a>
+            <a :href="scope.row.loanTargetUrl" target="_blank" style="color: #0573f4;">{{ scope.row.loanId }}</a>
           </template>
         </el-table-column>
         <el-table-column prop="loanMoney" label="借款金额" width="100">
