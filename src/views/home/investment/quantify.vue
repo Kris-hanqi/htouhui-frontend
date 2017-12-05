@@ -32,7 +32,7 @@
           <p class="money" v-else=""><span class="roboto-regular">{{ (item.raisingMoney / 10000) | currency('') }}</span>万元</p>
           <p>当前剩余金额</p>
         </div>
-        <a class="btn-join" @click.stop="oneKeyJoin(item.planId)">一键加入</a>
+        <a class="btn-join" @click.stop="oneKeyJoin(item.planId, item.raisingMoney)">{{ item.raisingMoney ? '一键加入' : '发放份额中' }}</a>
         <a class="btn-out" v-if="item.joinPlan" @click.stop="pullOut(item.planId)">申请退出</a>
       </div>
       <div class="quantify-card__footer" v-if="item.joinPlan">
@@ -79,10 +79,11 @@
         const str = `${path}/${id}`;
         this.$router.push(str);
       },
-      oneKeyJoin(id) {
+      oneKeyJoin(id, money) {
         const validateSteps = ['openAccount', 'transactionPassword', 'bankCard', 'automaticTender', 'automaticDebtTransfer'];
         const result = this.$refs['validateSteps'].validate(validateSteps); // eslint-disable-line
         if (!result) return;
+        if (!money) return;
         this.$router.push('/investment/quantify/oneKeyJoin/' + id);
       },
       pullOut(id) {
