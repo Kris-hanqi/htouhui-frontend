@@ -221,6 +221,13 @@
             if (response.data.meta.code === 200) {
               window.open(response.data.data);
             }
+            if (response.data.meta.code === 9999) {
+              this.$notify({
+                title: '下载失败',
+                message: response.data.meta.message,
+                type: 'error'
+              });
+            }
           })
       },
       handleCurrentChange() {

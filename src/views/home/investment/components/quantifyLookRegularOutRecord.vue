@@ -61,7 +61,7 @@
         <el-table-column prop="status" label="状态" width="80"></el-table-column>
         <el-table-column prop="contract" label="合同">
           <template slot-scope="scope">
-            <el-button v-if="scope.row.showContract" type="text">点击下载</el-button>
+            <el-button v-if="scope.row.showContract" type="text">下载合同</el-button>
             <a v-else type="text">放款后可查看</a>
           </template>
         </el-table-column>

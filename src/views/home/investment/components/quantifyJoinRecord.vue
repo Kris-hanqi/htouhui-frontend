@@ -4,16 +4,16 @@
       <ul class="times">
         <li>交易时间：</li>
         <li>
-          <a href="javascript:void(0)" @click="switchDateType('3day')" :class="{ active: dateType === '3day'}">近三天</a>
+          <a @click.stop="switchDateType('3day')" :class="{ active: dateType === '3day'}">近三天</a>
         </li>
         <li>
-          <a href="javascript:void(0)" @click="switchDateType('1month')" :class="{ active: dateType === '1month'}">近一个月</a>
+          <a @click.stop="switchDateType('1month')" :class="{ active: dateType === '1month'}">近一个月</a>
         </li>
         <li>
-          <a href="javascript:void(0)" @click="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a>
+          <a @click.stop="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a>
         </li>
         <li>
-          <a href="javascript:void(0)" class="diy-time" @click="dateType = 'other'" :class="{ active: dateType === 'other'}">自定义时间</a>
+          <a @click.stop="dateType = 'other'" class="diy-time" :class="{ active: dateType === 'other'}">自定义时间</a>
         </li>
       </ul>
       <ul class="allChooseCalendar" v-show="dateType === 'other'">
@@ -61,17 +61,22 @@
           {{ scope.row.status | keyToValue(typeList) }}
         </template>
       </el-table-column>
-      <el-table-column prop="seeInterests" label="查看" width="60">
+      <el-table-column prop="seeInterests" fixed="right" label="操作" width="140">
         <template slot-scope="scope">
-          <el-button class="icon-interests" v-if="scope.row.status == 'matched'" @click="lookJoinRegular(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
+          <el-button class="icon-interests" v-if="scope.row.status === 'matched'"
+                     @click="lookJoinRegular(scope.row.joinPlanId)" type="text">查看债权</el-button>
           <p v-else>暂无债权</p>
-          <el-button v-if="scope.row.status == 'matched'" style="color: #0573f4;" type="text" size="small">点击下载</el-button>
+          <el-button v-if="scope.row.status === 'matched'" @click="downLoadContract(scope.row.joinPlanId)" type="text">点击下载</el-button>
         </template>
       </el-table-column>
     </el-table>
     <div class="pages">
       <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-      <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
+      <el-pagination @current-change="handleCurrentChange"
+                     :current-page.sync="listQuery.pageNo"
+                     :page-size="listQuery.size"
+                     layout="prev, pager, next"
+                     :total="total"></el-pagination>
     </div>
 
     <el-dialog title="平台奖励"
@@ -95,6 +100,7 @@
 
 <script>
   import { joinRecord } from 'api/home/quantify';
+  import { feachDownLoadJoinContract } from 'api/home/investment';
   import { getStartAndEndTime, getDateString } from 'utils/index';
   import tabTieXi from './quantifyTabTieXi.vue';
   import tabCoupons from './quantifyTabCoupons.vue';
@@ -195,6 +201,21 @@
         this.showTest = true;
         this.dialogVisible = true;
         this.joinPlanId = id;
+      },
+      downLoadContract(id) {
+        feachDownLoadJoinContract(id)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              window.open(response.data.data);
+            }
+            if (response.data.meta.code === 9999) {
+              this.$notify({
+                title: '下载失败',
+                message: response.data.meta.message,
+                type: 'error'
+              });
+            }
+          })
       }
     },
     created() {
