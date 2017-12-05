@@ -52,6 +52,7 @@ const user = {
     token: getToken(),                 // token
     uuid: getUuid(),                   // uuid
     username: '',                      // 用户名
+    thirdPartyName: '',                // 第三方名称（空中）
     realName: '',                      // 真实姓名
     mobile: '',                        // 手机号
     status: 0,                         // 用户状态
@@ -83,6 +84,9 @@ const user = {
     },
     SET_USERNAME: (state, data) => {
       state.username = data;
+    },
+    SET_THIRD_PARTY_NAME: (state, data) => {
+      state.thirdPartyName = data;
     },
     SET_REAL_NAME: (state, data) => {
       state.realName = data;
@@ -155,6 +159,7 @@ const user = {
             const data = response.data.data;
             const status = getUserStatus(data);
             commit('SET_USERNAME', data.userId);
+            commit('SET_THIRD_PARTY_NAME', data.thirdPartyName);
             commit('SET_REAL_NAME', data.realName);
             commit('SET_MOBILE', data.mobileNumber);
             commit('SET_BANK_NAME', data.bankName);

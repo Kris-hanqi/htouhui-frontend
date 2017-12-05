@@ -57,6 +57,12 @@
             type: 'warning',
             callback: action => {
               if (action === 'confirm') {
+                if (stepData.storeName === 'isOpenAccount' || stepData.storeName === 'isTransactionPassword') {
+                  if (this.$store.getters.thirdPartyName === 'KONG_ZHONG') {
+                    window.location.href = this.$store.getters.baseUrl + '/jixin/open-account';
+                    return;
+                  }
+                }
                 this.$router.push(stepData.url);
               }
             }

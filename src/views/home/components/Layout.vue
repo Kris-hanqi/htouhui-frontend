@@ -53,7 +53,8 @@
     computed: {
       ...mapGetters([
         'novicePlanStatus',
-        'isBorrower'
+        'isBorrower',
+        'baseUrl'
       ]),
       operationTips() {
         return this.operationTipsArray[this.$store.state.user.status]
@@ -94,9 +95,17 @@
         })
       },
       showOpenAccount() {
+        if (this.$store.getters.thirdPartyName === 'KONG_ZHONG') {
+          window.location.href = this.baseUrl + '/jixin/open-account';
+          return;
+        }
         this.$router.push('/accountManage/set/openAccount');
       },
       toTransactionPassword() {
+        if (this.$store.getters.thirdPartyName === 'KONG_ZHONG') {
+          window.location.href = this.baseUrl + '/jixin/open-account';
+          return;
+        }
         this.$router.push('/accountManage/set/transactionPassword');
       },
       toBindBackCard() {

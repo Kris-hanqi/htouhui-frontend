@@ -7,6 +7,7 @@ const getters = {
   lastLoginTime: state => state.user.lastLoginTime,
   username: state => state.user.username,
   realName: state => state.user.realName,
+  thirdPartyName: state => state.user.thirdPartyName,
   status: state => state.user.status,
   transactionPasswordStatus: state => state.user.transactionPasswordStatus,
   bankCard: state => state.user.bankCard,
