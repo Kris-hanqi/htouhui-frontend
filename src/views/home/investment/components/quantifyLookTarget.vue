@@ -32,7 +32,7 @@
                 element-loading-text="拼命加载中...">
         <el-table-column prop="loanId" label="项目编号" width="120">
           <template slot-scope="scope">
-            <a :href="scope.row.loanTargetUrl" target="_blank">{{ scope.row.loanId }}</a>
+            <a :href="scope.row.loanTargetUrl" style="color: #409eff;" target="_blank">{{ scope.row.loanId }}</a>
           </template>
         </el-table-column>
         <el-table-column prop="loanMoney" label="借款金额" width="100">
@@ -69,7 +69,7 @@
         <el-table-column prop="status" label="状态" width="80"></el-table-column>
         <el-table-column fixed="right" prop="contract" label="合同" width="120">
           <template slot-scope="scope">
-            <el-button v-if="scope.row.showContract" type="text" size="small">合同</el-button>
+            <el-button v-if="scope.row.showContract" type="text" size="small">下载合同</el-button>
             <p v-else="">放款后可查看</p>
           </template>
         </el-table-column>
