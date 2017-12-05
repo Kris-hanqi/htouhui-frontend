@@ -95,6 +95,7 @@ router.afterEach(to => {
       MessageBox.alert('尚未开户', '提示', {
         confirmButtonText: '确认',
         type: 'warning',
+        showClose: false,
         callback: action => {
           if (action === 'confirm') {
             router.push('/accountManage/set/openAccount');
