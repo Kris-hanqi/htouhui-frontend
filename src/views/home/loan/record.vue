@@ -16,7 +16,7 @@
             </div>
           </form>
           <hth-data-table :data="list" :col-configs="repayingColConfigs">
-            <el-table-column fixed="right" label="操作" width="150">
+            <el-table-column slot="opt" fixed="right" label="操作" width="150">
               <template slot-scope="scope">
                 <el-button @click="openRepaymentPlan(scope.row.id)" type="text">还款计划</el-button>
                 <el-button v-if="scope.row.ensignContract" @click="contractDownload(scope.row)" type="text">下载合同</el-button>
@@ -80,7 +80,7 @@
                 <button style="width: 100px" :disabled="!listQuery.name" @click="query" type="button" class="hth-btn hth-btn-primary">查询</button>
               </div>
             </form>
-            <el-table-column fixed="right" label="操作" width="150">
+            <el-table-column  slot="opt" fixed="right" label="操作" width="150">
               <template slot-scope="scope">
                 <el-button @click="openRepaymentPlan(scope.row.id)" type="text">还款计划</el-button>
                 <el-button v-if="scope.row.ensignContract" @click="contractDownload(scope.row)" type="text">下载合同</el-button>
@@ -102,7 +102,7 @@
           </form>
           <hth-data-table :data="list"
                           :col-configs="failColConfigs">
-            <el-table-column fixed="right" label="操作" width="150">
+            <el-table-column slot="opt" fixed="right" label="操作" width="150">
               <template slot-scope="scope">
                 <el-button @click="openRepaymentPlan(scope.row.id)" type="text">还款计划</el-button>
                 <el-button v-if="scope.row.ensignContract" @click="contractDownload(scope.row)" type="text">下载合同</el-button>
