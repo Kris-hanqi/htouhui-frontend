@@ -139,6 +139,7 @@
   import HthDataTable from '../components/hth-data-table/HthDataTable.vue';
   import RowProjectName from '../components/hth-data-table/RowProjectName.vue';
   import RowUnit from '../components/hth-data-table/RowUnit.vue';
+  import RowTwoAdd from '../components/hth-data-table/RowTwoAdd.vue';
   import RowRepayTotalTerm from '../components/hth-data-table/RowRepayTotalTerm.vue';
   import LoanRepaymentStatistics from '../components/LoanRepaymentStatistics.vue';
   import RepaymentPlan from './components/repaymentPlan.vue';
@@ -188,7 +189,7 @@
           { label: '实际募集金额', width: '100', prop: 'realRaisedMoney' },
           { label: '预计利息', width: '100', prop: 'predictInterst' },
           { label: '年利率', width: '100', prop: 'yearRate', component: RowUnit, unit: '%' },
-          { label: '借款期限', width: '100', prop: 'deadline', component: RowUnit, unit: '天' },
+          { label: '借款期限', width: '100', one: 'deadline', two: 'repayUnit', component: RowTwoAdd },
           { label: '状态', prop: 'status' }
         ],
         waitingColConfigs: [
@@ -196,7 +197,7 @@
           { label: '借款金额', prop: 'loanMoney' },
           { label: '预计利息', prop: 'predictInterst' },
           { label: '年利率', prop: 'yearRate', component: RowUnit, unit: '%' },
-          { label: '借款期限', prop: 'deadline', component: RowUnit, unit: '天' },
+          { label: '借款期限', width: '100', one: 'deadline', two: 'repayUnit', component: RowTwoAdd },
           { label: '状态', prop: 'status' }
         ],
         raisingColConfigs: [
