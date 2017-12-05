@@ -32,7 +32,7 @@
       </ul>
     </div>
     <div class="message">
-  
+
       <hth-data-table :data="list"
                       v-loading="listLoading"
                       element-loading-text="拼命加载中..."
@@ -41,7 +41,7 @@
           <template slot-scope="scope">
             <el-button v-if="scope.row.status === 'matched'"
                        @click="goClaimsView(scope.row.joinPlanId)" type="text">查看债权</el-button>
-            <p v-else>查看债权</p>
+            <p v-else>暂无债权</p>
           </template>
         </el-table-column>
       </hth-data-table>
@@ -59,7 +59,7 @@
   import HthDataTable from '../components/hth-data-table/HthDataTable.vue';
   import RowUnit from '../components/hth-data-table/RowUnit.vue';
   import RowFilterGetValue from '../components/hth-data-table/RowFilterGetValue.vue';
-  
+
   const typeList = [
     { key: 'matched', value: '成功' },
     { key: 'matching', value: '自动投标中' }
