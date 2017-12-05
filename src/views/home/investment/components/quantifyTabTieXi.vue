@@ -66,7 +66,7 @@
         listQuery: {
           joinId: '',
           type: 'tiexi',
-          curPage: 1,
+          pageNo: 1,
           pageSize: 10
         },
         showNoAward: true
