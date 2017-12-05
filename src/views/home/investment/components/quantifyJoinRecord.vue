@@ -61,10 +61,11 @@
           {{ scope.row.status | keyToValue(typeList) }}
         </template>
       </el-table-column>
-      <el-table-column prop="seeInterests" label="查看">
+      <el-table-column prop="seeInterests" label="查看" width="60">
         <template slot-scope="scope">
           <el-button class="icon-interests" v-if="scope.row.status == 'matched'" @click="lookJoinRegular(scope.row.joinPlanId)" type="text" size="small">查看债权</el-button>
           <p v-else>暂无债权</p>
+          <el-button v-if="scope.row.status == 'matched'" style="color: #0573f4;" type="text" size="small">点击下载</el-button>
         </template>
       </el-table-column>
     </el-table>
