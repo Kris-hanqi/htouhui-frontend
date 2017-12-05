@@ -82,7 +82,12 @@
               this.$store.commit('SET_IS_BANK_CARD', true);
               this.$store.commit('SET_BANK_NAME', response.data.data.bankName);
               this.$store.commit('SET_BANK_NO', response.data.data.bankNo);
-              this.$store.commit('SET_STATUS', 3);
+              // 判断是否已设置交易密码
+              if (!this.$store.getters.isTransactionPassword) {
+                this.$store.commit('SET_STATUS', 1);
+              } else {
+                this.$store.commit('SET_STATUS', 3);
+              }
               this.bankCard = '';
               this.$router.push('/accountManage/set/index');
               this.$message({

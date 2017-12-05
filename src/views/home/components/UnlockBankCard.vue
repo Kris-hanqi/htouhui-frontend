@@ -40,7 +40,12 @@
             // 更新全局状态
             this.$store.commit('SET_BANK_NAME', '');
             this.$store.commit('SET_BANK_CARD', '');
-            this.$store.commit('SET_STATUS', 2);
+            // 判断是否已设置交易密码
+            if (!this.$store.getters.isTransactionPassword) {
+              this.$store.commit('SET_STATUS', 1);
+            } else {
+              this.$store.commit('SET_STATUS', 2);
+            }
             this.$message({
               message: '银行卡解绑成功',
               type: 'success'
