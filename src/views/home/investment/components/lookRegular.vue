@@ -76,7 +76,7 @@
         <el-table-column prop="status" label="状态" width="60"></el-table-column>
         <el-table-column prop="contract" fixed="right" label="操作" width="100">
           <template slot-scope="scope">
-            <el-button @click="downLoadContract(scope.row.investId)" type="text">合同下载</el-button>
+            <el-button @click="downLoadContract(scope.row.investId)" type="text">下载合同</el-button>
           </template>
         </el-table-column>
       </el-table>

@@ -1,7 +1,7 @@
 <template>
   <div class="contract-page">
      <h4>协议编号: {{ loanId }}</h4>
-     <button @click="contractDownload">合同下载</button>
+     <button @click="contractDownload">下载合同</button>
      <div v-html="contractContent"></div>
   </div>
 </template>
