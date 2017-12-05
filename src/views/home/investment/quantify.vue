@@ -18,8 +18,8 @@
       <div class="quantify-card__body">
         <div class="shengxinbaolianghua-rate">
           <p class="rate">
-            <span class="roboto-regular"><interest-rate :value="item.minRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>
-            %~<span class="roboto-regular"><interest-rate :value="item.maxRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%
+            <span class="roboto-regular"><interest-rate :value="item.minRate + item.tiexiRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>
+            %~<span class="roboto-regular"><interest-rate :value="item.maxRate + item.tiexiRate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%
           </p>
           <p>往期年化利率</p>
         </div>
