@@ -37,7 +37,7 @@
           </el-table-column>
           <el-table-column prop="money" label="加息金额">
             <template slot-scope="scope">
-              {{ scope.row.money | currency('') + '元' }}
+              {{ scope.row.money | currency('', 4) + '元' }}
             </template>
           </el-table-column>
         </el-table>
