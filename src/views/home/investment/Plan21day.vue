@@ -161,6 +161,12 @@
     },
     created() {
       this.getPageList();
+      if (this.$route.query.message) {
+        this.$message({
+          message: '加入成功',
+          type: 'success'
+        });
+      }
     }
   }
 </script>

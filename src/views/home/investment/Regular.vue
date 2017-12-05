@@ -303,9 +303,9 @@
         this.activeName = this.$route.query.tagName;
       }
       if (this.$route.query.message) {
-        this.$notify.info({
-          title: '提示',
-          message: '加入成功'
+        this.$message({
+          message: '加入成功',
+          type: 'success'
         });
       }
       this.getPageList();
