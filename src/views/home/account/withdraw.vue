@@ -93,6 +93,7 @@
   import RequestBankFrom from '../components/RequestBankFrom.vue';
   import UnionBank from './components/UnionBank.vue';
   import { fetchWithdraw, fetchWithdrawCost, fetchAccountMoney, fetchAllowLargeWithdraw } from 'api/home/account';
+  import { validateNumber } from 'utils/validate';
 
   export default {
     components: {
@@ -158,9 +159,16 @@
           fetchAllowLargeWithdraw({ money: this.money, cardNo: this.bankCard })
             .then(response => {
               if (response.data.meta.code === 200) {
-                if (response.data.data === 'allow_large_withdraw') {
+                // 非第一次大额提现
+                if (validateNumber(response.data.data)) {
                   this.showUnionBankInput = true;
+                  this.withdrawData.cnapNumber = response.data.data;
                   this.getRequestWithdrawData('large');
+                } else {
+                  if (response.data.data === 'allow_large_withdraw') {
+                    this.showUnionBankInput = true;
+                    this.getRequestWithdrawData('large');
+                  }
                 }
               } else {
                 this.$notify.error({

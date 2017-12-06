@@ -4,6 +4,12 @@ export function validateLowerCase(str) {
   return reg.test(str)
 }
 
+/** 小写字母*/
+export function validateNumber(str) {
+  const reg = /^[0-9]+$/;
+  return reg.test(str)
+}
+
 /** 金额校验 */
 export function validateMoney(str) {
   const reg = /(^[1-9]([0-9]+)?$)/;
