@@ -69,17 +69,17 @@
         </el-tab-pane>
         
         <el-tab-pane label="已结清" name="finished">
+          <form class="form-inline" style="margin-bottom: 15px;">
+            <div class="form-group">
+              <label></label>
+              <input v-model="listQuery.name" class="form-control" type="text" placeholder="请输入项目名称">
+            </div>
+            <div class="form-group">
+              <button style="width: 100px" :disabled="!listQuery.name" @click="query" type="button" class="hth-btn hth-btn-primary">查询</button>
+            </div>
+          </form>
           <hth-data-table :data="list"
                           :col-configs="finishedColConfigs">
-            <form class="form-inline" style="margin-bottom: 15px;">
-              <div class="form-group">
-                <label></label>
-                <input v-model="listQuery.name" class="form-control" type="text" placeholder="请输入项目名称">
-              </div>
-              <div class="form-group">
-                <button style="width: 100px" :disabled="!listQuery.name" @click="query" type="button" class="hth-btn hth-btn-primary">查询</button>
-              </div>
-            </form>
             <el-table-column  slot="opt" fixed="right" label="操作" width="150">
               <template slot-scope="scope">
                 <el-button @click="openRepaymentPlan(scope.row.id)" type="text">还款计划</el-button>
