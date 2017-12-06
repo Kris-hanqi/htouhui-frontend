@@ -308,7 +308,7 @@
       }
       if (this.$route.query.message) {
         this.$message({
-          message: '加入成功',
+          message: '投资请求已受理!请稍候',
           type: 'success'
         });
       }
