@@ -62,7 +62,7 @@
           <div class="col-md-offset-2 col-md-4">
             <el-button type="primary"
                        class="btn-block"
-                       :disabled="money === ''"
+                       :disabled="money === '' || this.accountMoney === 0"
                        @click="withdraw"
                        :loading="loading" round>提现</el-button>
           </div>
@@ -145,6 +145,13 @@
       withdraw() {
         const result = operationalValidate(this.operationalValidateData);
         if (!result) return;
+        if (this.accountMoney <= 0) {
+          this.$message({
+            message: '账户余额为0，不能提现',
+            type: 'warning'
+          });
+          return;
+        }
         if (!(this.money <= this.accountMoney && this.money > 1)) {
           this.$message({
             message: '提现金额应该在1.01和' + this.accountMoney + '之间',
