@@ -303,8 +303,8 @@
       }
     },
     created() {
-      if (this.$route.query.tagName) {
-        this.activeName = this.$route.query.tagName;
+      if (this.$route.query.tagName && this.$route.query.tagName === 'second') {
+        this.activeName = 'bid_success';
       }
       if (this.$route.query.message) {
         this.$message({
