@@ -98,7 +98,11 @@ router.afterEach(to => {
         showClose: false,
         callback: action => {
           if (action === 'confirm') {
-            router.push('/accountManage/set/openAccount');
+            if (store.getters.thirdPartyName === 'KONG_ZHONG') {
+              window.location.href = store.getters.baseUrl + '/setCashPassword';
+            } else {
+              router.push('/accountManage/set/openAccount');
+            }
           }
         }
       });
