@@ -9,7 +9,10 @@
                         :col-configs="firstColConfigs">
           <el-table-column slot="opt0" width="100" label="额外奖励">
             <template slot-scope="scope">
-              <el-button @click="getExtendEarn(scope.row.investId)" class="icon-award" type="text"></el-button>
+              <el-button @click="getExtendEarn(scope.row)"
+                         :class="{ 'ku-icon-disabled': scope.row.tiexi === null }" type="text">
+                <i class="ku-icon icon-money-bag" style="font-size: 25px"></i>
+              </el-button>
             </template>
           </el-table-column>
           <el-table-column slot="opt" fixed="right" label="操作" width="150">
@@ -263,10 +266,11 @@
           this.getPageList();
         }
       },
-      getExtendEarn(id) {
+      getExtendEarn(data) {
+        if (data.tiexi === null) return;
         this.extendEarnList = null;
         this.dialogVisible = true;
-        feachExtendEarn({ investId: id })
+        feachExtendEarn({ investId: data.investId })
           .then(response => {
             const data = response.data;
             if (data.meta.code === 200) {
@@ -321,6 +325,10 @@
     padding: 30px 15px;
     background-color: #fff;
     margin-bottom: 20px;
+    
+    .ku-icon-disabled {
+      color: #d0cdcd;
+    }
 
     .icon-award {
       width: 24px;

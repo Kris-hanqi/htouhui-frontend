@@ -24,7 +24,7 @@
     "element-ui": "^2.0.4",
     "es6-promise": "^4.1.1",
     "file-saver": "^1.3.3",
-    "hth-icon-font": "0.0.4",
+    "hth-icon-font": "^0.0.5",
     "jquery": "^3.2.1",
     "js-base64": "^2.3.2",
     "js-cookie": "^2.1.4",
