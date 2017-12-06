@@ -82,8 +82,7 @@
 
 <script>
   import { getExitInfo } from 'api/home/getExitInfo';
-  import { feachGetExitList } from 'api/home/investment';
-  import { feachDownLoadClaimsContract } from 'api/home/investment';
+  import { feachGetExitList, feachDownLoadClaimsContract } from 'api/home/investment';
   import interestRate from 'components/interest-rate';
 
   export default {

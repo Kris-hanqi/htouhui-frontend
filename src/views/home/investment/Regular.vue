@@ -10,7 +10,7 @@
           <el-table-column slot="opt0" width="100" label="额外奖励">
             <template slot-scope="scope">
               <el-button @click="getExtendEarn(scope.row)"
-                         :class="{ 'ku-icon-disabled': scope.row.tiexi === null }" type="text">
+                         :class="{ 'ku-icon-disabled': scope.row.jiaxi !== 1 }" type="text">
                 <i class="ku-icon icon-money-bag" style="font-size: 25px"></i>
               </el-button>
             </template>
@@ -267,7 +267,7 @@
         }
       },
       getExtendEarn(data) {
-        if (data.tiexi === null) return;
+        if (data.jiaxi !== 1) return;
         this.extendEarnList = null;
         this.dialogVisible = true;
         feachExtendEarn({ investId: data.investId })

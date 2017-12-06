@@ -47,8 +47,12 @@
       </hth-data-table>
     </div>
     <div class="pages" v-if="list && list.length">
-      <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-      <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
+      <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录
+      （共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+      <el-pagination @current-change="handleCurrentChange"
+                     :current-page.sync="listQuery.pageNo"
+                     :page-size="listQuery.size"
+                     layout="prev, pager, next" :total="total"></el-pagination>
     </div>
   </div>
 </template>
