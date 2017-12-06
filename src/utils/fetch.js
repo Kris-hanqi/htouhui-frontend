@@ -7,6 +7,7 @@ import { getLocationUrl } from './index';
 import errorCode from './error-code';
 
 let openModalStatus = false;
+let openModalErrorStatus = false; // eslint-disable-line
 
 // 获取后端API地址
 const BaseUrl = BaseApi();
@@ -49,7 +50,18 @@ service.interceptors.response.use(
         });
       }
     }
-
+    if (data.meta && (data.meta.code === 500 || data.meta.code === 600)) {
+      if (!openModalStatus) {
+        openModalErrorStatus = true;
+        MessageBox.alert('服务器错误，请稍后重试', '提示', {
+          confirmButtonText: '确认',
+          type: 'error',
+          callback: () => {
+            openModalErrorStatus = false;
+          }
+        });
+      }
+    }
     return response;
   },
   error => {
