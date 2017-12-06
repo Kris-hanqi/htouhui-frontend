@@ -88,8 +88,11 @@
       },
       validateTime() {
         let result = true;
-        const setTime = localStorage.getItem(labelName);
-        if (setTime) {
+        const data = localStorage.getItem(labelName);
+        const setTime = data.split('_')[1];
+        const username = data.split('_')[0];
+        // 判断是否是同一用户
+        if (username && setTime && this.$store.getters.username === username) {
           const timeStamp = new Date().getTime();
           if ((timeStamp - setTime) <= 5 * 60 * 1000) {
             const time = parseInt((5 * 60 * 1000 - (timeStamp - setTime)) / (1000 * 60));
@@ -126,7 +129,9 @@
             if (data.meta.code === 200) {
               // 数据请求成功 - 设置请求时间
               const timeStamp = new Date().getTime();
-              localStorage.setItem(labelName, timeStamp);
+              if (this.$store.getters.username) {
+                localStorage.setItem(labelName, this.$store.getters.username + '_' + timeStamp);
+              }
               this.requestBankData = data.data;
             }
             if (data.meta.code !== 500 && data.meta.code !== 600) {
