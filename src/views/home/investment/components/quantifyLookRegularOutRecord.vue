@@ -61,13 +61,16 @@
         <el-table-column prop="status" label="状态" width="80"></el-table-column>
         <el-table-column prop="contract" label="合同">
           <template slot-scope="scope">
-            <el-button v-if="scope.row.showContract" type="text">下载合同</el-button>
-            <a v-else type="text">放款后可查看</a>
+            <el-button v-if="scope.row.showContract"
+                       @click="downLoadContract(scope.row.investId)"
+                       type="text">下载合同</el-button>
+            <span v-else>放款后可查看</span>
           </template>
         </el-table-column>
       </el-table>
       <div class="pages">
-        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录
+        （共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
         <el-pagination @current-change="handleCurrentChange"
                        :current-page.sync="listQuery.pageNo"
                        :page-size="listQuery.size"
@@ -80,6 +83,7 @@
 <script>
   import { getExitInfo } from 'api/home/getExitInfo';
   import { feachGetExitList } from 'api/home/investment';
+  import { feachDownLoadClaimsContract } from 'api/home/investment';
   import interestRate from 'components/interest-rate';
 
   export default {
@@ -145,6 +149,21 @@
       },
       returnPrevPages(id) {
         this.$router.push('/investment/quantify/transactionRecord/' + id);
+      },
+      downLoadContract(id) {
+        feachDownLoadClaimsContract(id)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              window.open(response.data.data);
+            }
+            if (response.data.meta.code === 9999) {
+              this.$notify({
+                title: '下载失败',
+                message: response.data.meta.message,
+                type: 'error'
+              });
+            }
+          })
       }
     },
     created() {
