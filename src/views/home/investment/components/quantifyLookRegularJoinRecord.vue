@@ -73,16 +73,22 @@
           </template>
         </el-table-column>
         <el-table-column prop="status" label="状态" width="60"></el-table-column>
-        <el-table-column prop="contract" label="合同" width="100" fixed="right">
+        <el-table-column prop="contract" label="操作" width="100" fixed="right">
           <template slot-scope="scope">
-            <el-button v-if="scope.row.showContract" type="text">下载合同</el-button>
-            <a v-else class="icon-downloadNo" type="text">放款后可查看</a>
+            <el-button v-if="scope.row.showContract"
+                       @click="downLoadContract(scope.row.investId)"
+                       type="text">下载合同</el-button>
+            <span v-else>放款后可查看</span>
           </template>
         </el-table-column>
       </el-table>
       <div class="pages">
         <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-        <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
+        <el-pagination @current-change="handleCurrentChange"
+                       :current-page.sync="listQuery.pageNo"
+                       :page-size="listQuery.size"
+                       layout="prev, pager, next"
+                       :total="total"></el-pagination>
       </div>
     </div>
   </div>
@@ -92,6 +98,7 @@
   import { joinPlan } from 'api/home/getJoinInfo';
   import { queryUserInvestList } from 'api/home/queryUserJoinInvestList';
   import interestRate from 'components/interest-rate';
+  import { feachDownLoadClaimsContract } from 'api/home/investment';
   import img_icon_success from 'assets/images/home/icon-success.png';
   import img_icon_auto from 'assets/images/home/icon-auto.png';
 
@@ -152,6 +159,21 @@
       },
       returnPrevPages(id) {
         this.$router.push('/investment/quantify/transactionRecord/' + id);
+      },
+      downLoadContract(id) {
+        feachDownLoadClaimsContract(id)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              window.open(response.data.data);
+            }
+            if (response.data.meta.code === 9999) {
+              this.$notify({
+                title: '下载失败',
+                message: response.data.meta.message,
+                type: 'error'
+              });
+            }
+          })
       }
     },
     created() {

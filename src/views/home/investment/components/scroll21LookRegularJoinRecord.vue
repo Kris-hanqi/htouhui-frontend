@@ -3,12 +3,16 @@
     <div class="details">
       <div class="title-box">
         <span class="title">加入记录-债权信息</span>
-        <a href="javascript:void(0)" class="return-prev-pages" @click="returnPrevPages()">返回上一页 ></a>
+        <a class="return-prev-pages" @click.stop="returnPrevPages()">返回上一页 ></a>
       </div>
       <div class="look-regular-main">
         <div class="look-regular-rate">
           <p class="rate">
-            <span class="roboto-regular"><interest-rate :value="joinPlanList.rate" :leftFontSize="36" :rightFontSize="24"></interest-rate></span>%
+            <span class="roboto-regular">
+              <interest-rate :value="joinPlanList.rate"
+                                                        :leftFontSize="36"
+                                                        :rightFontSize="24"></interest-rate>
+            </span>%
           </p>
           <p>往期年化利率</p>
         </div>
@@ -23,7 +27,7 @@
       </div>
       <div class="look-regular-bottom">
         <p>加入时间 <span class="roboto-regular">{{ joinPlanList.joinTime }}</span></p>
-        <img v-if="joinPlanList.status == 'matched'" class="type-message" src="../../../../assets/images/home/icon-success.png" alt=""/>
+        <img v-if="joinPlanList.status === 'matched'" class="type-message" src="../../../../assets/images/home/icon-success.png" alt=""/>
         <img v-else class="type-message" src="../../../../assets/images/home/icon-auto.png" alt=""/>
       </div>
     </div>
@@ -75,16 +79,23 @@
           </template>
         </el-table-column>
         <el-table-column prop="status" label="状态" width="70"></el-table-column>
-        <el-table-column prop="contract" label="合同" width="90" fixed="right">
+        <el-table-column prop="contract" label="操作" width="90" fixed="right">
           <template slot-scope="scope">
-            <a v-if="scope.row.showContract" class="ico-download" type="text">点击下载</a>
-            <a v-else class="icon-downloadNo" type="text">放款后可查看</a>
+            <el-button v-if="scope.row.showContract"
+                       @click="downLoadContract(scope.row.investId)"
+                       type="text">下载合同</el-button>
+            <span v-else>放款后可查看</span>
           </template>
         </el-table-column>
       </el-table>
       <div class="pages">
-        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-        <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
+        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（
+        共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+        <el-pagination @current-change="handleCurrentChange"
+                       :current-page.sync="listQuery.pageNo"
+                       :page-size="listQuery.size"
+                       layout="prev, pager, next"
+                       :total="total"></el-pagination>
       </div>
     </div>
   </div>
@@ -92,6 +103,7 @@
 
 <script>
   import { joinPlan } from 'api/home/getJoinInfo';
+  import { feachDownLoadClaimsContract } from 'api/home/investment';
   import { queryUserInvestList } from 'api/home/queryUserJoinInvestList';
   import interestRate from 'components/interest-rate';
 
@@ -148,6 +160,21 @@
       },
       returnPrevPages() {
         this.$router.push('/investment/scroll21/index');
+      },
+      downLoadContract(id) {
+        feachDownLoadClaimsContract(id)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              window.open(response.data.data);
+            }
+            if (response.data.meta.code === 9999) {
+              this.$notify({
+                title: '下载失败',
+                message: response.data.meta.message,
+                type: 'error'
+              });
+            }
+          })
       }
     },
     created() {
