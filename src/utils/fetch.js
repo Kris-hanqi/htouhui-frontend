@@ -44,7 +44,7 @@ service.interceptors.response.use(
           callback: action => {
             openModalStatus = false;
             if (action === 'confirm') {
-              window.open(getLocationUrl() + '/logout');
+              window.location.href = getLocationUrl() + '/logout';
             }
           }
         });
