@@ -76,7 +76,10 @@
         <el-table-column prop="status" label="状态" width="60"></el-table-column>
         <el-table-column prop="contract" fixed="right" label="操作" width="100">
           <template slot-scope="scope">
-            <el-button @click="downLoadContract(scope.row.investId)" type="text">下载合同</el-button>
+            <el-button v-if="scope.row.showContract"
+                       @click="downLoadContract(scope.row.investId)"
+                       type="text">下载合同</el-button>
+            <span v-else>放款后可查看</span>
           </template>
         </el-table-column>
       </el-table>
