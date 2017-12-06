@@ -28,21 +28,27 @@
   
     <!-- 网关交互组件 -->
     <request-bank-from :request-data="requestBankData"></request-bank-from>
+  
+    <!-- 验证用户操作组件 需开户 -->
+    <operational-validate ref="validateSteps"></operational-validate>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
-  import operationalValidate from 'utils/home/operationalValidate';
   import { fetchSetTransactionPassword } from 'api/home/account-set';
   import { fetchSendCode } from 'api/public';
   import SmsTimer from 'common/sms-timer';
   import RequestBankFrom from './RequestBankFrom.vue';
+  import OperationalValidate from './OperationalValidate.vue';
+  
+  const labelName = 'setPasswordTime';
   
   export default {
     components: {
       SmsTimer,
-      RequestBankFrom
+      RequestBankFrom,
+      OperationalValidate
     },
     computed: {
       ...mapGetters([
@@ -61,12 +67,14 @@
           authCode: '',
           sessionId: '',
           callbackUrl: ''
-        },
-        operationalValidateData: ['openAccount']
+        }
       }
     },
     methods: {
       sendCode() {
+        // 校验是否可以发送设置交易密码 五分钟锁定
+        const result = this.validateTime();
+        if (!result) return;
         fetchSendCode({ authType: 'set' })
           .then(response => {
             if (response.data.meta.code === 200) {
@@ -78,9 +86,31 @@
             }
           })
       },
+      validateTime() {
+        let result = true;
+        const setTime = localStorage.getItem(labelName);
+        if (setTime) {
+          const timeStamp = new Date().getTime();
+          if ((timeStamp - setTime) <= 5 * 60 * 1000) {
+            const time = parseInt((5 * 60 * 1000 - (timeStamp - setTime)) / (1000 * 60));
+            this.$message({
+              message: `设置交易密码银行正在审核中，请${time}分钟后重试!`,
+              type: 'warning'
+            });
+            result = false;
+          }
+        }
+        return result;
+      },
       setTransactionPassword() {
-        const result = operationalValidate(this.operationalValidateData);
+        // 设置交易密码前必须开户
+        const validateSteps = ['openAccount'];
+        const result = this.$refs['validateSteps'].validate(validateSteps); // eslint-disable-line
         if (!result) return;
+        // 校验是否可以发送设置交易密码 五分钟锁定
+        const validateResult = this.validateTime();
+        if (!validateResult) return;
+        // 验证码不能为空
         if (!this.transactionPassword.authCode) {
           this.$message({
             message: '验证码不能为空!',
@@ -94,6 +124,9 @@
           .then(response => {
             const data = response.data;
             if (data.meta.code === 200) {
+              // 数据请求成功 - 设置请求时间
+              const timeStamp = new Date().getTime();
+              localStorage.setItem(labelName, timeStamp);
               this.requestBankData = data.data;
             }
             if (data.meta.code !== 500 && data.meta.code !== 600) {
