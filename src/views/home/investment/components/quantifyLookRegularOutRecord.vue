@@ -147,7 +147,7 @@
         this.getPageList();
       },
       returnPrevPages(id) {
-        this.$router.push('/investment/quantify/transactionRecord/' + id);
+        this.$router.push({ path: `/investment/quantify/transactionRecord/${id}`, query: { tabName: 'second' } });
       },
       downLoadContract(id) {
         feachDownLoadClaimsContract(id)
