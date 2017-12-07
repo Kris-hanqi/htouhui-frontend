@@ -4,9 +4,6 @@
       <!-- 显示银行卡 -->
       <bank-card></bank-card>
   
-      <!-- 银行限额提示 -->
-      <bank-limit :visible="dialogBankLimitVisible" @close="closeBankLimit"></bank-limit>
-  
       <!-- 网关交互组件 -->
       <request-bank-from :request-data="requestData"></request-bank-from>
       
@@ -27,9 +24,6 @@
             <input type="text"
                    v-model.number="money"
                    class="form-control" placeholder="请输入提现金额">
-          </div>
-          <div class="col-md-4">
-            <p class="form-control-static"><a @click.stop="showBankLimit">(查看银行限额)</a></p>
           </div>
         </div>
         <div class="form-group" v-if="showUnionBankInput">
@@ -88,7 +82,6 @@
   import { mapGetters } from 'vuex';
   import operationalValidate from 'utils/home/operationalValidate';
   import HthPanel from 'common/Panel/index.vue';
-  import BankLimit from '../components/BankLimit.vue';
   import BankCard from '../components/BackCard.vue';
   import RequestBankFrom from '../components/RequestBankFrom.vue';
   import UnionBank from './components/UnionBank.vue';
@@ -100,7 +93,6 @@
   export default {
     components: {
       HthPanel,
-      BankLimit,
       BankCard,
       UnionBank,
       RequestBankFrom
@@ -220,6 +212,7 @@
           .then(response => {
             if (response.data.meta.code === 200) {
               this.commissionCharge = response.data.data || 0;
+              console.log(this.commissionCharge);
             }
             this.loading = false;
           })
