@@ -59,7 +59,7 @@
       </el-table-column>
       <el-table-column prop="lookEquity" label="查看"  width="70">
         <template slot-scope="scope">
-          <el-button v-if="scope.row.status === 'exited'"
+          <el-button v-if="scope.row.isHaveInvest"
                      type="text"
                      @click="lookOutRegular(scope.row.appointmentExitId)">查看债权</el-button>
           <span v-else>暂无债权</span>
