@@ -305,6 +305,7 @@
     created() {
       if (this.$route.query.tagName && this.$route.query.tagName === 'second') {
         this.activeName = 'bid_success';
+        this.listQuery.status = 'bid_success';
       }
       if (this.$route.query.message) {
         this.$message({
