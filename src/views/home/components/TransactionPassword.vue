@@ -89,8 +89,12 @@
       validateTime() {
         let result = true;
         const data = localStorage.getItem(labelName);
-        const setTime = data.split('_')[1];
-        const username = data.split('_')[0];
+        let setTime = null;
+        let username = null;
+        if (data) {
+          setTime = data.split('_')[1];
+          username = data.split('_')[0];
+        }
         // 判断是否是同一用户
         if (username && setTime && this.$store.getters.username === username) {
           const timeStamp = new Date().getTime();
