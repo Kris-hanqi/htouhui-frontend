@@ -48,7 +48,7 @@
       </el-table-column>
       <el-table-column prop="actualExitMoney" label="实际到账金额">
         <template slot-scope="scope">
-          <p v-if="scope.row.actualExitMoney != null">{{ scope.row.actualExitMoney | currency('') + '元' }}</p>
+          <p v-if="scope.row.actualExitMoney !== null">{{ scope.row.actualExitMoney | currency('') + '元' }}</p>
           <p v-else>{{ '--' }}</p>
         </template>
       </el-table-column>
@@ -59,14 +59,21 @@
       </el-table-column>
       <el-table-column prop="lookEquity" label="查看"  width="70">
         <template slot-scope="scope">
-          <el-button v-if="scope.row.status == 'exited'" class="icon-interests" type="text" @click="lookOutRegular(scope.row.appointmentExitId)" size="small">查看债权</el-button>
-          <p v-else>暂无债权</p>
+          <el-button v-if="scope.row.status === 'exited'"
+                     type="text"
+                     @click="lookOutRegular(scope.row.appointmentExitId)">查看债权</el-button>
+          <span v-else>暂无债权</span>
         </template>
       </el-table-column>
     </el-table>
     <div class="pages" v-if="list && list.length">
-      <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-      <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
+      <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录
+      （共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+      <el-pagination @current-change="handleCurrentChange"
+                     :current-page.sync="listQuery.pageNo"
+                     :page-size="listQuery.size"
+                     layout="prev, pager, next"
+                     :total="total"></el-pagination>
     </div>
   </div>
 </template>

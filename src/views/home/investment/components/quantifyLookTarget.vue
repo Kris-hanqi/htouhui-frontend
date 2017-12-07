@@ -69,7 +69,9 @@
         <el-table-column prop="status" label="状态" width="80"></el-table-column>
         <el-table-column fixed="right" prop="contract" label="合同" width="120">
           <template slot-scope="scope">
-            <el-button v-if="scope.row.showContract" type="text" size="small">下载合同</el-button>
+            <el-button v-if="scope.row.showContract"
+                       @click="downLoadContract(scope.row.investId)"
+                       type="text">下载合同</el-button>
             <p v-else="">放款后可查看</p>
           </template>
         </el-table-column>
@@ -91,6 +93,7 @@
 
 <script>
   import { queryUserAssetInfoList } from 'api/home/queryUserAssetInfoList';
+  import { feachDownLoadClaimsContract } from 'api/home/investment';
   import img_icon_sxb from 'assets/images/home/icon-shengXinBaoLiangHua.png';
 
   export default {
@@ -138,6 +141,21 @@
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
         this.getPageList();
+      },
+      downLoadContract(id) {
+        feachDownLoadClaimsContract(id)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              window.open(response.data.data);
+            }
+            if (response.data.meta.code === 9999) {
+              this.$notify({
+                title: '下载失败',
+                message: response.data.meta.message,
+                type: 'error'
+              });
+            }
+          })
       }
     },
     created() {
