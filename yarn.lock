@@ -3272,9 +3272,9 @@ hpack.js@^2.1.6:
     readable-stream "^2.0.1"
     wbuf "^1.1.0"
 
-hth-icon-font@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/hth-icon-font/-/hth-icon-font-0.0.6.tgz#0e4c0a6c07137c00c1677e2687d7c4d6bf70e3a9"
+hth-icon-font@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/hth-icon-font/-/hth-icon-font-0.0.7.tgz#3256934b151b73911800335a8f05ed01a8e4c622"
 
 html-comment-regex@^1.1.0:
   version "1.1.1"

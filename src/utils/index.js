@@ -85,6 +85,32 @@ export function param2Obj(url) {
   return JSON.parse('{"' + decodeURIComponent(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
 }
 
+/** 获取get请求查询参数 */
+export function parseQuery(query) {
+  const res = {};
+
+  query = query.substring(query.lastIndexOf('?') + 1);
+  query = query.trim().replace(/^(\?|#|&)/, '');
+
+  query.split('&').forEach(param => {
+    const parts = param.replace(/\+/g, ' ').split('=');
+    const key = decodeURIComponent(parts.shift());
+    const val = parts.length > 0
+      ? decodeURIComponent(parts.join('='))
+      : null;
+
+    if (res[key] === undefined) {
+      res[key] = val;
+    } else if (Array.isArray(res[key])) {
+      res[key].push(val);
+    } else {
+      res[key] = [res[key], val];
+    }
+  });
+
+  return res;
+}
+
 export function getLocationUrl() {
   return window.location.protocol + '//' + window.location.host;
 }

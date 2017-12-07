@@ -3,9 +3,9 @@
 // we are also using it with karma-webpack
 //   https://github.com/webpack/karma-webpack
 
-var webpackConfig = require('../../build/webpack.test.conf.js')
+const webpackConfig = require('../../build/webpack.test.conf.js');
 
-module.exports = function (config) {
+module.exports = function(config) {
   config.set({
     // to run in additional browsers:
     // 1. install corresponding karma launcher
@@ -30,4 +30,4 @@ module.exports = function (config) {
       ]
     }
   })
-}
+};
