@@ -1,0 +1,10 @@
+@import "../variables";
+@import "../mixins/index";
+
+@include b(card) {
+  position: relative;
+  background: #fff;
+  border-radius: $border-radius-small;
+  font-size: $font-size-base;
+  transition: all $transition-time $ease-in-out;
+}

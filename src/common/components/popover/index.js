@@ -1,6 +1,6 @@
 import KuPopover from './src/popover.vue';
 
-KuPopover.install = function () {
+KuPopover.install = function() {
   Vue.component(KuPopover.name, KuPopover);
 };
 
