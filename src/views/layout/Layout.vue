@@ -1,21 +1,20 @@
 <template>
   <div class="app-wrapper">
     <hth-header></hth-header>
-    <breadcrumb></breadcrumb>
+    <!--<breadcrumb></breadcrumb>-->
     <div class="main-container">
-      idebar
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
   import HthHeader from 'components/header';
-  import { Breadcrumb, Sidebar } from 'views/layout/components'
+  import { Sidebar } from 'views/layout/components'
   
   export default {
     components: {
       HthHeader,
-      Breadcrumb,
       Sidebar
     }
   };
