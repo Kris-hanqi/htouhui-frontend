@@ -5,6 +5,7 @@ import store from './store';
 import 'normalize.css';
 import './styles/bootstrap.scss';
 import './styles/base.scss';
+import './common/styles/bootstrap.scss';
 
 Vue.config.productionTip = false;
 

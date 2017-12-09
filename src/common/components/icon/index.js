@@ -1,6 +1,6 @@
 import KuIcon from './src/icon.vue';
 
-KuIcon.install = function () {
+KuIcon.install = function() {
   Vue.component(KuIcon.name, KuIcon);
 };
 
