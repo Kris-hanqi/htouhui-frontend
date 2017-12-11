@@ -15,3 +15,21 @@ export function fetchAdRecommend() {
     method: 'get'
   })
 }
+
+/** 刷新token */
+export function fetchUpdateServeToken() {
+  return fetch({
+    url: 'userRefreshTokenServlet',
+    method: 'get'
+  })
+}
+
+/** 更新用户状态 */
+export function fetchUpdateUserStatus() {
+  return fetch({
+    url: 'refreshAuthority',
+    method: 'get'
+  })
+}
+
+

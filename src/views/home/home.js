@@ -41,6 +41,7 @@ import * as filters from '@/filters' // 全局filter
 import router from '@/router/home';
 import store from '@/store';
 import { setUuid, getUuid, getToken, setToken } from '@/utils/auth';
+import { fetchUpdateServeToken } from '@/api/home/public';
 import App from './App';
 // import '@/mock';
 
@@ -90,6 +91,7 @@ Vue.use(Vue2Filters);
 
 router.afterEach(to => {
   setToken(getToken());
+  fetchUpdateServeToken();
   if (to.path.indexOf('investment') === -1) {
     if (store.getters.username && !store.getters.isOpenAccount && to.path !== '/accountManage/set/openAccount') {
       MessageBox.alert('尚未开户', '提示', {

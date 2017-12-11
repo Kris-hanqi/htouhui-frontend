@@ -47,6 +47,7 @@
   import { mapGetters } from 'vuex';
   import { validateIdCard } from 'utils/validate';
   import { fetchOpenAccount } from 'api/home/account-set';
+  import { fetchUpdateUserStatus } from 'api/home/public';
   
   export default {
     computed: {
@@ -121,6 +122,8 @@
               this.$store.commit('SET_IS_OPEN_ACCOUNT', true);
               this.$store.commit('SET_IS_BANK_CARD', true);
               this.$emit('success');
+              // 请求刷新用户状态
+              fetchUpdateUserStatus();
               this.$message({
                 message: '恭喜，开户成功!',
                 type: 'success'
