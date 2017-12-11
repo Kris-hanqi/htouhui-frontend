@@ -78,7 +78,13 @@
           this.exitMoney = this.reservationExitData.canExitMoney;
         }
         // 数据校验
-        if (!this.exitMoney) return;
+        if (!this.exitMoney) {
+          this.$message({
+            message: '退出金额不能为空',
+            type: 'error'
+          });
+          return;
+        }
         if (this.exitMoney > this.reservationExitData.canExitMoney) {
           this.$message({
             message: '退出金额大于总可退出金额',
