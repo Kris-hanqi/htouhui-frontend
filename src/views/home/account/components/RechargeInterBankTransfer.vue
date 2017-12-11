@@ -3,7 +3,7 @@
     <div class="recharge-wrapper__steps">
       <p>操作流程（以招商银行为例）</p>
       <img :src="img_inter_bank_step" alt="">
-      <p>您可以使用您的银行卡，通过支付宝转账的方式将资金充值到您的江西银行存管帐户（支付宝APP更方便）</p>
+      <p>您可通过银行转账至您的江西银行电子账户中，转账方式包括：银行柜台转账、网银转账、手机银行转账。</p>
     </div>
     <div class="split-line"></div>
     <div class="transferNeedMsg">
