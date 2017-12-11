@@ -114,6 +114,7 @@
         dialogUnionBankVisible: false,
         accountMoney: '',
         money: '',
+        returnCnapNumber: '',
         requestData: {},
         withdrawData: {
           inputMoney: '',
@@ -163,7 +164,10 @@
                 // 非第一次大额提现
                 if (validateNumber(response.data.data)) {
                   this.showUnionBankInput = true;
-                  this.withdrawData.cnapNumber = response.data.data;
+                  if (!this.returnCnapNumber) {
+                    this.withdrawData.cnapNumber = response.data.data;
+                  }
+                  this.returnCnapNumber = response.data.data;
                   allowLargeWithdrawNumber++;
                   this.getRequestWithdrawData('large');
                 } else {
