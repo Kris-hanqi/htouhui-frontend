@@ -74,6 +74,13 @@
     },
     methods: {
       bindBankCard() {
+        if (!this.bankCard) {
+          this.$message({
+            message: '银行卡号不能为空！',
+            type: 'warning'
+          });
+          return;
+        }
         this.loading = true;
         fetchBindBankCard(this.bankCard)
           .then(response => {
