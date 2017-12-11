@@ -26,6 +26,18 @@
         </div>
       </div>
       <div class="form-group">
+        <label class="col-md-2 control-label">验证码</label>
+        <div class="col-md-5">
+          <input class="form-control"
+                 type="text"
+                 v-model="openAccountData.smsCode"
+                 maxlength="6" placeholder="请输入短信验证码">
+        </div>
+        <div class="col-md-5">
+          <sms-timer :start="startSmsTimer" @countDown="startSmsTimer = false" @click.native='sendCode'></sms-timer>
+        </div>
+      </div>
+      <div class="form-group">
         <div class="col-md-offset-2 col-md-5">
           <el-checkbox v-model="protocolChecked"
                        :class="{ shake: showAnimate }"
@@ -45,11 +57,16 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import SmsTimer from 'common/sms-timer';
   import { validateIdCard } from 'utils/validate';
   import { fetchOpenAccount } from 'api/home/account-set';
   import { fetchUpdateUserStatus } from 'api/home/public';
+  import { fetchSendCodeNew } from 'api/public';
   
   export default {
+    components: {
+      SmsTimer
+    },
     computed: {
       ...mapGetters([
         'username',
@@ -58,17 +75,32 @@
     },
     data() {
       return {
+        startSmsTimer: false,
         showAnimate: false,
         loading: false,
         protocolChecked: true,
         openAccountData: {
           realName: '',
           idCard: '',
-          cardNo: ''
+          cardNo: '',
+          smsCode: ''
         }
       }
     },
     methods: {
+      sendCode() {
+        if (!this.mobile) return;
+        this.startSmsTimer = true;
+        fetchSendCodeNew({ type: 'accountOpenPlus' })
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.$message({
+                message: '验证码发送成功!',
+                type: 'success'
+              });
+            }
+          })
+      },
       openAccount() { // 开户操作
         // 校验是否勾选协议
         if (!this.protocolChecked) {
