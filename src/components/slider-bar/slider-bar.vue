@@ -35,6 +35,49 @@
     components: {
       HthBackTop,
       GainCalculator
+    },
+    mounted() {
+      this.$nextTick(() => {
+        /* eslint-disable */
+        (function(a,h,c,b,f,g) {
+          a["UdeskApiObject"]=f;
+          a[f]=a[f]||function(){
+              (a[f].d=a[f].d||[]).push(arguments)
+            };
+          g=h.createElement(c);
+          g.async=1;
+          g.src=b;
+          c=h.getElementsByTagName(c)[0];
+          c.parentNode.insertBefore(g,c)
+        })(window,document,"script","//htouhui.udesk.cn/im_client/js/udeskApi.js?_t=1474855739578","ud");
+        ud({
+          "code":"14dg4kic",
+          "link":"//htouhui.udesk.cn/im_client",
+          "isInvite":true,
+          "mobile":{
+            "mode":"blank",
+            "color":"#307AE8",
+            "pos_flag":"crb",
+            "onlineText":"联系客服，在线咨询",
+            "offlineText":"客服下班，请留言",
+            "pop":{
+              "direction":"top",
+              "arrow":{"top":0,"left":"70%"}
+            }
+          },
+          "mode":"blank",
+          "color":"#307AE8",
+          "pos_flag":"srb",
+          "onlineText":"联系客服，在线咨询",
+          "offlineText":"客服下班，请留言",
+          "pop":{
+            "direction":"top",
+            "arrow":{"top":0,"left":"80%"}
+          },
+          "targetSelector":".online-service"
+        });
+      /* eslint-disable */
+      })
     }
   }
 </script>
