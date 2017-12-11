@@ -1,7 +1,6 @@
-@import "../variables";
-@import "../mixins/index";
+$component-name: "card";
 
-@include b(card) {
+@include b($component-name) {
   position: relative;
   background: #fff;
   border-radius: $border-radius-small;
