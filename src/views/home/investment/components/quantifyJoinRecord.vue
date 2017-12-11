@@ -34,6 +34,8 @@
     </div>
 
     <el-table :data="list" style="width: 100%">
+      <!-- 无数据时显示 -->
+      <no-data slot="empty"></no-data>
       <el-table-column prop="joinTime" label="加入时间" width="135"></el-table-column>
       <el-table-column prop="joinMoney" label="加入金额">
         <template slot-scope="scope">
@@ -70,7 +72,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <div class="pages">
+    <div class="pages" v-if="list && list.length">
       <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录
       （共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
       <el-pagination @current-change="handleCurrentChange"
@@ -105,11 +107,13 @@
   import { getStartAndEndTime, getDateString } from 'utils/index';
   import tabTieXi from './quantifyTabTieXi.vue';
   import tabCoupons from './quantifyTabCoupons.vue';
+  import NoData from '../../components/NoData.vue';
 
   export default {
     components: {
       tabTieXi,
-      tabCoupons
+      tabCoupons,
+      NoData
     },
     data() {
       return {

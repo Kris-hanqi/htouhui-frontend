@@ -34,6 +34,8 @@
     </div>
 
     <el-table :data="list" style="width: 100%">
+      <!-- 无数据时显示 -->
+      <no-data slot="empty"></no-data>
       <el-table-column prop="applyTime" label="申请时间" width="135"></el-table-column>
       <el-table-column prop="exitMoney" label="退出金额">
         <template slot-scope="scope">
@@ -65,15 +67,20 @@
       <el-table-column prop="lookEquity" label="查看"  width="70">
         <template slot-scope="scope">
           <div>
-            <el-button class="icon-interests" v-if="scope.row.haveInvest" type="text" @click="lookOutRegular(scope.row.userExitId)">查看债权</el-button>
-            <p v-else="">暂无债权</p>
+            <el-button v-if="scope.row.haveInvest" type="text" @click="lookOutRegular(scope.row.userExitId)">查看债权</el-button>
+            <span v-else="">暂无债权</span>
           </div>
         </template>
       </el-table-column>
     </el-table>
-    <div class="pages">
-      <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-      <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.size" layout="prev, pager, next" :total="total"></el-pagination>
+    <div class="pages" v-if="list && list.length">
+      <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录
+      （共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+      <el-pagination @current-change="handleCurrentChange"
+                     :current-page.sync="listQuery.pageNo"
+                     :page-size="listQuery.size"
+                     layout="prev, pager, next"
+                     :total="total"></el-pagination>
     </div>
   </div>
 </template>
@@ -81,8 +88,12 @@
 <script>
   import { feachExitPlanBill } from 'api/home/investment';
   import { getStartAndEndTime, getDateString } from 'utils/index';
+  import NoData from '../../components/NoData.vue';
 
   export default {
+    components: {
+      NoData
+    },
     data() {
       return {
         selectDates: {
@@ -172,7 +183,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .times-box {
     width: 100%;
     height: 40px;
@@ -225,9 +236,9 @@
 
   .out-record {
     margin-top: 20px;
-
-    .icon-interests {
-      color: #0573f4;
+  
+    .el-table__empty-block {
+      min-height: 260px;
     }
   }
 </style>
