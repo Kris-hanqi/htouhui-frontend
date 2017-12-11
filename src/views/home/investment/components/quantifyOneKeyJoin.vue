@@ -209,6 +209,12 @@
               // 跳转加入记录页面
               this.$router.push('/investment/quantify/transactionRecord/' + this.planId);
             }
+            if (response.data.meta.code === 9999) {
+              this.$message({
+                message: response.data.meta.message,
+                type: 'error'
+              });
+            }
             this.joinBthLoading = false;
           })
       },
