@@ -3,8 +3,7 @@
     <div class="coupon-wrapper__box-open-account" v-if="status === 0">
       <a @click.stop="toOpenAccount">立即开户激活</a>
     </div>
-    <div v-else
-         class="coupon-wrapper__box-top"
+    <div class="coupon-wrapper__box-top"
          :class="data.status === 'expire' ? 'expire' : ''">
       <i class="icon-new" v-if="data.isNew === 1"></i>
       <p class="title">
