@@ -19,12 +19,14 @@
       <ul class="allChooseCalendar" v-show="dateType === 'other'">
         <el-date-picker
           v-model="selectDates.startTime"
-          type="date"
+          :picker-options="pickerOptions"
+          type="datetime"
           placeholder="选择开始日期">
         </el-date-picker>
         <el-date-picker
           v-model="selectDates.endTime"
-          type="date"
+          :picker-options="pickerOptions"
+          type="datetime"
           placeholder="选择结束日期">
         </el-date-picker>
         <button class="find-btn" @click="query">查询</button>
@@ -131,6 +133,11 @@
           endTime: '',
           pageNo: 1,
           pageSize: 10
+        },
+        pickerOptions: {
+          disabledDate(date) {
+            return date > new Date();
+          }
         },
         total: 0,
         dialogVisible: false,
