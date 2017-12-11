@@ -9,10 +9,10 @@
                         :col-configs="firstColConfigs">
           <el-table-column slot="opt0" width="100" label="额外奖励">
             <template slot-scope="scope">
-              <el-button @click="getExtendEarn(scope.row)"
-                         :class="{ 'ku-icon-disabled': scope.row.jiaxi !== 1 }" type="text">
+              <el-button @click="getExtendEarn(scope.row)" v-if="scope.row.jiaxi === '1'" type="text">
                 <i class="ku-icon icon-money-bag" style="font-size: 25px"></i>
               </el-button>
+              <span v-else=""><i class="ku-icon icon-money-bag ku-icon-disabled" style="font-size: 25px"></i></span>
             </template>
           </el-table-column>
           <el-table-column slot="opt" fixed="right" label="操作" width="150">
@@ -267,7 +267,7 @@
         }
       },
       getExtendEarn(data) {
-        if (data.jiaxi !== 1) return;
+        if (data.jiaxi !== '1') return;
         this.extendEarnList = null;
         this.dialogVisible = true;
         feachExtendEarn({ investId: data.investId })
