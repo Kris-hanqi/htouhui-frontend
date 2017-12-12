@@ -4,22 +4,29 @@
              width="750px"
              :before-close="handleClose"
              :visible.sync="visible">
-    <el-table :data="list">
-      <el-table-column property="name" label="支持银行" width="150"></el-table-column>
-      <el-table-column label="交易限额">
-        <el-table-column
-          prop="singleLimit"
-          label="单笔限额"
-          width="120">
-        </el-table-column>
-        <el-table-column
-          label="单日限额"
-          prop="dayLimit"
-          width="120">
-        </el-table-column>
-      </el-table-column>
-      <el-table-column property="remarks" label="备注" width="320"></el-table-column>
-    </el-table>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <td>支持银行</td>
+          <td colspan="2">交易限额</td>
+          <td>备注</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in list">
+          <td>{{ item.name }}</td>
+          <td>{{ '单笔' + item.singleLimit }}</td>
+          <td>{{ '单日' + item.dayLimit }}</td>
+          <td>{{ item.remarks }}</td>
+        </tr>
+        <tr>
+          <td colspan="4" style="color: #FF4949;">
+            <p>充值金额可参考上表，具体的额度以发卡银行为准。</p>
+            <p>如果您在发卡银行设置的支付金额低于此表额度，以您的设置为准。</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </el-dialog>
 </template>
 
@@ -60,12 +67,16 @@
 
 <style lang="scss">
   .bank-limit-wrapper {
-    .el-dialog--small {
-      width: 750px;
+    .table td {
+      text-align: center;
+      font-size: 14px;
+      color: #727e90;
     }
-  
-    .el-table td {
-      height: 29px;
+    
+    .table thead {
+      color: #878d99;
+      background: #f5f7fa;
+      font-weight: 500;
     }
   }
 </style>
