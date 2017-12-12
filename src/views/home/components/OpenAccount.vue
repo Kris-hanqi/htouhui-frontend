@@ -89,7 +89,6 @@
     },
     methods: {
       sendCode() {
-        if (!this.mobile) return;
         this.startSmsTimer = true;
         fetchSendCodeNew({ type: 'accountOpenPlus' })
           .then(response => {
@@ -137,6 +136,14 @@
         if (!this.openAccountData.cardNo) {
           this.$message({
             message: '银行卡号不能为空',
+            type: 'warning'
+          });
+          return;
+        }
+        // 校验验证码
+        if (!this.openAccountData.smsCode) {
+          this.$message({
+            message: '验证码不能为空',
             type: 'warning'
           });
           return;
