@@ -63,7 +63,7 @@
       </el-table-column>
       <el-table-column prop="award" label="平台奖励">
         <template slot-scope="scope">
-          <el-button v-if="scope.row.jiaxi === 1" @click="getAward(scope.row.joinPlanId)" type="text">
+          <el-button v-if="scope.row.jiaxi === '1'" @click="getAward(scope.row.joinPlanId)" type="text">
             <i class="ku-icon icon-money-bag" style="font-size: 25px"></i>
           </el-button>
           <i v-else="" class="ku-icon icon-money-bag" style="font-size: 25px; color: #d0cdcd;"></i>
