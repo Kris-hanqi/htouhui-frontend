@@ -13,7 +13,7 @@
           <a @click.stop="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a>
         </li>
         <li>
-          <a @click.stop="dateType = 'other'" class="diy-time" :class="{ active: dateType === 'other'}">自定义时间</a>
+          <a @click.stop="switchDateType('other')" class="diy-time" :class="{ active: dateType === 'other'}">自定义时间</a>
         </li>
       </ul>
       <ul class="allChooseCalendar" v-show="dateType === 'other'">
@@ -194,7 +194,13 @@
       },
       switchDateType(type) {
         this.dateType = type;
-        this.getPageList();
+        this.listQuery.pageNo = 1;
+        this.total = 0;
+        if (this.dateType !== 'other') {
+          this.getPageList();
+        } else {
+          this.list = null;
+        }
       },
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;

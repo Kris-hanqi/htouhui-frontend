@@ -162,9 +162,12 @@
       },
       switchDateType(type) {
         this.dateType = type;
+        this.listQuery.pageNo = 1;
+        this.total = 0;
         if (this.dateType !== 'other') {
-          this.listQuery.pageNo = 1;
           this.getPageList();
+        } else {
+          this.list = null;
         }
       },
       switchProjectType(type) {
