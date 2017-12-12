@@ -1,6 +1,6 @@
 <template>
   <div v-show="false">
-    <form :action="requestData.formPostUrl" method="post" id="frm1" target="_blank" v-if="requestData.formPostUrl">
+    <form :action="requestData.formPostUrl" method="post" id="frm1" v-if="requestData.formPostUrl">
       <input type="text" v-for="(val, key) in requestData.formContent"
              :key="key"
              :name="key"
