@@ -55,7 +55,9 @@
       <el-table-column prop="lockEndTime" label="即日起免手续费" width="135"></el-table-column>
       <el-table-column prop="award" label="平台奖励">
         <template slot-scope="scope">
-          <el-button class="icon-award" @click="getAward(scope.row.joinPlanId)" type="text" size="small"></el-button>
+          <el-button @click="getAward(scope.row.joinPlanId)" type="text">
+            <i class="ku-icon icon-money-bag" style="font-size: 25px"></i>
+          </el-button>
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="80">
