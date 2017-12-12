@@ -40,14 +40,27 @@
       </div>
     </hth-panel>
     <div class="assetRunWaterTable">
-  
-      <hth-data-table :data="list"
-                      v-loading="listLoading"
-                      element-loading-text="拼命加载中..."
-                      :col-configs="colConfigs"></hth-data-table>
+      <el-table :data="list" v-loading="listLoading" element-loading-text="拼命加载中...">
+        <!-- 无数据时显示 -->
+        <no-data slot="empty"></no-data>
+        <el-table-column prop="time" label="交易时间" width="150"></el-table-column>
+        <el-table-column label="项目名称" width="150">
+          <span slot-scope="scope">
+            {{ scope.row.projectName ? scope.row.projectName : '--' }}
+          </span>
+        </el-table-column>
+        <el-table-column label="类型" prop="typeinfo" width="100"></el-table-column>
+        <el-table-column label="变动金额" width="100">
+          <template slot-scope="scope">
+            {{ scope.row.type | keyToValue(fundsTypes) }}{{ scope.row.money | currency('') + '元' }}
+          </template>
+        </el-table-column>
+        <el-table-column label="备注" prop="detail"></el-table-column>
+      </el-table>
       
       <div class="pages" v-if="list && list.length">
-        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录
+        （共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
         <el-pagination
           @current-change="handleCurrentChange"
           :current-page.sync="listQuery.pageNo"
@@ -60,16 +73,14 @@
 
 <script>
   import HthPanel from 'common/Panel/index.vue';
-  import HthDataTable from '../components/hth-data-table/HthDataTable.vue';
-  import RowChangeMoney from '../components/hth-data-table/RowChangeMoney.vue';
-  import RowString from '../components/hth-data-table/RowString.vue';
+  import NoData from '../components/NoData.vue';
   import { fetchFundsPageList } from 'api/home/account';
   import { getStartAndEndTime, getDateString } from 'utils/index';
   
   export default {
     components: {
       HthPanel,
-      HthDataTable
+      NoData
     },
     data() {
       return {
@@ -83,12 +94,12 @@
           endTime: '',
           type: ''
         },
-        colConfigs: [
-          { label: '交易时间', width: '150', prop: 'time' },
-          { label: '项目名称', width: '150', prop: 'projectName', component: RowString },
-          { label: '类型', width: '100', prop: 'typeinfo' },
-          { label: '变动金额', width: '100', component: RowChangeMoney },
-          { label: '备注', showOverflowTooltip: true, prop: 'detail' }
+        fundsTypes: [
+          { key: 'ti_balance', value: '+' },
+          { key: 'to_balance', value: '-' },
+          { key: 'freeze', value: '-' },
+          { key: 'unfreeze', value: '' },
+          { key: 'to_frozen', value: '' }
         ],
         pickerOptions: {
           disabledDate(date) {
@@ -174,6 +185,10 @@
 
 <style lang="scss">
   .funds-wrapper {
+    .el-table__empty-block {
+      min-height: 260px;
+    }
+    
     .assetRunWaterSee {
       padding-bottom: 10px;
       background-color: #fff;
