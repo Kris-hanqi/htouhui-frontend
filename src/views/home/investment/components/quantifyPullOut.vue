@@ -92,9 +92,15 @@
       showExitModal(type) {
         if (type === 'all') {
           this.exitMoney = this.exitInfoData.lockExitMoney + this.exitInfoData.unlockExitMoney;
+        } else {
+          if (!this.exitMoney) {
+            this.$message({
+              message: '退出金额不能为空',
+              type: 'error'
+            });
+            return;
+          }
         }
-        // 校验
-        if (this.exitMoney <= 0) return;
         if (this.exitMoney > this.exitInfoData.lockExitMoney + this.exitInfoData.unlockExitMoney) {
           this.$message({
             message: '退出金额大于总可退出金额',
