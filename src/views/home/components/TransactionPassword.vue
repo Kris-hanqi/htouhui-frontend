@@ -75,10 +75,10 @@
         // 校验是否可以发送设置交易密码 五分钟锁定
         const result = this.validateTime();
         if (!result) return;
+        this.startSmsTimer = true;
         fetchSendCode({ authType: 'set' })
           .then(response => {
             if (response.data.meta.code === 200) {
-              this.startSmsTimer = true;
               this.$message({
                 message: '验证码发送成功!',
                 type: 'success'
@@ -138,7 +138,7 @@
               }
               this.requestBankData = data.data;
             }
-            if (data.meta.code !== 500 && data.meta.code !== 600) {
+            if (data.meta.code === 9999) {
               this.$notify({
                 title: '操作失败',
                 message: data.meta.message,
