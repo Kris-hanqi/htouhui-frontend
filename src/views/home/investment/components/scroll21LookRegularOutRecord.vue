@@ -17,8 +17,10 @@
       </div>
       <div class="look-regular-bottom">
         <p>申请时间 <span class="roboto-regular">{{ outPlanList.applyTime }}</span></p>
-        <img v-if="outPlanList.status === 'exited'" class="type-message" src="../../../../assets/images/home/icon-success.png" alt=""/>
-        <img v-else class="type-message" src="../../../../assets/images/home/icon-outRecord.png" alt=""/>
+      </div>
+      <div class="hth-mark">
+        <i v-if="outPlanList.status === 'exited'" class="ku-icon icon-mark-success"></i>
+        <i v-else="" class="ku-icon icon-mark-reserve-exit"></i>
       </div>
     </div>
 
@@ -179,6 +181,19 @@
       float: right;
       font-size: 16px;
       color: #0573f4;
+    }
+  }
+  
+  .look-regular {
+    .hth-mark {
+      float: right;
+      margin-top: -96px;
+      margin-right: 8px;
+    }
+  
+    .ku-icon {
+      font-size: 100px;
+      color: #ec4d4c;
     }
   }
 
