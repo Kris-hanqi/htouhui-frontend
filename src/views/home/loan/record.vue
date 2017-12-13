@@ -137,7 +137,7 @@
 <script>
   import HthPanel from 'common/Panel/index.vue';
   import HthDataTable from '../components/hth-data-table/HthDataTable.vue';
-  import RowProjectName from '../components/hth-data-table/RowProjectName.vue';
+  import RowClaimsProjectName from '../components/hth-data-table/RowClaimsProjectName.vue';
   import RowUnit from '../components/hth-data-table/RowUnit.vue';
   import RowTwoAdd from '../components/hth-data-table/RowTwoAdd.vue';
   import RowRepayTotalTerm from '../components/hth-data-table/RowRepayTotalTerm.vue';
@@ -170,7 +170,7 @@
           name: ''
         },
         repayingColConfigs: [
-          { label: '项目名称', component: RowProjectName },
+          { label: '项目名称', component: RowClaimsProjectName },
           { label: '放款时间', width: '140', prop: 'giveTime' },
           { label: '借款金额', width: '110', prop: 'loanMoney', component: RowUnit, unit: '元' },
           { label: '实际借款金额', width: '140', prop: 'realLoanMoney', component: RowUnit, unit: '元' },
@@ -184,7 +184,7 @@
           { slot: 'opt' }
         ],
         recheckingColConfigs: [
-          { label: '项目名称', component: RowProjectName },
+          { label: '项目名称', component: RowClaimsProjectName },
           { label: '借款金额', width: '100', prop: 'loanMoney' },
           { label: '实际募集金额', width: '100', prop: 'realRaisedMoney' },
           { label: '预计利息', width: '100', prop: 'predictInterst' },
@@ -193,7 +193,7 @@
           { label: '状态', prop: 'status' }
         ],
         waitingColConfigs: [
-          { label: '项目名称', component: RowProjectName },
+          { label: '项目名称', component: RowClaimsProjectName },
           { label: '借款金额', prop: 'loanMoney' },
           { label: '预计利息', prop: 'predictInterst' },
           { label: '年利率', prop: 'yearRate', component: RowUnit, unit: '%' },
@@ -201,7 +201,7 @@
           { label: '状态', prop: 'status' }
         ],
         raisingColConfigs: [
-          { label: '项目名称', component: RowProjectName },
+          { label: '项目名称', component: RowClaimsProjectName },
           { label: '发布时间', prop: 'verifyTime' },
           { label: '借款金额', prop: 'loanMoney' },
           { label: '剩余时间', prop: 'remainTime' },
@@ -209,7 +209,7 @@
           { label: '状态', prop: 'status' }
         ],
         finishedColConfigs: [
-          { label: '项目名称', component: RowProjectName },
+          { label: '项目名称', component: RowClaimsProjectName },
           { label: '放款时间', width: '140', prop: 'giveTime' },
           { label: '借款金额', width: '100', prop: 'actualBorrowMoney' },
           { label: '还款金额', width: '100', prop: 'repayMoney' },
@@ -218,7 +218,7 @@
           { slot: 'opt' }
         ],
         failColConfigs: [
-          { label: '项目名称', component: RowProjectName },
+          { label: '项目名称', component: RowClaimsProjectName },
           { label: '发布时间', prop: 'verifyTime' },
           { label: '借款金额', prop: 'loanMoney' },
           { label: '流标时间', prop: 'cancelTime' },
