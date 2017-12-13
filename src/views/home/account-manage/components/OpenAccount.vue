@@ -1,7 +1,6 @@
 <template>
   <div class="open-account">
     <hth-panel title="存管开户">
-      {{ openAccountStatus }}
       <!-- 开户操作组件 -->
       <open-account @success="openAccountSuccess"></open-account>
       <div class="split-line"></div>
