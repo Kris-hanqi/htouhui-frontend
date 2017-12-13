@@ -160,6 +160,13 @@
       joinPlan() {
         const result = operationalValidate(this.operationalValidateData);
         if (!result) return;
+        if (!this.userMoney) {
+          this.$message({
+            message: '可加入金额为0,不能加入！',
+            type: 'error'
+          });
+          return;
+        }
         // 加入金额不能大于账户余额以及还可加入金额
         if (this.userMoney > this.oneKeyJoinInfo.canJoinMoney) {
           this.$message({
