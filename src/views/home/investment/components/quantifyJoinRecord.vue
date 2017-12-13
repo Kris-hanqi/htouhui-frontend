@@ -55,9 +55,10 @@
       <el-table-column prop="lockEndTime" label="即日起免手续费" width="135"></el-table-column>
       <el-table-column prop="award" label="平台奖励">
         <template slot-scope="scope">
-          <el-button @click="getAward(scope.row.joinPlanId)" type="text">
+          <el-button v-if="scope.row.jiaxi === '1'" @click="getAward(scope.row.joinPlanId)" type="text">
             <i class="ku-icon icon-money-bag" style="font-size: 25px"></i>
           </el-button>
+          <i v-else="" class="ku-icon icon-money-bag" style="font-size: 25px; color: #d0cdcd;"></i>
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="80">
@@ -237,7 +238,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .times-box {
     width: 100%;
     height: 40px;
@@ -290,13 +291,11 @@
 
   .join-record {
     margin-top: 20px;
-
-    .icon-award {
-      width: 24px;
-      height: 24px;
-      background: url(../../../../assets/images/home/icon-award.png) no-repeat center;
+    
+    .el-table__empty-block {
+      min-height: 260px;
     }
-
+    
     .icon-interests {
       color: #0573f4;
     }
