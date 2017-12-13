@@ -28,6 +28,11 @@
       setSuccess() {
         console.log('数据请求成功!');
       }
+    },
+    created() {
+      if (this.$store.getters.isTransactionPassword) {
+        this.$router.push('/account/index');
+      }
     }
   }
 </script>

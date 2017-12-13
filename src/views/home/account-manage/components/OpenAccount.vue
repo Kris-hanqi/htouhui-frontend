@@ -29,7 +29,8 @@
     computed: {
       ...mapGetters([
         'username',
-        'baseUrl'
+        'baseUrl',
+        'isOpenAccount'
       ])
     },
     data() {
@@ -39,6 +40,11 @@
     },
     methods: {
       openAccountSuccess() {
+        this.$router.push('/account/index');
+      }
+    },
+    created() {
+      if (this.isOpenAccount) {
         this.$router.push('/account/index');
       }
     }
