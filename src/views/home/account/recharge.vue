@@ -99,47 +99,6 @@
       right: 0;
       bottom: 0;
       background-color: rgba(0, 0, 0, 0.37);
-
-      .shortcutRechargeMoneyRule {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin-left: -365px;
-        width: 730px;
-        border-radius: 9px;
-        background-color: #fff;
-        box-shadow: 0 4px 14px 0 #61687b;
-        padding-top: 22px;
-        padding-bottom: 25px;
-
-        h1 {
-          height: 31px;
-          line-height: 31px;
-          font-size: 22px;
-          color: #394b67;
-          border-left: 10px solid #0573f4;
-          padding-left: 15px;
-        }
-
-        p {
-          font-size: 14px;
-          line-height: 1.29;
-          color: #ff4a33;
-          margin-left: 24px;
-          margin-top: 10px;
-        }
-      }
-
-      .shortcutRechargeMoneyRule:after {
-        display: block;
-        content: '';
-        position: absolute;
-        top: 18px;
-        right: 22px;
-        width: 40px;
-        height: 40px;
-        background: url(../../../assets/images/home/shortcut-recharge-closeIcon.png) no-repeat;
-      }
     }
     
     .transferNeedMsg {

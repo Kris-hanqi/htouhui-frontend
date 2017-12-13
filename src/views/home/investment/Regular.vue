@@ -21,9 +21,6 @@
               <el-button type="text" @click="downLoadContract(scope.row.investId)">下载合同</el-button>
             </template>
           </el-table-column>
-          <template slot-scope="scope">
-            <el-button class="icon-award" type="text"></el-button>
-          </template>
         </hth-data-table>
       </el-tab-pane>
       <el-tab-pane label="投标中" name="bid_success">
@@ -328,12 +325,6 @@
     
     .ku-icon-disabled {
       color: #d0cdcd;
-    }
-
-    .icon-award {
-      width: 24px;
-      height: 24px;
-      background: url(../../../assets/images/home/icon-award.png) no-repeat center;
     }
   }
 </style>

@@ -242,16 +242,6 @@
           color: #7c86a2;
           padding-left: 5px;
         }
-  
-        li i.calendarIcon {
-          display: block;
-          position: absolute;
-          right: 10px;
-          top: 7px;
-          width: 25px;
-          height: 23px;
-          background: url(../../../assets/images/home/center_ico16.png) no-repeat;
-        }
       
         li:nth-child(3) {
           margin-left: 0;

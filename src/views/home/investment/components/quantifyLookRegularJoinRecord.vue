@@ -25,8 +25,10 @@
       <div class="look-regular-bottom">
         <p>加入时间 <span class="roboto-regular">{{ joinPlanList.joinTime }}</span></p>
         <p>持有期限截至 <span class="roboto-regular">{{ joinPlanList.lockEndTime }}</span></p>
-        <img v-if="joinPlanList.status === 'matched'" class="type-message" :src="img_icon_success" />
-        <img v-else class="type-message" :src="img_icon_auto" />
+      </div>
+      <div class="hth-mark">
+        <i v-if="joinPlanList.status === 'matched'" class="ku-icon icon-mark-success"></i>
+        <i v-else="" class="ku-icon icon-mark-auto-tender"></i>
       </div>
     </div>
 
@@ -100,8 +102,6 @@
   import { queryUserInvestList } from 'api/home/queryUserJoinInvestList';
   import interestRate from 'components/interest-rate';
   import { feachDownLoadClaimsContract } from 'api/home/investment';
-  import img_icon_success from 'assets/images/home/icon-success.png';
-  import img_icon_auto from 'assets/images/home/icon-auto.png';
 
   export default {
     components: {
@@ -109,8 +109,6 @@
     },
     data() {
       return {
-        img_icon_success,
-        img_icon_auto,
         joinPlanQuery: {
           joinPlanId: this.$route.params.id
         },
@@ -184,13 +182,19 @@
   }
 </script>
 
-<style lang="scss" scoped>
-  .icon-download {
-    color: #0573f4;
-  }
-
-  .icon-downloadNo {
-    color: #727e90;
+<style lang="scss">
+  .look-regular {
+    .hth-mark {
+      float: right;
+      position: relative;
+      margin-top: -96px;
+      margin-right: 8px;
+    }
+  
+    .ku-icon {
+      font-size: 100px;
+      color: #ec4d4c;
+    }
   }
 
   .details {
