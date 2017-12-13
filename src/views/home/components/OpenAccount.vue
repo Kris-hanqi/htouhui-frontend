@@ -179,7 +179,7 @@
                 title: '开户失败',
                 message: response.data.meta.message
               });
-              this.startSmsTimer = 'end';
+              this.startSmsTimer = false;
             }
             this.loading = false;
           })

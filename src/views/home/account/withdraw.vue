@@ -158,6 +158,7 @@
         // 大于五万属于大额提现
         if (this.withdrawData.inputMoney >= 50002) {
           // 查看是否允许大额提现
+          this.loading = true;
           fetchAllowLargeWithdraw({ money: this.money, cardNo: this.bankCard })
             .then(response => {
               if (response.data.meta.code === 200) {
@@ -182,6 +183,7 @@
                   message: response.data.meta.message
                 });
               }
+              this.loading = false;
             });
           return;
         }

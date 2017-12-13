@@ -19,16 +19,20 @@
     data() {
       return {
         disabled: false,
-        time: '获取验证码'
+        time: '获取验证码',
+        interval: null
       }
     },
     watch: {
       start(value) {
         if (value === true) {
           this.countDown()
-        }
-        if (value === 'end') {
-          this.time = 0;
+        } else {
+          if (this.interval) {
+            clearInterval(this.interval);
+            this.time = '获取验证码';
+            this.disabled = false;
+          }
         }
       }
     },
@@ -36,14 +40,14 @@
       countDown() {
         this.time = this.second;
         this.disabled = true;
-        const time = setInterval(() => {
+        this.interval = setInterval(() => {
           this.time --;
           if (this.time === 0) {
             this.$emit('countDown');
             this.time = '获取验证码';
             this.disabled = false;
             flag = true;
-            clearInterval(time)
+            clearInterval(this.interval)
           }
         }, 1000)
       }
