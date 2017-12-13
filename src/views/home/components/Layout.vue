@@ -96,6 +96,10 @@
       },
       showOpenAccount() {
         if (this.$store.getters.thirdPartyName === 'KONG_ZHONG') {
+          if (!this.$store.getters.mobile) {
+            window.location.href = this.$store.getters.baseUrl + '/jixin/addNewUserMoblie';
+            return;
+          }
           window.location.href = this.baseUrl + '/jixin/open-account';
           return;
         }
