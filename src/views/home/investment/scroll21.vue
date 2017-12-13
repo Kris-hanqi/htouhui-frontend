@@ -12,7 +12,6 @@
 <script>
   import joinRecord from './components/scroll21JoinRecord.vue';
   import outRecord from './components/scroll21OutRecord.vue';
-  import { param2Obj } from 'utils/index';
   
   export default {
     components: {
@@ -25,8 +24,8 @@
       };
     },
     created() {
-      const data = param2Obj(window.location.href);
-      if (data.message === 'success') {
+      if (this.$route.query.message === 'success') {
+        this.$router.push('/investment/scroll21/index');
         this.$message({
           showClose: true,
           message: '加入成功',
