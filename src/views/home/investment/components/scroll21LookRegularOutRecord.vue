@@ -187,6 +187,7 @@
   .look-regular {
     .hth-mark {
       float: right;
+      position: relative;
       margin-top: -96px;
       margin-right: 8px;
     }

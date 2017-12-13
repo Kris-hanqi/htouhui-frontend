@@ -27,8 +27,10 @@
       </div>
       <div class="look-regular-bottom">
         <p>加入时间 <span class="roboto-regular">{{ joinPlanList.joinTime }}</span></p>
-        <img v-if="joinPlanList.status === 'matched'" class="type-message" src="../../../../assets/images/home/icon-success.png" alt=""/>
-        <img v-else class="type-message" src="../../../../assets/images/home/icon-auto.png" alt=""/>
+      </div>
+      <div class="hth-mark">
+        <i v-if="joinPlanList.status === 'matched'" class="ku-icon icon-mark-success"></i>
+        <i v-else="" class="ku-icon icon-mark-auto-tender"></i>
       </div>
     </div>
 
@@ -184,13 +186,19 @@
   }
 </script>
 
-<style lang="scss" scoped>
-  .ico-download {
-    color: #0573f4;
-  }
-
-  .icon-downloadNo {
-    color: #727e90;
+<style lang="scss">
+  .look-regular {
+    .hth-mark {
+      float: right;
+      position: relative;
+      margin-top: -96px;
+      margin-right: 8px;
+    }
+    
+    .ku-icon {
+      font-size: 100px;
+      color: #ec4d4c;
+    }
   }
 
   .details {
