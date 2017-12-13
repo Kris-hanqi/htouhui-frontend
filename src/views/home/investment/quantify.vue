@@ -9,7 +9,7 @@
         <p class="firstDay" v-if="item.isTiexi">首{{ item.tiexiPeriod }}天贴息</p>
         <p>随时可退</p>
         <p>满{{ item.lockPeriod }}天免手续费</p>
-        <div class="details pull-right" :class="{ disabled: !item.joinPlan }">
+        <div class="quantify-wrapper__details pull-right" :class="{ disabled: !item.joinPlan }">
           <i class="ku-icon icon-details"></i>
           <el-button @click="toRouter('/investment/quantify/transactionRecord', item.planId)" :disabled="!item.joinPlan" type="text">交易详情</el-button>
         </div>
@@ -160,7 +160,7 @@
       color: #0e76f1;
     }
   
-    .details {
+    .quantify-wrapper__details {
       display: inline-block;
       border: none;
       color: #409eff;
@@ -180,7 +180,7 @@
       }
     }
   
-    .details.disabled i {
+    .quantify-wrapper__details.disabled i {
       color: #b4bccc;
     }
   }
