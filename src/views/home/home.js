@@ -101,6 +101,10 @@ router.afterEach(to => {
         callback: action => {
           if (action === 'confirm') {
             if (store.getters.thirdPartyName === 'KONG_ZHONG') {
+              if (!store.getters.mobile) {
+                window.location.href = store.getters.baseUrl + '/jixin/addNewUserMoblie';
+                return;
+              }
               window.location.href = store.getters.baseUrl + '/jixin/open-account';
             } else {
               router.push('/accountManage/set/openAccount');

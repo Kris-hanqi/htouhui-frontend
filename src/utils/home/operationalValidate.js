@@ -58,6 +58,10 @@ export default function(stepsList) {
         if (action === 'confirm') {
           if (stepData.storeName === 'isOpenAccount') {
             if (store.getters.thirdPartyName === 'KONG_ZHONG') {
+              if (!store.getters.mobile) {
+                window.location.href = store.getters.baseUrl + '/jixin/addNewUserMoblie';
+                return;
+              }
               window.location.href = store.getters.baseUrl + '/jixin/open-account';
               return;
             }
