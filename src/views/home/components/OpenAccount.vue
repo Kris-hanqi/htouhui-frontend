@@ -174,6 +174,13 @@
                 message: response.data.meta.message
               });
             }
+            if (response.data.meta.code === 1020) {
+              this.$notify.error({
+                title: '开户失败',
+                message: response.data.meta.message
+              });
+              this.startSmsTimer = 'end';
+            }
             this.loading = false;
           })
       }

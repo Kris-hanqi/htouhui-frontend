@@ -27,6 +27,9 @@
         if (value === true) {
           this.countDown()
         }
+        if (value === 'end') {
+          this.time = 0;
+        }
       }
     },
     methods: {
