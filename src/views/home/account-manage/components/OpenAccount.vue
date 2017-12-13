@@ -1,6 +1,7 @@
 <template>
   <div class="open-account">
     <hth-panel title="存管开户">
+      {{ openAccountStatus }}
       <!-- 开户操作组件 -->
       <open-account @success="openAccountSuccess"></open-account>
       <div class="split-line"></div>
@@ -29,13 +30,22 @@
     computed: {
       ...mapGetters([
         'username',
-        'baseUrl',
-        'isOpenAccount'
-      ])
+        'baseUrl'
+      ]),
+      openAccountStatus() {
+        return this.$store.getters.isOpenAccount
+      }
     },
     data() {
       return {
         protocolChecked: true
+      }
+    },
+    watch: {
+      openAccountStatus(value) {
+        if (value) {
+          this.$router.push('/account/index');
+        }
       }
     },
     methods: {
@@ -44,7 +54,7 @@
       }
     },
     created() {
-      if (this.isOpenAccount) {
+      if (this.openAccountStatus) {
         this.$router.push('/account/index');
       }
     }
