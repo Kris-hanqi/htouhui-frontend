@@ -27,7 +27,7 @@
           <input type="text" v-model.number="rechargeData.money" class="form-control" placeholder="请输入充值金额">
         </div>
         <div class="col-md-4">
-          <p class="form-control-static"><a @click.stop="showBankLimit">(查看银行限额)</a></p>
+          <el-button type="text" @click="showBankLimit">(查看银行限额)</el-button>
         </div>
       </div>
       <div class="form-group">
@@ -67,6 +67,7 @@
   import BankCard from '../../components/BackCard.vue';
   import RequestBankFrom from '../../components/RequestBankFrom.vue';
   import OperationalValidate from '../../components/OperationalValidate.vue';
+  import ElButton from "../../../../../node_modules/element-ui/packages/button/src/button";
 
   export default {
     computed: {
@@ -76,7 +77,7 @@
       ])
     },
     components: {
-      RequestBankFrom,
+      ElButton, RequestBankFrom,
       OperationalValidate,
       BankLimit,
       BankCard
