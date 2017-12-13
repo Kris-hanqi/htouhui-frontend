@@ -32,4 +32,11 @@ export function fetchUpdateUserStatus() {
   })
 }
 
-
+/** 获取网关接口回调信息 */
+export function fetchGetBankMessage(data) {
+  return fetch({
+    url: 'user/userUnPackedBillMessage',
+    method: 'get',
+    params: data
+  })
+}

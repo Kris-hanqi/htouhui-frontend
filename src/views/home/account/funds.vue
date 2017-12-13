@@ -40,7 +40,7 @@
       </div>
     </hth-panel>
     <div class="assetRunWaterTable">
-      <el-table :data="list" v-loading="listLoading" element-loading-text="拼命加载中...">
+      <el-table :data="list" :fit="true" v-loading="listLoading" element-loading-text="拼命加载中...">
         <!-- 无数据时显示 -->
         <no-data slot="empty"></no-data>
         <el-table-column prop="time" label="交易时间" width="150"></el-table-column>

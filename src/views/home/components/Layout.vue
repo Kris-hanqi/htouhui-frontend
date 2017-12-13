@@ -41,7 +41,7 @@
   import HthSliderBar from 'components/slider-bar';
   import HthBreadcrumb from './breadcrumb';
   import HthSidebar from './Sidebar';
-  import { fetchAdRecommend } from 'api/home/public';
+  import { fetchAdRecommend, fetchGetBankMessage } from 'api/home/public';
 
   export default {
     components: {
@@ -54,7 +54,8 @@
       ...mapGetters([
         'novicePlanStatus',
         'isBorrower',
-        'baseUrl'
+        'baseUrl',
+        'uuid'
       ]),
       operationTips() {
         return this.operationTipsArray[this.$store.state.user.status]
@@ -119,6 +120,17 @@
     created() {
       this.getARecommend();
       this.$store.dispatch('GetUserInfo');
+      if (this.uuid) {
+        fetchGetBankMessage({ uuid: this.uuid })
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              const data = response.data.data;
+              if (data && data.length) {
+                this.$message(data[0].msg);
+              }
+            }
+          });
+      }
     }
   };
 </script>
