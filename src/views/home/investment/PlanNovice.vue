@@ -66,6 +66,10 @@
           <p class="day-stop col-md-5">持有期限截至<span class="roboto-regular">{{ joinDetails.lockEndTime }}</span></p>
           <p class="status col-md-3">状态<span>{{ joinDetails.status === 'matched' ? '成功' : '自动投标中' }}</span></p>
         </div>
+        <div class="hth-mark">
+          <i v-if="joinDetails.status === 'matched'" class="ku-icon icon-mark-success"></i>
+          <i v-else="" class="ku-icon icon-mark-auto-tender"></i>
+        </div>
       </div>
 
       <!--table-->
@@ -247,7 +251,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .newUser-plan {
     width: 100%;
     height: 245px;
@@ -255,6 +259,18 @@
     padding: 20px 15px;
     background-color: #fff;
     margin-bottom: 20px;
+  
+    .hth-mark {
+      float: right;
+      position: relative;
+      margin-top: -96px;
+      margin-right: 8px;
+    }
+  
+    .ku-icon {
+      font-size: 100px;
+      color: #ec4d4c;
+    }
 
     .newUser-plan-title {
       width: 100%;
