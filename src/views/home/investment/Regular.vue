@@ -191,7 +191,6 @@
           { label: '已还期数/总期数', width: '140', component: RowRepaymentPeriod, returned: 'paidPeriod', total: 'repayPeriod' },
           { label: '下次还款日', width: '140', prop: 'nextRepayDate' },
           { label: '额外奖励', slot: 'opt0' },
-          { label: '投资状态', width: '140', prop: 'status', component: RowFilterGetValue, listData: typeList },
           { slot: 'opt' }
         ],
         secondColConfigs: [
