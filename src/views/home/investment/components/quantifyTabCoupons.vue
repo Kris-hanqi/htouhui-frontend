@@ -24,6 +24,8 @@
       <div class="message-list" v-if="messageList.couponType !== 'cash'">
         <p class="title">加息流水</p>
         <el-table :data="list" style="width: 100%">
+          <!-- 无数据时显示 -->
+          <no-data slot="empty"></no-data>
           <el-table-column prop="time" label="时间"></el-table-column>
           <el-table-column prop="investMoney" label="在投金额">
             <template slot-scope="scope">
@@ -41,9 +43,13 @@
             </template>
           </el-table-column>
         </el-table>
-        <div class="pages small">
-          <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-          <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.PageSize" layout="prev, pager, next" :total="total"></el-pagination>
+        <div class="pages small" v-if="list && list.length">
+          <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录
+          （共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+          <el-pagination @current-change="handleCurrentChange"
+                         :current-page.sync="listQuery.pageNo"
+                         :page-size="listQuery.PageSize"
+                         layout="prev, pager, next" :total="total"></el-pagination>
         </div>
       </div>
     </div>
@@ -51,10 +57,14 @@
 </template>
 
 <script>
+  import NoData from '../../components/NoData.vue';
   import { queryPlatformAwardRecord } from 'api/home/quantify';
   import { couponTypeList } from 'utils/home/index';
 
   export default {
+    components: {
+      NoData
+    },
     props: [
       'joinPlanId'
     ],
