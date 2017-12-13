@@ -70,6 +70,29 @@ export function formatDate(date, format) {
   }
 }
 
+export function delayFn(fn, delay, mustDelay) {
+  let timer = null;
+  let t_start;
+  return function() {
+    const context = this, args = arguments, t_cur = +new Date(); // eslint-disable-line
+    // 先清理上一次的调用触发（上一次调用触发事件不执行）
+    clearTimeout(timer);
+    // 如果不存触发时间，那么当前的时间就是触发时间
+    if (!t_start) {
+      t_start = t_cur;
+    }
+    // 如果当前时间-触发时间大于最大的间隔时间（mustDelay），触发一次函数运行函数
+    if (t_cur - t_start >= mustDelay) {
+      fn.apply(context, args);
+      t_start = t_cur;
+    } else {  // 否则延迟执行
+      timer = setTimeout(() => {
+        fn.apply(context, args);
+      }, delay);
+    }
+  };
+}
+
 /**
  * 获取请求参数
  * @param url

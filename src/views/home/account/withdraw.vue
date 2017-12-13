@@ -87,6 +87,7 @@
   import UnionBank from './components/UnionBank.vue';
   import { fetchWithdraw, fetchWithdrawCost, fetchAccountMoney, fetchAllowLargeWithdraw } from 'api/home/account';
   import { validateNumber } from 'utils/validate';
+  import { delayFn } from 'utils/index';
   
   let allowLargeWithdrawNumber = 0;
 
@@ -129,8 +130,8 @@
       }
     },
     watch: {
-      money(val) {
-        this.getWithdrawCost(val);
+      money() {
+        this.getWithdrawCostDelay();
       }
     },
     methods: {
@@ -210,19 +211,18 @@
         })
       },
       // 获取提现手续费
-      getWithdrawCost(val) {
-        if (!val) return;
-        if (this.accountMoney < val) return;
+      getWithdrawCostDelay: delayFn(function() {
+        if (!this.money) return;
+        if (this.accountMoney < this.money) return;
         this.loading = true;
         fetchWithdrawCost({ money: this.money })
           .then(response => {
             if (response.data.meta.code === 200) {
               this.commissionCharge = response.data.data || 0;
-              console.log(this.commissionCharge);
             }
             this.loading = false;
           })
-      },
+      }, 100, 200),
       // 获取账户余额
       getAccountMoney() {
         return fetchAccountMoney()
