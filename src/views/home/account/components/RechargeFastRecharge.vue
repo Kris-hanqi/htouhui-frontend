@@ -67,7 +67,6 @@
   import BankCard from '../../components/BackCard.vue';
   import RequestBankFrom from '../../components/RequestBankFrom.vue';
   import OperationalValidate from '../../components/OperationalValidate.vue';
-  import ElButton from "../../../../../node_modules/element-ui/packages/button/src/button";
 
   export default {
     computed: {
@@ -77,7 +76,7 @@
       ])
     },
     components: {
-      ElButton, RequestBankFrom,
+      RequestBankFrom,
       OperationalValidate,
       BankLimit,
       BankCard
