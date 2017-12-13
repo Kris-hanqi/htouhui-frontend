@@ -34,7 +34,7 @@
                  maxlength="6" placeholder="请输入短信验证码">
         </div>
         <div class="col-md-5">
-          <sms-timer :start="startSmsTimer" @countDown="startSmsTimer = false" @click.native='sendCode'></sms-timer>
+          <sms-timer :start="startSmsTimer" :second="90" @countDown="startSmsTimer = false" @click.native='sendCode'></sms-timer>
         </div>
       </div>
       <div class="form-group">
