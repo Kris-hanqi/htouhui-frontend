@@ -10,6 +10,12 @@ export function validateNumber(str) {
   return reg.test(str)
 }
 
+/** 中文 */
+export function validateChinese(str) {
+  const reg = /^[\u4e00-\u9fa5]+$/;
+  return reg.test(str)
+}
+
 /** 金额校验 */
 export function validateMoney(str) {
   const reg = /(^[1-9]([0-9]+)?$)/;

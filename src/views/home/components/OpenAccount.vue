@@ -58,7 +58,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import SmsTimer from 'common/sms-timer';
-  import { validateIdCard } from 'utils/validate';
+  import { validateIdCard, validateChinese } from 'utils/validate';
   import { fetchOpenAccount } from 'api/home/account-set';
   import { fetchUpdateUserStatus } from 'api/home/public';
   import { fetchSendCodeNew } from 'api/public';
@@ -113,6 +113,13 @@
         if (!this.openAccountData.realName) {
           this.$message({
             message: '真实姓名不能为空',
+            type: 'warning'
+          });
+          return;
+        }
+        if (!validateChinese(this.openAccountData.realName)) {
+          this.$message({
+            message: '真实姓名只能为中文字符',
             type: 'warning'
           });
           return;
