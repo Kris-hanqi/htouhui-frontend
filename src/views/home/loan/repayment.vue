@@ -11,7 +11,7 @@
       <el-table :data="list" :border="false" style="width: 100%">
         <el-table-column label="项目名称" width="150">
           <template slot-scope="scope">
-            <a :href="baseUrl + '/loan/' + scope.row.loanId " target="_blank">{{ scope.row.name }}</a>
+            <a :href="baseUrl + '/loan/' + scope.row.loanId " style="color: #409eff;" target="_blank">{{ scope.row.name }}</a>
           </template>
         </el-table-column>
         <el-table-column prop="giveTime" label="放款时间" width="140"></el-table-column>
