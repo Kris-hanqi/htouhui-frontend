@@ -49,6 +49,7 @@ deploy_docker_image:
   script:
     - DATE=`date +%Y%m%d`
     - DOCKER_IMAGE_VERSION=$VERSION-$DATE-$CI_PIPELINE_ID
+    - echo -e "DOCKER_IMAGE_VERSION=$DOCKER_IMAGE_VERSION"
     - docker login --username=228044108@qq.com --password=cnFbU8VKtvn3daF registry-internal.cn-beijing.aliyuncs.com
     - docker tag registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:latest
     - docker push registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION
