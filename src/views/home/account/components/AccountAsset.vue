@@ -1,12 +1,16 @@
 <template>
   <div class="account-asset-wrapper">
     <hth-panel title="我的资产">
+      <div id="showAmount" class="ku-icon" :class="{'icon-eye': amountShow, 'icon-eye-close': !amountShow}" @click="amountShow = !amountShow"></div>
       <div class="list">
         <div class="item">
           <p class="title">总资产</p>
           <p>
-            <i class="num-font">{{ (data.sumCapital || 0) | currency('') }}</i>元
-            <img class="home-ico-arrow" v-on:mouseenter="messageBoxShow = true" v-on:mouseout="messageBoxShow = false" src="../../../../assets/images/home/home-ico-arrow-02.png" alt=""/>
+            <i class="num-font" v-if="amountShow">{{ (data.sumCapital || 0) | currency('') }}</i>
+            <i class="num-font" v-if="!amountShow">****</i>
+            元
+            <img class="home-ico-arrow" v-on:mouseenter="messageBoxShow = true" v-on:mouseout="messageBoxShow = false"
+                 src="../../../../assets/images/home/home-ico-arrow-02.png" alt=""/>
           </p>
 
           <div class="message-box" v-if="messageBoxShow">
@@ -18,11 +22,19 @@
         </div>
         <div class="item">
           <p class="title">累计收益</p>
-          <p><i class="num-font">{{ (data.accumulatedIncome || 0) | currency('') }}</i>元</p>
+          <p>
+            <i class="num-font" v-if="amountShow">{{ (data.accumulatedIncome || 0) | currency('') }}</i>
+            <i class="num-font" v-if="!amountShow">****</i>
+            元
+          </p>
         </div>
         <div class="item">
           <p class="title">可用余额</p>
-          <p><i class="num-font">{{ (data.balance || 0) | currency('') }}</i>元</p>
+          <p>
+            <i class="num-font" v-if="amountShow">{{ (data.balance || 0) | currency('') }}</i>
+            <i class="num-font" v-if="!amountShow">****</i>
+            元
+          </p>
         </div>
       </div>
     </hth-panel>
@@ -35,7 +47,8 @@
   export default {
     data() {
       return {
-        messageBoxShow: false
+        messageBoxShow: false,
+        amountShow: true
       }
     },
     components: {
@@ -47,6 +60,22 @@
 
 <style lang="scss">
   .account-asset-wrapper {
+    position: relative;
+
+    #showAmount {
+      position: absolute;
+      top: 10px;
+      right: 8px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      border-radius: 100%;
+      font-size: 25px;
+      font-weight: 600;
+      background-color: #ebf4ff;
+    }
+
     .list {
       height: 100%;
       padding-bottom: 10px;
@@ -87,8 +116,8 @@
 
     .message-box {
       position: absolute;
-      left: 65%;
-      top: 80%;
+      left: 5%;
+      top: 110%;
       z-index: 1;
       min-width: 217px;
       height: auto;

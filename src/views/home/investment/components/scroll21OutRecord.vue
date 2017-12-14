@@ -42,7 +42,7 @@
           {{ scope.row.exitMoney | currency('') + '元' }}
         </template>
       </el-table-column>
-      <el-table-column prop="appointmentExitTime" label="预期退出时间" width="150"></el-table-column>
+      <el-table-column prop="appointmentExitTime" label="预期退出时间" :formatter="exitTimeFormatter" width="150"></el-table-column>
       <el-table-column prop="successExitTime" label="退出成功时间" width="150">
         <template slot-scope="scope">
           {{ scope.row.successExitTime || '--' }}
@@ -155,6 +155,10 @@
             this.total = data.data.count || 0;
           }
         })
+      },
+      exitTimeFormatter(row, column, cellValue) {
+        const dates = cellValue.split(' ');
+        return dates[0];
       },
       query() {
         this.getPageList();

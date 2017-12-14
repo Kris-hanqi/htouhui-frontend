@@ -1,11 +1,11 @@
 <template>
   <div class="regular">
     <el-tabs v-model="activeName"
+             v-loading="listLoading"
+             element-loading-text="拼命加载中..."
              @tab-click="toggleType" type="card">
       <el-tab-pane label="还款中" name="repaying">
-        <hth-data-table v-loading="listLoading"
-                        element-loading-text="拼命加载中..."
-                        :data="list"
+        <hth-data-table :data="list"
                         :col-configs="firstColConfigs">
           <el-table-column slot="opt0" width="100" label="额外奖励">
             <template slot-scope="scope">
@@ -24,15 +24,11 @@
         </hth-data-table>
       </el-tab-pane>
       <el-tab-pane label="投标中" name="bid_success">
-        <hth-data-table v-loading="listLoading"
-                        element-loading-text="拼命加载中..."
-                        :data="list"
+        <hth-data-table :data="list"
                         :col-configs="secondColConfigs"></hth-data-table>
       </el-tab-pane>
       <el-tab-pane label="已结清" name="complete">
-        <hth-data-table v-loading="listLoading"
-                        element-loading-text="拼命加载中..."
-                        :data="list"
+        <hth-data-table :data="list"
                         :col-configs="completeColConfigs">
           <el-table-column slot="opt" fixed="right" label="操作" width="150">
             <template slot-scope="scope">
@@ -43,9 +39,7 @@
         </hth-data-table>
       </el-tab-pane>
       <el-tab-pane label="未成功" name="cancel">
-        <hth-data-table v-loading="listLoading"
-                        element-loading-text="拼命加载中..."
-                        :data="list"
+        <hth-data-table :data="list"
                         :col-configs="cancelColConfigs"></hth-data-table>
       </el-tab-pane>
     </el-tabs>
