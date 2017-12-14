@@ -1,5 +1,6 @@
-# payday-loan-app
+# hth-frontend
 
+> 海投汇官网项目（PC）
 
 ## 开发环境搭建
 
@@ -7,16 +8,21 @@
 2. 安装Yarn(安装教程请查阅[yarn](https://yarnpkg.com/zh-Hans/))
 3. 安装开发依赖(命令行执行`yarn`)
 
-## 命令介绍
+## 使用方法
+```
+# 开发 
 
-* `yarn run dev` | `yarn run start ` 开发
-* `yarn run build` 项目打包
-* `yarn run unit` 单元测试
-* `yarn run e2e` 端对端测试
-* `yarn run test` 执行单元测试以及端对端测试
-* `yarn run lint` 代码审查
+yarn run dev || npm run dev 
 
-## 开发组件介绍
+# 打包 
+
+yarn run build || npm run build 
+
+```
+
+注意: 本地默认访问9600端口，需要修改请修改`./config/index.js`
+
+## 开发依赖介绍
 
 **vue 全家桶**
 
@@ -38,14 +44,24 @@
 * [axios](https://github.com/mzabriskie/axios) // 基于 promise 的 HTTP 库
 * [lodash](https://github.com/lodash/lodash) // js库(提供对常见数据类型的处理)
 
+## 各个环境说明
 
-## 组件API中文文档集锦
+* 测试环境 -- http://47.93.122.236:9600 端口: 9600-9699 
+* 常驻测试环境 -- http://47.93.122.236:9666
+* 预发环境 -- http://47.93.119.31:19196
+* 正式环境 -- 待定
+
+## 开发规范
+
+* js采用eslint进行代码审查 - 具体规则请查看[.eslintrc.js](./.eslintrc.js)
+* css采用stylelint进行代码审查 - 具体规则请查看[.stylelintrc](./.stylelintrc)
+
+详细请移步[开发规范](./code-guide.md)
+
+## API中文文档集锦
 
 * [vue中文官网](https://cn.vuejs.org/)
 * [vuex中文文档](https://vuex.vuejs.org/zh-cn/)
 * [vue-router中文文档](http://router.vuejs.org/zh-cn/)
 * [lodash中文文档](http://www.css88.com/doc/lodash/)
 * [axios中文文档](https://segmentfault.com/a/1190000008470355?utm_source=tuicool&utm_medium=referral)
-
-
-
