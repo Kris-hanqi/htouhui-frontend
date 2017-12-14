@@ -32,7 +32,8 @@
           <p class="money" v-else=""><span class="roboto-regular">{{ (item.raisingMoney / 10000) | currency('') }}</span>万元</p>
           <p>当前剩余金额</p>
         </div>
-        <a class="btn-join" @click.stop="oneKeyJoin(item.planId, item.raisingMoney)">{{ item.raisingMoney ? '一键加入' : '发放份额中' }}</a>
+        <a class="btn-join" v-if="item.raisingMoney" @click.stop="oneKeyJoin(item.planId, item.raisingMoney)">一键加入</a>
+        <a class="btn-join-no" v-else="">发放份额中</a>
         <a class="btn-out" v-if="item.joinPlan" @click.stop="pullOut(item.planId)">申请退出</a>
       </div>
       <div class="quantify-card__footer" v-if="item.joinPlan">
@@ -240,11 +241,27 @@
       text-align: center;
       font-size: 18px;
       color: #0573f4;
-
-      &:hover {
-        background-color: #378ff6;
-        color: #fff;
-      }
+    }
+  
+    .btn-join-no {
+      float: right;
+      vertical-align: top;
+      width: 122px;
+      height: 34px;
+      box-sizing: border-box;
+      margin-top: 15px;
+      border-radius: 41px;
+      border: solid 1px #0573f4;
+      line-height: 34px;
+      text-align: center;
+      font-size: 18px;
+      color: #0573f4;
+      cursor: default;
+    }
+  
+    .btn-join:hover {
+      background-color: #378ff6;
+      color: #fff;
     }
 
     .btn-out {
