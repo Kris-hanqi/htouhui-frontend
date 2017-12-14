@@ -20,6 +20,9 @@ build_job:
     - mv dist docker
     - cd docker
     - PUBLISH_VERSION=$(echo $CI_COMMIT_REF_NAME | cut -d'/' -f 2)
+    - DATE=`date +%Y%m%d`
+    - DOCKER_IMAGE_VERSION=$VERSION-$DATE-$CI_PIPELINE_ID
+    - echo -e "DOCKER_IMAGE_VERSION=$DOCKER_IMAGE_VERSION"
     - docker build --build-arg PUBLISH_VERSION=$PUBLISH_VERSION -t registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION .
   tags:
     - Dev
@@ -32,6 +35,9 @@ deploy_job:
     - master
   script:
     - PUBLISH_VERSION=$(echo $CI_COMMIT_REF_NAME | cut -d'/' -f 2)
+    - DATE=`date +%Y%m%d`
+    - DOCKER_IMAGE_VERSION=$VERSION-$DATE-$CI_PIPELINE_ID
+    - echo -e "DOCKER_IMAGE_VERSION=$DOCKER_IMAGE_VERSION"
     - docker stop nginx-htouhui-front-$CI_BUILD_REF_SLUG || true
     - docker rm -f nginx-htouhui-front-$CI_BUILD_REF_SLUG || true
     - docker run -d -p $SERVICE_PORT:80 --name nginx-htouhui-front-$CI_BUILD_REF_SLUG -t registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION
