@@ -5,9 +5,7 @@ stages:
 
 variables:
   SERVICE_PORT: "9400"
-  DOCKER_IMAGE_VERSION: "1.0.0"
-  STAGE_SERVICE_PORT: "9600"
-  DEV_SERVICE_PORT: "9600"
+  VERSION: "0.1.0"
 
 cache:
   paths:
@@ -36,7 +34,7 @@ deploy_job:
     - PUBLISH_VERSION=$(echo $CI_COMMIT_REF_NAME | cut -d'/' -f 2)
     - docker stop nginx-htouhui-front-$CI_BUILD_REF_SLUG || true
     - docker rm -f nginx-htouhui-front-$CI_BUILD_REF_SLUG || true
-    - docker run -d -p $DEV_SERVICE_PORT:80 --name nginx-htouhui-front-$CI_BUILD_REF_SLUG -t registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION
+    - docker run -d -p $SERVICE_PORT:80 --name nginx-htouhui-front-$CI_BUILD_REF_SLUG -t registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION
   tags:
     - Dev
 
@@ -49,10 +47,11 @@ deploy_docker_image:
     url: http://loan.htouhui.com/
   when: manual
   script:
+    - DATE=`date +%Y%m%d`
+    - DOCKER_IMAGE_VERSION=$VERSION-$DATE-$CI_PIPELINE_ID
     - docker login --username=228044108@qq.com --password=cnFbU8VKtvn3daF registry-internal.cn-beijing.aliyuncs.com
     - docker tag registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:latest
     - docker push registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION
     - docker push registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:latest
   tags:
     - Dev
-    
