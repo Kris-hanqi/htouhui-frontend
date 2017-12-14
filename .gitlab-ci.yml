@@ -1,7 +1,6 @@
 stages:
   - build
   - deploy
-  - deploy_to_server
 
 variables:
   SERVICE_PORT: "9400"
