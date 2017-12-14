@@ -52,7 +52,7 @@
           {{ scope.row.rate + '%' }}
         </template>
       </el-table-column>
-      <el-table-column prop="lockEndTime" label="即日起免手续费" width="135"></el-table-column>
+      <el-table-column prop="lockEndTime" label="即日起免手续费" :formatter="exitTimeFormatter" width="135"></el-table-column>
       <el-table-column prop="award" label="平台奖励">
         <template slot-scope="scope">
           <el-button v-if="scope.row.jiaxi === '1'" @click="getAward(scope.row.joinPlanId)" type="text">
@@ -215,6 +215,10 @@
         this.showTest = true;
         this.dialogVisible = true;
         this.joinPlanId = id;
+      },
+      exitTimeFormatter(row, column, cellValue) {
+        const dates = cellValue.split(' ');
+        return dates[0];
       },
       downLoadContract(id) {
         feachDownLoadJoinContract(id)
