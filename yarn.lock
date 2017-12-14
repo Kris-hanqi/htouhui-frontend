@@ -3290,9 +3290,9 @@ hosted-git-info@^2.1.4:
   version "2.4.2"
   resolved "http://registry.npm.taobao.org/hosted-git-info/download/hosted-git-info-2.4.2.tgz#0076b9f46a270506ddbaaea56496897460612a67"
 
-hth-icon-font@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/hth-icon-font/-/hth-icon-font-0.0.9.tgz#b99164357ac013c38236ce8472b874ab08afd73d"
+hth-icon-font@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/hth-icon-font/-/hth-icon-font-0.0.10.tgz#07f83f02a2c042ffebcabaa7eb70bff3ac6be69b"
 
 html-comment-regex@^1.1.0:
   version "1.1.1"
