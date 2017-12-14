@@ -50,18 +50,24 @@ service.interceptors.response.use(
         });
       }
     }
-    if (data.meta && (data.meta.code === 500 || data.meta.code === 600)) {
-      if (!openModalStatus) {
-        openModalErrorStatus = true;
-        MessageBox.alert('服务器错误，请稍后重试', '提示', {
-          confirmButtonText: '确认',
-          type: 'error',
-          callback: () => {
-            openModalErrorStatus = false;
-          }
-        });
+
+    // 排除获取网关接口消息接口异常
+    if (response.config.url !== '/web-api/user/userUnPackedBillMessage') {
+      // 处理公共异常码
+      if (data.meta && (data.meta.code === 500 || data.meta.code === 600)) {
+        if (!openModalStatus) {
+          openModalErrorStatus = true;
+          MessageBox.alert('服务器错误，请稍后重试', '提示', {
+            confirmButtonText: '确认',
+            type: 'error',
+            callback: () => {
+              openModalErrorStatus = false;
+            }
+          });
+        }
       }
     }
+
     return response;
   },
   error => {
