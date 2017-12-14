@@ -276,10 +276,6 @@
       .el-table th > div {
         padding: 0 5px;
       }
-    
-      .el-table .cell {
-        white-space: nowrap;
-      }
     }
   
     .pages {
