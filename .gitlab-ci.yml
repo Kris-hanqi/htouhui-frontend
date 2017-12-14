@@ -71,7 +71,7 @@ deploy_stage_job:
     - docker stop nginx-htouhui-front-$CI_BUILD_REF_SLUG || true
     - docker rm -f nginx-htouhui-front-$CI_BUILD_REF_SLUG || true
     - docker login --username=228044108@qq.com --password=cnFbU8VKtvn3daF registry-internal.cn-beijing.aliyuncs.com
-    - docker pull registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:DOCKER_IMAGE_VERSION
+    - docker pull registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION
     - docker run -d -p $STAGE_SERVICE_PORT:80 --name nginx-htouhui-front-$CI_BUILD_REF_SLUG -t registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION
     
 deploy_product1_job:
@@ -89,7 +89,7 @@ deploy_product1_job:
     - docker stop nginx-htouhui-front-$CI_BUILD_REF_SLUG || true
     - docker rm -f nginx-htouhui-front-$CI_BUILD_REF_SLUG || true
     - docker login --username=228044108@qq.com --password=cnFbU8VKtvn3daF registry-internal.cn-beijing.aliyuncs.com
-    - docker pull registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:DOCKER_IMAGE_VERSION
+    - docker pull registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION
     - docker run -d -p $SERVICE_PORT:80 --name nginx-htouhui-front-$CI_BUILD_REF_SLUG -t registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION
     
 deploy_product2_job:
@@ -107,5 +107,5 @@ deploy_product2_job:
     - docker stop nginx-htouhui-front-$CI_BUILD_REF_SLUG || true
     - docker rm -f nginx-htouhui-front-$CI_BUILD_REF_SLUG || true
     - docker login --username=228044108@qq.com --password=cnFbU8VKtvn3daF registry-internal.cn-beijing.aliyuncs.com || true
-    - docker pull registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:DOCKER_IMAGE_VERSION || true
+    - docker pull registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION || true
     - docker run -d -p $SERVICE_PORT:80 --name nginx-htouhui-front-$CI_BUILD_REF_SLUG -t registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION         
