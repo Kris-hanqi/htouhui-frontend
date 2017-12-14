@@ -54,9 +54,7 @@
         <tr v-if="status !== 0">
           <td></td>
           <td>自动还款授权</td>
-          <td><button class="hth-btn" @click="automaticRepayment"
-                      :class="{ 'btn-blue': !isAutomaticRepayment }">
-            {{ isAutomaticRepayment ? '解约' : '授权' }}</button></td>
+          <td><button class="hth-btn" @click="automaticRepayment">{{ isAutomaticRepayment ? '解约' : '授权' }}</button></td>
         </tr>
         <tr v-if="status !== 0" class="borderNone">
           <td>交易密码</td>
