@@ -123,6 +123,7 @@
       if (this.uuid) {
         fetchGetBankMessage({ uuid: this.uuid })
           .then(response => {
+            console.log(response);
             if (response.data.meta.code === 200) {
               const data = response.data.data;
               if (data && data.length) {
