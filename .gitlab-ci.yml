@@ -62,6 +62,7 @@ deploy_stage_job:
     - master
   environment:
     name: stage
+  when: manual
   tags:
     - front_server1
   script:
@@ -79,6 +80,7 @@ deploy_product1_job:
     - master
   environment:
     name: production1
+  when: manual
   tags:
     - front_server1
   script:
@@ -96,6 +98,7 @@ deploy_product2_job:
     - master
   environment:
     name: production2
+  when: manual
   tags:
     - front_server2
   script:
