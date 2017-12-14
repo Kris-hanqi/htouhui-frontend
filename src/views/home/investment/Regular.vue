@@ -291,6 +291,12 @@
             if (response.data.meta.code === 200) {
               window.open(response.data.data);
             }
+            if (response.data.meta.code === 9999) {
+              this.$notify.error({
+                title: '合同下载失败',
+                message: response.data.meta.message
+              });
+            }
           })
       },
       handleCurrentChange(val) {
