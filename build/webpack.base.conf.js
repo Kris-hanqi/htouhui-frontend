@@ -3,7 +3,7 @@ const utils = require('./utils');
 const webpack = require('webpack');
 const config = require('../config');
 
-const entries =  utils.getMultiEntry('./src/' + config.moduleName + '/**/*.html'); // 获得入口js文件
+const entries = utils.getMultiEntry('./src/' + config.moduleName + '/**/*.html'); // 获得入口js文件
 
 const chunks = Object.keys(entries);
 
@@ -12,6 +12,17 @@ console.log(chunks);
 chunks.forEach(v => {
   entries[v] = entries[v].replace('html', 'js');
 });
+
+const dependencies = [
+  'vue',
+  'vuex',
+  'vue-router',
+  'axios'
+];
+
+entries.vendor = dependencies;
+
+console.log(entries);
 
 const vuxLoader = require('vux-loader');
 

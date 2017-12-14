@@ -35,7 +35,6 @@ import '@/styles/base.scss';
 import '@/styles/index.scss';
 import '@/styles/element-ui.scss';
 import 'animate.css';
-import 'hth-icon-font/css/ku-icon.css';
 import Vue2Filters from 'vue2-filters';
 import * as filters from '@/filters' // 全局filter
 import router from '@/router/home';
