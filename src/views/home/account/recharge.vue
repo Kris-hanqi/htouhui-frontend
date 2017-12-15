@@ -63,14 +63,13 @@
         margin-top: 24px;
         color: #394b67;
       }
-    
+
       img {
         margin-top: 15px;
         margin-left: 34px;
       }
     }
 
-    
     .warmPrompt {
       margin-top: 25px;
       padding-bottom: 40px;
@@ -100,7 +99,7 @@
       bottom: 0;
       background-color: rgba(0, 0, 0, 0.37);
     }
-    
+
     .transferNeedMsg {
       margin-left: 47px;
 
@@ -149,5 +148,9 @@
         margin-top: 34px;
       }
     }
+  }
+
+  .el-tabs__header {
+    border-bottom: none !important;
   }
 </style>
