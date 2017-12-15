@@ -1,7 +1,8 @@
 <template>
   <div class="account-asset-wrapper">
     <hth-panel title="我的资产">
-      <div id="showAmount" class="ku-icon" :class="{'icon-eye': amountShow, 'icon-eye-close': !amountShow}" @click="amountShow = !amountShow"></div>
+      <div id="showAmount" class="ku-icon" :class="{'icon-eye': amountShow, 'icon-eye-close': !amountShow}"
+           @click="toggleAmountShow()"></div>
       <div class="list">
         <div class="item">
           <p class="title">总资产</p>
@@ -9,8 +10,9 @@
             <i class="num-font" v-if="amountShow">{{ (data.sumCapital || 0) | currency('') }}</i>
             <i class="num-font" v-if="!amountShow">****</i>
             元
-            <img class="home-ico-arrow" v-on:mouseenter="messageBoxShow = true" v-on:mouseout="messageBoxShow = false"
-                 src="../../../../assets/images/home/home-ico-arrow-02.png" alt=""/>
+            <span class="home-ico-arrow">
+              <i class="ku-icon icon-bottom-01 " v-if="amountShow" @mouseenter="messageBoxShow = true" @mouseout="messageBoxShow = false"></i>
+            </span>
           </p>
 
           <div class="message-box" v-if="messageBoxShow">
@@ -51,6 +53,17 @@
         amountShow: true
       }
     },
+    methods: {
+      toggleAmountShow() {
+        this.amountShow = !this.amountShow;
+        localStorage.setItem('amountShow', this.amountShow ? 'open' : 'close');
+      }
+    },
+    created() {
+      if (localStorage.hasOwnProperty('amountShow')) {
+        this.amountShow = localStorage.getItem('amountShow') === 'open';
+      }
+    },
     components: {
       HthPanel
     },
@@ -64,16 +77,17 @@
 
     #showAmount {
       position: absolute;
-      top: 10px;
-      right: 8px;
-      width: 50px;
-      height: 50px;
-      line-height: 50px;
+      top: 20px;
+      right: 28px;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
       text-align: center;
       border-radius: 100%;
       font-size: 25px;
-      font-weight: 600;
-      background-color: #ebf4ff;
+      color: #8991ab;
+      background-color: #edf1fe;
+      cursor: pointer;
     }
 
     .list {
@@ -81,7 +95,7 @@
       padding-bottom: 10px;
 
       .item {
-        display: inline-block;
+        float: left;
         position: relative;
         width: 31%;
       }
@@ -106,10 +120,11 @@
 
       .home-ico-arrow {
         display: block;
-        width: 26px;
+        position: relative;
+        top: -15px;
         height: 16px;
-        margin: 0 auto;
-        margin-top: 20px;
+        margin: 20px auto 0;
+        line-height: 16px;
         cursor: pointer;
       }
     }
