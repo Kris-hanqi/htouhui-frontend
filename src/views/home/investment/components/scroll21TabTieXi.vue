@@ -4,7 +4,7 @@
       <img src="../../../../assets/images/home/icon-noAward.png" alt=""/>
     </div>
     <div v-else>
-      <div class="message">
+      <div class="message-tie-xi">
         <div>
           <p>加入金额：<span class="roboto-regular">{{ messageList.joinMoney | currency('') }}</span><span>元</span></p>
           <p>加入时间：<span class="roboto-regular">{{ messageList.joinTime }}</span></p>
@@ -103,7 +103,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .tab-TieXie {
     width: 100%;
     margin-top: 15px;
@@ -119,7 +119,7 @@
     }
   }
 
-  .tab-TieXie .message {
+  .tab-TieXie .message-tie-xi {
     width: 100%;
 
     > div {
