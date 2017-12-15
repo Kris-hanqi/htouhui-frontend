@@ -1,7 +1,7 @@
 <template>
   <div class="tab-TieXie">
     <div class="empty" v-if="this.showNoAward">
-      <img src="../../../../assets/images/home/icon-noAward.png" alt=""/>
+      <img src="../../../../assets/images/home/icon-noAward.png"/>
     </div>
     <div v-else>
       <div class="message-tie-xi">
@@ -17,7 +17,8 @@
               <div slot="content">贴息金额计算方式以<br/>四舍五入至后两位</div>
               <i class="question"></i>
             </el-tooltip>
-            <img class="status-img" v-if="messageList.status == 'transfered'" src="../../../../assets/images/home/icon-haveToAccount.png" alt=""/>
+            <img class="status-img" v-if="messageList.status === 'transfered'"
+                 src="../../../../assets/images/home/icon-haveToAccount.png" alt=""/>
             <i class="status-txt" v-else>未发放</i>
           </p>
         </div>
@@ -25,6 +26,8 @@
       <div class="message-list">
         <p class="title">贴息流水</p>
         <el-table :data="list" style="width: 100%">
+          <!-- 无数据时显示 -->
+          <no-data slot="empty"></no-data>
           <el-table-column prop="time" label="时间"></el-table-column>
           <el-table-column prop="investMoney" label="在投金额">
             <template slot-scope="scope">
@@ -42,9 +45,14 @@
             </template>
           </el-table-column>
         </el-table>
-        <div class="pages small">
-          <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
-          <el-pagination @current-change="handleCurrentChange" :current-page.sync="listQuery.pageNo" :page-size="listQuery.PageSize" layout="prev, pager, next" :total="total"></el-pagination>
+        <div class="pages small" v-if="list && list.length">
+          <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（
+          共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+          <el-pagination @current-change="handleCurrentChange"
+                         :current-page.sync="listQuery.pageNo"
+                         :page-size="listQuery.PageSize"
+                         layout="prev, pager, next"
+                         :total="total"></el-pagination>
         </div>
       </div>
     </div>
@@ -53,11 +61,15 @@
 
 <script>
   import { queryPlatformAwardRecord } from 'api/home/quantify';
+  import NoData from '../../components/NoData.vue';
 
   export default {
     props: [
       'joinPlanId'
     ],
+    components: {
+      NoData
+    },
     data() {
       return {
         list: null,
