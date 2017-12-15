@@ -30,6 +30,8 @@
                 style="width: 100%"
                 v-loading="listLoading"
                 element-loading-text="拼命加载中...">
+        <!-- 无数据时显示 -->
+        <no-data slot="empty"></no-data>
         <el-table-column prop="loanId" label="项目编号" width="120">
           <template slot-scope="scope">
             <a :href="scope.row.loanTargetUrl" style="color: #409eff;" target="_blank">{{ scope.row.loanId }}</a>
@@ -76,8 +78,8 @@
           </template>
         </el-table-column>
       </el-table>
-      
-      <div class="pages" v-if="!listLoading && list">
+
+      <div class="pages" v-if="list && list.length">
         <p class="total-pages">共计
           <span class="roboto-regular">{{ total }}</span>
           条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）
@@ -95,11 +97,16 @@
   import { queryUserAssetInfoList } from 'api/home/queryUserAssetInfoList';
   import { feachDownLoadClaimsContract } from 'api/home/investment';
   import img_icon_sxb from 'assets/images/home/icon-shengXinBaoLiangHua.png';
+  import NoData from '../../components/NoData.vue';
 
   export default {
+    components: {
+      NoData
+    },
     data() {
       return {
         img_icon_sxb,
+        NoData,
         list: null,
         listLoading: false,
         planInfo: {
@@ -129,7 +136,8 @@
         queryUserAssetInfoList(this.listQuery).then(response => {
           const data = response.data;
           if (data.meta.code === 200) {
-            this.list = data.data.data;
+//            this.list = data.data.data;
+            this.list = [];
             this.total = data.data.count || 0;
           }
           this.listLoading = false;
@@ -167,7 +175,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .lookTarget {
     width: 100%;
     height: auto;
@@ -251,7 +259,6 @@
 
     .message-list {
       width: 100%;
-      height: auto;
       box-sizing: border-box;
       padding: 25px 10px;
       background-color: #fff;
@@ -261,6 +268,10 @@
         margin-bottom: 30px;
         font-size: 20px;
         color: #274161;
+      }
+
+      .el-table__empty-block {
+        min-height: 280px !important;
       }
     }
   }

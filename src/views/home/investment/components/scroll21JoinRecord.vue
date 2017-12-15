@@ -222,6 +222,7 @@
       getAward(id) {
         this.showTest = true;
         this.dialogVisible = true;
+        this.activeName = 'first';
         this.joinPlanId = id;
       },
       goPullOut(id) {

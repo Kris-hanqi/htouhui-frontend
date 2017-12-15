@@ -4,7 +4,7 @@
       <img src="../../../../assets/images/home/icon-noAward.png" alt=""/>
     </div>
     <div v-else>
-      <div class="message">
+      <div class="message-coupons">
         <div>
           <p>加入金额：<span class="roboto-regular">{{ messageList.joinMoney | currency('') }}</span><span>元</span></p>
           <p>面值：<span class="roboto-regular">{{ messageList.couponType != 'plus_coupon' ? messageList.couponMoney : messageList.couponRate  }}{{ messageList.couponType != 'plus_coupon' ? '元' : '%'  }}</span></p>
@@ -114,7 +114,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .tab-coupons {
     width: 100%;
     margin-top: 15px;
@@ -130,7 +130,7 @@
     }
   }
 
-  .tab-coupons .message {
+  .tab-coupons .message-coupons {
     width: 100%;
 
     > div {
