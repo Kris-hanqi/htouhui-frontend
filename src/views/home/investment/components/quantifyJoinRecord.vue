@@ -36,7 +36,7 @@
     <el-table :data="list" style="width: 100%">
       <!-- 无数据时显示 -->
       <no-data slot="empty"></no-data>
-      <el-table-column prop="joinTime" label="加入时间" width="135"></el-table-column>
+      <el-table-column prop="joinTime" label="加入时间" width="140"></el-table-column>
       <el-table-column prop="joinMoney" label="加入金额">
         <template slot-scope="scope">
           {{ scope.row.joinMoney | currency('') + '元' }}
@@ -224,7 +224,7 @@
         feachDownLoadJoinContract(id)
           .then(response => {
             if (response.data.meta.code === 200) {
-              window.open(response.data.data);
+              document.getElementById('ifile').src = response.data.data;
             }
             if (response.data.meta.code === 9999) {
               this.$notify({

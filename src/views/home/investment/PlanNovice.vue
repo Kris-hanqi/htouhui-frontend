@@ -78,7 +78,9 @@
            element-loading-text="拼命加载中...">
         <p class="title">您购买的债权信息</p>
         <el-table :data="claimsList" style="width: 100%">
-          <el-table-column prop="loanId" label="项目编号" width="110">
+          <!-- 无数据时显示 -->
+          <no-data slot="empty"></no-data>
+          <el-table-column prop="loanId" label="项目编号" width="120">
             <template slot-scope="scope">
               <a :href="scope.row.loanTargetUrl" target="_blank" style="color: #0573f4;">{{ scope.row.loanId }}</a>
             </template>
@@ -114,7 +116,7 @@
               {{ scope.row.uncollectedRepayMoney | currency('') + '元' }}
           </template>
           </el-table-column>
-          <el-table-column prop="status" label="状态" width="80"></el-table-column>
+          <el-table-column prop="status" label="状态" width="70"></el-table-column>
           <el-table-column prop="contract" label="操作" width="70">
             <template slot-scope="scope">
               <el-button v-if="scope.row.showContract" @click="downLoadContract(scope.row.investId)" type="text">下载合同</el-button>
@@ -123,7 +125,7 @@
           </el-table-column>
         </el-table>
 
-        <div class="pages">
+        <div class="pages" v-if="list && list.length">
           <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>
             条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
           <el-pagination @current-change="handleCurrentChange"
@@ -142,10 +144,12 @@
   import { getLocationUrl } from 'utils/index';
   import { fetchNovicePlanInfo, fetchJoinPlanBill, feachJoinInvestClaims, feachDownLoadClaimsContract } from 'api/home/investment';
   import interestRate from 'components/interest-rate';
+  import NoData from '../components/NoData.vue';
 
   export default {
     components: {
-      interestRate
+      interestRate,
+      NoData
     },
     data() {
       return {
@@ -223,7 +227,7 @@
         feachDownLoadClaimsContract(id)
           .then(response => {
             if (response.data.meta.code === 200) {
-              window.open(response.data.data);
+              document.getElementById('ifile').src = response.data.data;
             }
             if (response.data.meta.code === 9999) {
               this.$notify({
@@ -252,6 +256,12 @@
 </script>
 
 <style lang="scss">
+  .plan-novice {
+    .el-table__empty-block {
+      min-height: 260px;
+    }
+  }
+  
   .newUser-plan {
     width: 100%;
     height: 245px;
@@ -259,7 +269,7 @@
     padding: 20px 15px;
     background-color: #fff;
     margin-bottom: 20px;
-  
+    
     .hth-mark {
       float: right;
       position: relative;

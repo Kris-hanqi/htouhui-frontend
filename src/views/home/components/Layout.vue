@@ -31,6 +31,7 @@
         </div>
       </div>
     </div>
+    <iframe id="ifile" style="display:none"></iframe>
     <hth-slider-bar></hth-slider-bar>
   </div>
 </template>

@@ -155,7 +155,7 @@
         feachDownLoadClaimsContract(id)
           .then(response => {
             if (response.data.meta.code === 200) {
-              window.open(response.data.data);
+              document.getElementById('ifile').src = response.data.data;
             }
             if (response.data.meta.code === 9999) {
               this.$notify({
