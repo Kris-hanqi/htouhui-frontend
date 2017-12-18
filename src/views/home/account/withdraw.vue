@@ -3,19 +3,19 @@
     <hth-panel title="我要提现">
       <!-- 显示银行卡 -->
       <bank-card></bank-card>
-  
+
       <!-- 网关交互组件 -->
       <request-bank-from :request-data="requestData"></request-bank-from>
-      
+
       <!-- 获取联行号 -->
       <union-bank :visible="dialogUnionBankVisible" @close="closeUnionBank" @select-union-bank="selectUnionBank"></union-bank>
-  
+
       <!-- 交互表单 -->
       <form class="form-horizontal" style="margin-top: 20px;">
         <div class="form-group">
           <label class="col-md-2 control-label">账户余额</label>
           <div class="col-md-5">
-            <p class="form-control-static">{{ accountMoney | currency('') }}元</p>
+            <p class="form-control-static">{{ accountMoney || 0  | currency('') }}元</p>
           </div>
         </div>
         <div class="form-group">
@@ -88,7 +88,7 @@
   import { fetchWithdraw, fetchWithdrawCost, fetchAccountMoney, fetchAllowLargeWithdraw } from 'api/home/account';
   import { validateNumber } from 'utils/validate';
   import { delayFn } from 'utils/index';
-  
+
   let allowLargeWithdrawNumber = 0;
 
   export default {
@@ -273,11 +273,11 @@
 <style lang="scss">
   .withdraw-wrapper {
     width: 832px;
-    
+
     .back-card-wrapper {
       margin-left: 20px;
     }
-  
+
     .form-horizontal .control-label {
       width: 120px;
     }
