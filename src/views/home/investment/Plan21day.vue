@@ -33,7 +33,7 @@
         <button class="find-btn" @click="query">查询</button>
       </ul>
     </div>
-    <div class="message">
+    <div class="plan21day-message">
       <el-table :data="list" v-loading="listLoading" element-loading-text="拼命加载中...">
         <!-- 无数据时显示 -->
         <no-data slot="empty"></no-data>
