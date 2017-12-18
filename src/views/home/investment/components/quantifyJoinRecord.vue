@@ -37,23 +37,23 @@
       <!-- 无数据时显示 -->
       <no-data slot="empty"></no-data>
       <el-table-column prop="joinTime" label="加入时间" width="140"></el-table-column>
-      <el-table-column prop="joinMoney" label="加入金额">
+      <el-table-column prop="joinMoney" label="加入金额" width="150">
         <template slot-scope="scope">
           {{ scope.row.joinMoney | currency('') + '元' }}
         </template>
       </el-table-column>
-      <el-table-column prop="lockPeriod" label="持有期限">
+      <el-table-column prop="lockPeriod" label="持有期限" width="100">
         <template slot-scope="scope">
           {{ scope.row.lockPeriod + '天' }}
         </template>
       </el-table-column>
-      <el-table-column prop="rate" label="往期年化利率">
+      <el-table-column prop="rate" label="往期年化利率" width="140">
         <template slot-scope="scope">
-          {{ scope.row.rate + '%' }}
+          {{ scope.row.minRate + '%' + '~' + scope.row.maxRate + '%'}}
         </template>
       </el-table-column>
-      <el-table-column prop="lockEndTime" label="即日起免手续费" :formatter="exitTimeFormatter" width="135"></el-table-column>
-      <el-table-column prop="award" label="平台奖励">
+      <el-table-column prop="lockEndTime" label="即日起免手续费" :formatter="exitTimeFormatter" width="145"></el-table-column>
+      <el-table-column prop="award" label="平台奖励" width="100">
         <template slot-scope="scope">
           <el-button v-if="scope.row.jiaxi === '1'" @click="getAward(scope.row.joinPlanId)" type="text">
             <i class="ku-icon icon-money-bag" style="font-size: 25px"></i>

@@ -18,7 +18,8 @@
           <el-table-column slot="opt" fixed="right" label="操作" width="150">
             <template slot-scope="scope">
               <el-button type="text" @click="getInvestRepays(scope.row.investId)">还款计划</el-button>
-              <el-button type="text" @click="downLoadContract(scope.row.investId)">下载合同</el-button>
+              <el-button type="text" v-if="scope.row.contract === '1'" @click="downLoadContract(scope.row.investId)">下载合同</el-button>
+              <a v-else="" style="color: #409EFF;" :href="'/user/contract.html?loanId=' + scope.row.loanId" target="_blank">下载合同</a>
             </template>
           </el-table-column>
         </hth-data-table>
@@ -33,7 +34,8 @@
           <el-table-column slot="opt" fixed="right" label="操作" width="150">
             <template slot-scope="scope">
               <el-button type="text" @click="getInvestRepays(scope.row.investId)">还款计划</el-button>
-              <el-button type="text" @click="downLoadContract(scope.row.investId)">下载合同</el-button>
+              <el-button type="text" v-if="scope.row.contract === '1'" @click="downLoadContract(scope.row.investId)">下载合同</el-button>
+              <a v-else="" style="color: #409EFF;" :href="'/user/contract.html?loanId=' + scope.row.loanId" target="_blank">下载合同</a>
             </template>
           </el-table-column>
         </hth-data-table>

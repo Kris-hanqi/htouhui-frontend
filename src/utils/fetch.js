@@ -19,6 +19,13 @@ const service = axios.create({
 
 // 请求拦截器
 service.interceptors.request.use(config => {
+  // 特殊处理刷新token以及更新用户状态接口
+  if (config.url === '/web-api/refreshTokenServlet') {
+    config.url = '/refreshTokenServlet';
+  }
+  if (config.url === '/web-api/refreshAuthority') {
+    config.url = '/refreshAuthority';
+  }
   if (store.getters.token && config.url !== '/web-api/loginByPassword') {
     if (getToken()) {
       config.headers['token'] = getToken(); // eslint-disable-line

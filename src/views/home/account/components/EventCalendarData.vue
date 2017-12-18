@@ -20,7 +20,7 @@
         <img :src="img_icon_calendar"/>
       </div>
     </div>
-  
+
     <!-- 日视图 -->
     <div class="event-detail-day" v-show="viewType !== 'month'">
       <div class="day-header">
@@ -35,8 +35,8 @@
           <div class="box-main row">
             <div class="col-xs-4" style="padding-right: 0;">
               <p>投资金额</p>
-              <p>本&nbsp;&nbsp;&nbsp;&nbsp;金</p>
-              <p>利&nbsp;&nbsp;&nbsp;&nbsp;息</p>
+              <p>本&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金</p>
+              <p>利&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;息</p>
               <p>平台奖励</p>
             </div>
             <div class="col-xs-8" style="padding-left: 0;">
@@ -68,7 +68,7 @@
 
 <script>
   import img_icon_calendar from 'assets/images/home/icon-calendar.png';
-  
+
   export default {
     props: {
       // 需要显示的视图
@@ -143,48 +143,48 @@
 <style lang="scss">
   .event-calendar-data-wrapper {
     display: inline-block;
-  
+
     .event-detail__body {
       img {
         display: inline-block;
         width: 207px;
         height: 64px;
       }
-    
+
       p {
         margin-bottom: 35px;
         font-size: 16px;
         color: #727e90;
-      
+
         i {
           display: inline-block;
           vertical-align: text-bottom;
           margin-right: 5px;
         }
-      
+
         span {
           font-size: 14px;
         }
-      
+
         span.roboto-regular {
           font-size: 26px;
         }
       }
     }
-    
+
     .event-detail-month {
       overflow: hidden;
       height: auto;
       width: 360px;
       padding: 20px 25px;
-  
+
       .month-header {
         margin-bottom: 45px;
         font-size: 18px;
         letter-spacing: 0.7px;
         text-align: center;
         color: #35385a;
-    
+
         span {
           display: inline-block;
           vertical-align: middle;
@@ -193,27 +193,27 @@
           border: solid 1px #ced9e4;
         }
       }
-  
+
       .month-body {
         padding-left: 70px;
       }
-      
+
       .month-body .ku-icon {
         font-size: 25px;
       }
-      
+
       .month-footer {
         text-align: center;
       }
     }
-    
+
     .event-detail-day {
       width: 360px;
       height: auto;
       box-sizing: border-box;
       text-align: center;
       padding: 20px;
-      
+
       .day-header {
         width: 100%;
         margin-bottom: 25px;
@@ -221,7 +221,7 @@
         letter-spacing: 0.7px;
         text-align: center;
         color: #35385a;
-  
+
         span.return-btn {
           display: inline-block;
           position: relative;
@@ -237,17 +237,17 @@
           border-radius: 16px;
           cursor: pointer;
         }
-        
+
         i {
           margin-left: 6px;
           font-size: 16px;
           color: #b2b2b2;
         }
       }
-      
+
       .title {
         width: 100%;
-    
+
         span {
           float: left;
           width: 22px;
@@ -258,13 +258,13 @@
           cursor: pointer;
         }
       }
-  
+
       .box {
         width: 100%;
         margin-bottom: 20px;
         border-bottom: 1px solid #e4eef8;
         text-align: left;
-    
+
         .title {
           margin-bottom: 15px;
           border-left: 4px solid #50e3c2;
@@ -273,33 +273,33 @@
           font-size: 16px;
           color: #35385a;
         }
-    
+
         .box-main {
           width: 100%;
         }
-    
+
         .box-main > div p {
           margin-bottom: 15px;
           font-size: 14px;
           color: #727e90;
         }
-    
+
         .box-main > div p span {
           margin-left: 20px;
           font-size: 14px;
           color: #727e90;
         }
-    
+
         .box-main > div.right-part p span {
           color: #ff4f38;
         }
-    
+
         .pages {
           width: 233px;
           height: 70.5px;
           padding: 0 24.5px 0 31.5px;
         }
-    
+
         .pages-top {
           width: 233px;
           height: 2px;
@@ -307,19 +307,19 @@
           background: #a4b2d2;
         }
       }
-  
+
       .day-footer {
         text-align: center;
-        
+
         .ku-icon {
           font-size: 20px;
           color: #989292;
         }
-        
+
         button {
           background-color: transparent;
         }
-  
+
         .pagination-bullet {
           display: inline-block;
           width: 8px;
@@ -328,7 +328,7 @@
           border-radius: 100%;
           background: #ccc;
         }
-  
+
         .pagination-bullet-active {
           background: #50e3c2;
         }

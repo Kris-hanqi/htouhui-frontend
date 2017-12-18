@@ -89,6 +89,7 @@
             message: '请填写验证码',
             type: 'warning'
           });
+          return;
         }
         this.loading = true;
         fetchCheckCurrentMobile(this.mobileInfo)

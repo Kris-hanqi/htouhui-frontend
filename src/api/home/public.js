@@ -19,7 +19,7 @@ export function fetchAdRecommend() {
 /** 刷新token */
 export function fetchUpdateServeToken() {
   return fetch({
-    url: 'userRefreshTokenServlet',
+    url: 'refreshTokenServlet',
     method: 'get'
   })
 }

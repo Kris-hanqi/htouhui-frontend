@@ -10,16 +10,21 @@
           <p class="money"><span class="roboto-regular">{{ outPlanList.money | currency('') }}</span>元</p>
           <p>退出金额</p>
         </div>
-        <div class="look-regular-day">
-          <p class="day"><span class="roboto-regular">{{ outPlanList.lockPeriod }}</span>天</p>
+        <div class="look-regular-money">
+          <p class="day"><span class="roboto-regular">{{ outPlanList.lockPeriod }}</span>{{ outPlanList.lockUnit === 'day' ? '天' : '月'}}</p>
           <p>持有期限</p>
+        </div>
+        <div class="look-regular-money">
+          <p class="day"><span class="roboto-regular">{{ (outPlanList.actualMoney || 0) | currency('')  }}</span>元</p>
+          <p>实际到账金额</p>
         </div>
       </div>
       <div class="look-regular-bottom">
         <p>申请时间 <span class="roboto-regular">{{ outPlanList.applyTime }}</span></p>
+        <p v-if="outPlanList.actualTime">退出成功时间 <span class="roboto-regular">{{ outPlanList.actualTime }}</span></p>
       </div>
       <div class="hth-mark">
-        <i v-if="joinPlanList.status === 'matched'" class="ku-icon icon-mark-success"></i>
+        <i v-if="joinPlanList.status === 'exited'" class="ku-icon icon-mark-success"></i>
         <i v-else="" class="ku-icon icon-mark-quit-process"></i>
       </div>
     </div>
@@ -47,7 +52,7 @@
         </el-table-column>
         <el-table-column label="借款期限" width="90">
           <template slot-scope="scope">
-            {{ scope.row.perid | currency('') + '天' }}
+            {{ scope.row.perid }}
           </template>
         </el-table-column>
         <el-table-column label="投资金额" width="90">
@@ -55,12 +60,12 @@
             {{ scope.row.investMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column label="退出金额" width="100">
+        <el-table-column label="退出金额" width="90">
           <template slot-scope="scope">
             {{ scope.row.exitMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="status" label="状态" width="80"></el-table-column>
+        <el-table-column prop="status" label="状态" width="90"></el-table-column>
         <el-table-column prop="contract" label="合同">
           <template slot-scope="scope">
             <el-button v-if="scope.row.showContract"
@@ -222,7 +227,7 @@
 
     > div {
       display: inline-block;
-      width: 37%;
+      width: 33%;
       text-align: center;
 
       p {
@@ -241,10 +246,6 @@
         font-size: 30px;
         color: #394b67;
       }
-    }
-
-    .look-regular-day {
-      margin: 0 50px;
     }
   }
 
