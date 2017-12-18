@@ -41,7 +41,7 @@
 
   .transactionRecord {
     width: 100%;
-    height: 845px;
+    height: auto;
     box-sizing: border-box;
     padding: 15px 10px;
     background-color: #fff;
