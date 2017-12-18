@@ -47,7 +47,11 @@
           {{ scope.row.exitFee | currency('') + '元' }}
         </template>
       </el-table-column>
-      <el-table-column prop="lockPeriod" label="持有期限"  width="60"></el-table-column>
+      <el-table-column prop="lockPeriod" label="持有期限"  width="60">
+        <template slot-scope="scope">
+          {{ scope.row.lockPeriod + '天' }}
+        </template>
+      </el-table-column>
       <el-table-column prop="actualExitTime" label="成功退出时间" width="140">
         <template slot-scope="scope">
           {{ scope.row.actualExitTime || '--' }}
