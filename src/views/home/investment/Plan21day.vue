@@ -53,7 +53,7 @@
             {{ scope.row.rate + '%' }}
           </template>
         </el-table-column>
-        <el-table-column label="持有期限截至" prop="lockEndTime" width="140"></el-table-column>
+        <el-table-column label="持有期限截至" prop="lockEndTime" :formatter="exitTimeFormatter" width="140"></el-table-column>
         <el-table-column label="状态" prop="detail" width="100">
           <template slot-scope="scope">
             {{ scope.row.status | keyToValue(typeList) }}
@@ -161,6 +161,10 @@
       },
       query() {
         this.getPageList();
+      },
+      exitTimeFormatter(row, column, cellValue) {
+        const dates = cellValue.split(' ');
+        return dates[0];
       },
       switchDateType(type) {
         this.dateType = type;
