@@ -27,8 +27,8 @@
         <p style="line-height: 1.67;">使用说明：{{ data.description }}</p>
       </div>
       <a v-if="data.status === 'unused'" class="newUse" @click="toIndexPage">立即使用</a>
-      <img v-else-if="data.status === 'used'" class="pass" src="../../../../assets/images/home/ico-used.png" />
-      <img v-else class="pass" src="../../../../assets/images/home/ico-perimir.png" />
+      <i v-if="data.status === 'used'" class="status-sign ku-icon icon-mark-used"></i>
+      <i v-if="data.status === 'expire'" class="status-sign ku-icon icon-mark-expired"></i>
     </div>
   </div>
 </template>
@@ -65,3 +65,17 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .coupon-wrapper__box-body {
+    position: relative;
+
+    .status-sign {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #808080;
+      font-size: 80px;
+    }
+  }
+</style>
