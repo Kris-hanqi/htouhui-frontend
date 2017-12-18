@@ -80,10 +80,11 @@
       getGain() {
         if (!this.gainData.money) return;
         this.configData.forEach(v => {
-          if (v.time === this.gainData.deadline) {
+          if (v.time.toString() === this.gainData.deadline.toString()) {
             this.gainData.rate = v.rate;
           }
         });
+        console.log(this.gainData);
         feachGainCalculator(this.gainData).then(response => {
           if (response.data.meta.code === 200) {
             this.gain = response.data.data.anticipatedInterest;

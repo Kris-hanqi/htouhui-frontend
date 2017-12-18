@@ -22,6 +22,12 @@ export function validateMoney(str) {
   return reg.test(str)
 }
 
+/** 金额校验 */
+export function validateMoney12(str) {
+  const reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
+  return reg.test(str)
+}
+
 /** 邮箱校验 */
 export function validateEmail(str) {
   const reg = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;

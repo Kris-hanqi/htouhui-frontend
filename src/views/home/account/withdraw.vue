@@ -86,7 +86,7 @@
   import RequestBankFrom from '../components/RequestBankFrom.vue';
   import UnionBank from './components/UnionBank.vue';
   import { fetchWithdraw, fetchWithdrawCost, fetchAccountMoney, fetchAllowLargeWithdraw } from 'api/home/account';
-  import { validateNumber } from 'utils/validate';
+  import { validateNumber, validateMoney12 } from 'utils/validate';
   import { delayFn } from 'utils/index';
 
   let allowLargeWithdrawNumber = 0;
@@ -139,7 +139,7 @@
       withdraw() {
         const result = operationalValidate(this.operationalValidateData);
         if (!result) return;
-        if (!validateNumber(this.money)) {
+        if (!validateMoney12(this.money)) {
           this.$message({
             message: '提现金额只能输入数字',
             type: 'warning'
@@ -220,7 +220,7 @@
       // 获取提现手续费
       getWithdrawCostDelay: delayFn(function() {
         if (!this.money) return;
-        if (!validateNumber(this.money)) {
+        if (!validateMoney12(this.money)) {
           this.$message({
             message: '提现金额只能输入数字',
             type: 'warning'
