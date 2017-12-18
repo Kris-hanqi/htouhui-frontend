@@ -14,7 +14,7 @@
           <p class="day"><span class="roboto-regular">{{ outPlanList.lockPeriod }}</span>{{ outPlanList.lockUnit === 'day' ? '天' : '月'}}</p>
           <p>持有期限</p>
         </div>
-        <div class="look-regular-money">
+        <div class="look-regular-money" v-if="outPlanList.actualMoney">
           <p class="day"><span class="roboto-regular">{{ (outPlanList.actualMoney || 0) | currency('')  }}</span>元</p>
           <p>实际到账金额</p>
         </div>
