@@ -63,7 +63,7 @@
           <template slot-scope="scope">
             <el-button v-if="scope.row.status === 'matched'"
                        @click="goClaimsView(scope.row.joinPlanId)" type="text">查看债权</el-button>
-            <span v-else>暂无债权</span>
+            <span style="font-size: 13px;" v-else>暂无债权</span>
           </template>
         </el-table-column>
       </el-table>

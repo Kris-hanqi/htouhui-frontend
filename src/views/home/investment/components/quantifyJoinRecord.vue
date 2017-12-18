@@ -70,7 +70,7 @@
         <template slot-scope="scope">
           <el-button class="icon-interests" v-if="scope.row.status === 'matched'"
                      @click="lookJoinRegular(scope.row.joinPlanId)" type="text">查看债权</el-button>
-          <span v-else>暂无债权</span>
+          <span style="font-size: 13px;" v-else>暂无债权</span>
           <el-button @click="downLoadContract(scope.row.joinPlanId)" type="text">点击下载</el-button>
         </template>
       </el-table-column>
