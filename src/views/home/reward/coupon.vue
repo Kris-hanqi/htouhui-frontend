@@ -3,7 +3,7 @@
     <div class="coupon-wrapper__top">
       <p>优惠券</p>
       <el-button @click="showCouponDescription" type="text">优惠券使用说明</el-button>
-      <el-button :plain="true" @click="showExchangeCoupon" type="info">兑换优惠券</el-button>
+      <el-button plain @click="showExchangeCoupon" type="primary">兑换优惠券</el-button>
     </div>
 
     <!-- 优惠券使用说明 -->
@@ -169,7 +169,7 @@
       color: #274161;
     }
 
-    .el-button--info {
+    .el-button--primary {
       float: right;
       border-radius: 100px;
       margin-right: 10px;
