@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-offset-2 col-md-5">
+          <div class="col-md-offset-2 col-md-3" style="text-align: center">
             <el-button type="primary" @click="checkCurrentMobile" :loading="loading" round>提交</el-button>
           </div>
         </div>
@@ -47,7 +47,7 @@
   import HthPanel from 'common/Panel/index.vue';
   import { fetchSendCode } from 'api/public';
   import { fetchCheckCurrentMobile } from 'api/home/account-set';
-  
+
   export default {
     components: {
       SmsTimer,

@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-offset-2 col-md-5">
+          <div class="col-md-offset-2 col-md-3" style="text-align: center">
             <el-button type="primary" @click="bindEmail" :loading="loading" round>提交</el-button>
           </div>
         </div>
@@ -48,7 +48,7 @@
   import { fetchBindEmail } from 'api/home/account-set';
   import HthPanel from 'common/Panel/index.vue';
   import SmsTimer from 'common/sms-timer';
-  
+
   export default {
     components: {
       HthPanel,

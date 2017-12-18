@@ -18,6 +18,7 @@
           <el-input type="password" v-model="passwordData.confirmPassword" placeholder="请重新输入"></el-input>
         </el-form-item>
         <el-form-item>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <el-button type="primary" @click="UpdatePassword" style="width: 200px" round>提交</el-button>
         </el-form-item>
       </el-form>
@@ -35,7 +36,7 @@
   import HthPanel from 'common/Panel/index.vue';
   import { validatePassword } from 'utils/validate';
   import { fetchUpdatePassword } from 'api/public';
-  
+
   export default {
     computed: {
       ...mapGetters([

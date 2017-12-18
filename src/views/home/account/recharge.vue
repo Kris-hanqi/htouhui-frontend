@@ -149,8 +149,4 @@
       }
     }
   }
-
-  .el-tabs__header {
-    border-bottom: none !important;
-  }
 </style>

@@ -1,24 +1,31 @@
 <template>
   <!-- 解绑银行卡组件 -->
   <div class="unlock-bank-card-wrapper">
-    <el-dialog title="提示"
+    <el-dialog title="解绑银行卡"
                width="500px"
                :before-close="handleClose"
                :visible.sync="visible">
-      <span class="text">确认解绑银行卡？</span>
-      <span slot="footer">
+      <div style="text-align: center">
+        <div style="color: #f00; font-size: 60px;">
+          <i class="ku-icon icon-prompt"></i>
+        </div>
+        <br>
+        <div class="text">是否确认解绑银行卡？</div>
+        <br><br>
+        <div slot="footer">
         <el-button :round="true" @click="handleClose">取 消</el-button>
         <el-button :round="true" type="primary"
                    :loading="unlockBankCardLoading"
                    @click="unlockBankCard">确 定</el-button>
-      </span>
+      </div>
+      </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
   import { fetchUnlockBankCard } from 'api/home/account-set';
-  
+
   export default {
     props: {
       visible: {
@@ -70,9 +77,9 @@
 
 <style lang="scss">
   .unlock-bank-card-wrapper {
-    span.text {
+    .text {
       font-size: 20px;
-      color: #e54;
+      color: #727e90;
     }
   }
 </style>
