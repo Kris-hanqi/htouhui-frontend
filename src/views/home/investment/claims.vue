@@ -140,7 +140,7 @@
 <style lang="scss">
   .claims {
     width: 100%;
-    height: 846px;
+    height: auto;
     box-sizing: border-box;
     padding: 20px 15px;
     background-color: #fff;
