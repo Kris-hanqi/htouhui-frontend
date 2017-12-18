@@ -132,6 +132,10 @@
       // 兑换成功事件
       successExchangeCoupon() {
         this.exchangeCouponVisible = false;
+        this.$message({
+          message: '优惠券兑换成功!',
+          type: 'success'
+        });
         this.getPageList();
       },
       // 关闭兑换优惠券modal

@@ -27,7 +27,7 @@
         <p style="line-height: 1.67;">使用说明：{{ data.description }}</p>
       </div>
       <a v-if="data.status === 'unused'" class="newUse" @click="toIndexPage">立即使用</a>
-      <i v-if="data.status === 'used'" class="status-sign ku-icon icon-mark-used"></i>
+      <i v-if="data.status === 'used'" class="status-sign ku-icon icon-mark-used" style="color: #ec4d4c;"></i>
       <i v-if="data.status === 'expire'" class="status-sign ku-icon icon-mark-expired"></i>
     </div>
   </div>
