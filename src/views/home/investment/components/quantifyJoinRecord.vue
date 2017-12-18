@@ -49,7 +49,7 @@
       </el-table-column>
       <el-table-column prop="rate" label="往期年化利率" width="140">
         <template slot-scope="scope">
-          {{ scope.row.rate + '%' }}
+          {{ scope.row.minRate + '%' + '~' + scope.row.maxRate + '%'}}
         </template>
       </el-table-column>
       <el-table-column prop="lockEndTime" label="即日起免手续费" :formatter="exitTimeFormatter" width="145"></el-table-column>
