@@ -65,19 +65,23 @@
                  :disabled="!protocolList.one || !protocolList.two"
                  plain>一键加入</el-button>
     </hth-panel>
+  
+    <!-- 验证用户操作组件 -->
+    <operational-validate ref="validateSteps"></operational-validate>
   </div>
 </template>
 
 <script>
   import { fetchGetOneKeyJoinInfo, userCouponList } from 'api/home/investment-quantify';
-  import operationalValidate from 'utils/home/operationalValidate';
+  import OperationalValidate from '../../components/OperationalValidate.vue';
   import { fetchJoinPlan } from 'api/home/investment';
   import { getLocationUrl } from 'utils/index';
   import HthPanel from 'common/Panel/index.vue';
 
   export default {
     components: {
-      HthPanel
+      HthPanel,
+      OperationalValidate
     },
     data() {
       return {
@@ -114,8 +118,7 @@
           { key: 'plus_coupon', value: '%加息' }
         ],
         showUsedCoupon: false,
-        usedCouponText: '',
-        operationalValidateData: ['openAccount', 'transactionPassword', 'bankCard', 'automaticTender', 'automaticDebtTransfer']
+        usedCouponText: ''
       }
     },
     computed: {
@@ -158,7 +161,8 @@
       },
       // 加入标的
       joinPlan() {
-        const result = operationalValidate(this.operationalValidateData);
+        const validateSteps = ['openAccount', 'transactionPassword', 'bankCard', 'automaticTender', 'automaticDebtTransfer']
+        const result = this.$refs['validateSteps'].validate(validateSteps); // eslint-disable-line
         if (!result) return;
         if (!this.userMoney) {
           this.$message({

@@ -58,18 +58,18 @@
             callback: action => {
               if (action === 'confirm') {
                 if (stepData.storeName === 'isOpenAccount') {
-                  if (store.getters.thirdPartyName === 'KONG_ZHONG') {
-                    if (!store.getters.mobile) {
-                      window.location.href = store.getters.baseUrl + '/jixin/addNewUserMoblie';
+                  if (this.$store.getters.thirdPartyName === 'KONG_ZHONG') {
+                    if (!this.$store.getters.mobile) {
+                      window.location.href = this.$store.getters.baseUrl + '/jixin/addNewUserMoblie';
                       return;
                     }
-                    window.location.href = store.getters.baseUrl + '/jixin/open-account';
+                    window.location.href = this.$store.getters.baseUrl + '/jixin/open-account';
                     return;
                   }
                 }
                 if (stepData.storeName === 'isTransactionPassword') {
-                  if (store.getters.thirdPartyName === 'KONG_ZHONG') {
-                    window.location.href = store.getters.baseUrl + '/setCashPassword';
+                  if (this.$store.getters.thirdPartyName === 'KONG_ZHONG') {
+                    window.location.href = this.$store.getters.baseUrl + '/setCashPassword';
                     return;
                   }
                 }
