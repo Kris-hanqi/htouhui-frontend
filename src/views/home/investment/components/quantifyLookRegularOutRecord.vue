@@ -21,6 +21,7 @@
       </div>
       <div class="look-regular-bottom">
         <p>申请时间 <span class="roboto-regular">{{ outPlanList.applyTime }}</span></p>
+        <p v-if="outPlanList.actualTime">退出成功时间 <span class="roboto-regular">{{ outPlanList.actualTime }}</span></p>
       </div>
       <div class="hth-mark">
         <i v-if="joinPlanList.status === 'exited'" class="ku-icon icon-mark-success"></i>
