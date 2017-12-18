@@ -21,10 +21,10 @@
       <div class="content" v-if="data.type === 'plus_coupon'">
         <p class="money" v-if="data.maxInterestMoney != 0">最高计息金额：<span class="roboto-regular">{{ data.maxInterestMoney }}</span>元</p>
         <p class="money" v-if="data.interestDeadline != 0">最高计息天数：<span class="roboto-regular">{{ data.interestDeadline }}</span>天</p>
-        <p class="msg-bg" style="line-height: 1.67;">使用说明：{{ data.description }}</p>
+        <p style="line-height: 1.67;">使用说明：{{ data.description }}</p>
       </div>
       <div class="content" v-else>
-        <p class="msg-bg" style="line-height: 1.67;">使用说明：{{ data.description }}</p>
+        <p style="line-height: 1.67;">使用说明：{{ data.description }}</p>
       </div>
       <a v-if="data.status === 'unused'" class="newUse" @click="toIndexPage">立即使用</a>
       <img v-else-if="data.status === 'used'" class="pass" src="../../../../assets/images/home/ico-used.png" />
@@ -65,12 +65,3 @@
     }
   }
 </script>
-
-<style lang="scss">
-  .msg-bg {
-    margin-bottom: 30px;
-    padding: 8px 10px;
-    background: #fff;
-  }
-</style>
-
