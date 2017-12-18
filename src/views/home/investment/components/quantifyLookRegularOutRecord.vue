@@ -60,12 +60,12 @@
             {{ scope.row.investMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column label="退出金额" width="100">
+        <el-table-column label="退出金额" width="90">
           <template slot-scope="scope">
             {{ scope.row.exitMoney | currency('') + '元' }}
           </template>
         </el-table-column>
-        <el-table-column prop="status" label="状态" width="80"></el-table-column>
+        <el-table-column prop="status" label="状态" width="90"></el-table-column>
         <el-table-column prop="contract" label="合同">
           <template slot-scope="scope">
             <el-button v-if="scope.row.showContract"
