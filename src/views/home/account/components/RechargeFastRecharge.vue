@@ -16,13 +16,13 @@
     <!-- 充值表单 -->
     <form class="form-horizontal">
       <div class="form-group">
-        <label class="col-md-2 control-label grey-text">账户余额</label>
+        <label class="col-md-2 control-label">账户余额</label>
         <div class="col-md-5">
           <p class="form-control-static">{{ balance || 0 | currency('') }}元</p>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-2 control-label grey-text">转入金额</label>
+        <label class="col-md-2 control-label">转入金额</label>
         <div class="col-md-5">
           <input type="text" v-model.number="rechargeData.money" class="form-control" placeholder="请输入充值金额">
         </div>
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-2 control-label grey-text">支付金额</label>
+        <label class="col-md-2 control-label">支付金额</label>
         <div class="col-md-6">
           <p class="form-control-static">{{ (rechargeData.money || 0) | currency('') }}元</p>
         </div>
@@ -171,17 +171,5 @@
       font-size: 14px;
       color: #4990e2;
     }
-
-    .grey-text {
-      color: #727e90;
-    }
-  }
-
-  .el-tabs__item.is-active {
-    box-shadow: 5px 1px 4px -3px rgba(0, 0, 0, 0.5), -5px 1px 4px -3px rgba(0, 0, 0, 0.5) !important;
-  }
-
-  .el-tabs--top.el-tabs--card .el-tabs__item:nth-child(2) {
-    padding-left: 0 !important;
   }
 </style>

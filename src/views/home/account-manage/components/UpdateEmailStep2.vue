@@ -50,7 +50,7 @@
   import { fetchBindEmail } from 'api/home/account-set';
   import SmsTimer from 'common/sms-timer';
   import HthPanel from 'common/Panel/index.vue';
-  
+
   export default {
     components: {
       SmsTimer,

@@ -139,6 +139,13 @@
       withdraw() {
         const result = operationalValidate(this.operationalValidateData);
         if (!result) return;
+        if (!validateNumber(this.money)) {
+          this.$message({
+            message: '提现金额只能输入数字',
+            type: 'warning'
+          });
+          return;
+        }
         if (this.accountMoney <= 0) {
           this.$message({
             message: '账户余额为0，不能提现',
@@ -213,6 +220,13 @@
       // 获取提现手续费
       getWithdrawCostDelay: delayFn(function() {
         if (!this.money) return;
+        if (!validateNumber(this.money)) {
+          this.$message({
+            message: '提现金额只能输入数字',
+            type: 'warning'
+          });
+          return;
+        }
         if (this.accountMoney < this.money) return;
         this.loading = true;
         fetchWithdrawCost({ money: this.money })

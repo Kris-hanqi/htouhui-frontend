@@ -51,7 +51,7 @@
   import HthPanel from 'common/Panel/index.vue';
   import { fetchSendCodeNew } from 'api/public';
   import { fetchUpdateBindMobile } from 'api/home/account-set';
-  
+
   export default {
     components: {
       SmsTimer,

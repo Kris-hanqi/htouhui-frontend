@@ -261,7 +261,7 @@
       min-height: 260px;
     }
   }
-  
+
   .newUser-plan {
     width: 100%;
     height: 245px;
@@ -269,14 +269,14 @@
     padding: 20px 15px;
     background-color: #fff;
     margin-bottom: 20px;
-    
+
     .hth-mark {
       float: right;
       position: relative;
       margin-top: -96px;
       margin-right: 8px;
     }
-  
+
     .ku-icon {
       font-size: 100px;
       color: #ec4d4c;
@@ -300,7 +300,6 @@
   }
 
   .newUser-plan-main {
-    width: 100%;
     margin-bottom: 40px;
 
     > div {
