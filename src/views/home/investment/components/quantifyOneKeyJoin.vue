@@ -289,12 +289,11 @@
       box-sizing: border-box;
       border-radius: 40px;
       background-color: #fff;
-      border: solid 1px #7c86a2;
+      border: solid 1px #409eff;
       padding: 0;
       font-size: 18px;
       text-align: center;
       line-height: 50px;
-      color: #7c86a2;
     }
   }
 
