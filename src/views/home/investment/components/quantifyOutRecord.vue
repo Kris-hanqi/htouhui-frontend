@@ -72,7 +72,7 @@
         <template slot-scope="scope">
           <div>
             <el-button v-if="scope.row.haveInvest" type="text" @click="lookOutRegular(scope.row.userExitId)">查看债权</el-button>
-            <span v-else="">暂无债权</span>
+            <span style="font-size: 13px;" v-else="">暂无债权</span>
           </div>
         </template>
       </el-table-column>

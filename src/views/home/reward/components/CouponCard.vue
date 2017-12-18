@@ -8,10 +8,10 @@
       <i class="icon-new" v-if="data.isNew === 1"></i>
       <p class="title">
         <span v-if="data.type === 'plus_coupon'">
-          <span class="roboto-regular">{{ data.rate }}</span>%
+          <span class="roboto-regular">{{ data.rate }}</span><span style="font-size: 20px">%</span>
         </span>
         <span v-else>
-          <span class="roboto-regular">{{ data.money }}</span>元
+          <span class="roboto-regular">{{ data.money }}</span><span style="font-size: 20px">元</span>
         </span>
       </p>
       <p class="detail">{{ data.type | keyToValue(typeList) }}劵<span>［满{{ data.lowerLimitMoney }}可用］</span></p>

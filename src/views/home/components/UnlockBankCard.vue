@@ -6,8 +6,8 @@
                :before-close="handleClose"
                :visible.sync="visible">
       <div style="text-align: center">
-        <div style="color: #f00; font-size: 60px;">
-          <i class="ku-icon icon-prompt"></i>
+        <div>
+          <i style="font-size: 60px;color: #ff4a33;" class="ku-icon icon-prompt"></i>
         </div>
         <br>
         <div class="text">是否确认解绑银行卡？</div>
