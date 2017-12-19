@@ -37,6 +37,7 @@
 <script>
   import { mapGetters } from 'vuex';
   import { fetchSetTransactionPassword } from 'api/home/account-set';
+  import { getUuid, setUuid } from 'utils/auth';
   import { fetchSendCode } from 'api/public';
   import SmsTimer from 'common/sms-timer';
   import RequestBankFrom from './RequestBankFrom.vue';
@@ -125,7 +126,12 @@
           });
           return;
         }
-        this.transactionPassword.sessionId = this.uuid;
+        if (!this.uuid) {
+          setUuid();
+          this.transactionPassword.sessionId = getUuid();
+        } else {
+          this.transactionPassword.sessionId = this.uuid;
+        }
         this.transactionPassword.callbackUrl = `${this.baseUrl}/user/home.html#/accountManage/set`;
         fetchSetTransactionPassword(this.transactionPassword)
           .then(response => {

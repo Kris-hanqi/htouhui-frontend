@@ -123,6 +123,7 @@
   import UnlockBankCard from '../components/UnlockBankCard.vue';
   import RequestBankFrom from '../components/RequestBankFrom.vue';
   import { getLocationUrl } from 'utils/index';
+  import { getUuid, setUuid } from 'utils/auth';
   import { fetchAutomaticBidding, fetchAutomaticDebtTransfer, fetchAutomaticRepayment, fetchResetTransactionPassword } from 'api/home/account-set';
   
   export default {
@@ -185,7 +186,12 @@
       },
       // 修改交易密码
       updateTransactionPassword() {
-        this.updateTransactionPasswordData.sessionId = this.uuid;
+        if (!this.uuid) {
+          setUuid();
+          this.updateTransactionPasswordData.sessionId = getUuid();
+        } else {
+          this.updateTransactionPasswordData.sessionId = this.uuid;
+        }
         fetchResetTransactionPassword(this.updateTransactionPasswordData)
           .then(response => {
             if (response.data.meta.code === 200) {
@@ -211,7 +217,12 @@
           return;
         }
         this.requestBankData = {};
-        this.signingData.sessionId = this.uuid;
+        if (!this.uuid) {
+          setUuid();
+          this.signingData.sessionId = getUuid();
+        } else {
+          this.signingData.sessionId = this.uuid;
+        }
         fetchAutomaticBidding(this.signingData)
           .then(response => {
             if (response.data.meta.code === 200) {
