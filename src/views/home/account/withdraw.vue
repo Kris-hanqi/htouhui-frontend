@@ -220,6 +220,13 @@
       // 获取提现手续费
       getWithdrawCostDelay: delayFn(function() {
         if (!this.money) return;
+        if (!(this.money <= this.accountMoney && this.money > 1)) {
+          this.$message({
+            message: '提现金额应该在1.01和' + this.accountMoney + '之间',
+            type: 'warning'
+          });
+          return;
+        }
         if (!validateMoney12(this.money)) {
           this.$message({
             message: '提现金额只能输入数字',

@@ -71,20 +71,28 @@
     methods: {
       sendCode() {
         if (!this.email) return;
+        this.startSmsTimer = true;
         fetchSendEmailCode({ email: this.email, type: 'change_binding_email' })
           .then(response => {
             if (response.data.meta.code === 200) {
               this.startSmsTimer = true;
-              this.showPrompt = true;
               this.$message({
                 message: '邮箱验证码已发送',
                 type: 'success'
               });
+            } else {
+              this.startSmsTimer = false;
             }
           });
       },
       checkCurrentEmail() {
-        if (!this.emailData.authCode) return;
+        if (!this.emailData.authCode) {
+          this.$message({
+            message: '验证码不能为空',
+            type: 'warning'
+          });
+          return;
+        }
         this.loading = true;
         fetchCheckCurrentEmail(this.emailData)
           .then(response => {

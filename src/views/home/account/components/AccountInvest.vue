@@ -152,7 +152,7 @@
       }
 
       .td1 {
-        width: 137px;
+        width: 150px;
 
         span {
           display: inline-block;
@@ -165,18 +165,18 @@
       }
 
       .td2 {
-        width: 167px;
+        width: 130px;
         color: #7c86a2;
         text-indent: 1em;
       }
 
       .td3 {
-        width: 75px;
+        width: 100px;
         color: #7c86a2;
       }
 
       .td4 {
-        width: 160px;
+        width: 150px;
         text-align: right;
       }
     }

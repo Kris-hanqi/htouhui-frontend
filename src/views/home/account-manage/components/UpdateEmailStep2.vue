@@ -89,15 +89,16 @@
           });
           return;
         }
+        this.startSmsTimer = true;
         fetchSendEmailCode(this.info)
           .then(response => {
             if (response.data.meta.code === 200) {
-              this.startSmsTimer = true;
-              this.showPrompt = true;
               this.$message({
                 message: '邮箱验证码已发送',
                 type: 'success'
               });
+            } else {
+              this.startSmsTimer = false;
             }
           });
       },
@@ -116,7 +117,13 @@
           });
           return;
         }
-        if (!this.info.authCode) return;
+        if (!this.info.authCode) {
+          this.$message({
+            message: '验证码不能为空',
+            type: 'warning'
+          });
+          return;
+        }
         this.loading = true;
         fetchBindEmail(this.info)
           .then(response => {
