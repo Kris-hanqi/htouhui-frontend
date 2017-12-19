@@ -116,7 +116,13 @@
           });
           return;
         }
-        if (!this.info.authCode) return;
+        if (!this.info.authCode) {
+          this.$message({
+            message: '验证码不能为空',
+            type: 'warning'
+          });
+          return;
+        }
         this.loading = true;
         fetchBindEmail(this.info)
           .then(response => {
