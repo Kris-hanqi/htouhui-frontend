@@ -84,7 +84,6 @@
             this.gainData.rate = v.rate;
           }
         });
-        console.log(this.gainData);
         feachGainCalculator(this.gainData).then(response => {
           if (response.data.meta.code === 200) {
             this.gain = response.data.data.anticipatedInterest;
