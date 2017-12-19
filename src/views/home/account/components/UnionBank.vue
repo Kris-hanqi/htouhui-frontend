@@ -33,10 +33,14 @@
         </el-form-item>
       </el-form>
       
-      <el-table :data="list" v-loading="listLoading" element-loading-text="拼命加载中">
+      <el-table :data="list"
+                v-loading="listLoading"
+                element-loading-text="拼命加载中">
+        <!-- 无数据时显示 -->
+        <no-data slot="empty"></no-data>
         <el-table-column width="50" property="id" label="序号"></el-table-column>
         <el-table-column width="100" property="cnapsNo" label="联行行号"></el-table-column>
-        <el-table-column width="260" property="bankName" label="银行名称"></el-table-column>
+        <el-table-column width="240" property="bankName" label="银行名称"></el-table-column>
         <el-table-column width="320" property="address" label="地址"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
@@ -46,8 +50,9 @@
       </el-table>
   
       <!-- 分页 -->
-      <div class="pages" v-show="!listLoading">
-        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录（共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
+      <div class="pages" v-if="list && list.length">
+        <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录
+        （共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
         <el-pagination
           @current-change="handleCurrentChange"
           :current-page.sync="listQuery.pageNo"
@@ -60,6 +65,8 @@
 
 <script>
   import { fetchGetProvince, fetchGetCity, fetchGetUnionBank } from 'api/home/account'
+  import NoData from '../../components/NoData.vue';
+  
   export default {
     props: {
       visible: {
@@ -67,6 +74,9 @@
         default: false,
         required: true
       }
+    },
+    components: {
+      NoData
     },
     computed: {
       getPageSize() {
@@ -97,13 +107,16 @@
     },
     methods: {
       getPageList() {
+        this.listLoading = true;
         this.listQuery.province = this.provinceName;
-        fetchGetUnionBank(this.listQuery).then(response => {
-          if (response.data.meta.code === 200) {
-            this.list = response.data.data.data;
-            this.total = response.data.data.count || 0;
-          }
-        })
+        fetchGetUnionBank(this.listQuery)
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.list = response.data.data.data;
+              this.total = response.data.data.count || 0;
+            }
+            this.listLoading = false;
+          })
       },
       handleClose() {
         this.$emit('close');
@@ -159,6 +172,10 @@
   .union-bank {
     .el-form-item__label {
       padding: 0 3px 0 0;
+    }
+  
+    .el-table__empty-block {
+      min-height: 260px;
     }
   }
 </style>
