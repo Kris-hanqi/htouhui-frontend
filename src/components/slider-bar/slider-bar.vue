@@ -5,10 +5,11 @@
       ref="popover1"
       placement="left"
       popper-class="gain-calculator-popover"
-      :visible-arrow="false"
       width="320"
-      trigger="hover">
-      <gain-calculator></gain-calculator>
+      trigger="click">
+      <div>
+        <gain-calculator></gain-calculator>
+      </div>
     </el-popover>
 
     <!--计算器-->
