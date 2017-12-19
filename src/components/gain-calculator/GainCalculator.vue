@@ -94,7 +94,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   $gain-calculator-bg: #4181dc;
   
   .gain-calculator {
