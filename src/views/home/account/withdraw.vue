@@ -219,6 +219,7 @@
       },
       // 获取提现手续费
       getWithdrawCostDelay: delayFn(function() {
+        this.commissionCharge = 0;
         if (!this.money) return;
         if (!(this.money <= this.accountMoney && this.money > 1)) {
           this.$message({
