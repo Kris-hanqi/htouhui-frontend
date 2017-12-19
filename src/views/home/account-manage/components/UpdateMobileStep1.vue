@@ -71,15 +71,16 @@
     },
     methods: {
       sendCode() {
+        this.startSmsTimer = true;
         fetchSendCode({ authType: 'change_binding_mobile_number' })
           .then(response => {
             if (response.data.meta.code === 200) {
-              this.startSmsTimer = true;
-              this.showCodePrompt = true;
               this.$message({
                 message: '手机验证码已发送',
                 type: 'success'
               });
+            } else {
+              this.startSmsTimer = false;
             }
           })
       },
