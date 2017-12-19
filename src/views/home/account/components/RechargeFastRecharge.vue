@@ -67,6 +67,7 @@
   import BankCard from '../../components/BackCard.vue';
   import RequestBankFrom from '../../components/RequestBankFrom.vue';
   import OperationalValidate from '../../components/OperationalValidate.vue';
+  import { getUuid, setUuid } from 'utils/auth';
 
   export default {
     computed: {
@@ -145,7 +146,12 @@
           this.rechargeData.callbackUrl = `${this.baseUrl}/user/home.html`;
         }
         this.loading = true;
-        this.rechargeData.sessionId = this.uuid;
+        if (!this.uuid) {
+          setUuid();
+          this.rechargeData.sessionId = getUuid();
+        } else {
+          this.rechargeData.sessionId = this.uuid;
+        }
         fetchRecharge(this.rechargeData)
           .then(response => {
             this.loading = false;

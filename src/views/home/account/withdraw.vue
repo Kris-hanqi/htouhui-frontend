@@ -88,6 +88,7 @@
   import { fetchWithdraw, fetchWithdrawCost, fetchAccountMoney, fetchAllowLargeWithdraw } from 'api/home/account';
   import { validateNumber, validateMoney12 } from 'utils/validate';
   import { delayFn } from 'utils/index';
+  import { getUuid, setUuid } from 'utils/auth';
 
   let allowLargeWithdrawNumber = 0;
 
@@ -162,7 +163,12 @@
         }
         this.withdrawData.cardNo = this.bankCard;
         this.withdrawData.inputMoney = this.money;
-        this.withdrawData.sessionId = this.uuid;
+        if (!this.uuid) {
+          setUuid();
+          this.withdrawData.sessionId = getUuid();
+        } else {
+          this.withdrawData.sessionId = this.uuid;
+        }
         // 大于五万属于大额提现
         if (this.withdrawData.inputMoney >= 50002) {
           // 查看是否允许大额提现
@@ -219,6 +225,7 @@
       },
       // 获取提现手续费
       getWithdrawCostDelay: delayFn(function() {
+        this.commissionCharge = 0;
         if (!this.money) return;
         if (!(this.money <= this.accountMoney && this.money > 1)) {
           this.$message({
