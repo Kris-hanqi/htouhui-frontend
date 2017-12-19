@@ -100,6 +100,7 @@
                 message: response.data.meta.message,
                 type: 'error'
               });
+              this.startSmsTimer = false;
             }
           })
       },
