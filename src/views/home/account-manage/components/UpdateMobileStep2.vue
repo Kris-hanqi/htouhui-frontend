@@ -77,7 +77,13 @@
     },
     methods: {
       sendCode() {
-        if (!this.mobileInfo.mobileNumber) return;
+        if (!this.mobileInfo.mobileNumber) {
+          this.$message({
+            message: '请输入手机号',
+            type: 'warning'
+          });
+          return;
+        }
         if (!validateMobile(this.mobileInfo.mobileNumber)) {
           this.$message({
             message: '手机号不合法，请重新输入',
