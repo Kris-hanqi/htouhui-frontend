@@ -33,14 +33,14 @@
       <div class="form-group">
         <label class="col-md-2 control-label">支付金额</label>
         <div class="col-md-6">
-          <p class="form-control-static">{{ (rechargeData.money || 0) | currency('') }}元</p>
+          <p class="form-control-static">{{ (rechargeData.money <= 0 ? 0 : rechargeData.money) | currency('') }}元</p>
         </div>
       </div>
       <div class="form-group">
         <div class="col-md-offset-2 col-md-4">
           <el-button type="primary"
                      class="btn-block"
-                     :disabled="!rechargeData.money"
+                     :disabled="rechargeData.money <= 0"
                      @click="getRequestBankData"
                      :loading="loading" round>充值</el-button>
         </div>
