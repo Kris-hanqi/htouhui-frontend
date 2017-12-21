@@ -295,6 +295,14 @@ export const constantRouterMap = [
                 component: _import('home/account-manage/set')
               },
               {
+                path: 'riskEvaluation',
+                meta: {
+                  title: '风险测评'
+                },
+                name: 'AMSRiskEvaluation',
+                component: _import('home/account-manage/components/RiskEvaluation')
+              },
+              {
                 path: 'updateLoginPassword',
                 meta: {
                   title: '修改密码'

@@ -18,19 +18,19 @@ module.exports = {
     productionGzipExtensions: ['js', 'css'],
     // Run the build command with an extra argument to
     // View the bundle analyzer report after build finishes:
-    // `npm run build --report`
+    // `npm run build --report``
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report
   },
   dev: {
     env: require('./dev.env'),
-    port: 9666,
+    port: 9668,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
       '/web-api': {
-        target: 'http://120.27.166.122:5001',
+        target: 'https://120.27.165.213',
         pathRewrite: {
           '^/web-api': '/web-api'
         }

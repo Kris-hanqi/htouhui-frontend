@@ -24,6 +24,7 @@ import {
   Select,
   Option,
   Radio,
+  RadioGroup,
   Col,
   Checkbox,
   Notification,
@@ -70,6 +71,7 @@ Vue.use(Popover);
 Vue.use(Steps);
 Vue.use(Step);
 Vue.use(Radio);
+Vue.use(RadioGroup);
 Vue.use(Col);
 Vue.use(Select);
 Vue.use(Option);
