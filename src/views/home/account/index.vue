@@ -19,7 +19,7 @@
       width="625px"
       :before-close="onClose">
       <p class="risk-title-icon">
-        <i class="ku-icon icon-user"></i>
+        <i class="ku-icon icon-edit-round"></i>
       </p>
       <p class="risk-title-text">您还尚未完成风险测评！</p>
       <p class="risk-footer">
