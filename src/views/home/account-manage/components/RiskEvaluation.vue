@@ -31,17 +31,23 @@
 
     <el-dialog
       :visible.sync="dialogVisible"
-      width="30%">
-      <img src="" alt="">
-      <span class="conclusion">恭喜您完成测评</span>
-      <span slot="footer" class="dialog-footer">
+      width="625px">
+      <p style="text-align: center">
+        <img :src="oTypeImg[userType]" alt="">
+      </p>
+      <p class="result-title-text">恭喜您完成测评</p>
+      <p class="result-footer">
         <el-button type="primary" @click="dialogVisible = false" round>确 定</el-button>
-      </span>
+      </p>
     </el-dialog>
   </div>
 </template>
 
 <script>
+  import typeImg1 from 'assets/images/risk/ico01.png';
+  import typeImg2 from 'assets/images/risk/ico02.png';
+  import typeImg3 from 'assets/images/risk/ico03.png';
+  import typeImg4 from 'assets/images/risk/ico04.png';
   import HthPanel from 'common/Panel/index.vue';
   import { fetchGetQuestionnaire, fetchSubmitQuestionnaire } from 'api/home/account-set';
 
@@ -51,6 +57,13 @@
     },
     data() {
       return {
+        oTypeImg: {
+          A1: typeImg1,
+          B1: typeImg2,
+          C1: typeImg3,
+          D1: typeImg4
+        },
+        userType: 'A1',  // 用户的风险测评类型
         queryData: {
           warehouseId: null
         },
@@ -65,7 +78,7 @@
             console.dir(res);
             if (res.data.meta.code === 200) {
               this.queryData.warehouseId = res.data.data.id;
-              this.questionnaireData = res.data.data;
+              this.questionnaireData = res.data.data; // 题目列表数据
               console.dir(res.data);
             } else {
               console.error(res.meta.code + ':' + res.meta.message);
@@ -80,12 +93,13 @@
             if (res.status === 200) {
               return res.data;
             } else {
-              console.error('接口调用不成功');
+              console.error('获取风险测评结果接口，调用不成功');
             }
           })
           .then(data => {
             if (data.meta.code === 200) {
-              console.log('先别管别的，反正是调用成功了');
+              this.userType = data.riskLevel;
+              this.$store.commit('SET_IS_JOIN_RISK_ASSESSMENT', true);
               this.dialogVisible = true;
             } else {
               console.error(data.meta.code + ':' + data.meta.message)
@@ -120,29 +134,49 @@
     }
 
     .submit-btn:hover {
-      color: #66b1ff;
+      background: #66b1ff;
     }
-  }
 
-  .risk-description {
-    text-indent: 2em;
-  }
+    .risk-description {
+      text-indent: 2em;
+    }
 
-  .question-box {
-    margin-bottom: 25px;
-    text-indent: 2em;
-  }
+    .question-box {
+      margin-bottom: 25px;
+      text-indent: 2em;
+    }
 
-  .q-spacing {
-    margin: 10px 0 0;
-    text-indent: 2em;
-  }
+    .q-spacing {
+      margin: 10px 0 0;
+      text-indent: 2em;
+    }
 
-  .conclusion {
-    display: block;
-    margin: 36px 0 34px;
-    text-align: center;
-    font-size: 20px;
-    color: #7c86a2;
+    .conclusion {
+      display: block;
+      margin: 36px 0 34px;
+      text-align: center;
+      font-size: 20px;
+      color: #7c86a2;
+    }
+
+    .result-title-text {
+      margin: 13px 0 20px;
+      font-size: 20px;
+      color: #7c86a2;
+      text-align: center;
+    }
+
+    .result-footer {
+      text-align: center;
+
+      .el-button--primary {
+        width: 187px;
+        font-size: 18px;
+      }
+    }
+
+    .el-dialog__title {
+      display: none;
+    }
   }
 </style>

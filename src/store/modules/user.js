@@ -27,9 +27,9 @@ function getNovicePlanStatus(data) {
   let status = null;
   if (data.isNovice) { // 新用户
     status = 1;
-  } else if (data.isJoinNovicePlan) {
+  } else if (data.isJoinNovicePlan) { // 老用户加入新手计划
     status = 2;
-  } else {
+  } else {  // 老用户未加入新手计划
     status = 3;
   }
 
@@ -178,8 +178,8 @@ const user = {
             commit('SET_NOVICE_PLAN_STATUS', getNovicePlanStatus(data));
             commit('SET_IS_BORROWER', isBorrower(data));
             commit('SET_IS_OPEN_ACCOUNT', data.isOpenAccount);
-            commit('SET_IS_JOIN_RISK_ASSESSMENT', data.isOpenAccount);
-            commit('SET_IS_TRANSACTION_PASSWORD', data.isJoinRiskAssessment);
+            commit('SET_IS_JOIN_RISK_ASSESSMENT', data.isJoinRiskAssessment);
+            commit('SET_IS_TRANSACTION_PASSWORD', data.isTransactionPassword);
             commit('SET_IS_BANK_CARD', !!data.bankCard);
             commit('SET_IS_AUTOMATIC_BIDDING', data.isAutoBidAuth);
             commit('SET_IS_AUTOMATIC_DEBT_TRANSFER', data.isAutoInvestAuth);
