@@ -71,7 +71,7 @@ const user = {
     isAutomaticBidding: false,         // 是否自动投标授权
     isAutomaticDebtTransfer: false,    // 是否自动债转授权
     isAutomaticRepayment: false,       // 是否自动还款
-    novicePlanStatus: 1,               // 新手计划状态
+    novicePlanStatus: 0,               // 新手计划状态
     isBorrower: false,                 // 是否是借款人
     headImg: ''                        // 头像url
   },

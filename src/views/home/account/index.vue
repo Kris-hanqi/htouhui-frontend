@@ -15,6 +15,7 @@
     <!-- 风险测评弹窗 -->
     <el-dialog
       :visible.sync="dialogVisible"
+      title="提示"
       width="625px"
       :before-close="onClose">
       <p class="risk-title-icon">
@@ -48,16 +49,27 @@
     computed: {
       ...mapGetters([
         'username',
-        'status',
         'isOpenAccount',
         'isJoinRiskAssessment'
-      ])
+      ]),
+      novicePlanStatus() {
+        return this.$store.getters.novicePlanStatus
+      }
+    },
+    watch: {
+      novicePlanStatus(value) {
+        if (value !== 0) {
+          const key = `${this.username}_${riskName}`;
+          if (!localStorage.getItem(key)) {
+            this.dialogVisible = this.novicePlanStatus === 1 && this.isOpenAccount && !this.isJoinRiskAssessment;
+          }
+        }
+      }
     },
     data() {
       return {
         assetData: {},
-        dialogVisible: true,
-        riskIgnoreUser: []
+        dialogVisible: false
       }
     },
     methods: {
@@ -71,6 +83,7 @@
       },
       onClose() {
         localStorage.setItem(`${this.username}_${riskName}`, 'close');
+        this.dialogVisible = false;
       },
       onSkip() {
         this.$router.push('/accountManage/set/riskEvaluation');
@@ -78,20 +91,11 @@
     },
     created() {
       this.getAsset();
-      const key = `${this.username}_${riskName}`;
-      console.log(localStorage.getItem(key));
-      if (!localStorage.getItem(key)) {
-        console.log(123);
-        console.log(this.status);
-        console.log(this.isOpenAccount);
-        console.log(this.isJoinRiskAssessment);
-        this.dialogVisible = this.status === 1 && this.isOpenAccount && !this.isJoinRiskAssessment;
-      }
     }
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .account-wrapper {
     .risk-title-icon {
       text-align: center;
