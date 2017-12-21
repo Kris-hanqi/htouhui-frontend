@@ -31,6 +31,7 @@ module.exports = {
     proxyTable: {
       '/web-api': {
         target: 'https://120.27.165.213',
+        secure: false,
         pathRewrite: {
           '^/web-api': '/web-api'
         }
