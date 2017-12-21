@@ -125,9 +125,9 @@
             </router-link>
           </td>
         </tr>
-        <tr class="borderNone">
-          <td>风险测评<i class="iconDangerous" v-if="!email"></i></td>
-          <td :class="{ 'text-warning': email }">{{ email ? email : '未绑定' }}</td>
+        <!--<tr class="borderNone">
+          <td>风险测评<i class="iconDangerous" v-if="!isJoinRiskAssessment"></i></td>
+          <td :class="{ 'text-warning': isJoinRiskAssessment }">{{ isJoinRiskAssessment ? email : '未测评' }}</td>
           <td rowspan="2">
             <router-link to="/accountManage/set/updateEmailStep1" v-if="email">
               <button class="hth-btn" :class="{ 'btn-blue': !email }">{{ email ? '修改' : '绑定' }}</button>
@@ -136,7 +136,7 @@
               <button class="hth-btn" :class="{ 'btn-blue': !email }">{{ email ? '修改' : '绑定' }}</button>
             </router-link>
           </td>
-        </tr>
+        </tr>-->
         <tr class="borderNone">
           <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">可用于获取账户资金变动通知和投资讯息</td>
         </tr>
@@ -183,6 +183,7 @@
         'accountId',
         'lastLoginTime',
         'transactionPasswordStatus',
+        'isJoinRiskAssessment',
         'isAutomaticBidding',
         'isAutomaticDebtTransfer',
         'isAutomaticRepayment'

@@ -16,7 +16,7 @@
     <el-dialog
       :visible.sync="dialogVisible"
       width="625px"
-      :before-close="onClose()">
+      :before-close="onClose">
       <p class="risk-title-icon">
         <i class="ku-icon icon-user"></i>
       </p>
@@ -36,6 +36,8 @@
   import Invest from './components/AccountInvest.vue';
   import RepayCalendar from './components/RepayCalendar.vue';
 
+  const riskName = 'risk';
+
   export default {
     components: {
       Top,
@@ -45,14 +47,17 @@
     },
     computed: {
       ...mapGetters([
+        'username',
         'status',
-        'isOpenAccount'
+        'isOpenAccount',
+        'isJoinRiskAssessment'
       ])
     },
     data() {
       return {
         assetData: {},
-        dialogVisible: true
+        dialogVisible: true,
+        riskIgnoreUser: []
       }
     },
     methods: {
@@ -65,7 +70,7 @@
         })
       },
       onClose() {
-//        localStorage.setItem()
+        localStorage.setItem(`${this.username}_${riskName}`, 'close');
       },
       onSkip() {
         this.$router.push('/accountManage/set/riskEvaluation');
@@ -73,35 +78,46 @@
     },
     created() {
       this.getAsset();
-//      this.dialogVisible = this.status === 1 && this.isOpenAccount;
+      const key = `${this.username}_${riskName}`;
+      console.log(localStorage.getItem(key));
+      if (!localStorage.getItem(key)) {
+        console.log(123);
+        console.log(this.status);
+        console.log(this.isOpenAccount);
+        console.log(this.isJoinRiskAssessment);
+        this.dialogVisible = this.status === 1 && this.isOpenAccount && !this.isJoinRiskAssessment;
+      }
     }
   }
 </script>
 
 <style lang="scss">
-  .risk-title-icon {
-    text-align: center;
-    font-size: 139px;
-    color: red;
+  .account-wrapper {
+    .risk-title-icon {
+      text-align: center;
+      font-size: 139px;
+      color: red;
+    }
+
+    .risk-title-text {
+      margin: 25px 0;
+      font-size: 24px;
+      text-align: center;
+      color: #727e90;
+    }
+
+    .risk-footer {
+      text-align: center;
+    }
+
+    .el-button--primary {
+      width: 187px;
+      font-size: 18px;
+    }
+
+    .el-dialog__title {
+      display: none;
+    }
   }
 
-  .risk-title-text {
-    margin: 25px 0;
-    font-size: 24px;
-    text-align: center;
-    color: #727e90;
-  }
-
-  .risk-footer {
-    text-align: center;
-  }
-
-  .el-button--primary {
-    width: 187px;
-    font-size: 18px;
-  }
-
-  .el-dialog__title {
-    display: none !important;
-  }
 </style>
