@@ -17,6 +17,7 @@ const getters = {
   IDNumber: state => state.user.IDNumber,
   novicePlanStatus: state => state.user.novicePlanStatus,
   isOpenAccount: state => state.user.isOpenAccount,
+  isJoinRiskAssessment: state => state.user.isJoinRiskAssessment,
   isTransactionPassword: state => state.user.isTransactionPassword,
   isBankCard: state => state.user.isBankCard,
   isAutomaticBidding: state => state.user.isAutomaticBidding,

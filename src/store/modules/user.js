@@ -65,6 +65,7 @@ const user = {
     lastLoginTime: '',                 // 最后登录时间
     transactionPasswordStatus: false,  // 是否设置交易密码
     isOpenAccount: false,              // 是否开户
+    isJoinRiskAssessment: false,       // 是否进行过风险测评
     isTransactionPassword: false,      // 是否设置交易密码
     isBankCard: false,                 // 是否绑卡
     isAutomaticBidding: false,         // 是否自动投标授权
@@ -127,6 +128,9 @@ const user = {
     SET_IS_OPEN_ACCOUNT: (state, data) => {
       state.isOpenAccount = data;
     },
+    SET_IS_JOIN_RISK_ASSESSMENT: (state, data) => {
+      state.isJoinRiskAssessment = data;
+    },
     SET_IS_TRANSACTION_PASSWORD: (state, data) => {
       state.isTransactionPassword = data;
     },
@@ -174,7 +178,8 @@ const user = {
             commit('SET_NOVICE_PLAN_STATUS', getNovicePlanStatus(data));
             commit('SET_IS_BORROWER', isBorrower(data));
             commit('SET_IS_OPEN_ACCOUNT', data.isOpenAccount);
-            commit('SET_IS_TRANSACTION_PASSWORD', data.isSetPassWord);
+            commit('SET_IS_JOIN_RISK_ASSESSMENT', data.isOpenAccount);
+            commit('SET_IS_TRANSACTION_PASSWORD', data.isJoinRiskAssessment);
             commit('SET_IS_BANK_CARD', !!data.bankCard);
             commit('SET_IS_AUTOMATIC_BIDDING', data.isAutoBidAuth);
             commit('SET_IS_AUTOMATIC_DEBT_TRANSFER', data.isAutoInvestAuth);
