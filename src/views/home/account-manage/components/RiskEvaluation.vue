@@ -1,5 +1,5 @@
 <template>
-  <div class="risk-evaluation-password-wrapper">
+  <div class="risk-evaluation-password-wrapper" v-loading="displayLoading">
     <hth-panel title="风险测评">
       <p class="risk-description">通过风险评测可了解您对投资风险的承受意愿，同时我们会根据您的承受意愿推荐符合您的投资产品。</p>
       <div class="split-line"></div>
@@ -66,6 +66,7 @@
           warehouseId: null
         },
         dialogVisible: false,
+        displayLoading: true,
         questionnaireData: {}
       }
     },
@@ -77,6 +78,7 @@
             if (res.data.meta.code === 200) {
               this.queryData.warehouseId = res.data.data.id;
               this.questionnaireData = res.data.data; // 题目列表数据
+              this.displayLoading = false;
               console.dir(res.data);
             } else {
               console.error(res.meta.code + ':' + res.meta.message);
