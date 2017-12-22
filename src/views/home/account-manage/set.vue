@@ -102,6 +102,7 @@
         <tr>
           <td colspan="2" class="tableSmallFontColor textAlignLeft tablePadding">保障资金安全，转入、转出、投资等资金相关操作时使用</td>
         </tr>
+
         <tr class="borderNone">
           <td>登录密码</td>
           <td>已设置</td>
@@ -110,13 +111,15 @@
               <button class="hth-btn">修改</button>
             </router-link>
           </td>
+        </tr>
         <tr>
           <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">登录密码已设置 上次登录时间： {{ lastLoginTime }}</td>
         </tr>
+
         <tr class="borderNone">
           <td>邮箱认证<i class="iconDangerous" v-if="!email"></i></td>
           <td :class="{ 'text-warning': email }">{{ email ? email : '未绑定' }}</td>
-          <td rowspan="2">
+          <td rowspan="2" class="borderLine">
             <router-link to="/accountManage/set/updateEmailStep1" v-if="email">
               <button class="hth-btn" :class="{ 'btn-blue': !email }">{{ email ? '修改' : '绑定' }}</button>
             </router-link>
@@ -125,20 +128,21 @@
             </router-link>
           </td>
         </tr>
-        <!--<tr class="borderNone">
+        <tr>
+          <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">可用于获取账户资金变动通知和投资讯息</td>
+        </tr>
+
+        <tr class="borderNone">
           <td>风险测评<i class="iconDangerous" v-if="!isJoinRiskAssessment"></i></td>
-          <td :class="{ 'text-warning': isJoinRiskAssessment }">{{ isJoinRiskAssessment ? email : '未测评' }}</td>
+          <td :class="{ 'text-warning': isJoinRiskAssessment }">{{ isJoinRiskAssessment ? riskType[isJoinRiskAssessment] : '未测评' }}</td>
           <td rowspan="2">
-            <router-link to="/accountManage/set/updateEmailStep1" v-if="email">
-              <button class="hth-btn" :class="{ 'btn-blue': !email }">{{ email ? '修改' : '绑定' }}</button>
-            </router-link>
-            <router-link to="/accountManage/set/bindEmail" v-else>
-              <button class="hth-btn" :class="{ 'btn-blue': !email }">{{ email ? '修改' : '绑定' }}</button>
+            <router-link to="/accountManage/set/riskEvaluation">
+              <button class="hth-btn" :class="{ 'btn-blue': !isJoinRiskAssessment }">{{ isJoinRiskAssessment ? '重测' : '测评' }}</button>
             </router-link>
           </td>
-        </tr>-->
-        <tr class="borderNone">
-          <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">可用于获取账户资金变动通知和投资讯息</td>
+        </tr>
+        <tr  class="borderNone">
+          <td colspan="2" class="tableSmallFont textAlignLeft tablePadding">参考风险承受能力和投资偏好，提供个性化理财服务</td>
         </tr>
       </table>
     </hth-panel>
@@ -202,7 +206,13 @@
           callbackUrl: getLocationUrl() + '/user/home.html#/accountManage/set/index',
           sessionId: ''
         },
-        requestBankData: {}
+        requestBankData: {},
+        riskType: {
+          A1: '谨慎型',
+          B1: '稳健型',
+          C1: '进取型',
+          D1: '激进型'
+        }
       }
     },
     methods: {

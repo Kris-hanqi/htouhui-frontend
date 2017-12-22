@@ -22,8 +22,6 @@
         </div>
       </div>
 
-      <p class="conclusion">评测完成，感谢您的参与！</p>
-
       <div class="footer">
         <button class="submit-btn" @click="submitQuestionnaire();">提 交</button>
       </div>
@@ -37,7 +35,7 @@
       </p>
       <p class="result-title-text">恭喜您完成测评</p>
       <p class="result-footer">
-        <el-button type="primary" @click="dialogVisible = false" round>确 定</el-button>
+        <el-button type="primary" @click="$router.go(-1)" round>确 定</el-button>
       </p>
     </el-dialog>
   </div>
@@ -149,14 +147,6 @@
     .q-spacing {
       margin: 10px 0 0;
       text-indent: 2em;
-    }
-
-    .conclusion {
-      display: block;
-      margin: 36px 0 34px;
-      text-align: center;
-      font-size: 20px;
-      color: #7c86a2;
     }
 
     .result-title-text {
