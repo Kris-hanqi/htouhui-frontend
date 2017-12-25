@@ -8,7 +8,7 @@
         :before-upload="beforeAvatarUpload">
         <avatar size="large" icon="icon-avatar" :src="headImg"></avatar>
       </el-upload>
-      <span class="text">你好，<i class="num-font">{{ realName || username }}</i></span>
+      <span class="text">你好，<i class="num-font">{{ username }}</i></span>
       <a @click.stop="operationAccount"
          style="margin-right: 8px;"
          :class="{ active: status }">
@@ -54,7 +54,6 @@
     },
     computed: {
       ...mapGetters([
-        'realName',
         'username',
         'status',
         'bankCard',
