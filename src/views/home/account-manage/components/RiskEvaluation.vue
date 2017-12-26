@@ -34,7 +34,7 @@
         <img :src="oTypeImg[userType]" alt="">
       </p>
       <p class="result-title-text">适合您的产品风险等级</p>
-      <p style="font-size: 26px; color: #394b67; text-align: center; font-weight: 600">{{ typeList[userType].text }}</p>
+      <p style="font-size: 22px; color: #37455a; text-align: center; font-weight: 600">{{ typeList[userType].text }}</p>
       <p class="result-footer">
         <el-button type="primary" @click="handleClose" round>确 定</el-button>
       </p>
