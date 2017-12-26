@@ -1,5 +1,5 @@
 <template>
-  <div class="risk-evaluation-password-wrapper" v-loading="displayLoading">
+  <div class="risk-assessment" v-loading="displayLoading">
     <hth-panel title="风险测评">
       <p class="risk-description">通过风险评测可了解您对投资风险的承受意愿，同时我们会根据您的承受意愿推荐符合您的投资产品。</p>
       <div class="split-line"></div>
@@ -18,24 +18,24 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
       <div class="footer">
-        <button class="submit-btn" @click="submitQuestionnaire();">提 交</button>
+        <el-button class="submit-btn" :loading="submitLoading" @click="submitQuestionnaire();">提 交</el-button>
       </div>
     </hth-panel>
 
     <el-dialog
       :visible.sync="dialogVisible"
+      :before-close="handleClose"
       width="625px">
       <p style="text-align: center">
         <img :src="oTypeImg[userType]" alt="">
       </p>
       <p class="result-title-text">恭喜您完成测评</p>
       <p class="result-footer">
-        <el-button type="primary" @click="$router.go(-1)" round>确 定</el-button>
+        <el-button type="primary" @click="handleClose" round>确 定</el-button>
       </p>
     </el-dialog>
   </div>
@@ -67,44 +67,42 @@
         },
         dialogVisible: false,
         displayLoading: true,
+        submitLoading: false,
         questionnaireData: {}
       }
     },
     methods: {
       getQuestionnaire() {
-        fetchGetQuestionnaire()
-          .then(res => {
-            console.dir(res);
-            if (res.data.meta.code === 200) {
-              this.queryData.warehouseId = res.data.data.id;
-              this.questionnaireData = res.data.data; // 题目列表数据
-              this.displayLoading = false;
-              console.dir(res.data);
-            } else {
-              console.error(res.meta.code + ':' + res.meta.message);
-            }
-          })
+        fetchGetQuestionnaire().then(response => {
+          if (response.data.meta.code === 200) {
+            this.queryData.warehouseId = response.data.data.id;
+            this.questionnaireData = response.data.data;     // 题目列表数据
+            this.displayLoading = false;
+          }
+        })
       },
       submitQuestionnaire() {
-        const vm = this;
-        console.dir(vm.queryData);
+        const keys = Object.keys(this.queryData);
+        if (keys.length < 11) {
+          this.$message({
+            message: '尚有评测项未选择！',
+            type: 'warning'
+          });
+          return;
+        }
+        this.submitLoading = true;
         fetchSubmitQuestionnaire(this.queryData)
-          .then(res => {
-            if (res.status === 200) {
-              return res.data;
-            } else {
-              console.error('获取风险测评结果接口，调用不成功');
-            }
-          })
-          .then(data => {
-            if (data.meta.code === 200) {
-              this.userType = data.riskLevel;
-              this.$store.commit('SET_IS_JOIN_RISK_ASSESSMENT', true);
+          .then(response => {
+            if (response.data.meta.code === 200) {
+              this.userType = response.data.data.type;
+              this.$store.commit('SET_IS_JOIN_RISK_ASSESSMENT', this.userType);
               this.dialogVisible = true;
-            } else {
-              console.error(data.meta.code + ':' + data.meta.message)
             }
+            this.submitLoading = false;
           })
+      },
+      handleClose() {
+        this.$router.go(-1);
       }
     },
     created() {
@@ -114,7 +112,7 @@
 </script>
 
 <style lang="scss">
-  .risk-evaluation-password-wrapper {
+  .risk-assessment {
     width: 832px;
     height: 797px;
     color: #35385a;
