@@ -172,7 +172,7 @@
     }
 
     .result-footer {
-      margin-top: 10px;
+      margin-top: 30px;
       text-align: center;
 
       .el-button--primary {
