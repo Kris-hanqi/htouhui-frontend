@@ -91,6 +91,14 @@
     },
     created() {
       this.getAsset();
+      if (!this.dialogVisible) {
+        if (this.$store.getters.novicePlanStatus !== 0) {
+          const key = `${this.username}_${riskName}`;
+          if (!localStorage.getItem(key)) {
+            this.dialogVisible = this.novicePlanStatus === 1 && this.isOpenAccount && !this.isJoinRiskAssessment;
+          }
+        }
+      }
     }
   }
 </script>
