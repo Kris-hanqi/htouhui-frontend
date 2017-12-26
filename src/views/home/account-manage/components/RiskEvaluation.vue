@@ -33,7 +33,8 @@
       <p style="text-align: center">
         <img :src="oTypeImg[userType]" alt="">
       </p>
-      <p class="result-title-text">恭喜您完成测评</p>
+      <p class="result-title-text">适合您的产品风险等级</p>
+      <p style="font-size: 26px; color: #394b67; text-align: center; font-weight: 600">{{ typeList[userType].text }}</p>
       <p class="result-footer">
         <el-button type="primary" @click="handleClose" round>确 定</el-button>
       </p>
@@ -42,10 +43,10 @@
 </template>
 
 <script>
-  import typeImg1 from 'assets/images/risk/ico01.png';
-  import typeImg2 from 'assets/images/risk/ico02.png';
-  import typeImg3 from 'assets/images/risk/ico03.png';
-  import typeImg4 from 'assets/images/risk/ico04.png';
+  import img_v1 from 'assets/images/risk/v1.png';
+  import img_v2 from 'assets/images/risk/v2.png';
+  import img_v3 from 'assets/images/risk/v3.png';
+  import img_v4 from 'assets/images/risk/v4.png';
   import HthPanel from 'common/Panel/index.vue';
   import { fetchGetQuestionnaire, fetchSubmitQuestionnaire } from 'api/home/account-set';
 
@@ -56,14 +57,28 @@
     data() {
       return {
         oTypeImg: {
-          A1: typeImg1,
-          B1: typeImg2,
-          C1: typeImg3,
-          D1: typeImg4
+          A1: img_v1,
+          B1: img_v2,
+          C1: img_v3,
+          D1: img_v4
         },
         userType: 'A1',  // 用户的风险测评类型
         queryData: {
           warehouseId: null
+        },
+        typeList: {
+          A1: {
+            text: '低风险'
+          },
+          B1: {
+            text: '低风险、中等风险'
+          },
+          C1: {
+            text: '低风险、中等风险、中高风险'
+          },
+          D1: {
+            text: '低风险、中等风险、中高风险、高风险'
+          },
         },
         dialogVisible: false,
         displayLoading: true,
@@ -150,13 +165,14 @@
     }
 
     .result-title-text {
-      margin: 13px 0 20px;
-      font-size: 20px;
+      margin: 13px 0 10px;
+      font-size: 16px;
       color: #7c86a2;
       text-align: center;
     }
 
     .result-footer {
+      margin-top: 10px;
       text-align: center;
 
       .el-button--primary {
