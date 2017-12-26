@@ -78,7 +78,7 @@
           },
           D1: {
             text: '低风险、中等风险、中高风险、高风险'
-          },
+          }
         },
         dialogVisible: false,
         displayLoading: true,
