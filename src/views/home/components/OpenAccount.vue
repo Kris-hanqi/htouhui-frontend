@@ -167,6 +167,7 @@
               this.$store.commit('SET_BANK_NO', response.data.data.bankNo);
               this.$store.commit('SET_IS_OPEN_ACCOUNT', true);
               this.$store.commit('SET_IS_BANK_CARD', true);
+              this.$store.commit('SET_NOVICE_PLAN_STATUS', 1);
               this.$emit('success');
               // 请求刷新用户状态
               fetchUpdateUserStatus();
