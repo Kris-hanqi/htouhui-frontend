@@ -2,7 +2,9 @@
   <div class="header-down">
     <div class="contain">
       <div class="header-down__logo">
-        <i class="ku-icon icon-logo"></i>
+        <a href="/">
+          <i class="ku-icon icon-logo"></i>
+        </a>
       </div>
       <ul class="header-down__bar">
         <li><a href="/" active-class="active">首页</a></li>

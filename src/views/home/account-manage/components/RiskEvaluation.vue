@@ -22,7 +22,7 @@
       </div>
 
       <div class="footer">
-        <el-button class="submit-btn" :loading="submitLoading" @click="submitQuestionnaire();">提 交</el-button>
+        <el-button class="submit-btn" :loading="submitLoading" @click="submitQuestionnaire">提 交</el-button>
       </div>
     </hth-panel>
 
