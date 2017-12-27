@@ -1,6 +1,6 @@
 <template>
   <div class="update-mobile-wrapper">
-    <hth-panel title="验证手机号">
+    <hth-panel title="修改手机号">
       <form class="form-horizontal">
         <div class="form-group">
           <label class="col-md-2 control-label">用户名</label>
@@ -77,7 +77,13 @@
     },
     methods: {
       sendCode() {
-        if (!this.mobileInfo.mobileNumber) return;
+        if (!this.mobileInfo.mobileNumber) {
+          this.$message({
+            message: '请输入手机号',
+            type: 'warning'
+          });
+          return;
+        }
         if (!validateMobile(this.mobileInfo.mobileNumber)) {
           this.$message({
             message: '手机号不合法，请重新输入',
@@ -85,22 +91,22 @@
           });
           return;
         }
-        if (this.mobileInfo.mobileNumber === this.mobile) {
-          this.$message({
-            message: '与原手机号一致，请重新输入',
-            type: 'warning'
-          });
-          return;
-        }
+        this.startSmsTimer = true;
         fetchSendCodeNew(this.mobileInfo)
           .then(response => {
             if (response.data.meta.code === 200) {
-              this.startSmsTimer = true;
-              this.showCodePrompt = true;
               this.$message({
                 message: '手机验证码已发送',
                 type: 'success'
               });
+            }
+            if (response.data.meta.code === 9999) {
+              this.$notify({
+                title: '提示',
+                message: response.data.meta.message,
+                type: 'error'
+              });
+              this.startSmsTimer = false;
             }
           })
       },
@@ -112,14 +118,13 @@
           });
           return;
         }
-        if (this.mobileInfo.mobileNumber === this.mobile) {
+        if (!this.mobileInfo.authCode) {
           this.$message({
-            message: '与原手机号一致，请重新输入',
+            message: '请输入验证码',
             type: 'warning'
           });
           return;
         }
-        if (!this.mobileInfo.authCode) return;
         this.loading = true;
         this.mobileInfo.mobile = this.mobileInfo.mobileNumber;
         fetchUpdateBindMobile(this.mobileInfo)

@@ -6,6 +6,7 @@ const mapData = {
     label: '新手计划',
     color: '#f8e71c',
     url: '/plan',
+    closeStatus: false,
     disabled: true
   },
   SxbScroll21: {
@@ -13,6 +14,7 @@ const mapData = {
     label: '升薪宝滚动21',
     color: '#ffa837',
     url: '/rollPlan',
+    closeStatus: true,
     disabled: false
   },
   plan21Day: {
@@ -20,6 +22,7 @@ const mapData = {
     label: '我的计划',
     color: '#b8e986',
     url: '/plan',
+    closeStatus: true,
     disabled: false
   },
   SxbQuantify: {
@@ -27,12 +30,14 @@ const mapData = {
     label: '升薪宝量化',
     color: '#50e3c2',
     url: '/plans',
+    closeStatus: false,
     disabled: false
   },
   SxbRegular: {
     order: 5,
     label: '升薪宝定期',
     color: '#06b7f0',
+    closeStatus: false,
     url: '/shengxinbaos',
     disabled: false
   },
@@ -40,6 +45,7 @@ const mapData = {
     order: 6,
     label: '定期抵押',
     color: '#0671f0',
+    closeStatus: false,
     url: '/normalLoans',
     disabled: false
   }
@@ -80,9 +86,13 @@ export function getInvestData(data) {
       Object.assign(item, mapData.SxbScroll21, value);
     }
 
-    // 添加计划ID
-    if (item.planId) {
-      item.url = item.url + '/' + item.planId;
+    if (item.closeStatus) {
+      item.url = '';
+    } else {
+      // 添加计划ID
+      if (item.planId) {
+        item.url = item.url + '/' + item.planId;
+      }
     }
 
     item.sum = item.sum || 0;
@@ -94,8 +104,6 @@ export function getInvestData(data) {
   }
 
   list.sort((a, b) => a.order - b.order);
-
-  console.log(list);
 
   return list;
 }

@@ -33,14 +33,14 @@
       <div class="form-group">
         <label class="col-md-2 control-label">支付金额</label>
         <div class="col-md-6">
-          <p class="form-control-static">{{ (rechargeData.money || 0) | currency('') }}元</p>
+          <p class="form-control-static">{{ (rechargeData.money <= 0 ? 0 : rechargeData.money) | currency('') }}元</p>
         </div>
       </div>
       <div class="form-group">
         <div class="col-md-offset-2 col-md-4">
           <el-button type="primary"
                      class="btn-block"
-                     :disabled="!rechargeData.money"
+                     :disabled="rechargeData.money <= 0"
                      @click="getRequestBankData"
                      :loading="loading" round>充值</el-button>
         </div>
@@ -67,6 +67,7 @@
   import BankCard from '../../components/BackCard.vue';
   import RequestBankFrom from '../../components/RequestBankFrom.vue';
   import OperationalValidate from '../../components/OperationalValidate.vue';
+  import { getUuid, setUuid } from 'utils/auth';
 
   export default {
     computed: {
@@ -145,7 +146,12 @@
           this.rechargeData.callbackUrl = `${this.baseUrl}/user/home.html`;
         }
         this.loading = true;
-        this.rechargeData.sessionId = this.uuid;
+        if (!this.uuid) {
+          setUuid();
+          this.rechargeData.sessionId = getUuid();
+        } else {
+          this.rechargeData.sessionId = this.uuid;
+        }
         fetchRecharge(this.rechargeData)
           .then(response => {
             this.loading = false;

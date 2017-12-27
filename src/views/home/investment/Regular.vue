@@ -178,8 +178,8 @@
         activeName: 'repaying',
         firstColConfigs: [
           { label: '项目名称', component: RowRegularProjectName },
-          { label: '投资时间', width: '140', prop: 'investTime' },
-          { label: '投资金额', width: '100', prop: 'investCash', component: RowRegularInvestCash },
+          { label: '投资时间', width: '150', prop: 'investTime' },
+          { label: '投资金额', width: '140', prop: 'investCash', component: RowRegularInvestCash },
           { label: '年利率', width: '100', prop: 'investRate', component: RowUnit, unit: '%' },
           { label: '已还期数/总期数', width: '140', component: RowRepaymentPeriod, returned: 'paidPeriod', total: 'repayPeriod' },
           { label: '下次还款日', width: '140', prop: 'nextRepayDate' },

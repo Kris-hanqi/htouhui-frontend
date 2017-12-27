@@ -80,7 +80,7 @@ export const constantRouterMap = [
           {
             path: 'plan21Day',
             meta: {
-              title: '21天计划'
+              title: '我的计划'
             },
             name: 'investmentPlan21Day',
             component: Public,
