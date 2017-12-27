@@ -381,7 +381,7 @@
 
   .message {
     width: 100%;
-    height: 553px;
+    height: auto;
     box-sizing: border-box;
     padding: 20px 5px;
     background-color: #fff;
