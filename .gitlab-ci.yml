@@ -4,7 +4,7 @@ stages:
 
 variables:
   SERVICE_PORT: "9600"
-  VERSION: "0.1.0"
+  VERSION: "0.1.1"
 
 cache:
   paths:

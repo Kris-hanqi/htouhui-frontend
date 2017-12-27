@@ -1,5 +1,22 @@
 import fetch from 'utils/fetch';
 
+/** 风险评估-得到问卷 */
+export function fetchGetQuestionnaire() {
+  return fetch({
+    url: 'questionnaire/riskassessment',
+    method: 'get'
+  })
+}
+
+/** 风险评估-得到问卷 */
+export function fetchSubmitQuestionnaire(data) {
+  return fetch({
+    url: 'questionnaire/riskassessmentout',
+    method: 'post',
+    data
+  })
+}
+
 /** 绑定银行卡 */
 export function fetchUnlockBankCard() {
   return fetch({
