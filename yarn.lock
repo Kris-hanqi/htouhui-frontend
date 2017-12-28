@@ -484,7 +484,7 @@ aws4@^1.2.1, aws4@^1.6.0:
 
 axios@^0.17.1:
   version "0.17.1"
-  resolved "http://registry.npm.taobao.org/axios/download/axios-0.17.1.tgz#2d8e3e5d0bdbd7327f91bc814f5c57660f81824d"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.17.1.tgz#2d8e3e5d0bdbd7327f91bc814f5c57660f81824d"
   dependencies:
     follow-redirects "^1.2.5"
     is-buffer "^1.1.5"
@@ -2932,7 +2932,7 @@ express@^4.15.2:
 
 express@^4.16.2:
   version "4.16.2"
-  resolved "http://registry.npm.taobao.org/express/download/express-4.16.2.tgz#e35c6dfe2d64b7dca0a5cd4f21781be3299e076c"
+  resolved "https://registry.yarnpkg.com/express/-/express-4.16.2.tgz#e35c6dfe2d64b7dca0a5cd4f21781be3299e076c"
   dependencies:
     accepts "~1.3.4"
     array-flatten "1.1.1"
@@ -3554,6 +3554,10 @@ home-or-tmp@^2.0.0:
 hosted-git-info@^2.1.4:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.5.0.tgz#6d60e34b3abbc8313062c3b798ef8d901a07af3c"
+
+hth-icon-font@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/hth-icon-font/-/hth-icon-font-0.1.0.tgz#b4734e254a9bfe9abde2d18f6d983af7f1e336d4"
 
 html-comment-regex@^1.1.0:
   version "1.1.1"
@@ -4954,7 +4958,7 @@ number-is-nan@^1.0.0:
 
 nuxt@^1.0.0-rc11:
   version "1.0.0-rc11"
-  resolved "http://registry.npm.taobao.org/nuxt/download/nuxt-1.0.0-rc11.tgz#e30ea7f203cb936b3643527d897501e45eb0965e"
+  resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-1.0.0-rc11.tgz#e30ea7f203cb936b3643527d897501e45eb0965e"
   dependencies:
     "@nuxtjs/youch" "3.0.2"
     ansi-html "^0.0.7"
@@ -6776,7 +6780,7 @@ source-map-support@^0.4.17:
 
 source-map-support@^0.5.0:
   version "0.5.0"
-  resolved "http://registry.npm.taobao.org/source-map-support/download/source-map-support-0.5.0.tgz#2018a7ad2bdf8faf2691e5fddab26bed5a2bacab"
+  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.0.tgz#2018a7ad2bdf8faf2691e5fddab26bed5a2bacab"
   dependencies:
     source-map "^0.6.0"
 
