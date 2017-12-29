@@ -11,7 +11,7 @@
         <li><a href="/plans">升薪宝量化</a></li>
         <li><a href="/shengxinbaos">升薪宝定期</a></li>
         <li><a href="/normalLoans">定期抵押</a></li>
-        <li><a href="/st_page/safe">风控措施</a></li>
+        <li><a href="/information/operationreport">信息披露</a></li>
         <li><a href="/about/aboutus">关于我们</a></li>
         <li class="header-down__account">
           <a href="./home.html">
