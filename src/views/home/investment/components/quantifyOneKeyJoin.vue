@@ -59,12 +59,23 @@
           <a :href="baseUrl + '/hetong/weituoautoshouquanshu'" target="_blank">《 委托系统自动出借及债权转让授权书 》</a></el-checkbox>
       </div>
       <el-button class="btn-join"
-                 :loading="joinBthLoading"
                  type="primary"
-                 @click="joinPlan"
+                 @click="joinPlanOK"
                  :disabled="!protocolList.one || !protocolList.two"
                  plain>一键加入</el-button>
     </hth-panel>
+    
+    <!-- 一键加入二次确认 -->
+    <el-dialog
+      title="确认加入"
+      :visible.sync="dialogVisible"
+      width="500px">
+      <h3 style="text-align: center;">加入金额: {{ userMoney }}</h3>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false" round>取 消</el-button>
+        <el-button  style="margin-left: 20px" :loading="joinBthLoading" type="primary" @click="joinPlan" round>确 定</el-button>
+      </span>
+    </el-dialog>
   
     <!-- 验证用户操作组件 -->
     <operational-validate ref="validateSteps"></operational-validate>
@@ -118,7 +129,8 @@
           { key: 'plus_coupon', value: '%加息' }
         ],
         showUsedCoupon: false,
-        usedCouponText: ''
+        usedCouponText: '',
+        dialogVisible: false
       }
     },
     computed: {
@@ -160,8 +172,8 @@
           })
       },
       // 加入标的
-      joinPlan() {
-        const validateSteps = ['openAccount', 'transactionPassword', 'bankCard', 'automaticTender', 'automaticDebtTransfer']
+      joinPlanOK() {
+        const validateSteps = ['openAccount', 'transactionPassword', 'bankCard', 'automaticTender', 'automaticDebtTransfer'];
         const result = this.$refs['validateSteps'].validate(validateSteps); // eslint-disable-line
         if (!result) return;
         if (!this.userMoney) {
@@ -207,6 +219,11 @@
             }
           }
         }
+        
+        // 检验通过 二次确认
+        this.dialogVisible = true;
+      },
+      joinPlan() {
         this.joinBthLoading = true;
         this.joinPlanData.planId = this.planId;
         this.joinPlanData.joinMoney = this.userMoney;
