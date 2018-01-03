@@ -121,9 +121,9 @@ export function fetchGetCity(data) {
 }
 
 /** 获取联行号 */
-export function fetchGetUnionBank(data) {
+export function fetchGetBankCodeList(data) {
   return fetch({
-    url: 'user/cnapsNo',
+    url: 'user/getBankCodeList',
     method: 'get',
     params: data
   })

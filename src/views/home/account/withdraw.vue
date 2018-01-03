@@ -8,7 +8,9 @@
       <request-bank-from :request-data="requestData"></request-bank-from>
 
       <!-- 获取联行号 -->
-      <union-bank :visible="dialogUnionBankVisible" @close="closeUnionBank" @select-union-bank="selectUnionBank"></union-bank>
+      <union-bank :visible="dialogUnionBankVisible"
+                  @close="closeUnionBank"
+                  @select-union-bank="selectUnionBank"></union-bank>
 
       <!-- 交互表单 -->
       <form class="form-horizontal" style="margin-top: 20px;">
@@ -36,6 +38,14 @@
             <el-button type="info"
                        size="small"
                        @click="openUnionBank" round>查询</el-button>
+          </div>
+        </div>
+        <div class="form-group" v-if="showUnionBankInput">
+          <label class="col-md-2 control-label">支行名称</label>
+          <div class="col-md-5">
+            <input type="text"
+                   v-model="withdrawData.bankName"
+                   class="form-control" placeholder="请输入支行名称">
           </div>
         </div>
         <div class="form-group">
@@ -86,7 +96,7 @@
   import RequestBankFrom from '../components/RequestBankFrom.vue';
   import UnionBank from './components/UnionBank.vue';
   import { fetchWithdraw, fetchWithdrawCost, fetchAccountMoney, fetchAllowLargeWithdraw } from 'api/home/account';
-  import { validateNumber, validateMoney12 } from 'utils/validate';
+  import { validateMoney12 } from 'utils/validate';
   import { delayFn } from 'utils/index';
   import { getUuid, setUuid } from 'utils/auth';
 
@@ -122,6 +132,7 @@
           inputMoney: '',
           source: 'pc',
           cnapNumber: '',
+          bankName: '',
           cardNo: '',
           sessionId: '',
           callbackUrl: ''
@@ -173,21 +184,17 @@
         if (this.withdrawData.inputMoney >= 50002) {
           // 查看是否允许大额提现
           this.loading = true;
-          fetchAllowLargeWithdraw({ money: this.money, cardNo: this.bankCard })
+          fetchAllowLargeWithdraw({ money: this.money })
             .then(response => {
               if (response.data.meta.code === 200) {
-                // 非第一次大额提现
-                if (validateNumber(response.data.data)) {
+                // allowLargeWithdraw = 1 允许
+                if (response.data.data.allowLargeWithdraw) {
                   this.showUnionBankInput = true;
-                  if (!this.returnCnapNumber) {
-                    this.withdrawData.cnapNumber = response.data.data;
-                  }
-                  this.returnCnapNumber = response.data.data;
-                  allowLargeWithdrawNumber++;
-                  this.getRequestWithdrawData('large');
-                } else {
-                  if (response.data.data === 'allow_large_withdraw') {
-                    this.showUnionBankInput = true;
+                  // 非第一次大额提现
+                  if (response.data.data.cardBankCnaps) {
+                    this.withdrawData.cnapNumber = response.data.data.cardBankCnaps;
+                    this.withdrawData.bankName = response.data.data.bankName;
+                    allowLargeWithdrawNumber++;
                     this.getRequestWithdrawData('large');
                   }
                 }
@@ -266,9 +273,11 @@
       closeUnionBank() {
         this.dialogUnionBankVisible = false;
       },
-      selectUnionBank(value) {
-        if (value) {
-          this.withdrawData.cnapNumber = value;
+      // 获取选择的联行号
+      selectUnionBank(data) {
+        if (data) {
+          this.withdrawData.cnapNumber = data.cardBankCnaps;
+          this.withdrawData.bankName = data.bankName;
         }
       },
       showBankLimit() {
