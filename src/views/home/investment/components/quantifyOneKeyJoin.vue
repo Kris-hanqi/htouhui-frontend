@@ -219,7 +219,6 @@
             }
           }
         }
-        
         // 检验通过 二次确认
         this.dialogVisible = true;
       },
