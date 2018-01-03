@@ -32,7 +32,9 @@
           <label class="col-md-2 control-label">银行联行号</label>
           <div class="col-md-5">
             <input v-model="withdrawData.cnapNumber"
-                   class="form-control" type="text" placeholder="人民银行分配的12位联行号">
+                   disabled
+                   class="form-control"
+                   type="text" placeholder="人民银行分配的12位联行号">
           </div>
           <div class="col-md-4">
             <el-button type="info"
@@ -44,6 +46,7 @@
           <label class="col-md-2 control-label">支行名称</label>
           <div class="col-md-5">
             <input type="text"
+                   disabled
                    v-model="withdrawData.bankName"
                    class="form-control" placeholder="请输入支行名称">
           </div>
@@ -187,16 +190,16 @@
           fetchAllowLargeWithdraw({ money: this.money })
             .then(response => {
               if (response.data.meta.code === 200) {
+                allowLargeWithdrawNumber++;
                 // allowLargeWithdraw = 1 允许
                 if (response.data.data.allowLargeWithdraw) {
                   this.showUnionBankInput = true;
                   // 非第一次大额提现
-                  if (response.data.data.cardBankCnaps) {
+                  if (response.data.data.cardBankCnaps && !this.withdrawData.cnapNumber) {
                     this.withdrawData.cnapNumber = response.data.data.cardBankCnaps;
                     this.withdrawData.bankName = response.data.data.bankName;
-                    allowLargeWithdrawNumber++;
-                    this.getRequestWithdrawData('large');
                   }
+                  this.getRequestWithdrawData('large');
                 }
               } else {
                 this.$notify.error({
@@ -215,6 +218,13 @@
         if (type === 'large' && !this.withdrawData.cnapNumber) {
           this.$message({
             message: '大额提现请查询联行号',
+            type: 'warning'
+          });
+          return;
+        }
+        if (type === 'large' && !this.withdrawData.bankName) {
+          this.$message({
+            message: '大额提现请查询支行名称',
             type: 'warning'
           });
           return;
