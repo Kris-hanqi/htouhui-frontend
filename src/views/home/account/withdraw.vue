@@ -115,6 +115,7 @@
     computed: {
       ...mapGetters([
         'uuid',
+        'largeAmount',
         'baseUrl',
         'bankCard',
         'bankName'
@@ -184,7 +185,7 @@
           this.withdrawData.sessionId = this.uuid;
         }
         // 大于五万属于大额提现
-        if (this.withdrawData.inputMoney >= 50002) {
+        if (this.withdrawData.inputMoney >= 50002 || this.largeAmount === 1) {
           // 查看是否允许大额提现
           this.loading = true;
           fetchAllowLargeWithdraw({ money: this.money })
