@@ -186,15 +186,15 @@ th {
   }
 }
 
-/*文字提示*/
-.el-tooltip__popper.is-dark {
-  color: #7c86a2;
+/** 文字提示 */
+.el-tooltip__popper.is-light {
   background: #fff;
-  border: solid 1px #dfe8f0;
+  color: #4A9EF5;
+  border: 1px solid #94C8FE;
 }
 
-.el-tooltip__popper[x-placement^=top] .popper__arrow::after {
-  border-top-color: #fff;
+.el-tooltip__popper.is-light[x-placement^=bottom] .popper__arrow {
+  border-bottom-color: #94C8FE;
 }
 
 .el-picker-panel__footer {
