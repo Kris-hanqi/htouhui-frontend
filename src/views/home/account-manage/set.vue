@@ -73,7 +73,8 @@
           <td></td>
           <td>自动还款授权</td>
           <td>
-            <button class="hth-btn" @click="automaticRepayment">{{ isAutomaticRepayment ? '解约' : '授权' }}</button>
+            <button class="hth-btn" :class="{ 'btn-blue': !isAutomaticRepayment }"
+                    @click="automaticRepayment">{{ isAutomaticRepayment ? '解约' : '授权' }}</button>
           </td>
         </tr>
         <tr v-if="status !== 0" class="borderNone">

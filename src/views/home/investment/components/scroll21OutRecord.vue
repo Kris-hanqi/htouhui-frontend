@@ -4,6 +4,9 @@
       <ul class="times">
         <li>交易时间：</li>
         <li>
+          <a @click.stop="switchDateType('all')" :class="{ active: dateType === 'all'}">全部</a>
+        </li>
+        <li>
           <a @click.stop="switchDateType('3day')" :class="{ active: dateType === '3day'}">近三天</a>
         </li>
         <li>
@@ -108,7 +111,7 @@
           }
         },
         total: 0,
-        dateType: '3day',
+        dateType: 'all',
         typeList: [
           { key: 'apply_exit', value: '预约退出中' },
           { key: 'exiting', value: '预约退出中' },
@@ -125,9 +128,14 @@
       getPageList() {
         let dates = null;
         if (this.dateType !== 'other') {
-          dates = getStartAndEndTime(this.dateType);
-          this.listQuery.startTime = dates.startTime;
-          this.listQuery.endTime = dates.endTime;
+          if (this.dateType === 'all') {
+            this.listQuery.startTime = '2000-01-01 11:28:34';
+            this.listQuery.endTime = '2200-01-01 11:28:34';
+          } else {
+            dates = getStartAndEndTime(this.dateType);
+            this.listQuery.startTime = dates.startTime;
+            this.listQuery.endTime = dates.endTime;
+          }
         } else {
           if (this.selectDates.startTime && this.selectDates.endTime) {
             if (this.selectDates.startTime > this.selectDates.endTime) {
