@@ -4,6 +4,42 @@
              v-loading="listLoading"
              element-loading-text="拼命加载中..."
              @tab-click="toggleType" type="card">
+      <br>
+      <div class="times-box">
+        <ul class="times">
+          <li>交易时间：</li>
+          <li>
+            <a @click.stop="switchDateType('all')" :class="{ active: dateType === 'all'}">全部</a>
+          </li>
+          <li>
+            <a @click.stop="switchDateType('3day')" :class="{ active: dateType === '3day'}">近三天</a>
+          </li>
+          <li>
+            <a @click.stop="switchDateType('1month')" :class="{ active: dateType === '1month'}">近一个月</a>
+          </li>
+          <li>
+            <a @click.stop="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a>
+          </li>
+          <li>
+            <a @click.stop="switchDateType('other')" class="diy-time" :class="{ active: dateType === 'other'}">自定义时间</a>
+          </li>
+        </ul>
+        <ul class="allChooseCalendar" v-show="dateType === 'other'">
+          <el-date-picker
+            v-model="selectDates.startTime"
+            :picker-options="pickerOptions"
+            type="datetime"
+            placeholder="选择开始日期">
+          </el-date-picker>
+          <el-date-picker
+            v-model="selectDates.endTime"
+            :picker-options="pickerOptions"
+            type="datetime"
+            placeholder="选择结束日期">
+          </el-date-picker>
+          <button class="find-btn" @click="query">查询</button>
+        </ul>
+      </div>
       <el-tab-pane label="还款中" name="repaying">
         <hth-data-table :data="list"
                         :col-configs="firstColConfigs">
@@ -46,7 +82,7 @@
       </el-tab-pane>
     </el-tabs>
 
-    <div class="pages" v-if="list && list.length">
+    <div class="pages" v-if="list && list.length && !listLoading">
       <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录
       （共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
       <el-pagination @current-change="handleCurrentChange"
@@ -144,6 +180,7 @@
   import RowLoanData from '../components/hth-data-table/RowLoanData.vue';
   import { fetchGetPageList, feachExtendEarn, fetchInvestRepays } from 'api/home/investment-regular';
   import { feachDownLoadClaimsContract } from 'api/home/investment';
+  import { getStartAndEndTime, formatDate } from 'utils/index';
 
   const typeList = [
     { key: 'repaying', value: '还款中' },
@@ -170,11 +207,23 @@
       return {
         list: null,
         listLoading: false,
+        selectDates: {
+          startTime: '',
+          endTime: ''
+        },
         listQuery: {
+          startTime: '',
+          endTime: '',
           status: 'repaying',
           pageNo: 1,
           pageSize: 10
         },
+        pickerOptions: {
+          disabledDate(date) {
+            return date > new Date();
+          }
+        },
+        dateType: 'all',
         activeName: 'repaying',
         firstColConfigs: [
           { label: '项目名称', component: RowRegularProjectName },
@@ -237,6 +286,37 @@
     },
     methods: {
       getPageList() {
+        let dates = null;
+        if (this.dateType !== 'other') {
+          if (this.dateType === 'all') {
+            this.listQuery.startTime = '2000-01-01 11:28:34';
+            this.listQuery.endTime = '2200-01-01 11:28:34';
+          } else {
+            dates = getStartAndEndTime(this.dateType);
+            this.listQuery.startTime = dates.startTime;
+            this.listQuery.endTime = dates.endTime;
+          }
+        } else {
+          if (this.selectDates.startTime && this.selectDates.endTime) {
+            if (this.selectDates.startTime > this.selectDates.endTime) {
+              this.$message({
+                message: '开始时间不能大于结束时间',
+                type: 'warning'
+              });
+              return;
+            }
+            this.listQuery.startTime = formatDate(this.selectDates.startTime);
+            this.listQuery.endTime = formatDate(this.selectDates.endTime);
+          } else {
+            this.$message({
+              message: '请选择时间',
+              type: 'warning'
+            });
+            return;
+          }
+        }
+        this.list = null;
+        this.total = 0;
         this.listLoading = true;
         fetchGetPageList(this.listQuery)
           .then(response => {
@@ -248,8 +328,25 @@
             this.listLoading = false;
           })
       },
+      query() {
+        this.listQuery.pageNo = 1;
+        this.total = 0;
+        this.list = null;
+        this.getPageList();
+      },
+      switchDateType(type) {
+        this.dateType = type;
+        this.listQuery.pageNo = 1;
+        this.total = 0;
+        if (this.dateType !== 'other') {
+          this.getPageList();
+        } else {
+          this.list = null;
+        }
+      },
       toggleType(tab) {
         if (tab && tab.name) {
+          this.dateType = 'all';
           this.listLoading = false;
           this.list = null;
           this.total = 0;
@@ -324,6 +421,56 @@
     padding: 30px 15px;
     background-color: #fff;
     margin-bottom: 20px;
+  
+    .times-box {
+      width: 100%;
+      height: 40px;
+      box-sizing: border-box;
+      padding-left: 30px;
+      padding-right: 30px;
+      margin-bottom: 25px;
+    
+      ul {
+        float: left;
+      }
+    
+      li {
+        float: left;
+        margin-right: 10px;
+        font-size: 16px;
+        color: #274161;
+      
+        a {
+          display: inline-block;
+          padding: 4px 10px;
+          text-align: center;
+          margin-top: -5px;
+        }
+      
+        a.active {
+          border-radius: 100px;
+          background-color: #0671f0;
+          color: #fff;
+        }
+      }
+    
+      .allChooseCalendar {
+        margin: 15px 0 15px 57px;
+      }
+    
+      .find-btn {
+        width: 135px;
+        height: 40px;
+        box-sizing: border-box;
+        border-radius: 100px;
+        background-color: #378ff6;
+        line-height: 40px;
+        text-align: center;
+        font-size: 18px;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
     
     .ku-icon-disabled {
       color: #d0cdcd;
