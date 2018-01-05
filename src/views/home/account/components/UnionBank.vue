@@ -50,7 +50,7 @@
       </el-table>
   
       <!-- 分页 -->
-      <div class="pages" v-if="list && list.length">
+      <div class="pages" v-if="list && list.length && !listLoading">
         <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录
         （共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
         <el-pagination
@@ -107,6 +107,8 @@
     },
     methods: {
       getPageList() {
+        this.list = null;
+        this.total = 0;
         this.listLoading = true;
         this.listQuery.province = this.provinceName;
         fetchGetBankCodeList(this.listQuery)
