@@ -35,10 +35,9 @@
       <el-table :data="list" :fit="true" v-loading="listLoading" element-loading-text="拼命加载中...">
         <!-- 无数据时显示 -->
         <no-data slot="empty"></no-data>
-        <el-table-column prop="awardName" label="奖品名称" width="100"></el-table-column>
-        <el-table-column prop="awardDescribe" label="奖品描述" width="150"></el-table-column>
-        <el-table-column prop="activityName" label="活动名称" width="120"></el-table-column>
-        <el-table-column prop="awardType" label="奖品类型" width="100"></el-table-column>
+        <el-table-column prop="awardName" label="奖品名称" width="120"></el-table-column>
+        <el-table-column prop="activityName" label="活动名称" width="150"></el-table-column>
+        <el-table-column prop="awardType" label="奖品类型" width="120"></el-table-column>
         <el-table-column prop="acquisitionType" label="获得方式" width="100"></el-table-column>
         <el-table-column prop="prizeNumber" label="数量" width="80"></el-table-column>
         <el-table-column prop="formatCreateTime" label="获取时间"></el-table-column>
