@@ -116,7 +116,7 @@
             if (response.data.meta.code === 200) {
               if (response.data.data) {
                 this.list = response.data.data.data;
-                this.total = response.data.data.totalCount || 0;
+                this.total = Number(response.data.data.totalCount) || 0;
               } else {
                 this.list = null;
                 this.total = 0;
@@ -169,6 +169,7 @@
           });
           return;
         }
+        this.listQuery.pageNo = 1;
         this.getPageList();
       }
     },
