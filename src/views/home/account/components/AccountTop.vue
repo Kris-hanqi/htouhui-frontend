@@ -13,7 +13,9 @@
       <a @click.stop="operationAccount"
          style="margin-right: 8px;"
          :class="{ active: status }">
-        <el-tooltip class="item" effect="light"
+        <el-tooltip class="item"
+                    :disabled="dialogOpenAccountVisible"
+                    effect="light"
                     :content="openAccountText"
                     placement="bottom">
           <i class="ku-icon icon-user"></i>
@@ -21,7 +23,9 @@
       </a>
       <!-- 银行卡图标 -->
       <a @click.stop="operationBankCard" :class="{ active: bankCard }">
-        <el-tooltip class="item" effect="light"
+        <el-tooltip class="item"
+                    :disabled="dialogOpenAccountVisible"
+                    effect="light"
                     :content="bankCardText"
                     placement="bottom">
           <i class="ku-icon icon-bank-card"></i>
