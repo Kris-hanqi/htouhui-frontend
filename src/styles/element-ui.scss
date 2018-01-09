@@ -40,13 +40,17 @@
   cursor: default;
 }
 
-/*table*/
+/** table */
 th {
   font-weight: normal;
 }
 
 .el-table {
   border: none;
+}
+
+.el-table thead {
+  color: #394b67;
 }
 
 .el-table td {
