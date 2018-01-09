@@ -24,6 +24,7 @@ const getters = {
   isAutomaticDebtTransfer: state => state.user.isAutomaticDebtTransfer,
   isAutomaticRepayment: state => state.user.isAutomaticRepayment,
   isBorrower: state => state.user.isBorrower,
+  largeAmount: state => state.user.largeAmount,
   headImg: state => state.user.headImg,
   // app
   baseUrl: state => state.app.baseUrl

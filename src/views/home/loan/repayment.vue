@@ -9,6 +9,8 @@
                     :loading="listLoading"
                     :total="total">
       <el-table :data="list" :border="false" style="width: 100%">
+        <!-- 无数据时显示 -->
+        <no-data slot="empty"></no-data>
         <el-table-column label="项目名称" width="150">
           <template slot-scope="scope">
             <a :href="baseUrl + '/loan/' + scope.row.loanId " style="color: #409eff;" target="_blank">{{ scope.row.name }}</a>
@@ -22,6 +24,8 @@
         </el-table-column>
         <el-table-column prop="corpus" label="本金" width="100"></el-table-column>
         <el-table-column prop="interest" label="利息" width="100"></el-table-column>
+        <el-table-column prop="fee" label="手续费" width="100"></el-table-column>
+        <el-table-column prop="totalMoney" label="总额" width="100"></el-table-column>
         <el-table-column prop="defaultInterest" label="罚息" width="100"></el-table-column>
         <el-table-column prop="repayDay" label="还款日" width="140"></el-table-column>
         <el-table-column prop="status" label="状态" width="100"></el-table-column>
@@ -41,12 +45,14 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import NoData from '../components/NoData.vue';
   import HthDataTable from '../components/DataTable.vue';
   import LoanRepaymentStatistics from '../components/LoanRepaymentStatistics.vue';
   import { fetchRecentlyRepaymentPageList, fetchRecentlyRepaymentStatistic, fetchRepayment } from 'api/home/loan';
   
   export default {
     components: {
+      NoData,
       HthDataTable,
       LoanRepaymentStatistics
     },
@@ -131,6 +137,10 @@
 
 <style lang="scss">
   .recently-repayment-wrapper {
+    .el-table__empty-block {
+      min-height: 260px;
+    }
+    
     .recently-repayment__header {
       width: 100%;
       height: 200px;

@@ -38,19 +38,19 @@
                 element-loading-text="拼命加载中">
         <!-- 无数据时显示 -->
         <no-data slot="empty"></no-data>
-        <el-table-column width="50" property="id" label="序号"></el-table-column>
-        <el-table-column width="100" property="cnapsNo" label="联行行号"></el-table-column>
+        <el-table-column width="110" property="cardBankCnaps" label="联行行号"></el-table-column>
         <el-table-column width="240" property="bankName" label="银行名称"></el-table-column>
-        <el-table-column width="320" property="address" label="地址"></el-table-column>
+        <el-table-column width="150" property="tel" label="联系电话"></el-table-column>
+        <el-table-column width="240" property="address" label="地址"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button @click="selectUnionBank(scope.row.cnapsNo)" type="text">选择</el-button>
+            <el-button @click="selectUnionBank(scope.row)" type="text">选择</el-button>
           </template>
         </el-table-column>
       </el-table>
   
       <!-- 分页 -->
-      <div class="pages" v-if="list && list.length">
+      <div class="pages" v-if="list && list.length && !listLoading">
         <p class="total-pages">共计<span class="roboto-regular">{{ total }}</span>条记录
         （共<span class="roboto-regular">{{ getPageSize }}</span>页）</p>
         <el-pagination
@@ -64,7 +64,7 @@
 </template>
 
 <script>
-  import { fetchGetProvince, fetchGetCity, fetchGetUnionBank } from 'api/home/account'
+  import { fetchGetProvince, fetchGetCity, fetchGetBankCodeList } from 'api/home/account'
   import NoData from '../../components/NoData.vue';
   
   export default {
@@ -96,7 +96,7 @@
           city: '',
           keyWords: '',
           pageNo: 1,
-          pageSize: 10
+          pageSize: 15
         }
       }
     },
@@ -107,13 +107,20 @@
     },
     methods: {
       getPageList() {
+        this.list = null;
+        this.total = 0;
         this.listLoading = true;
         this.listQuery.province = this.provinceName;
-        fetchGetUnionBank(this.listQuery)
+        fetchGetBankCodeList(this.listQuery)
           .then(response => {
             if (response.data.meta.code === 200) {
-              this.list = response.data.data.data;
-              this.total = response.data.data.count || 0;
+              if (response.data.data) {
+                this.list = response.data.data.data;
+                this.total = Number(response.data.data.totalCount) || 0;
+              } else {
+                this.list = null;
+                this.total = 0;
+              }
             }
             this.listLoading = false;
           })
@@ -122,7 +129,10 @@
         this.$emit('close');
       },
       selectUnionBank(value) {
-        this.$emit('select-union-bank', value);
+        const data = {};
+        data.bankName = value.bankName;
+        data.cardBankCnaps = value.cardBankCnaps;
+        this.$emit('select-union-bank', data);
         this.$emit('close');
       },
       getProvince() {
@@ -159,6 +169,7 @@
           });
           return;
         }
+        this.listQuery.pageNo = 1;
         this.getPageList();
       }
     },

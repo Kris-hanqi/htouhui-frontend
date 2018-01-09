@@ -10,8 +10,8 @@
           <p class="rate">
             <span class="roboto-regular">
               <interest-rate :value="joinPlanList.rate"
-                                                        :leftFontSize="36"
-                                                        :rightFontSize="24"></interest-rate>
+                             :leftFontSize="36"
+                             :rightFontSize="24"></interest-rate>
             </span>%
           </p>
           <p>往期年化利率</p>
@@ -302,7 +302,7 @@
 
   .message {
     width: 100%;
-    height: 553px;
+    height: auto;
     box-sizing: border-box;
     padding: 20px 10px;
     background-color: #fff;

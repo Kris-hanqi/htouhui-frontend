@@ -9,13 +9,27 @@
         <avatar size="large" icon="icon-avatar" :src="headImg"></avatar>
       </el-upload>
       <span class="text">你好，<i class="num-font">{{ username }}</i></span>
+      <!-- 开户图标 -->
       <a @click.stop="operationAccount"
          style="margin-right: 8px;"
          :class="{ active: status }">
-        <i class="ku-icon icon-user"></i>
+        <el-tooltip class="item"
+                    :disabled="dialogOpenAccountVisible"
+                    effect="light"
+                    :content="openAccountText"
+                    placement="bottom">
+          <i class="ku-icon icon-user"></i>
+        </el-tooltip>
       </a>
+      <!-- 银行卡图标 -->
       <a @click.stop="operationBankCard" :class="{ active: bankCard }">
-        <i class="ku-icon icon-bank-card"></i>
+        <el-tooltip class="item"
+                    :disabled="dialogOpenAccountVisible"
+                    effect="light"
+                    :content="bankCardText"
+                    placement="bottom">
+          <i class="ku-icon icon-bank-card"></i>
+        </el-tooltip>
       </a>
       <el-button class="recharge-bth"
                  :round="true"
@@ -31,10 +45,7 @@
     <!-- 开户组件 -->
     <guide-operational :visible="dialogOpenAccountVisible"
                   @close="closeOpenAccount"></guide-operational>
-
-    <!-- 解绑银行卡 -->
-    <unlock-bank-card :visible="dialogUnlockBankCardVisible"
-                      @close="closeUnlockBankCard"></unlock-bank-card>
+    
   </div>
 </template>
 <script>
@@ -58,12 +69,17 @@
         'status',
         'bankCard',
         'headImg'
-      ])
+      ]),
+      openAccountText() {
+        return this.status === 0 ? '您还未开户' : '您已开户';
+      },
+      bankCardText() {
+        return this.bankCard ? '您已绑定银行卡' : '您还未绑定银行卡';
+      }
     },
     data() {
       return {
-        dialogOpenAccountVisible: false,
-        dialogUnlockBankCardVisible: false
+        dialogOpenAccountVisible: false
       }
     },
     methods: {
@@ -76,7 +92,7 @@
         if (!this.bankCard) {
           this.$router.push('/accountManage/set/bindBackCard');
         } else {
-          this.dialogUnlockBankCardVisible = true;
+          this.$router.push('/accountManage/set');
         }
       },
       operationAccount() {
@@ -104,9 +120,6 @@
       },
       closeOpenAccount() {
         this.dialogOpenAccountVisible = false;
-      },
-      closeUnlockBankCard() {
-        this.dialogUnlockBankCardVisible = false;
       },
       // element-ui upload组件方法
       beforeAvatarUpload(file) {

@@ -4,7 +4,7 @@ stages:
 
 variables:
   SERVICE_PORT: "9600"
-  VERSION: "0.1.1"
+  DOCKER_VERSION: "0.1.3"
 
 cache:
   paths:
@@ -20,7 +20,7 @@ build_job:
     - cd docker
     - PUBLISH_VERSION=$(echo $CI_COMMIT_REF_NAME | cut -d'/' -f 2)
     - DATE=`date +%Y%m%d`
-    - DOCKER_IMAGE_VERSION=$VERSION-$DATE-$CI_PIPELINE_ID
+    - DOCKER_IMAGE_VERSION=$DOCKER_VERSION-$DATE-$CI_PIPELINE_ID
     - echo -e "DOCKER_IMAGE_VERSION=$DOCKER_IMAGE_VERSION"
     - docker build --build-arg PUBLISH_VERSION=$PUBLISH_VERSION -t registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION .
   tags:
@@ -35,7 +35,7 @@ deploy_job:
   script:
     - PUBLISH_VERSION=$(echo $CI_COMMIT_REF_NAME | cut -d'/' -f 2)
     - DATE=`date +%Y%m%d`
-    - DOCKER_IMAGE_VERSION=$VERSION-$DATE-$CI_PIPELINE_ID
+    - DOCKER_IMAGE_VERSION=$DOCKER_VERSION-$DATE-$CI_PIPELINE_ID
     - echo -e "DOCKER_IMAGE_VERSION=$DOCKER_IMAGE_VERSION"
     - docker stop nginx-htouhui-front-$CI_BUILD_REF_SLUG || true
     - docker rm -f nginx-htouhui-front-$CI_BUILD_REF_SLUG || true
@@ -53,7 +53,7 @@ deploy_docker_image:
   when: manual
   script:
     - DATE=`date +%Y%m%d`
-    - DOCKER_IMAGE_VERSION=$VERSION-$DATE-$CI_PIPELINE_ID
+    - DOCKER_IMAGE_VERSION=$DOCKER_VERSION-$DATE-$CI_PIPELINE_ID
     - echo -e "DOCKER_IMAGE_VERSION=$DOCKER_IMAGE_VERSION"
     - docker login --username=228044108@qq.com --password=cnFbU8VKtvn3daF registry-internal.cn-beijing.aliyuncs.com
     - docker tag registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:$DOCKER_IMAGE_VERSION registry-internal.cn-beijing.aliyuncs.com/htouhui/nginx-htouhui-front:latest

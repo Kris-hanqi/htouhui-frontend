@@ -58,6 +58,9 @@
       <li class="nav">
         <router-link to="/reward/coupon" active-class="active">优惠券</router-link>
       </li>
+      <li class="nav">
+        <router-link to="/reward/prize" active-class="active">我的奖品</router-link>
+      </li>
     </ul>
     <p class="account-management">
       <i class="ku-icon icon-set"></i>账户管理

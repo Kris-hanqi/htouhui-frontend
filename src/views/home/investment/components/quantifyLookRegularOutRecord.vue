@@ -278,7 +278,7 @@
 
   .message {
     width: 100%;
-    height: 553px;
+    height: auto;
     box-sizing: border-box;
     padding: 20px 10px;
     background-color: #fff;

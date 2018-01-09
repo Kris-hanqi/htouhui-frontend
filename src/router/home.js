@@ -268,6 +268,14 @@ export const constantRouterMap = [
             },
             name: 'rewardCoupon',
             component: _import('home/reward/coupon')
+          },
+          {
+            path: 'prize',
+            meta: {
+              title: '我的奖品'
+            },
+            name: 'reward_prize',
+            component: _import('home/reward/prize')
           }
         ]
       },
