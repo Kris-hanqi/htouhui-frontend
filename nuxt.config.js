@@ -13,33 +13,12 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  /** 全局CSS */
-  css: [
-    '~/assets/css/main.css',
-    'normalize.css'
-  ],
-  /** 加载进度条 */
-  loading: {
-    color: 'blue',
-    height: '5px'
-  },
   /*
-  ** Add axios globally
+  ** Global CSS
   */
-  build: {
-    vendor: ['axios'],
-    /*
-    ** Run ESLINT on save
-    */
-    extend (config, ctx) {
-      if (ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    }
-  }
+  css: ['~assets/css/main.css'],
+  /*
+  ** Customize the progress-bar color
+  */
+  loading: { color: '#3B8070' }
 }

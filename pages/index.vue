@@ -1,23 +1,18 @@
 <template>
-  <div class="container">
-    <head-top></head-top>
-  </div>
+  <section class="container">
+    <img src="../assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
+    <h1 class="title">
+      Universal Vue.js Application Framework
+    </h1>
+    <nuxt-link class="button" to="/about">
+      About page
+    </nuxt-link>
+  </section>
 </template>
 
-<script>
-import HeadTop from '~/components/HeadTop.vue'
-
-export default {
-  components: {
-    HeadTop
-  },
-  data () {
-    return {}
-  },
-  head () {
-    return {
-      title: '海投汇-互联网金融平台-小额投资'
-    }
-  }
+<style scoped>
+.title
+{
+  margin: 50px 0;
 }
-</script>
+</style>
