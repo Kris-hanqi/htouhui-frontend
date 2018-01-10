@@ -1,6 +1,17 @@
 <template>
   <div class="funds-wrapper">
-    <hth-panel title="我的奖品">
+    <el-popover
+      ref="popover2"
+      placement="bottom"
+      width="210"
+      trigger="hover"
+      content="仅显示2017年12月24日以后的活动奖品（不含依波表及外设天下活动）">
+    </el-popover>
+    
+    <hth-panel>
+      <span slot="header">
+        <p class="htn-panel-title">我的奖品 <i style="color: #abb7b7; font-size: 18px" class="ku-icon icon-doubt" v-popover:popover2></i></p>
+      </span>
       <div class="assetRunWaterSee">
         <div class="fl">
           <ul>
@@ -40,7 +51,12 @@
         <el-table-column prop="awardType" label="奖品类型" width="120"></el-table-column>
         <el-table-column prop="acquisitionType" label="获得方式" width="100"></el-table-column>
         <el-table-column prop="prizeNumber" label="数量" width="80"></el-table-column>
-        <el-table-column prop="formatCreateTime" label="获取时间"></el-table-column>
+        <el-table-column prop="formatCreateTime" label="领奖时间"></el-table-column>
+        <el-table-column label="订单状态">
+          <template slot-scope="scope">
+            {{ scope.row.status === 'unsended' ? '未发' : '已发' }}
+          </template>
+        </el-table-column>
       </el-table>
       
       <div class="pages" v-if="list && list.length && !listLoading">

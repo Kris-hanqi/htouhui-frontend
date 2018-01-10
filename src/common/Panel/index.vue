@@ -3,6 +3,9 @@
     <div class="hth-panel-header" v-if="title">
       <h1 class="htn-panel-title">{{ title }}</h1>
     </div>
+    <div class="hth-panel-header" v-else="">
+      <slot name="header"></slot>
+    </div>
     <div class="hth-panel-body">
       <slot></slot>
     </div>

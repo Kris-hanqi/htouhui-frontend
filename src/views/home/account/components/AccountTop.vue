@@ -148,6 +148,10 @@
 
 <style lang="scss">
   .account-top-wrapper {
+    .hth-panel-header {
+      padding: 0;
+    }
+    
     .hth-panel-body {
       height: 73px;
       padding-top: 0;
