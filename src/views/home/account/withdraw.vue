@@ -15,7 +15,7 @@
       <!-- 交互表单 -->
       <form class="form-horizontal" style="margin-top: 20px;">
         <div class="form-group">
-          <label class="col-md-2 control-label">账户余额</label>
+          <label class="col-md-2 control-label">可提金额</label>
           <div class="col-md-5">
             <p class="form-control-static">{{ accountMoney || 0  | currency('') }}元</p>
           </div>
@@ -157,7 +157,7 @@
         if (!result) return;
         if (!validateMoney12(this.money)) {
           this.$message({
-            message: '提现金额只能输入数字',
+            message: '提现金额只能输入两位小数',
             type: 'warning'
           });
           return;
@@ -223,13 +223,6 @@
           });
           return;
         }
-        if (type === 'large' && !this.withdrawData.bankName) {
-          this.$message({
-            message: '大额提现请查询支行名称',
-            type: 'warning'
-          });
-          return;
-        }
         if (allowLargeWithdrawNumber === 1) return;
         this.loading = true;
         this.withdrawData.inputMoney = this.money;
@@ -254,7 +247,7 @@
         }
         if (!validateMoney12(this.money)) {
           this.$message({
-            message: '提现金额只能输入数字',
+            message: '提现金额只能输入两位小数',
             type: 'warning'
           });
           return;
