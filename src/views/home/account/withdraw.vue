@@ -157,7 +157,7 @@
         if (!result) return;
         if (!validateMoney12(this.money)) {
           this.$message({
-            message: '提现金额只能输入数字',
+            message: '提现金额只能输入两位小数',
             type: 'warning'
           });
           return;
@@ -254,7 +254,7 @@
         }
         if (!validateMoney12(this.money)) {
           this.$message({
-            message: '提现金额只能输入数字',
+            message: '提现金额只能输入两位小数',
             type: 'warning'
           });
           return;
