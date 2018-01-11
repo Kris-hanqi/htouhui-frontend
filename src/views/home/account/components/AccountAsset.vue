@@ -16,7 +16,7 @@
           </p>
 
           <div class="message-box" v-if="messageBoxShow">
-            <P>可用余额：<span class="roboto-regular">{{ (data.balance || 0) | currency('') }}</span>元</P>
+            <P>账户余额：<span class="roboto-regular">{{ (data.balance || 0) | currency('') }}</span>元</P>
             <P>待收本金：<span class="roboto-regular">{{ (data.waitRepayCorpus || 0) | currency('') }}</span>元</P>
             <P>待收利息：<span class="roboto-regular">{{ (data.waitRepayInterest || 0) | currency('') }}</span>元</P>
             <P>冻结金额：<span class="roboto-regular">{{ (data.frozenMoney || 0) | currency('') }}</span>元</P>
@@ -31,7 +31,7 @@
           </p>
         </div>
         <div class="item">
-          <p class="title">可用余额</p>
+          <p class="title">账户余额</p>
           <p>
             <i class="num-font" v-if="amountShow">{{ (data.balance || 0) | currency('') }}</i>
             <i class="num-font" v-if="!amountShow">****</i>
