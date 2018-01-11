@@ -223,13 +223,6 @@
           });
           return;
         }
-        if (type === 'large' && !this.withdrawData.bankName) {
-          this.$message({
-            message: '大额提现请查询支行名称',
-            type: 'warning'
-          });
-          return;
-        }
         if (allowLargeWithdrawNumber === 1) return;
         this.loading = true;
         this.withdrawData.inputMoney = this.money;
