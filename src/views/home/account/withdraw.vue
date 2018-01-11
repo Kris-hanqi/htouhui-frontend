@@ -15,7 +15,7 @@
       <!-- 交互表单 -->
       <form class="form-horizontal" style="margin-top: 20px;">
         <div class="form-group">
-          <label class="col-md-2 control-label">账户余额</label>
+          <label class="col-md-2 control-label">可提金额</label>
           <div class="col-md-5">
             <p class="form-control-static">{{ accountMoney || 0  | currency('') }}元</p>
           </div>

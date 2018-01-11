@@ -16,7 +16,7 @@
     <!-- 充值表单 -->
     <form class="form-horizontal">
       <div class="form-group">
-        <label class="col-md-2 control-label">账户余额</label>
+        <label class="col-md-2 control-label">可用余额</label>
         <div class="col-md-5">
           <p class="form-control-static">{{ balance || 0 | currency('') }}元</p>
         </div>
