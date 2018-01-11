@@ -24,7 +24,7 @@ export function validateMoney(str) {
 
 /** 金额校验 */
 export function validateMoney12(str) {
-  const reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
+  const reg = /(^[1-9](\d+)?(\.\d{1,2})?$)|(^(0){1}$)|(^\d\.\d{1,2}?$)/;
   return reg.test(str)
 }
 

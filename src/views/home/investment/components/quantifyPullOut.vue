@@ -7,7 +7,11 @@
     </div>
     <div class="main">
       <span>申请退出</span>
-      <input type="number" class="putOutMoney" v-model.number="exitMoney">
+      <el-input :min="0"
+                :autofocus="true"
+                size="medium"
+                @input="debounceHandleInput"
+                class="putOutMoney" placeholder="请输入退出金额" :clearable="true" v-model.trim="exitMoney"></el-input>
       <el-button type="text" @click="showExitModal"><p class="btn-out">退出</p></el-button>
       <el-button type="text" @click="showExitModal('all')"><p class="btn-allOut">全部退出</p></el-button>
     </div>
@@ -46,6 +50,8 @@
 
 <script>
   import { fetchGetExitInfo, fetchExitPlan } from 'api/home/investment';
+  import debounce from 'throttle-debounce/debounce';
+  import { validateMoney12 } from 'utils/validate';
 
   /**
    * 退出逻辑
@@ -100,6 +106,13 @@
             });
             return;
           }
+          if (!validateMoney12(this.exitMoney)) {
+            this.$message({
+              message: '退出金额输入不合法，请重新输入',
+              type: 'warning'
+            });
+            return;
+          }
         }
         if (this.exitMoney > this.exitInfoData.lockExitMoney + this.exitInfoData.unlockExitMoney) {
           this.$message({
@@ -131,9 +144,29 @@
             }
             this.exitButLoading = false;
           })
+      },
+      handleInput(value) {
+        if (value === '') {
+          return;
+        }
+        if (value.indexOf('-') !== -1) {
+          this.exitMoney = value.replace(/\-/g, '');  // eslint-disable-line
+        }
+        const newVal = parseFloat(value);
+        if (!isNaN(newVal)) {
+          this.exitMoney = newVal;
+        } else {
+          this.exitMoney = '';
+        }
+        if (value > this.exitInfoData.lockExitMoney) {
+          this.exitMoney = this.exitInfoData.lockExitMoney;
+        }
       }
     },
     created() {
+      this.debounceHandleInput = debounce(500, value => {
+        this.handleInput(value);
+      });
       this.planId = this.$route.params.id;
       this.getExitInfo(this.planId);
     }
@@ -195,11 +228,6 @@
 
       .putOutMoney {
         width: 350px;
-        height: 50px;
-        box-sizing: border-box;
-        background-color: #fff;
-        border: solid 1px #bfc1c4;
-        padding-left: 10px;
       }
 
       p {
