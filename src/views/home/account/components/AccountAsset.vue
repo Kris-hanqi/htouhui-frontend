@@ -6,7 +6,7 @@
       <div class="list">
         <div class="item">
           <p class="title">总资产</p>
-          <p>
+          <p v-if="!data.totalMoneyComputingMessage">
             <i class="num-font" v-if="amountShow">{{ (data.sumCapital || 0) | currency('') }}</i>
             <i class="num-font" v-if="!amountShow">****</i>
             元
@@ -14,6 +14,7 @@
               <i class="ku-icon icon-bottom-01 " v-if="amountShow" @mouseenter="messageBoxShow = true" @mouseout="messageBoxShow = false"></i>
             </span>
           </p>
+          <p style="font-size: 18px;" v-else="">{{ data.totalMoneyComputingMessage }}</p>
 
           <div class="message-box" v-if="messageBoxShow">
             <P>账户余额：<span class="roboto-regular">{{ (data.balance || 0) | currency('') }}</span>元</P>
@@ -98,6 +99,7 @@
         float: left;
         position: relative;
         width: 31%;
+        padding-bottom: 20px;
       }
     }
 
