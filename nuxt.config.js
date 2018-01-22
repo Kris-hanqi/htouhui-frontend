@@ -18,11 +18,12 @@ module.exports = {
   loading: { color: '#3B8070' },
   css: [
     'normalize.css',
-    'hth-icon-font'
+    'hth-icon-font',
+    '@/assets/scss/main.scss'
   ],
   /** 编译配置 */
   build: {
-    extend (config, { isDev, isClient }) {
+    extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',
