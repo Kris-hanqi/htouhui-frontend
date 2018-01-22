@@ -12,10 +12,10 @@
           <a class="nav-link" href="#">注册</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">网贷课堂</a>
+          <nuxt-link class="nav-link" to="/education">网贷课堂</nuxt-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">最新活动</a>
+          <nuxt-link class="nav-link" to="/activity">最新活动</nuxt-link>
         </li>
         <li class="nav-item">
           <nuxt-link class="nav-link" to="/help">帮助中心</nuxt-link>

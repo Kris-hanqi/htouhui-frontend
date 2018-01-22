@@ -12,13 +12,18 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  /*
-  ** Customize the progress bar color
-  */
+  vendor: [
+    'axios',
+    'element-ui'
+  ],
+  plugins: [
+    { src: '~plugins/element-ui.js' }
+  ],
   loading: { color: '#176ff0' },
   css: [
     'normalize.css',
     'hth-icon-font',
+    { src: 'element-ui/packages/theme-chalk/lib/index.css' },
     '@/assets/scss/main.scss'
   ],
   /** 编译配置 */
