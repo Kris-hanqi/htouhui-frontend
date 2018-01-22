@@ -1,6 +1,7 @@
 <template>
   <div class="help-container">
     <shortcut></shortcut>
+    <hth-header></hth-header>
     <!-- banner图 -->
     <div class="banner"></div>
     
@@ -29,11 +30,13 @@
 </template>
 
 <script>
-  import Shortcut from '~/components/Shortcut.vue'
+  import Shortcut from '~/components/Shortcut.vue';
+  import HthHeader from '~/components/Header.vue';
   
   export default {
     components: {
-      Shortcut
+      Shortcut,
+      HthHeader
     }
   }
 </script>
