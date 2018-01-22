@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="index-container">
     <shortcut></shortcut>
   </section>
 </template>
