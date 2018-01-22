@@ -2964,6 +2964,10 @@ hosted-git-info@^2.1.4:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.5.0.tgz#6d60e34b3abbc8313062c3b798ef8d901a07af3c"
 
+hth-icon-font@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/hth-icon-font/-/hth-icon-font-0.1.1.tgz#509a55bec389bbbf628127c9d349e4dec5f22f35"
+
 html-comment-regex@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/html-comment-regex/-/html-comment-regex-1.1.1.tgz#668b93776eaae55ebde8f3ad464b307a4963625e"

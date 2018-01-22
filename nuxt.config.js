@@ -16,17 +16,12 @@ module.exports = {
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
-  // 全局样式
   css: [
-    'normalize.css'
+    'normalize.css',
+    'hth-icon-font'
   ],
-  /*
-  ** Build configuration
-  */
+  /** 编译配置 */
   build: {
-    /*
-    ** Run ESLint on save
-    */
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
