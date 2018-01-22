@@ -11,7 +11,7 @@
                 :autofocus="true"
                 size="medium"
                 @input="debounceHandleInput"
-                class="putOutMoney" placeholder="请输入退出金额" :clearable="true" v-model.trim="exitMoney"></el-input>
+                class="putOutMoney" placeholder="请输入退出金额" v-model.number="exitMoney"></el-input>
       <el-button type="text" @click="showExitModal"><p class="btn-out">退出</p></el-button>
       <el-button type="text" @click="showExitModal('all')"><p class="btn-allOut">全部退出</p></el-button>
     </div>
@@ -114,7 +114,7 @@
             return;
           }
         }
-        if (this.exitMoney > this.exitInfoData.lockExitMoney + this.exitInfoData.unlockExitMoney) {
+        if (this.exitMoney > (this.exitInfoData.lockExitMoney + this.exitInfoData.unlockExitMoney)) {
           this.$message({
             message: '退出金额大于总可退出金额',
             type: 'error'
@@ -152,13 +152,13 @@
         if (value.indexOf('-') !== -1) {
           this.exitMoney = value.replace(/\-/g, '');  // eslint-disable-line
         }
-        const newVal = parseFloat(value);
+        const newVal = parseFloat(value.toString());
         if (!isNaN(newVal)) {
           this.exitMoney = newVal;
         } else {
           this.exitMoney = '';
         }
-        if (value > this.exitInfoData.lockExitMoney) {
+        if (value > (this.exitInfoData.lockExitMoney + this.exitInfoData.unlockExitMoney)) {
           this.exitMoney = this.exitInfoData.lockExitMoney;
         }
       }
