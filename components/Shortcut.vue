@@ -40,5 +40,15 @@
     .nav-link {
       padding: 0 10px;
     }
+  
+    .nav-item a {
+      text-decoration: none;
+      color: #7c86a2;
+      
+      &:hover,
+      .active {
+        color: #507dfb;
+      }
+    }
   }
 </style>
