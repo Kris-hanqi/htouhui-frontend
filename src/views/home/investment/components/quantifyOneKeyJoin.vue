@@ -35,7 +35,10 @@
                     <div class="coupon-img" :id="str.userCouponId">{{ str.type === 'plus_coupon' ? str.rate : str.money }}{{ str.type | keyToValue(typeList) }}</div>
                     <div class="coupon-message">
                       <p>满{{ str.lowerLimitMoney | currency('') }}元可用</p>
-                      <p><span v-if="str.maxInterestMoney !== null">最高计息金额：{{ str.maxInterestMoney | currency('') }}元 </span><span v-if="str.interestDeadline !== null"> 最高计息天数：{{ str.interestDeadline }}天</span></p>
+                      <p>
+                        <span v-if="str.maxInterestMoney !== null">最高计息金额：{{ str.maxInterestMoney | currency('') }}元 </span>
+                        <span v-if="str.interestDeadline !== null"> 最高计息天数：{{ str.interestDeadline }}天</span>
+                      </p>
                     </div>
                   </el-radio>
                 </div>
@@ -464,7 +467,7 @@
   .oneKeyJoin .main-2 .coupons-box .coupons-content {
     position: absolute;
     top: 40px;
-    width: 390px;
+    width: 420px;
     max-height: 312px;
     box-sizing: border-box;
     background-color: #fff;
@@ -530,8 +533,9 @@
       }
 
       .coupon-message {
-        display: inline-block;
         vertical-align: middle;
+        margin-top: 5px;
+        margin-left: 25px;
         font-size: 12px;
         color: #727e90;
 
