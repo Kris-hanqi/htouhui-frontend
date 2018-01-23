@@ -21,9 +21,18 @@
           <li class="nav-item">
             <nuxt-link class="nav-link" to="/help">帮助中心</nuxt-link>
           </li>
-          <li class="nav-item">
+          <el-popover
+            ref="popover1"
+            placement="bottom"
+            title=""
+            width="135px"
+            trigger="hover">
+            <img src="../assets/img/components/qr_code_download.jpg" alt="">
+            <p style="text-align: center; margin-bottom: 0;">客户端下载</p>
+          </el-popover>
+          <li class="nav-item" v-popover:popover1>
             <i class="ku-icon icon-phone"></i>手机APP
-        </li>
+          </li>
         </ul>
       </div>
     </div>
