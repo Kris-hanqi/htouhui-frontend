@@ -17,7 +17,7 @@
           <nuxt-link to="/">升薪宝定期</nuxt-link>
         </li>
         <li class="nav-item">
-          <nuxt-link to="/">定期抵押</nuxt-link>
+          <nuxt-link to="/mortgage">定期抵押</nuxt-link>
         </li>
         <li class="nav-item">
           <nuxt-link to="/">信息披露</nuxt-link>

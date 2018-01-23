@@ -1,5 +1,5 @@
 <template>
-  <section class="index-container">
+  <div class="index-container">
     <!-- 轮播图 -->
     <el-carousel height="300px">
       <el-carousel-item v-for="item in 4" :key="item">
@@ -33,8 +33,7 @@
         </div>
       </div>
     </div>
-   
-  </section>
+  </div>
 </template>
 
 <script>

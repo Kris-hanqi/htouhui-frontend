@@ -45,8 +45,8 @@
     </div>
     <div class="footer-container__info hth-container">
       <div class="text">
-        ©版权所有 北京冠城瑞富信息技术有限公司 Copyright Reserved　|　京ICP备15020986
-        <span>信息安全等级保护三级：11010517098-00001</span>
+        版权所有 © 北京冠城瑞富信息技术有限公司 Copyright Reserved&nbsp;&nbsp;|&nbsp;&nbsp;京ICP证B2-20171701号 京ICP备15020986
+        <span style="padding-left: 20px">信息安全等级保护三级：11010517098-00001</span>
       </div>
     </div>
   </div>
@@ -87,7 +87,12 @@
   }
   
   .footer-container__info {
-    padding-top: 10px;
+    padding: 10px 0;
     border-top: 1px solid #495a70;
+    
+    .text {
+      font-size: 12px;
+      color: #6882a1;
+    }
   }
 </style>
