@@ -29,11 +29,7 @@
       <div class="hth-container">
         <div class="product">
           <!-- 标的 -->
-          <el-card class="box-card">
-            <div v-for="o in 4" :key="o" class="text item">
-              {{'列表内容 ' + o }}
-           </div>
-          </el-card>
+          <product-card></product-card>
         </div>
       </div>
     </div>
@@ -42,9 +38,13 @@
 </template>
 
 <script>
-export default {
-  layout: 'full'
-}
+  import ProductCard from '~/components/ProductCard.vue';
+  export default {
+    layout: 'full',
+    components: {
+      ProductCard
+    }
+  }
 </script>
 
 <style lang="scss">

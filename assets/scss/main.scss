@@ -21,6 +21,13 @@
   margin: 0 auto;
 }
 
+ul, li, ol {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  list-style: none;
+}
+
 .el-popover {
   min-width: 100px;
 }
