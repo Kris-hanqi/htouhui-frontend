@@ -1,5 +1,5 @@
 FROM node:8.9.1
-MAINTAINER stark.wang
+MAINTAINER wangxingkang
 
 ENV NODE_ENV=production
 ENV HOST 0.0.0.0
@@ -7,9 +7,8 @@ ENV HOST 0.0.0.0
 RUN mkdir -p /app
 COPY . /app
 WORKDIR /app
-# Expose the app port
 EXPOSE 3000
 
-RUN npm install
-RUN npm run build
+RUN yarn
+RUN yarn run build
 CMD ["npm", "start"]

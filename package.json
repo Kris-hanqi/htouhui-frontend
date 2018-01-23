@@ -1,7 +1,7 @@
 {
-  "name": "my-project",
+  "name": "hth-frontend",
   "version": "1.0.0",
-  "description": "Nuxt.js project",
+  "description": "海投汇官网",
   "author": "wangxingkang <wang_xingkang@qq.com>",
   "private": true,
   "scripts": {
@@ -15,10 +15,13 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "cross-env": "^5.1.3",
     "element-ui": "^2.0.11",
     "hth-icon-font": "^0.1.1",
+    "koa": "^2.4.1",
     "normalize.css": "^7.0.0",
-    "nuxt": "^1.1.1"
+    "nuxt": "^1.1.1",
+    "source-map-support": "^0.5.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
