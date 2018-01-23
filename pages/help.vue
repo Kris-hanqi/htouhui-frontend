@@ -1,14 +1,12 @@
 <template>
   <div class="help-container">
-    <shortcut></shortcut>
-    <hth-header></hth-header>
     <!-- banner图 -->
     <div class="banner"></div>
     
     <!-- 平台介绍 -->
     <div class="platform-introduction hth-container">
       <div class="platform-introduction__txt">
-        <h1>01.平台介绍</h1>
+        <h1>平台介绍</h1>
         <p>北京冠城瑞富信息技术有限公司创办于2015年4月，注册资本5000万元人民币，实缴资本5000万元人民币，
         总部位于北京，拥有完整的产品、研发、风控、财务、市场以及客服等职能体系，是一家具备优秀的自主研发能力的金融创新型企业。</p>
         <p>海投汇的核心团队来自于国内的金融投资及互联网企业，凭借丰富的投资管理和金融风控经验以及互联网信息管理技术，
@@ -19,25 +17,19 @@
     
     <!-- 我们的优势 -->
     <div class="advantage">
-      <h1>02.我们的优势</h1>
+      <h1>我们的优势</h1>
     </div>
     
     <!-- 投资流程 -->
     <div class="investment-process">
-      <h1>03.投资流程</h1>
+      <h1>投资流程</h1>
     </div>
   </div>
 </template>
 
 <script>
-  import Shortcut from '~/components/Shortcut.vue';
-  import HthHeader from '~/components/Header.vue';
-  
   export default {
-    components: {
-      Shortcut,
-      HthHeader
-    }
+    layout: 'full'
   }
 </script>
 

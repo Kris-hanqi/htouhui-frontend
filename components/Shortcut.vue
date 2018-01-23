@@ -1,31 +1,33 @@
 <template>
-  <section class="shortcut-container">
+  <div class="shortcut-container">
     <div class="hth-container">
       <div class="contacts float-left">
         <span>客服热线：400-698-8810（工作日09:00 - 18:00）</span>
       </div>
-      <ul class="nav float-right">
-        <li class="nav-item">
-          <nuxt-link class="nav-link" to="/login">登录</nuxt-link>
+      <div class="float-right">
+        <ul class="nav">
+          <li class="nav-item">
+            <nuxt-link class="nav-link" to="/login">登录</nuxt-link>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">注册</a>
+          </li>
+          <li class="nav-item">
+            <nuxt-link class="nav-link" to="/education">网贷课堂</nuxt-link>
+          </li>
+          <li class="nav-item">
+            <nuxt-link class="nav-link" to="/activity">最新活动</nuxt-link>
+          </li>
+          <li class="nav-item">
+            <nuxt-link class="nav-link" to="/help">帮助中心</nuxt-link>
+          </li>
+          <li class="nav-item">
+            <i class="ku-icon icon-phone"></i>手机APP
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">注册</a>
-        </li>
-        <li class="nav-item">
-          <nuxt-link class="nav-link" to="/education">网贷课堂</nuxt-link>
-        </li>
-        <li class="nav-item">
-          <nuxt-link class="nav-link" to="/activity">最新活动</nuxt-link>
-        </li>
-        <li class="nav-item">
-          <nuxt-link class="nav-link" to="/help">帮助中心</nuxt-link>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">手机APP</a>
-        </li>
-      </ul>
+        </ul>
+      </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <style lang="scss">
