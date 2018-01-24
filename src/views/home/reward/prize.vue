@@ -22,6 +22,12 @@
             <li><a @click.stop="switchDateType('3month')" :class="{ active: dateType === '3month'}">近三个月</a></li>
             <li><a @click.stop="switchDateType('other')" :class="{ active: dateType === 'other'}">自定义时间</a></li>
           </ul>
+          <ul>
+            <li>奖品类型：</li>
+            <li><a @click.stop="switchPrizeType('all')" :class="{ active: prizeType === 'all'}">全部</a></li>
+            <li><a @click.stop="switchPrizeType('real')" :class="{ active: prizeType === 'real'}">实物奖品</a></li>
+            <li><a @click.stop="switchPrizeType('virtual')" :class="{ active: prizeType === 'virtual'}">虚拟奖品</a></li>
+          </ul>
           <ul class="allChooseCalendar" v-show="dateType === 'other'">
             <el-date-picker
               v-model="selectDates.startTime"
@@ -92,7 +98,8 @@
           pageNo: 1,
           pageSize: 10,
           startTime: '',
-          endTime: ''
+          endTime: '',
+          awardType: ''
         },
         pickerOptions: {
           disabledDate(date) {
@@ -103,7 +110,8 @@
           startTime: '',
           endTime: ''
         },
-        dateType: 'all'
+        dateType: 'all',
+        prizeType: 'all'
       };
     },
     computed: {
@@ -112,10 +120,9 @@
       }
     },
     methods: {
-      // 获取资金流水分页数据
       getPageList() {
         let dates = null;
-        this.listQuery.type = this.projectType;
+        this.listQuery.awardType = this.prizeType;
         if (this.dateType !== 'other') {
           if (this.dateType === 'all') {
             this.listQuery.startTime = '2000-01-01 11:28:34';
@@ -166,6 +173,12 @@
         } else {
           this.list = null;
         }
+      },
+      switchPrizeType(type) {
+        this.prizeType = type;
+        this.listQuery.pageNo = 1;
+        this.total = 0;
+        this.getPageList();
       },
       handleCurrentChange(val) {
         this.listQuery.pageNo = val;
