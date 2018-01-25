@@ -39,6 +39,7 @@
                         <span v-if="str.maxInterestMoney !== null">最高计息金额：{{ str.maxInterestMoney | currency('') }}元 </span>
                         <span v-if="str.interestDeadline !== null"> 最高计息天数：{{ str.interestDeadline }}天</span>
                       </p>
+                      <p>使用范围：{{ str.limitScope }}</p>
                     </div>
                   </el-radio>
                 </div>
