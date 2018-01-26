@@ -4,7 +4,7 @@ stages:
 
 variables:
   SERVICE_PORT: "9600"
-  DOCKER_VERSION: "0.1.4"
+  DOCKER_VERSION: "0.1.5"
 
 cache:
   paths:
