@@ -23,7 +23,7 @@
           <nuxt-link to="/">信息披露</nuxt-link>
         </li>
         <li class="nav-item">
-          <nuxt-link to="/">我的账户</nuxt-link>
+          <nuxt-link to="/account">我的账户</nuxt-link>
         </li>
       </ul>
     </div>

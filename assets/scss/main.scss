@@ -4,6 +4,10 @@
 @import "components/nav";
 @import "reboot";
 
+body {
+  background-color: #F7FAFE;
+}
+
 .float-left {
   @include float-left;
 }

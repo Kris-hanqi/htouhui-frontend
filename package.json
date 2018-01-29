@@ -23,7 +23,7 @@
     "hth-icon-font": "^0.1.1",
     "koa": "^2.4.1",
     "normalize.css": "^7.0.0",
-    "nuxt": "^1.1.1",
+    "nuxt": "^1.2.1",
     "source-map-support": "^0.5.2"
   },
   "devDependencies": {
