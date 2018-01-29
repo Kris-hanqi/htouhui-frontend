@@ -9,22 +9,22 @@ const mapData = {
     closeStatus: false,
     disabled: true
   },
-  SxbScroll21: {
-    order: 2,
-    label: '升薪宝滚动21',
-    color: '#ffa837',
-    url: '/rollPlan',
-    closeStatus: true,
-    disabled: false
-  },
-  plan21Day: {
-    order: 3,
-    label: '我的计划',
-    color: '#b8e986',
-    url: '/plan',
-    closeStatus: true,
-    disabled: false
-  },
+  // SxbScroll21: {
+  //   order: 2,
+  //   label: '升薪宝滚动21',
+  //   color: '#ffa837',
+  //   url: '/rollPlan',
+  //   closeStatus: true,
+  //   disabled: false
+  // },
+  // plan21Day: {
+  //   order: 3,
+  //   label: '我的计划',
+  //   color: '#b8e986',
+  //   url: '/plan',
+  //   closeStatus: true,
+  //   disabled: false
+  // },
   SxbQuantify: {
     order: 4,
     label: '升薪宝量化',
@@ -66,9 +66,9 @@ export function getInvestData(data) {
       Object.assign(item, mapData.planNovice, value);
     }
 
-    if (key === 'skyMap') {
-      Object.assign(item, mapData.plan21Day, value);
-    }
+    // if (key === 'skyMap') {
+    //   Object.assign(item, mapData.plan21Day, value);
+    // }
 
     if (key === 'quantificationMap') {
       Object.assign(item, mapData.SxbQuantify, value);
@@ -82,9 +82,9 @@ export function getInvestData(data) {
       Object.assign(item, mapData.regularMortgage, value);
     }
 
-    if (key === 'rollPlanMap') {
-      Object.assign(item, mapData.SxbScroll21, value);
-    }
+    // if (key === 'rollPlanMap') {
+    //   Object.assign(item, mapData.SxbScroll21, value);
+    // }
 
     if (item.closeStatus) {
       item.url = '';
