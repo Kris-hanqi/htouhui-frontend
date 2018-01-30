@@ -23,6 +23,7 @@ body {
 .hth-container {
   width: 1000px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 ul, li, ol {
@@ -34,4 +35,8 @@ ul, li, ol {
 
 .el-popover {
   min-width: 100px;
+}
+
+.text-center {
+  text-align: center;
 }

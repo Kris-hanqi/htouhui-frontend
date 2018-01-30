@@ -1,5 +1,7 @@
 import Koa from 'koa';
 import { Nuxt, Builder } from 'nuxt';
+import compose from 'koa-compose';
+import api from './api'
 
 async function start () {
   const app = new Koa();
@@ -30,6 +32,10 @@ async function start () {
         promise.then(resolve).catch(reject)
       })
     })
+  });
+
+  app.use(async function composeSubapp (ctx, next) {
+    await compose(api.middleware)(ctx)
   });
 
   app.listen(port, host);
