@@ -13,7 +13,23 @@
     <section class="page-login-body">
       <div class="hth-container">
         <el-card class="login-panel">
-          登录表单
+          <div class="login-form-head">
+            <p class="text">{{ loginTypeTextMap[loginType] }}</p>
+          </div>
+          <div class="login-form-body">
+            <el-form ref="form" label-width="0px">
+              <el-form-item>
+                <el-input placeholder="手机/用户名"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-input placeholder="密码"></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-input placeholder="验证码"></el-input>
+              </el-form-item>
+            </el-form>
+          </div>
+         
         </el-card>
       </div>
     </section>
@@ -31,6 +47,16 @@
     head() {
       return {
         title: '海投汇 - 用户登录'
+      }
+    },
+    data() {
+      return {
+        loginType: 'username', // 登录方式: 用户名密码(username)、短信快捷方式(sms)、扫码方式(verifyCode)
+        loginTypeTextMap: {
+          username: '用户名密码登录',
+          sms: '短信快捷登录',
+          verifyCode: '扫码登录'
+        }
       }
     }
   }
@@ -77,6 +103,24 @@
         top: 60px;
         right: 60px;
       }
+    }
+  
+    .el-card__body {
+      padding: 0 20px;
+    }
+    
+    .login-form-head {
+      font-size: 16px;
+      height: 46px;
+      color: #000;
+      
+      p.text {
+        padding: 20px 0 10px 0;
+      }
+    }
+    
+    .login-form-body {
+      padding-top: 20px;
     }
     
     .page-login-footer {
