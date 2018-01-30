@@ -1,12 +1,20 @@
 import Koa from 'koa';
 import { Nuxt, Builder } from 'nuxt';
-import compose from 'koa-compose';
-import api from './api'
+import Router from 'koa-router';
+import globalConfig from './config'
+import route from './routers';
 
 async function start () {
   const app = new Koa();
-  const host = process.env.HOST || '127.0.0.1';
-  const port = process.env.PORT || 3000;
+  const host = process.env.HOST || globalConfig.app.host;
+  const port = process.env.PORT || globalConfig.app.port;
+
+  const router = new Router();
+
+  router.use('', route.routes());
+  app
+    .use(router.routes())
+    .use(router.allowedMethods());
 
   // Import and Set Nuxt.js options
   let config = require('../nuxt.config.js');
@@ -32,10 +40,6 @@ async function start () {
         promise.then(resolve).catch(reject)
       })
     })
-  });
-
-  app.use(async function composeSubapp (ctx, next) {
-    await compose(api.middleware)(ctx)
   });
 
   app.listen(port, host);
