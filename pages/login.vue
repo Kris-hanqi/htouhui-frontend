@@ -24,8 +24,10 @@
               <el-form-item>
                 <el-input placeholder="密码"></el-input>
               </el-form-item>
-              <el-form-item>
+              <el-form-item class="captcha">
                 <el-input placeholder="验证码"></el-input>
+                <img class="pass-verifyCode" :src="captchaImgUrl">
+                <a @click="changeCaptcha">换一张</a>
               </el-form-item>
             </el-form>
           </div>
@@ -56,7 +58,18 @@
           username: '用户名密码登录',
           sms: '短信快捷登录',
           verifyCode: '扫码登录'
-        }
+        },
+        captchaVersion: 1
+      }
+    },
+    computed: {
+      captchaImgUrl() {
+        return `/api/captcha?${this.captchaVersion}` ;
+      }
+    },
+    methods: {
+      changeCaptcha() {
+        this.captchaVersion++;
       }
     }
   }
@@ -108,6 +121,10 @@
     .el-card__body {
       padding: 0 20px;
     }
+  
+    .el-input__inner {
+      border-radius: 0;
+    }
     
     .login-form-head {
       font-size: 16px;
@@ -116,6 +133,31 @@
       
       p.text {
         padding: 20px 0 10px 0;
+      }
+    }
+    
+    .captcha {
+      .el-input {
+        width: 130px;
+        float: left;
+      }
+      
+      img {
+        width: 110px;
+        height: 38px;
+        border: 1px solid #DDD;
+        float: left;
+        margin-left: 5px;
+      }
+  
+      a {
+        padding-left: 12px;
+        font-size: 12px;
+        text-decoration: none;
+        line-height: 40px;
+        color:  #2e82ff;
+        float: left;
+        cursor: pointer;
       }
     }
     
