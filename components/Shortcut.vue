@@ -7,7 +7,7 @@
       <div class="float-right">
         <ul class="nav">
           <li class="nav-item">
-            <nuxt-link class="nav-link" to="/login">登录</nuxt-link>
+            <nuxt-link class="nav-link" target="_blank" to="/login">登录</nuxt-link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">注册</a>
