@@ -27,11 +27,22 @@
               <el-form-item class="captcha">
                 <el-input placeholder="验证码"></el-input>
                 <img class="pass-verifyCode" :src="captchaImgUrl">
-                <a @click="changeCaptcha">换一张</a>
+                <a class="login-link" @click="changeCaptcha">换一张</a>
               </el-form-item>
+              <el-form-item style="margin-bottom: 0;" class="login-button">
+                <el-button type="primary">登录</el-button>
+              </el-form-item>
+              <div>
+                <nuxt-link class="login-link" style="padding-left: 0;" to="/forgotPassword">忘记密码？</nuxt-link>
+                <a @click="changeLoginType('sms')" class="login-link float-right">短信快捷登录</a>
+              </div>
             </el-form>
           </div>
-         
+          <div class="login-form-footer">
+            <el-button type="text float-right">
+              <nuxt-link to="/register">立即注册</nuxt-link>
+            </el-button>
+          </div>
         </el-card>
       </div>
     </section>
@@ -68,8 +79,15 @@
       }
     },
     methods: {
+      // 更换验证码
       changeCaptcha() {
         this.captchaVersion++;
+      },
+      // 切换登录类型
+      changeLoginType(type) {
+        if (!type) return;
+        this.loginType = type;
+        console.log(this.loginType);
       }
     }
   }
@@ -119,7 +137,7 @@
     }
   
     .el-card__body {
-      padding: 0 20px;
+      padding: 0;
     }
   
     .el-input__inner {
@@ -128,6 +146,7 @@
     
     .login-form-head {
       font-size: 16px;
+      padding: 0 20px;
       height: 46px;
       color: #000;
       
@@ -149,20 +168,39 @@
         float: left;
         margin-left: 5px;
       }
+    }
   
-      a {
-        padding-left: 12px;
-        font-size: 12px;
-        text-decoration: none;
-        line-height: 40px;
-        color:  #2e82ff;
-        float: left;
-        cursor: pointer;
-      }
+    a.login-link {
+      padding-left: 12px;
+      font-size: 12px;
+      text-decoration: none;
+      line-height: 40px;
+      color:  #2e82ff !important;
+      float: left;
+      cursor: pointer;
     }
     
     .login-form-body {
-      padding-top: 20px;
+      padding: 20px;
+      
+      .login-button button {
+        width: 100%;
+        border-radius: 0;
+      }
+    }
+    
+    .login-form-footer {
+      position: relative;
+      color: #2e82ff;
+      margin-top: 30px;
+      height: 50px;
+      line-height: 50px;
+      background: #f0f6ff;
+      padding: 0 20px;
+      
+      button {
+        margin-top: 5px;
+      }
     }
     
     .page-login-footer {
