@@ -25,7 +25,7 @@
           <br><br><br><br><br><br>
         </div>
       </div>
-      
+      {{ token }}
       <div class="hth-container">
         <div class="product">
           <!-- 标的 -->
@@ -37,12 +37,18 @@
 </template>
 
 <script>
+  import { mapMutations } from 'vuex'
   import ProductCard from '~/components/ProductCard.vue';
+  
   export default {
     layout: 'full',
     components: {
       ProductCard
-    }
+    },
+    computed: {
+      token() { return this.$store.state.user.token }
+    },
+    
   }
 </script>
 
