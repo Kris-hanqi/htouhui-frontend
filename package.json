@@ -33,7 +33,7 @@
     "koa-router": "^7.3.0",
     "koa-session": "^5.8.1",
     "normalize.css": "^7.0.0",
-    "nuxt": "^1.2.1",
+    "nuxt": "^1.3.0",
     "source-map-support": "^0.5.2",
     "trek-captcha": "^0.4.0"
   },
