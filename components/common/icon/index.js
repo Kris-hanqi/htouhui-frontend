@@ -1,2 +1,2 @@
-import KuIcon from './icon.vue';
-export default KuIcon;
+import Icon from './icon.vue';
+export default Icon;

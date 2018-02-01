@@ -22,13 +22,29 @@
         <li class="nav-item">
           <nuxt-link to="/">信息披露</nuxt-link>
         </li>
-        <li class="nav-item">
-          <nuxt-link to="/account">我的账户</nuxt-link>
+        <li style="margin-left: 40px">
+          <nuxt-link to="/account">
+            <ku-avatar icon="avatar"></ku-avatar>
+            我的账户
+          </nuxt-link>
         </li>
       </ul>
     </div>
   </div>
 </template>
+
+<script>
+  import KuAvatar from './common/avatar';
+  
+  export default {
+    components: {
+      KuAvatar
+    },
+    data() {
+      return {}
+    }
+  }
+</script>
 
 <style lang="scss">
   .header-container {

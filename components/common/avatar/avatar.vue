@@ -16,16 +16,18 @@
   
   export default {
     name: 'KuAvatar',
-    components: { KuIcon },
+    components: {
+      KuIcon
+    },
     props: {
       shape: {
-        validator (value) {
+        validator(value) {
           return oneOf(value, ['circle', 'square']);
         },
         default: 'circle'
       },
       size: {
-        validator (value) {
+        validator(value) {
           return oneOf(value, ['small', 'large', 'default']);
         },
         default: 'default'
@@ -45,7 +47,7 @@
       };
     },
     computed: {
-      classes () {
+      classes() {
         return [
           `${prefixCls}`,
           `${prefixCls}-${this.shape}`,

@@ -1,6 +1,6 @@
-<tempalte>
+<template>
   <i :class="classes" :style="styles"></i>
-</tempalte>
+</template>
 
 <script>
   const prefixCls = 'ku-icon';
@@ -13,10 +13,10 @@
       color: String
     },
     computed: {
-      classes () {
+      classes() {
         return `${prefixCls} icon-${this.type}`;
       },
-      styles () {
+      styles() {
         let style = {};
         if (this.size) {
           style['font-size'] = `${this.size}px`;
