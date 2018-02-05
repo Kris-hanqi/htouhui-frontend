@@ -7,9 +7,14 @@ import ccap from 'ccap';
  * @returns {Promise.<void>}
  */
 export const login = async(ctx, next) => {
-  const user = ctx.request;
-  console.log(user);
-  ctx.throw(401, '用户名/密码未填写123');
+  console.log(ctx);
+  console.log(ctx.request.body);
+  ctx.body = {
+    status: '200',
+    data: {
+      token: 'token1234'
+    }
+  }
 };
 
 export const captcha = async(ctx, next) => {

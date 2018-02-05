@@ -19,10 +19,10 @@
           <div class="login-form-body">
             <el-form ref="form" label-width="0px">
               <el-form-item>
-                <el-input placeholder="手机/用户名"></el-input>
+                <el-input v-model="user.username" placeholder="手机/用户名"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-input placeholder="密码"></el-input>
+                <el-input v-model="user.password" type="password" placeholder="密码"></el-input>
               </el-form-item>
               <el-form-item class="captcha">
                 <el-input placeholder="验证码"></el-input>
@@ -71,7 +71,8 @@
           verifyCode: '扫码登录'
         },
         user: {
-        
+          username: '',
+          password: ''
         },
         captchaVersion: 1
       }

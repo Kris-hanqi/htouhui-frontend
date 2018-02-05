@@ -12,7 +12,6 @@ const user = {
   actions: {
     // 用户名登录
     LoginByMobile({ commit }, userInfo) {
-      console.log(123);
       return new Promise((resolve, reject) => {
         fetchLoginByMobile(userInfo).then(response => {
           console.log('********************');

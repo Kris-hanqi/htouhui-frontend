@@ -1,6 +1,7 @@
 import Koa from 'koa';
 import { Nuxt, Builder } from 'nuxt';
 import Router from 'koa-router';
+import bodyParser from 'koa-bodyparser';
 import globalConfig from './config'
 import route from './routers';
 
@@ -9,12 +10,15 @@ async function start () {
   const host = process.env.HOST || globalConfig.app.host;
   const port = process.env.PORT || globalConfig.app.port;
 
+  app.use(bodyParser());
+
   const router = new Router();
 
   router.use('', route.routes());
   app
     .use(router.routes())
     .use(router.allowedMethods());
+
 
   // Import and Set Nuxt.js options
   let config = require('../nuxt.config.js');
