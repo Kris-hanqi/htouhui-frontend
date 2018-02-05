@@ -30,7 +30,7 @@
                 <a class="login-link" @click="changeCaptcha">换一张</a>
               </el-form-item>
               <el-form-item style="margin-bottom: 0;" class="login-button">
-                <el-button type="primary">登录</el-button>
+                <el-button @click="login" type="primary">登录</el-button>
               </el-form-item>
               <div>
                 <nuxt-link class="login-link" style="padding-left: 0;" to="/forgotPassword">忘记密码？</nuxt-link>
@@ -70,6 +70,9 @@
           sms: '短信快捷登录',
           verifyCode: '扫码登录'
         },
+        user: {
+        
+        },
         captchaVersion: 1
       }
     },
@@ -88,6 +91,12 @@
         if (!type) return;
         this.loginType = type;
         console.log(this.loginType);
+      },
+      login() {
+        this.$store.dispatch('LoginByMobile', this.user)
+          .then(data => {
+            console.log(data);
+          })
       }
     }
   }
