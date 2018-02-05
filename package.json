@@ -6,8 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "npm run bootstrap && nuxt",
-    "dev1": "nodemon -w ./server -w ./start.js --exec node ./start.js",
-    "server-dev": "npm run bootstrap && backpack dev",
+    "serve-dev": "nodemon -w ./server -w ./start.js --exec node ./start.js",
     "bootstrap": "yarn || npm i",
     "build": "nuxt build",
     "start": "nuxt start",
