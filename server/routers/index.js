@@ -8,7 +8,7 @@ const router = new Router({
 const user = require('../controllers/user');
 
 router
-  .post('/loginByMobile', user.login)
+  .post('/loginByPassword', user.loginByPassword)
   .get('/captcha', user.captcha);
 
 export default router;

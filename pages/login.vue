@@ -64,9 +64,9 @@
     },
     data() {
       return {
-        loginType: 'username', // 登录方式: 用户名密码(username)、短信快捷方式(sms)、扫码方式(verifyCode)
+        loginType: 'password', // 登录方式: 密码(password)、短信快捷方式(sms)、扫码方式(verifyCode)
         loginTypeTextMap: {
-          username: '用户名密码登录',
+          password: '用户名密码登录',
           sms: '短信快捷登录',
           verifyCode: '扫码登录'
         },
@@ -94,7 +94,7 @@
         console.log(this.loginType);
       },
       login() {
-        this.$store.dispatch('LoginByMobile', this.user)
+        this.$store.dispatch('LoginByPassword', this.user)
           .then(data => {
             console.log(data);
           })

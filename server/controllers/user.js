@@ -2,12 +2,12 @@ import ccap from 'ccap';
 import userDao from '../dao/userDao';
 
 /**
- * 用户登录
+ * 用户密码登录
  * @param ctx
  * @param next
  * @returns {Promise.<void>}
  */
-export const login = async(ctx, next) => {
+export const loginByPassword = async(ctx, next) => {
   console.log(ctx);
   console.log(ctx.request.body);
   // 调取dao层

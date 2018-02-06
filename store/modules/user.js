@@ -10,17 +10,18 @@ const user = {
     }
   },
   actions: {
-    // 用户名登录
-    LoginByMobile({ commit }, userInfo) {
+    // 密码登录
+    LoginByPassword({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
-        fetchLoginByMobile(userInfo).then(response => {
-          console.log('********************');
-          console.log(response);
-          console.log('********************');
-          resolve({ status: response.data.status });
-        }).catch(error => reject(error));
+        fetchLoginByMobile(userInfo)
+          .then(response => {
+            resolve({ status: response.data.status });
+          })
+          .catch(error => reject(error));
       });
     },
+    // 短信验证码登录
+    LoginBySms({ commit }, userInfo) {},
   }
 };
 
