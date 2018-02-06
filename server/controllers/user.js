@@ -1,4 +1,5 @@
 import ccap from 'ccap';
+import userDao from '../dao/userDao';
 
 /**
  * 用户登录
@@ -9,12 +10,16 @@ import ccap from 'ccap';
 export const login = async(ctx, next) => {
   console.log(ctx);
   console.log(ctx.request.body);
+  // 调取dao层
+  const token = await userDao.loginByPassword({userPhone: "MTExMDQxOTExMjM=", userPassword: "MTIzYWJj"})
+    .then(response => {
+      return response.data;
+    });
+
   ctx.body = {
-    status: '200',
-    data: {
-      token: 'token1234'
-    }
-  }
+    status: 200,
+    data: token
+  };
 };
 
 export const captcha = async(ctx, next) => {

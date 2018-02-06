@@ -5,6 +5,9 @@ import bodyParser from 'koa-bodyparser';
 import globalConfig from './config'
 import route from './routers';
 
+// 忽略ssl问题
+process.env.NODE_TLS_REJECT_UNAUTHORIZED ='0';
+
 async function start () {
   const app = new Koa();
   const host = process.env.HOST || globalConfig.app.host;
