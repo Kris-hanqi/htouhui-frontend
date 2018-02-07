@@ -14,21 +14,24 @@ export function oneOf(value, validList) {
 }
 
 /**
- *
+ * 向上查找指定name的组件
  * @param context
  * @param componentName
  * @param componentNames
  * @returns {boolean}
  */
 export function findComponentUpward(context, componentName, componentNames) {
+
   if (typeof componentName === 'string') {
     componentNames = [componentName];
   } else {
     componentNames = componentName;
   }
 
+  // 获取父组件
   let parent = context.$parent;
   let name = parent.$options.name;
+
   while (parent && (!name || componentNames.indexOf(name) < 0)) {
     parent = parent.$parent;
 
@@ -84,7 +87,7 @@ export function findComponentDownward(context, componentName) {
 }
 
 /**
- *
+ * 向下递归获取指定name的组件集合
  * @param context
  * @param componentName
  * @returns {*}
@@ -95,7 +98,10 @@ export function findComponentsDownward(context, componentName) {
       components.push(child);
     }
     const foundChilds = findComponentDownward(child, componentName);
-    return components.concat(foundChilds);
+    if (foundChilds) {
+      components.concat(foundChilds)
+    }
+    return components;
   }, [])
 }
 

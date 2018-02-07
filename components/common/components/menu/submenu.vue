@@ -29,7 +29,14 @@
       CollapseTransition
     },
     props: {
-    
+      name: {
+        type: [String, Number],
+        required: true
+      },
+      disabled: {
+        type: Boolean,
+        default: false
+      }
     },
     data() {
       return {
@@ -85,6 +92,7 @@
         if (this.mode === 'horizontal') return;
         const opened = this.opened;
         if (this.accordion) {
+          console.log(this.$parent.$children);
           this.$parent.$children.forEach(item => {
             if (item.$options.name === 'Submenu') item.opened = false;
           });
@@ -94,12 +102,12 @@
       }
     },
     watch: {
-      mode (val) {
+      mode(val) {
         if (val === 'horizontal') {
-          this.$refs.drop.update();
+          // this.$refs.drop.update();
         }
       },
-      opened (val) {
+      opened(val) {
         if (this.mode === 'vertical') return;
         if (val) {
           // set drop a width to fixed when menu has fixed position

@@ -120,4 +120,19 @@ $menu-prefix-cls: #{$css-prefix}menu;
     }
   }
 
+  // vertical
+  &-vertical &-item,
+  &-vertical &-submenu-title
+  {
+    padding: 14px 24px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+    transition: all $transition-time $ease-in-out;
+
+    &:hover{
+      background: #f3f3f3;
+    }
+  }
+
 }
