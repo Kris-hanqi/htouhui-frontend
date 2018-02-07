@@ -91,11 +91,17 @@
     }
   
     .active {
-      display: inline-block;
+      box-shadow: 0 4px 10px rgba(36,62,99,.15);
       width: 153px;
-      background: url(../../assets/img/account/menu-active-bg.png) no-repeat;
-      margin-left: 12px;
-      color: #fff !important;
+      background-color: #3793df;
+      text-decoration: none;
+      color: #fff;
+      display: inline-block;
+      
+      &:hover:after {
+        visibility: visible;
+        opacity: 1;
+      }
   
       .el-menu-item {
         color: #fff;

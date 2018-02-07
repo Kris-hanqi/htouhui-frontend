@@ -34,7 +34,7 @@
 </template>
 
 <script>
-  import KuAvatar from './common/avatar';
+  import KuAvatar from './common/components/avatar';
   
   export default {
     components: {

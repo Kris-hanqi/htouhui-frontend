@@ -11,15 +11,12 @@ export const loginByPassword = async(ctx, next) => {
   console.log(ctx);
   console.log(ctx.request.body);
   // 调取dao层
-  const token = await userDao.loginByPassword({userPhone: "MTExMDQxOTExMjM=", userPassword: "MTIzYWJj"})
+  const body = await userDao.loginByPassword({userPhone: "MTExMDQxOTExMjM=", userPassword: "MTIzYWJj"})
     .then(response => {
       return response.data;
     });
 
-  ctx.body = {
-    status: 200,
-    data: token
-  };
+  ctx.body = body;
 };
 
 export const captcha = async(ctx, next) => {
