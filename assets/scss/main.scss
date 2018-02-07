@@ -4,6 +4,9 @@
 @import "components/nav";
 @import "reboot";
 
+// 引入自定义组件库样式
+@import "../../components/common/styles/index";
+
 body {
   font-family: Helvetica,Arial,'sans-serif','PingFang SC','Microsoft YaHei','Heiti SC',simhei,'Lucida Sans Unicode','Myriad Pro','Helvetica Neue','Roboto Light';
   background-color: #F7FAFE;

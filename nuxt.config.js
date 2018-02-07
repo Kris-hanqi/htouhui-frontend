@@ -24,6 +24,7 @@ module.exports = {
     'normalize.css',
     'hth-icon-font',
     { src: 'element-ui/packages/theme-chalk/lib/index.css' },
+    '@/assets/scss/iview.css',
     '@/assets/scss/main.scss'
   ],
   /** 编译配置 */

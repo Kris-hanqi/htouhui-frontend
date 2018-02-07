@@ -1,5 +1,6 @@
 <template>
-  <ul :class="">
+  <!-- 导航菜单 -->
+  <ul :class="classes" :style="styles">
     <slot></slot>
   </ul>
 </template>
@@ -106,9 +107,10 @@
       },
       updateOpened() {
         const items = findComponentsDownward(this, 'Submenu');
+        console.log(items);
         if (items.length) {
           items.forEach(item => {
-            if (this.openNames.indexOf(item.name) > -1) {
+            if (item && this.openNames.indexOf(item.name) > -1) {
               item.opened = true;
             }
           })

@@ -1,0 +1,123 @@
+@import '../variables';
+
+$menu-prefix-cls: #{$css-prefix}menu;
+
+.#{$menu-prefix-cls} {
+  display: block;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  list-style: none;
+  color: $text-color;
+  font-size: $font-size-base;
+  position: relative;
+  z-index: $z-index-select;
+
+  &-horizontal {
+    height: 60px;
+    line-height: 60px;
+
+    &.#{$menu-prefix-cls}-light {
+      &:after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 1px;
+        background: $border-color-base;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+    }
+  }
+
+  &-vertical {
+    &.#{$menu-prefix-cls}-light {
+      &:after {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 100%;
+        background: $border-color-base;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 1;
+      }
+    }
+  }
+
+  &-light {
+    background: #fff;
+  }
+
+  &-dark {
+    background: $menu-dark-title;
+  }
+
+  &-primary {
+    background: $primary-color;
+  }
+
+  &-item {
+    display: block;
+    outline: none;
+    list-style: none;
+    font-size: $font-size-base;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    transition: all $transition-time $ease-in-out;
+  }
+
+  &-item > i {
+    margin-right: 6px;
+  }
+
+  &-submenu-title > i,
+  &-submenu-title span > i {
+    margin-right: 8px;
+  }
+
+  &-horizontal &-item,
+  &-horizontal &-submenu {
+    float: left;
+    padding: 0 20px;
+    position: relative;
+    cursor: pointer;
+    z-index: 3;
+    transition: all $transition-time $ease-in-out;
+  }
+
+  &-light &-horizontal &-item,
+  &-light &-horizontal &-submenu {
+    height: inherit;
+    line-height: inherit;
+    border-bottom: 2px solid transparent;
+    color: $text-color;
+
+    &-active,
+    &:hover{
+      color: $primary-color;
+      border-bottom: 2px solid $primary-color;
+    }
+  }
+
+  &-dark &-horizontal &-item,
+  &-dark &-horizontal &-submenu{
+    color: $menu-dark-subsidiary-color;
+    &-active, &:hover{
+      color: #fff;
+    }
+  }
+
+  &-primary &-horizontal &-item,
+  &-primary &-horizontal &-submenu{
+    color: #fff;
+    &-active, &:hover{
+      background: $link-active-color;
+    }
+  }
+
+}

@@ -4,8 +4,10 @@
       <slot name="title"></slot>
       <Icon type="ios-arrow-down" :class="[prefixCls + '-submenu-title-icon']"></Icon>
     </div>
-    <collapse-transition v-if="mode === 'vertical'">
-      <ul :class="[prefixCls]" v-show="opened"><slot></slot></ul>
+    <collapse-transition>
+      <ul :class="[prefixCls]" v-show="opened">
+        <slot></slot>
+      </ul>
     </collapse-transition>
   </li>
 </template>
@@ -13,7 +15,7 @@
 <script>
   import Icon from '../icon/icon.vue';
   import CollapseTransition from '../base/collapse-transition';
-  import { findComponentUpward, findComponentsDownward } from '../../utils/assist';
+  import { getStyle, findComponentUpward, findComponentsDownward } from '../../utils/assist';
   import Emitter from '../../mixins/emitter';
   import mixin from './mixin';
   
@@ -114,13 +116,14 @@
         this.dispatch('Menu', 'on-menu-item-select', name);
         return true;
       });
-      this.$on('on-update-active-name', status => {
-        if (findComponentUpward(this, 'Submenu')) this.dispatch('Submenu', 'on-update-active-name', status);
-        if (findComponentsDownward(this, 'Submenu')) findComponentsDownward(this, 'Submenu').forEach(item => {
-          item.active = false;
-        });
-        this.active = status;
-      });
+//      this.$on('on-update-active-name', status => {
+//        if (findComponentUpward(this, 'Submenu')) this.dispatch('Submenu', 'on-update-active-name', status);
+//        if (findComponentsDownward(this, 'Submenu')) findComponentsDownward(this, 'Submenu')
+//          .forEach(item => {
+//            item.active = false;
+//          });
+//        this.active = status;
+//      });
     }
   }
 </script>

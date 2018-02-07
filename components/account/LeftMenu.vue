@@ -54,8 +54,33 @@
         </el-menu-item>
       </el-submenu>
     </el-menu>
+    <ku-menu width="150px" theme="light" :open-names="['1']" accordion>
+      <ku-submenu name="1">
+        <template slot="title">
+          <ku-icon type="account"></ku-icon>
+          内容管理
+        </template>
+        <ku-menu-item name="1-1">文章管理</ku-menu-item>
+        <ku-menu-item name="1-2">评论管理</ku-menu-item>
+      </ku-submenu>
+    </ku-menu>
   </div>
 </template>
+
+<script>
+  import Menu from '~/components/common/components/menu';
+  import Icon from '~/components/common/components/icon';
+  
+  export default {
+    components: {
+      KuMenu: Menu,
+      KuSubmenu: Menu.Sub,
+      KuMenuItem: Menu.Item,
+      KuMenuGroup: Menu.Group,
+      KuIcon: Icon
+    }
+  }
+</script>
 
 <style lang="scss">
   .account-left-menu {

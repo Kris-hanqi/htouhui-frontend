@@ -1,0 +1,44 @@
+$css-prefix                   : 'ku-';
+
+// Color
+$primary-color                : #2d8cf0;
+$link-color                   : #2D8cF0;
+$link-hover-color             : tint($link-color, 20%);
+$link-active-color            : shade($link-color, 5%);
+$selected-color               : fade($primary-color, 90%);
+
+// base
+$text-color                   : #495060;
+$font-size-base               : 14px;
+
+// Border color
+$border-color-base            : #dddee1;  // outside
+$border-color-split           : #e9eaec;  // inside
+
+// z-index
+$z-index-spin                 : 8;
+$z-index-affix                : 10;
+$z-index-back-top             : 10;
+$z-index-select               : 900;
+$z-index-modal                : 1000;
+$z-index-message              : 1010;
+$z-index-notification         : 1010;
+$z-index-tooltip              : 1060;
+$z-index-transfer             : 1060;
+$z-index-loading-bar          : 2000;
+$z-index-spin-full-screen     : 2010;
+
+// Animation
+$animation-time               : .3s;
+$transition-time              : .2s;
+$ease-in-out                  : ease-in-out;
+
+// components
+
+// menu
+$menu-dark-title              : #495060;
+$menu-dark-active-bg          : #363e4f;
+$menu-dark-subsidiary-color   : rgba(255,255,255,.7);
+$menu-dark-group-title-color  : rgba(255,255,255,.36);
+
+
